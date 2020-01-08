@@ -127,4 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
->>>>>>> origin
+
+## CUSTOM added from vale
+media/
+.vs/

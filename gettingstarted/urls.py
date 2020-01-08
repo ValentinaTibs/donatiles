@@ -1,5 +1,6 @@
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 
 admin.autodiscover()
@@ -19,3 +20,15 @@ urlpatterns = [
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
 ]
+
+if settings.DEBUG: # new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+     
+# if settings.DEBUG is True:
+#     urlpatterns += static((r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}) )
+#     #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     # More paths/urls
+# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
