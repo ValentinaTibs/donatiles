@@ -3,6 +3,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 
+# from tinymce import urls
+
 admin.autodiscover()
 
 import taleoftiles.views
@@ -18,7 +20,10 @@ import taleoftiles.views
 urlpatterns = [
     path("", taleoftiles.views.index, name="index"),
     path("db/", taleoftiles.views.db, name="db"),
+    path("blog/", taleoftiles.views.blog, name="blog"),
     path("admin/", admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
+    # url(r'^tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG: # new
