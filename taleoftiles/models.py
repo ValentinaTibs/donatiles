@@ -18,7 +18,7 @@ class Image(models.Model):
         return mark_safe('<a href="/media/{0}"><img src="/media/{0}" width={1} height={2}></a>'.format(self.imagefile,width,height))
 
     def __str__(self):
-        return '%s' % (self.imagefile,)
+        return '%s' % (self.name,)
 
     def save(self, *args, **kwargs):
         if(self.name == None):
@@ -56,10 +56,12 @@ class Post(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField("date created", auto_now_add=True)
     publish_date = models.DateTimeField("date published", auto_now_add=False)
-    image = models.ForeignKey('Image', on_delete=models.SET_NULL, null = True)
+    image = models.ForeignKey(Image, verbose_name="Image", on_delete=models.SET_NULL, null = True)
 
     related = models.ForeignKey(PostRelated, default=1, verbose_name="Post Related", on_delete=models.SET_DEFAULT)
     slug = models.CharField(max_length=200, unique=True)
+
+    author = models.ForeignKey( User, on_delete=models.CASCADE )
 
     def __str__(self):
         return self.title

@@ -14,7 +14,13 @@ class PostAdmin(SummernoteModelAdmin):
             ("Title/date", {'fields': ["title","content", "publish_date","image"]}),
             ("Tags", {'fields': ["related"]}),
         ]
-    list_display = ('title', 'slug', "publish_date" )
+    list_display = ('title', 'slug', "publish_date",'image','author' )
+
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        super().save_model(request, obj, form, change)
+
+#    'author', 'author_first_name
 
 class ImageAdmin(admin.ModelAdmin):
     model = Image
@@ -29,7 +35,7 @@ admin.site.register(PostRelated)
 admin.site.register(Tag)
 admin.site.register(Post,PostAdmin)
 
-    
+
 
 # class PostAdmin(admin.ModelAdmin):
 #     fieldsets = [
