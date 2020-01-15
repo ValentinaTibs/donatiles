@@ -8,13 +8,24 @@
 
 <h2>ALL BLOG POST</h2>
 
+<h3>MENU</h3>
 
 <ul>
+{% for tag in menu_tags %}
+  <li>{{ tag.name }}</li>
 
-{% for post in posts %}
+{% endfor %}
+</ul>
+
+<h3>post list</h3>
+
+<ul>
+  {% for post in posts %}
     <li>{{ post.title }}</li>
-    <a>  <img src="{{ post.image.imagefile.url }}" ></a>
 
+    <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+
+    <a>  <img src="{{ post.image.imagefile.url }}" ></a>
 {% endfor %}
 
 </ul>

@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.db import models
 from django_summernote.admin import SummernoteModelAdmin
-
+from django_reverse_admin import ReverseModelAdmin
 # from .models import Image, Post
 # tutorial_content
 
-from .models import Post, Tag, PostRelated, Image
+from .models import Post, Tag, PostRelated, Image, Product
 
 class PostAdmin(SummernoteModelAdmin):
 
@@ -20,20 +20,31 @@ class PostAdmin(SummernoteModelAdmin):
         obj.author = request.user
         super().save_model(request, obj, form, change)
 
-#    'author', 'author_first_name
+
 
 class ImageAdmin(admin.ModelAdmin):
     model = Image
     list_display = ('name', 'thumb_', )
     search_fields = ('name', )
     readonly_fields  = ( 'image_', )
-    
+
+
+class TagAdmin(admin.ModelAdmin):
+  
+    list_display = ('name', 'summary',"slug","public","in_menu" )
+    fields = ("name","summary","public","in_menu")
+
+
+class ProductAdmin(ReverseModelAdmin):
+    inline_type = 'stacked'
+    inline_reverse = ['post', ]
+
+
 admin.site.register(Image, ImageAdmin)
-
-
 admin.site.register(PostRelated)
-admin.site.register(Tag)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Post,PostAdmin)
+admin.site.register(Product,ProductAdmin)
 
 
 

@@ -27,17 +27,23 @@ class Image(models.Model):
 
 class Tag(models.Model):
     
-    tag_name = models.CharField(max_length=200)
-    tag_summary = models.CharField(max_length=200)
-    tag_slug = models.CharField(max_length=200, default=1)
-    public =models.BooleanField(default = True)
+    name = models.CharField(max_length=200)
+    summary = models.CharField(max_length=200, null = True, blank=True,)
+    slug = models.CharField(max_length=200, default=1)
+    public = models.BooleanField(default = True)
+    in_menu = models.BooleanField(default = False)
 
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.name.replace(" ","-").lower()
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+    
     def __str__(self):
-        return self.tag_name
+        return self.name
 
 class PostRelated(models.Model):
     post_related = models.CharField(max_length=200)
@@ -59,6 +65,7 @@ class Post(models.Model):
     image = models.ForeignKey(Image, verbose_name="Image", on_delete=models.SET_NULL, null = True)
 
     related = models.ForeignKey(PostRelated, default=1, verbose_name="Post Related", on_delete=models.SET_DEFAULT)
+    post_tag = models.ForeignKey(Tag, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT)
     slug = models.CharField(max_length=200, unique=True)
 
     author = models.ForeignKey( User, on_delete=models.CASCADE )
@@ -71,6 +78,13 @@ class Post(models.Model):
             self.slug = self.title.replace(" ","-").lower()
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
+
+class Product(models.Model):
+    post = models.OneToOneField(Post, on_delete=models.CASCADE, related_name='product' )
+    
+class ProductImage(models.Model):
+    images = models.ForeignKey(Image, verbose_name="Image", on_delete=models.SET_NULL, null = True)
+    product = models.ForeignKey(Product, verbose_name="Product", on_delete=models.SET_NULL, null = True)
 
 # class Tag(models.Model):
 #     name =   models.CharField (max_length = 100 , null = True, blank=True)
