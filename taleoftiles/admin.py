@@ -39,7 +39,6 @@ class ProductAdmin(ReverseModelAdmin):
     inline_type = 'stacked'
     inline_reverse = ['post', ]
 
-
 admin.site.register(Image, ImageAdmin)
 admin.site.register(PostRelated)
 admin.site.register(Tag, TagAdmin)

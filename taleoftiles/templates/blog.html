@@ -8,27 +8,77 @@
 
 <h2>ALL BLOG POST</h2>
 
-<h3>MENU</h3>
+<div class="col-md-3 ml-auto">
+  <div class="row ">
 
-<ul>
-{% for tag in menu_tags %}
-  <li>{{ tag.name }}</li>
+  <h3>MENU</h3>
 
-{% endfor %}
-</ul>
+  <aside class="sidebar">
+    <ul>
+      {% for tag in menu_tags %}
+        <li>{{ tag.name }}</li>
+      
+      {% endfor %}
+      </ul>
+      
+  </aside>
+  </div>
+</div>
 
-<h3>post list</h3>
 
-<ul>
-  {% for post in posts %}
-    <li>{{ post.title }}</li>
 
-    <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+<div class="col-md-9 ">
 
-    <a>  <img src="{{ post.image.imagefile.url }}" ></a>
-{% endfor %}
+  <div class="row ">
+    {% for post in posts %}
+    <div class="col-4 ">
+     
 
-</ul>
+      <li>{{ post.title }}</li>
+
+      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+    
+      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
+
+    </div>
+    <div class="col-4 ">
+     
+
+      <li>{{ post.title }}</li>
+
+      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+    
+      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
+
+    </div>
+    <div class="col-4 ">
+     
+
+      <li>{{ post.title }}</li>
+
+      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+    
+      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
+
+    </div>
+    <div class="col-4 ">
+     
+
+      <li>{{ post.title }}</li>
+
+      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+    
+      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
+
+    </div>
+
+   
+
+    {% endfor %}
+    
+  </div>
+</div>
+
 
 </div>
 
