@@ -16,8 +16,9 @@
   <aside class="sidebar">
     <ul>
       {% for tag in menu_tags %}
+      <a href="{% url 'post' post.slug %}"> 
         <li>{{ tag.name }}</li>
-      
+      </a>
       {% endfor %}
       </ul>
       
@@ -26,52 +27,20 @@
 </div>
 
 
-
 <div class="col-md-9 ">
 
   <div class="row ">
     {% for post in posts %}
     <div class="col-4 ">
-     
 
-      <li>{{ post.title }}</li>
 
-      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
+      <a href="{% url 'post' post.slug %}">{{ post.title }}</a>
+      <a href="{% url 'post' post.slug %}"> 
+        <img src="{{ post.image.imagefile.url }}"  class="card-img">
+      </a>
     
-      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
 
     </div>
-    <div class="col-4 ">
-     
-
-      <li>{{ post.title }}</li>
-
-      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
-    
-      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
-
-    </div>
-    <div class="col-4 ">
-     
-
-      <li>{{ post.title }}</li>
-
-      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
-    
-      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
-
-    </div>
-    <div class="col-4 ">
-     
-
-      <li>{{ post.title }}</li>
-
-      <a href="{% url 'post' post.slug %}">{{ post.slug }}</a>
-    
-      <a>  <img src="{{ post.image.imagefile.url }}"  class="card-img"></a>
-
-    </div>
-
    
 
     {% endfor %}

@@ -16,11 +16,15 @@ def post(request, post_slug):
     post = Post.objects.get(slug= post_slug )
     return render(request, "post.html",{"post":post})
 
-def blog(request):
+def blog(request, tag_slug = None):
 
-    #filter just the ones that have publish date bigger than today
-    posts = Post.objects.filter(publish_date__gte= date.today()  )
-    menu_tags = Tag.objects.filter(in_menu = True)
-    
+    if(tag_slug == None):
+        #filter just the ones that have publish date bigger than today
+        posts = Post.objects.filter(publish_date__gte= date.today()  )
+        menu_tags = Tag.objects.filter(in_menu = True)
+    else:
+        posts = Post.objects.filter(publish_date__gte= date.today()  )
+        menu_tags = Tag.objects.filter(in_menu = True)
+
     return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})
 
