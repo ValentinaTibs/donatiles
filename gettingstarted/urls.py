@@ -20,8 +20,9 @@ import taleoftiles.views
 urlpatterns = [
     path("", taleoftiles.views.index, name="index"),
     path("blog/", taleoftiles.views.blog, name="blog"),
-    path('blog/<slug:post_slug>/',  taleoftiles.views.post, name="post"),
-    path("admin/", admin.site.urls),
+    path("blog/<slug:tag_slug>", taleoftiles.views.tag, name="tag"),
+    path('<slug:post_slug>/',  taleoftiles.views.post, name="post"),
+    # path("admin/", admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     # url(r'^tinymce/', include('tinymce.urls')),
 ]

@@ -16,7 +16,7 @@
   <aside class="sidebar">
     <ul>
       {% for tag in menu_tags %}
-      <a href="{% url 'post' post.slug %}"> 
+      <a href="{% url 'tag' tag.slug %}"> 
         <li>{{ tag.name }}</li>
       </a>
       {% endfor %}
@@ -34,7 +34,7 @@
     <div class="col-4 ">
 
 
-      <a href="{% url 'post' post.slug %}">{{ post.title }}</a>
+      <a href="{% url 'post' post.slug %}"> {{ post.title }} </a>
       <a href="{% url 'post' post.slug %}"> 
         <img src="{{ post.image.imagefile.url }}"  class="card-img">
       </a>
