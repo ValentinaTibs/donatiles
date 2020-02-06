@@ -22,6 +22,14 @@ urlpatterns = [
     path("blog/", taleoftiles.views.blog, name="blog"),
     path("blog/<slug:tag_slug>", taleoftiles.views.tag, name="tag"),
     path('blog/post/<slug:post_slug>/',  taleoftiles.views.post, name="post"),
+
+    path("settings/", taleoftiles.views.settings, name="settings"),    
+    path("settings/<slug:setting_slug>", taleoftiles.views.setting, name="setting"),
+    
+    path("product/<slug:product_slug>", taleoftiles.views.product, name="product"),
+
+    path("collection/<slug:collection_slug>/", taleoftiles.views.collection, name="collection"),    
+    
     path("admin/", admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     # url(r'^tinymce/', include('tinymce.urls')),

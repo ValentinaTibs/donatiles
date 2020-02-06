@@ -52,4 +52,11 @@ _______________________________________________________________________________
 heroku local web -f Procfile.windows
 ```
 
+##3 Gunicorn let Connecion opened on 5000
+
+```
+kill -9 $(lsof -i:5000 -t) 2> /dev/null
+```
+
+
 
