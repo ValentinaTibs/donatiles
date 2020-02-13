@@ -7,6 +7,9 @@ from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
 
 import requests
 
+import logging
+
+
 def pagination(request, list):
     page = request.GET.get('page')
     paginator = Paginator(list, 10)
@@ -42,6 +45,32 @@ def settings(requests):
 def setting(request, setting_slug):
     pass    
 
+def sampler(request, session_id):
+    try: 
+        sampler = Sampler.objects.get(session_id  = session_id )
+    except ObjectDoesNotExist:
+        # mettere controlli per vedere se session_id potrebbe essere veramente 
+        # una sessione valida altrimenti si rischia il ddos
+        sampler = Sampler(session_id  = session_id)
+        sampler.save()
+
+    try: 
+        sett = Setting.objects.get()
+    except ObjectDoesNotExist:
+        sett = Setting(num_img_sampler  = 4)
+        sett.save()
+    
+    samples = list(sampler.sample.all())
+    samples_len = len(samples)
+
+    for i in range(samples_len,4):
+        samples = samples + [None]
+
+    logger = logging.getLogger(__name__)
+    logger.error(samples)
+
+    print(samples)
+    return render(request, "sampler.html",{"sampler":sampler,"samples":samples})
 
 #Check if the product is suitable for sampling for 
 #check if we do have a connected use
@@ -69,8 +98,10 @@ def product(request, product_slug):
             sample = Sample(sampler  = sampler, product = product)
             sample.save()
             message = "Product added to your sampler"
+            session_id
     return render(request, "product.html",{"product":product, 
-        "session_id" : session_id ,"message": message,"sample" : sample})
+            "message": message,"sample" : sample,"sampler" : sampler,
+        })
 
 def products(request):
     pass

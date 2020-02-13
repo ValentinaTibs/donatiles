@@ -49,6 +49,8 @@ class Collection(models.Model):
 
 class Setting(models.Model):
 
+    num_img_sampler = models.PositiveIntegerField( default=4, ) 
+    
     def __str__(self):
         return self.publication.title
 
@@ -136,6 +138,10 @@ class Image(models.Model):
     collection = models.ForeignKey(Collection,blank = True,  null = True,on_delete=models.SET_NULL, related_name='images' )
     product = models.ForeignKey(Product, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     setting = models.ForeignKey(Setting, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
+    order = models.PositiveIntegerField( default=0, )   
+
+    class Meta:
+        ordering = ["order"]    
 
     def image_(self):
         return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
@@ -153,4 +159,5 @@ class Image(models.Model):
         if(self.name == None):
             self.name = self.imagefile.name
         super().save(*args, **kwargs)  # Call the "real" save() method.
+
 

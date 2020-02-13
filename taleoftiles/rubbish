@@ -1,3 +1,29 @@
+
+{% for sample in setting.num_img_sampler %}  
+    
+{% if sampler.sample.all[sample]%}
+
+{% empty %}
+
+{% endif %}
+
+{% endfor %}
+
+
+{% for sample in sampler.sample.all %}  
+
+    <li> {{ sample.product.publication.title }}</li>
+    <img width="200px" style="object-fit: contain;"  src="{{ product.images.all[0].imagefile.url }}" >  
+    <button> remove </button>
+
+{% endfor %}
+
+
+{% if sampler.sample.all|legth < 4 %}
+    {% for empty in sampler.sample.all %}  
+
+{% endif %}
+
 if request.method == 'POST':
         try:
             #check if the product is semplable

@@ -27,6 +27,7 @@ urlpatterns = [
     path("settings/<slug:setting_slug>", taleoftiles.views.setting, name="setting"),
     
     path("product/<slug:product_slug>", taleoftiles.views.product, name="product"),
+    path("sampler/<slug:session_id>", taleoftiles.views.sampler, name="sampler"),
 
     path("collection/<slug:collection_slug>/", taleoftiles.views.collection, name="collection"),    
     
