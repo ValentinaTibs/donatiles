@@ -16,15 +16,25 @@
 {% endfor %}
 
 <li>{{ product.publication.content }}</li>
- <form  action="/product/{{ product.publication.slug }}" method="POST">
- 	 {% csrf_token %}
-	<button> aggiungi al campione</button>
-</form>
+
+{% if product.samplable %}
+	{% if sample == None %}
+	 <h3>Link al tuo sampler</h3>
+	 {% else %}
+	<form  action="/product/{{ product.publication.slug }}" method="POST">
+		 {% csrf_token %}
+	<button> aggiungi al tuo campione gratuito</button> 
+	</form>
+	{% endif %}
+
+{% endif %}
+
 	<button> metti nel CARRELLO</button>
 
 </ul>
+<h1>SESS ID {{ session_id}}</h1>
 
-<h1> {{ gino}}</h1>
+<h4>{{message}}</h4>
 
 </div>
 

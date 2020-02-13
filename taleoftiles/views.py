@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
-from .models import Post, Tag, Collection, Setting, Product
+from django.core.exceptions import ObjectDoesNotExist
+from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
 
 import requests
 
@@ -43,18 +42,35 @@ def settings(requests):
 def setting(request, setting_slug):
     pass    
 
-def product(request, product_slug):
-    gino = 0
-    if request.method == 'POST':
-        try:
-            gino = int(request.session['fav_color']) + 1
-            request.session['fav_color'] = str(gino)
-        except KeyError:
-            gino = 0
-            request.session['fav_color'] = str(0)
 
+#Check if the product is suitable for sampling for 
+#check if we do have a connected use
+def product(request, product_slug):
+    session_id = request.session._get_or_create_session_key()
     product = Product.objects.get(publication__slug  = product_slug )
-    return render(request, "product.html",{"product":product, "gino":gino })
+    message = ""
+    sampler = None
+    sample = None
+    
+    #attributing to this session a permanence in the database
+    try: 
+        sampler = Sampler.objects.get(session_id  = session_id )
+    except ObjectDoesNotExist:
+        sampler = Sampler(session_id  = session_id)
+        sampler.save()
+
+    if request.method == 'POST':
+    # distinguis from chart post to the sampler post    
+        try:
+            sample = Sample.objects.get(sampler__pk  = sampler.pk, product__publication__slug = product_slug )
+            message = "You already have this in your sampler"
+
+        except ObjectDoesNotExist:
+            sample = Sample(sampler  = sampler, product = product)
+            sample.save()
+            message = "Product added to your sampler"
+    return render(request, "product.html",{"product":product, 
+        "session_id" : session_id ,"message": message,"sample" : sample})
 
 def products(request):
     pass

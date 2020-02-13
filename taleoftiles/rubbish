@@ -1,3 +1,21 @@
+if request.method == 'POST':
+        try:
+            #check if the product is semplable
+            try:
+            #check if the product is already sampled by this session
+                sample = Sample.objects.filter(sampler__pk  = sampler.pk, product__publication__slug = product_slug )
+                if sample.count() == 0:
+                    message = "You already have this in your sampler"
+                else:
+                    sampler = Sample(sampler  = sampler, product = product)
+                    message = "Product added to your sampler"
+            gino = int(request.session['fav_color']) + 1
+            request.session['fav_color'] = str(gino)
+        except KeyError:
+            gino = 0
+            request.session['fav_color'] = str(0)
+
+
 @admin.register(Image)
 @admin.register(Setting)
 @admin.register(Product)

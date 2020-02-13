@@ -4,6 +4,23 @@ from django.db import models
 
 from PIL import Image
 
+COMPLETION_STATUS = (
+    ('s', 'Started'),
+    ('c', 'Completed'),
+    ('o', 'Ordered'),
+    ('e', 'Expired')
+) 
+
+ORDER_STATUS = (
+    ('w', 'In Wait'),
+    ('i', 'Received'),
+    ('p', 'In Preparazione'),
+    ('s', 'Spedito'),
+    ('l', 'Lost'),
+    ('r', 'Ricevuto'),
+    ('c', 'Confermato'),
+) 
+
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -43,12 +60,11 @@ class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )
     samplable = models.BooleanField ( default=True, )
 
+    # wait time
+    # min ammount
     def __str__(self):
         return self.publication.title
 
-    # wait time
-    # enabled to sampler
-    # min ammount
 
 class Post(models.Model):
     pass
@@ -70,26 +86,17 @@ class Profile(models.Model):
 
 class Shipping(models.Model):
     user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
-    STATE = (
-        ('I', 'Inviato'),
-        ('P', 'In Preparazione'),
-        ('S', 'Spedito'),
-        ('L', 'Lost'),
-        ('R', 'Ricevuto'),
-        ('K', 'Confermato'),
-    ) 
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
 
 class Sampler(models.Model):
+    session_id = models.CharField(max_length=100, unique=True)
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
     
-    STATE = (
-        ('S', 'Inviato'),
-        ('P', 'In Preparazione'),
-        ('S', 'Spedito'),
-        ('L', 'Lost'),
-        ('R', 'Ricevuto'),
-        ('K', 'Confermato'),
-    ) 
-    pass
+
+class Sample(models.Model):
+    product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='sample')
+    sampler = models.ForeignKey(Sampler,  verbose_name="Sampler", null=True, on_delete=models.SET_NULL, related_name='sample')
 
 class Chart(models.Model):
     pass
@@ -99,8 +106,6 @@ class Order(models.Model):
 
 class Question(models.Model):
     pass
-
-
 
 
 class Publication(models.Model):
