@@ -25,10 +25,11 @@ urlpatterns = [
 
     path("settings/", taleoftiles.views.settings, name="settings"),    
     path("settings/<slug:setting_slug>", taleoftiles.views.setting, name="setting"),
-    
     path("product/<slug:product_slug>", taleoftiles.views.product, name="product"),
+
     path("sampler/<slug:session_id>", taleoftiles.views.sampler, name="sampler"),
     path("sampler/<slug:session_id>/del/<slug:product_id>", taleoftiles.views.del_sample, name="sampler"),
+    path("sampler/<slug:session_id>/shipit", taleoftiles.views.ship_sampler, name="ship_sampler"),
 
     path("collection/<slug:collection_slug>/", taleoftiles.views.collection, name="collection"),    
     

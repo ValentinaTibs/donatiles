@@ -6,39 +6,8 @@
   <div class="container">
 
 
-<h2> PRODUCT</h2>
-
-<li>{{ product.publication.title }}</li>
-  
-{% for image in product.images.all %}  
-   <img width="200px" style="object-fit: contain;" 
-  src="{{ image.imagefile.url }}" >  
-{% endfor %}
-
-<li>{{ product.publication.content }}</li>
-
-{% if product.samplable %}
-
-	{% if sample == None %}
-		
-		<a href="{% url 'sampler' sampler.session_id %}"> 
-            <li>Your free sampler</li>
-        </a>
-
-	{% else %}
-
-	<form  action="/product/{{ product.publication.slug }}" method="POST">
-		 {% csrf_token %}
-		<button> aggiungi al tuo campione gratuito</button> 
-	</form>
-
-	{% endif %}
-
-{% endif %}
-
-	<button> metti nel CARRELLO</button>
-
-</ul>
+<h2> 404 - Page Not Found</h2>
+	
 
 <h4>{{message}}</h4>
 

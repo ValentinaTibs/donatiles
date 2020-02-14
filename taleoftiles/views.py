@@ -46,6 +46,9 @@ def setting(request, setting_slug):
     pass    
 
 
+def ship_sampler(request, session_id):
+    # if we have less than 4 samples in the samples..
+    return render(request, "ship_sampler.html",{"sampler":sampler})
 
 def sampler(request, session_id):
     try: 
@@ -79,8 +82,8 @@ def del_sample(request, session_id, product_id):
         # una sessione valida altrimenti si rischia il ddos
         conf = Config.objects.get(active = True, tag = "message_del_sample")
         return render(request, "_404.html",{"message":conf.char_val})
-        
-    sampler(request,session_id)
+    # PUT here a redirect         
+    return sampler(request,session_id)
 
 #Check if the product is suitable for sampling for 
 #check if we do have a connected use
@@ -90,29 +93,26 @@ def product(request, product_slug):
     message = ""
     sampler = None
     sample = None
-    
+    make_it_new = False
     #attributing to this session a permanence in the database
     try: 
         sampler = Sampler.objects.get(session_id  = session_id )
     except ObjectDoesNotExist:
         sampler = Sampler(session_id  = session_id)
         sampler.save()
-    
 
-    if request.method == 'POST':
-    # distinguis from chart post to the sampler post    
-        try:
-            sample = Sample.objects.get(sampler__pk  = sampler.pk,removed = False, product__publication__slug = product_slug )
-            message = "You already have this in your sampler"
+    try:
+        sample = Sample.objects.get(sampler__pk  = sampler.pk,removed = False, product__publication__slug = product_slug )
 
-        except ObjectDoesNotExist:
-            sample = Sample(sampler = sampler, product = product)
-            sample.save()
-            message = "Product added to your sampler"
+    except ObjectDoesNotExist:
+        message = "Add this to your free sampler for receiving it at home"
 
-    print("HERE WE GO WITH THE RENDERING")
-    print(product)
-    print(session_id)
+    if request.method == 'POST' and make_it_new:
+        # distinguis from chart post to the sampler post    
+        sample = Sample(sampler = sampler, product = product)
+        sample.save()
+        message = "Product added to your sampler"
+
     return render(request, "product.html",{"product":product, 
             "message": message,"sample" : sample,"sampler" : sampler,
         })

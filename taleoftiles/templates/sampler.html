@@ -6,7 +6,8 @@
   <div class="container">
 
 
-<h2> YOUR SAMPLE</h2>
+<h2> YOUR SAMPLER</h2>
+
 <p>
 It will arrive to your house for FREE for giving you the exact sensation of how this is gonna look - we are so sure you would love the quality of our
 </p>
@@ -17,12 +18,11 @@ STATE: {{ sampler.completion_status }}
 
 	{% if sample != None %}
 		{{ sample.product.publication.title }}
-		<form  action="/sampler/{{ sampler.session_id }}/del/{{sample.product}}" method="POST">
+		<form  action="/sampler/{{ sampler.session_id }}/del/{{sample.product.id}}" method="POST">
 			{% csrf_token %}
 			<button>remove</button>
 		</form>
 
-		
 	{% else %}
 
 		<button>Add your free sampler</button>
@@ -31,10 +31,7 @@ STATE: {{ sampler.completion_status }}
 
 {% endfor %}
 
-<form  action="/sampler/{{ sampler.session_id }}" method="POST">
-	{% csrf_token %}
-	<button> receive your free sampler</button> 
-</form>
 
+<a href="{% url 'ship_sampler' sampler.session_id %}">  <button> receive your free sampler</button>  </a>
 
 {% endblock %}
