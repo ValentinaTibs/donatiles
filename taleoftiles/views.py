@@ -4,9 +4,9 @@ from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
+from .models import Config
 
 import requests
-
 import logging
 
 
@@ -45,9 +45,11 @@ def settings(requests):
 def setting(request, setting_slug):
     pass    
 
+
+
 def sampler(request, session_id):
     try: 
-        sampler = Sampler.objects.get(session_id  = session_id )
+        sampler = Sampler.objects.get(session_id  = session_id,  )
     except ObjectDoesNotExist:
         # mettere controlli per vedere se session_id potrebbe essere veramente 
         # una sessione valida altrimenti si rischia il ddos
@@ -55,22 +57,30 @@ def sampler(request, session_id):
         sampler.save()
 
     try: 
-        sett = Setting.objects.get()
+        conf = Config.objects.get(active = True, tag = "num_samples")
     except ObjectDoesNotExist:
-        sett = Setting(num_img_sampler  = 4)
-        sett.save()
-    
-    samples = list(sampler.sample.all())
+        conf = Config(tag = "num_samples", int_val  = 4)
+        conf.save()  
+
+    samples = list(sampler.sample.filter(removed = False))
     samples_len = len(samples)
 
-    for i in range(samples_len,4):
+    for i in range(samples_len,conf.int_val):
         samples = samples + [None]
 
-    logger = logging.getLogger(__name__)
-    logger.error(samples)
-
-    print(samples)
     return render(request, "sampler.html",{"sampler":sampler,"samples":samples})
+
+
+def del_sample(request, session_id, product_id):
+    try: 
+        sample = Sample.objects.get(sampler__session_id  = session_id, product__pk = product_id, )
+    except ObjectDoesNotExist:
+        # mettere controlli per vedere se session_id potrebbe essere veramente 
+        # una sessione valida altrimenti si rischia il ddos
+        conf = Config.objects.get(active = True, tag = "message_del_sample")
+        return render(request, "_404.html",{"message":conf.char_val})
+        
+    sampler(request,session_id)
 
 #Check if the product is suitable for sampling for 
 #check if we do have a connected use
@@ -87,18 +97,22 @@ def product(request, product_slug):
     except ObjectDoesNotExist:
         sampler = Sampler(session_id  = session_id)
         sampler.save()
+    
 
     if request.method == 'POST':
     # distinguis from chart post to the sampler post    
         try:
-            sample = Sample.objects.get(sampler__pk  = sampler.pk, product__publication__slug = product_slug )
+            sample = Sample.objects.get(sampler__pk  = sampler.pk,removed = False, product__publication__slug = product_slug )
             message = "You already have this in your sampler"
 
         except ObjectDoesNotExist:
-            sample = Sample(sampler  = sampler, product = product)
+            sample = Sample(sampler = sampler, product = product)
             sample.save()
             message = "Product added to your sampler"
-            session_id
+
+    print("HERE WE GO WITH THE RENDERING")
+    print(product)
+    print(session_id)
     return render(request, "product.html",{"product":product, 
             "message": message,"sample" : sample,"sampler" : sampler,
         })

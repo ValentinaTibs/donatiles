@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "taleoftiles",
     'django_summernote',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,8 @@ MEDIA_URL = '/media/'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 django_heroku.settings(locals())
+
+RECAPTCHA_PUBLIC_KEY = '6Le6idgUAAAAAPC8bqlkoCRIeU4Q4S9kVwgnRnIP'
+RECAPTCHA_PRIVATE_KEY = '6Le6idgUAAAAAGTdYuat-SXi_uQDPOeGMyJ4oAam'
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

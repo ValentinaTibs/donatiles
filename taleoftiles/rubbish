@@ -1,4 +1,8 @@
 
+<img width="200px" style="object-fit: contain;" 
+        src="{{ sample.images.all[0].imagefile.url }}" >  
+
+
 {% for sample in setting.num_img_sampler %}  
     
 {% if sampler.sample.all[sample]%}

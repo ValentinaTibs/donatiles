@@ -15,8 +15,26 @@ STATE: {{ sampler.completion_status }}
 
 {% for sample in samples %}  
 
+	{% if sample != None %}
+		{{ sample.product.publication.title }}
+		<form  action="/sampler/{{ sampler.session_id }}/del/{{sample.product}}" method="POST">
+			{% csrf_token %}
+			<button>remove</button>
+		</form>
+
+		
+	{% else %}
+
+		<button>Add your free sampler</button>
+
+	{% endif %}
+
 {% endfor %}
 
+<form  action="/sampler/{{ sampler.session_id }}" method="POST">
+	{% csrf_token %}
+	<button> receive your free sampler</button> 
+</form>
 
 
 {% endblock %}

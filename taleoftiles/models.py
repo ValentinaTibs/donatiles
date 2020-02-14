@@ -5,10 +5,11 @@ from django.db import models
 from PIL import Image
 
 COMPLETION_STATUS = (
+    ('e', 'Empty'),
     ('s', 'Started'),
     ('c', 'Completed'),
     ('o', 'Ordered'),
-    ('e', 'Expired')
+    ('ex', 'Expired')
 ) 
 
 ORDER_STATUS = (
@@ -49,8 +50,7 @@ class Collection(models.Model):
 
 class Setting(models.Model):
 
-    num_img_sampler = models.PositiveIntegerField( default=4, ) 
-    
+
     def __str__(self):
         return self.publication.title
 
@@ -88,17 +88,23 @@ class Profile(models.Model):
 
 class Shipping(models.Model):
     user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
-    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
 
 class Sampler(models.Model):
     session_id = models.CharField(max_length=100, unique=True)
-    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
     order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
-    
+
+    def __str__(self):
+        return self.session_id
 
 class Sample(models.Model):
     product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='sample')
     sampler = models.ForeignKey(Sampler,  verbose_name="Sampler", null=True, on_delete=models.SET_NULL, related_name='sample')
+    removed = models.BooleanField(default = False)
+
+    def __str__(self):
+        return self.sampler.session_id
 
 class Chart(models.Model):
     pass
@@ -107,8 +113,13 @@ class Order(models.Model):
     pass
 
 class Question(models.Model):
-    pass
-
+    content = models.TextField()
+    # user - that might be null 
+    # author that might be a user - that might be null 
+    # captcha
+    # status visible only to the staff
+    # creation date
+    # email to reply
 
 class Publication(models.Model):
     title = models.CharField(max_length=200, unique = True)
@@ -160,4 +171,12 @@ class Image(models.Model):
             self.name = self.imagefile.name
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
+class Config(models.Model):
+    int_val= models.PositiveIntegerField( default=1,  null = True, blank=True) 
+    char_val= models.CharField(max_length=100, default=1,  null = True, blank=True) 
+    active = models.BooleanField(default = True)
+    tag = models.CharField(max_length=20, default="-")
 
+    def __str__(self):
+        return '%s' % (self.tag,)
+    
