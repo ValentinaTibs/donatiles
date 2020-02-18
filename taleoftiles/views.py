@@ -4,7 +4,10 @@ from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
-from .models import Config
+from .models import Config, Shipping
+
+from .forms import NewSamplerShipping
+
 
 import requests
 import logging
@@ -43,14 +46,42 @@ def settings(requests):
     pass
 
 def setting(request, setting_slug):
-    pass    
+    pass 
 
+def shipping(request, internal_tracking_id):
+    try: 
+        #the goo sampler is the one that has not being shipped
+        shipping = Shipping.objects.get(internal_tracking_id  = internal_tracking_id,  )
+    except ObjectDoesNotExist:
+        return render(request, "_404.html",{"message":"The shippinh you asked to view is not existing",})   
+
+    return render(request, "shipping.html",{"shipping":shipping,})
 
 def ship_sampler(request, session_id):
     # if we have less than 4 samples in the samples..
-    return render(request, "ship_sampler.html",{"sampler":sampler})
+    # if there is not an user logged
+    form = NewSamplerShipping()
+
+    try: 
+        #the goo sampler is the one that has not being shipped
+        sampler = Sampler.objects.get(session_id  = session_id,  )
+    except ObjectDoesNotExist:
+        return render(request, "_404.html",{"message":"The sampler you asked to ship is not existing",})
+    
+    form.sampler_id = sampler.pk
+
+    if request.method == 'POST':
+        form = NewSamplerShipping(request.POST)
+
+        if form.is_valid():
+            form.save()
+            shipping = Shipping.objects.latest('id')
+            return render(request, "shipping.html",{"shipping":shipping,})
+        
+    return render(request, "ship_sampler.html",{"sampler":sampler,'form':form,})
 
 def sampler(request, session_id):
+    
     try: 
         sampler = Sampler.objects.get(session_id  = session_id,  )
     except ObjectDoesNotExist:
@@ -106,6 +137,7 @@ def product(request, product_slug):
 
     except ObjectDoesNotExist:
         message = "Add this to your free sampler for receiving it at home"
+        make_it_new = True
 
     if request.method == 'POST' and make_it_new:
         # distinguis from chart post to the sampler post    

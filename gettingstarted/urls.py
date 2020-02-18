@@ -31,6 +31,8 @@ urlpatterns = [
     path("sampler/<slug:session_id>/del/<slug:product_id>", taleoftiles.views.del_sample, name="sampler"),
     path("sampler/<slug:session_id>/shipit", taleoftiles.views.ship_sampler, name="ship_sampler"),
 
+    path("shipping/<slug:internal_tracking_id>", taleoftiles.views.shipping, name="shipping"),
+
     path("collection/<slug:collection_slug>/", taleoftiles.views.collection, name="collection"),    
     
     path("admin/", admin.site.urls),

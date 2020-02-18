@@ -1,4 +1,6 @@
 from django.utils.safestring import mark_safe
+from django.utils.crypto import get_random_string
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -86,14 +88,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-class Shipping(models.Model):
-    user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
-    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
-
+        
 class Sampler(models.Model):
     session_id = models.CharField(max_length=100, unique=True)
     completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
     order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+
 
     def __str__(self):
         return self.session_id
@@ -105,6 +105,36 @@ class Sample(models.Model):
 
     def __str__(self):
         return self.sampler.session_id
+
+
+class Shipping(models.Model):
+    #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
+    name    = models.CharField(max_length=100,default = "")
+    surname = models.CharField(max_length=100,default = "")
+    
+    email   = models.EmailField(max_length=100,default = "")
+    telephone = models.CharField(max_length=100,default = "")
+
+    address = models.CharField(max_length=100,default = "")
+    address2 = models.CharField(max_length=100,default = "")
+    city = models.CharField(max_length=100,default = "")
+    postcode = models.CharField(max_length=100,default = "")
+    note = models.TextField(max_length = 200)
+
+    internal_tracking_id = models.CharField(max_length=100, default = "")
+    external_tracking_id= models.CharField(max_length=100, default = "")
+
+    sampler = models.ForeignKey(Sampler,  verbose_name="Sampler", on_delete=models.CASCADE, related_name='shipping')
+    
+
+    def save(self, *args, **kwargs):
+        self.internal_tracking_id = get_random_string(length=32)
+
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+    def __str__(self):
+        return self.internal_tracking_id
 
 class Chart(models.Model):
     pass

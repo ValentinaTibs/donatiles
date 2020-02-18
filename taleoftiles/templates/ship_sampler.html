@@ -6,42 +6,27 @@
 {% load static %}
 
 {% block content %}
-  <div class="container">
+ 
+<div class="container">
 
 
-<h2> PRODUCT</h2>
+<h2> SHIP THE SAMPLER</h2>
 
-<li>{{ product.publication.title }}</li>
-  
-{% for image in product.images.all %}  
-   <img width="200px" style="object-fit: contain;" 
-  src="{{ image.imagefile.url }}" >  
-{% endfor %}
+{% if doneit %}
 
-<li>{{ product.publication.content }}</li>
 
-{% if product.samplable %}
+{% else %}
 
-	{% if sample %}
+<form action="/sampler/{{sampler.session_id }}/shipit"   method="post" >
+    
+	{% csrf_token %}
+	{{ form }}
+	<input type="hidden" id="session_id" name="session_id" value="{{sampler.session_id}}">
+	<input type="submit" value="Save" />
 
-		<a href="{% url 'sampler' sampler.session_id %}"> 
-            <li>Your free sampler</li>
-        </a>
-		
-	{% else %}
-		
-		<form  action="/product/{{ product.publication.slug }}" method="POST">
-			 {% csrf_token %}
-			<button> aggiungi al tuo campione gratuito</button> 
-		</form>
-
-	{% endif %}
+</form>  
 
 {% endif %}
-
-	<button> metti nel CARRELLO</button>
-
-</ul>
 
 <h4>{{message}}</h4>
 

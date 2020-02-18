@@ -1,0 +1,27 @@
+
+
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container">
+
+
+<h2> SHIPPING STATUS</h2>
+
+
+{{shipping.internal_tracking_id}}
+{{shipping.name}}
+
+<form>
+	
+<button> Mark as received</button>
+</form>
+
+<h4>{{message}}</h4>
+
+</div>
+
+{% endblock %}

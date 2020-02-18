@@ -3,7 +3,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
 from .models import Post, Publication, Product, Image, Tag, Setting, Collection
-from .models import Sampler, Sample, Config
+from .models import Sampler, Sample, Config, Shipping
 
 
 class ImageStackedAdmin(admin.StackedInline):
@@ -37,7 +37,11 @@ class SettingAdmin(admin.ModelAdmin):
 class SampleAdmin(admin.ModelAdmin):
     inlines = ()
 
+class ShippingAdmin(admin.ModelAdmin):
+    inlines = ()
+
     
+admin.site.register(Shipping)
  
 admin.site.register(Post)
 admin.site.register(Image,ImageAdmin)
