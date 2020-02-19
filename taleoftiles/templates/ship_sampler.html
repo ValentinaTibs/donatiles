@@ -12,10 +12,14 @@
 
 <h2> SHIP THE SAMPLER</h2>
 
-{% if doneit %}
 
+{% if  diff_num_samples == 0 %}  
+		
+		<p></p>
 
 {% else %}
+	<p>You can add more {{ diff_num_samples }} samples </p>
+{% endif %}
 
 <form action="/sampler/{{sampler.session_id }}/shipit"   method="post" >
     
@@ -26,7 +30,6 @@
 
 </form>  
 
-{% endif %}
 
 <h4>{{message}}</h4>
 

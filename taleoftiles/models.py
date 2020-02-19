@@ -50,16 +50,11 @@ class Collection(models.Model):
    #interaction = models.PositiveIntegerField( default=0, )
   
 
-class Setting(models.Model):
-
-
-    def __str__(self):
-        return self.publication.title
 
 #    pub = models.OneToOneField(Publication, on_delete=models.CASCADE, related_name='setting' )
 
 class Product(models.Model):
-    setting = models.ForeignKey(Setting, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
+    setting = models.ManyToManyField(Setting, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
     collection = models.ForeignKey(Collection, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
     price = models.PositiveIntegerField( default=0, )
     samplable = models.BooleanField ( default=True, )
@@ -68,7 +63,6 @@ class Product(models.Model):
     # min ammount
     def __str__(self):
         return self.publication.title
-
 
 class Post(models.Model):
     pass
@@ -120,7 +114,7 @@ class Shipping(models.Model):
     address2 = models.CharField(max_length=100,default = "")
     city = models.CharField(max_length=100,default = "")
     postcode = models.CharField(max_length=100,default = "")
-    note = models.TextField(max_length = 200)
+    note = models.TextField(max_length = 200, null = True)
 
     internal_tracking_id = models.CharField(max_length=100, default = "")
     external_tracking_id= models.CharField(max_length=100, default = "")
@@ -156,7 +150,7 @@ class Publication(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField("date created", auto_now_add=True)
     publish_date = models.DateTimeField("date published", auto_now_add=False)
-    tag = models.ForeignKey(Tag, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT,related_name='publication' )
+    tag = models.ManyToManyField(Tag, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT,related_name='publication' )
     slug = models.CharField(max_length=200, unique=True)
     #author = models.ForeignKey( User,blank = True, on_delete=models.CASCADE )
     collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )

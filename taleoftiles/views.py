@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -60,6 +60,7 @@ def shipping(request, internal_tracking_id):
 def ship_sampler(request, session_id):
     # if we have less than 4 samples in the samples..
     # if there is not an user logged
+    conf_num_samples = Config.objects.get(active = True, tag = "num_samples")
     form = NewSamplerShipping()
 
     try: 
@@ -68,27 +69,40 @@ def ship_sampler(request, session_id):
     except ObjectDoesNotExist:
         return render(request, "_404.html",{"message":"The sampler you asked to ship is not existing",})
     
+    sampler.completion_status = 'c'
+    sampler.save()
+
     form.sampler_id = sampler.pk
 
     if request.method == 'POST':
+
         form = NewSamplerShipping(request.POST)
 
         if form.is_valid():
+            
+            sampler.completion_status = 'o'
+            sampler.save()
+            
             form.save()
             shipping = Shipping.objects.latest('id')
+
             return render(request, "shipping.html",{"shipping":shipping,})
-        
-    return render(request, "ship_sampler.html",{"sampler":sampler,'form':form,})
+
+    return render(request, "ship_sampler.html",{"sampler":sampler,'form':form,
+            'diff_num_samples':( conf_num_samples.int_val - sampler.sample.filter(removed = False).count()) })
 
 def sampler(request, session_id):
     
     try: 
-        sampler = Sampler.objects.get(session_id  = session_id,  )
+        sampler = Sampler.objects.get(session_id  = session_id )
     except ObjectDoesNotExist:
         # mettere controlli per vedere se session_id potrebbe essere veramente 
         # una sessione valida altrimenti si rischia il ddos
         sampler = Sampler(session_id  = session_id)
         sampler.save()
+
+    if sampler.completion_status == 'o':
+        return ship_sampler(request,session_id)
 
     try: 
         conf = Config.objects.get(active = True, tag = "num_samples")
@@ -113,8 +127,10 @@ def del_sample(request, session_id, product_id):
         # una sessione valida altrimenti si rischia il ddos
         conf = Config.objects.get(active = True, tag = "message_del_sample")
         return render(request, "_404.html",{"message":conf.char_val})
-    # PUT here a redirect         
-    return sampler(request,session_id)
+
+    sample.removed = True;
+    sample.save()
+    return redirect(request.META.get('HTTP_REFERER'))   
 
 #Check if the product is suitable for sampling for 
 #check if we do have a connected use
@@ -133,7 +149,7 @@ def product(request, product_slug):
         sampler.save()
 
     try:
-        sample = Sample.objects.get(sampler__pk  = sampler.pk,removed = False, product__publication__slug = product_slug )
+        sample = Sample.objects.get(sampler__pk  = sampler.pk, removed = False, product__publication__slug = product_slug )
 
     except ObjectDoesNotExist:
         message = "Add this to your free sampler for receiving it at home"

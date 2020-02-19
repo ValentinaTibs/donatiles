@@ -15,6 +15,12 @@
 {{shipping.internal_tracking_id}}
 {{shipping.name}}
 
+{% for sample in shipping.sampler.samples %}  
+		
+		{{ sample.product.publication.title }}
+
+{% endfor %}
+
 <form>
 	
 <button> Mark as received</button>
