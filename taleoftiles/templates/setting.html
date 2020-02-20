@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+<h2> SETTING</h2>
+
+<h4>{{ setting.publication.title }}</h4>
+  
+{% for image in setting.images.all %}  
+  <img width="200px" style="object-fit: contain;" 
+  src="{{ image.imagefile.url }}" >  
+{% endfor %}
+
+<p>{{ setting.publication.content }}</p>
+
+<h3> PRODUCTS in this setting</h3>
+
+{% for product in setting.products.all %}
+	<a href="{% url 'product' product.publication.slug %}"> 
+		<li>{{ product.publication.title }}</li>
+	</a>
+
+    {% for image in product.images.all %}  
+	  <img width="200px" style="object-fit: contain;" 
+	  	src="{{ image.imagefile.url }}" >  
+	{% endfor %}
+
+{% endfor %}
+
+
+</div>
+
+{% endblock %}

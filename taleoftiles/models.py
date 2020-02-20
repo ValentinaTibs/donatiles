@@ -44,23 +44,24 @@ class Tag(models.Model):
         return self.name
 
 class Collection(models.Model):
+
     def __str__(self):
         return self.publication.title
 
-   #interaction = models.PositiveIntegerField( default=0, )
-  
-
-
-#    pub = models.OneToOneField(Publication, on_delete=models.CASCADE, related_name='setting' )
 
 class Product(models.Model):
-    setting = models.ManyToManyField(Setting, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
     collection = models.ForeignKey(Collection, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
     price = models.PositiveIntegerField( default=0, )
     samplable = models.BooleanField ( default=True, )
+    wait_time = models.PositiveIntegerField(default = 15)
+    min_ammount = models.PositiveIntegerField(default = 5)
 
-    # wait time
-    # min ammount
+    def __str__(self):
+        return self.publication.title
+
+class Setting(models.Model):
+    products = models.ManyToManyField(Product, null=True, blank= True, related_name='settings')
+
     def __str__(self):
         return self.publication.title
 
@@ -121,7 +122,6 @@ class Shipping(models.Model):
 
     sampler = models.ForeignKey(Sampler,  verbose_name="Sampler", on_delete=models.CASCADE, related_name='shipping')
     
-
     def save(self, *args, **kwargs):
         self.internal_tracking_id = get_random_string(length=32)
 
@@ -150,7 +150,7 @@ class Publication(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField("date created", auto_now_add=True)
     publish_date = models.DateTimeField("date published", auto_now_add=False)
-    tag = models.ManyToManyField(Tag, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT,related_name='publication' )
+    tag = models.ManyToManyField(Tag, default=1, verbose_name="Category", related_name='publication' )
     slug = models.CharField(max_length=200, unique=True)
     #author = models.ForeignKey( User,blank = True, on_delete=models.CASCADE )
     collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )
@@ -168,6 +168,7 @@ class Publication(models.Model):
   
 
 class Image(models.Model):  
+
     name =  models.CharField (max_length = 100 , null = True, blank=True)
     imagefile = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
     collection = models.ForeignKey(Collection,blank = True,  null = True,on_delete=models.SET_NULL, related_name='images' )
@@ -196,6 +197,7 @@ class Image(models.Model):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 class Config(models.Model):
+    
     int_val= models.PositiveIntegerField( default=1,  null = True, blank=True) 
     char_val= models.CharField(max_length=100, default=1,  null = True, blank=True) 
     active = models.BooleanField(default = True)

@@ -7,7 +7,10 @@
 
 <h3>Setting</h3>
 {% for setting in settings %}
+    <a href="{% url 'setting' setting.publication.slug %}"> 
     <li>{{ setting.publication.title }}</li>
+  </a>
+
 {% endfor %}
 
 <h3>Collection</h3>
@@ -16,7 +19,9 @@
   <a href="{% url 'collection' collection.publication.slug %}"> 
     <li>{{ collection.publication.title }}</li>
   </a>
- {% endfor %}
+{% endfor %}
+
+
 
 {% endblock %}
 

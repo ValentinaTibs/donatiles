@@ -20,6 +20,12 @@ class ImageAdmin(admin.ModelAdmin):
     search_fields = ('name', )
     readonly_fields  = ( 'image_', )
 
+class ProductAdmin(admin.ModelAdmin):
+    model = Product
+
+    list_display = ('name', )
+    search_fields = ('slug', )
+
 
 class PublicationAdmin(admin.StackedInline):
     model = Publication
@@ -32,7 +38,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = (PublicationAdmin,ImageStackedAdmin)
  
 class SettingAdmin(admin.ModelAdmin):
-    inlines = (PublicationAdmin,ImageStackedAdmin)
+    inlines = (PublicationAdmin,ImageStackedAdmin )
 
 class SampleAdmin(admin.ModelAdmin):
     inlines = ()

@@ -8,10 +8,11 @@ from .models import Config, Shipping
 
 from .forms import NewSamplerShipping
 
+import numpy as np
+import datetime as dt
 
 import requests
 import logging
-
 
 def pagination(request, list):
     page = request.GET.get('page')
@@ -23,6 +24,18 @@ def pagination(request, list):
     except EmptyPage:
         contacts = paginator.page(paginator.num_pages)
     return contacts
+
+def about(request):
+    return render(request, "about.html",)
+
+def askaquestion(request):
+    return render(request, "askaquestion.html",)
+
+def contacts(request):
+    return render(request, "contacts.html",)
+
+def termsandcond(request):
+    return render(request, "termsandcond.html",)
 
 def index():
     return 
@@ -45,15 +58,21 @@ def post(request, post_slug):
 def settings(requests):
     pass
 
-def setting(request, setting_slug):
-    pass 
+def setting(request, setting_slug):    
+    try: 
+        setting = Setting.objects.get(publication__slug  = setting_slug )
+    except ObjectDoesNotExist:
+        return render(request, "_404.html",{"message":"The setting you asked to review is not existing",})
+
+    return render(request, "setting.html",{"setting":setting })
+ 
 
 def shipping(request, internal_tracking_id):
     try: 
         #the goo sampler is the one that has not being shipped
         shipping = Shipping.objects.get(internal_tracking_id  = internal_tracking_id,  )
     except ObjectDoesNotExist:
-        return render(request, "_404.html",{"message":"The shippinh you asked to view is not existing",})   
+        return render(request, "_404.html",{"message":"The shipping you asked to view is not existing",})   
 
     return render(request, "shipping.html",{"shipping":shipping,})
 

@@ -12,26 +12,27 @@
 <h2> PRODUCT</h2>
 
 <li>{{ product.publication.title }}</li>
-  
+<li>Collection: 
+		<a href="{% url 'collection' product.collection.publication.slug %}"> 
+            {{ product.collection.publication.title }} 
+        </a>
+</li>  
 {% for image in product.images.all %}  
    <img width="200px" style="object-fit: contain;" 
   src="{{ image.imagefile.url }}" >  
 {% endfor %}
 
 <li>{{ product.publication.content }}</li>
+<li> {{product.price }} </li>
 
 {% if product.samplable %}
 
 	{% if sample %}
+		<a href="{% url 'sampler' sampler.session_id %}">  <li>Your free sampler</li> </a>
 
-		<a href="{% url 'sampler' sampler.session_id %}"> 
-            <li>Your free sampler</li>
-        </a>
-		
 	{% else %}
-		
-		<form  action="/product/{{ product.publication.slug }}" method="POST">
-			 {% csrf_token %}
+
+		<form  action="/product/{{ product.publication.slug }}" method="POST"> {% csrf_token %}
 			<button> aggiungi al tuo campione gratuito</button> 
 		</form>
 
@@ -43,7 +44,24 @@
 
 </ul>
 
+
 <h4>{{message}}</h4>
+
+
+<h2> Some of the Settings that contain this tile</h2>
+
+{% for setting in product.settings.all %}
+	<a href="{% url 'setting' setting.publication.slug %}"> 
+		<li>{{ setting.publication.title }}</li>
+	</a>
+
+    {% for image in setting.images.all %}  
+	  <img width="200px" style="object-fit: contain;" 
+	  	src="{{ image.imagefile.url }}" >  
+	{% endfor %}
+
+{% endfor %}
+
 
 </div>
 
