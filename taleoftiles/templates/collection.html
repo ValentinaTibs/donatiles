@@ -18,15 +18,7 @@
 
 
 {% for product in collection.products.all %}
-	<a href="{% url 'product' product.publication.slug %}"> 
-		<li>{{ product.publication.title }}</li>
-	</a>
-
-    {% for image in product.images.all %}  
-	  <img width="200px" style="object-fit: contain;" 
-	  	src="{{ image.imagefile.url }}" >  
-	{% endfor %}
-
+	{% product_small product%}
 {% endfor %}
 
 

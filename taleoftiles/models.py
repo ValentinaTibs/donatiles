@@ -1,8 +1,13 @@
 from django.utils.safestring import mark_safe
 from django.utils.crypto import get_random_string
+from django.utils.translation import gettext_lazy as _
+
+from django.core.exceptions import ValidationError
+
 
 from django.contrib.auth.models import User
 from django.db import models
+
 
 from PIL import Image
 
@@ -85,7 +90,7 @@ class Profile(models.Model):
 
         
 class Sampler(models.Model):
-    session_id = models.CharField(max_length=100, unique=True)
+    session_id = models.CharField(max_length=100, unique=True, default="")
     completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
     order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
 
@@ -99,8 +104,27 @@ class Sample(models.Model):
     removed = models.BooleanField(default = False)
 
     def __str__(self):
-        return self.sampler.session_id
+        return self.sampler.session_id        
 
+class Chart(models.Model):
+    session_id = models.CharField(max_length=100, unique=True, default="")
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
+    order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+
+def min_ammount(value):
+    if value % 2 != 0:
+        raise ValidationError(
+            _('%(value)s is not an even number'),
+            params={'value': value},
+            code='not_enough'
+        )
+
+class ChartItem(models.Model):
+    product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    removed = models.BooleanField(default = False)
+    chart = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    
+    squared_meter = models.PositiveIntegerField( default=1, validators=[min_ammount] )   
 
 class Shipping(models.Model):
     #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
@@ -129,9 +153,6 @@ class Shipping(models.Model):
 
     def __str__(self):
         return self.internal_tracking_id
-
-class Chart(models.Model):
-    pass
 
 class Order(models.Model):
     pass

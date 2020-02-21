@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% load view_extra %}
 
 {% load static %}
+
+{% block title%} Setting |  {{ setting.publication.content }} {% endblock%}
 
 {% block content %}
 
@@ -20,15 +23,7 @@
 <h3> PRODUCTS in this setting</h3>
 
 {% for product in setting.products.all %}
-	<a href="{% url 'product' product.publication.slug %}"> 
-		<li>{{ product.publication.title }}</li>
-	</a>
-
-    {% for image in product.images.all %}  
-	  <img width="200px" style="object-fit: contain;" 
-	  	src="{{ image.imagefile.url }}" >  
-	{% endfor %}
-
+	{% product_small product%}
 {% endfor %}
 
 

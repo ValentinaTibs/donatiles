@@ -22,8 +22,9 @@
   src="{{ image.imagefile.url }}" >  
 {% endfor %}
 
-<li>{{ product.publication.content }}</li>
-<li> {{product.price }} </li>
+<li> {{ product.publication.content }}</li>
+<li> PRICE: {{ product.price }} </li>
+<li> {{ wait_day_64 }} </li>
 
 {% if product.samplable %}
 
@@ -40,12 +41,18 @@
 
 {% endif %}
 
-	<button> metti nel CARRELLO</button>
+
+	<form  action="/product/{{ product.publication.slug }}/add_product_chart" method="POST"> {% csrf_token %}
+		{{ new_ic_form }}
+		<button> aggiungi al CARRELLO</button>
+	</form>		
 
 </ul>
 
 
 <h4>{{message}}</h4>
+<h2>Related To this</h2>
+
 
 
 <h2> Some of the Settings that contain this tile</h2>

@@ -1,0 +1,11 @@
+{% load view_extra %}
+
+	<h5>A small product</h5>
+	<a href="{% url 'product' product_info.publication.slug %}"> 
+		<li>{{ product_info.publication.title }}</li>
+	</a>
+
+    {% for image in product_info.images.all %}  
+	  <img width="200px" style="object-fit: contain;" 
+	  	src="{{ image.imagefile.url }}" >  
+	{% endfor %}

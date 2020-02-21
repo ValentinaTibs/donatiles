@@ -4,9 +4,9 @@ from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
-from .models import Config, Shipping
+from .models import Config, Shipping, ChartItem, Chart
 
-from .forms import NewSamplerShipping
+from .forms import NewSamplerShipping, NewChartItemForm
 
 import numpy as np
 import datetime as dt
@@ -151,15 +151,59 @@ def del_sample(request, session_id, product_id):
     sample.save()
     return redirect(request.META.get('HTTP_REFERER'))   
 
+def add_product_chart(request, product_slug):
+
+    session_id = request.session._get_or_create_session_key()
+    
+    try: 
+        product = Product.objects.get(publication__slug  = product_slug )
+    except ObjectDoesNotExist:
+        return render(request, "_404.html",{"message":"The product you asked to view is not existing",}) 
+
+    try: 
+        chart = Chart.objects.get(session_id  = session_id )
+    except ObjectDoesNotExist:
+        # mettere controlli per vedere se session_id potrebbe essere veramente 
+        # una sessione valida altrimenti si rischia il ddos
+        chart = Chart(session_id  = session_id)
+        chart.save()
+
+    # chartitem = ChartItem(chart = chart, product = product)
+    # chartitem.save()
+    if request.method == 'POST':
+
+        form = NewChartItemForm(request.POST)
+        
+        if form.is_valid():
+            chart.completion_status = 'o'
+            chart.save()
+            
+            form.save()
+
+    message = "Product added to your chart"
+    
+    return redirect(request.META.get('HTTP_REFERER'))  
+
 #Check if the product is suitable for sampling for 
 #check if we do have a connected use
 def product(request, product_slug):
     session_id = request.session._get_or_create_session_key()
-    product = Product.objects.get(publication__slug  = product_slug )
+    
+    try: 
+        product = Product.objects.get(publication__slug  = product_slug )
+    except ObjectDoesNotExist:
+        return render(request, "_404.html",{"message":"The product you asked to view is not existing",}) 
+
     message = ""
     sampler = None
     sample = None
     make_it_new = False
+
+    dt64 = np.datetime64(np.busday_offset(date.today(), product.wait_time, roll='backward'))
+    wait_day = dt.datetime.utcfromtimestamp(dt64.astype(int))#, timezone.utc)
+   
+    new_ic_form = NewChartItemForm()
+
     #attributing to this session a permanence in the database
     try: 
         sampler = Sampler.objects.get(session_id  = session_id )
@@ -169,7 +213,6 @@ def product(request, product_slug):
 
     try:
         sample = Sample.objects.get(sampler__pk  = sampler.pk, removed = False, product__publication__slug = product_slug )
-
     except ObjectDoesNotExist:
         message = "Add this to your free sampler for receiving it at home"
         make_it_new = True
@@ -180,8 +223,10 @@ def product(request, product_slug):
         sample.save()
         message = "Product added to your sampler"
 
+
     return render(request, "product.html",{"product":product, 
             "message": message,"sample" : sample,"sampler" : sampler,
+            "wait_day_64" : dt64, "new_ic_form" : new_ic_form
         })
 
 def products(request):

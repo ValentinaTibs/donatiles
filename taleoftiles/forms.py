@@ -2,7 +2,7 @@ from django import forms
 from datetime import datetime
 
 from django.forms import ModelForm
-from taleoftiles.models import Question, Shipping
+from taleoftiles.models import Question, Shipping, ChartItem
 
 from captcha.fields import ReCaptchaField
 
@@ -14,6 +14,19 @@ class QuestionForm(forms.Form):
         model = Question
         fields = ('text',)
 
+
+class NewChartItemForm(ModelForm):
+    
+    class Meta:
+        model = ChartItem
+        fields = ('squared_meter',)
+
+    def validate(self, value):
+        """Check if value consists only of valid emails."""
+        # Use the parent's handling of required fields, etc.
+        super().validate(value)
+        for squared_meter in value:
+            min_ammount(squared_meter)
 
 
 class NewSamplerShipping(ModelForm):

@@ -14,28 +14,31 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
 
 
-  {% block meta-tag %}{% endblock %}
+  {% block meta-tag %}
+
+  {% endblock %}
 
 </head>
 <body data-gr-c-s-loaded="true">
 <header>
-  <div class="container">
 
-    <!-- <button class="navbar-toggler order-2 order-md-1"
-    type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-left navbar-right" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
     <ul> 
-      <li> <a href="{% url 'about' %}">  ABOUT </a></li>
+      <li> <a href="{% url 'blog' %}">  design blog </a></li> 
       <li> <a href="{% url 'askaquestion' %}">  askaquestion </a></li>      
       <li> <a href="{% url 'contacts' %}">  contacts </a></li>      
-      <li> <a href="{% url 'termsandcond' %}">  Terms and Conditions </a></li>      
+      
     </ul>
+
+    <ul> 
+          <li> <a href="{% url 'about' %}">  ABOUT </a></li>
+          <li> <a href="{% url 'termsandcond' %}">  Terms and Conditions </a></li>      
+    </ul>
+
 </header>
 <main>
   <div class="container">
-  {% block content %}{% endblock %}
-</div>
+  {% block content %} {% endblock %}
+  </div>
 </main>
 
 
