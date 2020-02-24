@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container">
+
+
+<h2> YOUR CHART </h2>
+
+<p>
+Your order would be shipped as fast as possible couting the product it would require 
+the maximum of time needed
+</p>
+
+STATE: {{ sampler.completion_status }}	
+
+{% for sample in samples %}  
+
+	{% if sample != None %}
+		{{ sample.product.publication.title }}
+		<form  action="/sampler/{{ sampler.session_id }}/del/{{sample.product.id}}" method="POST">
+			{% csrf_token %}
+			<button>remove</button>
+		</form>
+
+	{% else %}
+
+		<button>Complete your free sampler</button>
+
+	{% endif %}
+
+{% endfor %}
+
+
+<a href="{% url 'ship_sampler' sampler.session_id %}">  <button> receive your free sampler</button>  </a>
+
+{% endblock %}

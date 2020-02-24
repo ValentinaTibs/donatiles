@@ -23,6 +23,14 @@ def release_note(notes, type, id ,edit = False ):
 def product_small(product):
 	return {'product_info':product}
 
+@register.inclusion_tag('collection_small.html')
+def collection_small(collection):
+	return {'collection_info':collection}
+
+@register.inclusion_tag('setting_small.html')
+def setting_small(setting):
+	return {'setting_info':setting}
+
 
 @register.inclusion_tag('paginator.html')
 def paginator(list):

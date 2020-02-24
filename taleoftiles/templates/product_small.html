@@ -1,11 +1,48 @@
 {% load view_extra %}
 
-	<h5>A small product</h5>
-	<a href="{% url 'product' product_info.publication.slug %}"> 
-		<li>{{ product_info.publication.title }}</li>
-	</a>
+	<!-- product card -->
+	<div class="product-item bg-light">
+		<div class="card">
+			<div class="thumb-content">
+				<div class="price">{{ product_info.price}}€/m2</div>
+				<a href="single.html">
+					{% if product_info.images.all.0 %}
+					<img class="card-img-top img-fluid" 
+					src="{{ product_info.images.all.0.imagefile.url }}" 
+					alt="{{ product_info.publication.title }}">
+					{% endif %}
 
-    {% for image in product_info.images.all %}  
-	  <img width="200px" style="object-fit: contain;" 
-	  	src="{{ image.imagefile.url }}" >  
-	{% endfor %}
+				</a>
+			</div>
+			<div class="card-body">
+			    <h4 class="card-title">
+			    	<a href="{% url 'product' product_info.publication.slug %}"> {{ product_info.publication.title }}</a>
+			    </h4>
+			    <ul class="list-inline product-meta">
+			    	<li class="list-inline-item">
+			    		<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
+			    	</li>
+			    	<li class="list-inline-item">
+			    		<a href="#"><i class="fa fa-calendar"></i>26th December</a>
+			    	</li>
+			    </ul>
+			    <p class="card-text">
+			    	{{ product_info.publication.content|truncatechars:250}}
+			    	<a href="{% url 'product' product_info.publication.slug %}"> ... </a>
+			    </p>
+			    	<a href="{% url 'product' product_info.publication.slug %}"> 
+			    	<button> view this at home for free</button>
+			    	</a>
+
+			    <!-- <div class="product-ratings">
+			    	<ul class="list-inline">
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
+			    	</ul>
+			    </div> -->
+			</div>
+		</div>
+	</div>

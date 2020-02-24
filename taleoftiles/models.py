@@ -144,8 +144,9 @@ class Shipping(models.Model):
     internal_tracking_id = models.CharField(max_length=100, default = "")
     external_tracking_id= models.CharField(max_length=100, default = "")
 
-    sampler = models.ForeignKey(Sampler,  verbose_name="Sampler", on_delete=models.CASCADE, related_name='shipping')
-    
+    sampler = models.ForeignKey(Sampler,  verbose_name="Sampler", null = True, on_delete=models.CASCADE, related_name='shipping')
+    chart = models.ForeignKey(Chart,  verbose_name="Chart",  null = True,on_delete=models.CASCADE, related_name='chart')
+
     def save(self, *args, **kwargs):
         self.internal_tracking_id = get_random_string(length=32)
 
@@ -177,7 +178,8 @@ class Publication(models.Model):
     collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )
     product = models.OneToOneField(Product, blank = True, null = True,on_delete=models.CASCADE, related_name='publication' )
     setting = models.OneToOneField(Setting, blank = True, null = True,on_delete=models.CASCADE, related_name='publication' )
-
+    post = models.OneToOneField(Post, blank = True, null = True,on_delete=models.CASCADE, related_name='publication' )
+    
     def __str__(self):
         return self.title
 

@@ -14,9 +14,9 @@ import datetime as dt
 import requests
 import logging
 
-def pagination(request, list):
+def pagination(request, list, num):
     page = request.GET.get('page')
-    paginator = Paginator(list, 10)
+    paginator = Paginator(list, num)
     try:
         contacts = paginator.page(page)
     except PageNotAnInteger:
@@ -37,26 +37,44 @@ def contacts(request):
 def termsandcond(request):
     return render(request, "termsandcond.html",)
 
-def index():
-    return 
-
 def index(request):
-    collections = Collection.objects.filter()
-    settings = Setting.objects.filter()
-    
-    return render(request, "index.html",{ "collections":collections,"settings" : settings})
+    collections = Collection.objects.filter(publication__publish_date__lte= date.today())
+    settings = Setting.objects.filter(publication__publish_date__lte= date.today())
+    products = Product.objects.filter(publication__publish_date__lte= date.today())
+
+    collections = pagination(request,collections,3)
+    settings = pagination(request,settings,3)
+    products = pagination(request,products,3)
+
+    return render(request, "index.html",{ 
+        "collections":collections,"settings" : settings, "products" : products
+        })
+
+
+def collections(request):
+    collections = Collection.objects.filter(publication__publish_date__lte= date.today())
+    collections = pagination(request,collections,3)
+    return render(request, "collections.html",{ "collections":collections })
 
 def collection(request, collection_slug):
     collection = Collection.objects.get(publication__slug  = collection_slug )
     return render(request, "collection.html",{"collection":collection })
 
 def post(request, post_slug):
-    #post = Post.objects.get(slug = post_slug )
-    post = Post.objects.get( )
+    post = Post.objects.get(slug = post_slug )
     return render(request, "post.html",{"post":post})
 
 def settings(requests):
-    pass
+    settings = Settings.objects.filter(publication__publish_date__lte= date.today())
+    settings = pagination(request,settings,3)
+    return render(request, "settings.html",{ "settings":settings })
+
+
+# form = myForm(request.POST or None, request.FILES or None)
+# if request.method == 'POST':
+#     if form.is_valid():
+#         return HttpResponseRedirect('/thanks/')
+# return render_to_response('my_template.html', {'form': form})
 
 def setting(request, setting_slug):    
     try: 
@@ -75,6 +93,9 @@ def shipping(request, internal_tracking_id):
         return render(request, "_404.html",{"message":"The shipping you asked to view is not existing",})   
 
     return render(request, "shipping.html",{"shipping":shipping,})
+
+def chart(request, session_id):
+    pass
 
 def ship_sampler(request, session_id):
     # if we have less than 4 samples in the samples..
@@ -213,6 +234,7 @@ def product(request, product_slug):
 
     try:
         sample = Sample.objects.get(sampler__pk  = sampler.pk, removed = False, product__publication__slug = product_slug )
+        message = "Product added to your sampler"
     except ObjectDoesNotExist:
         message = "Add this to your free sampler for receiving it at home"
         make_it_new = True
@@ -229,11 +251,16 @@ def product(request, product_slug):
             "wait_day_64" : dt64, "new_ic_form" : new_ic_form
         })
 
-def products(request):
-    pass
+def products(request,tag_slug = None):
+    if(tag_slug):
+        products = Product.objects.filter(publish_date__lte= date.today(), publication__tag__slug = tag_slug )
+    else:
+        products = Product.objects.filter(publish_date__lte= date.today())
     
-def tag(request, tag_slug):
-    #posts = Post.objects.filter(publish_date__lte= date.today(), post_tag = tag_slug )
+    return render(request, "products.html", {"products": products,})
+    
+def post(request, tag_slug):
+    #posts = Post.objects.filter(publish_date__lte= date.today(), publication__tag__slug = tag_slug )
     posts = Post.objects.filter()
     posts = pagination(request, posts)
     menu_tags = Tag.objects.filter(in_menu = True)
