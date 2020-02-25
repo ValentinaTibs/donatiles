@@ -1,12 +1,16 @@
-
-
-
 {% extends "base.html" %}
+{% load view_extra %}
 
 {% load static %}
 
+{% block title %} Shipping and tracking {% endblock %}
+
 {% block content %}
- 
+ <h1> POsto sbagliatissimo</h1>
+
+
+{% endblock %}
+
 <div class="container">
 
 
@@ -15,7 +19,7 @@
 
 {% if  diff_num_samples == 0 %}  
 		
-		<p></p>
+<p></p>
 
 {% else %}
 	<p>You can add more {{ diff_num_samples }} samples </p>
@@ -34,5 +38,3 @@
 <h4>{{message}}</h4>
 
 </div>
-
-{% endblock %}

@@ -5,7 +5,7 @@
 		<div class="card">
 			<div class="thumb-content">
 				<div class="price">{{ product_info.price}}€/m2</div>
-				<a href="single.html">
+				<a href="{% url 'product' product_info.publication.slug %}">
 					{% if product_info.images.all.0 %}
 					<img class="card-img-top img-fluid" 
 					src="{{ product_info.images.all.0.imagefile.url }}" 

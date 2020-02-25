@@ -23,13 +23,13 @@ urlpatterns = [
     path("product/<slug:product_slug>", taleoftiles.views.product, name="product"),
     path("product/<slug:product_slug>/add_product_chart", taleoftiles.views.add_product_chart, name="add_product_chart"),
 
-    path("sampler/<slug:session_id>", taleoftiles.views.sampler, name="sampler"),
-    path("sampler/<slug:session_id>/del/<slug:product_id>", taleoftiles.views.del_sample, name="sampler"),
-    path("sampler/<slug:session_id>/shipit", taleoftiles.views.ship_sampler, name="ship_sampler"),
+    path("sampler/", taleoftiles.views.sampler, name="sampler"),
+    path("sampler/del/<slug:product_id>", taleoftiles.views.del_sample, name="sampler"),
 
     path("shipping/<slug:internal_tracking_id>", taleoftiles.views.shipping, name="shipping"),
-    path("chart/<slug:session_id>", taleoftiles.views.chart, name="chart"),
-    
+    path("chart", taleoftiles.views.chart, name="chart"),
+    path("ship_chart", taleoftiles.views.ship_chart, name="ship_chart"),
+   
     path("about/", taleoftiles.views.about, name="about"), 
     path("askaquestion/", taleoftiles.views.askaquestion, name="askaquestion"),
     path("contacts/", taleoftiles.views.contacts, name="contacts"),

@@ -1,37 +1,140 @@
 {% extends "base.html" %}
+{% load view_extra %}
 
 {% load static %}
 
 {% block content %}
-  <div class="container">
 
 
-<h2> YOUR SAMPLER</h2>
 
-<p>
-It will arrive to your house for FREE for giving you the exact sensation of how this is gonna look - we are so sure you would love the quality of our
-</p>
+<section class="dashboard section">
+	<!-- Container Start -->
+	<div class="container">
+		<!-- Row Start -->
+		<div class="row">
 
-STATE: {{ sampler.completion_status }}	
+<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Recently Favorited -->
+				<div class="widget dashboard-container my-adslist">
+					<h3 class="widget-header">Your Sampler <small>STATE: {{ sampler.completion_status }}	</small></h3>
 
-{% for sample in samples %}  
+					<p>
+						It will arrive to your house for FREE for giving you the exact sensation of how this is gonna look - we are so sure you would love the quality of our
+						</p>
 
-	{% if sample != None %}
-		{{ sample.product.publication.title }}
-		<form  action="/sampler/{{ sampler.session_id }}/del/{{sample.product.id}}" method="POST">
-			{% csrf_token %}
-			<button>remove</button>
-		</form>
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+							<tr>
+								<th>Image</th>
+								<th>Product Title</th>
+								<th class="text-center">Category</th>
+								<th class="text-center">Action</th>
+							</tr>
+						</thead>
+						<tbody>
 
-	{% else %}
+							{% for sample in samples %}  
+							<tr>
+								{% if sample != None %}
+									{% product_row sample.product%}
+								{% else %}
+									<td colspan=4>Complete your free sampler with more free samples</td>
+								{% endif %}
+							</tr>
+							{% endfor %}
 
-		<button>Complete your free sampler</button>
+						</tbody>
 
-	{% endif %}
+					</table>
 
-{% endfor %}
+				</div>
+</div>
+
+<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+				<div class="sidebar">
+
+						<div class="widget personal-info">
+							<h3 class="widget-header user">It's free!</h3>
+								
+							{% if  diff_num_samples == 0 %}  
+
+							<p></p>
+
+							{% else %}
+							<p>You can add more {{ diff_num_samples }} samples </p>
+							{% endif %}
+
+							<form action="/sampler/{{sampler.session_id }}/shipit"   method="post" >
+
+								{% csrf_token %}
+								{{ form }}
+								
+								<button class="btn btn-transparent"> receive your free sampler</button>  
+
+							</form>
 
 
-<a href="{% url 'ship_sampler' sampler.session_id %}">  <button> receive your free sampler</button>  </a>
+						</div>
+					<!-- User Widget -->
+						<div class="widget personal-info">
+							<h3 class="widget-header user">Edit Personal Information</h3>
+							<form action="#">
+								<!-- First Name -->
+								<div class="form-group">
+									<label for="first-name">First Name</label>
+									<input type="text" class="form-control" id="first-name">
+								</div>
+								<!-- Last Name -->
+								<div class="form-group">
+									<label for="last-name">Last Name</label>
+									<input type="text" class="form-control" id="last-name">
+								</div>
+								<!-- File chooser -->
+								<div class="form-group choose-file d-inline-flex">
+									<i class="fa fa-user text-center px-3"></i>
+									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
+								 </div>
+								<!-- Comunity Name -->
+								<div class="form-group">
+									<label for="comunity-name">Comunity Name</label>
+									<input type="text" class="form-control" id="comunity-name">
+								</div>
+								<!-- Checkbox -->
+								<div class="form-check">
+								  <label class="form-check-label" for="hide-profile">
+									<input class="form-check-input mt-1" type="checkbox" value="" id="hide-profile">
+									Hide Profile from Public/Comunity
+								  </label>
+								</div>
+								<!-- Zip Code -->
+								<div class="form-group">
+									<label for="zip-code">Zip Code</label>
+									<input type="text" class="form-control" id="zip-code">
+								</div>
+								<!-- Submit button -->
+
+								
+							</form>
+						</div>
+					</div>
+
+
+
+				</div>
+</div>
+		</div>
+		<!-- Row End -->
+	</div>
+	<!-- Container End -->
+</section>			
 
 {% endblock %}
+
+
+
+
+
+  
+
+
+<h4>{{message}}</h4>

@@ -35,10 +35,12 @@ class Tag(models.Model):
     slug = models.CharField(max_length=200, default=1)
     public = models.BooleanField(default = True)
     in_menu = models.BooleanField(default = False)
+    order = models.PositiveIntegerField(default = 0)
 
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
+        ordering = ["order"] 
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -60,6 +62,8 @@ class Product(models.Model):
     samplable = models.BooleanField ( default=True, )
     wait_time = models.PositiveIntegerField(default = 15)
     min_ammount = models.PositiveIntegerField(default = 5)
+    source = models.CharField(max_length=100, default="Italy")
+    available  = models.BooleanField(default = True)
 
     def __str__(self):
         return self.publication.title

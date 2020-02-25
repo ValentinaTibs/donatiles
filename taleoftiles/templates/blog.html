@@ -1,34 +1,110 @@
 {% extends "base.html" %}
+{% load view_extra %}
 
 {% load static %}
 
 {% block content %}
  
+<!--================================
+=            Page Title            =
+=================================-->
+<section class="page-title">
+  <!-- Container Start -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 text-center">
+        <!-- Title text -->
+        <h3>Blog Page</h3>
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+</section>
+<!--==================================
+=            Blog Section            =
+===================================-->
 
-<h2>ALL BLOG POST</h2>
+<section class="blog section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+<!-- Article 01 -->
+<article>
+  <!-- Post Image -->
+  <div class="image">
+    <img src="images/blog/post-1.jpg" alt="article-01">
+  </div>
+  <!-- Post Title -->
+  <h3>Donec id dolor in erat imperdiet.</h3>
+  <ul class="list-inline">
+    <li class="list-inline-item">by <a href="">Admin</a></li>
+    <li class="list-inline-item">Nov 22,2016</li>
+  </ul>
+  <!-- Post Description -->
+  <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores iusto tempore voluptatum blanditiis impedit alias magni ullam facilis perspiciatis magnam!</p>
+  <!-- Read more button -->
+  <a href="" class="btn btn-transparent">Read More</a>
+</article>
+        
+        
 
-<div class="col-md-3 ml-auto">
-  <div class="row ">
+       
+
+      </div>
+      <div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+        <div class="sidebar">
+          <!-- Search Widget -->
+          <div class="widget search p-0">
+            <div class="input-group">
+                <input type="text" class="form-control" id="expire" placeholder="Search...">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>
+          </div>
+          <!-- Category Widget -->
+          <div class="widget category">
+            <!-- Widget Header -->
+            <h5 class="widget-header">Categories</h5>
+            <ul class="category-list">
+              <li><a href="">Appearel <span class="float-right">(2)</span></a></li>
+              <li><a href="">Accesories <span class="float-right">(5)</span></a></li>
+              <li><a href="">Business<span class="float-right">(7)</span></a></li>
+              <li><a href="">Entertaiment<span class="float-right">(3)</span></a></li>
+              <li><a href="">Education<span class="float-right">(9)</span></a></li>
+            </ul>
+          </div>
+          <!-- Archive Widget -->
+          <div class="widget archive">
+            <!-- Widget Header -->
+            <h5 class="widget-header">Archives</h5>
+            <ul class="archive-list">
+              <li><a href="">January 2017</a></li>
+              <li><a href="">February 2017</a></li>
+              <li><a href="">March 2017</a></li>
+              <li><a href="">April 2017</a></li>
+              <li><a href="">May 2017</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <h3>MENU</h3>
 
   <aside class="sidebar">
     <ul>
       {% for tag in menu_tags %}
-      <a href="{% url 'tag' tag.slug %}"> 
+      <a href="{% url 'blog_tag' tag.slug %}"> 
         <li>{{ tag.name }}</li>
       </a>
       {% endfor %}
     </ul>
       
-  </aside>
-  </div>
-</div>
 
 
-<div class="col-md-9 ">
 
-  <div class="row ">
+
     {% for post in posts %}
     <div class="col-4 ">
 
@@ -39,13 +115,10 @@
       </a>
     
 
-    </div>
    
 
     {% endfor %}
     
-  </div>
-</div>
 
 
 {% endblock %}

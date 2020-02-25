@@ -19,8 +19,16 @@ def release_note(notes, type, id ,edit = False ):
 	action = '/'+type+'/' +str(id)+'/' +'add_note'+'/'+type+'/'
 	return {'notes': notes, 'action':action, 'type': type, 'collapse':False, 'edit': edit}
 
+@register.inclusion_tag('post_small.html')
+def post_small(post):
+	return {'post_info':post}
+
 @register.inclusion_tag('product_small.html')
 def product_small(product):
+	return {'product_info':product}
+
+@register.inclusion_tag('product_row.html')
+def product_row(product):
 	return {'product_info':product}
 
 @register.inclusion_tag('collection_small.html')

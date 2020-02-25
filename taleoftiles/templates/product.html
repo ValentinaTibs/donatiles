@@ -72,10 +72,6 @@
 								<h3 class="tab-title">Questo prodotto al microscopio</h3>
 								<p>{{ product.publication.content }} </p>
 
-								<!-- <iframe width="100%" height="400" src="https://www.youtube.com/embed/LUH7njvhydE?rel=0&amp;controls=0&amp;showinfo=0"
-								 frameborder="0" allowfullscreen></iframe>
-								 -->
-
 							</div>
 							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<h3 class="tab-title">Specifiche tecniche</h3>
@@ -208,13 +204,14 @@
 
 							{% if sample %}
 								
-									<a class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" href="{% url 'sampler' sampler.session_id %}">  Your free sampler
+									<a class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" href="{% url 'sampler'%}">  View your free sampler
 									</a>
 
 
 							{% else %}
 
-								<form  action="/product/{{ product.publication.slug }}" method="POST"> {% csrf_token %}
+								<form  action="/product/{{ product.publication.slug }}" method="POST"> 
+									{% csrf_token %}
 									<li class="list-inline-item">
 										<button class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3"> aggiungi al tuo campione gratuito</button>
 									</li> 
@@ -242,50 +239,41 @@
 						<p>{{ product.price }} €/m2</p>
 					</div>
 
-					<!-- Map Widget -->
-					<!-- <div class="widget map">
-						<div class="map">
-							<div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
-						</div>
-					</div> -->
 					<!-- Rate Widget -->
 					<div class="widget rate">
 						<!-- Heading -->
-						<h5 class="widget-header text-center">Compralo</h5>
+						<h5 class="widget-header text-center">Compralo Ora</h5>
 							<form  action="/product/{{ product.publication.slug }}/add_product_chart" method="POST"> {% csrf_token %}
-							{{ new_ic_form }}
-							<button> Valuta costo totale</button> 
+								{{ new_ic_form }}
+								<div class="form-group ">
+									<label for="zip-code">How many squared meter</label>
+									<input type="number" class="form-control" id="zip-code">
+								</div>
+
+								<div class="form-group text-center">
+
+									<button class="btn btn-transparent"> Valuta costo totale</button> 
+								
+								</div>
 							<br/>
-
-							<button> aggiungi al CARRELLO</button>
-							</form>	
-
-
-
-							<li>complete your order</li>
-						<!-- Rate -->
-						<!-- <div class="starrr"></div> -->
+						</form>	
+							
 
 					</div>
-					<!-- Safety tips widget -->
-					<div class="widget disclaimer">
-						<h5 class="widget-header">Safety Tips</h5>
-						<ul>
-							<li>Meet seller at a public place</li>
-							<li>Check the item before you buy</li>
-							<li>Pay only after collecting the item</li>
-							<li>Pay only after collecting the item</li>
-						</ul>
-					</div>
+
 					<!-- Coupon Widget -->
 					<div class="widget coupon text-center">
 						<!-- Coupon description -->
-						<p>Have a great product to post ? Share it with
-							your fellow users.
+						<p>Sei pronto? Hai guardato valutato la tua mattonella? <br/>E' il momento di metterla nel carrello!
 						</p>
 						<!-- Submii button -->
-						<a href="" class="btn btn-transparent-white">Submit Listing</a>
+						<button class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" href="{% url 'sampler' sampler.session_id %}">  aggiungi al CARRELLO
+							</button>
+							<b>La Spedizione è gratuita! </b>
+						
 					</div>
+					<h5><small>se ancora hai dei dubbi ricevi questo prodotto a casa oppure contattaci per chiederci consigli o informazioni 
+						</small></h5>
 
 				</div>
 			</div>

@@ -80,46 +80,51 @@ def setting(request, setting_slug):
     try: 
         setting = Setting.objects.get(publication__slug  = setting_slug )
     except ObjectDoesNotExist:
-        return render(request, "_404.html",{"message":"The setting you asked to review is not existing",})
+        return render(request, "404.html",{"message":"The setting you asked to review is not existing",})
 
     return render(request, "setting.html",{"setting":setting })
  
 
 def shipping(request, internal_tracking_id):
+
     try: 
         #the goo sampler is the one that has not being shipped
         shipping = Shipping.objects.get(internal_tracking_id  = internal_tracking_id,  )
+
     except ObjectDoesNotExist:
-        return render(request, "_404.html",{"message":"The shipping you asked to view is not existing",})   
+        return render(request, "404.html",{"message":"The shipping you asked to view is not existing",})   
 
     return render(request, "shipping.html",{"shipping":shipping,})
 
-def chart(request, session_id):
+def ship_chart(request):
     pass
 
-def ship_sampler(request, session_id):
-    # if we have less than 4 samples in the samples..
-    # if there is not an user logged
-    conf_num_samples = Config.objects.get(active = True, tag = "num_samples")
-    form = NewSamplerShipping()
+def chart(request):
 
-    try: 
-        #the goo sampler is the one that has not being shipped
-        sampler = Sampler.objects.get(session_id  = session_id,  )
-    except ObjectDoesNotExist:
-        return render(request, "_404.html",{"message":"The sampler you asked to ship is not existing",})
+    session_id = request.session._get_or_create_session_key()
     
-    sampler.completion_status = 'c'
-    sampler.save()
+    try: 
+        chart = Chart.objects.get(session_id  = session_id )
+    except ObjectDoesNotExist:
+        chart = Chart(session_id  = session_id)
+        chart.save()
 
-    form.sampler_id = sampler.pk
+    return render(request, "chart.html",{"chart":chart,})
 
+def sampler(request):
+    session_id = request.session._get_or_create_session_key()
+    
+    try: 
+        sampler = Sampler.objects.get(session_id  = session_id )
+
+    except ObjectDoesNotExist:
+        sampler = Sampler(session_id  = session_id)
+        sampler.save()
+
+    form = NewSamplerShipping(request.POST or None, request.FILES or None)
+    
     if request.method == 'POST':
-
-        form = NewSamplerShipping(request.POST)
-
         if form.is_valid():
-            
             sampler.completion_status = 'o'
             sampler.save()
             
@@ -127,23 +132,6 @@ def ship_sampler(request, session_id):
             shipping = Shipping.objects.latest('id')
 
             return render(request, "shipping.html",{"shipping":shipping,})
-
-    return render(request, "ship_sampler.html",{"sampler":sampler,'form':form,
-            'diff_num_samples':( conf_num_samples.int_val - sampler.sample.filter(removed = False).count()) })
-
-def sampler(request, session_id):
-    
-    try: 
-        sampler = Sampler.objects.get(session_id  = session_id )
-    except ObjectDoesNotExist:
-        # mettere controlli per vedere se session_id potrebbe essere veramente 
-        # una sessione valida altrimenti si rischia il ddos
-        sampler = Sampler(session_id  = session_id)
-        sampler.save()
-
-    if sampler.completion_status == 'o':
-        return ship_sampler(request,session_id)
-
     try: 
         conf = Config.objects.get(active = True, tag = "num_samples")
     except ObjectDoesNotExist:
@@ -155,18 +143,21 @@ def sampler(request, session_id):
 
     for i in range(samples_len,conf.int_val):
         samples = samples + [None]
+    
 
-    return render(request, "sampler.html",{"sampler":sampler,"samples":samples})
+    return render(request, "sampler.html",{"sampler":sampler,"samples":samples,'form':form,
+            'diff_num_samples':( conf.int_val - sampler.sample.filter(removed = False).count())})
 
 
-def del_sample(request, session_id, product_id):
+def del_sample(request,  product_id):
+    session_id = request.session._get_or_create_session_key()
     try: 
         sample = Sample.objects.get(sampler__session_id  = session_id, product__pk = product_id, )
     except ObjectDoesNotExist:
         # mettere controlli per vedere se session_id potrebbe essere veramente 
         # una sessione valida altrimenti si rischia il ddos
         conf = Config.objects.get(active = True, tag = "message_del_sample")
-        return render(request, "_404.html",{"message":conf.char_val})
+        return render(request, "404.html",{"message":conf.char_val})
 
     sample.removed = True;
     sample.save()
@@ -179,7 +170,7 @@ def add_product_chart(request, product_slug):
     try: 
         product = Product.objects.get(publication__slug  = product_slug )
     except ObjectDoesNotExist:
-        return render(request, "_404.html",{"message":"The product you asked to view is not existing",}) 
+        return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
     try: 
         chart = Chart.objects.get(session_id  = session_id )
@@ -213,7 +204,7 @@ def product(request, product_slug):
     try: 
         product = Product.objects.get(publication__slug  = product_slug )
     except ObjectDoesNotExist:
-        return render(request, "_404.html",{"message":"The product you asked to view is not existing",}) 
+        return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
     message = ""
     sampler = None
@@ -267,7 +258,7 @@ def post(request, tag_slug):
     return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})
 
 def blog(request):
-    posts = Post.objects.filter(publish_date__lte= date.today()  )
+    posts = Post.objects.filter(publication__publish_date__lte= date.today()  )
     menu_tags = Tag.objects.filter(in_menu = True)
 
     return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})

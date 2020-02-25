@@ -1,44 +1,35 @@
 {% load view_extra %}
 
-	<!-- product card -->
-	<div class="product-item bg-light">
-		<div class="card">
-			<div class="thumb-content">
-				<div class="price">TUO a partire da: {{ setting_info.price}}€/m2</div>
-				<a href="single.html">
-					{% if setting_info.images.all.0 %}
-					<img class="card-img-top img-fluid" 
-					src="{{ setting_info.images.all.0.imagefile.url }}" 
-					alt="{{ setting_info.publication.title }}">
-					{% endif %}
-				</a>
-			</div>
-			<div class="card-body">
-			    <h4 class="card-title">
-			    	<a href="{% url 'setting' setting_info.publication.slug %}"> {{ setting_info.publication.title }}</a>
-			    </h4>
-			    <ul class="list-inline product-meta">
-			    	<li class="list-inline-item">
-			    		<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
-			    	</li>
-			    	<li class="list-inline-item">
-			    		<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-			    	</li>
-			    </ul>
-			    <p class="card-text">
-			    	{{ setting_info.publication.content|truncatechars:250}}
-			    	<a href="{% url 'setting' setting_info.publication.slug %}"> ... </a>
-			    </p>
+<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<div class="price">TUO a partire da: {{ setting_info.price}}€/m2</div>
+			<a href="single.html">
+				{% if setting_info.images.all.0 %}
+				<img class="card-img-top img-fluid" 
+				src="{{ setting_info.images.all.0.imagefile.url }}" 
+				alt="{{ setting_info.publication.title }}">
+				{% endif %}
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title">
+		    	<a href="{% url 'setting' setting_info.publication.slug %}"> {{ setting_info.publication.title }}</a>
+		    </h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a href="#"><i class="fa fa-calendar"></i>26th December</a>
+		    	</li>
+		    </ul>
+		    <p class="card-text">
+		    	{{ setting_info.publication.content|truncatechars:250}}
+		    	<a href="{% url 'setting' setting_info.publication.slug %}"> ... </a>
+		    </p>
 
-			    <!-- <div class="product-ratings">
-			    	<ul class="list-inline">
-			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-			    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
-			    	</ul>
-			    </div> -->
-			</div>
 		</div>
 	</div>
+</div>

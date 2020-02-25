@@ -1630,6 +1630,8 @@ ul.pagination .active a {
   padding-left: 25px;
 }
 
+
+
 .product-review img {
   width: 60px;
   margin-right: 20px;
@@ -2699,6 +2701,10 @@ form textarea {
 
 .top-to a:hover {
   text-decoration: none;
+}
+
+.middle{
+  vertical-align: middle;
 }
 
 /*# sourceMappingURL=maps/style.css.map */

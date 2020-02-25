@@ -7,26 +7,122 @@
 
 {% block content %}
 
-<div class="container">
-
-<h2> SETTING</h2>
-
-<h4>{{ setting.publication.title }}</h4>
-  
-{% for image in setting.images.all %}  
-  <img width="200px" style="object-fit: contain;" 
-  src="{{ image.imagefile.url }}" >  
-{% endfor %}
-
-<p>{{ setting.publication.content }}</p>
-
-<h3> PRODUCTS in this setting</h3>
-
-{% for product in setting.products.all %}
-	{% product_small product%}
-{% endfor %}
 
 
-</div>
+
+<!--===================================
+=            Store Section            =
+====================================-->
+<section class="section bg-gray">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<!-- Left sidebar -->
+			<div class="col-md-8">
+				<div class="product-details">
+					<h1 class="product-title">{{ setting.publication.title }}</h1>
+					<div class="product-meta">
+						<ul class="list-inline">
+							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">Andrew</a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
+						</ul>
+					</div>
+
+					<!-- product slider -->
+					<div class="product-slider">
+
+						{% for image in setting.images.all %}  
+						<!-- PUT THE THUMBNAIL HERE in data-image -->
+						  <div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
+							<img class="img-fluid w-100" src="{{ image.imagefile.url }}" alt="product-img">
+						</div> 
+						{% endfor %}
+
+					</div>
+					<!-- product slider -->
+
+					<div class="content mt-5 pt-5">
+
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+								<h3 class="tab-title">This Setting</h3>
+								<p>{{ setting.publication.content }} </p>
+
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<!-- User Profile widget -->
+					<div class="widget user text-center">
+						<img class="rounded-circle img-fluid mb-5 px-5" src="images/user/user-thumb.jpg" alt="">
+						<h4><a href="">Jonathon Andrew</a></h4>
+						<p class="member-time">Member Since Jun 27, 2017</p>
+						<a href="">See all ads</a>
+						<ul class="list-inline mt-20">
+							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>
+							<li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
+									offer</a></li>
+						</ul>
+					</div>
+					<!-- Map Widget -->
+					<div class="widget map">
+						<div class="map">
+							<div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
+						</div>
+					</div>
+					<!-- Rate Widget -->
+					<div class="widget rate">
+						<!-- Heading -->
+						<h5 class="widget-header text-center">What would you rate
+							<br>
+							this product</h5>
+						<!-- Rate -->
+						<div class="starrr"></div>
+					</div>
+					<!-- Safety tips widget -->
+					<div class="widget disclaimer">
+						<h5 class="widget-header">Safety Tips</h5>
+						<ul>
+							<li>Meet seller at a public place</li>
+							<li>Check the item before you buy</li>
+							<li>Pay only after collecting the item</li>
+							<li>Pay only after collecting the item</li>
+						</ul>
+					</div>
+					<!-- Coupon Widget -->
+					<div class="widget coupon text-center">
+						<!-- Coupon description -->
+						<p>Have a great product to post ? Share it with
+							your fellow users.
+						</p>
+						<!-- Submii button -->
+						<a href="" class="btn btn-transparent-white">Submit Listing</a>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h3 class="product-title">Products in this setting</h3>
+				<div class="row">
+					{% for product in setting.products.all %}
+						<div class="col-sm-12 col-lg-4"> {% product_small product%}</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+
 
 {% endblock %}
