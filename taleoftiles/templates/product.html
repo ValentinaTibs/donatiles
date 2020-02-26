@@ -22,11 +22,13 @@
 					<h1 class="product-title">{{ product.publication.title }}</h1>
 					<div class="product-meta">
 						<ul class="list-inline">
+							{% if product.collection%}
 							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Collection
 								<a href="{% url 'collection' product.collection.publication.slug %}"> 
 							    	{{ product.collection.publication.title }} 
 							    </a>
 							</li>
+							{% endif %}
 							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category
 								{% for tag in product.publication.tag.all%}
 									<a href="">{{tag.name}}</a>

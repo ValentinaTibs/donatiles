@@ -64,6 +64,12 @@ class Product(models.Model):
     min_ammount = models.PositiveIntegerField(default = 5)
     source = models.CharField(max_length=100, default="Italy")
     available  = models.BooleanField(default = True)
+    internal_name = models.CharField(max_length=100)
+
+    def save(self, *args, **kwargs):
+        if not self.internal_name:
+            self.internal_name = self.name.replace(" ","-").lower()
+        super().save(*args, **kwargs)  # Call the "real" save() method.
 
     def __str__(self):
         return self.publication.title
