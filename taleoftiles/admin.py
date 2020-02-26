@@ -30,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
 class PublicationAdmin(admin.StackedInline):
     model = Publication
     exclude = ('slug',)
-    
+
 class CollectionAdmin(admin.ModelAdmin):
     inlines = (PublicationAdmin,ImageStackedAdmin)
 

@@ -23,7 +23,12 @@
 					<div class="product-meta">
 						<ul class="list-inline">
 							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">Andrew</a></li>
-							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category
+								{% for tag in collection.publication.tag.all%}
+										<a href="{% url 'collections' tag.slug %}">{{tag.name}}</a>
+								{% endfor %}
+
+							</li>
 							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
 						</ul>
 					</div>

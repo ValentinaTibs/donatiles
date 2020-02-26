@@ -44,6 +44,15 @@ def setting_small(setting):
 def paginator(list):
 	return {'list':list}
 
+@register.inclusion_tag('page_search.html')
+def page_search():
+	return {}
+
+
+@register.inclusion_tag('sidebar_categories.html')
+def sidebar_categories():
+	return {}
+
 
 @register.filter
 def parse_date(value):

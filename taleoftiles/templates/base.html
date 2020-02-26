@@ -52,7 +52,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="{% url 'index' %}">
 						<img src="{% static 'images/logo.png' %}" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -68,7 +68,7 @@
                 </a>
                   
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                  <a class="dropdown-item" href="{% url 'blog' %}">All Ideas</a>
                   <a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
                   <a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
                   <a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
@@ -81,7 +81,7 @@
                 </a>
                   
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                  <a class="dropdown-item" href="{% url 'collections' %}">All Collections</a>
                   <a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
                   <a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
                   <a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
@@ -101,12 +101,29 @@
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 							<li class="nav-item">
-								<a class="nav-link login-button" href="login.html">Login</a>
+								
+                <div class=" search ">
+                  <div class="input-group">
+                    <form>
+                      <input type="text" placeholder="Track your item...">
+
+                      <button>
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                       </button>
+                    </form>
+                  </div>
+                </div>
+
 							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="{% url 'chart' %}"><i class="fa fa-plus-circle"></i> Your Chart </a>
-							</li>
+							
 						</ul>
+          <ul class="navbar-nav ml-auto mt-10">
+            <li class="nav-item">
+                
+                  <a class="nav-link text-white add-button" href="{% url 'chart' %}"><i class="fa fa-plus-circle"></i> Your Chart </a>
+                
+              </li>
+          </ul>
 					</div>
 				</nav>
 			</div>

@@ -51,8 +51,11 @@ def index(request):
         })
 
 
-def collections(request):
-    collections = Collection.objects.filter(publication__publish_date__lte= date.today())
+def collections(request, tag_slug = None):
+    if(tag_slug):
+        collections = Collection.objects.filter(publication__publish_date__lte= date.today(), publication__tag__slug = tag_slug)
+    else:
+        collections = Collection.objects.filter(publication__publish_date__lte= date.today())
     collections = pagination(request,collections,3)
     return render(request, "collections.html",{ "collections":collections })
 
@@ -64,9 +67,13 @@ def post(request, post_slug):
     post = Post.objects.get(slug = post_slug )
     return render(request, "post.html",{"post":post})
 
-def settings(requests):
-    settings = Settings.objects.filter(publication__publish_date__lte= date.today())
-    settings = pagination(request,settings,3)
+def settings(request, tag_slug = None):
+    if(tag_slug):
+        settings = Setting.objects.filter(publication__publish_date__lte= date.today(), publication__tag__slug = tag_slug )
+    else:
+        settings = Setting.objects.filter(publication__publish_date__lte= date.today())
+
+    settings = pagination(request,settings,10)
     return render(request, "settings.html",{ "settings":settings })
 
 
@@ -122,7 +129,7 @@ def sampler(request):
         sampler.save()
 
     form = NewSamplerShipping(request.POST or None, request.FILES or None)
-    
+
     if request.method == 'POST':
         if form.is_valid():
             sampler.completion_status = 'o'
@@ -244,11 +251,12 @@ def product(request, product_slug):
 
 def products(request,tag_slug = None):
     if(tag_slug):
-        products = Product.objects.filter(publish_date__lte= date.today(), publication__tag__slug = tag_slug )
+        products = Product.objects.filter(publication__publish_date__lte= date.today(), publication__tag__slug = tag_slug )
     else:
-        products = Product.objects.filter(publish_date__lte= date.today())
+        products = Product.objects.filter(publication__publish_date__lte= date.today())
     
     return render(request, "products.html", {"products": products,})
+
     
 def post(request, tag_slug):
     #posts = Post.objects.filter(publish_date__lte= date.today(), publication__tag__slug = tag_slug )
@@ -257,8 +265,11 @@ def post(request, tag_slug):
     menu_tags = Tag.objects.filter(in_menu = True)
     return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})
 
-def blog(request):
-    posts = Post.objects.filter(publication__publish_date__lte= date.today()  )
+def blog(request,tag_slug = None):
+    if(tag_slug):
+        posts = Post.objects.filter(publication__publish_date__lte= date.today(), publication__tag__slug = tag_slug )
+    else:
+        posts = Post.objects.filter(publication__publish_date__lte= date.today()  )
     menu_tags = Tag.objects.filter(in_menu = True)
 
     return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})

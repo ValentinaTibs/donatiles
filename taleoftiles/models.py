@@ -32,7 +32,7 @@ ORDER_STATUS = (
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
-    slug = models.CharField(max_length=200, default=1)
+    slug = models.CharField(max_length=200, default=1, unique=True)
     public = models.BooleanField(default = True)
     in_menu = models.BooleanField(default = False)
     order = models.PositiveIntegerField(default = 0)

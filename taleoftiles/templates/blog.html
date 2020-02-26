@@ -28,27 +28,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
-<!-- Article 01 -->
-<article>
-  <!-- Post Image -->
-  <div class="image">
-    <img src="images/blog/post-1.jpg" alt="article-01">
-  </div>
-  <!-- Post Title -->
-  <h3>Donec id dolor in erat imperdiet.</h3>
-  <ul class="list-inline">
-    <li class="list-inline-item">by <a href="">Admin</a></li>
-    <li class="list-inline-item">Nov 22,2016</li>
-  </ul>
-  <!-- Post Description -->
-  <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores iusto tempore voluptatum blanditiis impedit alias magni ullam facilis perspiciatis magnam!</p>
-  <!-- Read more button -->
-  <a href="" class="btn btn-transparent">Read More</a>
-</article>
-        
-        
 
-       
+        
+      {% for post in posts %}
+        {% post_small post %}
+      {% endfor %}
 
       </div>
       <div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
@@ -65,11 +49,11 @@
             <!-- Widget Header -->
             <h5 class="widget-header">Categories</h5>
             <ul class="category-list">
-              <li><a href="">Appearel <span class="float-right">(2)</span></a></li>
-              <li><a href="">Accesories <span class="float-right">(5)</span></a></li>
-              <li><a href="">Business<span class="float-right">(7)</span></a></li>
-              <li><a href="">Entertaiment<span class="float-right">(3)</span></a></li>
-              <li><a href="">Education<span class="float-right">(9)</span></a></li>
+              {% for tag in menu_tags %}
+              <li><a href="{% url 'blog_tag' tag.slug %}">{{ tag.name }} 
+                <span class="float-right">(2)</span></a></li>
+              {% endfor %}
+              
             </ul>
           </div>
           <!-- Archive Widget -->
@@ -100,19 +84,16 @@
       </a>
       {% endfor %}
     </ul>
-      
-
-
 
 
     {% for post in posts %}
-    <div class="col-4 ">
-
+      
 
       <a href="{% url 'post' post.slug %}"> {{ post.title }} </a>
       <a href="{% url 'post' post.slug %}"> 
         <img src="{{ post.image.imagefile.url }}"  class="card-img">
       </a>
+
     
 
    

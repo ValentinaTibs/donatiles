@@ -14,12 +14,16 @@ urlpatterns = [
     path("blog/<slug:tag_slug>", taleoftiles.views.blog, name="blog_tag"),
     path('blog/post/<slug:post_slug>/',  taleoftiles.views.post, name="post"),
 
-    path("collections/", taleoftiles.views.collections, name="collections"),    
-    path("collection/<slug:collection_slug>/", taleoftiles.views.collection, name="collection"),    
+    path("collections/", taleoftiles.views.collections, name="collections"),
+    path("collections/<slug:tag_slug>/", taleoftiles.views.collections, name="collections"),    
+    path("collection/<slug:collection_slug>/", taleoftiles.views.collection, name="collection"),
+
     path("settings/", taleoftiles.views.settings, name="settings"),    
-    path("settings/<slug:setting_slug>", taleoftiles.views.setting, name="setting"),
+    path("settings/<slug:tag_slug>", taleoftiles.views.settings, name="settings"),    
+    path("setting/<slug:setting_slug>", taleoftiles.views.setting, name="setting"),
 
     path("products/", taleoftiles.views.products, name="products"),
+    path("products/<slug:tag_slug>/", taleoftiles.views.products, name="products"),
     path("product/<slug:product_slug>", taleoftiles.views.product, name="product"),
     path("product/<slug:product_slug>/add_product_chart", taleoftiles.views.add_product_chart, name="add_product_chart"),
 
