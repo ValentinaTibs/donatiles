@@ -32,7 +32,7 @@ ORDER_STATUS = (
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
-    slug = models.CharField(max_length=200, default=1, unique=True)
+    slug = models.CharField(max_length=200,  unique=True)
     public = models.BooleanField(default = True)
     in_menu = models.BooleanField(default = False)
     order = models.PositiveIntegerField(default = 0)
@@ -115,20 +115,12 @@ class Chart(models.Model):
     completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
     order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
 
-def min_ammount(value):
-    if value % 2 != 0:
-        raise ValidationError(
-            _('%(value)s is not an even number'),
-            params={'value': value},
-            code='not_enough'
-        )
-
 class ChartItem(models.Model):
     product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     removed = models.BooleanField(default = False)
     chart = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     
-    squared_meter = models.PositiveIntegerField( default=1, validators=[min_ammount] )   
+    squared_meter = models.PositiveIntegerField( default=1 )   
 
 class Shipping(models.Model):
     #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
@@ -176,7 +168,7 @@ class Publication(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField("date created", auto_now_add=True)
     publish_date = models.DateTimeField("date published", auto_now_add=False)
-    tag = models.ManyToManyField(Tag, default=1, verbose_name="Category", related_name='publication' )
+    tag = models.ManyToManyField(Tag,blank = True, null = True, verbose_name="Category", related_name='publication' )
     slug = models.CharField(max_length=200, unique=True)
     #author = models.ForeignKey( User,blank = True, on_delete=models.CASCADE )
     collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )

@@ -27,6 +27,10 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('slug', )
 
 
+class TagAdmin(admin.ModelAdmin):
+    model = Tag
+    exclude = ('slug',)
+
 class PublicationAdmin(admin.StackedInline):
     model = Publication
     exclude = ('slug',)
@@ -51,7 +55,7 @@ admin.site.register(Shipping)
  
 admin.site.register(Post)
 admin.site.register(Image,ImageAdmin)
-admin.site.register(Tag)
+admin.site.register(Tag,TagAdmin)
 admin.site.register(Sampler)
 admin.site.register(Sample)
 admin.site.register(Config)

@@ -21,14 +21,6 @@ class NewChartItemForm(ModelForm):
         model = ChartItem
         fields = ('squared_meter',)
 
-    def validate(self, value):
-        """Check if value consists only of valid emails."""
-        # Use the parent's handling of required fields, etc.
-        super().validate(value)
-        for squared_meter in value:
-            min_ammount(squared_meter)
-
-
 class NewSamplerShipping(ModelForm):
     
     text =  forms.Textarea(attrs={'class': 'form-control'},)
