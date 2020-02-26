@@ -33,6 +33,7 @@ urlpatterns = [
     path("ship_sampler", taleoftiles.views.ship_sampler, name="ship_sampler"),
     path("ship_chart", taleoftiles.views.ship_chart, name="ship_chart"),
     path("shipping/<slug:internal_tracking_id>", taleoftiles.views.shipping, name="shipping"),
+    path("shipping", taleoftiles.views.shipping, name="shipping"),
     path("chart", taleoftiles.views.chart, name="chart"),
     
    

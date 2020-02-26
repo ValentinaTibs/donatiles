@@ -61,6 +61,8 @@
 					<p>You can add more {{ diff_num_samples }} samples </p>
 				{% endif %}
 
+				{% if sampler.samples|length >= 0 %}  				
+
 				<form action="{% url 'ship_sampler' %}"   method="post" >
 
 					{% csrf_token %}
@@ -68,6 +70,7 @@
 					
 					<button class="btn btn-transparent"> receive your free sampler</button>  
 				</form>
+				{% endif %}
 
 			</div>
 	</div>

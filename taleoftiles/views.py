@@ -90,10 +90,11 @@ def setting(request, setting_slug):
         return render(request, "404.html",{"message":"The setting you asked to review is not existing",})
 
     return render(request, "setting.html",{"setting":setting })
- 
 
-def shipping(request, internal_tracking_id):
+def shipping(request, internal_tracking_id = None):
 
+    if request.method == 'GET':
+        internal_tracking_id = request.GET['tracking_id']
     try: 
         #the goo sampler is the one that has not being shipped
         shipping = Shipping.objects.get(internal_tracking_id  = internal_tracking_id,  )

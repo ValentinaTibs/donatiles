@@ -7,6 +7,7 @@ from taleoftiles.models import Question, Shipping, ChartItem
 from captcha.fields import ReCaptchaField
 
 
+
 class QuestionForm(forms.Form):
     captcha = ReCaptchaField()
 
@@ -33,4 +34,9 @@ class NewSamplerShipping(ModelForm):
             'surname': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
             'telephone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'address2': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'postcode': forms.TextInput(attrs={'class': 'form-control'}),
+            'note': forms.TextInput(attrs={'class': 'border p-3 w-100'}),
         }
