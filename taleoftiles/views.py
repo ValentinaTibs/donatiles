@@ -103,7 +103,8 @@ def shipping(request, internal_tracking_id):
 
     return render(request, "shipping.html",{"shipping":shipping,})
 
-
+def ship_sampler(request):
+    pass
 
 def ship_chart(request):
     pass
@@ -114,7 +115,7 @@ def chart(request):
     
     try: 
         chart = Chart.objects.get(session_id  = session_id )
-
+        
     except ObjectDoesNotExist:
         chart = Chart(session_id  = session_id)
         chart.save()
