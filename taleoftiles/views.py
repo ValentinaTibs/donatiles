@@ -104,7 +104,32 @@ def shipping(request, internal_tracking_id):
     return render(request, "shipping.html",{"shipping":shipping,})
 
 def ship_sampler(request):
-    pass
+    session_id = request.session._get_or_create_session_key()
+    
+    try: 
+        sampler = Sampler.objects.get(session_id  = session_id )
+
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message":"The shipping you asked to view is not existing",})   
+
+    form = NewSamplerShipping(request.POST or None, request.FILES or None)
+
+    if request.method == 'POST':
+
+        # inserire controlli sul fatto che non ci siano altri ordini da questo utente
+        # che ancora non si siano conclusi con un acquisto
+        if form.is_valid():
+            sampler.completion_status = 'o'
+            sampler.save()
+
+            form.save()
+            shipping = Shipping.objects.latest('id')
+            shipping.sampler = sampler
+            shipping.save()
+
+            return render(request, "shipping.html",{"shipping":shipping,})
+
+    return redirect(request.META.get('HTTP_REFERER'))   
 
 def ship_chart(request):
     pass
@@ -115,7 +140,7 @@ def chart(request):
     
     try: 
         chart = Chart.objects.get(session_id  = session_id )
-        
+
     except ObjectDoesNotExist:
         chart = Chart(session_id  = session_id)
         chart.save()
@@ -134,15 +159,6 @@ def sampler(request):
 
     form = NewSamplerShipping(request.POST or None, request.FILES or None)
 
-    if request.method == 'POST':
-        if form.is_valid():
-            sampler.completion_status = 'o'
-            sampler.save()
-            
-            form.save()
-            shipping = Shipping.objects.latest('id')
-
-            return render(request, "shipping.html",{"shipping":shipping,})
     try: 
         conf = Config.objects.get(active = True, tag = "num_samples")
     except ObjectDoesNotExist:
@@ -155,7 +171,6 @@ def sampler(request):
     for i in range(samples_len,conf.int_val):
         samples = samples + [None]
     
-
     return render(request, "sampler.html",{"sampler":sampler,"samples":samples,'form':form,
             'diff_num_samples':( conf.int_val - sampler.sample.filter(removed = False).count())})
 

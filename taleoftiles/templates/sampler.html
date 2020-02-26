@@ -6,7 +6,6 @@
 {% block content %}
 
 
-
 <section class="dashboard section">
 	<!-- Container Start -->
 	<div class="container">
@@ -57,20 +56,17 @@
 				<h3 class="widget-header user">It's free!</h3>
 					
 				{% if  diff_num_samples == 0 %}  
-
-				<p></p>
-
+					<p></p>
 				{% else %}
-				<p>You can add more {{ diff_num_samples }} samples </p>
+					<p>You can add more {{ diff_num_samples }} samples </p>
 				{% endif %}
 
-				<form action="{% url 'sampler' %}"   method="post" >
+				<form action="{% url 'ship_sampler' %}"   method="post" >
 
 					{% csrf_token %}
 					{{ form }}
 					
 					<button class="btn btn-transparent"> receive your free sampler</button>  
-
 				</form>
 
 			</div>
