@@ -64,5 +64,12 @@ kill -9 $(lsof -i:5000 -t) 2> /dev/null
 
 ## remote check and deploy of migrations
 
+```
+heroku run python manage.py showmigrations
+```
 
-python manage.py showmigrations
+## Fixin messed up databases
+
+heroku restart
+heroku pg:reset DATABASE
+heroku run python manage.py migrate

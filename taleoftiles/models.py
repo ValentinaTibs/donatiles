@@ -57,15 +57,15 @@ class Collection(models.Model):
 
 class Format(models.Model):
     description = models.CharField(max_length=100, default="10x10")
-
+    slug = models.CharField(max_length=50, unique=True)
 
 class Color(models.Model):
     description = models.CharField(max_length=100, default="white")
-
+    slug = models.CharField(max_length=50, unique=True)
 
 class Finish(models.Model):
     description = models.CharField(max_length=100, default="matte")
-
+    slug = models.CharField(max_length=50, unique=True)
 
 class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )

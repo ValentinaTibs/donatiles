@@ -5,6 +5,7 @@ from django_reverse_admin import ReverseModelAdmin
 from .models import Post, Publication, Product, Image, Tag, Setting, Collection
 from .models import Sampler, Sample, Config, Shipping, Chart, ChartItem
 
+from .models import Format, Color, Finish
 
 class ImageStackedAdmin(admin.StackedInline):
     model = Image
@@ -59,6 +60,10 @@ admin.site.register(Tag,TagAdmin)
 admin.site.register(Sampler)
 admin.site.register(Sample)
 admin.site.register(Config)
+
+admin.site.register(Format)
+admin.site.register(Color)
+admin.site.register(Finish)
 
 admin.site.register(Chart)
 admin.site.register(ChartItem)
