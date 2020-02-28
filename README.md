@@ -29,8 +29,12 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ```sh
 $ heroku create
-$ git push heroku master
 
+$ git push heroku master
+```
+
+```
+in case you want to 
 $ heroku run python manage.py migrate
 $ heroku open
 ```
@@ -58,5 +62,7 @@ heroku local web -f Procfile.windows
 kill -9 $(lsof -i:5000 -t) 2> /dev/null
 ```
 
+## remote check and deploy of migrations
 
 
+python manage.py showmigrations

@@ -55,9 +55,19 @@ class Collection(models.Model):
     def __str__(self):
         return self.publication.title
 
+class Format(models.Model):
+    description = models.CharField(max_length=100, default="10x10")
+
+
+class Color(models.Model):
+    description = models.CharField(max_length=100, default="white")
+
+
+class Finish(models.Model):
+    description = models.CharField(max_length=100, default="matte")
+
 
 class Product(models.Model):
-    collection = models.ForeignKey(Collection, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
     price = models.PositiveIntegerField( default=0, )
     samplable = models.BooleanField ( default=True, )
     wait_time = models.PositiveIntegerField(default = 15)
@@ -65,6 +75,12 @@ class Product(models.Model):
     source = models.CharField(max_length=100, default="Italy")
     available  = models.BooleanField(default = True)
     internal_name = models.CharField(max_length=100)
+
+    collection = models.ForeignKey(Collection, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
+    
+    color = models.ForeignKey(Color, null=False, blank= False, on_delete=models.CASCADE, related_name='product')
+    finish = models.ForeignKey(Finish, null=True, blank= True, on_delete=models.SET_NULL, related_name='product')
+    formats = models.ManyToManyField(Format,  blank= True, related_name='product')
 
     def save(self, *args, **kwargs):
         if not self.internal_name:
@@ -75,7 +91,7 @@ class Product(models.Model):
         return self.publication.title
 
 class Setting(models.Model):
-    products = models.ManyToManyField(Product, null=True, blank= True, related_name='settings')
+    products = models.ManyToManyField(Product, blank= True, related_name='settings')
 
     def __str__(self):
         return self.publication.title
@@ -97,7 +113,6 @@ class Profile(models.Model):
   
     def __str__(self):
         return self.user.username
-
         
 class Sampler(models.Model):
     session_id = models.CharField(max_length=100, unique=True, default="")
@@ -174,7 +189,7 @@ class Publication(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField("date created", auto_now_add=True)
     publish_date = models.DateTimeField("date published", auto_now_add=False)
-    tag = models.ManyToManyField(Tag,blank = True, null = True, verbose_name="Category", related_name='publication' )
+    tag = models.ManyToManyField(Tag,blank = True, verbose_name="Category", related_name='publication' )
     slug = models.CharField(max_length=200, unique=True)
     #author = models.ForeignKey( User,blank = True, on_delete=models.CASCADE )
     collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )
