@@ -59,13 +59,32 @@ class Format(models.Model):
     description = models.CharField(max_length=100, default="10x10")
     slug = models.CharField(max_length=50, unique=True)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.title.replace(" ","-").lower()
+        #author = request.user
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+
 class Color(models.Model):
     description = models.CharField(max_length=100, default="white")
     slug = models.CharField(max_length=50, unique=True)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.title.replace(" ","-").lower()
+        #author = request.user
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
 class Finish(models.Model):
     description = models.CharField(max_length=100, default="matte")
     slug = models.CharField(max_length=50, unique=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.title.replace(" ","-").lower()
+        #author = request.user
+        super().save(*args, **kwargs)  # Call the "real" save() method.
 
 class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )
