@@ -8,13 +8,19 @@ from captcha.fields import ReCaptchaField
 
 
 
-class QuestionForm(forms.Form):
+class QuestionForm(ModelForm):
     captcha = ReCaptchaField()
 
     class Meta:
         model = Question
-        fields = ('text',)
-
+        fields = ('name', 'surname', 'email',  'telephone','content' )
+        widgets = { 
+            'content' :  forms.Textarea(attrs={'class': 'border w-100 p-3 mt-3 mt-lg-4', 'placeholder':"Message *"}),
+            'name': forms.TextInput(attrs={'class': 'form-control','placeholder': "Name *"}),
+            'surname': forms.TextInput(attrs={'class': 'form-control','placeholder': "Surname "}),
+            'email': forms.TextInput(attrs={'class': 'form-control', 'type':"email" ,'placeholder': "Email *"}),
+            'telephone': forms.TextInput(attrs={'class': 'form-control','placeholder': "Telephone *"}),
+        }
 
 class NewChartItemForm(ModelForm):
     

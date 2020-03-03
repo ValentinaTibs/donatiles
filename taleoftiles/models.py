@@ -50,41 +50,55 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class TecnicalSpec(models.Model):
+    note = models.TextField(max_length = 200, null = True)
+
 class Collection(models.Model):
+    specs = models.ForeignKey(TecnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='collection' )
 
     def __str__(self):
         return self.publication.title
 
 class Format(models.Model):
-    description = models.CharField(max_length=100, default="10x10")
+    title = models.CharField(max_length=100, default="10x10")
+    description = models.CharField(max_length=100, null=True)
     slug = models.CharField(max_length=50, unique=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.title.replace(" ","-").lower()
-        #author = request.user
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+        super().save(*args, **kwargs)  
+
+    def __str__(self):
+        return self.title
 
 
 class Color(models.Model):
-    description = models.CharField(max_length=100, default="white")
+    title = models.CharField(max_length=100, default="white")
+    description = models.CharField(max_length=100, null=True)
     slug = models.CharField(max_length=50, unique=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.title.replace(" ","-").lower()
-        #author = request.user
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+  
 
 class Finish(models.Model):
-    description = models.CharField(max_length=100, default="matte")
+    title = models.CharField(max_length=100, default="matte")
+    description = models.CharField(max_length=100, null=True)
     slug = models.CharField(max_length=50, unique=True)
     
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.title.replace(" ","-").lower()
-        #author = request.user
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+        super().save(*args, **kwargs)  
+
+    def __str__(self):
+        return self.title
 
 class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )
@@ -101,6 +115,9 @@ class Product(models.Model):
     finish = models.ForeignKey(Finish, null=True, blank= True, on_delete=models.SET_NULL, related_name='product')
     formats = models.ManyToManyField(Format,  blank= True, related_name='product')
 
+    is_decor = models.BooleanField(default = False)
+    single_sell = models.BooleanField(default = False)
+
     def save(self, *args, **kwargs):
         if not self.internal_name:
             self.internal_name = self.name.replace(" ","-").lower()
@@ -116,7 +133,10 @@ class Setting(models.Model):
         return self.publication.title
 
 class Post(models.Model):
-    pass
+    
+    def __str__(self):
+        return self.publication.title
+
     #pub = models.OneToOneField(Publication, on_delete=models.CASCADE, related_name='post' )
 
 class Profile(models.Model):
@@ -196,12 +216,25 @@ class Order(models.Model):
 
 class Question(models.Model):
     content = models.TextField()
+    name    = models.CharField(max_length=100,default = "")
+    surname = models.CharField(max_length=100,default = "")
+
+    email   = models.EmailField(max_length=100,default = "")
+    telephone = models.CharField(max_length=100,default = "")
+    published = models.BooleanField(default = True)
+
+    create_date  = models.DateTimeField("date created", auto_now_add=True)
+    publish_date = models.DateTimeField("date published", blank = True, null = True, auto_now_add=False)
+
+    reply = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='question' )
     # user - that might be null 
     # author that might be a user - that might be null 
-    # captcha
     # status visible only to the staff
     # creation date
     # email to reply
+
+    # null=True, to allow in database
+    # blank=True, to allow in form validation
 
 class Publication(models.Model):
     title = models.CharField(max_length=200, unique = True)
@@ -233,6 +266,7 @@ class Image(models.Model):
     collection = models.ForeignKey(Collection,blank = True,  null = True,on_delete=models.SET_NULL, related_name='images' )
     product = models.ForeignKey(Product, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     setting = models.ForeignKey(Setting, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
+    post = models.ForeignKey(Post, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     order = models.PositiveIntegerField( default=0, )   
 
     class Meta:

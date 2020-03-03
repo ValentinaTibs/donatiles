@@ -3,6 +3,11 @@
 
 {% load static %}
 
+
+{% block title %} Tale of Tiles | the ideas book {% endblock %}
+
+
+
 {% block content %}
  
 <!--================================
@@ -49,16 +54,16 @@
             <!-- Widget Header -->
             <h5 class="widget-header">Categories</h5>
             <ul class="category-list">
-              {% for tag in menu_tags %}
+              {% for tag in blog_tags %}
               <li><a href="{% url 'blog_tag' tag.slug %}">{{ tag.name }} 
                 <span class="float-right">(2)</span></a></li>
               {% endfor %}
               
             </ul>
           </div>
+
           <!-- Archive Widget -->
-          <div class="widget archive">
-            <!-- Widget Header -->
+<!--           <div class="widget archive">
             <h5 class="widget-header">Archives</h5>
             <ul class="archive-list">
               <li><a href="">January 2017</a></li>
@@ -67,39 +72,15 @@
               <li><a href="">April 2017</a></li>
               <li><a href="">May 2017</a></li>
             </ul>
-          </div>
+          </div> -->
+          
         </div>
       </div>
     </div>
   </div>
 </section>
 
-  <h3>MENU</h3>
-
-  <aside class="sidebar">
-    <ul>
-      {% for tag in menu_tags %}
-      <a href="{% url 'blog_tag' tag.slug %}"> 
-        <li>{{ tag.name }}</li>
-      </a>
-      {% endfor %}
-    </ul>
-
-
-    {% for post in posts %}
-      
-
-      <a href="{% url 'post' post.slug %}"> {{ post.title }} </a>
-      <a href="{% url 'post' post.slug %}"> 
-        <img src="{{ post.image.imagefile.url }}"  class="card-img">
-      </a>
-
-    
-
-   
-
-    {% endfor %}
-    
+  
 
 
 {% endblock %}

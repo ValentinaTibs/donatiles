@@ -4,7 +4,7 @@
 
 {% load static %}
 
-{% block title %}  The Squad | who we are {% endblock %}
+{% block title %}  Ask a Questions | who we are {% endblock %}
 
 
 {% block content %}
@@ -39,31 +39,45 @@
                 </div>
             </div>
             <div class="col-md-6">
-                    <form action="#">
-                        <fieldset class="p-4">
-                            <div class="form-group">
+                <form action="#">
+                    <fieldset class="p-4">
+                        {% csrf_token %}
+                        
+                        
+                         <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-6 py-2">
-                                        <input type="text" placeholder="Name *" class="form-control" required>
+                                        {{form.name}}
                                     </div>
                                     <div class="col-lg-6 pt-2">
-                                        <input type="email" placeholder="Email *" class="form-control" required>
+                                        {{form.surname}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 pt-2">
+                                        {{form.email}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 pt-2">
+                                        {{form.telephone}}
                                     </div>
                                 </div>
                             </div>
-                            <select name="" id="" class="form-control w-100">
-                                <option value="1">Select Category</option>
-                                <option value="1">Laptop</option>
-                                <option value="1">iPhone</option>
-                                <option value="1">Monitor</option>
-                                <option value="1">I need</option>
-                            </select>
-                            <textarea name="message" id=""  placeholder="Message *" class="border w-100 p-3 mt-3 mt-lg-4"></textarea>
-                            <div class="btn-grounp">
-                                <button type="submit" class="btn btn-primary mt-2 float-right">SUBMIT</button>
-                            </div>
-                        </fieldset>
-                    </form>
+                            {{form.content}}
+                            {{form.captcha}}
+                        <div class="btn-grounp">
+                            <button type="submit" class="btn btn-primary mt-2 float-right">SUBMIT</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+                    <!-- 
+                        
+                           
+                            
+                        
+                     -->
             </div>
         </div>
     </div>

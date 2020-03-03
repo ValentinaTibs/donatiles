@@ -1454,7 +1454,6 @@ ul.pagination .active a {
 
 .product-item .card {
   border: none;
-  min-height: 500px;
 }
 
 .product-item .card .card-body {
@@ -1629,8 +1628,6 @@ ul.pagination .active a {
 .product-table tr td {
   padding-left: 25px;
 }
-
-
 
 .product-review img {
   width: 60px;
@@ -2701,10 +2698,6 @@ form textarea {
 
 .top-to a:hover {
   text-decoration: none;
-}
-
-.middle{
-  vertical-align: middle;
 }
 
 /*# sourceMappingURL=maps/style.css.map */

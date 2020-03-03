@@ -233,7 +233,6 @@
 
 						{% endif %}
 
-						
 					</div>
 
 					<div class="widget price text-center">
@@ -247,17 +246,19 @@
 						<h5 class="widget-header text-center">Compralo Ora</h5>
 							<form  action="/product/{{ product.publication.slug }}/add_product_chart" method="POST"> {% csrf_token %}
 								{{ new_ic_form }}
-								<div class="form-group ">
-									<label for="zip-code">How many squared meter</label>
-									<input type="number" class="form-control" id="zip-code">
-								</div>
+								{% if single_sell %}
+
+								{% else %}
+									<div class="form-group ">
+										<label for="zip-code">How many squared meter</label>
+										<input type="number" class="form-control" id="zip-code">
+									</div>
+								{% endif %}
 
 								<div class="form-group text-center">
-
 									<button class="btn btn-transparent"> Valuta costo totale</button> 
-								
 								</div>
-							<br/>
+							
 						</form>	
 							
 

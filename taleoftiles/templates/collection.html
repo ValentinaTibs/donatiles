@@ -47,12 +47,65 @@
 					<!-- product slider -->
 
 					<div class="content mt-5 pt-5">
-
+						<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+								 aria-selected="true">{{ collection.publication.title }}: dettagli</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+								 aria-selected="false">Specifications</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+								 aria-selected="false">Reviews</a>
+							</li>
+						</ul>
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<h3 class="tab-title">Collection Description</h3>
 								<p>{{ collection.publication.content }} </p>
 
+							</div>
+
+														<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<h3 class="tab-title">Specifiche tecniche</h3>
+								<table class="table table-bordered product-table">
+									<tbody>
+										<tr>
+											<td>Seller Price</td>
+											<td>$450</td>
+										</tr>
+										<tr>
+											<td>Added</td>
+											<td>26th December</td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>Dhaka</td>
+										</tr>
+										<tr>
+											<td>Brand</td>
+											<td>Apple</td>
+										</tr>
+										<tr>
+											<td>Condition</td>
+											<td>Used</td>
+										</tr>
+										<tr>
+											<td>Model</td>
+											<td>2017</td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>Dhaka</td>
+										</tr>
+										<tr>
+											<td>Battery Life</td>
+											<td>23</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 
 

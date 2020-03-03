@@ -6,7 +6,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
 from .models import Config, Shipping, ChartItem, Chart
 
-from .forms import NewSamplerShipping, NewChartItemForm
+from .forms import NewSamplerShipping, NewChartItemForm,QuestionForm
+
+from django.db.models import Count
 
 import numpy as np
 import datetime as dt
@@ -32,7 +34,13 @@ def askaquestion(request):
     return render(request, "askaquestion.html",)
 
 def contacts(request):
-    return render(request, "contacts.html",)
+
+    form = QuestionForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            return HttpResponseRedirect('/thanks/')
+
+    return render(request, "contacts.html",{'form': form})
 
 def termsandcond(request):
     return render(request, "termsandcond.html",)
@@ -42,9 +50,12 @@ def index(request):
     settings = Setting.objects.filter(publication__publish_date__lte= date.today())
     products = Product.objects.filter(publication__publish_date__lte= date.today())
 
-    collections = pagination(request,collections,3)
-    settings = pagination(request,settings,3)
-    products = pagination(request,products,3)
+    blog_tags = Tag.objects.filter(publication__post_id__isnull = False, in_menu = True).distinct()
+    setting_tags = Tag.objects.filter(publication__setting_id__isnull = False, in_menu = True).distinct()
+
+    # collections = pagination(request,collections,3)
+    # settings = pagination(request,settings,3)
+    # products = pagination(request,products,3)
 
     return render(request, "index.html",{ 
         "collections":collections,"settings" : settings, "products" : products
@@ -75,7 +86,6 @@ def settings(request, tag_slug = None):
 
     settings = pagination(request,settings,10)
     return render(request, "settings.html",{ "settings":settings })
-
 
 # form = myForm(request.POST or None, request.FILES or None)
 # if request.method == 'POST':
@@ -286,11 +296,14 @@ def post(request, tag_slug):
     return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})
 
 def blog(request,tag_slug = None):
+    
+    blog_tags = Tag.objects.filter(publication__post_id__isnull = False, in_menu = True).distinct()
+
     if(tag_slug):
         posts = Post.objects.filter(publication__publish_date__lte= date.today(), publication__tag__slug = tag_slug )
     else:
         posts = Post.objects.filter(publication__publish_date__lte= date.today()  )
-    menu_tags = Tag.objects.filter(in_menu = True)
+    
 
-    return render(request, "blog.html", {"posts": posts, "menu_tags" : menu_tags})
+    return render(request, "blog.html", {"posts": posts, "blog_tags" : blog_tags})
 
