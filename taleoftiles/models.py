@@ -53,12 +53,6 @@ class Tag(models.Model):
 class TecnicalSpec(models.Model):
     note = models.TextField(max_length = 200, null = True)
 
-class Collection(models.Model):
-    specs = models.ForeignKey(TecnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='collection' )
-
-    def __str__(self):
-        return self.publication.title
-
 class Format(models.Model):
     title = models.CharField(max_length=100, default="10x10")
     description = models.CharField(max_length=100, null=True)
@@ -72,6 +66,13 @@ class Format(models.Model):
     def __str__(self):
         return self.title
 
+class Collection(models.Model):
+    specs = models.ForeignKey(TecnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='collection' )
+    formats = models.ManyToManyField(Format,  blank= True, related_name='collection')
+
+
+    def __str__(self):
+        return self.publication.title
 
 class Color(models.Model):
     title = models.CharField(max_length=100, default="white")
@@ -107,21 +108,19 @@ class Product(models.Model):
     min_ammount = models.PositiveIntegerField(default = 5)
     source = models.CharField(max_length=100, default="Italy")
     available  = models.BooleanField(default = True)
-    internal_name = models.CharField(max_length=100)
 
     collection = models.ForeignKey(Collection, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
     
     color = models.ForeignKey(Color, null=False, blank= False, on_delete=models.CASCADE, related_name='product')
     finish = models.ForeignKey(Finish, null=True, blank= True, on_delete=models.SET_NULL, related_name='product')
-    formats = models.ManyToManyField(Format,  blank= True, related_name='product')
 
     is_decor = models.BooleanField(default = False)
     single_sell = models.BooleanField(default = False)
 
-    def save(self, *args, **kwargs):
-        if not self.internal_name:
-            self.internal_name = self.name.replace(" ","-").lower()
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+    # def save(self, *args, **kwargs):
+    #     if not self.internal_name:
+    #         self.internal_name = self.name.replace(" ","-").lower()
+    #     super().save(*args, **kwargs)  # Call the "real" save() method.
 
     def __str__(self):
         return self.publication.title

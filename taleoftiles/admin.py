@@ -29,15 +29,12 @@ class ProductAdmin(admin.ModelAdmin):
 
 class FormatAdmin(admin.ModelAdmin):
     model = Format
-    exclude = ('slug',)
 
 class ColorAdmin(admin.ModelAdmin):
     model = Color
-    exclude = ('slug',)
 
 class FinishAdmin(admin.ModelAdmin):
     model = Finish
-    exclude = ('slug',)
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -47,7 +44,6 @@ class TagAdmin(admin.ModelAdmin):
 
 class PublicationAdmin(admin.StackedInline):
     model = Publication
-    exclude = ('slug',  )
 
 class PublicationAdminSelf(admin.ModelAdmin):
     list_display = ('title','tags','post_id')

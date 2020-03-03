@@ -29,7 +29,13 @@
 								{% endfor %}
 
 							</li>
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Formats
+
+								{% for format in collection.formats.all %}
+									<!-- mettere link per filtrare sulla collezione in base al formato -->
+									<a href="">{{format.title}}</a>
+								{% endfor %}
+							</li>
 						</ul>
 					</div>
 
@@ -68,7 +74,7 @@
 
 							</div>
 
-														<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<h3 class="tab-title">Specifiche tecniche</h3>
 								<table class="table table-bordered product-table">
 									<tbody>
@@ -114,54 +120,14 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="sidebar">
-					<!-- User Profile widget -->
-					<div class="widget user text-center">
-						<img class="rounded-circle img-fluid mb-5 px-5" src="images/user/user-thumb.jpg" alt="">
-						<h4><a href="">Jonathon Andrew</a></h4>
-						<p class="member-time">Member Since Jun 27, 2017</p>
-						<a href="">See all ads</a>
-						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>
-							<li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
-									offer</a></li>
-						</ul>
-					</div>
-					<!-- Map Widget -->
-					<div class="widget map">
-						<div class="map">
-							<div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
-						</div>
-					</div>
-					<!-- Rate Widget -->
-					<div class="widget rate">
-						<!-- Heading -->
-						<h5 class="widget-header text-center">What would you rate
-							<br>
-							this product</h5>
-						<!-- Rate -->
-						<div class="starrr"></div>
-					</div>
-					<!-- Safety tips widget -->
-					<div class="widget disclaimer">
-						<h5 class="widget-header">Safety Tips</h5>
-						<ul>
-							<li>Meet seller at a public place</li>
-							<li>Check the item before you buy</li>
-							<li>Pay only after collecting the item</li>
-							<li>Pay only after collecting the item</li>
-						</ul>
-					</div>
-					<!-- Coupon Widget -->
-					<div class="widget coupon text-center">
-						<!-- Coupon description -->
-						<p>Have a great product to post ? Share it with
-							your fellow users.
-						</p>
-						<!-- Submii button -->
-						<a href="" class="btn btn-transparent-white">Submit Listing</a>
-					</div>
 
+
+				<h3 class="product-title">Products in this collection</h3>
+				<div class="row">
+					<!-- limitare a 3 ed ordinare per interesse -->
+					{% for product in collection.products.all %}
+						<div class="col-sm-12 col-lg-12"> {% product_small product%}</div>
+					{% endfor %}
 				</div>
 			</div>
 
@@ -169,12 +135,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h3 class="product-title">Products in this collection</h3>
-				<div class="row">
-					{% for product in collection.products.all %}
-						<div class="col-sm-12 col-lg-4"> {% product_small product%}</div>
-					{% endfor %}
-				</div>
+				
 			</div>
 		</div>
 	</div>

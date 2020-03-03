@@ -82,7 +82,6 @@ class Migration(migrations.Migration):
                 ('min_ammount', models.PositiveIntegerField(default=5)),
                 ('source', models.CharField(default='Italy', max_length=100)),
                 ('available', models.BooleanField(default=True)),
-                ('internal_name', models.CharField(max_length=100)),
                 ('collection', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='products', to='taleoftiles.Collection')),
                 ('color', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product', to='taleoftiles.Color')),
                 ('finish', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='product', to='taleoftiles.Finish')),
