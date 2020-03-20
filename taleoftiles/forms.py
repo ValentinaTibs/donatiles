@@ -1,8 +1,8 @@
 from django import forms
 from datetime import datetime
 
-from django.forms import ModelForm
-from taleoftiles.models import Question, Shipping, ChartItem
+from django.forms import ModelForm, ModelChoiceField
+from taleoftiles.models import Question, Shipping, ChartItem, Format, Product
 
 from captcha.fields import ReCaptchaField
 
@@ -22,12 +22,23 @@ class QuestionForm(ModelForm):
             'telephone': forms.TextInput(attrs={'class': 'form-control','placeholder': "Telephone *"}),
         }
 
-class NewChartItemForm(ModelForm):
-    
-    class Meta:
-        model = ChartItem
-        fields = ('squared_meter',)
+# menu = MenuModelChoiceField(queryset=Menu.objects.all())
+#     class Meta:      
+#         model = Item
+#         fields = '__all__'
+class NewChartItemForm(forms.Form):
 
+    quantity = forms.CharField()    
+    formats = forms.ModelMultipleChoiceField(queryset=None, class =  'form-control')    
+
+    def __init__(self, *args, **kwargs):
+        the_product = Product.objects.get(pk = kwargs.pop('product_id'))
+        the_coll = the_product.collection
+
+        super(NewChartItemForm, self).__init__(*args, **kwargs)
+        self.fields['formats'].queryset = Format.objects.filter(collection__pk=the_coll.id)
+        
+        
 class NewSamplerShipping(ModelForm):
     
     text =  forms.Textarea(attrs={'class': 'form-control'},)

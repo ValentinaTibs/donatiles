@@ -70,7 +70,6 @@ class Collection(models.Model):
     specs = models.ForeignKey(TecnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='collection' )
     formats = models.ManyToManyField(Format,  blank= True, related_name='collection')
 
-
     def __str__(self):
         return self.publication.title
 
@@ -176,10 +175,11 @@ class Chart(models.Model):
 
 class ChartItem(models.Model):
     product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    format_chosen =  models.ForeignKey(Format,  verbose_name="Formats", null=False, on_delete=models.SET_NULL, related_name='chart_item')
     removed = models.BooleanField(default = False)
     chart = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     
-    squared_meter = models.PositiveIntegerField( default=1 )   
+    quantity = models.PositiveIntegerField( default=1 )   
 
 class Shipping(models.Model):
     #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)

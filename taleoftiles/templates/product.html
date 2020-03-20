@@ -64,10 +64,7 @@
 								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
 								 aria-selected="false">Specifications</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
-								 aria-selected="false">Reviews</a>
-							</li>
+
 						</ul>
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -75,45 +72,7 @@
 								<p>{{ product.publication.content }} </p>
 
 							</div>
-							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-								<h3 class="tab-title">Specifiche tecniche</h3>
-								<table class="table table-bordered product-table">
-									<tbody>
-										<tr>
-											<td>Seller Price</td>
-											<td>$450</td>
-										</tr>
-										<tr>
-											<td>Added</td>
-											<td>26th December</td>
-										</tr>
-										<tr>
-											<td>State</td>
-											<td>Dhaka</td>
-										</tr>
-										<tr>
-											<td>Brand</td>
-											<td>Apple</td>
-										</tr>
-										<tr>
-											<td>Condition</td>
-											<td>Used</td>
-										</tr>
-										<tr>
-											<td>Model</td>
-											<td>2017</td>
-										</tr>
-										<tr>
-											<td>State</td>
-											<td>Dhaka</td>
-										</tr>
-										<tr>
-											<td>Battery Life</td>
-											<td>23</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+
 							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								<h3 class="tab-title">Product Review</h3>
 								<div class="product-review">
@@ -245,21 +204,34 @@
 						<!-- Heading -->
 						<h5 class="widget-header text-center">Compralo Ora</h5>
 							<form  action="/product/{{ product.publication.slug }}/add_product_chart" method="POST"> {% csrf_token %}
+
 								{{ new_ic_form }}
+								<div class="form-group ">
 								{% if single_sell %}
 
+										<label for="zip-code">How many squared meter</label>
+										{{ new_ic_form}}
+										<input type="number" class="form-control" id="zip-code">
 								{% else %}
-									<div class="form-group ">
+
 										<label for="zip-code">How many squared meter</label>
 										<input type="number" class="form-control" id="zip-code">
-									</div>
+									
 								{% endif %}
-
+								</div>
 								<div class="form-group text-center">
 									<button class="btn btn-transparent"> Valuta costo totale</button> 
 								</div>
 							
 						</form>	
+							<div class="form-group text-center">
+									<button class="btn btn-transparent"> Aggiungi al carrello</button> 
+								</div>
+								<div class="form-group text-center">
+									<button class="btn btn-transparent"> Vai al tuo carrello
+									</button> 
+								</div>
+							
 							
 
 					</div>

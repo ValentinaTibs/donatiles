@@ -5,7 +5,10 @@ from django_reverse_admin import ReverseModelAdmin
 from .models import Post, Publication, Product, Image, Tag, Setting, Collection
 from .models import Sampler, Sample, Config, Shipping, Chart, ChartItem
 
-from .models import Format, Color, Finish
+from .models import Format, Color, Finish, TecnicalSpec
+
+class TecnicalSpecStackedAdmin(admin.StackedInline):
+    model = TecnicalSpec
 
 class ImageStackedAdmin(admin.StackedInline):
     model = Image
@@ -36,6 +39,10 @@ class ColorAdmin(admin.ModelAdmin):
 class FinishAdmin(admin.ModelAdmin):
     model = Finish
 
+class TecnicalSpecAdmin(SummernoteModelAdmin):
+    model = TecnicalSpec
+
+    summernote_fields = ('note',)
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
@@ -102,6 +109,9 @@ admin.site.register(Config)
 admin.site.register(Format, FormatAdmin)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Finish, FinishAdmin)
+
+admin.site.register(TecnicalSpec, TecnicalSpecAdmin)
+
 
 admin.site.register(Chart)
 admin.site.register(ChartItem)
