@@ -251,7 +251,7 @@ def product(request, product_slug):
     dt64 = np.datetime64(np.busday_offset(date.today(), product.wait_time, roll='backward'))
     wait_day = dt.datetime.utcfromtimestamp(dt64.astype(int))#, timezone.utc)
    
-    new_ic_form = NewChartItemForm()
+    new_ic_form = NewChartItemForm(product_id = product.pk)
 
     #attributing to this session a permanence in the database
     try: 
