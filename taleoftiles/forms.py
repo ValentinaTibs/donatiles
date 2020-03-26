@@ -7,7 +7,6 @@ from taleoftiles.models import Question, Shipping, ChartItem, Format, Product
 from captcha.fields import ReCaptchaField
 
 
-
 class QuestionForm(ModelForm):
     captcha = ReCaptchaField()
 
@@ -29,7 +28,7 @@ class QuestionForm(ModelForm):
 class NewChartItemForm(forms.Form):
 
     quantity = forms.CharField()    
-    formats = forms.ModelMultipleChoiceField(queryset=None, class =  'form-control')    
+#    formats = forms.ModelMultipleChoiceField(queryset=Menu.objects.all())    
 
     def __init__(self, *args, **kwargs):
         the_product = Product.objects.get(pk = kwargs.pop('product_id'))

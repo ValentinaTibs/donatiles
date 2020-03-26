@@ -175,7 +175,7 @@ class Chart(models.Model):
 
 class ChartItem(models.Model):
     product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
-    format_chosen =  models.ForeignKey(Format,  verbose_name="Formats", null=False, on_delete=models.SET_NULL, related_name='chart_item')
+    format_chosen =  models.ForeignKey(Format,  verbose_name="Formats", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     removed = models.BooleanField(default = False)
     chart = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     
