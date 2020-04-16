@@ -29,6 +29,11 @@ ORDER_STATUS = (
     ('c', 'Confermato'),
 ) 
 
+class TagCategory(models.Model):
+    name = models.CharField(max_length=200)
+    summary = models.CharField(max_length=200, null = True, blank=True,)
+    slug = models.CharField(max_length=200,  unique=True)
+
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -36,7 +41,8 @@ class Tag(models.Model):
     public = models.BooleanField(default = True)
     in_menu = models.BooleanField(default = False)
     order = models.PositiveIntegerField(default = 0)
-
+    category = models.ForeignKey(TagCategory, blank = True, null = True, on_delete=models.SET_NULL, related_name='tags' )
+    
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
@@ -49,6 +55,7 @@ class Tag(models.Model):
     
     def __str__(self):
         return self.name
+
 
 class TecnicalSpec(models.Model):
     note = models.TextField(max_length = 200, null = True)
