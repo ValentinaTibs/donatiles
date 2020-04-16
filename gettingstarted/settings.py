@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -100,10 +101,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
+# as in ->https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes     
 
-LANGUAGE_CODE = "en-us"
+LANGUAGES = (
+    ('en', ('English')),
+    ('it-ita', ('Italiano')),
+    ('swe-sv', ('Svenska')),
+    ('ger-de', ('Deutch')),
+)
 
+LANGUAGE_CODE = "en"
+    
 TIME_ZONE = "UTC"
 
 USE_I18N = True
@@ -126,7 +134,13 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 django_heroku.settings(locals())
 
+# ---- RECAPTCHA  ------
 RECAPTCHA_PUBLIC_KEY = '6Le6idgUAAAAAPC8bqlkoCRIeU4Q4S9kVwgnRnIP'
 RECAPTCHA_PRIVATE_KEY = '6Le6idgUAAAAAGTdYuat-SXi_uQDPOeGMyJ4oAam'
 
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+# ---- SENDGRID -------
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
