@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+from django.utils.translation import ugettext_lazy as _
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -29,19 +30,24 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    'django_summernote',
+    'modeltranslation',
+    'captcha',
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "taleoftiles",
-    'django_summernote',
-    'captcha',
+
+
+    'taleoftiles',
+    'CRM',
+    'layout',
 ]
 
 MIDDLEWARE = [
@@ -103,18 +109,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # as in ->https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes     
 
+USE_I18N = True
+
 LANGUAGES = (
-    ('en', ('English')),
-    ('it-ita', ('Italiano')),
-    ('swe-sv', ('Svenska')),
-    ('ger-de', ('Deutch')),
+    ('en', _('English')),
+    ('it', _('Italiano')),
+    ('sv', _('Svenska')),
+    ('de', _('Deutch')),
 )
 
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = 'en'
     
 TIME_ZONE = "UTC"
-
-USE_I18N = True
 
 USE_L10N = True
 
@@ -130,6 +136,8 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+LOCALE_PATHS =  [os.path.join(BASE_DIR, 'locale'),]
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 django_heroku.settings(locals())
@@ -141,6 +149,6 @@ RECAPTCHA_PRIVATE_KEY = '6Le6idgUAAAAAGTdYuat-SXi_uQDPOeGMyJ4oAam'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # ---- SENDGRID -------
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+# SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False

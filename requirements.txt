@@ -8,3 +8,4 @@ django_reverse_admin
 django-recaptcha
 numpy
 django-sendgrid-v5
+django-modeltranslation
