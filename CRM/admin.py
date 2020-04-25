@@ -1,3 +1,7 @@
 from django.contrib import admin
+from CRM.models import Profile
 
-# Register your models here.
+class ClientAdmin(admin.ModelAdmin):
+    model = Profile
+
+admin.site.register(Profile,ClientAdmin)

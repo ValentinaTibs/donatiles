@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 
@@ -23,13 +24,13 @@ class ElementTag(models.Model):
         return self.name
 
 class Element(models.Model):
-	name = models.CharField(max_length=200)
-	summary = models.CharField(max_length=200, null = True, blank=True,)
-	slug = models.CharField(max_length=200,  unique=True)
-	public = models.BooleanField(default = True)
-	tag = models.ForeignKey(ElementTag, blank = True, null = True,on_delete=models.SET_NULL, related_name='elements' )
-	def __str__(self):
-		return '%s' % (self.name,)   
+    name = models.CharField(max_length=200)
+    content = models.TextField(max_length=200)
+    public = models.BooleanField(default = True)
+    tag = models.ForeignKey(ElementTag, blank = True, null = True,on_delete=models.SET_NULL, related_name='elements' )
+
+    def __str__(self):
+    	return '%s' % (self.name,)   
 
 class Config(models.Model):
 	    

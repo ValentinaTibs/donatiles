@@ -1,6 +1,7 @@
-from layout.models import ElementTag
+from layout.models import Element
 from modeltranslation.translator import register, TranslationOptions
 
-@register(ElementTag)
-class ElementTagTranslationOptions(TranslationOptions):
-    fields = ('name', 'summary', )
+@register(Element)
+class ElementTranslationOptions(TranslationOptions):
+    fields = ('content', )
+

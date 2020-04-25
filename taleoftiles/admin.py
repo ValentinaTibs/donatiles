@@ -52,6 +52,7 @@ class TagAdmin(admin.ModelAdmin):
     exclude = ('slug',)
     list_display = ('name','summary','slug')
 
+
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
     summernote_fields = ('content',)

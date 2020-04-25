@@ -4,20 +4,29 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.db import models
 
+DATA_TYPE = (
+    ('t', 'Text'),
+    ('b', 'Boolean'),
+    ('c', 'Color'),
+    ('i', 'Integer')
+) 
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
     slug = models.CharField(max_length=200,  unique=True)
     public = models.BooleanField(default = True)
-    # in_menu = models.BooleanField(default = False)
-    # order = models.PositiveIntegerField(default = 0)
+
+    in_catalogue = models.BooleanField(default = False)
+    order = models.PositiveIntegerField(default = 0)
     parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='child' )
+
+    data_type = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
 
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
-        #ordering = ["order"] 
+        ordering = ["order"] 
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -26,6 +35,13 @@ class Tag(models.Model):
     
     def __str__(self):
         return self.name
+
+    def childs(self):
+        return Tag.objects.filter(parent = self)
+
+    def catalogue_childs(self):
+        return Tag.objects.filter(parent = self, in_catalogue = True)
+
 
 class Publication(models.Model):
     title = models.CharField(max_length=200, unique = True)
