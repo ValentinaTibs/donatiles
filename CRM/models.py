@@ -23,6 +23,7 @@ class Profile(models.Model):
 # def save_user_profile(sender, instance, **kwargs):
 #     instance.profile.save()
 
+
 COMPLETION_STATUS = (
     ('e', 'Empty'),
     ('s', 'Started'),

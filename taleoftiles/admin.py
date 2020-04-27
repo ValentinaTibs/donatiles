@@ -2,7 +2,69 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
-from taleoftiles.models import  Product,Tag, Publication, Photo
+from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, TechnicalSpec
+
+def duplicate(modeladmin, request, queryset):
+    for e in queryset:
+        e.pk = None
+        e.slug = e.slug + "_COPY"
+        e.save() # blog.pk == 2
+
+duplicate.short_description = "Duplicate selected items"
+
+class PhotoStackedAdmin(admin.StackedInline):
+    model = Photo
+
+    list_display = ('name', 'thumb_', )
+    search_fields = ('name', )
+    readonly_fields  = ( 'image_', )
+
+class TagAdmin(admin.ModelAdmin):
+    model = Tag
+    exclude = ('slug',)
+    list_display = ('name','summary','slug')
+    actions = [duplicate]
+
+class PublicationAdminSelf(SummernoteModelAdmin):
+    model = Publication
+    summernote_fields = ('content',)
+
+class PhotoAdminSelf(admin.ModelAdmin):
+    model = Photo
+
+class IconAdminSelf(admin.ModelAdmin):
+    model = Icon
+    list_display = ('name','image_','description')
+
+class ProductAdmin(admin.ModelAdmin):
+    inlines = (PhotoStackedAdmin,)
+    #inlines = (PublicationAdmin,ImageStackedAdmin)
+    #list_display = ('name','price','color','tags', 'is_decor' )
+
+    def name(self, obj):
+        pub = obj.publication
+        return pub.title
+
+    def tags(self, obj):
+        pub = obj.publication
+        return "\n".join([p.name for p in pub.tag.all()])    
+
+class TechnicalSpecAdmin(admin.ModelAdmin):
+    model = TechnicalSpec
+    list_display = ('slug','file','icons',)
+
+    # def icons_(self, obj):
+
+    #     mark_safe('<img src="/media/{0}">'.format(self.imagefile))
+    #     return "\n".join([p.name for p in obj.icons.all()])    
+
+
+admin.site.register(Tag,TagAdmin)
+admin.site.register(Product,ProductAdmin)
+admin.site.register(Publication,PublicationAdminSelf)
+admin.site.register(Photo,PhotoAdminSelf)
+admin.site.register(Icon,IconAdminSelf)
+admin.site.register(TechnicalSpec,TechnicalSpecAdmin)
 
 
 # from .models import Post, Publication, Product, Image, Tag, Setting, Collection
@@ -13,12 +75,7 @@ from taleoftiles.models import  Product,Tag, Publication, Photo
 # class TecnicalSpecStackedAdmin(admin.StackedInline):
 #     model = TecnicalSpec
 
-class PhotoStackedAdmin(admin.StackedInline):
-    model = Photo
 
-    list_display = ('name', 'thumb_', )
-    search_fields = ('name', )
-    readonly_fields  = ( 'image_', )
 
 # class ImageAdmin(admin.ModelAdmin):
 #     model = Image
@@ -47,15 +104,7 @@ class PhotoStackedAdmin(admin.StackedInline):
 
 #     summernote_fields = ('note',)
 
-class TagAdmin(admin.ModelAdmin):
-    model = Tag
-    exclude = ('slug',)
-    list_display = ('name','summary','slug')
 
-
-class PublicationAdminSelf(SummernoteModelAdmin):
-    model = Publication
-    summernote_fields = ('content',)
 
 
 # class PublicationAdminSelf(admin.ModelAdmin):
@@ -68,18 +117,7 @@ class PublicationAdminSelf(SummernoteModelAdmin):
 # class CollectionAdmin(admin.ModelAdmin):
 #     inlines = (PublicationAdmin,ImageStackedAdmin)
 
-class ProductAdmin(admin.ModelAdmin):
-    inlines = (PhotoStackedAdmin,)
-    #inlines = (PublicationAdmin,ImageStackedAdmin)
-    #list_display = ('name','price','color','tags', 'is_decor' )
 
-    def name(self, obj):
-        pub = obj.publication
-        return pub.title
-
-    def tags(self, obj):
-        pub = obj.publication
-        return "\n".join([p.name for p in pub.tag.all()])
 
  
 # class SettingAdmin(admin.ModelAdmin):
@@ -125,8 +163,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 # admin.site.register(Setting,SettingAdmin)
 # admin.site.register(Collection,CollectionAdmin)
-admin.site.register(Tag,TagAdmin)
-admin.site.register(Product,ProductAdmin)
-
-admin.site.register(Publication,PublicationAdminSelf)
 

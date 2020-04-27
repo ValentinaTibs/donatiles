@@ -11,6 +11,20 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
+class Post(models.Model):
+    name = models.CharField(max_length=200)
+
+class Icon(models.Model):  
+    name =  models.CharField (max_length = 100 , null = False, blank=False, unique=True)
+    imagefile = models.ImageField( upload_to='icons', null=True, blank=True, help_text="Load an image.", unique=True)
+    description = models.TextField()
+
+    def image_(self):
+        return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
+
+    def __str__(self):
+        return '%s' % (self.name, )
+
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -22,6 +36,7 @@ class Tag(models.Model):
     parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='child' )
 
     data_type = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
+    icon  = models.ForeignKey(Icon, blank= True, null = True,on_delete=models.SET_NULL,related_name='tags' )
 
     class Meta:
         # Gives the proper plural name for admin
@@ -42,13 +57,15 @@ class Tag(models.Model):
     def catalogue_childs(self):
         return Tag.objects.filter(parent = self, in_catalogue = True)
 
+    def has_childs(self):
+        return (Tag.objects.filter(parent = self).count > 0)
 
 class Publication(models.Model):
     title = models.CharField(max_length=200, unique = True)
     content = models.TextField()
     create_date = models.DateTimeField("date created", auto_now_add=True)
     publish_date = models.DateTimeField("date published", auto_now_add=False)
-    tag = models.ManyToManyField(Tag, blank = True, verbose_name="Category", related_name='publication' )
+    #tag = models.ManyToManyField(Tag, blank = True, verbose_name="Category", related_name='publication' )
     slug = models.CharField(max_length=200, unique=True)
     #author = models.ForeignKey( User,blank = True, on_delete=models.CASCADE )
     # collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )
@@ -64,25 +81,34 @@ class Publication(models.Model):
             self.slug = self.title.replace(" ","-").lower()
         #author = request.user
         super().save(*args, **kwargs)  # Call the "real" save() method.
+
+class TechnicalSpec(models.Model):
+    slug = models.CharField(max_length=50, unique=True)
+    icons = models.ManyToManyField(Icon,  blank= True, related_name='techspecs')
+    file =  models.FileField(upload_to='techspecs/')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.imagefile.name.replace(" ","-").lower()
+        super().save(*args, **kwargs) 
   
 class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )
-    samplable = models.BooleanField ( default=True, null = True)
+    
     wait_time = models.PositiveIntegerField(default = 15)
     min_ammount = models.PositiveIntegerField(default = 5)
     code = models.CharField(max_length=100,)
-    available  = models.BooleanField(default = True)
+    
     tags = models.ManyToManyField(Tag, blank= True, related_name='tags')
     publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
 
-    #images = models.ManyToManyField(Image, blank= True, related_name='products' )
-    
-    # # collection = models.ForeignKey(Collection, null=True, blank= True, on_delete=models.SET_NULL, related_name='products')
-    
-    # # color = models.ForeignKey(Color, null=False, blank= False, on_delete=models.CASCADE, related_name='product')
-    # # finish = models.ForeignKey(Finish, null=True, blank= True, on_delete=models.SET_NULL, related_name='product')
+    is_support = models.BooleanField ( default=True, null = True)    
+    support_to = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
+    is_decor = models.BooleanField(default = False)
+    is_samplable = models.BooleanField ( default=True, null = True)
+    available  = models.BooleanField(default = True)
+    active = models.BooleanField(default = False)
 
-    # is_decor = models.BooleanField(default = False)
     # single_sell = models.BooleanField(default = False)
 
     def save(self, *args, **kwargs):

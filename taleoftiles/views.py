@@ -22,42 +22,20 @@ from taleoftiles.models import Tag
 
 from django.db.models import Count
 
-def index(request):
-    # collections = Collection.objects.filter(publication__publish_date__lte= dt.date.today())
-    # settings = Setting.objects.filter(publication__publish_date__lte= dt.date.today())
-    # products = Product.objects.filter(publication__publish_date__lte= dt.date.today())
-
-    # blog_tags = Tag.objects.filter(publication__post_id__isnull = False, in_menu = True).distinct()
-    # setting_tags = Tag.objects.filter(publication__setting_id__isnull = False, in_menu = True).distinct()
-
-    # collections = pagination(request,collections,3)
-    # settings = pagination(request,settings,3)
-    # products = pagination(request,products,3)
-
-    # cannolo = ugettext("Sign Up")
-    # cannolo2 = _("POCCOZIO")
-
-
-    #return render(request, "empty.html",{ "msg" : cannolo,"msg2" : cannolo2})
-    
+def index(request):    
     return render(request, "empty.html",{ })
-
-
 
 def catalogue(request):
     first_o_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True)
-    # collections = Collection.objects.filter(publication__publish_date__lte= dt.date.today())
-    # settings = Setting.objects.filter(publication__publish_date__lte= dt.date.today())
-    # products = Product.objects.filter(publication__publish_date__lte= dt.date.today())
-
-    # blog_tags = Tag.objects.filter(publication__post_id__isnull = False, in_menu = True).distinct()
-    # setting_tags = Tag.objects.filter(publication__setting_id__isnull = False, in_menu = True).distinct()
-
-    # collections = pagination(request,collections,3)
-    # settings = pagination(request,settings,3)
-    # products = pagination(request,products,3)
-
     return render(request, "catalogue.html",{ "f_o_tags" : first_o_tags  })
+
+def product(request, product_slug):    
+    try: 
+        product = Product.objects.get( publication__slug  = product_slug )
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
+
+    return render(request, "product.html",{"product":product, })
 
 # def pagination(request, list, num):
 #     page = request.GET.get('page')
