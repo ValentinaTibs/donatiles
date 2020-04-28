@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Q
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -25,19 +26,21 @@ class Icon(models.Model):
     def __str__(self):
         return '%s' % (self.name, )
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
     slug = models.CharField(max_length=200,  unique=True)
     public = models.BooleanField(default = True)
 
-    in_catalogue = models.BooleanField(default = False)
-    order = models.PositiveIntegerField(default = 0)
+    #catalogue = models.ForeignKey(Catalogue, blank= True, null = True,on_delete=models.SET_NULL,related_name='all_tags' )
+    in_catalogue = models.BooleanField(default = False)    
+    icon  = models.ForeignKey(Icon, blank= True, null = True,on_delete=models.SET_NULL,related_name='tags' )
     parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='child' )
 
     data_type = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
-    icon  = models.ForeignKey(Icon, blank= True, null = True,on_delete=models.SET_NULL,related_name='tags' )
-
+    order = models.PositiveIntegerField(default = 0)
+    
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
@@ -54,11 +57,9 @@ class Tag(models.Model):
     def childs(self):
         return Tag.objects.filter(parent = self)
 
-    def catalogue_childs(self):
-        return Tag.objects.filter(parent = self, in_catalogue = True)
-
     def has_childs(self):
         return (Tag.objects.filter(parent = self).count > 0)
+
 
 class Publication(models.Model):
     title = models.CharField(max_length=200, unique = True)
@@ -86,11 +87,16 @@ class TechnicalSpec(models.Model):
     slug = models.CharField(max_length=50, unique=True)
     icons = models.ManyToManyField(Icon,  blank= True, related_name='techspecs')
     file =  models.FileField(upload_to='techspecs/')
-
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.imagefile.name.replace(" ","-").lower()
         super().save(*args, **kwargs) 
+
+    def __str__(self):
+        return self.slug
+
+
   
 class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )
@@ -101,8 +107,8 @@ class Product(models.Model):
     
     tags = models.ManyToManyField(Tag, blank= True, related_name='tags')
     publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
+    techspec = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
 
-    is_support = models.BooleanField ( default=True, null = True)    
     support_to = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
     is_decor = models.BooleanField(default = False)
     is_samplable = models.BooleanField ( default=True, null = True)
@@ -125,8 +131,71 @@ class Product(models.Model):
     def is_samplable(self,):
         return true
 
+    def is_support(self,):
+        return self.support_to.is_null == True
+    
     def has_single_sell(self):
         return true
+
+    def serie(self):
+        try:
+            serie = self.tags.get(parent__slug = "serie")
+        except ObjectDoesNotExist:
+            serie = "None"
+        return serie
+
+    def color(self):
+        try:
+            color = self.tags.get(parent__slug = "colour")
+        except ObjectDoesNotExist:
+            color = "FFFFFF"
+        return color
+
+    def formats(self):    
+        formats = self.tags.filter(parent__slug = "format")
+        if formats.count() == 0:
+            formats= "none"
+        return formats
+
+    def finishes(self):    
+        finishes = self.tags.filter(parent__slug = "finish")
+        if finishes.count() == 0:
+            finishes= "none"        
+        return finishes
+
+
+
+import operator
+from operator import and_
+from django.db.models import Q
+from functools import reduce
+from django.db.models import Count
+
+class Catalogue(models.Model):
+    title = models.CharField(max_length=200, unique = True)
+    active = models.BooleanField(default = True)
+
+    # def catalogue_childs(self):
+    #     return Tag.objects.filter(parent = self, in_catalogue = True)
+
+    def tags(self):
+        return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
+
+    def products(self,query_dictionary):
+        
+        tag_query = Q()
+        tag_len = 0
+        for key, value in query_dictionary:
+            if(key != 'csrfmiddlewaretoken'):
+                tag_query = tag_query | Q(slug = value)
+                tag_len = tag_len + 1
+
+
+        active_tags = Tag.objects.filter(tag_query)
+        
+        prods = Product.objects.filter(active = True, available = True, tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len)
+        
+        return prods.distinct()
 
 class Photo(models.Model):  
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
-from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, TechnicalSpec
+from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, TechnicalSpec, Catalogue
 
 def duplicate(modeladmin, request, queryset):
     for e in queryset:
@@ -21,8 +21,8 @@ class PhotoStackedAdmin(admin.StackedInline):
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
-    exclude = ('slug',)
-    list_display = ('name','summary','slug')
+    #exclude = ('slug',)
+    list_display = ('name','summary','slug','in_catalogue','public','parent')
     actions = [duplicate]
 
 class PublicationAdminSelf(SummernoteModelAdmin):
@@ -35,6 +35,9 @@ class PhotoAdminSelf(admin.ModelAdmin):
 class IconAdminSelf(admin.ModelAdmin):
     model = Icon
     list_display = ('name','image_','description')
+
+class CatalogueAdmin(admin.ModelAdmin):
+    model = Catalogue
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = (PhotoStackedAdmin,)
@@ -51,13 +54,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 class TechnicalSpecAdmin(admin.ModelAdmin):
     model = TechnicalSpec
-    list_display = ('slug','file','icons',)
+    list_display = ('slug','file','icons_',)
 
-    # def icons_(self, obj):
-
-    #     mark_safe('<img src="/media/{0}">'.format(self.imagefile))
-    #     return "\n".join([p.name for p in obj.icons.all()])    
-
+    def icons_(self, obj):
+        return "\n".join([p.name for p in obj.icons.all()])    
 
 admin.site.register(Tag,TagAdmin)
 admin.site.register(Product,ProductAdmin)
@@ -65,6 +65,7 @@ admin.site.register(Publication,PublicationAdminSelf)
 admin.site.register(Photo,PhotoAdminSelf)
 admin.site.register(Icon,IconAdminSelf)
 admin.site.register(TechnicalSpec,TechnicalSpecAdmin)
+admin.site.register(Catalogue,CatalogueAdmin)
 
 
 # from .models import Post, Publication, Product, Image, Tag, Setting, Collection

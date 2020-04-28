@@ -76,3 +76,9 @@ python manage.py migrate --fake core zero
 heroku restart
 heroku pg:reset DATABASE
 heroku run python manage.py migrate
+
+
+
+# Translations -
+
+## Microcopy text

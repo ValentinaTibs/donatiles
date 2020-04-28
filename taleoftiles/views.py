@@ -14,28 +14,49 @@ from django.utils.translation import ugettext_lazy as _
 import requests
 import logging
 
-from taleoftiles.models import Tag
+from taleoftiles.models import Tag, Product, Catalogue
+
 # from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
 # from .models import Config, Shipping, ChartItem, Chart
 
-# from .forms import NewSamplerShipping, NewChartItemForm,QuestionForm
+# from .forms importcat.products NewSamplerShipping, NewChartItemForm,QuestionForm
 
 from django.db.models import Count
+
 
 def index(request):    
     return render(request, "empty.html",{ })
 
 def catalogue(request):
-    first_o_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True)
-    return render(request, "catalogue.html",{ "f_o_tags" : first_o_tags  })
+
+	query_dictionary = {}
+	if request.method == 'POST':
+		query_dictionary = request.POST.items()
+	# tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True)
+	
+	try: 
+	    cat = Catalogue.objects.get(active = True)
+	except ObjectDoesNotExist:
+	    return render(request, "404.html",{"message":"There is no active catalogue",})
+
+	catalogue_tags = cat.tags()
+	catalogue_prod = cat.products(query_dictionary)
+	
+	return render(request, "catalogue.html",{ 	
+		"tags":catalogue_tags,	
+		"products" : catalogue_prod
+		})
 
 def product(request, product_slug):    
-    try: 
-        product = Product.objects.get( publication__slug  = product_slug )
-    except ObjectDoesNotExist:
-        return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
+	# 2do mettere traduzioni
+	try: 
+	    product = Product.objects.get( publication__slug  = product_slug )
+	except ObjectDoesNotExist:
+	    return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
-    return render(request, "product.html",{"product":product, })
+	return render(request, "product.html",{
+		"product":product, 
+		})
 
 # def pagination(request, list, num):
 #     page = request.GET.get('page')

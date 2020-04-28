@@ -1,6 +1,8 @@
 from django.utils.crypto import get_random_string
 
 from django.db import models
+from django.db.models import Q
+
 from taleoftiles.models import Product
 
 
@@ -41,6 +43,22 @@ ORDER_STATUS = (
     ('r', 'Ricevuto'),
     ('c', 'Confermato'),
 ) 
+
+
+class Catalogue(models.Model):
+    title = models.CharField(max_length=200, unique = True)
+    active = models.BooleanField(default = True)
+    # def catalogue_childs(self):
+    #     return Tag.objects.filter(parent = self, in_catalogue = True)
+    def tags(self):
+        return self.all_tags.filter(parent__isnull = True).in_bulk(field_name='slug')
+
+    def products(self,query_dictionary):
+        query = Q(active = True)
+        #self.all_tags.filter(parent__isnull = True).in_bulk(field_name='slug')
+        #publication__publish_date__lte= dt.date.today(), publication__tag__slug = tag_slug 
+        prods = Product.objects.filter(query)
+        return prods 
 
 class Chart(models.Model):
 	session_id = models.CharField(max_length=100, unique=True, default="")
