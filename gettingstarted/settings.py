@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-
     'taleoftiles',
     'CRM',
     'layout',
@@ -74,6 +73,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "taleoftiles.core_context.category_menu",
+                "taleoftiles.core_context.user_menu",
             ]
         },
     }

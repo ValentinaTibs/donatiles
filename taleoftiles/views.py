@@ -1,20 +1,21 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 
 
-from datetime import date
-import datetime as dt
-import numpy as np
+# from datetime import date
+# import datetime as dt
+# import numpy as np
 
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
-import requests
-import logging
+# import requests
+# import logging
 
 from taleoftiles.models import Tag, Product, Catalogue
+# from taleoftiles.CRM import Chart, ChartItem
 
 # from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
 # from .models import Config, Shipping, ChartItem, Chart
@@ -22,25 +23,24 @@ from taleoftiles.models import Tag, Product, Catalogue
 # from .forms importcat.products NewSamplerShipping, NewChartItemForm,QuestionForm
 
 from django.db.models import Count
-
+  
 
 def index(request):    
     return render(request, "empty.html",{ })
 
 def catalogue(request):
 
-	query_dictionary = {}
-	if request.method == 'POST':
-		query_dictionary = request.POST.items()
-	# tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True)
-	
+	catalogue_prod = Product.objects.filter(active = True, available = True)
+
 	try: 
 	    cat = Catalogue.objects.get(active = True)
 	except ObjectDoesNotExist:
 	    return render(request, "404.html",{"message":"There is no active catalogue",})
 
 	catalogue_tags = cat.tags()
-	catalogue_prod = cat.products(query_dictionary)
+	if request.method == 'POST':
+		catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
+	
 	
 	return render(request, "catalogue.html",{ 	
 		"tags":catalogue_tags,	
@@ -57,6 +57,54 @@ def product(request, product_slug):
 	return render(request, "product.html",{
 		"product":product, 
 		})
+
+
+# #Check if the product is suitable for sampling for 
+# #check if we do have a connected use
+# def product(request, product_slug):
+#     
+    
+#     try: 
+#         product = Product.objects.get(publication__slug  = product_slug )
+#     except ObjectDoesNotExist:
+#         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
+
+#     message = ""
+#     sampler = None
+#     sample = None
+#     make_it_new = False
+
+#     dt64 = np.datetime64(np.busday_offset(dt.date.today(), product.wait_time, roll='backward'))
+#     wait_day = dt.datetime.utcfromtimestamp(dt64.astype(int))#, timezone.utc)
+   
+#     new_ic_form = NewChartItemForm(product_id = product.pk)
+
+#     #attributing to this session a permanence in the database
+#     try: 
+#         sampler = Sampler.objects.get(session_id  = session_id )
+#     except ObjectDoesNotExist:
+#         sampler = Sampler(session_id  = session_id)
+#         sampler.save()
+
+#     try:
+#         sample = Sample.objects.get(sampler__pk  = sampler.pk, removed = False, product__publication__slug = product_slug )
+#         message = "Product added to your sampler"
+#     except ObjectDoesNotExist:
+#         message = "Add this to your free sampler for receiving it at home"
+#         make_it_new = True
+
+#     if request.method == 'POST' and make_it_new:
+#         # distinguis from chart post to the sampler post    
+#         sample = Sample(sampler = sampler, product = product)
+#         sample.save()
+#         message = "Product added to your sampler"
+
+
+#     return render(request, "product.html",{"product":product, 
+#             "message": message,"sample" : sample,"sampler" : sampler,
+#             "wait_day_64" : dt64, "new_ic_form" : new_ic_form
+#         })
+	
 
 # def pagination(request, list, num):
 #     page = request.GET.get('page')

@@ -8,7 +8,7 @@ def duplicate(modeladmin, request, queryset):
     for e in queryset:
         e.pk = None
         e.slug = e.slug + "_COPY"
-        e.save() # blog.pk == 2
+        e.save() 
 
 duplicate.short_description = "Duplicate selected items"
 
@@ -21,8 +21,7 @@ class PhotoStackedAdmin(admin.StackedInline):
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
-    #exclude = ('slug',)
-    list_display = ('name','summary','slug','in_catalogue','public','parent')
+    list_display = ('name','summary','slug','in_catalogue','in_menu','public','parent')
     actions = [duplicate]
 
 class PublicationAdminSelf(SummernoteModelAdmin):

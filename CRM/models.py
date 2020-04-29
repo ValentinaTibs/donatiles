@@ -1,9 +1,9 @@
 from django.utils.crypto import get_random_string
 
 from django.db import models
-from django.db.models import Q
 
 from taleoftiles.models import Product
+from django.utils import timezone
 
 
 from django.contrib.auth.models import User
@@ -27,11 +27,11 @@ class Profile(models.Model):
 
 
 COMPLETION_STATUS = (
-    ('e', 'Empty'),
     ('s', 'Started'),
     ('c', 'Completed'),
     ('o', 'Ordered'),
-    ('ex', 'Expired')
+    ('ex', 'Expired'),
+    ('cs', 'Closed by Staff'),
 ) 
 
 ORDER_STATUS = (
@@ -45,40 +45,121 @@ ORDER_STATUS = (
 ) 
 
 
-class Catalogue(models.Model):
-    title = models.CharField(max_length=200, unique = True)
-    active = models.BooleanField(default = True)
-    # def catalogue_childs(self):
-    #     return Tag.objects.filter(parent = self, in_catalogue = True)
-    def tags(self):
-        return self.all_tags.filter(parent__isnull = True).in_bulk(field_name='slug')
-
-    def products(self,query_dictionary):
-        query = Q(active = True)
-        #self.all_tags.filter(parent__isnull = True).in_bulk(field_name='slug')
-        #publication__publish_date__lte= dt.date.today(), publication__tag__slug = tag_slug 
-        prods = Product.objects.filter(query)
-        return prods 
-
 class Chart(models.Model):
-	session_id = models.CharField(max_length=100, unique=True, default="")
-	completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
-	order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
-	is_sample = models.BooleanField(default = False)
+    session_id = models.CharField(max_length=100, unique=True, default="")
+    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+    is_sample  = models.BooleanField(default = False)
 
-	def __str__(self):
-		return self.session_id
+    created_at  = models.DateTimeField(editable=False)
+    modified_at = models.DateTimeField()
 
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super().save(*args, **kwargs)  
+
+    def __str__(self):
+        return self.session_id
+
+    def num_prods(self):
+        if self.chart_item:
+            return self.chart_item.filter(removed = False).count()
+        else:
+            return 0
 
 class ChartItem(models.Model):
-	chart = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
-	product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
-	removed = models.BooleanField(default = False)
+    chart       = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    product     = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    removed     = models.BooleanField(default = False)
 
-	quantity = models.PositiveIntegerField( default=1 )   
+    quantity    = models.PositiveIntegerField( default=1 )   
+    
+    created_at  = models.DateTimeField(editable=False)
+    modified_at = models.DateTimeField()
 
-	def __str__(self):
-		return self.Chart.session_id        
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.chart.session_id        
+   
+
+def create_shipping_internal_id():
+	return get_random_string(length=32)
+
+class Order(models.Model):
+    note = models.TextField(max_length = 200, null = True)
+
+    internal_tracking_id = models.CharField(max_length=100, default = "")
+    shipping_tracking_id= models.CharField(max_length=100, default = "")
+
+    chart = models.ForeignKey(Chart, verbose_name="Chart", null = False, on_delete=models.CASCADE, related_name='shipping')
+
+    def save(self, *args, **kwargs):
+        self.internal_tracking_id = create_shipping_internal_id
+
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+    def __str__(self):
+        return self.internal_tracking_id
+    #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
+    #completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
+    # name    = models.CharField(max_length=100,default = "")
+    # surname = models.CharField(max_length=100,default = "")
+    
+    # email   = models.EmailField(max_length=100,default = "")
+    # telephone = models.CharField(max_length=100,default = "")
+
+    # address = models.CharField(max_length=100,default = "")
+    # address2 = models.CharField(max_length=100,default = "")
+    # city = models.CharField(max_length=100,default = "")
+    # postcode = models.CharField(max_length=100,default = "")
+    
+
+class Question(models.Model):
+    content = models.TextField()
+    # name    = models.CharField(max_length=100,default = "")
+    # surname = models.CharField(max_length=100,default = "")
+
+    # email   = models.EmailField(max_length=100,default = "")
+    # telephone = models.CharField(max_length=100,default = "")
+
+    modified_at = models.DateTimeField()    
+    created_at  = models.DateTimeField("date created",editable=False)
+    publish_date = models.DateTimeField("date published", blank = True, null = True, auto_now_add=False)
+
+    reply = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='question' )
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super().save(*args, **kwargs)
+
+    def published(self):
+        return True #models.BooleanField(default = True)
+
+    # user - that might be null 
+    # author that might be a user - that might be null 
+    # status visible only to the staff
+    # creation date
+    # email to reply
+
+    # null=True, to allow in database
+    # blank=True, to allow in form validation
+
+    # class Order(models.Model):
+    #     pass
+
+
 
 
         
@@ -96,60 +177,4 @@ class ChartItem(models.Model):
 #     removed = models.BooleanField(default = False)
 
 #     def __str__(self):
-#         return self.sampler.session_id        
-
-def create_shipping_internal_id():
-	return get_random_string(length=32)
-
-class Order(models.Model):
-    #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
-    #completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
-    # name    = models.CharField(max_length=100,default = "")
-    # surname = models.CharField(max_length=100,default = "")
-    
-    # email   = models.EmailField(max_length=100,default = "")
-    # telephone = models.CharField(max_length=100,default = "")
-
-    # address = models.CharField(max_length=100,default = "")
-    # address2 = models.CharField(max_length=100,default = "")
-    # city = models.CharField(max_length=100,default = "")
-    # postcode = models.CharField(max_length=100,default = "")
-    note = models.TextField(max_length = 200, null = True)
-
-    internal_tracking_id = models.CharField(max_length=100, default = "")
-    shipping_tracking_id= models.CharField(max_length=100, default = "")
-
-    chart = models.ForeignKey(Chart, verbose_name="Chart", null = False, on_delete=models.CASCADE, related_name='shipping')
-
-    def save(self, *args, **kwargs):
-        self.internal_tracking_id = create_shipping_internal_id
-
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-
-    def __str__(self):
-        return self.internal_tracking_id
-
-class Question(models.Model):
-    content = models.TextField()
-    # name    = models.CharField(max_length=100,default = "")
-    # surname = models.CharField(max_length=100,default = "")
-
-    # email   = models.EmailField(max_length=100,default = "")
-    # telephone = models.CharField(max_length=100,default = "")
-    published = models.BooleanField(default = True)
-
-    create_date  = models.DateTimeField("date created", auto_now_add=True)
-    publish_date = models.DateTimeField("date published", blank = True, null = True, auto_now_add=False)
-
-    reply = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='question' )
-    # user - that might be null 
-    # author that might be a user - that might be null 
-    # status visible only to the staff
-    # creation date
-    # email to reply
-
-    # null=True, to allow in database
-    # blank=True, to allow in form validation
-
-# class Order(models.Model):
-#     pass
+#         return self.sampler.session_id     

@@ -1,9 +1,11 @@
 from django.utils.safestring import mark_safe
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError,ObjectDoesNotExist
 
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Q
+from django.db.models import Count
+
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -16,8 +18,8 @@ class Post(models.Model):
     name = models.CharField(max_length=200)
 
 class Icon(models.Model):  
-    name =  models.CharField (max_length = 100 , null = False, blank=False, unique=True)
-    imagefile = models.ImageField( upload_to='icons', null=True, blank=True, help_text="Load an image.", unique=True)
+    name        =  models.CharField (max_length = 100 , null = False, blank=False, unique=True)
+    imagefile   = models.ImageField( upload_to='icons', null=True, blank=True, help_text="Load an image.", unique=True)
     description = models.TextField()
 
     def image_(self):
@@ -28,18 +30,20 @@ class Icon(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=200)
+    name    = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
-    slug = models.CharField(max_length=200,  unique=True)
-    public = models.BooleanField(default = True)
+    slug    = models.CharField(max_length=200,  unique=True)
+    public  = models.BooleanField(default = True)
+
+    in_catalogue= models.BooleanField(default = False)    
+    in_menu     = models.BooleanField(default = False)    
+    icon        = models.ForeignKey( Icon,  blank = True, null = True, on_delete=models.SET_NULL, related_name='tags' )
+    parent      = models.ForeignKey("self", blank = True, null = True, on_delete=models.SET_NULL, related_name='child' )
+
+    data_type   = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
+    order       = models.PositiveIntegerField(default = 0)
 
     #catalogue = models.ForeignKey(Catalogue, blank= True, null = True,on_delete=models.SET_NULL,related_name='all_tags' )
-    in_catalogue = models.BooleanField(default = False)    
-    icon  = models.ForeignKey(Icon, blank= True, null = True,on_delete=models.SET_NULL,related_name='tags' )
-    parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='child' )
-
-    data_type = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
-    order = models.PositiveIntegerField(default = 0)
     
     class Meta:
         # Gives the proper plural name for admin
@@ -163,14 +167,6 @@ class Product(models.Model):
             finishes= "none"        
         return finishes
 
-
-
-import operator
-from operator import and_
-from django.db.models import Q
-from functools import reduce
-from django.db.models import Count
-
 class Catalogue(models.Model):
     title = models.CharField(max_length=200, unique = True)
     active = models.BooleanField(default = True)
@@ -181,7 +177,7 @@ class Catalogue(models.Model):
     def tags(self):
         return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
 
-    def products(self,query_dictionary):
+    def filter_products(self,prods,query_dictionary):
         
         tag_query = Q()
         tag_len = 0
@@ -190,12 +186,10 @@ class Catalogue(models.Model):
                 tag_query = tag_query | Q(slug = value)
                 tag_len = tag_len + 1
 
-
         active_tags = Tag.objects.filter(tag_query)
         
-        prods = Product.objects.filter(active = True, available = True, tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len)
+        return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
         
-        return prods.distinct()
 
 class Photo(models.Model):  
 
