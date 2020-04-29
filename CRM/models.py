@@ -44,6 +44,16 @@ ORDER_STATUS = (
     ('c', 'Confermato'),
 ) 
 
+ITEM_STATUS = (
+    ('ok', 'ok'),
+    ('ns', 'Not Samplable'),
+    ('le', 'Limit Exceeded'),
+    ('ru', 'Removed by User'),
+    ('rs', 'Removed by Staff'),
+    ('o', 'Others')
+) 
+
+
 
 class Chart(models.Model):
     session_id = models.CharField(max_length=100, unique=True, default="")
@@ -66,14 +76,19 @@ class Chart(models.Model):
 
     def num_prods(self):
         if self.chart_item:
-            return self.chart_item.filter(removed = False).count()
+            return self.chart_item.filter(status = 'ok').count()
         else:
             return 0
+
+    def all_samples(self):
+        if self.chart_item:
+            return self.chart_item.filter(status = 'ok')
+
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     product     = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
-    removed     = models.BooleanField(default = False)
+    status     = models.CharField(max_length=2, choices=ITEM_STATUS, default='ok')
 
     quantity    = models.PositiveIntegerField( default=1 )   
     

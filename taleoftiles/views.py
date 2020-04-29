@@ -23,7 +23,7 @@ from taleoftiles.models import Tag, Product, Catalogue
 # from .forms importcat.products NewSamplerShipping, NewChartItemForm,QuestionForm
 
 from django.db.models import Count
-  
+
 
 def index(request):    
     return render(request, "empty.html",{ })

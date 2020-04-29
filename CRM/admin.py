@@ -13,7 +13,7 @@ class ChartItemStackedAdmin(admin.StackedInline):
     model = ChartItem
 
     search_fields = ('product__publication__slug', )
-    readonly_fields  = ('removed','modified_at')
+    readonly_fields  = ('status','modified_at')
 
 def close_them(modeladmin, request, queryset):
     for e in queryset:

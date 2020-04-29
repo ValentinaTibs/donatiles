@@ -11,16 +11,66 @@
 {% load i18n %}
 
 
+<form method="POST" action="{% url 'catalogue' %}">
+{% csrf_token %}
 
+	       
+        {{ tags.effect.name }} 
+        {% for effect in tags.effect.child.all %}
+        	<input type="checkbox" name="{{ tags.effect.name }}" value="{{effect.slug}}">{{effect.name}}       
+		{% endfor %}
+     
+		<br/>
+	       
+        {{ tags.style.name }} 
+        {% for style in tags.style.child.all %}
+        	<input type="checkbox" name="{{ tags.style.name }}" value="{{style.slug}}">{{style.name}}       
+		{% endfor %}
+                
+		<br/>
+           
+        {{ tags.colour.name }} 
+        {% for colour in tags.colour.child.all %}
+        	<input type="checkbox" name="{{ tags.colour.name }}" value="{{colour.slug}}">{{colour.name}}       
+		{% endfor %}
+           
+		<br/>
+           
+        {{ tags.setting.name }} 
+        {% for setting in tags.setting.child.all %}
+        	<input type="checkbox" name="{{ tags.setting.name }}" value="{{setting.slug}}">{{setting.name}}       
+		{% endfor %}
+          
+		<br/>
+           
+        {{ tags.format.name }} 
+        {% for format in tags.format.child.all %}
+        	<input type="checkbox" name="{{ tags.format.name }}" value="{{format.slug}}">{{format.name}}       
+		{% endfor %}
+    
+    	<br/>
+        
+        <input type="checkbox" name="{{ tags.handmade.name }}" 	value="{{tags.handmade.slug}}">{{tags.handmade.name}}       
+		<input type="checkbox" name="{{ tags.samplable.name }}" value="{{tags.samplable.slug}}">{{tags.samplable.name}}       
 
-{% for tag in f_o_tags %}
-	{{ tag }} -- 
-
-	{% for tag_c in tag.childs %}
+		<br/>
 		
-		{{ tag_c }}  
-	{% endfor %}
+        {{ tags.serie.name }} 
+        {% for serie in tags.serie.child.all %}
+        	<input type="checkbox" name="{{ tags.serie.name }}" value="{{serie.slug}}">{{serie.name}}       
+		{% endfor %}
+       
+		<br/>
+    <input type="submit" value="SEARCH" />      
 
+</form>
+
+
+
+
+{% for product in products %}
+	{{ product }}
+	<a href="{% url 'product' product.publication.slug %}"> {{ product }}</a>
 
 {% endfor %}
 

@@ -129,12 +129,6 @@ class Product(models.Model):
     def __str__(self):
         return self.publication.title
 
-    def is_decor(self,):
-        return true
-
-    def is_samplable(self,):
-        return true
-
     def is_support(self,):
         return self.support_to.is_null == True
     

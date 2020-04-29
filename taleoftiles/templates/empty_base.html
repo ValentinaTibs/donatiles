@@ -49,8 +49,24 @@
 </menu>
 
 
-{% block content %} {% endblock %}
+{% for cat in menu_cats %}
+  {{cat}}
+{% endfor %}
 
+SAMPLER
+{% for sample in sampler.all_samples %}
+  {{sample.product}}
+  <a href="{% url 'del_chart' sample.product.publication.slug %}"> del this</a> 
+{% endfor %}
+
+CHART
+{% for chart_item in chart.chart_item.all %}
+  {{sample}}
+{% endfor %}
+
+<hr/>
+{% block content %} {% endblock %}
+<hr/>
 <!--============================
 =            Footer            =
 =============================-->
