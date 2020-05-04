@@ -27,6 +27,11 @@ class TagAdmin(admin.ModelAdmin):
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
     summernote_fields = ('content',)
+    fields = ('title','content','publish_date','slug')
+
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        super().save_model(request, obj, form, change)
 
 class PhotoAdminSelf(admin.ModelAdmin):
     model = Photo

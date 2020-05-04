@@ -8,6 +8,7 @@ admin.autodiscover()
 
 import taleoftiles.views
 import CRM.views
+import blog.views
 
 urlpatterns = [ ]
 i18n_patterns(*urlpatterns  , prefix_default_language = False)
@@ -16,7 +17,7 @@ urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
     path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
     path("catalogue/<slug:the_filter>/",taleoftiles.views.catalogue, name="catalogue"),
-        
+
     path("product/<slug:product_slug>", taleoftiles.views.product,  name="product"),
 
     path("add_chart/<slug:product_slug>",                   CRM.views.add_chart,  name="add_chart"),
@@ -25,7 +26,10 @@ urlpatterns += i18n_patterns(
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
     
     
-    # path("blog/",                       taleoftiles.views.blog, name="blog"),
+    path("blog/",                       blog.views.blog, name="blog"),
+    path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),
+    path('blog/post/<slug:post_slug>/', blog.views.post, name="post"),
+
     # path("blog/<slug:tag_slug>",        taleoftiles.views.blog, name="blog_tag"),
     # path('blog/post/<slug:post_slug>/', taleoftiles.views.post, name="post"),
 

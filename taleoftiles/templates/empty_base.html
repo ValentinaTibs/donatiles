@@ -50,16 +50,23 @@
 </menu>
 
 
+
+{% url 'blog' as blog_url %}
+{% if blog_url|starts_with:request.path %} WE ARE IN BLOG {% endif %}
+
+<a href="{% url 'blog'%}"> BLOG </a>
+
+
+
+
 {% url 'catalogue' as catalogue_url %}
 {% if catalogue_url|starts_with:request.path %} WE ARE IN CAT {% endif %}
 
 <a href="{% url 'catalogue'%}"> CATALOGUE </a>
 
 {% for cat in menu_cats %}
-<a href="{% url 'catalogue' cat.slug %}"> {{cat}} </a>
-   
+<a href="{% url 'catalogue' cat.slug %}"> {{cat}} </a>   
 {% endfor %}
-
 
 SAMPLER
 {% for sample in sampler.all_samples %}

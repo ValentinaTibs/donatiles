@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'taleoftiles',
     'CRM',
     'layout',
+    'blog',
 ]
 
 MIDDLEWARE = [

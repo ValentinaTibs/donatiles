@@ -111,7 +111,7 @@ class ChartItem(models.Model):
    
 
 def create_shipping_internal_id():
-	return get_random_string(length=32)
+    return get_random_string(length=32)
 
 class Order(models.Model):
     note = models.TextField(max_length = 200, null = True)

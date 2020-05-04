@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 # from datetime import date
-# import datetime as dt
+import datetime as dt
 # import numpy as np
 
 from django.utils.translation import ugettext
@@ -28,30 +28,10 @@ from django.db.models import Count
 def index(request):    
     return render(request, "empty.html",{ })
 
-def catalogue2(request, the_filter = None):
-
-	catalogue_prod = Product.objects.filter(active = True, available = True)
-
-	try: 
-	    cat = Catalogue.objects.get(active = True)
-	except ObjectDoesNotExist:
-	    return render(request, "404.html",{"message":"There is no active catalogue",})
-
-	catalogue_tags = cat.tags()
-
-	if request.method == 'POST':
-		print(request.POST)
-		catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
-	
-	
-	return render(request, "catalogue.html",{ 	
-		"tags":catalogue_tags,	
-		"products" : catalogue_prod
-		})
 
 def catalogue(request, the_filter = None):
 
-	catalogue_prod = Product.objects.filter(active = True, available = True)
+	catalogue_prod = Product.objects.filter(publication__publish_date__lte= dt.datetime.now(), active = True, available = True)
 
 	try: 
 	    cat = Catalogue.objects.get(active = True)
@@ -73,7 +53,8 @@ def catalogue(request, the_filter = None):
 def product(request, product_slug):    
 	# 2do mettere traduzioni
 	try: 
-	    product = Product.objects.get( publication__slug  = product_slug )
+	    product = Product.objects.get( publication__publish_date__lte= dt.datetime.now(), 
+	    	active = True, publication__slug  = product_slug )
 	except ObjectDoesNotExist:
 	    return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 

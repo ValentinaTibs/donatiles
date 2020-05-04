@@ -1,5 +1,6 @@
 from django.utils.safestring import mark_safe
 from django.core.exceptions import ValidationError,ObjectDoesNotExist
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -14,8 +15,6 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
-class Post(models.Model):
-    name = models.CharField(max_length=200)
 
 class Icon(models.Model):  
     name        =  models.CharField (max_length = 100 , null = False, blank=False, unique=True)
@@ -68,15 +67,13 @@ class Tag(models.Model):
 class Publication(models.Model):
     title = models.CharField(max_length=200, unique = True)
     content = models.TextField()
-    create_date = models.DateTimeField("date created", auto_now_add=True)
-    publish_date = models.DateTimeField("date published", auto_now_add=False)
-    #tag = models.ManyToManyField(Tag, blank = True, verbose_name="Category", related_name='publication' )
-    slug = models.CharField(max_length=200, unique=True)
-    #author = models.ForeignKey( User,blank = True, on_delete=models.CASCADE )
-    # collection = models.OneToOneField(Collection,blank = True,  null = True,on_delete=models.CASCADE, related_name='publication' )
-    #product = models.OneToOneField(Product, blank = True, null = True,on_delete=models.CASCADE, related_name='publication' )
-    # setting = models.OneToOneField(Setting, blank = True, null = True,on_delete=models.CASCADE, related_name='publication' )
-    # post = models.OneToOneField(Post, blank = True, null = True,on_delete=models.CASCADE, related_name='publication' )
+
+    created_at  = models.DateTimeField(editable=False, blank=True,null=False )
+    modified_at = models.DateTimeField(editable=False, blank=True,null=False)
+
+    publish_date = models.DateTimeField("date published", blank=True,null=False)
+    slug = models.CharField(max_length=200, unique=True, blank=True,null=False)
+    author = models.ForeignKey( User, on_delete=models.CASCADE, blank=True,null=False )
     
     def __str__(self):
         return self.title
@@ -84,8 +81,17 @@ class Publication(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.title.replace(" ","-").lower()
-        #author = request.user
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+
+        if not self.publish_date:
+            self.publish_date = timezone.now()
+
+        return super().save(*args, **kwargs)  # Call the "real" save() method.
+        
 
 class TechnicalSpec(models.Model):
     slug = models.CharField(max_length=50, unique=True)
@@ -101,7 +107,6 @@ class TechnicalSpec(models.Model):
         return self.slug
 
 
-  
 class Product(models.Model):
     price = models.PositiveIntegerField( default=0, )
     
@@ -109,7 +114,7 @@ class Product(models.Model):
     min_ammount = models.PositiveIntegerField(default = 5)
     code = models.CharField(max_length=100,)
     
-    tags = models.ManyToManyField(Tag, blank= True, related_name='tags')
+    tags = models.ManyToManyField(Tag, blank= True, related_name='products')
     publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
     techspec = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
 

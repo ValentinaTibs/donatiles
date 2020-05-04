@@ -1,0 +1,17 @@
+{% extends "empty_base.html" %}
+{% load i18n %}
+
+{% load view_extra %}
+
+{% block title%} Tale of Tiles | {% trans 'the_blog' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+{% for post in all_post%}
+	<a href="{% url 'post' post.publication.slug %}"> {{post}} </a>   
+{% endfor %}
+
+{% endblock %}
+
