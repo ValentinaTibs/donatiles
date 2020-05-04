@@ -27,7 +27,6 @@ class Icon(models.Model):
     def __str__(self):
         return '%s' % (self.name, )
 
-
 class Tag(models.Model):
     name    = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -82,7 +81,6 @@ class Publication(models.Model):
         if not self.slug:
             self.slug = self.title.replace(" ","-").lower()
 
-        ''' On save, update timestamps '''
         if not self.id:
             self.created_at = timezone.now()
         self.modified_at = timezone.now()

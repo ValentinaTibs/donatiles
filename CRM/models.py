@@ -81,8 +81,6 @@ ITEM_STATUS = (
     ('o', 'Others')
 ) 
 
-
-
 class Chart(models.Model):
     session_id  = models.CharField(max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='orders' )
