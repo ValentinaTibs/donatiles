@@ -33,6 +33,7 @@
 <body >
 
 {% load i18n %}
+{% load view_extra %}
 
 <menu>
 {% trans 'facebook' %}
@@ -49,9 +50,16 @@
 </menu>
 
 
+{% url 'catalogue' as catalogue_url %}
+{% if catalogue_url|starts_with:request.path %} WE ARE IN CAT {% endif %}
+
+<a href="{% url 'catalogue'%}"> CATALOGUE </a>
+
 {% for cat in menu_cats %}
-  {{cat}}
+<a href="{% url 'catalogue' cat.slug %}"> {{cat}} </a>
+   
 {% endfor %}
+
 
 SAMPLER
 {% for sample in sampler.all_samples %}

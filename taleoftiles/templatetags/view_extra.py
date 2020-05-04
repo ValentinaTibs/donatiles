@@ -2,18 +2,17 @@ import datetime
 #from django.contrib.auth.models import Group
 
 from django import template
-
+ 
 register = template.Library()
 
+
+@register.filter(name = 'starts_with')
+def starts_with(expected,actual):
+	return actual.startswith(expected);
 
 @register.filter
 def clean(value):
 	return value.replace('-',' ')
-
-@register.filter
-def wpcf_prop(value):
-	return CATEGORY[value]
-
 
 @register.inclusion_tag('release_note.html')
 def release_note(notes, type, id ,edit = False ):

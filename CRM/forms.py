@@ -31,14 +31,14 @@ class RegisterForm(UserCreationForm):
         return self.cleaned_data    
 
     def save(self, commit=True):
-        print('cazzo')
+        
         user = super(RegisterForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
         user.groups.set(Group.objects.get(name='Clients'))
 
         if commit:
             user.save()
-            
+
         return user    
 
 

@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -13,8 +13,10 @@ urlpatterns = [ ]
 i18n_patterns(*urlpatterns  , prefix_default_language = False)
 
 urlpatterns += i18n_patterns(
-    path("",                            taleoftiles.views.index, name="index"),
+    path("",                            taleoftiles.views.index,     name="index"),
     path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
+    path("catalogue/<slug:the_filter>/",taleoftiles.views.catalogue, name="catalogue"),
+        
     path("product/<slug:product_slug>", taleoftiles.views.product,  name="product"),
 
     path("add_chart/<slug:product_slug>",                   CRM.views.add_chart,  name="add_chart"),
