@@ -127,6 +127,7 @@ USE_TZ = True
 
 
 LOGIN_URL = '/'
+SESSION_ENGINE = 'taleoftiles.core_context'
 
 
 # Static files (CSS, JavaScript, Images)

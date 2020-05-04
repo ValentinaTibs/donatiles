@@ -81,9 +81,10 @@ CHART
 
 <hr/>
 
-LOGIN
 
 {% if user.is_anonymous %}
+
+LOGIN
 
 {% if loginform.errors %}
   <p>Your username and password didn't match. Please try again.</p>
@@ -115,6 +116,7 @@ LOGIN
 {% else %}
 
 <a href="{% url 'account'%}"> ACCOUNT </a>
+<a href="{% url 'logout' %}?next=/"> LOGOUT </a>
 
 {% endif %}
 
@@ -150,7 +152,7 @@ SIGNUP
 
 </form>
 
-{{session}}
+SESSION:{{session}}
 <hr/>
 {% block content %} {% endblock %}
 <hr/>

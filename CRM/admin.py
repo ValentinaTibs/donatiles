@@ -25,7 +25,7 @@ close_them.short_description = "Mark as Closed"
 class ChartAdmin(admin.ModelAdmin):
 	model = Chart
 
-	list_display = ('session_id','completion_status','order_status','is_sample','created_at','modified_at','_num_prods')
+	list_display = ('session_id','user','completion_status','order_status','is_sample','created_at','modified_at','_num_prods')
 	actions = [close_them]
 	readonly_fields  = ( 'session_id','is_sample','created_at','modified_at')
 	inlines = [ChartItemStackedAdmin,]

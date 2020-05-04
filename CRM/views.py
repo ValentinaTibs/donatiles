@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
 
-from CRM.models import Chart, ChartItem
-
-from CRM.models import Profile
+from CRM.models         import Chart, ChartItem
+from CRM.models         import Profile
+from taleoftiles.models import Product
 
 from CRM.forms import RegisterForm
 
-from taleoftiles.models import Product
-
-from django.core.exceptions import ObjectDoesNotExist
 
 #@login_required(redirect_field_name='my_redirect_field')
 def account(request):
@@ -32,7 +30,7 @@ def add_user(request):
             da_user.save()
             #login(request, new_user)
             #???user = authenticate(username=new_user.username, password=new_user.password)
-    # add here all the prods she might have in the chart            
+    
     return redirect(request.META.get('HTTP_REFERER'))
 
 def del_chart(request, product_slug, is_sample):
@@ -48,13 +46,13 @@ def del_chart(request, product_slug, is_sample):
     return redirect(request.META.get('HTTP_REFERER'))
 
 def add_sample(request, product_slug):
-
+    
     try: 
         product = Product.objects.get(publication__slug = product_slug )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no product with code " + product_slug,})
 
-    
+    user_query = Q()
     if not request.user.is_authenticated:
         session_loc_id = request.session._get_or_create_session_key()
         user_query = Q(session_id  = session_loc_id)
@@ -86,24 +84,25 @@ def add_chart(request, product_slug):
         product = Product.objects.get(publication__slug = product_slug )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no product with code " + product_slug,})
+    
+    # session_loc_id = request.session._get_or_create_session_key()
 
-    if not request.user.is_authenticated:
-        session_loc_id = request.session._get_or_create_session_key()
-        user_query = Q(session_id  = session_loc_id)
-    else:
-        user_query = Q(user  = request.user)
-        
+    if not request.session.exists(request.session.session_key):
+        request.session.create() 
+
 
     try: 
-        chart = Chart.objects.get(user_query, is_sample = False )
+        chart = Chart.objects.get(session_id  = request.session.session_key, is_sample = False )
     except ObjectDoesNotExist:
-        chart = Chart(user_query, is_sample = False)
+        chart = Chart(session_id  = request.session.session_key, is_sample = False)
+        if request.user.is_authenticated:
+            chart.user = request.user
         chart.save()
 
     try:
         chart_item = ChartItem.objects.get(chart__pk  = chart.pk, product__pk = product.pk, status = 'ok',)
     except ObjectDoesNotExist:
-        chart_item = ChartItem(chart  = chart, product = product)
+        chart_item = ChartItem(chart = chart, product = product)
         chart_item.save()
 
     return redirect('product', product_slug= product_slug )

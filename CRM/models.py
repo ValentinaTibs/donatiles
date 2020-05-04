@@ -14,10 +14,14 @@ from django.dispatch import receiver
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
 
-def do_stuff(sender, user, request, **kwargs):
-    print("MAMMAMIA DEGLI ABBA")
+def pour_charts(sender, user, request, **kwargs):
+    session_loc_id = request.session.session_key
 
-user_logged_in.connect(do_stuff)
+    for chart in Chart.objects.filter( session_id  = session_loc_id): 
+        chart.user = user
+        chart.save()
+
+user_logged_in.connect(pour_charts)
 
 #####  --------------
 
