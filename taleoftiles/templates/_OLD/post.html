@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container">
+
+
+<h2> POST</h2>
+
+  <li>{{ post.title }}</li>
+  {{ post.slug }}
+  <img src="{{ post.image.imagefile.url }}" >
+  
+</ul>
+
+</div>
+
+{% endblock %}

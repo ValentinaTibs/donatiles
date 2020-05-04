@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load view_extra %}
+
+{% load static %}
+
+{% block title%} Setting |  {{ setting.publication.title }} {% endblock%}
+
+{% block content %}
+
+
+
+
+<!--===================================
+=            Store Section            =
+====================================-->
+<section class="section bg-gray">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<!-- Left sidebar -->
+			<div class="col-md-8">
+				<div class="product-details">
+					<h1 class="product-title">{{ setting.publication.title }}</h1>
+					<div class="product-meta">
+						<ul class="list-inline">
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category
+								{% for tag in setting.publication.tag.all%}
+									<a href="{% url 'settings' tag.slug %}">{{tag.name}}</a>
+								{% endfor %}
+						</ul>
+					</div>
+
+					<!-- product slider -->
+					<div class="product-slider">
+
+						{% for image in setting.images.all %}  
+						<!-- PUT THE THUMBNAIL HERE in data-image -->
+						  <div class="product-slider-item my-4" data-image="images/products/products-1.jpg">
+							<img class="img-fluid w-100" src="{{ image.imagefile.url }}" alt="product-img">
+						</div> 
+						{% endfor %}
+
+					</div>
+					<!-- product slider -->
+
+					<div class="content mt-5 pt-5">
+
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+								<h3 class="tab-title">This Setting</h3>
+								<p>{{ setting.publication.content }} </p>
+
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<h3 class="product-title">Products in this setting</h3>
+					<div class="row">
+						{% for product in setting.products.all %}
+							{% product_small product%}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- Container End -->
+</section>
+
+
+{% endblock %}

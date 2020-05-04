@@ -56,13 +56,82 @@
 SAMPLER
 {% for sample in sampler.all_samples %}
   {{sample.product}}
-  <a href="{% url 'del_chart' sample.product.publication.slug %}"> del this</a> 
+  <a href="{% url 'del_chart' sample.product.publication.slug True %}"> del this</a> 
+{% endfor %}
+|
+CHART
+{% for chart_item in chart_item.all_items %}
+  {{chart_item.product}}
+  <a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a> 
 {% endfor %}
 
-CHART
-{% for chart_item in chart.chart_item.all %}
-  {{sample}}
-{% endfor %}
+<hr/>
+
+LOGIN
+
+{% if user.is_anonymous %}
+
+{% if loginform.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+
+<tr>
+  <td>{{ loginform.username.label_tag }}</td>
+  <td>{{ loginform.username }}</td>
+</tr>
+
+<tr>
+  <td>{{ loginform.password.label_tag }}</td>
+  <td>{{ loginform.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endif %}
+
+{% block login %} {% endblock %}
+
+
+<hr/>
+
+SIGNUP
+
+{% if signupform.errors %}
+  <p>{{message}}. Please try again.</p>
+{% endif %}
+
+
+<form method="post" action="{% url 'add_user' %}">
+{% csrf_token %}
+<table>
+
+<tr>
+  <td>{{ signupform.username.label_tag }}</td>
+  <td>{{ signupform.username }}</td>
+</tr>
+
+<tr>
+  <td>{{ signupform.password1.label_tag }}</td>
+  <td>{{ signupform.password1 }}</td>
+</tr>
+</table>
+
+<input type="submit" value="register" />
+<input type="hidden" name="next" value="{{ next }}" />
+
+</form>
+
 
 <hr/>
 {% block content %} {% endblock %}

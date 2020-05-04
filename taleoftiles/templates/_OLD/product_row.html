@@ -1,0 +1,50 @@
+{% load view_extra %}
+
+
+	<td class="product-thumb">
+		<a href="{% url 'product' product_info.publication.slug %}">
+			{% if product_info.images.all.0 %}
+				<img width="80px" height="auto" 
+				src="{{ product_info.images.all.0.imagefile.url }}" 
+				alt="{{ product_info.publication.title }}">
+			{% endif %}
+		</a>
+		
+	</td>
+	<td class="product-details">
+		<h3 class="title">{{product_info.publication.title}}</h3>
+		<span class="add-id"><strong>Ad ID:</strong> {{ product_info.internal_name }}</span>
+		<span><strong>wait time: </strong><time>{{ product_info.wait_time }}</time> </span>
+		{% if product_info.available %}
+			<span class="status active"><strong>Status</strong>Active</span>
+		{% else %}
+			<span class="status inactive"><strong>Status</strong>Inactive</span>
+		{% endif %}
+		<span class="location"><strong>Provenienza</strong>{{ product_info.source }} </span>
+	</td>
+	<td class="product-category"><span class="categories">
+		{% for tag in product_info.publication.tag.all%} <a href="">{{tag.name}}</a> {% endfor %} </span></td>
+	<td class="action middle" data-title="Action" >
+		<div class="">
+			<ul class="list-inline justify-content-center">
+				<!-- <li class="list-inline-item">
+					<a data-toggle="tooltip" data-placement="top" title="Edit" class="edit" href="">
+						<i class="fa fa-clipboard"></i>
+					</a>
+				</li> -->
+				<li class="list-inline-item">
+					<a data-toggle="tooltip" data-placement="top" title="" class="view" href="{% url 'product' product_info.publication.slug %}" data-original-title="View">
+						<i class="fa fa-eye"></i>
+					</a>
+				</li>
+				<li class="list-inline-item">
+					<a data-toggle="tooltip" data-placement="top" title="Delete" class="delete" href="/sampler/{{ sampler.session_id }}/del/{{sample.product.id}}">
+						<i class="fa fa-trash"></i>
+					</a>
+
+				</li>
+
+			</ul>
+		</div>
+	</td>
+

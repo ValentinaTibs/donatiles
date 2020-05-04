@@ -1,0 +1,53 @@
+{% load view_extra %}
+
+
+	<!-- product card -->
+	<div class="product-item bg-light">
+		<div class="card">
+			<div class="thumb-content">
+				<div class="price">{{ product_info.price}}€/m2</div>
+				<a href="{% url 'product' product_info.publication.slug %}">
+					{% if product_info.images.all.0 %}
+					<img class="card-img-top img-fluid" 
+					src="{{ product_info.images.all.0.imagefile.url }}" 
+					alt="{{ product_info.publication.title }}">
+					{% endif %}
+
+				</a>
+			</div>
+			<div class="card-body">
+			    <h4 class="card-title">
+			    	<a href="{% url 'product' product_info.publication.slug %}"> {{ product_info.publication.title }}</a>
+			    </h4>
+			    <ul class="list-inline product-meta">
+			    	<li class="list-inline-item">
+			    		<i class="fa fa-folder-open-o"></i>
+			    		{% for tag in product_info.publication.tag.all%}
+							<a href="{% url 'products' tag.slug %}">{{tag.name}}</a>
+						{% endfor %}
+			    	</li>
+			    	<li class="list-inline-item">
+						<b>{{product_info.color.title}}</b>
+						
+			    	</li>
+			    </ul>
+			    <p class="card-text">
+			    	{{ product_info.publication.content|truncatechars:250}}
+			    	<a href="{% url 'product' product_info.publication.slug %}"> ... </a>
+			    </p>
+			    	<a href="{% url 'product' product_info.publication.slug %}"> 
+			    	<button> view this at home for free</button>
+			    	</a>
+
+			    <!-- <div class="product-ratings">
+			    	<ul class="list-inline">
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+			    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
+			    	</ul>
+			    </div> -->
+			</div>
+		</div>
+	</div>

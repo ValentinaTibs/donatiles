@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load view_extra %}
+
+{% load static %}
+
+{% block content %}
+
+
+<section class="dashboard section">
+	<!-- Container Start -->
+	<div class="container">
+		<!-- Row Start -->
+		<div class="row">
+
+<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Recently Favorited -->
+				<div class="widget dashboard-container my-adslist">
+					<h3 class="widget-header">Your Sampler <small>STATE: {{ sampler.completion_status }}	</small></h3>
+
+					<p>
+						It will arrive to your house for FREE for giving you the exact sensation of how this is gonna look - we are so sure you would love the quality of our
+						</p>
+
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+							<tr>
+								<th>Image</th>
+								<th>Product Title</th>
+								<th class="text-center">Category</th>
+								<th class="text-center">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for sample in samples %}  
+							<tr>
+								{% if sample != None %}
+									{% product_row sample.product%}
+								{% else %}
+									<td colspan=4>Complete your free sampler with more free samples</td>
+								{% endif %}
+							</tr>
+							{% endfor %}
+
+						</tbody>
+
+					</table>
+
+				</div>
+</div>
+
+<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+	<div class="sidebar">
+
+			<div class="widget personal-info">
+				<h3 class="widget-header user">It's free!</h3>
+					
+				{% if  diff_num_samples == 0 %}  
+					<p></p>
+				{% else %}
+					<p>You can add more {{ diff_num_samples }} samples </p>
+				{% endif %}
+
+				{% if sampler.samples|length >= 0 %}  				
+
+				<form action="{% url 'ship_sampler' %}"   method="post" >
+
+					{% csrf_token %}
+					{{ form }}
+					
+					<button class="btn btn-transparent"> receive your free sampler</button>  
+				</form>
+				{% endif %}
+
+			</div>
+	</div>
+</div>
+
+		</div>
+		<!-- Row End -->
+	</div>
+	<!-- Container End -->
+</section>			
+
+{% endblock %}
+
+
+
+
+
+  
+
+
+<h4>{{message}}</h4>

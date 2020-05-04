@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load view_extra %}
+
+{% load static %}
+
+{% block title%} Collection |  {{ collection.publication.title }} {% endblock%}
+
+
+{% block content %}
+
+
+<!--===================================
+=            Store Section            =
+====================================-->
+<section class="section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="search-result bg-gray">
+					<h2>Results For 
+
+						"Electronics"
+
+					</h2>
+					<p>{{collections|length}} Results on 12 December, 2017</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				{% sidebar_categories %}
+			</div>
+			<div class="col-md-9">
+				<div class="category-search-filter">
+					<div class="row">
+						<div class="col-md-6">
+							<strong>Short</strong>
+							<select>
+								<option>Most Recent</option>
+								<option value="1">Most Popular</option>
+								<option value="2">Lowest Price</option>
+								<option value="4">Highest Price</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<div class="view">
+								<strong>Views</strong>
+								<ul class="list-inline view-switcher">
+									<li class="list-inline-item">
+										<a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
+									</li>
+									<li class="list-inline-item">
+										<a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="product-grid-list">
+					<div class="row mt-30">
+							{% for collection in collections %}
+								<div class="col-sm-12 col-lg-4 col-md-6">{% collection_small collection %}</div>
+							{% endfor %}
+					</div>
+				</div>
+					{% paginator products %}
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

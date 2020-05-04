@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load view_extra %}
+
+{% load static %}
+
+
+{% block title %} Tale of Tiles | the ideas book {% endblock %}
+
+
+
+{% block content %}
+ 
+<!--================================
+=            Page Title            =
+=================================-->
+<section class="page-title">
+  <!-- Container Start -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 text-center">
+        <!-- Title text -->
+        <h3>Blog Page</h3>
+      </div>
+    </div>
+  </div>
+  <!-- Container End -->
+</section>
+<!--==================================
+=            Blog Section            =
+===================================-->
+
+<section class="blog section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+
+        
+      {% for post in posts %}
+        {% post_small post %}
+      {% endfor %}
+
+      </div>
+      <div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+        <div class="sidebar">
+          <!-- Search Widget -->
+          <div class="widget search p-0">
+            <div class="input-group">
+                <input type="text" class="form-control" id="expire" placeholder="Search...">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              </div>
+          </div>
+          <!-- Category Widget -->
+          <div class="widget category">
+            <!-- Widget Header -->
+            <h5 class="widget-header">Categories</h5>
+            <ul class="category-list">
+              {% for tag in blog_tags %}
+              <li><a href="{% url 'blog_tag' tag.slug %}">{{ tag.name }} 
+                <span class="float-right">(2)</span></a></li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+
+          <!-- Archive Widget -->
+<!--           <div class="widget archive">
+            <h5 class="widget-header">Archives</h5>
+            <ul class="archive-list">
+              <li><a href="">January 2017</a></li>
+              <li><a href="">February 2017</a></li>
+              <li><a href="">March 2017</a></li>
+              <li><a href="">April 2017</a></li>
+              <li><a href="">May 2017</a></li>
+            </ul>
+          </div> -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+
+
+{% endblock %}

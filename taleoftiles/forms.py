@@ -2,11 +2,19 @@ from django import forms
 from datetime import datetime
 
 from django.forms import ModelForm, ModelChoiceField
-from taleoftiles.models import Question, Shipping, ChartItem, Format, Product
+#from taleoftiles.models import Question, Shipping, ChartItem, Format, Product
 
 from captcha.fields import ReCaptchaField
 
 
+
+
+# from CRM.models import Profile
+
+# class LoginForm(ModelForm):
+#     captcha = ReCaptchaField()
+
+#     class Meta:
 
 # class QuestionForm(ModelForm):
 #     captcha = ReCaptchaField()

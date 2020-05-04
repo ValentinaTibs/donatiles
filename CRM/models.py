@@ -11,7 +11,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
@@ -56,7 +56,7 @@ ITEM_STATUS = (
 
 
 class Chart(models.Model):
-    session_id = models.CharField(max_length=100, unique=True, default="")
+    session_id = models.CharField(max_length=100, default="")
     completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
     is_sample  = models.BooleanField(default = False)
@@ -81,7 +81,11 @@ class Chart(models.Model):
             return 0
 
     def all_samples(self):
-        if self.chart_item:
+        if self.chart_item and self.is_sample:
+            return self.chart_item.filter(status = 'ok')
+    
+    def all_items(self):
+        if self.chart_item and (not self.is_sample):
             return self.chart_item.filter(status = 'ok')
 
 

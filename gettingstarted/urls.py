@@ -17,9 +17,11 @@ urlpatterns += i18n_patterns(
     path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
     path("product/<slug:product_slug>", taleoftiles.views.product,  name="product"),
 
-    path("add_chart/<slug:product_slug>",    CRM.views.add_chart,  name="add_chart"),
-    path("del_chart/<slug:product_slug>",   CRM.views.del_chart,  name="del_chart"),
-    path("add_sample/<slug:product_slug>",   CRM.views.add_sample,  name="add_sample"),
+    path("add_chart/<slug:product_slug>",                   CRM.views.add_chart,  name="add_chart"),
+    path("del_chart/<slug:product_slug>/<str:is_sample>",   CRM.views.del_chart,  name="del_chart"),
+    path("add_sample/<slug:product_slug>",                  CRM.views.add_sample, name="add_sample"),
+    path("add_user/",                                       CRM.views.add_user,   name="add_user"),
+    
     
     # path("blog/",                       taleoftiles.views.blog, name="blog"),
     # path("blog/<slug:tag_slug>",        taleoftiles.views.blog, name="blog_tag"),
@@ -54,8 +56,11 @@ urlpatterns += i18n_patterns(
     # url(r'^tinymce/', include('tinymce.urls')),
 )
 
-urlpatterns += i18n_patterns(path("admin/", admin.site.urls),
-        path('summernote/', include('django_summernote.urls')))
+urlpatterns += (
+    path("admin/", admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('django.contrib.auth.urls'))
+    )
 
 
 if settings.DEBUG: # new
