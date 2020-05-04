@@ -52,17 +52,15 @@ def add_sample(request, product_slug):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no product with code " + product_slug,})
 
-    user_query = Q()
-    if not request.user.is_authenticated:
-        session_loc_id = request.session._get_or_create_session_key()
-        user_query = Q(session_id  = session_loc_id)
-    else:
-        user_query = Q(user  = request.user)
+    if not request.session.exists(request.session.session_key):
+        request.session.create() 
 
     try: 
-        chart = Chart.objects.get( user_query, is_sample = True )
+        chart = Chart.objects.get( session_id  = request.session.session_key, is_sample = True )
     except ObjectDoesNotExist:
-        chart = Chart(user_query, is_sample = True)
+        chart = Chart(session_id  = request.session.session_key, is_sample = True)
+        if request.user.is_authenticated:
+            chart.user = request.user
         chart.save()
 
     try:
@@ -85,11 +83,8 @@ def add_chart(request, product_slug):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no product with code " + product_slug,})
     
-    # session_loc_id = request.session._get_or_create_session_key()
-
     if not request.session.exists(request.session.session_key):
         request.session.create() 
-
 
     try: 
         chart = Chart.objects.get(session_id  = request.session.session_key, is_sample = False )
