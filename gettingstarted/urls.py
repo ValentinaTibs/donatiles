@@ -24,6 +24,7 @@ urlpatterns += i18n_patterns(
     path("del_chart/<slug:product_slug>/<str:is_sample>",   CRM.views.del_chart,  name="del_chart"),
     path("add_sample/<slug:product_slug>",                  CRM.views.add_sample, name="add_sample"),
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
+    path("account/",                                        CRM.views.account,    name="account"),
     
     
     path("blog/",                       blog.views.blog, name="blog"),

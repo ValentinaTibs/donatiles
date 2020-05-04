@@ -121,12 +121,12 @@ LANGUAGES = (
 )
 
 LANGUAGE_CODE = 'en'
-    
 TIME_ZONE = "UTC"
-
 USE_L10N = True
-
 USE_TZ = True
+
+
+LOGIN_URL = '/'
 
 
 # Static files (CSS, JavaScript, Images)

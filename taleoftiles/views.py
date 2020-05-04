@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 
-
-# from datetime import date
 import datetime as dt
 # import numpy as np
 
@@ -29,7 +26,6 @@ from django.db.models import Count
 def index(request):  
     all_home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
     return render(request, "empty.html",{'layout_elems' : all_home_elems})
-
 
 def catalogue(request, the_filter = None):
 

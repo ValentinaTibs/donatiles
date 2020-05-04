@@ -36,9 +36,9 @@ class Element(models.Model):
     tag = models.ForeignKey(ElementTag, blank = True, null = True,on_delete=models.SET_NULL, related_name='element' )
 
     def __str__(self):
-        if data_type == 't':
+        if self.data_type == 't':
         	return '%s' % (self.name,)   
-        if data_type == 'i':
+        if self.data_type == 'i':
             return mark_safe('<img src="/img/{0}">'.format(self.imagefile))
 
     def image_(self):

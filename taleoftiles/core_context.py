@@ -10,7 +10,8 @@ def category_menu(context):
 
 
 def user_menu(context):
-
+	sampler = None
+	chart = None
 	if context.session.exists(context.session.session_key):
 		
 		try:
@@ -20,7 +21,8 @@ def user_menu(context):
 		try: 
 			chart = Chart.objects.get(session_id  = context.session.session_key, is_sample = False)
 		except ObjectDoesNotExist:
-			chart = None			
+			chart = None
+
 			
 	return {'sampler': sampler,'chart':chart,
 	'user':context.user,

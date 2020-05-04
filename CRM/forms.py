@@ -1,14 +1,19 @@
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
-
 from django.core.validators import validate_email
-    
 
 from django import forms
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User,Group
 
+from CRM.models import Shipping
+
+class ShippingForm(forms.ModelForm):
+
+    class Meta:
+        model = Shipping
+        fields = ('fullname','country','city','CAP','shipping_address','telephone_num')
 
 class RegisterForm(UserCreationForm):
     
@@ -40,26 +45,6 @@ class RegisterForm(UserCreationForm):
             user.save()
 
         return user    
-
-
-    # email = forms.CharField(label='Email', max_length=100,required=False)
-    # telephone = forms.CharField(label='Telephone Number', max_length=100,required=False)
-
-    
-    # widgets = { 'username': forms.EmailField(label='Email', max_length=100,required=True),}
-
-    # def validate(self, *args, **kwargs):
-    #   print("ECCOCI")
-    #   if not self.password2:
-    #       self.password2 = self.password1
-    #   return super().save(*args, **kwargs)
-
-    # def function():
-    #   pass
-    # def save(self):
-    #   print("GIAMMACO")
-    #   print(self)
-    #   print(self.cleaned_data)
 
 
 class LoginForm(AuthenticationForm):

@@ -10,20 +10,44 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
+#### ------- Move this to SIgnals.py
+from django.contrib.auth.signals import user_logged_in
+
+def do_stuff(sender, user, request, **kwargs):
+    print("MAMMAMIA DEGLI ABBA")
+
+user_logged_in.connect(do_stuff)
+
+#####  --------------
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
 
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.profile.save()
+
+
+class Shipping(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
+    fullname = models.TextField(max_length=100, blank=True)
+    #2do this must be a selectebox...for now is a text field
+    #country = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    country = models.TextField(max_length=100, blank=True)
+    city = models.TextField(max_length=100, blank=True)
+    CAP = models.TextField(max_length=10, blank=True)
+    shipping_address = models.TextField(max_length=100, blank=True)
+    telephone_num = models.TextField(max_length=30, blank=True)
 
 
 COMPLETION_STATUS = (
@@ -56,10 +80,12 @@ ITEM_STATUS = (
 
 
 class Chart(models.Model):
-    session_id = models.CharField(max_length=100, default="")
-    completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
-    order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
-    is_sample  = models.BooleanField(default = False)
+    session_id  = models.CharField(max_length=100, default="", null = True)
+    user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='orders' )
+
+    completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    order_status        = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+    is_sample           = models.BooleanField(default = False)
 
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()

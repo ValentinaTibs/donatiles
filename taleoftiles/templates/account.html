@@ -1,0 +1,18 @@
+{% extends "empty_base.html" %}
+{% load i18n %}
+
+{% load view_extra %}
+
+{% block title%} Tale of Tiles | {% trans 'the_blog' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+{{ profile }}
+
+<a href="{% url 'logout' %}?next=/"> LOGOUT </a>
+
+
+{% endblock %}
+

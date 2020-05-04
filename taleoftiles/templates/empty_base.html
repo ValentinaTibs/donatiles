@@ -90,7 +90,7 @@ LOGIN
 {% endif %}
 
 
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'login' %}?next={{request.get_full_path|urlencode}}">
 {% csrf_token %}
 <table>
 
@@ -106,14 +106,16 @@ LOGIN
 </table>
 
 <input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
+ <input type="hidden" name="next" value="{{ request.get_full_path }}">
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
 {% else %}
-  
+
+<a href="{% url 'account'%}"> ACCOUNT </a>
+
 {% endif %}
 
 {% block login %} {% endblock %}
@@ -144,7 +146,7 @@ SIGNUP
 </table>
 
 <input type="submit" value="register" />
-<input type="hidden" name="next" value="{{ next }}" />
+<input type="hidden" name="next" value="{{ request.get_full_path }} " />
 
 </form>
 

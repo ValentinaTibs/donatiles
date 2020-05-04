@@ -1,9 +1,9 @@
 from django.contrib import admin
 from CRM.models import Profile, Chart, ChartItem
 
-class ClientAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     model = Profile
-
+    #list_display = ('user.email')
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
@@ -36,6 +36,6 @@ class ChartAdmin(admin.ModelAdmin):
 	_num_prods.short_description = "Number of Products"
 	_num_prods.admin_order_field = 'num_prods'
 
-admin.site.register(Profile,ClientAdmin)
+admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Chart,ChartAdmin)
 admin.site.register(ChartItem,ChartItemAdmin)
