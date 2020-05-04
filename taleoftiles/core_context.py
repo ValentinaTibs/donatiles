@@ -21,7 +21,10 @@ def user_menu(context):
 			chart = Chart.objects.get(session_id  = context.session.session_key, is_sample = False)
 		except ObjectDoesNotExist:
 			chart = None			
+			
 	return {'sampler': sampler,'chart':chart,
 	'user':context.user,
-	'loginform':LoginForm, 'signupform':RegisterForm} 
+	'loginform':LoginForm, 'signupform':RegisterForm,
+	#'session' : context.session.session_key
+	} 
 

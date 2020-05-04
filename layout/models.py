@@ -1,15 +1,18 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-# Create your models here.
+DATA_TYPE = (
+    ('t', 'Text'),
+    ('i', 'Image')
+) 
 
 class ElementTag(models.Model):
     name = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
     slug = models.CharField(max_length=200,  unique=True)
     public = models.BooleanField(default = True)
-    parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='child' )
-
+    parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='childs' )    
+    
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
@@ -26,11 +29,20 @@ class ElementTag(models.Model):
 class Element(models.Model):
     name = models.CharField(max_length=200)
     content = models.TextField(max_length=200)
+    imagefile = models.ImageField( upload_to='img', null=True, blank=True, help_text="Load an image.")
     public = models.BooleanField(default = True)
-    tag = models.ForeignKey(ElementTag, blank = True, null = True,on_delete=models.SET_NULL, related_name='elements' )
+    data_type   = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
+    
+    tag = models.ForeignKey(ElementTag, blank = True, null = True,on_delete=models.SET_NULL, related_name='element' )
 
     def __str__(self):
-    	return '%s' % (self.name,)   
+        if data_type == 't'
+        	return '%s' % (self.name,)   
+        if data_type == 'i'
+            return mark_safe('<img src="/img/{0}">'.format(self.imagefile))
+
+    def image_(self):
+        return mark_safe('<img src="/img/{0}">'.format(self.imagefile))
 
 class Config(models.Model):
 	    
@@ -40,7 +52,9 @@ class Config(models.Model):
 	tag = models.CharField(max_length=20, default="-")
 
 	def __str__(self):
-		return '%s' % (self.tag,)    
+		return '%s' % (self.tag,)
+
+   
 
 
 # class Image(models.Model):  

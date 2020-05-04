@@ -57,8 +57,6 @@
 <a href="{% url 'blog'%}"> BLOG </a>
 
 
-
-
 {% url 'catalogue' as catalogue_url %}
 {% if catalogue_url|starts_with:request.path %} WE ARE IN CAT {% endif %}
 
@@ -75,7 +73,8 @@ SAMPLER
 {% endfor %}
 |
 CHART
-{% for chart_item in chart_item.all_items %}
+({{chart.all_items.count}})
+{% for chart_item in chart.all_items %}
   {{chart_item.product}}
   <a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a> 
 {% endfor %}
@@ -113,6 +112,8 @@ LOGIN
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
+{% else %}
+  
 {% endif %}
 
 {% block login %} {% endblock %}
@@ -147,7 +148,7 @@ SIGNUP
 
 </form>
 
-
+{{session}}
 <hr/>
 {% block content %} {% endblock %}
 <hr/>

@@ -88,7 +88,6 @@ class Chart(models.Model):
         if self.chart_item and (not self.is_sample):
             return self.chart_item.filter(status = 'ok')
 
-
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
     product     = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')

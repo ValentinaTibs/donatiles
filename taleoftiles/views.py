@@ -15,6 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 # import logging
 
 from taleoftiles.models import Tag, Product, Catalogue
+from layout.models      import Element
 # from taleoftiles.CRM import Chart, ChartItem
 
 # from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
@@ -25,42 +26,43 @@ from taleoftiles.models import Tag, Product, Catalogue
 from django.db.models import Count
 
 
-def index(request):    
-    return render(request, "empty.html",{ })
+def index(request):  
+    all_home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
+    return render(request, "empty.html",{'layout_elems' : all_home_elems})
 
 
 def catalogue(request, the_filter = None):
 
-	catalogue_prod = Product.objects.filter(publication__publish_date__lte= dt.datetime.now(), active = True, available = True)
+    catalogue_prod = Product.objects.filter(publication__publish_date__lte= dt.datetime.now(), active = True, available = True)
 
-	try: 
-	    cat = Catalogue.objects.get(active = True)
-	except ObjectDoesNotExist:
-	    return render(request, "404.html",{"message":"There is no active catalogue",})
+    try: 
+        cat = Catalogue.objects.get(active = True)
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message":"There is no active catalogue",})
 
-	catalogue_tags = cat.tags()
+    catalogue_tags = cat.tags()
 
-	if request.method == 'POST':
-		print(request.POST)
-		catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
-	
-	
-	return render(request, "catalogue.html",{ 	
-		"tags":catalogue_tags,	
-		"products" : catalogue_prod
-		})
+    if request.method == 'POST':
+        print(request.POST)
+        catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
+    
+    
+    return render(request, "catalogue.html",{   
+        "tags":catalogue_tags,  
+        "products" : catalogue_prod
+        })
 
 def product(request, product_slug):    
-	# 2do mettere traduzioni
-	try: 
-	    product = Product.objects.get( publication__publish_date__lte= dt.datetime.now(), 
-	    	active = True, publication__slug  = product_slug )
-	except ObjectDoesNotExist:
-	    return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
+    # 2do mettere traduzioni
+    try: 
+        product = Product.objects.get( publication__publish_date__lte= dt.datetime.now(), 
+            active = True, publication__slug  = product_slug )
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
-	return render(request, "product.html",{
-		"product":product, 
-		})
+    return render(request, "product.html",{
+        "product":product, 
+        })
 
 
 # #Check if the product is suitable for sampling for 
@@ -108,7 +110,7 @@ def product(request, product_slug):
 #             "message": message,"sample" : sample,"sampler" : sampler,
 #             "wait_day_64" : dt64, "new_ic_form" : new_ic_form
 #         })
-	
+    
 
 # def pagination(request, list, num):
 #     page = request.GET.get('page')
