@@ -78,7 +78,6 @@ heroku pg:reset DATABASE
 heroku run python manage.py migrate
 
 
-
 # Translations -
 
 ## Microcopy text
