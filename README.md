@@ -50,11 +50,18 @@ For more information about using Python on Heroku, see these Dev Center articles
 _______________________________________________________________________________
 
 
-##2 RUN locally
+# RUN 
 
 ```
 heroku local web -f Procfile.windows
 ```
+
+or 
+
+```
+heroku local web 
+```
+
 
 ##3 Gunicorn let Connecion opened on 5000
 
@@ -62,6 +69,7 @@ heroku local web -f Procfile.windows
 kill -9 $(lsof -i:5000 -t) 2> /dev/null
 ```
 
+# Migrations
 ## remote check and deploy of migrations
 
 ```
@@ -71,13 +79,31 @@ python manage.py migrate --fake core zero
 
 ```
 
-## Fixin messed up databases
+## Fixin messed up remote databases
 
 heroku restart
 heroku pg:reset DATABASE
 heroku run python manage.py migrate
 
+## Reset local Migrations
+
+python3 manage.py makemigrations
+python3 manage.py showmigrations
+python3 manage.py migrate --fake taleoftiles zero
+
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc"  -delete
+
+python3 manage.py showmigrations
+
+python3 manage.py migrate --fake-initial
+
 
 # Translations -
 
 ## Microcopy text
+
+
+
+
+

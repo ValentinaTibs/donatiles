@@ -37,3 +37,11 @@ ITEM_ = (
     ('rs', 'Removed by Staff'),
     ('o', 'Others')
 ) 
+
+DATA_TYPE = (
+    ('t', 'Text'),
+    ('b', 'Boolean'),
+    ('c', 'Color'),
+    ('i', 'Integer')
+) 
+
