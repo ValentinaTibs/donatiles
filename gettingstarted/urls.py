@@ -28,6 +28,7 @@ urlpatterns += i18n_patterns(
 
     path("summary/",    CRM.views.summary, name="summary"),
     path("shipping/",   CRM.views.shipping, name="shipping"),
+    path("payment/<int:id_>",   CRM.views.payment, name="payment"),
     
     path("blog/",                       blog.views.blog, name="blog"),
     path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),

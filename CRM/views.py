@@ -37,6 +37,13 @@ def summary(request):
         chart.save()
     return render(request, "summary.html", {'charts':charts,'prv_page':prv_page})   
 
+def payment(request, id_):
+    try:
+        new_order = Order.objects.get( pk = id_)
+    except ObjectDoesNotExist:
+            return render(request, "404.html",{"message": "This order does not exist" })
+    return render(request, "payment.html", {'order':new_order,'prv_page':None})   
+
 def shipping(request):
 
     if request.method == 'GET':

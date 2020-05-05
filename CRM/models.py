@@ -116,7 +116,7 @@ class Order(models.Model):
     shipping_tracking_id = models.CharField(max_length=100, default = "")
 
     def save(self, *args, **kwargs):
-        self.internal_tracking_id = create_shipping_internal_id
+        self.internal_tracking_id = create_shipping_internal_id()
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from CRM.models import Profile, Chart, ChartItem, Shipping
+from CRM.models import Profile, Chart, ChartItem, Shipping, Order
 
 class ShippingStackedAdmin(admin.StackedInline):
     model = Shipping
@@ -12,6 +12,9 @@ class ProfileAdmin(admin.ModelAdmin):
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
 
+class OrderAdmin(admin.ModelAdmin):
+    model = Order
+    #inlines = ('inte',)
 
 class ChartItemStackedAdmin(admin.StackedInline):
     model = ChartItem
@@ -34,7 +37,6 @@ class ChartAdmin(admin.ModelAdmin):
 	readonly_fields  = ( 'session_id','is_sample','created_at','modified_at')
 	inlines = [ChartItemStackedAdmin,]
 
-
 	def _num_prods(self, obj):
 		return obj.num_prods()
 	_num_prods.short_description = "Number of Products"
@@ -43,3 +45,4 @@ class ChartAdmin(admin.ModelAdmin):
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Chart,ChartAdmin)
 admin.site.register(ChartItem,ChartItemAdmin)
+admin.site.register(Order,OrderAdmin)
