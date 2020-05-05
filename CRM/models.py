@@ -44,25 +44,28 @@ class Profile(models.Model):
     #     instance.profile.save()
 
 class Shipping(models.Model):
+    #2do this must become a one to Many because we want to keep track of old shippings
     user = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
-    fullname = models.TextField(max_length=100, blank=True)
+    
     #2do this must be a selectebox...for now is a text field
     #country = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
-    country = models.TextField(max_length=100, blank=True)
-    city = models.TextField(max_length=100, blank=True)
-    CAP = models.TextField(max_length=10, blank=True)
-    shipping_address = models.TextField(max_length=100, blank=True)
-    telephone_num = models.TextField(max_length=30, blank=True)
+    fullname            = models.TextField(max_length=100, blank=True)
+    country             = models.TextField(max_length=100, blank=True)
+    city                = models.TextField(max_length=100, blank=True)
+    CAP                 = models.TextField(max_length=10, blank=True)
+    shipping_address    = models.TextField(max_length=100, blank=True)
+    telephone_num       = models.TextField(max_length=30, blank=True)
 
+    is_active           = models.BooleanField(default = True)
 
 COMPLETION_STATUS = (
-    ('s', 'Started'),
-    ('i1', 'In Checkout 1'),
-    ('i2', 'In Checkout 2'),
-    ('c', 'Completed'),
-    ('o', 'Ordered'),
-    ('ex', 'Expired'),
-    ('cs', 'Closed by Staff'),
+    ('s',   'Started'),
+    ('i1',  'In Checkout 1'),
+    ('i2',  'In Checkout 2'),
+    ('c',   'Completed'),
+    ('p',   'Payed'),
+    ('ex',  'Expired'),
+    ('cs',  'Closed by Staff'),
 ) 
 
 ORDER_STATUS = (
@@ -94,8 +97,7 @@ class ActiveChartManager(models.Manager):
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
         )
         return qs
-        
-        
+          
 class ActiveSamplesManager(models.Manager):
     def get_queryset(self):
         qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(
@@ -104,9 +106,25 @@ class ActiveSamplesManager(models.Manager):
             )
         return qs
 
+def create_shipping_internal_id():
+    return get_random_string(length=32)
+
+class Order(models.Model):
+    note = models.TextField(max_length = 200, null = True)
+
+    internal_tracking_id = models.CharField(max_length=100, default = "")
+    shipping_tracking_id = models.CharField(max_length=100, default = "")
+
+    def save(self, *args, **kwargs):
+        self.internal_tracking_id = create_shipping_internal_id
+
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+
 class Chart(models.Model):
-    session_id  = models.CharField(max_length=100, default="", null = True)
+    session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='orders' )
+    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
 
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     order_status        = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
@@ -115,7 +133,7 @@ class Chart(models.Model):
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
-    objects = models.Manager() # The default manager.
+    objects     = models.Manager() # The default manager.
     active      = ActiveChartManager() # The Active Charts
     samples     = ActiveSamplesManager() # The Active Samples
 
@@ -157,26 +175,6 @@ class ChartItem(models.Model):
     def __str__(self):
         return self.chart.session_id        
    
-
-def create_shipping_internal_id():
-    return get_random_string(length=32)
-
-class Order(models.Model):
-    note = models.TextField(max_length = 200, null = True)
-
-    internal_tracking_id = models.CharField(max_length=100, default = "")
-    shipping_tracking_id= models.CharField(max_length=100, default = "")
-
-    chart = models.ForeignKey(Chart, verbose_name="Chart", null = False, on_delete=models.CASCADE, related_name='shipping')
-
-    def save(self, *args, **kwargs):
-        self.internal_tracking_id = create_shipping_internal_id
-
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-
-    def __str__(self):
-        return self.internal_tracking_id
-
 class Question(models.Model):
     content = models.TextField()
     # name    = models.CharField(max_length=100,default = "")

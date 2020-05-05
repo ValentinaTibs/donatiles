@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 
-from CRM.models         import Chart, ChartItem, Shipping
+from CRM.models         import Chart, ChartItem, Shipping, Order
 from CRM.models         import Profile
 from taleoftiles.models import Product
 
@@ -19,7 +19,6 @@ def account(request):
         return render(request, "404.html",{"message": "There is no user for such profile " })
    
     return render(request, "account.html", {'profile':profile})
-
 
 def summary(request):
 
@@ -56,20 +55,32 @@ def shipping(request):
         query = Q(session_id  = request.session.session_key) 
     
     charts   = Chart.active.filter( query )
-    for chart in charts:
-        chart.status = 'i1'
-        chart.save()
-    
     shipping_form = ShippingForm(instance=prev_data)
 
     if request.method == 'POST':
         shipping_form = ShippingForm(request.POST, instance=prev_data)
+
         #2do mettere qui controlli sicurezza
         prv_page = request.POST['prv']
 
         if shipping_form.is_valid():
             shipping_form.save()
             
+            new_order = Order()
+            new_order.save()
+
+            for chart in charts:
+                chart.status = 'c'
+                chart.order = new_order
+                chart.save()
+
+            #ok to keep this as this since is not possible to reach this page from anywhereselle
+            return render(request, "payment.html", {'order':new_order,'prv_page':prv_page})   
+
+    for chart in charts:
+        chart.status = 'i2'
+        chart.save()
+
     return render(request, "shipping.html", {'form':shipping_form,'prv_page':prv_page})   
 
 

@@ -10,7 +10,7 @@
 
 {% load i18n %}
 
-<form method="post" >
+<form method="post" action="{{request.get_full_path|urlencode}}" >
 {% csrf_token %}
 
 {{ form.fullname.label_tag }}			{{ form.fullname }}
@@ -21,8 +21,9 @@
 {{ form.telephone_num.label_tag }}		{{ form.telephone_num }}
 
 <input type="submit" value="concludi lordine" />
-<input type="hidden" value="concludi lordine" />
+
 <input type="hidden" name="prv" value="{{ prv_page }}">
+
 </form>
 
 {% endblock %}
