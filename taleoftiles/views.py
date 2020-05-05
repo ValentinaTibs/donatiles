@@ -51,8 +51,8 @@ def catalogue(request, the_filter = None):
 def product(request, product_slug):    
     # 2do mettere traduzioni
     try: 
-        product = Product.objects.get( publication__publish_date__lte= dt.datetime.now(), 
-            active = True, publication__slug  = product_slug )
+        product = Product.objects.filter( publication__publish_date__lte= dt.datetime.now(), 
+            active = True, publication__slug  = product_slug )[:1]
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 

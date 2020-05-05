@@ -1,21 +1,24 @@
 from django.utils.crypto import get_random_string
 
 from django.db import models
-
-from taleoftiles.models import Product
 from django.utils import timezone
-
+from django.db.models import Count, Q, Sum
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from taleoftiles.models import Product
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
 
 def pour_charts(sender, user, request, **kwargs):
     session_loc_id = request.session.session_key
+    
+    for chart in Chart.active.filter( user = user): 
+        chart.session_id = session_id
+        chart.save()
 
     for chart in Chart.objects.filter( session_id  = session_loc_id): 
         chart.user = user
@@ -41,7 +44,6 @@ class Profile(models.Model):
     # def save_user_profile(sender, instance, **kwargs):
     #     instance.profile.save()
 
-
 class Shipping(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
     fullname = models.TextField(max_length=100, blank=True)
@@ -56,6 +58,9 @@ class Shipping(models.Model):
 
 COMPLETION_STATUS = (
     ('s', 'Started'),
+    ('i1', 'In Checkout 1'),
+    ('i2', 'In Checkout 2'),
+    ('i3', 'In Checkout 3'),
     ('c', 'Completed'),
     ('o', 'Ordered'),
     ('ex', 'Expired'),
@@ -81,6 +86,24 @@ ITEM_STATUS = (
     ('o', 'Others')
 ) 
 
+
+class ActiveChartManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(completion_status = 's', is_sample = False).annotate(
+            total = Count('chart_item',filter=Q(chart_item__status='ok')),
+            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
+        )
+        return qs
+        
+        
+class ActiveSamplesManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(
+            total = Count('chart_item',filter=Q(chart_item__status='ok')),
+            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
+            )
+        return qs
+
 class Chart(models.Model):
     session_id  = models.CharField(max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='orders' )
@@ -92,6 +115,10 @@ class Chart(models.Model):
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
+    objects = models.Manager() # The default manager.
+    active      = ActiveChartManager() # The Active Charts
+    samples     = ActiveSamplesManager() # The Active Samples
+
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
@@ -101,12 +128,6 @@ class Chart(models.Model):
 
     def __str__(self):
         return self.session_id
-
-    def num_prods(self):
-        if self.chart_item:
-            return self.chart_item.filter(status = 'ok').count()
-        else:
-            return 0
 
     def all_samples(self):
         if self.chart_item and self.is_sample:
@@ -155,19 +176,6 @@ class Order(models.Model):
 
     def __str__(self):
         return self.internal_tracking_id
-    #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
-    #completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
-    # name    = models.CharField(max_length=100,default = "")
-    # surname = models.CharField(max_length=100,default = "")
-    
-    # email   = models.EmailField(max_length=100,default = "")
-    # telephone = models.CharField(max_length=100,default = "")
-
-    # address = models.CharField(max_length=100,default = "")
-    # address2 = models.CharField(max_length=100,default = "")
-    # city = models.CharField(max_length=100,default = "")
-    # postcode = models.CharField(max_length=100,default = "")
-    
 
 class Question(models.Model):
     content = models.TextField()
@@ -206,7 +214,18 @@ class Question(models.Model):
     #     pass
 
 
+    #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
+    #completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
+    # name    = models.CharField(max_length=100,default = "")
+    # surname = models.CharField(max_length=100,default = "")
+    
+    # email   = models.EmailField(max_length=100,default = "")
+    # telephone = models.CharField(max_length=100,default = "")
 
+    # address = models.CharField(max_length=100,default = "")
+    # address2 = models.CharField(max_length=100,default = "")
+    # city = models.CharField(max_length=100,default = "")
+    # postcode = models.CharField(max_length=100,default = "")
 
         
 # class Sample(models.Model):

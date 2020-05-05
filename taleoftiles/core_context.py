@@ -1,9 +1,9 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 from taleoftiles.models import Tag
 from CRM.models import Chart
 from CRM.forms  import LoginForm, RegisterForm
-
 
 #####  -----------
 # mantaining the same session key after authentication process
@@ -14,41 +14,30 @@ class SessionStore(DbSessionStore):
         pass
 #####  -----------        
 
-
 def category_menu(context):
     cats = Tag.objects.filter(public = True, in_menu = True)
     return {'menu_cats': cats} 
 
-
 def user_menu(context):
+    query = Q()
 
     if context.user.is_authenticated:
-        try:
-            sampler = Chart.objects.get(user  = context.user, is_sample = True)
-        except ObjectDoesNotExist:
-            sampler = None
-        try: 
-            chart = Chart.objects.get(user  = context.user, is_sample = False)
-        except ObjectDoesNotExist:
-            chart = None
-
+        query = Q(user = context.user) 
     elif context.session.exists(context.session.session_key):
-        
-        try:
-            sampler = Chart.objects.get(session_id  = context.session.session_key, is_sample = True)
-        except ObjectDoesNotExist:
-            sampler = None
-        try: 
-            chart = Chart.objects.get(session_id  = context.session.session_key, is_sample = False)
-        except ObjectDoesNotExist:
-            chart = None
+        query = Q(session_id  = context.session.session_key) 
     else:
-        sampler = None
-        chart   = None
-            
-    return {'sampler': sampler,'chart':chart,
+        return {'sampler': None,'chart':None, 'user':None,
+            'loginform':LoginForm, 'signupform':RegisterForm,
+            'session' : context.session.session_key
+        } 
+   
+    charts   = Chart.active.filter( query )
+    sampler = Chart.samples.filter( query ).first()
+
+    return {'sampler': sampler,'charts':charts,
     'user':context.user,
     'loginform':LoginForm, 'signupform':RegisterForm,
     'session' : context.session.session_key
     } 
+
 

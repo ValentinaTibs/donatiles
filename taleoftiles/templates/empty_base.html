@@ -71,15 +71,20 @@ SAMPLER
   {{sample.product}}
   <a href="{% url 'del_chart' sample.product.publication.slug True %}"> del this</a> 
 {% endfor %}
-|
+
+
 CHART
-({{chart.all_items.count}})
-{% for chart_item in chart.all_items %}
-  {{chart_item.product}}
-  <a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a> 
+
+## {{ charts.count }} ##
+
+{% for chart in charts.all %}
+  {% for chart_item in chart.all_items %}
+    {{chart_item.product}}
+    <a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a> 
+  {% endfor %}
 {% endfor %}
 
-<hr/>
+<a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> CHECKOUT</a> 
 
 
 {% if user.is_anonymous %}

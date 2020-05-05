@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.db.models import Count,Sum
 
 from CRM.models         import Chart, ChartItem
 from CRM.models         import Profile
@@ -7,6 +8,7 @@ from taleoftiles.models import Product
 
 from CRM.forms import RegisterForm
 
+from django.db.models import Q 
 
 #@login_required(redirect_field_name='my_redirect_field')
 def account(request):
@@ -18,6 +20,24 @@ def account(request):
         return render(request, "404.html",{"message": "There is no user for such profile " })
    
     return render(request, "account.html", {'profile':profile})
+
+from django.db.models import Sum
+#total_price = Quotes.objects.all().annotate(total=Sum('purchase_quote_products__subtotal'))
+
+def summary(request):
+
+    if request.method == 'GET':
+        prv_page = request.GET['prv']
+
+    query = Q()
+
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        query = Q(session_id  = request.session.session_key) 
+    
+    charts   = Chart.active.filter( query )
+    return render(request, "summary.html", {'charts':charts,'prv_page':prv_page})   
 
 def add_user(request):
 
@@ -69,6 +89,7 @@ def add_sample(request, product_slug):
         remove_stat = 'ok'
         if (chart.num_prods() > 4):
             remove_stat = 'le'
+        #this might cause db collapse
         if (not product.is_samplable):
             remove_stat = 'ns'          
         chart_item = ChartItem(chart  = chart, product = product, status = remove_stat)
