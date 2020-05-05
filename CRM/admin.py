@@ -1,8 +1,12 @@
 from django.contrib import admin
-from CRM.models import Profile, Chart, ChartItem
+from CRM.models import Profile, Chart, ChartItem, Shipping
+
+class ShippingStackedAdmin(admin.StackedInline):
+    model = Shipping
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
+    inlines = [ShippingStackedAdmin,]
     #list_display = ('user.email')
 
 class ChartItemAdmin(admin.ModelAdmin):

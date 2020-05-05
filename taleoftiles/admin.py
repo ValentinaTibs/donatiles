@@ -46,7 +46,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     inlines = (PhotoStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
-    #list_display = ('name','price','color','tags', 'is_decor' )
+    list_display = ('name','price','color','tags', 'is_decor' )
 
     def name(self, obj):
         pub = obj.publication

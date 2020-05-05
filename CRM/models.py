@@ -28,7 +28,6 @@ user_logged_in.connect(pour_charts)
 
 #####  --------------
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
     bio = models.TextField(max_length=500, blank=True)
@@ -45,7 +44,7 @@ class Profile(models.Model):
     #     instance.profile.save()
 
 class Shipping(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
     fullname = models.TextField(max_length=100, blank=True)
     #2do this must be a selectebox...for now is a text field
     #country = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
@@ -60,7 +59,6 @@ COMPLETION_STATUS = (
     ('s', 'Started'),
     ('i1', 'In Checkout 1'),
     ('i2', 'In Checkout 2'),
-    ('i3', 'In Checkout 3'),
     ('c', 'Completed'),
     ('o', 'Ordered'),
     ('ex', 'Expired'),
@@ -89,7 +87,9 @@ ITEM_STATUS = (
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
-        qs = super().get_queryset().filter(completion_status = 's', is_sample = False).annotate(
+        query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
+        query = (query) & Q( is_sample = False)
+        qs = super().get_queryset().filter(query).annotate(
             total = Count('chart_item',filter=Q(chart_item__status='ok')),
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
         )

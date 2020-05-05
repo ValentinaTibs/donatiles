@@ -16,13 +16,19 @@
 	---> {{ chart.total }}
 
 	{% for chart_item in chart.all_items %}
-	  {{chart_item.product}}
-	  <a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a> 
+	  	{{chart_item.product}}
+	  	{{chart_item.product.thumb_}}
+	  	{{chart_item.product.serie}}
+	  	{{chart_item.quantity}}
+
+	  	<a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a>
+
 	{% endfor %}
 
 {% endfor %}
 
-{{prv_page}}
+<a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}"> SHIPPING</a> 
+
 
 {% endblock %}
 

@@ -1,0 +1,29 @@
+{% extends "checkout_base.html" %}
+{% load view_extra %}
+
+
+{% block title%} Tale of Tiles {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+{% load i18n %}
+
+<form method="post" >
+{% csrf_token %}
+
+{{ form.fullname.label_tag }}			{{ form.fullname }}
+{{ form.country.label_tag }}			{{ form.country }}
+{{ form.city.label_tag }}				{{ form.city }}
+{{ form.CAP.label_tag }}				{{ form.CAP }}
+{{ form.shipping_address.label_tag }}	{{ form.shipping_address }}
+{{ form.telephone_num.label_tag }}		{{ form.telephone_num }}
+
+<input type="submit" value="concludi lordine" />
+<input type="hidden" value="concludi lordine" />
+<input type="hidden" name="prv" value="{{ prv_page }}">
+</form>
+
+{% endblock %}
+

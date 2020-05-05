@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.db.models import Count,Sum
+from django.core.exceptions import ObjectDoesNotExist
 
-from CRM.models         import Chart, ChartItem
+from CRM.models         import Chart, ChartItem, Shipping
 from CRM.models         import Profile
 from taleoftiles.models import Product
 
-from CRM.forms import RegisterForm
+from CRM.forms import RegisterForm,ShippingForm
 
 from django.db.models import Q 
 
@@ -21,8 +20,6 @@ def account(request):
    
     return render(request, "account.html", {'profile':profile})
 
-from django.db.models import Sum
-#total_price = Quotes.objects.all().annotate(total=Sum('purchase_quote_products__subtotal'))
 
 def summary(request):
 
@@ -30,14 +27,51 @@ def summary(request):
         prv_page = request.GET['prv']
 
     query = Q()
-
     if request.user.is_authenticated:
         query = Q(user = request.user) 
     else:
         query = Q(session_id  = request.session.session_key) 
     
     charts   = Chart.active.filter( query )
+    for chart in charts:
+        chart.status = 'i1'
+        chart.save()
     return render(request, "summary.html", {'charts':charts,'prv_page':prv_page})   
+
+def shipping(request):
+
+    if request.method == 'GET':
+        prv_page = request.GET['prv']
+
+    query = Q()
+    prev_data = None
+
+    if request.user.is_authenticated:
+        query = Q(user = request.user)
+        try:
+            prev_data = Shipping.objects.get( user__user = request.user)
+        except ObjectDoesNotExist:
+            prev_data = None
+    else:
+        query = Q(session_id  = request.session.session_key) 
+    
+    charts   = Chart.active.filter( query )
+    for chart in charts:
+        chart.status = 'i1'
+        chart.save()
+    
+    shipping_form = ShippingForm(instance=prev_data)
+
+    if request.method == 'POST':
+        shipping_form = ShippingForm(request.POST, instance=prev_data)
+        #2do mettere qui controlli sicurezza
+        prv_page = request.POST['prv']
+
+        if shipping_form.is_valid():
+            shipping_form.save()
+            
+    return render(request, "shipping.html", {'form':shipping_form,'prv_page':prv_page})   
+
 
 def add_user(request):
 

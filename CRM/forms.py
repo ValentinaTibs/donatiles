@@ -14,6 +14,15 @@ class ShippingForm(forms.ModelForm):
     class Meta:
         model = Shipping
         fields = ('fullname','country','city','CAP','shipping_address','telephone_num')
+        
+        def __init__(self, *args, **kwargs):
+            super(ShippingForm, self).__init__(*args, **kwargs)
+            self.fields['fullname']         .required = True
+            self.fields['country']          .required = True
+            self.fields['city']             .required = True
+            self.fields['CAP']              .required = True
+            self.fields['shipping_address'] .required = True
+            self.fields['telephone_num']    .required = True
 
 class RegisterForm(UserCreationForm):
     

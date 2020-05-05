@@ -26,8 +26,8 @@ urlpatterns += i18n_patterns(
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
     path("account/",                                        CRM.views.account,    name="account"),
 
-    #risolvere questo false passato in URL
-    path("summary/", CRM.views.summary, name="summary"),
+    path("summary/",    CRM.views.summary, name="summary"),
+    path("shipping/",   CRM.views.shipping, name="shipping"),
     
     path("blog/",                       blog.views.blog, name="blog"),
     path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),

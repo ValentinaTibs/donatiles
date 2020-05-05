@@ -122,7 +122,6 @@ class Product(models.Model):
     available  = models.BooleanField(default = True)
     active = models.BooleanField(default = False)
 
-    # single_sell = models.BooleanField(default = False)
 
     def save(self, *args, **kwargs):
         if not self.code:
@@ -134,6 +133,11 @@ class Product(models.Model):
 
     def is_support(self,):
         return self.support_to.is_null == True
+
+    def thumb_(self):
+        for image in self.images.all():
+            if image.is_cover:
+                return image.thumb_()
     
     def has_single_sell(self):
         return true
@@ -190,13 +194,11 @@ class Catalogue(models.Model):
 
 class Photo(models.Model):  
 
-    name =  models.CharField (max_length = 100 , null = True, blank=True)
-    imagefile = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
-    # collection = models.ForeignKey(Collection,blank = True,  null = True,on_delete=models.SET_NULL, related_name='images' )
-    product = models.ForeignKey(Product, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
-    # setting = models.ForeignKey(Setting, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
-    # post = models.ForeignKey(Post, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
-    order = models.PositiveIntegerField( default=0, )   
+    name        = models.CharField (max_length = 100 , null = True, blank=True)
+    imagefile   = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
+    product     = models.ForeignKey(Product, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
+    order       = models.PositiveIntegerField( default=0, )   
+    is_cover    = models.BooleanField(default = False)
 
     class Meta:
         ordering = ["order"]    
