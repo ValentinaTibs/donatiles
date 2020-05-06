@@ -5,16 +5,12 @@ from modeltranslation.admin import TranslationAdmin
 # Register your models here.
 class ElementLayoutAdmin(TranslationAdmin):
     model = Element
-    list_display = ('name', 'tag', 'tag__parent', 'data_type','public' )
+    list_display = ('name', 'tags',  'data_type','public' )
     readonly_fields  = ( 'image_', )
-
-    def tag__parent(self, obj):
-
-        if obj.tag:
-            return obj.tag.parent
-        else:
-            return "-"
     
+    def tags(self, obj):
+        return "\n".join([p.name for p in obj.tag.all()])  
+
 class ElementTagAdmin(admin.ModelAdmin):
     model = ElementTag
     list_display = ('name', 'summary','slug','public','parent_' )

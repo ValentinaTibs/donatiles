@@ -33,13 +33,13 @@ class Element(models.Model):
     public      = models.BooleanField   (default = True)
     data_type   = models.CharField      (choices=DATA_TYPE, max_length=2,  default=DATA_TYPE[0])
     imagefile   = models.ImageField     (upload_to='img',null=True, blank=True, help_text="Load an image.")
-    tag         = models.ForeignKey     (ElementTag,     null=True, blank=True, on_delete=models.SET_NULL, related_name='element' )
+    tag         = models.ManyToManyField(ElementTag, related_name='element')
 
     def __str__(self):
         if self.data_type == 't':
         	return '%s' % (self.name,)   
         if self.data_type == 'i':
-            return self.thumb_()
+            return self.imagefile
     
     def data(self):
         if self.data_type == 'i':

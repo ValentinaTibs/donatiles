@@ -42,7 +42,8 @@ class IconAdminSelf(admin.ModelAdmin):
 
 class CatalogueAdmin(admin.ModelAdmin):
     model = Catalogue
-
+    list_display = ('title','active')
+    
 class ProductAdmin(admin.ModelAdmin):
     inlines = (PhotoStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)

@@ -92,9 +92,9 @@ class Publication(models.Model):
         
 
 class TechnicalSpec(models.Model):
-    slug = models.CharField(max_length=50, unique=True)
-    icons = models.ManyToManyField(Icon,  blank= True, related_name='techspecs')
-    file =  models.FileField(upload_to='techspecs/')
+    slug    = models.CharField(max_length=50, unique=True)
+    icons   = models.ManyToManyField(Icon,  blank= True, related_name='techspecs')
+    file    = models.FileField(upload_to='techspecs/')
     
     def save(self, *args, **kwargs):
         if not self.slug:

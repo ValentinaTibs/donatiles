@@ -9,6 +9,8 @@
 
 {% block content %}
 
+{{ layout_elems|get_elem:'cover-blog' }}
+
 {% for post in all_post%}
 	<a href="{% url 'post' post.publication.slug %}"> {{post}} </a>   
 {% endfor %}

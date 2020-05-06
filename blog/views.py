@@ -3,12 +3,14 @@ from django.shortcuts import render
 
 
 from blog.models import Post
+from layout.models      import Element
 
 def blog(request, the_filter = None):
-
+	blog_elements = Element.objects.filter(tag__parent__slug = 'blog', public = True)
 	all_post = Post.active.all()
 	return render(request, "blog.html",{ 	
 		"all_post":all_post,	
+		'layout_elems'  : blog_elements,
 		})
 
 
