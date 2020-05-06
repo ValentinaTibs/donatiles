@@ -1,10 +1,8 @@
 import datetime
-#from django.contrib.auth.models import Group
-
 from django import template
- 
-register = template.Library()
 
+
+register = template.Library()
 
 @register.filter(name = 'starts_with')
 def starts_with(expected,actual):
@@ -15,8 +13,9 @@ def clean(value):
     return value.replace('-',' ')
 
 @register.filter
-def get(queryset, key):
-    return(queryset.filter(tag__slug=key))
+def get_elem(queryset, key):
+    elem = queryset.get(tag__slug=key)
+    return(elem.data())
 
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
@@ -24,6 +23,8 @@ def get(queryset, key):
 #   admin = Group.objects.get(name='Admin') 
 #   return True if admin in user.groups.all() else False  
 #   return True if guy_name == str(city_name) else False 
+
+#from django.contrib.auth.models import Group
 
 # @register.filter(name='has_group') 
 # def has_group(user, group_name): 

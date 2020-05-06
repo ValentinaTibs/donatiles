@@ -5,7 +5,11 @@ from modeltranslation.admin import TranslationAdmin
 # Register your models here.
 class ElementLayoutAdmin(TranslationAdmin):
     model = Element
-    list_display = ('name', 'tag','data_type','public' )
+    list_display = ('name', 'tag', 'tag__parent', 'data_type','public' )
+    readonly_fields  = ( 'image_', )
+
+    def tag__parent(self, obj):
+        return obj.tag.parent
     
 class ElementTagAdmin(admin.ModelAdmin):
     model = ElementTag

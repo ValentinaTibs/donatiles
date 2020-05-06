@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.safestring import mark_safe
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -7,11 +8,11 @@ DATA_TYPE = (
 ) 
 
 class ElementTag(models.Model):
-    name = models.CharField(max_length=200)
-    summary = models.CharField(max_length=200, null = True, blank=True,)
-    slug = models.CharField(max_length=200,  unique=True)
-    public = models.BooleanField(default = True)
-    parent = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='childs' )    
+    name    = models.CharField  (max_length=200)
+    slug    = models.CharField  (max_length=200, unique=True)
+    public  = models.BooleanField(default = True)
+    summary = models.CharField  (max_length=200, null=True, blank=True,)
+    parent  = models.ForeignKey ("self",        null=True, blank=True, on_delete=models.SET_NULL, related_name='childs' )    
     
     class Meta:
         # Gives the proper plural name for admin
@@ -27,22 +28,32 @@ class ElementTag(models.Model):
         return self.name
 
 class Element(models.Model):
-    name = models.CharField(max_length=200)
-    content = models.TextField(max_length=200)
-    imagefile = models.ImageField( upload_to='img', null=True, blank=True, help_text="Load an image.")
-    public = models.BooleanField(default = True)
-    data_type   = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
-    
-    tag = models.ForeignKey(ElementTag, blank = True, null = True,on_delete=models.SET_NULL, related_name='element' )
+    name        = models.CharField      (max_length=200)
+    content     = models.TextField      (max_length=200, null=True, blank=True)
+    public      = models.BooleanField   (default = True)
+    data_type   = models.CharField      (choices=DATA_TYPE, max_length=2,  default=DATA_TYPE[0])
+    imagefile   = models.ImageField     (upload_to='img',null=True, blank=True, help_text="Load an image.")
+    tag         = models.ForeignKey     (ElementTag,     null=True, blank=True, on_delete=models.SET_NULL, related_name='element' )
 
     def __str__(self):
         if self.data_type == 't':
         	return '%s' % (self.name,)   
         if self.data_type == 'i':
-            return mark_safe('<img src="/img/{0}">'.format(self.imagefile))
+            return self.thumb_()
+    
+    def data(self):
+        if self.data_type == 'i':
+            return self.imagefile
+        return self.content
 
     def image_(self):
-        return mark_safe('<img src="/img/{0}">'.format(self.imagefile))
+        return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
+
+    def thumb_(self):
+        width = 30
+        ratio = 30 / self.imagefile.width
+        height = self.imagefile.height * ratio
+        return mark_safe('<a href="/media/{0}"><img src="/media/{0}" width={1} height={2}></a>'.format(self.imagefile,width,height))
 
 class Config(models.Model):
 	    

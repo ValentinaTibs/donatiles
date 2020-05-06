@@ -25,7 +25,7 @@ from django.db.models import Count
 
 def index(request):  
     all_home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
-    return render(request, "empty.html",{'layout_elems' : all_home_elems})
+    return render(request, "home.html",{'layout_elems' : all_home_elems})
 
 def catalogue(request, the_filter = None):
 
