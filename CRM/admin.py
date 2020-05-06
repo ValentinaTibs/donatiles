@@ -7,13 +7,18 @@ class ShippingStackedAdmin(admin.StackedInline):
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     inlines = [ShippingStackedAdmin,]
-    #list_display = ('user.email')
+    #list_display = ('user__username')
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
 
 class OrderAdmin(admin.ModelAdmin):
     model = Order
+    # list_display = ('id','profile',)
+
+    # def profile(self, obj):
+    #     return "\n".join([chart.user.username for chart in obj.charts.all()])    
+
     #inlines = ('inte',)
 
 class ChartItemStackedAdmin(admin.StackedInline):
@@ -32,7 +37,7 @@ close_them.short_description = "Mark as Closed"
 class ChartAdmin(admin.ModelAdmin):
 	model = Chart
 
-	list_display = ('session_id','user','completion_status','order_status','is_sample','created_at','modified_at','_num_prods')
+	list_display = ('session_id','user','completion_status','is_sample','created_at','modified_at','_num_prods')
 	actions = [close_them]
 	readonly_fields  = ( 'session_id','is_sample','created_at','modified_at')
 	inlines = [ChartItemStackedAdmin,]

@@ -50,23 +50,27 @@ For more information about using Python on Heroku, see these Dev Center articles
 _______________________________________________________________________________
 
 
-# RUN
+# RUN 
 
 ```
 heroku local web -f Procfile.windows
 ```
 
-or
+
+or 
 
 ```
-heroku local web
+heroku local web 
 ```
+
+
 
 ##3 Gunicorn let Connecion opened on 5000
 
 ```
 kill -9 $(lsof -i:5000 -t) 2> /dev/null
 ```
+
 # Migrations
 ## remote check and deploy of migrations
 
@@ -100,3 +104,8 @@ python3 manage.py migrate --fake-initial
 # Translations -
 
 ## Microcopy text
+
+
+
+
+

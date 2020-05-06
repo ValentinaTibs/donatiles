@@ -55,11 +55,24 @@
 ---> {{ user }}
 <hr>
 
+{% if user.is_anonymous %}
+
+CACCAPUZZA
+
+{% endif %}
+
+{% if user.is_authenticated %}
+
+AUTENTICATO
+
+{% endif %}
+
+
 {% url 'blog' as blog_url %}
+
 {% if blog_url|starts_with:request.path %} WE ARE IN BLOG {% endif %}
 
 <a href="{% url 'blog'%}"> BLOG </a>
-
 
 {% url 'catalogue' as catalogue_url %}
 {% if catalogue_url|starts_with:request.path %} WE ARE IN CAT {% endif %}
