@@ -9,6 +9,8 @@ admin.autodiscover()
 import taleoftiles.views
 import CRM.views
 import blog.views
+import layout.views
+
 
 urlpatterns = [ ]
 i18n_patterns(*urlpatterns  , prefix_default_language = False)
@@ -33,6 +35,8 @@ urlpatterns += i18n_patterns(
     path("blog/",                       blog.views.blog, name="blog"),
     path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),
     path('blog/post/<slug:post_slug>/', blog.views.post, name="post"),
+
+    path("support/",  layout.views.support, name="support"),
 
     # path("blog/<slug:tag_slug>",        taleoftiles.views.blog, name="blog_tag"),
     # path('blog/post/<slug:post_slug>/', taleoftiles.views.post, name="post"),

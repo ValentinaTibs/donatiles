@@ -64,15 +64,15 @@ class Tag(models.Model):
 
 
 class Publication(models.Model):
-    title = models.CharField(max_length=200, unique = True)
+    title   = models.CharField(max_length=200, unique = True)
     content = models.TextField()
 
     created_at  = models.DateTimeField(editable=False, blank=True,null=False )
     modified_at = models.DateTimeField(editable=False, blank=True,null=False)
 
-    publish_date = models.DateTimeField("date published", blank=True,null=False)
-    slug = models.CharField(max_length=200, unique=True, blank=True,null=False)
-    author = models.ForeignKey( User, on_delete=models.CASCADE, blank=True,null=False )
+    publish_date    = models.DateTimeField("date published", blank=True,null=False)
+    slug            = models.CharField(max_length=200, unique=True, blank=True,null=False)
+    author          = models.ForeignKey( User, on_delete=models.CASCADE, blank=True,null=False )
     
     def __str__(self):
         return self.title

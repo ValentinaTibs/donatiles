@@ -36,14 +36,15 @@
 {% load view_extra %}
 
 <menu>
-<a href="{% url 'index' %}"> HOME </a>
 
 {% trans 'facebook' %}
 {% trans 'pinterest' %}
 {% trans 'instagram' %}
 
 
-{% trans 'assistenza' %}
+
+<a href="{% url 'support'%}"> {% trans 'support' %} </a>
+
 {% trans 'account' %}
 
 
@@ -56,6 +57,11 @@
 ---> {{ user.is_authenticated }}
 ---> {{ user }}
 <hr>
+
+
+
+<a href="{% url 'index' %}"> <img src="/media/img/logo.png" width="100"> </a>
+
 
 {% url 'blog' as blog_url %}
 {% if blog_url|starts_with:request.path %} WE ARE IN BLOG {% endif %}

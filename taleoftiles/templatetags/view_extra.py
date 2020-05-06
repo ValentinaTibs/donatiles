@@ -1,7 +1,6 @@
 import datetime
 from django import template
 
-
 register = template.Library()
 
 @register.filter(name = 'starts_with')
@@ -15,12 +14,18 @@ def clean(value):
 @register.filter
 def get_elem(queryset, key):
     elem = queryset.get(tag__slug=key)
-    return(elem.data())
+    return(elem)
 
 @register.filter
 def filter_tags(queryset, key):
     elems = queryset.filter(parent__slug=key)
     return(elems)
+
+@register.simple_tag
+def define(val=None):
+  return val
+
+
 
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):

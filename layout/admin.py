@@ -9,12 +9,22 @@ class ElementLayoutAdmin(TranslationAdmin):
     readonly_fields  = ( 'image_', )
 
     def tag__parent(self, obj):
-        return obj.tag.parent
+
+        if obj.tag:
+            return obj.tag.parent
+        else:
+            return "-"
     
 class ElementTagAdmin(admin.ModelAdmin):
     model = ElementTag
-    list_display = ('name', 'summary','slug','public','parent' )
+    list_display = ('name', 'summary','slug','public','parent_' )
 
+    def parent_(self, obj):
+        if obj.parent:
+            return obj.parent
+        else:
+            return "-"
+    
 
 admin.site.register(Element,ElementLayoutAdmin)
 admin.site.register(ElementTag,ElementTagAdmin)
