@@ -18,11 +18,8 @@ def account(request):
         profile = Profile.objects.get(user = request.user )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no user for such profile " })
-    
-    #profile = Profile.objects.get(user__chart__order )
-    orders = Order.objects.filter(charts__user = request.user)
-    print(orders)
-    return render(request, "account.html", {'profile':profile,'orders':orders})
+   
+    return render(request, "account.html", {'profile':profile})
 
 def summary(request):
 
@@ -78,7 +75,6 @@ def shipping(request):
             shipping_form.save()
             
             new_order = Order()
-            new_order.profile = request.user.profile 
             new_order.save()
 
             for chart in charts:

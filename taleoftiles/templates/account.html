@@ -11,22 +11,20 @@
 
 
 
-{% for order in orders %}
-	{{ order }}	
-	{{ order.profile }}	
-	{{ order.internal_tracking_id }}
-	{{ order.status }}
+{% for order in profile.user.orders.all %}
+	
+	{{ order }}
 
 {% endfor %}
 
 <a href="{% url 'logout' %}?next=/"> LOGOUT </a>
 
-{{ profile.shipping.fullname }}
-{{ profile.shipping.country }}
-{{ profile.shipping.city }}
-{{ profile.shipping.CAP }}
-{{ profile.shipping.shipping_address }}
-{{ profile.shipping.telephone_num }}
+{{ profile.user.shipping.fullname }}
+{{ profile.user.shipping.country }}
+{{ profile.user.shipping.city }}
+{{ profile.user.shipping.CAP }}
+{{ profile.user.shipping.shipping_address }}
+{{ profile.user.shipping.telephone_num }}
 
 
 - {{ profile.user.username }} -

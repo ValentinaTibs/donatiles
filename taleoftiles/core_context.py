@@ -10,24 +10,19 @@ from CRM.forms  import LoginForm, RegisterForm
 from django.contrib.sessions.backends.db import SessionStore as DbSessionStore
 
 class SessionStore(DbSessionStore):
-    pass
-    # def cycle_key(self):
-    #     pass
-####  -----------        
+    def cycle_key(self):
+        pass
+#####  -----------        
 
 def category_menu(context):
     cats = Tag.objects.filter(public = True, in_menu = True)
     return {'menu_cats': cats} 
 
 def user_menu(context):
-    return {'sampler': None,'chart':None, 'user':None,
-    'loginform':LoginForm, 'signupform':RegisterForm,
-    'session' : context.session.session_key
-    } 
     query = Q()
 
     if context.user.is_authenticated:
-        query = Q(user = context.user.profile) 
+        query = Q(user = context.user) 
     elif context.session.exists(context.session.session_key):
         query = Q(session_id  = context.session.session_key) 
     else:
@@ -35,7 +30,7 @@ def user_menu(context):
             'loginform':LoginForm, 'signupform':RegisterForm,
             'session' : context.session.session_key
         } 
-
+   
     charts   = Chart.active.filter( query )
     sampler = Chart.samples.filter( query ).first()
 
