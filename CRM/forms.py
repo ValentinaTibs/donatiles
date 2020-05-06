@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-
+from django.core.exceptions import ObjectDoesNotExist
 
 from django import forms
 
@@ -51,7 +51,10 @@ class RegisterForm(UserCreationForm):
         
         if commit:
             user.save()
-            client_group = Group.objects.get(name='Clients') 
+            try: 
+                client_group = Group.objects.get(name='Clients') 
+            except ObjectDoesNotExist:
+                return user
             client_group.user_set.add(user)
 
         return user    
