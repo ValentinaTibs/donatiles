@@ -7,13 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.db.models import Count
 
-
-DATA_TYPE = (
-    ('t', 'Text'),
-    ('b', 'Boolean'),
-    ('c', 'Color'),
-    ('i', 'Integer')
-) 
+from taleoftiles.utils import DATA_TYPE
 
 
 class Icon(models.Model):  

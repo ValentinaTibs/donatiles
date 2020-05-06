@@ -45,3 +45,10 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
+COUNTRIES_ = (
+    ('it', 'Italia'),
+    ('sv', 'Sweden'),
+    ('g', 'Germany'),
+    ('fr', 'France')
+) 
+

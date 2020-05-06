@@ -7,7 +7,7 @@ class ShippingStackedAdmin(admin.StackedInline):
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     inlines = [ShippingStackedAdmin,]
-    #list_display = ('user.email')
+    #list_display = ('user__username')
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem

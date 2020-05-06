@@ -6,17 +6,16 @@ from django.utils import timezone
 
 from django.contrib.auth.models import User
 from taleoftiles.models import Product
-from taleoftiles.utils import COMPLETION_, SHIPPING_, ORDER_, ITEM_\
+from taleoftiles.utils import COMPLETION_, SHIPPING_, ORDER_, ITEM_, COUNTRIES_
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False, related_name='profile')
     
 class Shipping(models.Model):
 
-    user = models.ForeignKey    (Profile,  blank = True, null = True, on_delete=models.SET_NULL, related_name='shippings' )
-    #2do this must be a selectebox...for now is a text field
-    #country = models.CharField(max_length=2, choices=COMPLETION_, default='s')
+    profile = models.ForeignKey(Profile,  blank = True, null = True, on_delete=models.SET_NULL, related_name='shippings' )
+    country             = models.CharField(max_length=2, choices=COUNTRIES_, default='t')
     fullname            = models.TextField(max_length=100, blank=True)
     country             = models.TextField(max_length=100, blank=True)
     city                = models.TextField(max_length=100, blank=True)
@@ -25,8 +24,6 @@ class Shipping(models.Model):
     telephone_num       = models.TextField(max_length=30, blank=True)
 
     is_active           = models.BooleanField(default = True)
-
-
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
@@ -59,8 +56,6 @@ class Order(models.Model):
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
-    profile        = models.ForeignKey( Profile,  blank = True, null = True, on_delete=models.SET_NULL, related_name='orders' )
-
     def save(self, *args, **kwargs):
         self.internal_tracking_id = create_shipping_internal_id()
         if not self.id:
@@ -71,8 +66,8 @@ class Order(models.Model):
 
 class Chart(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
-    user        = models.ForeignKey( Profile,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
-    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
+    user        = models.ForeignKey( Profile,  blank = True,        null = True, on_delete=models.SET_NULL, related_name='charts' )
+    order       = models.ForeignKey( Order, verbose_name="Order",   null = True, on_delete=models.CASCADE,  related_name='charts')
 
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_, default='s')
     is_sample           = models.BooleanField(default = False)
@@ -140,4 +135,21 @@ class Question(models.Model):
         self.modified_at = timezone.now()
         return super().save(*args, **kwargs)
 
+#### ------- Move this to SIgnals.py
+from django.contrib.auth.signals import user_logged_in
+
+def pour_charts(sender, user, request, **kwargs):
+    session_loc_id = request.session.session_key
+    
+    for chart in Chart.active.filter( user = user): 
+        chart.session_id = session_id
+        chart.save()
+
+    for chart in Chart.objects.filter( session_id  = session_loc_id): 
+        chart.user = user
+        chart.save()
+
+user_logged_in.connect(pour_charts)
+
+#####  --------------
    
