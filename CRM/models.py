@@ -35,6 +35,12 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
 
     # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
+
+
+    # @receiver(post_save, sender=User)
     # def create_user_profile(sender, instance, created, **kwargs):
     #     if created:
     #         Profile.objects.create(user=instance)
@@ -131,7 +137,7 @@ class Chart(models.Model):
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
 
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
-    order_status        = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+    order_status        = models.CharField(max_length=2, choices=ORDER_STATUS,      default='w')
     is_sample           = models.BooleanField(default = False)
 
     created_at  = models.DateTimeField(editable=False)
@@ -160,12 +166,10 @@ class Chart(models.Model):
             return self.chart_item.filter(status = 'ok')
 
 class ChartItem(models.Model):
-    chart       = models.ForeignKey(Chart,  verbose_name="Charts", null=True, on_delete=models.SET_NULL, related_name='chart_item')
-    product     = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='chart_item')
-    status     = models.CharField(max_length=2, choices=ITEM_STATUS, default='ok')
-
-    quantity    = models.PositiveIntegerField( default=1 )   
-    
+    chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, on_delete=models.SET_NULL, related_name='chart_item')
+    status      = models.CharField(choices=ITEM_STATUS, max_length=2,  default='ok')
+    quantity    = models.PositiveIntegerField( default=1 )       
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
@@ -180,13 +184,14 @@ class ChartItem(models.Model):
         return self.chart.session_id        
    
 class Question(models.Model):
-    content = models.TextField()
+    content         = models.TextField()
     modified_at     = models.DateTimeField()    
     created_at      = models.DateTimeField("date created",editable=False)
     publish_date    = models.DateTimeField("date published", blank = True, null = True, auto_now_add=False)
 
     reply           = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='question' )
     public          = models.BooleanField(default = False)
+
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import authenticate, login
 
 from CRM.models         import Chart, ChartItem, Shipping, Order
 from CRM.models         import Profile
@@ -94,15 +95,15 @@ def shipping(request):
 def add_user(request):
 
     form = RegisterForm(request.POST or None, request.FILES or None)
-
+    
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()
-            da_user = Profile(user = new_user)        
+            da_user = Profile( user = new_user)        
             da_user.save()
-            #login(request, new_user)
-            #???user = authenticate(username=new_user.username, password=new_user.password)
-    
+            login(request, new_user)
+            
+    #2do add to the redirect the form error 
     return redirect(request.META.get('HTTP_REFERER'))
 
 def del_chart(request, product_slug, is_sample):

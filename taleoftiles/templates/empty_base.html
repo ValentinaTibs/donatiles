@@ -91,11 +91,9 @@ CHART
 
 <a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> CHECKOUT</a> 
 <hr>
-LOGIN
 
 <a href="{% url 'account'%}"> ACCOUNT </a>
 <a href="{% url 'logout' %}?next=/"> LOGOUT </a>
-
 
 {% if loginform.errors %}
   <p>Your username and password didn't match. Please try again.</p>

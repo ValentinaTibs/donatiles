@@ -2,6 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
+
 from django import forms
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -33,25 +34,25 @@ class RegisterForm(UserCreationForm):
     def clean(self):
         super(RegisterForm, self).clean()
         username = self.cleaned_data.get('username')
-
-        #ensure is a well formed email
-        if not validate_email( username ):
+        try:
+            validate_email(username)
+        except ValidationError as e:
             raise ValidationError(_('Invalid email'), code='no_email')
 
         #avoid duplicates
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError(_('Invalid value'), code='duplicated')
+            raise forms.ValidationError(_('Duplicated email'), code='duplicated')
 
         return self.cleaned_data    
 
     def save(self, commit=True):
         
         user = super(RegisterForm, self).save(commit=False)
-        user.email = self.cleaned_data["email"]
-        user.groups.set(Group.objects.get(name='Clients'))
-
+        
         if commit:
             user.save()
+            client_group = Group.objects.get(name='Clients') 
+            client_group.user_set.add(user)
 
         return user    
 
