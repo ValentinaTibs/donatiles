@@ -14,10 +14,10 @@ class ChartItemAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     model = Order
-    list_display = ('id','profile',)
+    # list_display = ('id','profile',)
 
-    def profile(self, obj):
-        return "\n".join([chart.user.username for chart in obj.charts.all()])    
+    # def profile(self, obj):
+    #     return "\n".join([chart.user.username for chart in obj.charts.all()])    
 
     #inlines = ('inte',)
 
