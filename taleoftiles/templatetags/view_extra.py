@@ -17,6 +17,11 @@ def get_elem(queryset, key):
     elem = queryset.get(tag__slug=key)
     return(elem.data())
 
+@register.filter
+def filter_tags(queryset, key):
+    elems = queryset.filter(parent__slug=key)
+    return(elems)
+
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
 #   guy_name = user.userprofile.centre.related.slug.split('-')[0].capitalize()

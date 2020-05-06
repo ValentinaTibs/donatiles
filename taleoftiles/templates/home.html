@@ -20,5 +20,15 @@
 {{ layout_elems|get_elem:'cover-claim' }}
 {{ layout_elems|get_elem:'cover-img' }}
 
+{% for tag in tags|filter_tags:'effect' %}
+	{{tag}}
+{% endfor %}
+
+<h2>{% trans 'home-idee' %}</h2>
+
+{% for post in posts %}
+	{{post}}
+{% endfor %}
+
 {% endblock %}
 

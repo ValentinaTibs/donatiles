@@ -15,7 +15,6 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
-
 class Icon(models.Model):  
     name        =  models.CharField (max_length = 100 , null = False, blank=False, unique=True)
     imagefile   = models.ImageField( upload_to='icons', null=True, blank=True, help_text="Load an image.", unique=True)
@@ -35,6 +34,7 @@ class Tag(models.Model):
 
     in_catalogue= models.BooleanField(default = False)    
     in_menu     = models.BooleanField(default = False)    
+    in_home     = models.BooleanField(default = False)    
     icon        = models.ForeignKey( Icon,  blank = True, null = True, on_delete=models.SET_NULL, related_name='tags' )
     parent      = models.ForeignKey("self", blank = True, null = True, on_delete=models.SET_NULL, related_name='child' )
 

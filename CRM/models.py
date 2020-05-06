@@ -61,7 +61,6 @@ class Shipping(models.Model):
     CAP                 = models.TextField(max_length=10, blank=True)
     shipping_address    = models.TextField(max_length=100, blank=True)
     telephone_num       = models.TextField(max_length=30, blank=True)
-
     is_active           = models.BooleanField(default = True)
 
 COMPLETION_STATUS = (
@@ -94,23 +93,6 @@ ITEM_STATUS = (
 ) 
 
 
-class ActiveChartManager(models.Manager):
-    def get_queryset(self):
-        query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
-        query = (query) & Q( is_sample = False)
-        qs = super().get_queryset().filter(query).annotate(
-            total = Count('chart_item',filter=Q(chart_item__status='ok')),
-            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
-        )
-        return qs
-          
-class ActiveSamplesManager(models.Manager):
-    def get_queryset(self):
-        qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(
-            total = Count('chart_item',filter=Q(chart_item__status='ok')),
-            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
-            )
-        return qs
 
 def create_shipping_internal_id():
     return get_random_string(length=32)
@@ -131,6 +113,24 @@ class Order(models.Model):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
+class ActiveChartManager(models.Manager):
+    def get_queryset(self):
+        query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
+        query = (query) & Q( is_sample = False)
+        qs = super().get_queryset().filter(query).annotate(
+            total = Count('chart_item',filter=Q(chart_item__status='ok')),
+            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
+        )
+        return qs
+          
+class ActiveSamplesManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(
+            total = Count('chart_item',filter=Q(chart_item__status='ok')),
+            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
+            )
+        return qs
+        
 class Chart(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )

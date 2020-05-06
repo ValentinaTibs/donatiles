@@ -3,29 +3,23 @@ from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 import datetime as dt
-# import numpy as np
 
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
-# import requests
-# import logging
-
 from taleoftiles.models import Tag, Product, Catalogue
 from layout.models      import Element
-# from taleoftiles.CRM import Chart, ChartItem
-
-# from .models import Post, Tag, Collection, Setting, Product, Sampler, Sample
-# from .models import Config, Shipping, ChartItem, Chart
-
-# from .forms importcat.products NewSamplerShipping, NewChartItemForm,QuestionForm
-
-from django.db.models import Count
-
+from blog.models        import Post
 
 def index(request):  
-    all_home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
-    return render(request, "home.html",{'layout_elems' : all_home_elems})
+    home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
+    home_tags = Tag.objects.filter(in_home = True, public = True)
+    home_post = Post.active.filter(tags__slug='in-home')
+    return render(request, "home.html",{
+        'layout_elems'  : home_elems,
+        'tags'          : home_tags,
+        'posts'         : home_post,
+        })
 
 def catalogue(request, the_filter = None):
 
