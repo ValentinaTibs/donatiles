@@ -49,7 +49,11 @@
 {% trans 'valuta' %}
 </menu>
 
-
+<hr>
+---> {{ user.is_anonymous }}
+---> {{ user.is_authenticated }}
+---> {{ user }}
+<hr>
 
 {% url 'blog' as blog_url %}
 {% if blog_url|starts_with:request.path %} WE ARE IN BLOG {% endif %}
@@ -65,6 +69,7 @@
 {% for cat in menu_cats %}
 <a href="{% url 'catalogue' cat.slug %}"> {{cat}} </a>   
 {% endfor %}
+
 
 SAMPLER
 {% for sample in sampler.all_samples %}
@@ -85,11 +90,12 @@ CHART
 {% endfor %}
 
 <a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> CHECKOUT</a> 
-
-
-{% if user.is_anonymous %}
-
+<hr>
 LOGIN
+
+<a href="{% url 'account'%}"> ACCOUNT </a>
+<a href="{% url 'logout' %}?next=/"> LOGOUT </a>
+
 
 {% if loginform.errors %}
   <p>Your username and password didn't match. Please try again.</p>
@@ -118,12 +124,8 @@ LOGIN
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
-{% else %}
 
-<a href="{% url 'account'%}"> ACCOUNT </a>
-<a href="{% url 'logout' %}?next=/"> LOGOUT </a>
 
-{% endif %}
 
 {% block login %} {% endblock %}
 

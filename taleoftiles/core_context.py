@@ -35,7 +35,7 @@ def user_menu(context):
     sampler = Chart.samples.filter( query ).first()
 
     return {'sampler': sampler,'charts':charts,
-    'user':context.user,
+
     'loginform':LoginForm, 'signupform':RegisterForm,
     'session' : context.session.session_key
     } 
