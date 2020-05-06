@@ -131,3 +131,7 @@ dmypy.json
 ## CUSTOM added from vale
 media/
 .vs/
+
+*/migrations/*
+
+

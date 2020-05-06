@@ -114,16 +114,20 @@ class Order(models.Model):
 
     internal_tracking_id = models.CharField(max_length=100, default = "")
     shipping_tracking_id = models.CharField(max_length=100, default = "")
+    created_at  = models.DateTimeField(editable=False)
+    modified_at = models.DateTimeField()
 
     def save(self, *args, **kwargs):
         self.internal_tracking_id = create_shipping_internal_id()
-
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
 class Chart(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
-    user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='orders' )
+    user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
 
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
@@ -177,18 +181,12 @@ class ChartItem(models.Model):
    
 class Question(models.Model):
     content = models.TextField()
-    # name    = models.CharField(max_length=100,default = "")
-    # surname = models.CharField(max_length=100,default = "")
+    modified_at     = models.DateTimeField()    
+    created_at      = models.DateTimeField("date created",editable=False)
+    publish_date    = models.DateTimeField("date published", blank = True, null = True, auto_now_add=False)
 
-    # email   = models.EmailField(max_length=100,default = "")
-    # telephone = models.CharField(max_length=100,default = "")
-
-    modified_at = models.DateTimeField()    
-    created_at  = models.DateTimeField("date created",editable=False)
-    publish_date = models.DateTimeField("date published", blank = True, null = True, auto_now_add=False)
-
-    reply = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='question' )
-
+    reply           = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='question' )
+    public          = models.BooleanField(default = False)
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
