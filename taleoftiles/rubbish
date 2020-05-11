@@ -1,3 +1,17 @@
+<form  action="{% url 'add_sample' product.publication.slug %}" method="POST"> 
+    {% csrf_token %}
+    <button > aggiungi al campione gratuito</button>
+
+</form>
+
+<form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
+    {% csrf_token %}
+    <button > aggiungi al carrello</button>
+
+</form>
+
+
+
 
 <img width="200px" style="object-fit: contain;" 
         src="{{ sample.images.all[0].imagefile.url }}" >  

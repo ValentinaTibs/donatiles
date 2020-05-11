@@ -7,6 +7,8 @@ from django.db import models
 from django.db.models import Q
 from django.db.models import Count
 
+import datetime as dt
+
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -104,24 +106,31 @@ class TechnicalSpec(models.Model):
     def __str__(self):
         return self.slug
 
+class ActiveProductManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(
+            publication__publish_date__lte= dt.datetime.now(), 
+            is_active = True)
+        return qs
+    
 
 class Product(models.Model):
-    price = models.PositiveIntegerField( default=0, )
-    
-    wait_time = models.PositiveIntegerField(default = 15)
-    min_ammount = models.PositiveIntegerField(default = 5)
-    code = models.CharField(max_length=100,)
-    
-    tags = models.ManyToManyField(Tag, blank= True, related_name='products')
-    publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
-    techspec = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
 
-    support_to = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
-    is_decor = models.BooleanField(default = False)
-    is_samplable = models.BooleanField ( default=True, null = True)
-    available  = models.BooleanField(default = True)
-    active = models.BooleanField(default = False)
+    price           = models.PositiveIntegerField( default=0, )    
+    wait_time       = models.PositiveIntegerField(default = 15)
+    min_ammount     = models.PositiveIntegerField(default = 5)
+    code            = models.CharField(max_length=100,)
+    is_decor        = models.BooleanField(default = False)
+    is_samplable    = models.BooleanField( default=True, null = True)
+    available       = models.BooleanField(default = True)
+    is_active       = models.BooleanField(default = True)
+    tags            = models.ManyToManyField(Tag, blank= True, related_name='products')
+    publication     = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
+    support_to      = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
+    techspec        = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
 
+    objects     = models.Manager() # The default manager.
+    active      = ActiveProductManager() # The Active Charts
 
     def save(self, *args, **kwargs):
         if not self.code:
@@ -148,7 +157,7 @@ class Product(models.Model):
         except ObjectDoesNotExist:
             serie = "None"
         return serie
-
+    
     def color(self):
         try:
             color = self.tags.get(parent__slug = "colour")
@@ -190,6 +199,9 @@ class Catalogue(models.Model):
         active_tags = Tag.objects.filter(tag_query)
         
         return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+
+    def __str__(self):
+        return self.title
         
 
 class Photo(models.Model):  

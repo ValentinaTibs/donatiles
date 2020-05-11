@@ -27,17 +27,16 @@ def user_menu(context):
         query = Q(session_id  = context.session.session_key) 
     else:
         return {'sampler': None,'chart':None, 'user':None,
-            'loginform':LoginForm, 'signupform':RegisterForm,
-            'session' : context.session.session_key
+                'loginform':LoginForm, 'signupform':RegisterForm,
+                'session' : context.session.session_key
         } 
    
-    charts   = Chart.active.filter( query )
-    sampler = Chart.samples.filter( query ).first()
+    charts  = Chart.active.filter   ( query )
+    sampler = Chart.samples.filter  ( query ).first()
 
-    return {'sampler': sampler,'charts':charts,
-
-    'loginform':LoginForm, 'signupform':RegisterForm,
-    'session' : context.session.session_key
+    return {
+            'sampler': sampler,'charts':charts,
+            'loginform':LoginForm, 'signupform':RegisterForm,
+            'session' : context.session.session_key
     } 
-
 

@@ -21,7 +21,7 @@ class PhotoStackedAdmin(admin.StackedInline):
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
-    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','public','parent')
+    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','public','parent','data_type')
     actions = [duplicate]
 
 class PublicationAdminSelf(SummernoteModelAdmin):
