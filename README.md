@@ -26,7 +26,13 @@ $ heroku local
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku
+###nightly push
+```sh
+$ git push heroku master
+```
 
+
+###freshly made repo
 ```sh
 $ heroku create
 

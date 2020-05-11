@@ -39,7 +39,7 @@ class Element(models.Model):
         if self.data_type == 't':
         	return '%s' % (self.name,)   
         if self.data_type == 'i':
-            return self.imagefile
+            return self.imagefile.url
     
     def data(self):
         if self.data_type == 'i':
@@ -64,22 +64,3 @@ class Config(models.Model):
 
 	def __str__(self):
 		return '%s' % (self.tag,)
-
-   
-
-
-# class Image(models.Model):  
-#     name =  models.CharField (max_length = 100 , null = True, blank=True)
-#     imagefile = models.ImageField( upload_to='img', null=True, blank=True, help_text="Load an image.")
-#     elm = models.ForeignKey(Element, blank = True, null = False, on_delete=models.SET_NULL, related_name='image' )
-
-#     def image_(self):
-#         return mark_safe('<img class="'+self.elm.name+'" src="/media/{0}">'.format(self.imagefile))
-
-#     def __str__(self):
-#         return '%s' % (self.name,)
-
-#     def save(self, *args, **kwargs):
-#         if(self.name == None):
-#             self.name = self.imagefile.name
-#         super().save(*args, **kwargs)  # Call the "real" save() method.
