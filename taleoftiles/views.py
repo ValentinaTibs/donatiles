@@ -39,17 +39,18 @@ def catalogue(request, the_filter = None):
         })
 
 def product(request, product_slug):    
-    # 2do mettere traduzioni
+
     try: 
         product = Product.active.get(publication__slug = product_slug )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
     
-    #supports    = Product.active.filter(support_to = product)
-    serie_tag   = product.serie()
-
     #for all product in the same series that are not support and not itself
-    rel_series  = Product.active.filter(tags = serie_tag,support_to = None).exclude(pk = product.pk)
+    rel_series  = Product.active.filter(tags = product.serie(),support_to = None).exclude(pk = product.pk)
+
+    # #checking if the current session or the current user has this product in the sampler
+    # if not request.session.exists(request.session.session_key):
+
     return render(request, "product.html",{
         "product":product,
         "products_series":rel_series,

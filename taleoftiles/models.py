@@ -112,6 +112,7 @@ class ActiveProductManager(models.Manager):
             publication__publish_date__lte= dt.datetime.now(), 
             is_active = True)
         return qs
+    
 
 class Product(models.Model):
 

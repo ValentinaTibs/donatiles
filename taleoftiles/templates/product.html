@@ -5,6 +5,7 @@
 
 {% load static %}
 
+
 {% block content %}
 
 {% load i18n %}
@@ -53,17 +54,31 @@
 {% endfor %}
 
 
-<form  action="{% url 'add_sample' product.publication.slug %}" method="POST"> 
-	{% csrf_token %}
-	<button > aggiungi al campione gratuito</button>
 
-</form>
 
 <form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
 	{% csrf_token %}
 	<button > aggiungi al carrello</button>
 </form>
 
+
+--- {{sampler}} ---- 
+
+{% if sampler and sampler.all_samples.count >= 4 %}
+	HAI RIEMPITO IL SAMPLER
+{% endif %}
+
+{% if sampler|is_in_sample:product.publication.slug %}
+
+	QUESTO E' NEL SAMPLER 
+
+{% else %}
+
+	<form  action="{% url 'add_sample' product.publication.slug %}" method="POST"> 
+		{% csrf_token %}
+		<button > {% trans 'add-sampler' %}</button>
+	</form>
+{% endif %}
 
 {% endblock %}
 

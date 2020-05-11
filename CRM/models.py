@@ -122,12 +122,13 @@ class ActiveChartManager(models.Manager):
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
         )
         return qs
-          
+
+# return all charts that are samples and have at least one item            
 class ActiveSamplesManager(models.Manager):
     def get_queryset(self):
         qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(
             total = Count('chart_item',filter=Q(chart_item__status='ok')),
-            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
+            count = Sum  ('chart_item',filter=Q(chart_item__status='ok'))
             )
         return qs
         
@@ -164,6 +165,12 @@ class Chart(models.Model):
     def all_items(self):
         if self.chart_item and (not self.is_sample):
             return self.chart_item.filter(status = 'ok')
+
+    def is_in_sample(self, product_slug):
+        if self.chart_item and self.is_sample:
+            return self.chart_item.filter(status = 'ok',
+                product__publication__slug = product_slug)
+        
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, on_delete=models.SET_NULL, related_name='chart_item')
