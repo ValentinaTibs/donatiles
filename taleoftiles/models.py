@@ -151,31 +151,18 @@ class Product(models.Model):
     def has_single_sell(self):
         return true
 
-    def serie(self):
+    def get_tag(self,tag_slug):
         try:
-            serie = self.tags.get(parent__slug = "serie")
+            serie = self.tags.get(parent__slug = tag_slug)
         except ObjectDoesNotExist:
             serie = "None"
         return serie
-    
-    def color(self):
-        try:
-            color = self.tags.get(parent__slug = "colour")
-        except ObjectDoesNotExist:
-            color = "FFFFFF"
-        return color
 
-    def formats(self):    
-        formats = self.tags.filter(parent__slug = "format")
-        if formats.count() == 0:
-            formats= "none"
-        return formats
-
-    def finishes(self):    
-        finishes = self.tags.filter(parent__slug = "finish")
-        if finishes.count() == 0:
-            finishes= "none"        
-        return finishes
+    def filter_tags(self,tag_slug):
+        res = self.tags.filter(parent__slug = tag_slug)
+        if res.count() == 0:
+            res= "none"
+        return res
 
 class Catalogue(models.Model):
     title = models.CharField(max_length=200, unique = True)
@@ -191,13 +178,15 @@ class Catalogue(models.Model):
         
         tag_query = Q()
         tag_len = 0
-        for key, value in query_dictionary:
+        for key, value in query_dictionary.items():
             if(key != 'csrfmiddlewaretoken'):
-                tag_query = tag_query | Q(slug = value)
+                tag_query = tag_query | Q(slug = value[0])
                 tag_len = tag_len + 1
-
-        active_tags = Tag.objects.filter(tag_query)
         
+        if tag_query == Q():
+            return prods
+        active_tags = Tag.objects.filter(tag_query)
+
         return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
     def __str__(self):

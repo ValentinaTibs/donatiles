@@ -22,17 +22,25 @@ def index(request):
 def catalogue(request, the_filter = None):
 
     catalogue_prod = Product.active.filter(available = True)
-
+    query_dict = {}
     try: 
         cat = Catalogue.objects.get(active = True)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"There is no active catalogue",})
 
-    catalogue_tags = cat.tags()
+    if the_filter:
+        try: 
+            tag = Tag.objects.get(slug = the_filter)
+        except ObjectDoesNotExist:
+            return render(request, "404.html",{"message":"There is no active catalogue",})        
+        query_dict = {**query_dict, **{tag.parent.slug:[the_filter]}}
 
     if request.method == 'POST':
-        catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
-    
+        query_dict = {**query_dict, **dict(request.POST.lists())}
+
+    catalogue_tags = cat.tags()
+    catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
+
     return render(request, "catalogue.html",{   
         "tags"      : catalogue_tags,  
         "products"  : catalogue_prod
@@ -46,7 +54,7 @@ def product(request, product_slug):
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
     
     #for all product in the same series that are not support and not itself
-    rel_series  = Product.active.filter(tags = product.serie(),support_to = None).exclude(pk = product.pk)
+    rel_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
 
     return render(request, "product.html",{
         "product":product,

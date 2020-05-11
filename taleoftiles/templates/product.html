@@ -13,7 +13,8 @@
 
 <br/>
 
-{{product.serie}}
+
+{{product|serie}}
 
 {% for image in product.images.all %}  
 <img  src="{{ image.imagefile.url }}" >
@@ -34,18 +35,28 @@
 {% endfor %}
 
 
-{{product.color}}
+{{product|colour}}
 
-{% for format in product.formats.all %}  
+
+{% for effect in product|effects %}  
+	{{effect.name}}       
+{% endfor %}
+
+{% for format in product|formats %}  
 	{% for more_format in format.child.all %}
 		{{more_format.name}}       
 	{% endfor %}            
 {% endfor %}
 
+{% for style in product|styles %}  
+	{{style.name}}       
+{% endfor %}
 
-{% for finish in product.finishes.all %}  
+
+{% for finish in product|finishes %}  
 	{{finish.name}}       
 {% endfor %}
+
 
 {{product.price}}
 
@@ -64,6 +75,7 @@
 <!-- SAMPLER !-->
 
 {% if sampler and sampler.all_samples.count >= 4 %}
+
 	HAI RIEMPITO IL SAMPLER
 {% elif sampler|is_in_sample:product.publication.slug %}
 

@@ -31,6 +31,41 @@ def is_in_sample(chart, product):
         return chart.is_in_sample(product).count() > 0
     return False
 
+@register.filter
+def serie(product):
+    if product: 
+        return product.get_tag("serie")
+    return "-"
+
+@register.filter
+def colour(product):
+    if product: 
+        return product.get_tag("colour")
+    return "-"
+
+@register.filter
+def formats(product):
+    if product: 
+        return product.filter_tags("format")
+    return "-"
+
+@register.filter
+def finishes(product):
+    if product: 
+        return product.filter_tags("finish")
+    return "-"
+
+@register.filter
+def styles(product):
+    if product: 
+        return product.filter_tags("style")
+    return "-"
+
+@register.filter
+def effects(product):
+    if product: 
+        return product.filter_tags("effect")
+    return "-"
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
 #   guy_name = user.userprofile.centre.related.slug.split('-')[0].capitalize()
