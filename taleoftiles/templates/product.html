@@ -35,10 +35,18 @@
 {% endfor %}
 
 
-
 {{product.color}}
-{{product.formats}}
-{{product.finishes}}
+
+{% for format in product.formats.all %}  
+	{% for more_format in format.child.all %}
+		{{more_format.name}}       
+	{% endfor %}            
+{% endfor %}
+
+
+{% for finish in product.finishes.all %}  
+	{{finish.name}}       
+{% endfor %}
 
 {{product.price}}
 
@@ -53,14 +61,8 @@
 	{{brother_product}}
 {% endfor %}
 
-
-
-
-<form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
-	{% csrf_token %}
-	<button > aggiungi al carrello</button>
-</form>
-
+<hr>
+<!-- SAMPLER !-->
 
 {% if sampler and sampler.all_samples.count >= 4 %}
 	HAI RIEMPITO IL SAMPLER
@@ -77,6 +79,13 @@
 
 {% endif %}
 
+<hr>
+
+<!-- CHART !-->
+<form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
+	{% csrf_token %}
+	<button > aggiungi al carrello</button>
+</form>
 
 
 {% endblock %}
