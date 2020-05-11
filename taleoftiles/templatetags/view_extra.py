@@ -27,7 +27,9 @@ def define(val=None):
 
 @register.filter
 def is_in_sample(chart, product):
-    return chart.is_in_sample(product).count() > 0
+    if chart: 
+        return chart.is_in_sample(product).count() > 0
+    return False
 
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
