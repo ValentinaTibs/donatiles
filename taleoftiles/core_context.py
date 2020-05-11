@@ -34,8 +34,9 @@ def user_menu(context):
     charts  = Chart.active.filter   ( query )
     sampler = Chart.samples.filter  ( query ).first()
 
-    return {'sampler': sampler,'charts':charts,
-        'loginform':LoginForm, 'signupform':RegisterForm,
-        'session' : context.session.session_key
+    return {
+            'sampler': sampler,'charts':charts,
+            'loginform':LoginForm, 'signupform':RegisterForm,
+            'session' : context.session.session_key
     } 
 

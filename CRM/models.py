@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from taleoftiles.models import Product
+from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
@@ -29,69 +30,22 @@ user_logged_in.connect(pour_charts)
 #####  --------------
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
+    bio         = models.TextField(max_length=500, blank=True)
+    location    = models.CharField(max_length=30, blank=True)
+    birth_date  = models.DateField(null=True, blank=True)
 
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-    #     if created:
-    #         Profile.objects.create(user=instance)
-
-
-    # @receiver(post_save, sender=User)
-    # def create_user_profile(sender, instance, created, **kwargs):
-    #     if created:
-    #         Profile.objects.create(user=instance)
-
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-    #     instance.profile.save()
 
 class Shipping(models.Model):
     #2do this must become a one to Many because we want to keep track of old shippings
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
-    
-    #2do this must be a selectebox...for now is a text field
-    #country = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    user                = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
     fullname            = models.TextField(max_length=100, blank=True)
-    country             = models.TextField(max_length=100, blank=True)
+    country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
     city                = models.TextField(max_length=100, blank=True)
     CAP                 = models.TextField(max_length=10, blank=True)
     shipping_address    = models.TextField(max_length=100, blank=True)
     telephone_num       = models.TextField(max_length=30, blank=True)
     is_active           = models.BooleanField(default = True)
-
-COMPLETION_STATUS = (
-    ('s',   'Started'),
-    ('i1',  'In Checkout 1'),
-    ('i2',  'In Checkout 2'),
-    ('c',   'Completed'),
-    ('p',   'Payed'),
-    ('ex',  'Expired'),
-    ('cs',  'Closed by Staff'),
-) 
-
-ORDER_STATUS = (
-    ('w', 'In Wait'),
-    ('i', 'Received'),
-    ('p', 'In Preparazione'),
-    ('s', 'Spedito'),
-    ('l', 'Lost'),
-    ('r', 'Ricevuto'),
-    ('c', 'Confermato'),
-) 
-
-ITEM_STATUS = (
-    ('ok', 'ok'),
-    ('ns', 'Not Samplable'),
-    ('le', 'Limit Exceeded'),
-    ('ru', 'Removed by User'),
-    ('rs', 'Removed by Staff'),
-    ('o', 'Others')
-) 
-
 
 
 def create_shipping_internal_id():
@@ -208,46 +162,4 @@ class Question(models.Model):
 
     def published(self):
         return True #models.BooleanField(default = True)
-
-    # user - that might be null 
-    # author that might be a user - that might be null 
-    # status visible only to the staff
-    # creation date
-    # email to reply
-
-    # null=True, to allow in database
-    # blank=True, to allow in form validation
-
-    # class Order(models.Model):
-    #     pass
-
-
-    #user = models.ForeignKey(User,  verbose_name="User", null=True, on_delete=models.SET_NULL)
-    #completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
-    # name    = models.CharField(max_length=100,default = "")
-    # surname = models.CharField(max_length=100,default = "")
-    
-    # email   = models.EmailField(max_length=100,default = "")
-    # telephone = models.CharField(max_length=100,default = "")
-
-    # address = models.CharField(max_length=100,default = "")
-    # address2 = models.CharField(max_length=100,default = "")
-    # city = models.CharField(max_length=100,default = "")
-    # postcode = models.CharField(max_length=100,default = "")
-
-        
-# class Sample(models.Model):
-#     session_id = models.CharField(max_length=100, unique=True, default="")
-#     completion_status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='e')
-#     order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
-
-#     def __str__(self):
-#         return self.session_id
-
-# class SampleItem(models.Model):
-#     product = models.ForeignKey(Product,  verbose_name="Products", null=True, on_delete=models.SET_NULL, related_name='sample')
-#     sampler = models.ForeignKey(Sample,  verbose_name="Sampler", null=True, on_delete=models.SET_NULL, related_name='sample')
-#     removed = models.BooleanField(default = False)
-
-#     def __str__(self):
-#         return self.sampler.session_id     
+  

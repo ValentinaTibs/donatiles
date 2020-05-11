@@ -62,15 +62,11 @@
 </form>
 
 
---- {{sampler}} ---- 
-
 {% if sampler and sampler.all_samples.count >= 4 %}
 	HAI RIEMPITO IL SAMPLER
-{% endif %}
+{% elif sampler|is_in_sample:product.publication.slug %}
 
-{% if sampler|is_in_sample:product.publication.slug %}
-
-	QUESTO E' NEL SAMPLER 
+	QUESTO PRODOTTO E' NEL SAMPLER 
 
 {% else %}
 
@@ -78,7 +74,10 @@
 		{% csrf_token %}
 		<button > {% trans 'add-sampler' %}</button>
 	</form>
+
 {% endif %}
+
+
 
 {% endblock %}
 
