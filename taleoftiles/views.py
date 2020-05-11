@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
-import datetime as dt
-
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,7 +21,7 @@ def index(request):
 
 def catalogue(request, the_filter = None):
 
-    catalogue_prod = Product.objects.filter(publication__publish_date__lte= dt.datetime.now(), active = True, available = True)
+    catalogue_prod = Product.active.filter(available = True)
 
     try: 
         cat = Catalogue.objects.get(active = True)
@@ -35,22 +33,26 @@ def catalogue(request, the_filter = None):
     if request.method == 'POST':
         catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
     
-    
     return render(request, "catalogue.html",{   
-        "tags":catalogue_tags,  
-        "products" : catalogue_prod
+        "tags"      : catalogue_tags,  
+        "products"  : catalogue_prod
         })
 
 def product(request, product_slug):    
     # 2do mettere traduzioni
     try: 
-        product = Product.objects.filter( publication__publish_date__lte= dt.datetime.now(), 
-            active = True, publication__slug  = product_slug )[:1]
+        product = Product.active.get(publication__slug = product_slug )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
+    
+    #supports    = Product.active.filter(support_to = product)
+    serie_tag   = product.serie()
 
+    #for all product in the same series that are not support and not itself
+    rel_series  = Product.active.filter(tags = serie_tag,support_to = None).exclude(pk = product.pk)
     return render(request, "product.html",{
-        "product":product, 
+        "product":product,
+        "products_series":rel_series,
         })
 
 

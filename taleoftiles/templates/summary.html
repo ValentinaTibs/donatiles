@@ -2,7 +2,7 @@
 {% load view_extra %}
 
 
-{% block title%} Tale of Tiles {% endblock%}
+{% block title%} {% trans 'summary-title' %} {% endblock%}
 
 {% load static %}
 
@@ -10,7 +10,10 @@
 
 {% load i18n %}
 
+<a href="{{prv_page|urlencode}}"> {% trans 'summary-back' %} </a>
+
 ## {{ charts.count }}
+
 
 {% for chart in charts %}
 	---> {{ chart.total }}

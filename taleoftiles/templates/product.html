@@ -1,7 +1,7 @@
 {% extends "empty_base.html" %}
 {% load view_extra %}
 
-{% block title%} Tale of Tiles {% endblock%}
+{% block title%} {{ product.publication.title }} {% endblock%}
 
 {% load static %}
 
@@ -13,6 +13,8 @@
 
 <br/>
 
+{{product.serie}}
+
 {% for image in product.images.all %}  
 <img  src="{{ image.imagefile.url }}" >
 {% endfor %}
@@ -23,22 +25,31 @@
 	{{ product.publication.content }} 
 {% endautoescape %}
 
+<!-- scheda tecnica -->
 {{ product.techspec }} 
 
+<!-- ICONE scheda tecnica -->
 {% for icon in product.techspec.icons.all %}  
 <img  src="{{ icon.imagefile.url }}" >
 {% endfor %}
 
 
-{{product.serie}}
+
 {{product.color}}
 {{product.formats}}
 {{product.finishes}}
 
 {{product.price}}
 
+<h3>{% trans 'product-support' %}</h3>
+
 {% for support in product.supports.all %}  
 	{{support}}
+{% endfor %}
+
+<h3>{% trans 'product-same-serie' %}</h3>
+{% for brother_product in products_series.all %}  
+	{{brother_product}}
 {% endfor %}
 
 
@@ -51,7 +62,8 @@
 <form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
 	{% csrf_token %}
 	<button > aggiungi al carrello</button>
-
 </form>
+
+
 {% endblock %}
 

@@ -56,12 +56,11 @@ For more information about using Python on Heroku, see these Dev Center articles
 _______________________________________________________________________________
 
 
-# RUN 
+# SERVER RUN 
 
 ```
 heroku local web -f Procfile.windows
 ```
-
 
 or 
 
@@ -77,7 +76,15 @@ heroku local web
 kill -9 $(lsof -i:5000 -t) 2> /dev/null
 ```
 
-# Migrations
+# DATABASE
+
+## local run 
+
+```
+$ brew services start postgresql
+$ psql postgres
+```
+
 ## remote check and deploy of migrations
 
 ```
@@ -106,6 +113,10 @@ python3 manage.py showmigrations
 
 python3 manage.py migrate --fake-initial
 
+## Download and test remote database
+
+heroku pg:backups:capture
+heroku pg:backups:download
 
 # Translations -
 
