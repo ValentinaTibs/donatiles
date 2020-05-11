@@ -95,6 +95,7 @@ heroku run python manage.py migrate
 
 ## Reset local Migrations
 
+```sh
 python3 manage.py makemigrations
 python3 manage.py showmigrations
 python3 manage.py migrate --fake taleoftiles zero
@@ -105,7 +106,7 @@ find . -path "*/migrations/*.pyc"  -delete
 python3 manage.py showmigrations
 
 python3 manage.py migrate --fake-initial
-
+```
 
 # Translations -
 
