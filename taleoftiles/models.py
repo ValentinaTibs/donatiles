@@ -23,7 +23,7 @@ class Icon(models.Model):
     description = models.TextField()
 
     def image_(self):
-        return mark_safe('<img src="/icons/{0}">'.format(self.imagefile))
+        return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
 
     def __str__(self):
         return '%s' % (self.name, )

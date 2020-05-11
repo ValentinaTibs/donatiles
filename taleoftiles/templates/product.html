@@ -1,5 +1,6 @@
 {% extends "empty_base.html" %}
 {% load view_extra %}
+{% load i18n %}
 
 {% block title%} {{ product.publication.title }} {% endblock%}
 
@@ -7,8 +8,6 @@
 
 
 {% block content %}
-
-{% load i18n %}
 
 {{ product.publication.title }}
 

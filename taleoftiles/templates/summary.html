@@ -1,14 +1,12 @@
 {% extends "checkout_base.html" %}
 {% load view_extra %}
-
+{% load i18n %}
 
 {% block title%} {% trans 'summary-title' %} {% endblock%}
 
 {% load static %}
 
 {% block content %}
-
-{% load i18n %}
 
 <a href="{{prv_page|urlencode}}"> {% trans 'summary-back' %} </a>
 
