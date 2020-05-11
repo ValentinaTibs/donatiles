@@ -46,6 +46,9 @@
         {{ tags.format.name }} 
         {% for format in tags.format.child.all %}
         	<input type="checkbox" name="{{ tags.format.name }}" value="{{format.slug}}">{{format.name}}       
+            {% for more_format in format.child.all %}
+                {{more_format.name}}       
+            {% endfor %}            
 		{% endfor %}
     
     	<br/>

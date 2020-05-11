@@ -33,7 +33,6 @@ def catalogue(request, the_filter = None):
     catalogue_tags = cat.tags()
 
     if request.method == 'POST':
-        print(request.POST)
         catalogue_prod = cat.filter_products(catalogue_prod,request.POST.items())
     
     

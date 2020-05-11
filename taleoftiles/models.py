@@ -190,6 +190,9 @@ class Catalogue(models.Model):
         active_tags = Tag.objects.filter(tag_query)
         
         return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+
+    def __str__(self):
+        return self.title
         
 
 class Photo(models.Model):  
