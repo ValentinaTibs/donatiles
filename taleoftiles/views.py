@@ -19,6 +19,14 @@ def index(request):
         'posts'         : home_post,
         })
 
+def custom_merge(unit1, unit2):
+   # Merge dictionaries and concat values of same keys if list
+   out = {**unit1, **unit2}
+   for key, value in out.items():
+       if key in unit1 and key in unit2 :
+               out[key] = value + unit1[key]
+   return out
+
 def catalogue(request, the_filter = None):
 
     catalogue_prod = Product.active.filter(available = True)
@@ -33,10 +41,11 @@ def catalogue(request, the_filter = None):
             tag = Tag.objects.get(slug = the_filter)
         except ObjectDoesNotExist:
             return render(request, "404.html",{"message":"There is no active catalogue",})        
-        query_dict = {**query_dict, **{tag.parent.slug:[the_filter]}}
+        
+        query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
 
     if request.method == 'POST':
-        query_dict = {**query_dict, **dict(request.POST.lists())}
+        query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
 
     catalogue_tags = cat.tags()
     catalogue_prod = cat.filter_products(catalogue_prod,query_dict)

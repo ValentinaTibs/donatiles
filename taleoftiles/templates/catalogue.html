@@ -9,7 +9,7 @@
 {% block content %}
 
 
-
+{{active_tags}}
 <form method="POST" action="{{request.get_full_path}}">
 {% csrf_token %}
 	       
