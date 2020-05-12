@@ -12,6 +12,13 @@ def duplicate(modeladmin, request, queryset):
 
 duplicate.short_description = "Duplicate selected items"
 
+def make_for_product(modeladmin, request, queryset):
+    for e in queryset:
+        e.in_product_edit = not(e.in_product_edit)
+        e.save() 
+
+make_for_product.short_description = "Toggle availability for product edit"
+
 class PhotoStackedAdmin(admin.StackedInline):
     model = Photo
 
@@ -21,8 +28,8 @@ class PhotoStackedAdmin(admin.StackedInline):
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
-    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','public','parent','data_type')
-    actions = [duplicate]
+    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','parent','data_type')
+    actions = [duplicate,make_for_product]
 
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
@@ -45,6 +52,13 @@ class CatalogueAdmin(admin.ModelAdmin):
     list_display = ('title','active')
     
 class ProductAdmin(admin.ModelAdmin):
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "tags":
+            kwargs["queryset"] = Tag.objects.filter(in_product_edit=True)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+
     inlines = (PhotoStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
     list_display = ('name',
@@ -61,6 +75,7 @@ class ProductAdmin(admin.ModelAdmin):
                     'support_to',
                     'techspec'
                     )
+
 
     def name(self, obj):
         pub = obj.publication

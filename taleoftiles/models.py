@@ -34,9 +34,10 @@ class Tag(models.Model):
     slug    = models.CharField(max_length=200,  unique=True)
     public  = models.BooleanField(default = True)
 
-    in_catalogue= models.BooleanField(default = False)    
-    in_menu     = models.BooleanField(default = False)    
-    in_home     = models.BooleanField(default = False)    
+    in_catalogue    = models.BooleanField(default = False)    
+    in_menu         = models.BooleanField(default = False)    
+    in_home         = models.BooleanField(default = False)    
+    in_product_edit = models.BooleanField(default = False)    
     icon        = models.ForeignKey( Icon,  blank = True, null = True, on_delete=models.SET_NULL, related_name='tags' )
     parent      = models.ForeignKey("self", blank = True, null = True, on_delete=models.SET_NULL, related_name='child' )
 
