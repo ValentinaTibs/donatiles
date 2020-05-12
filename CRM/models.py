@@ -72,7 +72,6 @@ class Order(models.Model):
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
         query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
-        query = (query) & Q( is_sample = False)
         qs = super().get_queryset().filter(query).annotate(
             total = Count('chart_item',filter=Q(chart_item__status='ok')),
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
@@ -114,6 +113,14 @@ class Chart(models.Model):
     def __str__(self):
         return self.session_id
 
+    def total_price(self):
+        total = 0
+        if self.is_sample:
+            return total
+        for ch_i in self.chart_item.filter(status = 'ok'):
+            total += ch_i.quantity * ch_i.product.price
+        return total
+    
     def all_samples(self):
         if self.chart_item and self.is_sample:
             return self.chart_item.filter(status = 'ok')
@@ -124,9 +131,8 @@ class Chart(models.Model):
 
     def is_in_sample(self, product_slug):
         if self.chart_item and self.is_sample:
-            return self.chart_item.filter(status = 'ok',
-                product__publication__slug = product_slug)
-        
+            return self.chart_item.filter(status = 'ok',product__publication__slug = product_slug)
+
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, on_delete=models.SET_NULL, related_name='chart_item')

@@ -38,7 +38,7 @@ class ChartAdmin(admin.ModelAdmin):
 	inlines = [ChartItemStackedAdmin,]
 
 	def _num_prods(self, obj):
-		return obj.num_prods()
+		return obj.all_items()
 	_num_prods.short_description = "Number of Products"
 	_num_prods.admin_order_field = 'num_prods'
 

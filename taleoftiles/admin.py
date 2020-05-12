@@ -82,8 +82,6 @@ class ProductAdmin(admin.ModelAdmin):
         return pub.title
 
     def tags_(self, obj):
-        print(obj)
-        print(obj.tags.all())
         return "\n".join([p.name + ' * ' for p in obj.tags.all()])    
 
 class TechnicalSpecAdmin(admin.ModelAdmin):

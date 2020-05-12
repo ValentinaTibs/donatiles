@@ -1,34 +1,92 @@
 {% extends "checkout_base.html" %}
 {% load view_extra %}
 {% load i18n %}
-
-{% block title%} {% trans 'summary-title' %} {% endblock%}
-
 {% load static %}
+
+{% block title %} 	{% trans 'summary-title' %} {% endblock%}
+{% block menu %}
+<a href="{{prv_page|urlencode}}"> {% trans 'summary-back' %} </a>
+{% endblock%}
 
 {% block content %}
 
-<a href="{{prv_page|urlencode}}"> {% trans 'summary-back' %} </a>
-
 ## {{ charts.count }}
 
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
 
+{% trans 'summary-page-title' %}
+
+<table>
+	<tr>
+		<td>{% trans 'quantity' %}</td>
+		<td>{% trans 'price' %}</td>
+	</tr>
+	
 {% for chart in charts %}
-	---> {{ chart.total }}
 
+	<tr>
 	{% for chart_item in chart.all_items %}
-	  	{{chart_item.product}}
-	  	{{chart_item.product.thumb_}}
-	  	{{chart_item.product.serie}}
-	  	{{chart_item.quantity}}
+	  	<td>{{chart_item.product}}</td>
+	  	<td>{{chart_item.product.thumb_}}</td>
+	  	<td>{{chart_item.product|serie}}</td>
+	  	<td>{{chart_item.quantity}}</td>
 
-	  	<a href="{% url 'del_chart' chart_item.product.publication.slug False %}"> del this</a>
-
+	  	<td>
+	  		<a href="{% url 'del_chart' chart_item.product.publication.slug False %}">
+	  		{% trans 'delete' %}</a>
+	  	</td>
 	{% endfor %}
+	</tr>
+	<tr>
+		<td>{% trans 'summary-corrispond-to' %} {% trans 'box' %}</td>
+
+
+	</tr>
+
+
+
+	<tr>
+		<td>
+		{% for chart_item in chart.all_samples %}
+			{{chart_item.product.thumb_}}
+		{% endfor %}
+		</td>
+	</tr>
+
+	<tr>
+		<td>{% trans 'summary-sample-title' %}</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>{% trans 'summary-sample-subtitle' %}</td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td>{% trans 'summary-shipping-title' %}</td>
+		<td>{{chart.total_price}}</td>
+	</tr>
+	<tr>
+		<td>{% trans 'summary-shipping-subtitle' %}</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>{% trans 'summary-total-title' %}</td>
+		<td></td>
+	</tr>
+
 
 {% endfor %}
 
-<a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}"> SHIPPING</a> 
+</table>
+<a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}"> {% trans 'summary-insert-shipping' %} </a> 
+
+{% trans 'summary-longtext' %}
+
 
 
 {% endblock %}

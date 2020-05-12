@@ -100,7 +100,7 @@
                 {% if active_tags|get_item:tags.serie.slug|length > 0  %}
                     disabled
                 {% endif %}
-                >Tutte</option>       
+                >{% trans 'cat-menu-all' %}</option>       
             
 
             {% for serie in tags.serie.child.all %}
