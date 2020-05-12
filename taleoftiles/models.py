@@ -176,7 +176,7 @@ class Catalogue(models.Model):
         tag_query = Q()
         tag_len = 0
         for key, value in query_dictionary.items():
-            if(key != 'csrfmiddlewaretoken'):
+            if(key != 'csrfmiddlewaretoken') and len(value[0]) >0:
                 tag_query = tag_query | Q(slug = value[0])
                 tag_len = tag_len + 1
         

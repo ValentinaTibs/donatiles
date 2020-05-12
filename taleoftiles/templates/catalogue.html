@@ -10,7 +10,7 @@
 
 
 {{active_tags}}
-<form method="POST" action="{{request.get_full_path}}">
+<form method="POST" action="{% url 'catalogue' %}">
 {% csrf_token %}
 	       
         {{ tags.effect.name }} 
@@ -50,7 +50,7 @@
            
 		<br/>
            
-        {{ tags.setting.name }} 
+        {{ tags.setting.name }}
         {% for setting in tags.setting.child.all %}
         	<input type="checkbox" name="{{ tags.setting.slug }}" value="{{setting.slug}}"
             {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
@@ -76,15 +76,42 @@
     
     	<br/>
         
-        <input type="checkbox" name="{{ tags.handmade.slug }}" 	value="{{tags.handmade.slug}}">{{tags.handmade.name}}       
+        <input type="checkbox" name="{{ tags.handmade.slug }}" 	value="{{tags.handmade.slug}}"
+        {% if tags.handmade.slug in active_tags|get_item:tags.handmade.slug  %}
+           checked 
+        {% endif %}
+        >{{tags.handmade.name}}       
 		<input type="checkbox" name="{{ tags.samplable.slug }}" value="{{tags.samplable.slug}}">{{tags.samplable.name}}       
 
 		<br/>
 		
         {{ tags.serie.name }} 
-        {% for serie in tags.serie.child.all %}
-        	<input type="checkbox" name="{{ tags.serie.slug }}" value="{{serie.slug}}">{{serie.name}}       
-		{% endfor %}
+        <select name="{{ tags.serie.slug }}" multiple>
+       
+                <option value="" 
+                {% if '' in active_tags|get_item:tags.serie.slug  %}
+                    selected 
+                {% endif %}
+
+                {% if active_tags|get_item:tags.serie.slug|length == 0  %}
+                    selected 
+                {% endif %}
+
+                {% if active_tags|get_item:tags.serie.slug|length > 0  %}
+                    disabled
+                {% endif %}
+                >Tutte</option>       
+            
+
+            {% for serie in tags.serie.child.all %}
+                <option value="{{serie.slug}}" 
+                {% if serie.slug in active_tags|get_item:tags.serie.slug  %}
+                   selected 
+                {% endif %}
+                >{{serie.name}}</option>       
+    		{% endfor %}
+
+        </select>
        
 		<br/>
     <input type="submit" value="SEARCH" />      

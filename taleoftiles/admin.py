@@ -47,15 +47,29 @@ class CatalogueAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     inlines = (PhotoStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
-    list_display = ('name','price','color','tags', 'is_decor' )
+    list_display = ('name',
+                    'price',
+                    'wait_time',
+                    'min_ammount',
+                    'code',
+                    'is_decor',
+                    'is_samplable',
+                    'available',
+                    'is_active',
+                    'tags_',
+                    'publication',
+                    'support_to',
+                    'techspec'
+                    )
 
     def name(self, obj):
         pub = obj.publication
         return pub.title
 
-    def tags(self, obj):
-        pub = obj.publication
-        return "\n".join([p.name for p in pub.tag.all()])    
+    def tags_(self, obj):
+        print(obj)
+        print(obj.tags.all())
+        return "\n".join([p.name + ' * ' for p in obj.tags.all()])    
 
 class TechnicalSpecAdmin(admin.ModelAdmin):
     model = TechnicalSpec
