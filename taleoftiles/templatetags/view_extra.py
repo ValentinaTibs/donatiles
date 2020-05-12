@@ -7,6 +7,17 @@ register = template.Library()
 def starts_with(expected,actual):
     return actual.startswith(expected);
 
+
+@register.filter
+def has(dict,val):
+    # if dict[val]: 
+    #     return True
+    return False
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+    
 @register.filter
 def clean(value):
     return value.replace('-',' ')
@@ -66,6 +77,8 @@ def effects(product):
     if product: 
         return product.filter_tags("effect")
     return "-"
+
+
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
 #   guy_name = user.userprofile.centre.related.slug.split('-')[0].capitalize()

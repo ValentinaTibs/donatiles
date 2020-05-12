@@ -168,9 +168,6 @@ class Catalogue(models.Model):
     title = models.CharField(max_length=200, unique = True)
     active = models.BooleanField(default = True)
 
-    # def catalogue_childs(self):
-    #     return Tag.objects.filter(parent = self, in_catalogue = True)
-
     def tags(self):
         return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
 
@@ -186,7 +183,6 @@ class Catalogue(models.Model):
         if tag_query == Q():
             return prods
         active_tags = Tag.objects.filter(tag_query)
-
         return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
     def __str__(self):

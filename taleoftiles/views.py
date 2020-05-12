@@ -42,8 +42,9 @@ def catalogue(request, the_filter = None):
     catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
 
     return render(request, "catalogue.html",{   
-        "tags"      : catalogue_tags,  
-        "products"  : catalogue_prod
+        "tags"          : catalogue_tags,  
+        "products"      : catalogue_prod,
+        "active_tags"   : query_dict
         })
 
 def product(request, product_slug):    

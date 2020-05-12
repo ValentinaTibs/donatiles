@@ -8,41 +8,67 @@
 
 {% block content %}
 
-<form method="POST" action="{% url 'catalogue' %}">
-{% csrf_token %}
 
+
+<form method="POST" action="{{request.get_full_path}}">
+{% csrf_token %}
 	       
         {{ tags.effect.name }} 
         {% for effect in tags.effect.child.all %}
-        	<input type="checkbox" name="{{ tags.effect.name }}" value="{{effect.slug}}">{{effect.name}}       
+
+        	<input type="checkbox" name="{{ tags.effect.slug }}" value="{{effect.slug}}"
+            {% if effect.slug in active_tags|get_item:tags.effect.slug  %}
+               checked 
+            {% endif %}
+            >
+            {{effect.name}}
+
 		{% endfor %}
-     
+
+
 		<br/>
 	       
         {{ tags.style.name }} 
         {% for style in tags.style.child.all %}
-        	<input type="checkbox" name="{{ tags.style.name }}" value="{{style.slug}}">{{style.name}}       
+        	<input type="checkbox" name="{{ tags.style.slug }}" value="{{style.slug}}"
+            {% if style.slug in active_tags|get_item:tags.style.slug  %}
+               checked 
+            {% endif %}
+            >{{style.name}}       
 		{% endfor %}
                 
 		<br/>
            
         {{ tags.colour.name }} 
         {% for colour in tags.colour.child.all %}
-        	<input type="checkbox" name="{{ tags.colour.name }}" value="{{colour.slug}}">{{colour.name}}       
+        	<input type="checkbox" name="{{ tags.colour.slug }}" value="{{colour.slug}}"
+            {% if colour.slug in active_tags|get_item:tags.colour.slug  %}
+               checked 
+            {% endif %}
+            >{{colour.name}}       
 		{% endfor %}
            
 		<br/>
            
         {{ tags.setting.name }} 
         {% for setting in tags.setting.child.all %}
-        	<input type="checkbox" name="{{ tags.setting.name }}" value="{{setting.slug}}">{{setting.name}}       
+        	<input type="checkbox" name="{{ tags.setting.slug }}" value="{{setting.slug}}"
+            {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
+               checked 
+            {% endif %}
+            >{{setting.name}}       
 		{% endfor %}
           
 		<br/>
            
         {{ tags.format.name }} 
         {% for format in tags.format.child.all %}
-        	<input type="checkbox" name="{{ tags.format.name }}" value="{{format.slug}}">{{format.name}}       
+        	<input type="checkbox" name="{{ tags.format.slug }}" value="{{format.slug}}" 
+            {% if format.slug in active_tags|get_item:tags.format.slug  %}
+               checked 
+            {% endif %}
+            >
+            {{format.name}}       
             {% for more_format in format.child.all %}
                 {{more_format.name}}       
             {% endfor %}            
@@ -50,14 +76,14 @@
     
     	<br/>
         
-        <input type="checkbox" name="{{ tags.handmade.name }}" 	value="{{tags.handmade.slug}}">{{tags.handmade.name}}       
-		<input type="checkbox" name="{{ tags.samplable.name }}" value="{{tags.samplable.slug}}">{{tags.samplable.name}}       
+        <input type="checkbox" name="{{ tags.handmade.slug }}" 	value="{{tags.handmade.slug}}">{{tags.handmade.name}}       
+		<input type="checkbox" name="{{ tags.samplable.slug }}" value="{{tags.samplable.slug}}">{{tags.samplable.name}}       
 
 		<br/>
 		
         {{ tags.serie.name }} 
         {% for serie in tags.serie.child.all %}
-        	<input type="checkbox" name="{{ tags.serie.name }}" value="{{serie.slug}}">{{serie.name}}       
+        	<input type="checkbox" name="{{ tags.serie.slug }}" value="{{serie.slug}}">{{serie.name}}       
 		{% endfor %}
        
 		<br/>
