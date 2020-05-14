@@ -33,9 +33,9 @@ make_for_product.short_description = "Toggle availability for product edit"
 class PhotoStackedAdmin(admin.StackedInline):
     model = Photo
 
-    list_display = ('name', 'thumb_', )
+    list_display = ('name',  )
     search_fields = ('name', )
-    readonly_fields  = ( 'thumb_', )
+    # readonly_fields  = ( 'thumb_', )
 
 # class SerieStackedAdmin(admin.StackedInline):
 #     model = Tag
