@@ -59,6 +59,19 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','parent','data_type')
     actions = [duplicate,make_for_product]
 
+
+
+class SerieAdmin(admin.ModelAdmin):
+    model = Tag
+    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','parent','data_type')
+    actions = [duplicate,make_for_product]
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "parent":
+            kwargs["queryset"] = Tag.objects.filter(parent__slug='serie')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
     summernote_fields = ('content',)
@@ -121,6 +134,8 @@ class TechnicalSpecAdmin(admin.ModelAdmin):
         return "\n".join([p.name for p in obj.icons.all()])    
 
 admin.site.register(Tag,TagAdmin)
+# admin.site.register(Tag,SerieAdmin)
+
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Price,PriceAdmin)
 admin.site.register(Publication,PublicationAdminSelf)

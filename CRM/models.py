@@ -140,8 +140,8 @@ class Chart(models.Model):
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
-    product     = models.ForeignKey(Product,    verbose_name="Products",    null=False, blank = True, on_delete=models.CASCADE, related_name='chart_item')
-    size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=False, blank = True, on_delete=models.CASCADE, related_name='chart_item')
+    product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
+    size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     quantity    = models.PositiveIntegerField( default=1 )       
 
     status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
