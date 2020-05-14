@@ -9,9 +9,16 @@ def duplicate(modeladmin, request, queryset):
     for e in queryset:
         e.pk = None
         e.slug = e.slug + "_COPY"
-        e.save() 
+        e.save()
+
+def duplicate_product(modeladmin, request, queryset):
+    for e in queryset:
+        e.pk = None
+        e.code = e.code + "_COPY"
+        e.save()          
 
 duplicate.short_description = "Duplicate selected items"
+duplicate_product.short_description = "Duplicate selected items"
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -94,7 +101,7 @@ class CatalogueAdmin(admin.ModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
 
-    actions = [duplicate]
+    actions = [duplicate_product]
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
     list_display = ('name',
                     'wait_time',
@@ -127,7 +134,6 @@ class TechnicalSpecAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag,TagAdmin)
 # admin.site.register(Tag,SerieAdmin)
-
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Price,PriceAdmin)
 admin.site.register(Publication,PublicationAdminSelf)
