@@ -122,7 +122,7 @@
 
 {% for product in products %}
 	{{ product }}
-	<a href="{% url 'product' product.publication.slug %}"> {{ product }}</a>
+	<a href="{% url 'product' product.code %}"> {{ product }}</a>
 {% endfor %}
 
 {% endblock %}

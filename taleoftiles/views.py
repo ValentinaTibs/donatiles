@@ -58,10 +58,10 @@ def catalogue(request, the_filter = None):
         "active_tags"   : query_dict
         })
 
-def product(request, product_slug, chi_form = None ):    
+def product(request, product_code, chi_form = None ):    
     
     try: 
-        product = Product.active.get(publication__slug = product_slug )
+        product = Product.active.get(code = product_code )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 

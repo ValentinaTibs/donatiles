@@ -133,9 +133,9 @@ class Chart(models.Model):
         if self.chart_item and (not self.is_sample):
             return self.chart_item.filter(status = 'ok')
 
-    def is_in_sample(self, product_slug):
+    def is_in_sample(self, product_code):
         if self.chart_item and self.is_sample:
-            return self.chart_item.filter(status = 'ok',product__publication__slug = product_slug)
+            return self.chart_item.filter(status = 'ok',product__code = product_code)
 
 
 class ChartItem(models.Model):

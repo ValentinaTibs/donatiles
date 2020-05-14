@@ -118,13 +118,13 @@ class Product(models.Model):
     
     wait_time       = models.PositiveIntegerField(default = 15)
     min_ammount     = models.PositiveIntegerField(default = 5)
-    code            = models.CharField(max_length=100,)
+    code            = models.CharField(max_length=100,unique=True,)
     is_decor        = models.BooleanField(default = False)
     is_samplable    = models.BooleanField( default=True, null = True)
     available       = models.BooleanField(default = True)
     is_active       = models.BooleanField(default = True)
     tags            = models.ManyToManyField(Tag, blank= True, related_name='products')
-    publication     = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
+    publication     = models.ForeignKey(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
     support_to      = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
     techspec        = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
 

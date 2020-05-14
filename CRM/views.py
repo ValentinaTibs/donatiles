@@ -106,24 +106,24 @@ def add_user(request):
     #2do add to the redirect the form error 
     return redirect(request.META.get('HTTP_REFERER'))
 
-def del_chart(request, product_slug, is_sample):
+def del_chart(request, product_code, is_sample):
     sess_k =request.session.session_key
 
     try: 
         chart_item = ChartItem.objects.get(chart__session_id  = sess_k, chart__is_sample = is_sample, 
-            product__publication__slug = product_slug, status = 'ok' )
+            product__code = product_code, status = 'ok' )
     except ObjectDoesNotExist:
-        return render(request, "404.html",{"message": "Removing something that wasnt in your chart/sampler " + product_slug,})
+        return render(request, "404.html",{"message": "Removing something that wasnt in your chart/sampler " + product_code,})
     chart_item.status = 'ru'
     chart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
-def add_sample(request, product_slug):
+def add_sample(request, product_code):
     
     try: 
-        product = Product.objects.get(publication__slug = product_slug )
+        product = Product.objects.get(code = product_code )
     except ObjectDoesNotExist:
-        return render(request, "404.html",{"message": "There is no product with code " + product_slug,})
+        return render(request, "404.html",{"message": "There is no product with code " + product_code,})
 
     if not request.session.exists(request.session.session_key):
         request.session.create() 
@@ -148,9 +148,9 @@ def add_sample(request, product_slug):
         chart_item = ChartItem(chart  = chart, product = product, status = remove_stat)
         chart_item.save()
 
-    return redirect('product', product_slug= product_slug )
+    return redirect('product', product_code= product_code )
 
-def add_chart(request, product_slug):
+def add_chart(request, product_code):
 
     chi_form = NewChartItemForm(request.POST or None, request.FILES or None)
     if not request.session.exists(request.session.session_key):
@@ -171,5 +171,5 @@ def add_chart(request, product_slug):
             chart_item.chart = chart
             chart_item.save()
 
-    return redirect('product', product_slug = product_slug)
+    return redirect('product', product_code = product_code)
 

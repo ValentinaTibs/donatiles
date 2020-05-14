@@ -33,7 +33,7 @@ table, th, td {
 	  	<td>{{chart_item.quantity}}</td>
 
 	  	<td>
-	  		<a href="{% url 'del_chart' chart_item.product.publication.slug False %}">
+	  		<a href="{% url 'del_chart' chart_item.product.code False %}">
 	  		{% trans 'delete' %}</a>
 	  	</td>
 	{% endfor %}

@@ -72,13 +72,13 @@
 {% if sampler and sampler.all_samples.count >= 4 %}
 
 	HAI RIEMPITO IL SAMPLER
-{% elif sampler|is_in_sample:product.publication.slug %}
+{% elif sampler|is_in_sample:product.code %}
 
 	QUESTO PRODOTTO E' NEL SAMPLER 
 
 {% else %}
 
-	<form  action="{% url 'add_sample' product.publication.slug %}" method="POST"> 
+	<form  action="{% url 'add_sample' product.code %}" method="POST"> 
 		{% csrf_token %}
 		<button > {% trans 'add-sampler-button' %}</button>
 	</form>
@@ -102,7 +102,7 @@
 
 <!-- CHART calc !-->
 
-<form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
+<form  action="{% url 'add_chart' product.code %}" method="POST"> 
 
 	{% csrf_token %}
 

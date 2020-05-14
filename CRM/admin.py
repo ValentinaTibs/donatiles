@@ -19,7 +19,7 @@ class OrderAdmin(admin.ModelAdmin):
 class ChartItemStackedAdmin(admin.StackedInline):
     model = ChartItem
 
-    search_fields = ('product__publication__slug', )
+    search_fields = ('product__code', )
     readonly_fields  = ('status','modified_at')
 
 def close_them(modeladmin, request, queryset):
