@@ -35,7 +35,7 @@ class PhotoStackedAdmin(admin.StackedInline):
 
     list_display = ('name', 'thumb_', )
     search_fields = ('name', )
-    readonly_fields  = ( 'image_', )
+    readonly_fields  = ( 'thumb_', )
 
 # class SerieStackedAdmin(admin.StackedInline):
 #     model = Tag
@@ -69,6 +69,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','parent','data_type')
     actions = [duplicate,make_for_product]
 
+    search_fields = ('name','parent' )
 
 
 class SerieAdmin(admin.ModelAdmin):
