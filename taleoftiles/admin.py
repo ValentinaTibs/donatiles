@@ -94,16 +94,8 @@ class CatalogueAdmin(admin.ModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
 
-    # def formfield_for_manytomany(self, db_field, request, **kwargs):
-    #     if db_field.name == "tags":
-    #         the_qs = Tag.objects.filter(in_product_edit=True).exclude(
-    #             parent__parent__slug='format').exclude(parent__slug='format')
-    #         kwargs["queryset"] = the_qs
-    #     return super().formfield_for_manytomany(db_field, request, **kwargs)
-
-
+    actions = [duplicate]
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
-    #inlines = (PublicationAdmin,ImageStackedAdmin)
     list_display = ('name',
                     'wait_time',
                     'min_ammount',
