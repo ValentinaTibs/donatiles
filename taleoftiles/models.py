@@ -208,13 +208,19 @@ class Photo(models.Model):
         ordering = ["order"]    
 
     def image_(self):
-        return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
+        if self.imagefile:
+            return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
+        else:
+            return mark_safe('<img src="/media/photos/{0}">'.format(self.name))
 
     def thumb_(self):
         width = 30
         ratio = 30 / self.imagefile.width
         height = self.imagefile.height * ratio
-        return mark_safe('<a href="/media/{0}"><img src="/media/{0}" width={1} height={2}></a>'.format(self.imagefile,width,height))
+        if self.imagefile:
+            return mark_safe('<a href="/media/{0}"><img src="/media/{0}" width={1} height={2}></a>'.format(self.imagefile,width,height))
+        else:
+            return mark_safe('<a href="/media/photos/{0}"><img src="/media/photos/{0}" width={1} height={2}></a>'.format(self.name,width,height))
 
     def __str__(self):
         return '%s' % (self.name,)
