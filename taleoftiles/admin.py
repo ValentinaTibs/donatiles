@@ -69,7 +69,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','parent','data_type')
     actions = [duplicate,make_for_product]
 
-    search_fields = ('name','parent' )
+    search_fields = ('name','parent__slug' )
 
 
 class SerieAdmin(admin.ModelAdmin):
