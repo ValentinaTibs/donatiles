@@ -13,10 +13,13 @@ def duplicate(modeladmin, request, queryset):
 
 def duplicate_product(modeladmin, request, queryset):
     for e in queryset:
+        cc = e.tags.all()
         e.pk = None
         e.code = e.code + "_COPY"
-        e.save()          
-
+        e.save()
+        for tag in cc:
+            e.tags.add(tag)
+            
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
 
