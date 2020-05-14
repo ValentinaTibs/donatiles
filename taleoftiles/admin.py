@@ -66,7 +66,7 @@ class PriceAdmin(admin.ModelAdmin):
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
-    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','parent','data_type')
+    list_display = ('name','summary','slug','in_catalogue','in_menu','in_home','in_product_edit','public','order','parent','data_type')
     actions = [duplicate,make_for_product]
 
     search_fields = ('name','parent__slug' )
