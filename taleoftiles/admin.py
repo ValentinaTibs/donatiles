@@ -2,7 +2,8 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
-from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, TechnicalSpec, Catalogue
+from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, Price
+from taleoftiles.models import TechnicalSpec, Catalogue
 
 def duplicate(modeladmin, request, queryset):
     for e in queryset:
@@ -25,6 +26,33 @@ class PhotoStackedAdmin(admin.StackedInline):
     list_display = ('name', 'thumb_', )
     search_fields = ('name', )
     readonly_fields  = ( 'image_', )
+
+# class SerieStackedAdmin(admin.StackedInline):
+#     model = Tag
+    
+#     def formfield_for_manytomany(self, db_field, request, **kwargs):
+#         if db_field.name == "tags":
+#             kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='serie')
+#         return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+class PriceStackedAdmin(admin.StackedInline):
+    model = Price
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "size":
+            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+class PriceAdmin(admin.ModelAdmin):
+
+    model = Price
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "size":
+            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    
+    list_display = ("product","size","euros")
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
@@ -53,16 +81,17 @@ class CatalogueAdmin(admin.ModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
 
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "tags":
-            kwargs["queryset"] = Tag.objects.filter(in_product_edit=True)
-        return super().formfield_for_manytomany(db_field, request, **kwargs)
+    # def formfield_for_manytomany(self, db_field, request, **kwargs):
+    #     if db_field.name == "tags":
+    #         the_qs = Tag.objects.filter(in_product_edit=True).exclude(
+    #             parent__parent__slug='format').exclude(parent__slug='format')
+    #         kwargs["queryset"] = the_qs
+    #     return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 
-    inlines = (PhotoStackedAdmin,)
+    inlines = (PriceStackedAdmin,PhotoStackedAdmin)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
     list_display = ('name',
-                    'price',
                     'wait_time',
                     'min_ammount',
                     'code',
@@ -93,107 +122,10 @@ class TechnicalSpecAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag,TagAdmin)
 admin.site.register(Product,ProductAdmin)
+admin.site.register(Price,PriceAdmin)
 admin.site.register(Publication,PublicationAdminSelf)
 admin.site.register(Photo,PhotoAdminSelf)
 admin.site.register(Icon,IconAdminSelf)
 admin.site.register(TechnicalSpec,TechnicalSpecAdmin)
 admin.site.register(Catalogue,CatalogueAdmin)
-
-
-# from .models import Post, Publication, Product, Image, Tag, Setting, Collection
-# from .models import Sampler, Sample, Config, Shipping, Chart, ChartItem
-
-# from .models import Format, Color, Finish, TecnicalSpec
-
-# class TecnicalSpecStackedAdmin(admin.StackedInline):
-#     model = TecnicalSpec
-
-
-
-# class ImageAdmin(admin.ModelAdmin):
-#     model = Image
-
-#     list_display = ('name', 'thumb_', )
-#     search_fields = ('name', )
-#     readonly_fields  = ( 'image_', )
-
-# class ProductAdmin(admin.ModelAdmin):
-#     model = Product
-
-#     # list_display = ('name', )
-#     # search_fields = ('slug', )
-
-# class FormatAdmin(admin.ModelAdmin):
-#     model = Format
-
-# class ColorAdmin(admin.ModelAdmin):
-#     model = Color
-
-# class FinishAdmin(admin.ModelAdmin):
-#     model = Finish
-
-# class TecnicalSpecAdmin(SummernoteModelAdmin):
-#     model = TecnicalSpec
-
-#     summernote_fields = ('note',)
-
-
-
-
-# class PublicationAdminSelf(admin.ModelAdmin):
-#     inlines = (ImageStackedAdmin)
-#     list_display = ('title','tags','post_id')
-
-#     def tags(self, obj):
-#         return "\n".join([p.name for p in obj.tag.all()])
-
-# class CollectionAdmin(admin.ModelAdmin):
-#     inlines = (PublicationAdmin,ImageStackedAdmin)
-
-
-
- 
-# class SettingAdmin(admin.ModelAdmin):
-#     inlines = (PublicationAdmin,ImageStackedAdmin )
-
-# class PostAdmin(admin.ModelAdmin):
-#     inlines = (PublicationAdmin,ImageStackedAdmin )
-#     list_display = ('name','get_tags',  )
-
-#     def name(self, obj):
-#         pub = obj.publication
-#         return pub.title
-
-#     def get_tags(self, obj):
-#         pub = obj.publication
-#         return "\n".join([p.name for p in pub.tag.all()])
-
-# class SampleAdmin(admin.ModelAdmin):
-#     inlines = ()
-
-# class ShippingAdmin(admin.ModelAdmin):
-#     inlines = ()
-
-    
-# admin.site.register(Shipping)
- 
-# admin.site.register(Post,PostAdmin)
-# admin.site.register(Image,ImageAdmin)
-
-# admin.site.register(Sampler)
-# admin.site.register(Sample)
-# admin.site.register(Config)
-
-# admin.site.register(Format, FormatAdmin)
-# admin.site.register(Color, ColorAdmin)
-# admin.site.register(Finish, FinishAdmin)
-
-# admin.site.register(TecnicalSpec, TecnicalSpecAdmin)
-
-
-# admin.site.register(Chart)
-# admin.site.register(ChartItem)
-
-# admin.site.register(Setting,SettingAdmin)
-# admin.site.register(Collection,CollectionAdmin)
 

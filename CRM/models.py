@@ -1,24 +1,27 @@
 from django.utils.crypto import get_random_string
-
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+
 from django.db.models import Count, Q, Sum
 
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from taleoftiles.models import Product
+from taleoftiles.models import Product, Tag
 from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
+
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
 
 def pour_charts(sender, user, request, **kwargs):
     session_loc_id = request.session.session_key
-    
+    if not request.session.exists(request.session.session_key):
+        return
+    session_loc_id = request.session.session_key
     for chart in Chart.active.filter( user = user): 
-        chart.session_id = session_id
+        chart.session_id = session_loc_id
         chart.save()
 
     for chart in Chart.objects.filter( session_id  = session_loc_id): 
@@ -72,6 +75,7 @@ class Order(models.Model):
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
         query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
+        query = query and Q(is_sample = False)
         qs = super().get_queryset().filter(query).annotate(
             total = Count('chart_item',filter=Q(chart_item__status='ok')),
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
@@ -135,10 +139,12 @@ class Chart(models.Model):
 
 
 class ChartItem(models.Model):
-    chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, on_delete=models.SET_NULL, related_name='chart_item')
-    product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, on_delete=models.SET_NULL, related_name='chart_item')
-    status      = models.CharField(choices=ITEM_STATUS, max_length=2,  default='ok')
+    chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
+    product     = models.ForeignKey(Product,    verbose_name="Products",    null=False, blank = True, on_delete=models.CASCADE, related_name='chart_item')
+    size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=False, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     quantity    = models.PositiveIntegerField( default=1 )       
+
+    status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
@@ -150,7 +156,11 @@ class ChartItem(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.chart.session_id        
+        if self.chart:
+            return self.chart.session_id        
+        else:
+            return self.status
+
    
 class Question(models.Model):
     content         = models.TextField()

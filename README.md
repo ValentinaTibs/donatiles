@@ -129,8 +129,8 @@ heroku pg:backups:download
 
 ```sh
 
-python manage.py makemessages -l 'en'
-python manage.py compilemessages
+python3 manage.py makemessages -l 'en'
+python3 manage.py compilemessages
 RESTART SERVER
 ```
 

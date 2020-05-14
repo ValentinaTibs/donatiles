@@ -2,12 +2,29 @@ from django import forms
 from datetime import datetime
 
 from django.forms import ModelForm, ModelChoiceField
+# from taleoftiles.models import ChartItem
 #from taleoftiles.models import Question, Shipping, ChartItem, Format, Product
 
 from captcha.fields import ReCaptchaField
+from django.core.exceptions import NON_FIELD_ERRORS
 
 
+        
+        # if quantity < 
+        # try:
+        #     validate_email(username)
+        # except ValidationError as e:
+        #     raise ValidationError(_('Invalid email'), code='no_email')
 
+        # cleaned_data = super().clean()
+        # quantity = cleaned_data.get("quantity")
+        # super(NewChartItemForm, self).clea(*args, **kwargs)
+        #     self.fields['fullname']         .required = True
+
+
+        #avoid duplicates
+        # if User.objects.filter(username=username).exists():
+        #     raise forms.ValidationError(_('Duplicated email'), code='duplicated')
 
 # from CRM.models import Profile
 
@@ -34,17 +51,17 @@ from captcha.fields import ReCaptchaField
 # #     class Meta:      
 # #         model = Item
 # #         fields = '__all__'
-# class NewChartItemForm(forms.Form):
 
-#     quantity = forms.CharField()    
-#     formats = forms.ModelMultipleChoiceField(queryset=None, class =  'form-control')    
 
-#     def __init__(self, *args, **kwargs):
-#         the_product = Product.objects.get(pk = kwargs.pop('product_id'))
-#         the_coll = the_product.collection
+    # quantity  = forms.CharField()    
+    # formats   = forms.ModelMultipleChoiceField(queryset=None, class =  'form-control')    
 
-#         super(NewChartItemForm, self).__init__(*args, **kwargs)
-#         self.fields['formats'].queryset = Format.objects.filter(collection__pk=the_coll.id)
+    # def __init__(self, *args, **kwargs):
+    #     the_product = Product.objects.get(pk = kwargs.pop('product_id'))
+    #     the_coll = the_product.collection
+
+    #     super(NewChartItemForm, self).__init__(*args, **kwargs)
+    #     self.fields['formats'].queryset = Format.objects.filter(collection__pk=the_coll.id)
         
         
 # class NewSamplerShipping(ModelForm):

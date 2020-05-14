@@ -43,18 +43,15 @@
 
 </menu>
 
-
-
 <img src="{% static 'images/logo.png' %}" width="100"> 
 
 <menu>
 
-
 {% trans 'summary-menu' %}
-{% trans 'summary-shipping' %}
-{% trans 'summary-payment' %}
-
+{% trans 'shipping-menu' %}
+{% trans 'payment-menu' %}
 </menu>
+
 <a href="{{prv_page|urlencode}}"> {% trans 'checkout-back' %} </a>
 
 {% block content %} {% endblock %}

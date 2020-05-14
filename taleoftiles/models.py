@@ -113,11 +113,9 @@ class ActiveProductManager(models.Manager):
             publication__publish_date__lte= dt.datetime.now(), 
             is_active = True)
         return qs
-    
 
 class Product(models.Model):
-
-    price           = models.PositiveIntegerField( default=0, )    
+    
     wait_time       = models.PositiveIntegerField(default = 15)
     min_ammount     = models.PositiveIntegerField(default = 5)
     code            = models.CharField(max_length=100,)
@@ -165,6 +163,14 @@ class Product(models.Model):
             res= "none"
         return res
 
+class Price(models.Model):
+    size    = models.ForeignKey(Tag,     blank = True, null = True, on_delete=models.SET_NULL, related_name='prices')
+    product = models.ForeignKey(Product, blank = True, null = True, on_delete=models.SET_NULL, related_name='prices' )
+    euros   = models.PositiveIntegerField(default = 10)
+
+    def __str__(self):
+        return self.size.name + self.product.publication.title + str(self.euros)
+    
 class Catalogue(models.Model):
     title = models.CharField(max_length=200, unique = True)
     active = models.BooleanField(default = True)

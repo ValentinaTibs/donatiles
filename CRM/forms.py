@@ -8,7 +8,8 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User,Group
 
-from CRM.models import Shipping
+from CRM.models import Shipping,ChartItem,Tag
+from taleoftiles.models import Product
 
 class ShippingForm(forms.ModelForm):
 
@@ -24,6 +25,48 @@ class ShippingForm(forms.ModelForm):
             self.fields['CAP']              .required = True
             self.fields['shipping_address'] .required = True
             self.fields['telephone_num']    .required = True
+
+class NewChartItemForm(forms.ModelForm):
+
+    class Meta:
+        model = ChartItem
+        fields = ('size', 'quantity' ,'product','chart')
+        widgets = { 
+            'product'   :forms.HiddenInput(),
+            'chart'     :forms.HiddenInput(),
+            'size'      :forms.RadioSelect()
+        }
+
+    def __init__(self, *args, **kwargs):
+
+        product = args[0]['product']
+
+        if product:
+            prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
+            if not ('size' in args[0]):
+                args[0]['size'] = prod_sizes.first()
+
+        super(NewChartItemForm, self).__init__(*args, **kwargs)
+        self.fields['size'].required = True
+        self.fields['size'].empty_label = None
+        self.fields['size'].queryset = prod_sizes
+        self.fields['quantity'].required = True   
+
+
+        
+    def clean(self):
+        print("+++")
+        quantity    = self.cleaned_data.get('quantity')
+        product     = self.cleaned_data.get('product')
+        if quantity < product.min_ammount:
+            raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
+
+        else:
+            return super(NewChartItemForm, self).clean()
+
+
+        self._errors['starting_date'] = ['min-ammount-error']
+
 
 class RegisterForm(UserCreationForm):
     
@@ -41,7 +84,7 @@ class RegisterForm(UserCreationForm):
 
         #avoid duplicates
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError(_('Duplicated email'), code='duplicated')
+            raise forms.ValidationError(_('Duplicated email'), code='duplicated-user-error')
 
         return self.cleaned_data    
 

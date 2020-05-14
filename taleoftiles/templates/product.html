@@ -42,11 +42,6 @@
 	{{effect.name}}       
 {% endfor %}
 
-{% for format in product|formats %}  
-	{% for more_format in format.child.all %}
-		{{more_format.name}}       
-	{% endfor %}            
-{% endfor %}
 
 {% for style in product|styles %}  
 	{{style.name}}       
@@ -85,17 +80,40 @@
 
 	<form  action="{% url 'add_sample' product.publication.slug %}" method="POST"> 
 		{% csrf_token %}
-		<button > {% trans 'add-sampler' %}</button>
+		<button > {% trans 'add-sampler-button' %}</button>
 	</form>
-
 {% endif %}
+
+{% trans 'add-sampler-text' %}
 
 <hr>
 
-<!-- CHART calc !-->
-<form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
+<!-- 
+<form  action="{{request.get_full_path|urlencode}}" method="POST"> 
 	{% csrf_token %}
-	<button > aggiungi al carrello</button>
+
+	{% for price in product.prices.all %}  
+		<input type="radio" name="size" value="{{price.size.name}}">{{price.size.name}} 
+	{% endfor %}
+
+	<button > refresh price</button>
+</form>
+ -->
+
+<!-- CHART calc !-->
+
+<form  action="{% url 'add_chart' product.publication.slug %}" method="POST"> 
+
+	{% csrf_token %}
+
+	{{chi_form.size.label_tag}}
+	{{chi_form.size}}
+	{{chi_form.product}}
+	{{chi_form.quantity.label_tag}}
+	{{chi_form.quantity}}
+
+	<button> {% trans 'add-chart-button' %} </button>
+
 </form>
 
 

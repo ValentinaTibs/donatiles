@@ -6,7 +6,7 @@ from CRM.models         import Chart, ChartItem, Shipping, Order
 from CRM.models         import Profile
 from taleoftiles.models import Product
 
-from CRM.forms import RegisterForm,ShippingForm
+from CRM.forms import RegisterForm,ShippingForm,NewChartItemForm
 
 from django.db.models import Q 
 
@@ -142,7 +142,7 @@ def add_sample(request, product_slug):
         remove_stat = 'ok'
         if (chart.all_samples().count() > 4):
             remove_stat = 'le'
-        #this might cause db collapse
+        #2do this might cause db collapse
         if (not product.is_samplable):
             remove_stat = 'ns'          
         chart_item = ChartItem(chart  = chart, product = product, status = remove_stat)
@@ -152,11 +152,7 @@ def add_sample(request, product_slug):
 
 def add_chart(request, product_slug):
 
-    try: 
-        product = Product.objects.get(publication__slug = product_slug )
-    except ObjectDoesNotExist:
-        return render(request, "404.html",{"message": "There is no product with code " + product_slug,})
-    
+    chi_form = NewChartItemForm(request.POST or None, request.FILES or None)
     if not request.session.exists(request.session.session_key):
         request.session.create() 
 
@@ -168,10 +164,12 @@ def add_chart(request, product_slug):
             chart.user = request.user
         chart.save()
 
-    try:
-        chart_item = ChartItem.objects.get(chart__pk  = chart.pk, product__pk = product.pk, status = 'ok',)
-    except ObjectDoesNotExist:
-        chart_item = ChartItem(chart = chart, product = product)
-        chart_item.save()
+    if request.method == 'POST':
 
-    return redirect('product', product_slug= product_slug )
+        if chi_form.is_valid():
+            chart_item = chi_form.save(commit=False)
+            chart_item.chart = chart
+            chart_item.save()
+
+    return redirect('product', product_slug = product_slug)
+

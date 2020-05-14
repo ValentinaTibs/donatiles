@@ -9,6 +9,8 @@ from taleoftiles.models import Tag, Product, Catalogue
 from layout.models      import Element
 from blog.models        import Post
 
+from CRM.forms          import NewChartItemForm
+
 def index(request):  
     home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
     home_tags = Tag.objects.filter(in_home = True, public = True)
@@ -56,19 +58,34 @@ def catalogue(request, the_filter = None):
         "active_tags"   : query_dict
         })
 
-def product(request, product_slug):    
-
+def product(request, product_slug, chi_form = None ):    
+    
     try: 
         product = Product.active.get(publication__slug = product_slug )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
-    
+
     #for all product in the same series that are not support and not itself
-    rel_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
+    related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
+    
+    # if request.session.exists(request.session.session_key):
+    #     try: 
+    #         chart = Chart.objects.get(session_id  = request.session.session_key, is_sample = False )
+    #     except ObjectDoesNotExist:
+    #         chart = Chart(session_id  = request.session.session_key, is_sample = True)
+    #         if request.user.is_authenticated:
+    #             chart.user = request.user
+    #         chart.save()   
+
+    #if not chi_form:
+        #chi_form = NewChartItemForm(request.POST or , request.FILES or None)
+    chi_form = NewChartItemForm(request.POST or {'product':product.pk,} , request.FILES or None)
+
 
     return render(request, "product.html",{
         "product":product,
-        "products_series":rel_series,
+        "products_series":related_series,
+        "chi_form" : chi_form
         })
 
 
