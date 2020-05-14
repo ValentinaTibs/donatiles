@@ -137,7 +137,7 @@ class Product(models.Model):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
     def __str__(self):
-        return self.publication.title
+        return self.code
 
     def is_support(self,):
         return self.support_to.is_null == True
