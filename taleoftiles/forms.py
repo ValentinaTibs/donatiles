@@ -26,9 +26,17 @@ class CustomProductModelForm(forms.ModelForm):
         if serie:
             self.initial['series'] = serie.pk
 
+        if colours:
+            col_iv = []
+            for colour in colours:
+                col_iv.append(colour.pk)
+            self.initial['colours'] = col_iv
+
     def save(self, commit=True):
 
         product = super(CustomProductModelForm, self).save(False)
+
+        # ---- SERIE UPDATE -----
         series = product.tags.filter(parent__slug='serie') 
 
         for serie in series:
@@ -37,8 +45,18 @@ class CustomProductModelForm(forms.ModelForm):
         if self.cleaned_data.get('series'):
             product.tags.add(self.cleaned_data.get('series')) 
 
-        prd = super(CustomProductModelForm, self).save(True)
-        return prd
+        # ---- colors UPDATE -----
+
+        colours = product.tags.filter(parent__slug='colour') 
+
+        for color in colours:
+            product.tags.remove(color.pk)
+
+        if self.cleaned_data.get('colours'):
+            for color in self.cleaned_data.get('colours'):
+                    product.tags.add(color) 
+
+        return super(CustomProductModelForm, self).save(True)
 
         # for color in colours:
         #     print("-----")
