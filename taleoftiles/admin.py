@@ -1,9 +1,11 @@
 from django.contrib import admin
+
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
 from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, Price
 from taleoftiles.models import TechnicalSpec, Catalogue
+from taleoftiles.forms import CustomProductModelForm
 
 def duplicate(modeladmin, request, queryset):
     for e in queryset:
@@ -35,15 +37,6 @@ class PhotoStackedAdmin(admin.StackedInline):
 
     list_display = ('name',  )
     search_fields = ('name', )
-    # readonly_fields  = ( 'thumb_', )
-
-# class SerieStackedAdmin(admin.StackedInline):
-#     model = Tag
-    
-#     def formfield_for_manytomany(self, db_field, request, **kwargs):
-#         if db_field.name == "tags":
-#             kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='serie')
-#         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 class PriceStackedAdmin(admin.StackedInline):
     model = Price
@@ -103,8 +96,11 @@ class CatalogueAdmin(admin.ModelAdmin):
     model = Catalogue
     list_display = ('title','active')
     
-class ProductAdmin(admin.ModelAdmin):
 
+
+
+class ProductAdmin(admin.ModelAdmin):
+    form = CustomProductModelForm
     actions = [duplicate_product]
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
     list_display = ('name',
@@ -120,7 +116,6 @@ class ProductAdmin(admin.ModelAdmin):
                     'support_to',
                     'techspec'
                     )
-
 
     def name(self, obj):
         pub = obj.publication

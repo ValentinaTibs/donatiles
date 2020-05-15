@@ -51,19 +51,15 @@ class NewChartItemForm(forms.ModelForm):
         self.fields['size'].empty_label = None
         self.fields['size'].queryset = prod_sizes
         self.fields['quantity'].required = True   
-
-
         
     def clean(self):
-        print("+++")
+
         quantity    = self.cleaned_data.get('quantity')
         product     = self.cleaned_data.get('product')
         if quantity < product.min_ammount:
             raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
-
         else:
             return super(NewChartItemForm, self).clean()
-
 
         self._errors['starting_date'] = ['min-ammount-error']
 
@@ -103,5 +99,6 @@ class RegisterForm(UserCreationForm):
         return user    
 
 
+        
 class LoginForm(AuthenticationForm):
     pass

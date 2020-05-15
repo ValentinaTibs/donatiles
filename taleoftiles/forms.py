@@ -2,83 +2,85 @@ from django import forms
 from datetime import datetime
 
 from django.forms import ModelForm, ModelChoiceField
-# from taleoftiles.models import ChartItem
-#from taleoftiles.models import Question, Shipping, ChartItem, Format, Product
+
+from taleoftiles.models import Product, Tag
 
 from captcha.fields import ReCaptchaField
 from django.core.exceptions import NON_FIELD_ERRORS
 
-
-        
-        # if quantity < 
-        # try:
-        #     validate_email(username)
-        # except ValidationError as e:
-        #     raise ValidationError(_('Invalid email'), code='no_email')
-
-        # cleaned_data = super().clean()
-        # quantity = cleaned_data.get("quantity")
-        # super(NewChartItemForm, self).clea(*args, **kwargs)
-        #     self.fields['fullname']         .required = True
-
-
-        #avoid duplicates
-        # if User.objects.filter(username=username).exists():
-        #     raise forms.ValidationError(_('Duplicated email'), code='duplicated')
-
-# from CRM.models import Profile
-
-# class LoginForm(ModelForm):
-#     captcha = ReCaptchaField()
-
-#     class Meta:
-
-# class QuestionForm(ModelForm):
-#     captcha = ReCaptchaField()
-
-#     class Meta:
-#         model = Question
-#         fields = ('name', 'surname', 'email',  'telephone','content' )
-#         widgets = { 
-#             'content' :  forms.Textarea(attrs={'class': 'border w-100 p-3 mt-3 mt-lg-4', 'placeholder':"Message *"}),
-#             'name': forms.TextInput(attrs={'class': 'form-control','placeholder': "Name *"}),
-#             'surname': forms.TextInput(attrs={'class': 'form-control','placeholder': "Surname "}),
-#             'email': forms.TextInput(attrs={'class': 'form-control', 'type':"email" ,'placeholder': "Email *"}),
-#             'telephone': forms.TextInput(attrs={'class': 'form-control','placeholder': "Telephone *"}),
-#         }
-
-# # menu = MenuModelChoiceField(queryset=Menu.objects.all())
-# #     class Meta:      
-# #         model = Item
-# #         fields = '__all__'
-
-
-    # quantity  = forms.CharField()    
-    # formats   = forms.ModelMultipleChoiceField(queryset=None, class =  'form-control')    
-
-    # def __init__(self, *args, **kwargs):
-    #     the_product = Product.objects.get(pk = kwargs.pop('product_id'))
-    #     the_coll = the_product.collection
-
-    #     super(NewChartItemForm, self).__init__(*args, **kwargs)
-    #     self.fields['formats'].queryset = Format.objects.filter(collection__pk=the_coll.id)
-        
-        
-# class NewSamplerShipping(ModelForm):
+class CustomProductModelForm(forms.ModelForm):
     
-#     text =  forms.Textarea(attrs={'class': 'form-control'},)
+    series  = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
+    colours = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
 
-#     class Meta:
-#         model = Shipping
-#         fields = ('name','surname','address','address2','city','postcode','email','telephone','note')
-#         widgets = { 
-#             'name': forms.TextInput(attrs={'class': 'form-control'}),
-#             'surname': forms.TextInput(attrs={'class': 'form-control'}),
-#             'email': forms.TextInput(attrs={'class': 'form-control'}),
-#             'telephone': forms.TextInput(attrs={'class': 'form-control'}),
-#             'address': forms.TextInput(attrs={'class': 'form-control'}),
-#             'address2': forms.TextInput(attrs={'class': 'form-control'}),
-#             'city': forms.TextInput(attrs={'class': 'form-control'}),
-#             'postcode': forms.TextInput(attrs={'class': 'form-control'}),
-#             'note': forms.TextInput(attrs={'class': 'border p-3 w-100'}),
-#         }
+    class Meta:
+        model = Product
+        fields = '__all__'
+        exclude = ('tags',)
+
+    def __init__(self, *args, **kwargs):
+        serie       = kwargs['instance'].tags.filter(parent__slug='serie').first()
+        colours     = kwargs['instance'].tags.filter(parent__slug='colour')
+
+        super(CustomProductModelForm, self).__init__(*args, **kwargs)
+        if serie:
+            self.initial['series'] = serie.pk
+
+    def save(self, commit=True):
+
+        product = super(CustomProductModelForm, self).save(False)
+        series = product.tags.filter(parent__slug='serie') 
+
+        for serie in series:
+            product.tags.remove(serie.pk)
+
+        if self.cleaned_data.get('series'):
+            product.tags.add(self.cleaned_data.get('series')) 
+
+        prd = super(CustomProductModelForm, self).save(True)
+        return prd
+
+        # for color in colours:
+        #     print("-----")
+        #     print(color)
+        #     if self.initial['colours']:
+        #     self.initial['colours'] = color.pk
+
+        # self.initial.setdefault('colours', default=None)
+        # for color in colours:
+        #     self.initial.get('colours').append(color.pk)
+            
+
+        #print (self.initial)
+
+
+    # def clean(self):
+    #     super().clean()
+    #     print()
+        # for form in self.forms:
+        #     name = form.cleaned_data['name'].upper()
+        #     form.cleaned_data['name'] = name
+        #     # update the instance value.
+        #     form.instance.name = name
+
+    # def save(self, commit=True):
+    #     print("-+   +-")
+    #     print(product.tags.all())
+    
+    #     series = product.tags.filter(parent__slug='serie') 
+    #     for serie in series:
+    #         print("->   <-")
+    #         print(serie)
+        
+    #         product.tags.remove(serie.pk)
+
+    #     # if self.cleaned_data.get('series'):
+    #     #     product.tags.add(self.cleaned_data.get('series')) 
+
+    #     # if self.cleaned_data.get('colours'):
+    #     #     for color in self.cleaned_data.get('colours'):
+    #     #         product.tags.add(color) 
+    #     print("--   --")                
+    #     print(product.tags.all())
+    #     product = super(CustomProductModelForm, self).save(commit)
+    #     return product
