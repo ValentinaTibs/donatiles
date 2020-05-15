@@ -12,6 +12,9 @@ class CustomProductModelForm(forms.ModelForm):
     
     series  = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
     colours = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
+    formats = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='format'), required = False)
+    settings = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
+    styles  = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
 
     class Meta:
         model = Product
@@ -21,6 +24,9 @@ class CustomProductModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         serie       = kwargs['instance'].tags.filter(parent__slug='serie').first()
         colours     = kwargs['instance'].tags.filter(parent__slug='colour')
+        formats     = kwargs['instance'].tags.filter(parent__slug='format')
+        settings    = kwargs['instance'].tags.filter(parent__slug='setting')
+        styles      = kwargs['instance'].tags.filter(parent__slug='style')
 
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
         if serie:
@@ -32,73 +38,68 @@ class CustomProductModelForm(forms.ModelForm):
                 col_iv.append(colour.pk)
             self.initial['colours'] = col_iv
 
+        if formats:
+            format_iv = []
+            for format_ in formats:
+                format_iv.append(format_.pk)
+            self.initial['formats'] = format_iv   
+        
+        if settings:
+            settings_iv = []
+            for setting in settings:
+                settings_iv.append(setting.pk)
+            self.initial['settings'] = settings_iv   
+
+        if styles:
+            styles_iv = []
+            for style in styles:
+                styles_iv.append(style.pk)
+            self.initial['styles'] = styles_iv  
+
+        return
+
     def save(self, commit=True):
 
         product = super(CustomProductModelForm, self).save(False)
 
         # ---- SERIE UPDATE -----
         series = product.tags.filter(parent__slug='serie') 
-
         for serie in series:
             product.tags.remove(serie.pk)
-
         if self.cleaned_data.get('series'):
             product.tags.add(self.cleaned_data.get('series')) 
 
         # ---- colors UPDATE -----
-
         colours = product.tags.filter(parent__slug='colour') 
-
         for color in colours:
             product.tags.remove(color.pk)
-
         if self.cleaned_data.get('colours'):
             for color in self.cleaned_data.get('colours'):
                     product.tags.add(color) 
 
+        # ---- FORMATS UPDATE -----
+        formats = product.tags.filter(parent__slug='format') 
+        for format_ in formats:
+            product.tags.remove(format_.pk)
+        if self.cleaned_data.get('formats'):
+            for format_ in self.cleaned_data.get('formats'):
+                    product.tags.add(format_) 
+
+        # ---- STYLEs UPDATE -----
+        settings = product.tags.filter(parent__slug='setting') 
+        for setting in settings:
+            product.tags.remove(setting.pk)
+        if self.cleaned_data.get('styles'):
+            for setting in self.cleaned_data.get('settings'):
+                    product.tags.add(setting)                                     
+
+        # ---- STYLEs UPDATE -----
+        styles = product.tags.filter(parent__slug='style') 
+        for style in styles:
+            product.tags.remove(style.pk)
+        if self.cleaned_data.get('styles'):
+            for style in self.cleaned_data.get('styles'):
+                    product.tags.add(style) 
+
         return super(CustomProductModelForm, self).save(True)
 
-        # for color in colours:
-        #     print("-----")
-        #     print(color)
-        #     if self.initial['colours']:
-        #     self.initial['colours'] = color.pk
-
-        # self.initial.setdefault('colours', default=None)
-        # for color in colours:
-        #     self.initial.get('colours').append(color.pk)
-            
-
-        #print (self.initial)
-
-
-    # def clean(self):
-    #     super().clean()
-    #     print()
-        # for form in self.forms:
-        #     name = form.cleaned_data['name'].upper()
-        #     form.cleaned_data['name'] = name
-        #     # update the instance value.
-        #     form.instance.name = name
-
-    # def save(self, commit=True):
-    #     print("-+   +-")
-    #     print(product.tags.all())
-    
-    #     series = product.tags.filter(parent__slug='serie') 
-    #     for serie in series:
-    #         print("->   <-")
-    #         print(serie)
-        
-    #         product.tags.remove(serie.pk)
-
-    #     # if self.cleaned_data.get('series'):
-    #     #     product.tags.add(self.cleaned_data.get('series')) 
-
-    #     # if self.cleaned_data.get('colours'):
-    #     #     for color in self.cleaned_data.get('colours'):
-    #     #         product.tags.add(color) 
-    #     print("--   --")                
-    #     print(product.tags.all())
-    #     product = super(CustomProductModelForm, self).save(commit)
-    #     return product
