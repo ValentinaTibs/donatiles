@@ -22,6 +22,10 @@ class CustomProductModelForm(forms.ModelForm):
         exclude = ('tags',)
 
     def __init__(self, *args, **kwargs):
+        if not kwargs.get('instance'):
+            super(CustomProductModelForm, self).__init__(*args, **kwargs)
+            return
+
         serie       = kwargs['instance'].tags.filter(parent__slug='serie').first()
         colours     = kwargs['instance'].tags.filter(parent__slug='colour')
         formats     = kwargs['instance'].tags.filter(parent__slug='format')
