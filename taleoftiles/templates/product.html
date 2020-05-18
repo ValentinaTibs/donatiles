@@ -34,9 +34,9 @@
 <img  src="{{ icon.imagefile.url }}" >
 {% endfor %}
 
-
-{{product|colour}}
-
+{% for colour in product|colour %}  
+	{{colour.name}}       
+{% endfor %}
 
 {% for effect in product|effects %}  
 	{{effect.name}}       

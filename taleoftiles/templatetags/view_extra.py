@@ -51,7 +51,7 @@ def serie(product):
 @register.filter
 def colour(product):
     if product: 
-        return product.get_tag("colour")
+        return product.filter_tags("colour")
     return "-"
 
 @register.filter
