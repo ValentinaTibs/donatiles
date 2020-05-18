@@ -117,10 +117,6 @@ class ProductAdmin(admin.ModelAdmin):
                     'techspec'
                     )
 
-    def name(self, obj):
-        pub = obj.publication
-        return pub.title
-
     def tags_(self, obj):
         return "\n".join([p.name + ' * ' for p in obj.tags.all()])    
 
