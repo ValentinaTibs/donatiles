@@ -103,7 +103,7 @@ class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     actions = [duplicate_product]
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
-    list_display = ('name',
+    list_display = ('name_',
                     'wait_time',
                     'min_ammount',
                     'code',
@@ -116,6 +116,10 @@ class ProductAdmin(admin.ModelAdmin):
                     'support_to',
                     'techspec'
                     )
+    def name_(self, obj):
+        if obj.name == " ":
+            return obj.code
+        return obj.name
 
     def tags_(self, obj):
         return "\n".join([p.name + ' * ' for p in obj.tags.all()])    

@@ -78,7 +78,7 @@ class Publication(models.Model):
     author          = models.ForeignKey( User, on_delete=models.CASCADE, blank=True,null=False )
     
     def __str__(self):
-        if self.title == " "
+        if self.title == "":
             return "-"
         return self.title
 
