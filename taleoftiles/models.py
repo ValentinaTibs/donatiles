@@ -116,6 +116,7 @@ class ActiveProductManager(models.Manager):
 
 class Product(models.Model):
     
+    name            = models.CharField(max_length=100,)
     wait_time       = models.PositiveIntegerField(default = 15)
     min_ammount     = models.PositiveIntegerField(default = 5)
     code            = models.CharField(max_length=100,unique=True,)
