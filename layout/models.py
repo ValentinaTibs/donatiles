@@ -37,7 +37,7 @@ class Element(models.Model):
 
     def __str__(self):
         if self.data_type == 't':
-        	return '%s' % (self.name,)   
+        	return '%s' % (self.content,)   
         if self.data_type == 'i':
             return self.imagefile.url
     

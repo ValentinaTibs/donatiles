@@ -31,7 +31,7 @@
 
 <!-- ICONE scheda tecnica -->
 {% for icon in product.techspec.icons.all %}  
-<img  src="{{ icon.imagefile.url }}" >
+	<img  src="{{ icon.imagefile.url }}" >
 {% endfor %}
 
 {% for colour in product|colour %}  
