@@ -67,6 +67,9 @@ class CustomProductModelForm(forms.ModelForm):
         product = super(CustomProductModelForm, self).save(False)
 
         # ---- SERIE UPDATE -----
+        if not product.pk:
+            super(CustomProductModelForm, self).save(True)
+            
         series = product.tags.filter(parent__slug='serie') 
         for serie in series:
             product.tags.remove(serie.pk)
