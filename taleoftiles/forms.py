@@ -12,7 +12,7 @@ class CustomProductModelForm(forms.ModelForm):
     
     series  = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
     colours = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
-    formats = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='format'), required = False)
+    formats = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format'), required = False)
     settings = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
     styles  = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
 
@@ -28,7 +28,7 @@ class CustomProductModelForm(forms.ModelForm):
 
         serie       = kwargs['instance'].tags.filter(parent__slug='serie').first()
         colours     = kwargs['instance'].tags.filter(parent__slug='colour')
-        formats     = kwargs['instance'].tags.filter(parent__slug='format')
+        formats     = kwargs['instance'].tags.filter(parent__parent__slug='format')
         settings    = kwargs['instance'].tags.filter(parent__slug='setting')
         styles      = kwargs['instance'].tags.filter(parent__slug='style')
 
@@ -82,7 +82,7 @@ class CustomProductModelForm(forms.ModelForm):
                     product.tags.add(color) 
 
         # ---- FORMATS UPDATE -----
-        formats = product.tags.filter(parent__slug='format') 
+        formats = product.tags.filter(parent__parent__slug='format') 
         for format_ in formats:
             product.tags.remove(format_.pk)
         if self.cleaned_data.get('formats'):
