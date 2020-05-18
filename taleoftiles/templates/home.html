@@ -18,13 +18,73 @@
 
 <h2>{% trans 'home-idee' %}</h2>
 
+
+{{ layout_elems|get_elem:'strength-pt-1' }}
+{{ layout_elems|get_elem:'strength-pt-2' }}
+{{ layout_elems|get_elem:'strength-pt-3' }}
+{{ layout_elems|get_elem:'strength-pt-4' }}
+
+{{ layout_elems|get_elem:'strength-campionario-up' }}
+{{ layout_elems|get_elem:'strength-campionario-description' }}
+
+<hr>
+{% trans 'title-renovate-home' %}
+
+
 {% for post in posts %}
 	{{post}}
+	{% trans 'read' %}
 {% endfor %}
 
-{% define layout_elems|get_elem:'home-faq-1' as faq1 %}
-	{{ faq1.name }}
-	{{ faq1.content }}
+<hr>
+
+{% trans 'title-faq-home' %}
+
+{% define layout_elems|get_elem:'home-faq-1-question' as faq %}
+	{{ faq.name }}
+	{{ faq.content }}
+	{% trans 'read-answer' %}
 
 {% endblock %}
 
+{% define layout_elems|get_elem:'home-faq-2-question' as faq %}
+	{{ faq.name }}
+	{{ faq.content }}
+	{% trans 'read-answer' %}
+
+{% endblock %}
+
+{% define layout_elems|get_elem:'home-faq-3-question' as faq %}
+	{{ faq.name }}
+	{{ faq.content }}
+	{% trans 'read-answer' %}
+
+{% endblock %}
+
+{% define layout_elems|get_elem:'home-faq-4-question' as faq %}
+	{{ faq.name }}
+	{{ faq.content }}
+	{% trans 'read-answer' %}
+
+{% endblock %}
+
+
+<hr>
+{% trans 'title-team-home' %}
+
+{% trans 'founder-name' %}
+{{ layout_elems|get_elem:'home-founder-description' }}
+{{ layout_elems|get_elem:'home-founder-text' }}
+
+
+{{ layout_elems|get_elem:'home-cite-1' }}
+{{ layout_elems|get_elem:'home-cite-auth-1' }}
+
+{{ layout_elems|get_elem:'home-cite-2' }}
+{{ layout_elems|get_elem:'home-cite-auth-2' }}
+
+{{ layout_elems|get_elem:'home-cite-3' }}
+{{ layout_elems|get_elem:'home-cite-auth-3' }}
+
+{{ layout_elems|get_elem:'home-cite-4' }}
+{{ layout_elems|get_elem:'home-cite-auth-4' }}
