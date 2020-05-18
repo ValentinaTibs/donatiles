@@ -28,8 +28,8 @@
 {{ layout_elems|get_elem:'strength-campionario-description' }}
 
 <hr>
-{% trans 'title-renovate-home' %}
 
+{% trans 'title-renovate-home' %}
 
 {% for post in posts %}
 	{{post}}
@@ -40,33 +40,29 @@
 
 {% trans 'title-faq-home' %}
 
-{% define layout_elems|get_elem:'home-faq-1-question' as faq %}
-	{{ faq.name }}
-	{{ faq.content }}
+{% define layout_elems|get_elem:'home-faq-1-question' as faq1 %}
+	{{ faq1.name }}
+	{{ faq1.content }}
 	{% trans 'read-answer' %}
 
-{% endblock %}
 
-{% define layout_elems|get_elem:'home-faq-2-question' as faq %}
-	{{ faq.name }}
-	{{ faq.content }}
+{% define layout_elems|get_elem:'home-faq-2-question' as faq2 %}
+	{{ faq2.name }}
+	{{ faq2.content }}
 	{% trans 'read-answer' %}
 
-{% endblock %}
 
-{% define layout_elems|get_elem:'home-faq-3-question' as faq %}
-	{{ faq.name }}
-	{{ faq.content }}
+{% define layout_elems|get_elem:'home-faq-3-question' as faq3 %}
+	{{ faq3.name }}
+	{{ faq3.content }}
 	{% trans 'read-answer' %}
 
-{% endblock %}
 
-{% define layout_elems|get_elem:'home-faq-4-question' as faq %}
-	{{ faq.name }}
-	{{ faq.content }}
+{% define layout_elems|get_elem:'home-faq-4-question' as faq4 %}
+	{{ faq4.name }}
+	{{ faq4.content }}
 	{% trans 'read-answer' %}
 
-{% endblock %}
 
 
 <hr>
@@ -88,3 +84,7 @@
 
 {{ layout_elems|get_elem:'home-cite-4' }}
 {{ layout_elems|get_elem:'home-cite-auth-4' }}
+
+
+{% endblock %}
+
