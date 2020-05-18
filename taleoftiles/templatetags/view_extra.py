@@ -24,7 +24,7 @@ def clean(value):
 
 @register.filter
 def get_elem(queryset, key):
-    elem = queryset.get(tag__slug=key)
+    elem = queryset.filter(tag__slug=key).first()
     return(elem)
 
 @register.filter
