@@ -33,10 +33,13 @@ def summary(request):
         query = Q(session_id  = request.session.session_key) 
     
     charts   = Chart.active.filter( query )
+    total = 0
     for chart in charts:
         chart.status = 'i1'
         chart.save()
-    return render(request, "summary.html", {'charts':charts,'prv_page':prv_page})   
+        total += chart.total_price()
+    return render(request, "summary.html", {'charts':charts,'prv_page':prv_page,
+        'total':total})   
 
 def payment(request, id_):
     try:
