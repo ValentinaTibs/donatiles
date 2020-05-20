@@ -24,8 +24,9 @@ table, th, td {
 		<td></td>
 		<td></td>
 
-		<td>{% trans 'price' %}</td>
+		
 		<td>{% trans 'quantity' %}</td>
+		<td>{% trans 'price' %}</td>
 	</tr>
 	
 {% for chart in charts %}
@@ -37,8 +38,9 @@ table, th, td {
 	  	<td>{{chart_item.product.thumb_}}</td>
 	  	<td>{{chart_item.product|serie}}</td>
 	  	<td>{{chart_item.size}}</td>
-	  	<td>{{chart_item.price}}</td>
-	  	<td>{{chart_item.quantity}}</td>
+	  	
+	  	<td>{{chart_item.tot_quantity}}</td>
+		<td>{{chart_item.price}}</td>
 
 	  	<td>
 	  		<a href="{% url 'del_chart' chart_item.product.code False %}">
@@ -55,8 +57,8 @@ table, th, td {
 		{{chart_item.product.thumb_}}
 		</td>
 	</tr>
-
 	{% endfor %}
+
 {% endfor %}
 
 	<tr>
@@ -66,11 +68,11 @@ table, th, td {
 
 	<tr>
 		<td>{% trans 'summary-sample-title' %}</td>
-		<td></td>
+		
 	</tr>
 	<tr>
 		<td>{% trans 'summary-sample-subtitle' %}</td>
-		<td></td>
+		
 	</tr>
 
 	<tr>
@@ -78,14 +80,16 @@ table, th, td {
 		<td></td>
 		<td></td>
 		<td></td>
+		<td></td>
 		<td>0</td>
 	</tr>
 	<tr>
 		<td>{% trans 'summary-shipping-subtitle' %}</td>
-		<td></td>
+		
 	</tr>
 	<tr>
 		<td>{% trans 'summary-total-title' %}</td>
+		<td></td>
 		<td></td>
 		<td></td>
 		<td></td>

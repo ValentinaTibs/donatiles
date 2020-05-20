@@ -1,3 +1,5 @@
+import math
+
 from django.utils.crypto import get_random_string
 from django.db import models
 from django.utils import timezone
@@ -122,7 +124,7 @@ class Chart(models.Model):
         if self.is_sample:
             return total
         for ch_i in self.chart_item.filter(status = 'ok'):
-            total += ch_i.quantity * ch_i.product.price
+            total += ch_i.tot_quantity() * ch_i.product.price(ch_i.size)
         return total
     
     def all_samples(self):
@@ -143,6 +145,7 @@ class ChartItem(models.Model):
     product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     quantity    = models.PositiveIntegerField( default=1 )       
+    has_frido   = models.BooleanField(default = True)
 
     status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
     created_at  = models.DateTimeField(editable=False)
@@ -161,6 +164,15 @@ class ChartItem(models.Model):
         else:
             return self.status
 
+    def tot_quantity(self):
+        if self.has_frido:
+            return math.ceil(self.product.sfrido() * self.quantity + self.quantity)
+        else:
+            return self.quantity
+
+    def price(self):
+        if self.status == 'ok':
+            return self.tot_quantity() * self.product.price(self.size)
    
 class Question(models.Model):
     content         = models.TextField()

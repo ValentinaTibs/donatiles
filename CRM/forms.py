@@ -30,11 +30,12 @@ class NewChartItemForm(forms.ModelForm):
 
     class Meta:
         model = ChartItem
-        fields = ('size', 'quantity' ,'product','chart')
+        fields = ('size', 'quantity' ,'product','chart','has_frido')
         widgets = { 
             'product'   :forms.HiddenInput(),
             'chart'     :forms.HiddenInput(),
-            'size'      :forms.RadioSelect()
+            'size'      :forms.RadioSelect(),
+            'has_frido' :forms.CheckboxInput(attrs={'checked' : True,}),
         }
 
     def __init__(self, *args, **kwargs):

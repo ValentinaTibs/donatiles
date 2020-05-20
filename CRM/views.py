@@ -159,9 +159,9 @@ def add_chart(request, product_code):
     if not request.session.exists(request.session.session_key):
         request.session.create() 
 
-    try: 
-        chart = Chart.objects.get(session_id  = request.session.session_key, is_sample = False )
-    except ObjectDoesNotExist:
+    chart = Chart.objects.filter(session_id  = request.session.session_key, is_sample = False ).first()
+    
+    if not chart:
         chart = Chart(session_id  = request.session.session_key, is_sample = False)
         if request.user.is_authenticated:
             chart.user = request.user
