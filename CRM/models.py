@@ -121,8 +121,9 @@ class Chart(models.Model):
         total = 0
         if self.is_sample:
             return total
+
         for ch_i in self.chart_item.filter(status = 'ok'):
-            total += ch_i.quantity * ch_i.product.prices
+            total += ch_i.quantity * ch_i.product.price(ch_i.size)
         return total
     
     def all_samples(self):
@@ -161,6 +162,9 @@ class ChartItem(models.Model):
         else:
             return self.status
 
+    def price(self):
+        if self.status == 'ok':
+            return self.quantity * self.product.price(self.size)
    
 class Question(models.Model):
     content         = models.TextField()
