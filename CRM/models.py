@@ -122,7 +122,7 @@ class Chart(models.Model):
         if self.is_sample:
             return total
         for ch_i in self.chart_item.filter(status = 'ok'):
-            total += ch_i.quantity * ch_i.product.price
+            total += ch_i.quantity * ch_i.product.prices
         return total
     
     def all_samples(self):

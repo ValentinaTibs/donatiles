@@ -10,12 +10,12 @@ from django.core.exceptions import NON_FIELD_ERRORS
 
 class CustomProductModelForm(forms.ModelForm):
     
-    series  = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
-    colours = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
-    formats = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format'), required = False)
-    settings = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
-    styles  = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
-    effects  = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect'), required = False)
+    series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
+    colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
+    formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format'), required = False)
+    settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
+    styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
+    effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect'), required = False)
 
     class Meta:
         model = Product
@@ -32,8 +32,8 @@ class CustomProductModelForm(forms.ModelForm):
         formats     = kwargs['instance'].tags.filter(parent__parent__slug='format')
         settings    = kwargs['instance'].tags.filter(parent__slug='setting')
         styles      = kwargs['instance'].tags.filter(parent__slug='style')
-        effects      = kwargs['instance'].tags.filter(parent__slug='effect')
-
+        effects     = kwargs['instance'].tags.filter(parent__slug='effect')
+        
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
         if serie:
             self.initial['series'] = serie.pk
@@ -65,9 +65,8 @@ class CustomProductModelForm(forms.ModelForm):
         if effects:
             effects_iv = []
             for effect in effects:
-                effects_iv.append(style.pk)
+                effects_iv.append(effect.pk)
             self.initial['effects'] = effects_iv  
-
         return
 
     def save(self, commit=True):

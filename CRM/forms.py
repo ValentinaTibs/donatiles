@@ -43,6 +43,7 @@ class NewChartItemForm(forms.ModelForm):
 
         if product:
             prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
+            print(prod_sizes)
             if not ('size' in args[0]):
                 args[0]['size'] = prod_sizes.first()
 
