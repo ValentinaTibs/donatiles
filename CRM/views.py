@@ -33,10 +33,13 @@ def summary(request):
         query = Q(session_id  = request.session.session_key) 
     
     charts   = Chart.active.filter( query )
+    total = 0
     for chart in charts:
         chart.status = 'i1'
         chart.save()
-    return render(request, "summary.html", {'charts':charts,'prv_page':prv_page})   
+        total += chart.total_price()
+    return render(request, "summary.html", {'charts':charts,'prv_page':prv_page,
+        'total':total})   
 
 def payment(request, id_):
     try:
@@ -106,12 +109,12 @@ def add_user(request):
     #2do add to the redirect the form error 
     return redirect(request.META.get('HTTP_REFERER'))
 
-def del_chart(request, product_code, is_sample):
+def del_chart(request, item_id, is_sample):
     sess_k =request.session.session_key
 
     try: 
         chart_item = ChartItem.objects.get(chart__session_id  = sess_k, chart__is_sample = is_sample, 
-            product__code = product_code, status = 'ok' )
+            pk = item_id, status = 'ok' )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "Removing something that wasnt in your chart/sampler " + product_code,})
     chart_item.status = 'ru'
@@ -156,9 +159,9 @@ def add_chart(request, product_code):
     if not request.session.exists(request.session.session_key):
         request.session.create() 
 
-    try: 
-        chart = Chart.objects.get(session_id  = request.session.session_key, is_sample = False )
-    except ObjectDoesNotExist:
+    chart = Chart.objects.filter(session_id  = request.session.session_key, is_sample = False ).first()
+
+    if not chart:
         chart = Chart(session_id  = request.session.session_key, is_sample = False)
         if request.user.is_authenticated:
             chart.user = request.user

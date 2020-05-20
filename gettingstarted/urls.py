@@ -23,7 +23,7 @@ urlpatterns += i18n_patterns(
     path("product/<slug:product_code>", taleoftiles.views.product,  name="product"),
 
     path("add_chart/<slug:product_code>",                   CRM.views.add_chart,  name="add_chart"),
-    path("del_chart/<slug:product_code>/<str:is_sample>",   CRM.views.del_chart,  name="del_chart"),
+    path("del_chart/<int:item_id>/<str:is_sample>",   CRM.views.del_chart,  name="del_chart"),
     path("add_sample/<slug:product_code>",                  CRM.views.add_sample, name="add_sample"),
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
     path("account/",                                        CRM.views.account,    name="account"),

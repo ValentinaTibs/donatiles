@@ -115,7 +115,7 @@ CHART
 {% for chart in charts.all %}
   {% for chart_item in chart.all_items %}
     {{chart_item.product}}
-    <a href="{% url 'del_chart' chart_item.product.code False %}"> del this</a> 
+    <a href="{% url 'del_chart' chart_item.pk False %}"> del this</a> 
   {% endfor %}
 {% endfor %}
 

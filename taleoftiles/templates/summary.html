@@ -19,65 +19,86 @@ table, th, td {
 
 <table>
 	<tr>
+		<td>{% trans 'product' %}</td>
+		<td></td>
+		<td></td>
+		<td></td>
+
+		
 		<td>{% trans 'quantity' %}</td>
 		<td>{% trans 'price' %}</td>
 	</tr>
 	
 {% for chart in charts %}
 
-	<tr>
+	
 	{% for chart_item in chart.all_items %}
+	<tr>
 	  	<td>{{chart_item.product}}</td>
 	  	<td>{{chart_item.product.thumb_}}</td>
 	  	<td>{{chart_item.product|serie}}</td>
-	  	<td>{{chart_item.quantity}}</td>
+	  	<td>{{chart_item.size}}</td>
+	  	
+	  	<td>{{chart_item.tot_quantity}}</td>
+		<td>{{chart_item.price}}</td>
 
 	  	<td>
-	  		<a href="{% url 'del_chart' chart_item.product.code False %}">
+	  		<a href="{% url 'del_chart' chart_item.pk False %}">
 	  		{% trans 'delete' %}</a>
 	  	</td>
+	  </tr>
 	{% endfor %}
-	</tr>
-	<tr>
-		<td>{% trans 'summary-corrispond-to' %} {% trans 'box' %}</td>
+	
 
 
-	</tr>
-
-
-
+	{% for chart_item in chart.all_samples %}
 	<tr>
 		<td>
-		{% for chart_item in chart.all_samples %}
-			{{chart_item.product.thumb_}}
-		{% endfor %}
+		{{chart_item.product.thumb_}}
 		</td>
 	</tr>
+	{% endfor %}
+
+{% endfor %}
+
+	<tr>
+		<td>{% trans 'summary-corrispond-to' %} {% trans 'box' %}</td>
+	</tr>
+
 
 	<tr>
 		<td>{% trans 'summary-sample-title' %}</td>
-		<td></td>
+		
 	</tr>
 	<tr>
 		<td>{% trans 'summary-sample-subtitle' %}</td>
-		<td></td>
+		
 	</tr>
 
 	<tr>
 		<td>{% trans 'summary-shipping-title' %}</td>
-		<td>{{chart.total_price}}</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>0</td>
 	</tr>
 	<tr>
 		<td>{% trans 'summary-shipping-subtitle' %}</td>
-		<td></td>
+		
 	</tr>
 	<tr>
 		<td>{% trans 'summary-total-title' %}</td>
 		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+
+		<td>{{total}}</td>
 	</tr>
 
 
-{% endfor %}
+
 
 </table>
 <a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}"> {% trans 'summary-insert-shipping' %} </a> 
