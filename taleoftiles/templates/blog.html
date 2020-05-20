@@ -9,10 +9,22 @@
 
 {% block content %}
 
+{% trans 'blog-page-name' %}
+
+{{ layout_elems|get_elem:'cover-blog-text' }}
 {{ layout_elems|get_elem:'cover-blog' }}
 
 {% for post in all_post%}
-	<a href="{% url 'post' post.publication.slug %}"> {{post}} </a>   
+
+	<p>
+		<a href="{% url 'post' post.publication.slug %}"> 
+			{{post.publication.title}}
+			{% autoescape off %}
+				{{post.publication.content|truncatewords:"40"}} 
+			{% endautoescape %}
+		</a>   
+	</p>
+
 {% endfor %}
 
 {% endblock %}
