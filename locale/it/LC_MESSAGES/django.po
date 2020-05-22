@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-22 13:45+0000\n"
+"POT-Creation-Date: 2020-05-22 13:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,30 +18,274 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: gettingstarted/settings.py:111
+#: CRM/forms.py:62
+msgid "Not Enought"
+msgstr ""
+
+#: CRM/forms.py:81
+msgid "Invalid email"
+msgstr ""
+
+#: CRM/forms.py:85
+msgid "Duplicated email"
+msgstr ""
+
+#: gettingstarted/settings.py:116
 msgid "English"
 msgstr "Inglese"
 
-#: gettingstarted/settings.py:112
+#: gettingstarted/settings.py:117
 msgid "Italiano"
 msgstr "Italiano"
 
-#: gettingstarted/settings.py:113
+#: gettingstarted/settings.py:118
 msgid "Svenska"
 msgstr "Svedese"
 
-#: gettingstarted/settings.py:114
+#: gettingstarted/settings.py:119
 msgid "Deutch"
 msgstr "Tedesco"
 
-#: taleoftiles/templates/empty.html:13
-msgid "unique_id"
-msgstr "ID UNICO"
+#: taleoftiles/templates/account.html:6
+msgid "account-page-name"
+msgstr ""
 
-#: taleoftiles/views.py:36
-msgid "Sign Up"
-msgstr "LOGGATI"
+#: taleoftiles/templates/blog.html:6 taleoftiles/templates/blog.html:12
+msgid "blog-page-name"
+msgstr ""
 
-#: taleoftiles/views.py:37
-msgid "POCCOZIO"
-msgstr "LAZY ITA"
+#: taleoftiles/templates/catalogue.html:5
+msgid "catalgoue-page-name"
+msgstr ""
+
+#: taleoftiles/templates/catalogue.html:103
+msgid "cat-menu-all"
+msgstr ""
+
+#: taleoftiles/templates/checkout_base.html:41
+#: taleoftiles/templates/empty_base.html:77
+msgid "language"
+msgstr "Lingua"
+
+#: taleoftiles/templates/checkout_base.html:42
+#: taleoftiles/templates/empty_base.html:78
+msgid "currency"
+msgstr "Valuta"
+
+#: taleoftiles/templates/checkout_base.html:50
+msgid "summary-menu"
+msgstr ""
+
+#: taleoftiles/templates/checkout_base.html:51
+msgid "shipping-menu"
+msgstr ""
+
+#: taleoftiles/templates/checkout_base.html:52
+msgid "payment-menu"
+msgstr ""
+
+#: taleoftiles/templates/checkout_base.html:55
+msgid "checkout-back"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:33
+msgid "facebook"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:34
+msgid "pinterest"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:35
+msgid "instagram"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:37
+msgid "support"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:41
+msgid "account"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:42
+msgid "logout"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:91
+msgid "catalogue-menu"
+msgstr "Catalogo"
+
+#: taleoftiles/templates/empty_base.html:101
+msgid "blog-menu"
+msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/home.html:5
+msgid "home-page-name"
+msgstr ""
+
+#: taleoftiles/templates/home.html:19
+msgid "home-idee"
+msgstr ""
+
+#: taleoftiles/templates/home.html:32
+msgid "title-renovate-home"
+msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/home.html:36
+msgid "read"
+msgstr "leggi"
+
+#: taleoftiles/templates/home.html:41
+msgid "title-faq-home"
+msgstr "Domande frequenti"
+
+#: taleoftiles/templates/home.html:46 taleoftiles/templates/home.html:52
+#: taleoftiles/templates/home.html:58 taleoftiles/templates/home.html:64
+msgid "read-answer"
+msgstr "leggi risposta"
+
+#: taleoftiles/templates/home.html:69
+msgid "title-team-home"
+msgstr "Chi siamo"
+
+#: taleoftiles/templates/home.html:71
+msgid "founder-name"
+msgstr "Donatella Mattonella"
+
+#: taleoftiles/templates/post.html:6
+msgid "the_blog"
+msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/product.html:58
+msgid "product-support"
+msgstr ""
+
+#: taleoftiles/templates/product.html:64
+msgid "product-same-serie"
+msgstr ""
+
+#: taleoftiles/templates/product.html:83
+msgid "add-sampler-button"
+msgstr ""
+
+#: taleoftiles/templates/product.html:87
+msgid "add-sampler-text"
+msgstr ""
+
+#: taleoftiles/templates/product.html:119
+msgid "add-chart-button"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:6
+msgid "summary-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:18
+msgid "summary-page-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:22
+msgid "product"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:28
+msgid "quantity"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:29
+msgid "price"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:47
+msgid "delete"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:65
+msgid "summary-corrispond-to"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:65
+msgid "box"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:70
+msgid "summary-sample-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:74
+msgid "summary-sample-subtitle"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:79
+msgid "summary-shipping-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:87
+msgid "summary-shipping-subtitle"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:91
+msgid "summary-total-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:104
+msgid "summary-insert-shipping"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:106
+msgid "summary-longtext"
+msgstr ""
+
+#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:12
+msgid "support-page-name"
+msgstr ""
+
+#: taleoftiles/templates/support.html:14
+msgid "frequent-question"
+msgstr ""
+
+#: taleoftiles/templates/support.html:20
+msgid "write-us-orders"
+msgstr ""
+
+#: taleoftiles/templates/support.html:23
+msgid "write-us-sells"
+msgstr ""
+
+#: taleoftiles/templates/support.html:26
+msgid "write-us-support"
+msgstr ""
+
+#: taleoftiles/templates/support.html:29
+msgid "search"
+msgstr ""
+
+#: taleoftiles/templates/support.html:32
+msgid "products"
+msgstr ""
+
+#: taleoftiles/templates/support.html:42
+msgid "samples"
+msgstr ""
+
+#: taleoftiles/templates/support.html:52
+msgid "payment"
+msgstr ""
+
+#: taleoftiles/templates/support.html:62
+msgid "shipping"
+msgstr ""
+
+#: taleoftiles/templates/support.html:72
+msgid "company"
+msgstr ""
+
+#~ msgid "unique_id"
+#~ msgstr "ID UNICO"
+
+#~ msgid "Sign Up"
+#~ msgstr "LOGGATI"
+
+#~ msgid "POCCOZIO"
+#~ msgstr "LAZY ITA"
