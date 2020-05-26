@@ -8,6 +8,8 @@
 
 {% block content %}
 
+{% trans 'shipping-title' %}
+
 <form method="post" action="{{request.get_full_path}}" >
 {% csrf_token %}
 
@@ -18,8 +20,7 @@
 {{ form.shipping_address.label_tag }}	{{ form.shipping_address }}
 {{ form.telephone_num.label_tag }}		{{ form.telephone_num }}
 
-<input type="submit" value="concludi lordine" />
-
+<input type="submit" value="{% trans 'shipping-insert-order' %}" />
 <input type="hidden" name="prv" value="{{ prv_page }}">
 
 </form>

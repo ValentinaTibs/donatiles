@@ -5,9 +5,9 @@ from modeltranslation.translator import register, TranslationOptions
 class TagTranslation(TranslationOptions):
     fields = ('name', 'summary')
 
-# @register(Publication)
-# class TagTranslation(TranslationOptions):
-#     fields = ('title', 'content')
+@register(Publication)
+class PubTranslation(TranslationOptions):
+    fields = ('content')
 
 
 # @register(Icon)

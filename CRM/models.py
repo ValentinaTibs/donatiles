@@ -46,12 +46,12 @@ class Profile(models.Model):
 class Shipping(models.Model):
     #2do this must become a one to Many because we want to keep track of old shippings
     user                = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
-    fullname            = models.TextField(max_length=100, blank=True)
+    fullname            = models.TextField(max_length=100, blank=False)
     country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
-    city                = models.TextField(max_length=100, blank=True)
-    CAP                 = models.TextField(max_length=10, blank=True)
-    shipping_address    = models.TextField(max_length=100, blank=True)
-    telephone_num       = models.TextField(max_length=30, blank=True)
+    city                = models.TextField(max_length=100, blank=False)
+    CAP                 = models.TextField(max_length=10, blank=False)
+    shipping_address    = models.TextField(max_length=100, blank=False)
+    telephone_num       = models.TextField(max_length=30, blank=False)
     is_active           = models.BooleanField(default = True)
 
 

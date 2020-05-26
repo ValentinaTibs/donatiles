@@ -8,9 +8,29 @@
 
 {% block content %}
 
-Come effettuare il pagamento 
 
-{{order}}
+
+{% trans 'summary-recipt-title' %}
+
+{% trans 'summary-long-text1' %}
+
+
+
+{% trans 'order' %} {{order.internal_tracking_id}}
+
+{% trans 'summary-iban-title' %}
+{% trans 'summary-iban' %}
+
+{% trans 'summary-SWIFT-title' %}
+{% trans 'summary-SWIFT' %}
+
+{% trans 'summary-accountholder-title' %}
+{% trans 'summary-accountholder' %}
+
+
+
+<a href="{% url 'account'%}"> {% trans 'summary-back-home' %} </a>
+
 
 <a href="{% url 'payment' order.id %}">Lost password?</a>
 

@@ -58,6 +58,8 @@ def catalogue(request, the_filter = None):
         "active_tags"   : query_dict
         })
 
+from django.core.mail import send_mail
+
 def product(request, product_code, chi_form = None ):    
     
     try: 
@@ -65,28 +67,15 @@ def product(request, product_code, chi_form = None ):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
+    send_mail('Subject here', 'Here is the message.', 'info@taleoftiles.it', ['tibaldo.valentina@gmail.com'], fail_silently=False)
+
     #for all product in the same series that are not support and not itself
     related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
     
-    # if request.session.exists(request.session.session_key):
-    #     try: 
-    #         chart = Chart.objects.get(session_id  = request.session.session_key, is_sample = False )
-    #     except ObjectDoesNotExist:
-    #         chart = Chart(session_id  = request.session.session_key, is_sample = True)
-    #         if request.user.is_authenticated:
-    #             chart.user = request.user
-    #         chart.save()   
-
-    #if not chi_form:
-        #chi_form = NewChartItemForm(request.POST or , request.FILES or None)
     chi_form = NewChartItemForm(request.POST or {'product':product.pk,} , request.FILES or None)
-
 
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,
         "chi_form" : chi_form
         })
-
-
-

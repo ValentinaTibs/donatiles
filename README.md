@@ -111,7 +111,6 @@ find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 find . -path "*/migrations/*.pyc"  -delete
 
 python3 manage.py showmigrations
-
 python3 manage.py migrate --fake-initial
 
 ```
@@ -132,6 +131,9 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale la
 python3 manage.py makemessages -l 'en'
 python3 manage.py compilemessages
 RESTART SERVER
+
+heroku run python manage.py compilemessages
+
 ```
 
 

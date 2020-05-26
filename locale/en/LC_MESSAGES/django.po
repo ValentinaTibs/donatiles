@@ -1,12 +1,12 @@
-#: CRM/forms.py:62
+#: CRM/forms.py:56
 msgid "Not Enought"
 msgstr ""
 
-#: CRM/forms.py:81
+#: CRM/forms.py:75
 msgid "Invalid email"
 msgstr ""
 
-#: CRM/forms.py:85
+#: CRM/forms.py:79
 msgid "Duplicated email"
 msgstr ""
 
@@ -104,34 +104,70 @@ msgstr "Restoration Ideas"
 msgid "home-page-name"
 msgstr ""
 
-#: taleoftiles/templates/home.html:19
-msgid "home-idee"
-msgstr ""
-
-#: taleoftiles/templates/home.html:32
+#: taleoftiles/templates/home.html:29
 msgid "title-renovate-home"
 msgstr "Ideas for rennovate"
 
-#: taleoftiles/templates/home.html:36
+#: taleoftiles/templates/home.html:33
 msgid "read"
 msgstr "read"
 
-#: taleoftiles/templates/home.html:41
+#: taleoftiles/templates/home.html:38
 msgid "title-faq-home"
 msgstr "Frequent Question"
 
-#: taleoftiles/templates/home.html:46 taleoftiles/templates/home.html:52
-#: taleoftiles/templates/home.html:58 taleoftiles/templates/home.html:64
+#: taleoftiles/templates/home.html:43 taleoftiles/templates/home.html:49
+#: taleoftiles/templates/home.html:55 taleoftiles/templates/home.html:61
 msgid "read-answer"
 msgstr "read answer"
 
-#: taleoftiles/templates/home.html:69
+#: taleoftiles/templates/home.html:66
 msgid "title-team-home"
 msgstr "The Team"
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:68
 msgid "founder-name"
 msgstr "Donatella Mattonella"
+
+#: taleoftiles/templates/payment.html:13
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "summary-recipt-title"
+msgstr "Shipping"
+
+#: taleoftiles/templates/payment.html:14
+msgid "order"
+msgstr "order"
+
+#: taleoftiles/templates/payment.html:16
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "summary-iban-title"
+msgstr "Shipping"
+
+#: taleoftiles/templates/payment.html:17
+msgid "summary-iban"
+msgstr "IBAN"
+
+#: taleoftiles/templates/payment.html:19
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "summary-SWIFT-title"
+msgstr "Shipping"
+
+#: taleoftiles/templates/payment.html:20
+msgid "summary-SWIFT"
+msgstr ""
+
+#: taleoftiles/templates/payment.html:22
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "summary-accountholder-title"
+msgstr "Shipping"
+
+#: taleoftiles/templates/payment.html:23
+msgid "summary-accountholder"
+msgstr "BPPPPPPPP"
 
 #: taleoftiles/templates/post.html:6
 msgid "the_blog"

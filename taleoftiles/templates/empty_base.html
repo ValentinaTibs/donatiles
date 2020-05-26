@@ -80,7 +80,6 @@
 </menu>
 
 <!--  LOGO !-->
-
 <a href="{% url 'index' %}"> <img src="{% static 'images/logo.png' %}" width="100"> </a>
 
 <!--  CATALOGUE !-->
@@ -102,15 +101,17 @@
 
 
 SAMPLER
+## {{ sampler.all_samples|length }}  ##
 {% for sample in sampler.all_samples %}
   {{sample.product}}
-  <a href="{% url 'del_chart' sample.product.code True %}"> del this</a> 
+  <a href="{% url 'del_chart' sample.pk True %}"> del this</a> 
 {% endfor %}
 
 
 CHART
 
 ## {{ num_ch_i }} ##
+## {{ chart.all_items|length }}  ##
 
 {% for chart in charts.all %}
   {% for chart_item in chart.all_items %}
@@ -139,13 +140,10 @@ SIGNUP
   <td>{{ signupform.username }}</td>
 </tr>
 
-<tr>
-  <td>{{ signupform.password1.label_tag }}</td>
-  <td>{{ signupform.password1 }}</td>
-</tr>
+
 </table>
 
-<input type="submit" value="register" />
+<input type="submit" value="{% trans 'register' %}" />
 <input type="hidden" name="next" value="{{ request.get_full_path }} " />
 
 </form>

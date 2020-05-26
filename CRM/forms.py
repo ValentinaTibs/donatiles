@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.core.exceptions import ObjectDoesNotExist
 
+from django.utils.crypto import get_random_string
+
 from django import forms
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -19,12 +21,6 @@ class ShippingForm(forms.ModelForm):
         
         def __init__(self, *args, **kwargs):
             super(ShippingForm, self).__init__(*args, **kwargs)
-            self.fields['fullname']         .required = True
-            self.fields['country']          .required = True
-            self.fields['city']             .required = True
-            self.fields['CAP']              .required = True
-            self.fields['shipping_address'] .required = True
-            self.fields['telephone_num']    .required = True
 
 class NewChartItemForm(forms.ModelForm):
 
@@ -65,6 +61,8 @@ class NewChartItemForm(forms.ModelForm):
 
         self._errors['starting_date'] = ['min-ammount-error']
 
+def create_first_pwd():
+    return get_random_string(length=32)
 
 class RegisterForm(UserCreationForm):
     
@@ -73,6 +71,7 @@ class RegisterForm(UserCreationForm):
         del self.fields['password2']
 
     def clean(self):
+        
         super(RegisterForm, self).clean()
         username = self.cleaned_data.get('username')
         try:

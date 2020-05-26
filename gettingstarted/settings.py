@@ -151,6 +151,14 @@ RECAPTCHA_PRIVATE_KEY = '6Le6idgUAAAAAGTdYuat-SXi_uQDPOeGMyJ4oAam'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # ---- SENDGRID -------
-# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-# SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_ECHO_TO_STDOUT=True
+SENDGRID_SANDBOX_MODE_IN_DEBUG = True
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
