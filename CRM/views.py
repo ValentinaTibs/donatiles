@@ -102,6 +102,9 @@ def add_user(request):
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()
+            #new_user.is_active = False
+            #new_user.set_unusable_password()
+            new_user.save()
             da_user = Profile( user = new_user)        
             da_user.save()
             login(request, new_user)

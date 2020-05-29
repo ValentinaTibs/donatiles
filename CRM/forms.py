@@ -12,6 +12,7 @@ from django.contrib.auth.models import User,Group
 
 from CRM.models import Shipping,ChartItem,Tag
 from taleoftiles.models import Product
+from layout.models import  MailTemplate
 
 class ShippingForm(forms.ModelForm):
 
@@ -62,18 +63,22 @@ class NewChartItemForm(forms.ModelForm):
         self._errors['starting_date'] = ['min-ammount-error']
 
 def create_first_pwd():
-    return get_random_string(length=32)
+    return get_random_string(length=9)
 
 class RegisterForm(UserCreationForm):
-    
+
+
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
         del self.fields['password2']
+        del self.fields['password1']
 
     def clean(self):
-        
+        self.cleaned_data["password1"] = create_first_pwd()
+
         super(RegisterForm, self).clean()
         username = self.cleaned_data.get('username')
+
         try:
             validate_email(username)
         except ValidationError as e:
@@ -82,7 +87,10 @@ class RegisterForm(UserCreationForm):
         #avoid duplicates
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError(_('Duplicated email'), code='duplicated-user-error')
-
+        
+        #send welcome email with pwd 
+        MailTemplate().send_first_password(username,self.cleaned_data.get('password1'))
+        
         return self.cleaned_data    
 
     def save(self, commit=True):
@@ -98,7 +106,6 @@ class RegisterForm(UserCreationForm):
             client_group.user_set.add(user)
 
         return user    
-
 
         
 class LoginForm(AuthenticationForm):

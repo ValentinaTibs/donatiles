@@ -7,5 +7,7 @@ django-summernote
 django_reverse_admin
 django-recaptcha
 numpy
-django-sendgrid-v5
 django-modeltranslation
+sendgrid
+boto3
+django-storages

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 
+
 DATA_TYPE = (
     ('t', 'Text'),
     ('i', 'Image')
@@ -64,3 +65,58 @@ class Config(models.Model):
 
 	def __str__(self):
 		return '%s' % (self.tag,)
+
+from sendgrid.helpers.mail import *   
+from sendgrid import SendGridAPIClient
+import os
+
+
+class MailTemplate(models.Model):
+    slug            = models.CharField(max_length=50, unique=True)
+    subj            = models.CharField(max_length=250, null = False, blank=False)
+    sender          = models.CharField(max_length=50,  null = False, blank=False) 
+    content         = models.TextField      (max_length=500, null=True, blank=True)
+    template_id     = models.CharField(max_length=50, null = False, blank=False) 
+    template_vs     = models.CharField(max_length=50, null = False, blank=False) 
+    no_reply        = models.BooleanField(default = False)
+
+
+    def send(self,email_rec,pwd):
+        pass
+
+        message = Mail()
+        message.to_emails = To("tibaldo.valentina@gmail.com")
+        message.subject = Subject(self.subj, p=0)
+        message.from_email = Email(self.sender)
+        message.html_content = HtmlContent(self.content)
+
+        try:
+            sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+
+        except Exception as e:
+            print(str(e))
+            print(str(e.body))
+
+        # mail_settings               = MailSettings()
+        # mail_settings.sandbox_mode  = SandBoxMode(True)
+        # message.mail_settings       = mail_settings
+        # message.template_id         = TemplateId(self.template_id)
+
+        # message.substitution = Substitution('content', self.content, p=0)
+        # message.substitution = Substitution('password', pwd, p=0)
+
+
+    def send_first_password(self,email_rec,pwd):
+        da_mail = MailTemplate.objects.filter(slug='first-password').first()
+        da_mail.send(email_rec, pwd)
+    
+    def send_password_reset(self,email_rec):
+        da_mail = MailTemplate.objects.filter(slug='password-reset').first()
+        da_mail.send(email_rec)
+    
+
+

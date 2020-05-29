@@ -162,3 +162,11 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+# ----- AWS3   ----- 
+DEFAULT_FILE_STORAGE    = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID       = 'AKIAJS6CLBOAQSAVY4CA'
+AWS_SECRET_ACCESS_KEY   = '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'
+AWS_STORAGE_BUCKET_NAME = 'taleoftiles'
+AWS_DEFAULT_ACL         = None
+
+MEDIA_URL              = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'

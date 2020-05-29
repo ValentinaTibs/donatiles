@@ -1,5 +1,5 @@
 from django.contrib import admin
-from layout.models import  Element, ElementTag
+from layout.models import  Element, ElementTag, MailTemplate
 from modeltranslation.admin import TranslationAdmin
 
 # Register your models here.
@@ -31,6 +31,10 @@ class ElementTagAdmin(admin.ModelAdmin):
         else:
             return "-"
     
+class MailTemplateAdmin(admin.ModelAdmin):
+    model = MailTemplate
+    list_display = ("slug","subj","sender","content","template_id","template_vs","no_reply",)
 
 admin.site.register(Element,ElementLayoutAdmin)
 admin.site.register(ElementTag,ElementTagAdmin)
+admin.site.register(MailTemplate,MailTemplateAdmin)

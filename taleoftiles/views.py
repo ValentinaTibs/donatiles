@@ -58,16 +58,12 @@ def catalogue(request, the_filter = None):
         "active_tags"   : query_dict
         })
 
-from django.core.mail import send_mail
-
 def product(request, product_code, chi_form = None ):    
     
     try: 
         product = Product.active.get(code = product_code )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
-
-    send_mail('Subject here', 'Here is the message.', 'info@taleoftiles.it', ['tibaldo.valentina@gmail.com'], fail_silently=False)
 
     #for all product in the same series that are not support and not itself
     related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
