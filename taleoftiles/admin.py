@@ -78,12 +78,20 @@ class SerieAdmin(admin.ModelAdmin):
 
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
-    summernote_fields = ('content',)
-    fields = ('title','content','publish_date','slug')
+    summernote_fields = ('content_it','content_de','content_en','content_sv',)
+    fields = ('title_it','title_de','title_en','title_sv','content_it','content_de','content_en','content_sv',
+        'publish_date','slug')
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         super().save_model(request, obj, form, change)
+
+    list_display = ('title_', 'slug')
+
+    def title_(self, obj):
+        if obj.title == '':
+            return '-'
+        return obj.title
 
 class PhotoAdminSelf(admin.ModelAdmin):
     model = Photo

@@ -1,3 +1,6 @@
+<img src="{{ model.file.url }}"/>
+
+
 <form  action="{% url 'add_sample' product.publication.slug %}" method="POST"> 
     {% csrf_token %}
     <button > aggiungi al campione gratuito</button>

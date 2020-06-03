@@ -48,13 +48,14 @@ class Element(models.Model):
         return self.content
 
     def image_(self):
-        return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
+        return mark_safe('<img src="{0}">'.format(self.imagefile.url))
+
 
     def thumb_(self):
         width = 30
         ratio = 30 / self.imagefile.width
         height = self.imagefile.height * ratio
-        return mark_safe('<a href="/media/{0}"><img src="/media/{0}" width={1} height={2}></a>'.format(self.imagefile,width,height))
+        return mark_safe('<a href="{0}"><img src="{0}" width={1} height={2}></a>'.format(self.imagefile.url,width,height))
 
 class Config(models.Model):
 	    
