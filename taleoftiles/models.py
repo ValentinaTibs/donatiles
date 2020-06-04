@@ -17,16 +17,6 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
-class Icon(models.Model):  
-    name        =  models.CharField (max_length = 100 , null = False, blank=False, unique=True)
-    imagefile   = models.ImageField( upload_to='icons', null=True, blank=True, help_text="Load an image.", unique=True)
-    description = models.TextField()
-
-    def image_(self):
-        return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
-
-    def __str__(self):
-        return '%s' % (self.name, )
 
 class Tag(models.Model):
     name    = models.CharField(max_length=200)
@@ -38,7 +28,6 @@ class Tag(models.Model):
     in_menu         = models.BooleanField(default = False)    
     in_home         = models.BooleanField(default = False)    
     in_product_edit = models.BooleanField(default = False)    
-    icon        = models.ForeignKey( Icon,  blank = True, null = True, on_delete=models.SET_NULL, related_name='tags' )
     parent      = models.ForeignKey("self", blank = True, null = True, on_delete=models.SET_NULL, related_name='child' )
 
     data_type   = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
@@ -98,7 +87,6 @@ class Publication(models.Model):
 
 class TechnicalSpec(models.Model):
     slug    = models.CharField(max_length=50, unique=True)
-    icons   = models.ManyToManyField(Icon,  blank= True, related_name='techspecs')
     file    = models.FileField(upload_to='techspecs/')
     
     def save(self, *args, **kwargs):
@@ -209,36 +197,3 @@ class Catalogue(models.Model):
     def __str__(self):
         return self.title
         
-
-class Photo(models.Model):  
-
-    name        = models.CharField (max_length = 100 , null = True, blank=True)
-    imagefile   = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
-    product     = models.ForeignKey(Product, blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
-    order       = models.PositiveIntegerField( default=0, )   
-    is_cover    = models.BooleanField(default = False)
-
-    class Meta:
-        ordering = ["order"]    
-
-    def image_(self):
-        if self.imagefile:
-            return mark_safe('<img src="{0}">'.format(self.imagefile.url))
-
-    def thumb_(self):
-        width = 30
-        ratio = 30 / self.imagefile.width
-        height = self.imagefile.height * ratio
-        if self.imagefile:
-            return mark_safe('<a href="/media/{0}"><img src="/media/{0}" width={1} height={2}></a>'.format(self.imagefile,width,height))
-        else:
-            return mark_safe('<a href="/media/photos/{0}"><img src="/media/photos/{0}" width={1} height={2}></a>'.format(self.name,width,height))
-
-    def __str__(self):
-        return '%s' % (self.name,)
-
-    def save(self, *args, **kwargs):
-        if(self.name == None):
-            self.name = self.imagefile.name
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-

@@ -3,8 +3,10 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
-from taleoftiles.models import  Product,Tag, Publication, Photo, Icon, Price
+from taleoftiles.models import  Product,Tag, Publication, Price
 from taleoftiles.models import TechnicalSpec, Catalogue
+from layout.models      import Image, Icon
+
 from taleoftiles.forms import CustomProductModelForm
 
 def duplicate(modeladmin, request, queryset):
@@ -33,7 +35,7 @@ def make_for_product(modeladmin, request, queryset):
 make_for_product.short_description = "Toggle availability for product edit"
 
 class PhotoStackedAdmin(admin.StackedInline):
-    model = Photo
+    model = Image
 
     list_display = ('name',  )
     search_fields = ('name', )
@@ -93,11 +95,6 @@ class PublicationAdminSelf(SummernoteModelAdmin):
             return '-'
         return obj.title
 
-class PhotoAdminSelf(admin.ModelAdmin):
-    model = Photo
-    readonly_fields  = ( 'image_',)
-
-
 class IconAdminSelf(admin.ModelAdmin):
     model = Icon
     list_display = ('name','image_','description')
@@ -144,7 +141,7 @@ admin.site.register(Tag,TagAdmin)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Price,PriceAdmin)
 admin.site.register(Publication,PublicationAdminSelf)
-admin.site.register(Photo,PhotoAdminSelf)
+
 admin.site.register(Icon,IconAdminSelf)
 admin.site.register(TechnicalSpec,TechnicalSpecAdmin)
 admin.site.register(Catalogue,CatalogueAdmin)

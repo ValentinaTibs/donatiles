@@ -1,5 +1,5 @@
 from django.contrib import admin
-from layout.models import  Element, ElementTag, MailTemplate
+from layout.models import  Element, ElementTag, MailTemplate, Image
 from modeltranslation.admin import TranslationAdmin
 
 # Register your models here.
@@ -12,10 +12,19 @@ def duplicate(modeladmin, request, queryset):
 
 duplicate.short_description = "Duplicate selected items"
 
+class ImageStackedAdmin(admin.StackedInline):
+    model = Image
+
+    list_display = ('name',  )
+    search_fields = ('name', )
+    exclude = ('product','icon','is_cover' )
+
+
 class ElementLayoutAdmin(TranslationAdmin):
     model = Element
     list_display = ('name', 'tags',  'data_type','public' )
-    readonly_fields  = ( 'image_', )
+    inlines = (ImageStackedAdmin,)
+    readonly_fields  = ( 'image__image_', )
     
     def tags(self, obj):
         return "\n".join([p.name for p in obj.tag.all()])  
@@ -35,6 +44,11 @@ class MailTemplateAdmin(admin.ModelAdmin):
     model = MailTemplate
     list_display = ("slug","subj","sender","content","template_id","template_vs","no_reply",)
 
+class ImageAdminSelf(admin.ModelAdmin):
+    model = Image
+    readonly_fields  = ( 'image_',)
+
 admin.site.register(Element,ElementLayoutAdmin)
 admin.site.register(ElementTag,ElementTagAdmin)
 admin.site.register(MailTemplate,MailTemplateAdmin)
+admin.site.register(Image,ImageAdminSelf)

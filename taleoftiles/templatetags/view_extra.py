@@ -25,7 +25,10 @@ def clean(value):
 @register.filter
 def get_elem(queryset, key):
     elem = queryset.filter(tag__slug=key).first()
-    return(elem)
+    if elem:
+        return(elem.data())
+    else:
+        return None
 
 @register.filter
 def filter_tags(queryset, key):
