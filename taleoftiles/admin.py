@@ -95,6 +95,8 @@ class PublicationAdminSelf(SummernoteModelAdmin):
 
 class PhotoAdminSelf(admin.ModelAdmin):
     model = Photo
+    readonly_fields  = ( 'image_',)
+
 
 class IconAdminSelf(admin.ModelAdmin):
     model = Icon
@@ -104,8 +106,6 @@ class CatalogueAdmin(admin.ModelAdmin):
     model = Catalogue
     list_display = ('title','active')
     
-
-
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm

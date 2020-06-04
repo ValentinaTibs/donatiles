@@ -223,9 +223,7 @@ class Photo(models.Model):
 
     def image_(self):
         if self.imagefile:
-            return mark_safe('<img src="/media/{0}">'.format(self.imagefile))
-        else:
-            return mark_safe('<img src="/media/photos/{0}">'.format(self.name))
+            return mark_safe('<img src="{0}">'.format(self.imagefile.url))
 
     def thumb_(self):
         width = 30
