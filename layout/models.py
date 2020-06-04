@@ -37,24 +37,22 @@ class Element(models.Model):
 
     def __str__(self):
         return self.name    
+
+    def is_img(self):
+        if self.data_type == 'i':
+            return True
+        return False    
     
     def data(self):
-        if self.data_type == 'i':
-            return self.image.image_()
+        if self.is_img():
             return self.image.imagefile.url
-        return self.content
-        # if self.data_type == 't':
-        #     return '%s' % (self.content,)   
-        # if self.data_type == 'i':
-        #     return self.image.imagefile.url
-    
+        return self.content    
 
     def image_(self):
         return self.image.image_()
 
 
     def thumb_(self):
-        return " "
         return  self.image.thumb_()
 
 class Config(models.Model):

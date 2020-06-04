@@ -39,6 +39,15 @@ class PhotoStackedAdmin(admin.StackedInline):
 
     list_display = ('name',  )
     search_fields = ('name', )
+    exclude = ('name','element','icon' )
+
+class IconImageStackedAdmin(admin.StackedInline):
+    model = Image
+
+    list_display = ('name',  )
+    search_fields = ('name', )
+    exclude = ('name','product','is_cover','order','element' )
+
 
 class PriceStackedAdmin(admin.StackedInline):
     model = Price
@@ -97,6 +106,7 @@ class PublicationAdminSelf(SummernoteModelAdmin):
 
 class IconAdminSelf(admin.ModelAdmin):
     model = Icon
+    inlines = (IconImageStackedAdmin,)
     list_display = ('name','image_','description')
 
 class CatalogueAdmin(admin.ModelAdmin):

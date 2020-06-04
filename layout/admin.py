@@ -12,22 +12,27 @@ def duplicate(modeladmin, request, queryset):
 
 duplicate.short_description = "Duplicate selected items"
 
-class ImageStackedAdmin(admin.StackedInline):
+class ElementImageStackedAdmin(admin.StackedInline):
     model = Image
 
     list_display = ('name',  )
     search_fields = ('name', )
-    exclude = ('product','icon','is_cover' )
-
+    exclude = ('product','icon','is_cover','order' )
 
 class ElementLayoutAdmin(TranslationAdmin):
     model = Element
     list_display = ('name', 'tags',  'data_type','public' )
-    inlines = (ImageStackedAdmin,)
-    readonly_fields  = ( 'image__image_', )
+    inlines = (ElementImageStackedAdmin,)
+    readonly_fields  = ( 'image_', )
     
     def tags(self, obj):
         return "\n".join([p.name for p in obj.tag.all()])  
+
+    def image_(self,obj):
+        if obj and obj.is_img():
+            return obj.image.image_()
+        else:
+            return "NO IMAGE"
 
 class ElementTagAdmin(admin.ModelAdmin):
     model = ElementTag
