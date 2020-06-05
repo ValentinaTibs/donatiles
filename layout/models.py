@@ -44,7 +44,7 @@ class Element(models.Model):
         return False    
     
     def data(self):
-        if self.is_img():
+        if self.is_img() and self.image:
             return self.image.imagefile.url
         return self.content    
 
