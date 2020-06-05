@@ -45,6 +45,7 @@ class Element(models.Model):
     
     def data(self):
         if self.is_img() and self.image:
+            return mark_safe('<img src="{0}">'.format(self.image.imagefile.url))
             return self.image.imagefile.url
         return self.content    
 
