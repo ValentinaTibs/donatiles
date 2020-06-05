@@ -123,6 +123,7 @@ heroku pg:backups:capture
 heroku pg:backups:download
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale latest.dump
 ```
+
 # Translations -
 
 ## Microcopy text

@@ -12,10 +12,12 @@ class PostImageStackedAdmin(admin.StackedInline):
 
 
 class PostAdmin(admin.ModelAdmin):
+    
+    model = Post
 
     inlines = (PostImageStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
-    list_display = ('name','publish_date','tags', )
+    list_display = ('name','publish_date','tags','in_home','order' )
 
     def name(self, obj):
         pub = obj.publication
@@ -24,10 +26,8 @@ class PostAdmin(admin.ModelAdmin):
     def publish_date(self, obj):
         return obj.publication.publish_date
             
-
     def tags(self, obj):
         pub = obj.publication
         return "\n".join([p.name for p in pub.tag.all()])   
-
     
 admin.site.register(Post,PostAdmin)
