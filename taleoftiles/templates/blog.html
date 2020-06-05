@@ -15,15 +15,13 @@
 {{ layout_elems|get_elem:'cover-blog' }}
 
 {% for post in all_post%}
+	
+	<a href="{% url 'post' post.publication.slug %}"> {{post.publication.title}} </a>
 
-	<p>
-			<a href="{% url 'post' post.publication.slug %}"> {{post.publication.title}} </a>
-
-			{% autoescape off %}
-				{{post.publication.content|truncatewords:"40"}} 
-			{% endautoescape %}
-			
-	</p>
+	{% autoescape off %}
+		{{post.publication.content|truncatewords:"40"}} 
+	{% endautoescape %}
+	
 
 {% endfor %}
 
