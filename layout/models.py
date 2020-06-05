@@ -44,7 +44,7 @@ class Element(models.Model):
         return False    
     
     def data(self):
-        if self.image and self.is_img() :
+        if self.data_type == 'i' and  self.image and self.is_img() :
             return mark_safe('<img src="{0}">'.format(self.image.imagefile.url))
             return self.image.imagefile.url
         return self.content    
