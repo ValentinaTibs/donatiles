@@ -17,12 +17,12 @@
 {% for post in all_post%}
 
 	<p>
-		<a href="{% url 'post' post.publication.slug %}"> 
-			{{post.publication.title}}
+<!-- 		<a href="{% url 'post' post.publication.slug %}"> 
+ -->			{{post.publication.title}}
 			{% autoescape off %}
 				{{post.publication.content|truncatewords:"40"}} 
 			{% endautoescape %}
-		</a>   
+<!-- 		</a>    -->
 	</p>
 
 {% endfor %}
