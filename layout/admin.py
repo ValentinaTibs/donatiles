@@ -17,7 +17,7 @@ class ElementImageStackedAdmin(admin.StackedInline):
 
     list_display = ('name',  )
     search_fields = ('name', )
-    exclude = ('product','icon','is_cover','order' )
+    exclude = ('product','icon','is_cover','order','post' )
 
 class ElementLayoutAdmin(TranslationAdmin):
     model = Element

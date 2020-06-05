@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from taleoftiles.models import Product, Tag, TechnicalSpec
+from blog.models import Post
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -138,6 +139,8 @@ class Image(models.Model):
     product     = models.ForeignKey     (Product,   blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     element     = models.OneToOneField  (Element,   blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
     icon        = models.OneToOneField  (Icon,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
+    post        = models.OneToOneField  (Post,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
+    
     order       = models.PositiveIntegerField( default=0, )   
     is_cover    = models.BooleanField(default = False)
 

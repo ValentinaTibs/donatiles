@@ -11,9 +11,12 @@
 
 
 {{post.publication.title}}
-{{post.publication.content}}
 
+{{post.image.imagefile.url}}
 
+{% autoescape off %}
+	{{post.publication.content}}
+{% endautoescape %}
 
 {% endblock %}
 

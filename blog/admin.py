@@ -1,11 +1,19 @@
 from django.contrib import admin
-
+from layout.models import Image
 from blog.models import Post
+
+
+class PostImageStackedAdmin(admin.StackedInline):
+    model = Image
+
+    list_display = ('name',  )
+    search_fields = ('name', )
+    exclude = ('product','icon','is_cover','order','element' )
 
 
 class PostAdmin(admin.ModelAdmin):
 
-    #inlines = (PhotoStackedAdmin,)
+    inlines = (PostImageStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
     list_display = ('name','publish_date','tags', )
 
