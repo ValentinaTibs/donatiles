@@ -1,172 +1,372 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
 <head>
 
-  <!-- SITE TITTLE -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-  <title>
-   Tale of Tiles | {% block title %}{% endblock %}
-  </title>
-
+  <title>Tale of Tiles | {% block title %}{% endblock %} </title>
   {% load static %}
-  
-  <!-- FAVICON -->
-  <link href="img/favicon.png" rel="shortcut icon">
-  <!-- PLUGINS CSS STYLE -->
-  <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
 
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static '/site.webmanifest' %}">
+  <meta name="msapplication-TileColor" content="#3D312F">
+  <meta name="theme-color" content="#3D312F">
 
-{% block meta-tag %} {% endblock %}
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link type="text/css" href="{% static 'style/style.css' %}" rel="stylesheet">
+
+  {% block meta-tag %} {% endblock %}
 
 </head>
 
-<body >
+<body>
 
 {% load i18n %}
 {% load view_extra %}
 
-<menu>
+<header>
 
-{% trans 'facebook' %}
-{% trans 'pinterest' %}
-{% trans 'instagram' %}
+  <nav class="nav-secondary">
+    <ul>
+      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-social-facebook"/></svg></a></li>
+      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-social-instagram"/></svg></a></li>
+      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-social-pinterest"/></svg></a></li>
+      <li><a href="support.html"><span>Assistenza</span></a></li>
+      <li><a href="" data-overlay="Auth"><span>Login / Registrati</span></a></li>
+      <li>
+        <div class="nav-dropdown">
+          <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>ITA</span></div>
+          <div class="nav-dropdown-options">
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-en"/></svg><span>ENG</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>ITA</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-fr"/></svg><span>FRA</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-de"/></svg><span>DEU</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-sv"/></svg><span>SWE</span></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="nav-dropdown nav-dropdown-currency">
+          <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>EUR</span></div>
+          <div class="nav-dropdown-options">
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>EUR</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-gbp"/></svg><span>GBP</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-sek"/></svg><span>SEK</span></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
 
-<a href="{% url 'support'%}"> {% trans 'support' %} </a>
+  <nav class="nav-primary">
 
-{% if user.is_authenticated %}
+    <div><a href="index.html"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
+    <ul>
+      <li>
+        <a href="catalogue.html"><span>Catalogo</span></a>
+        <div class="nav-primary-expanded">
+          <div class="nav-col">
+            <h5>Effetto</h5>
+            <ul>
+              <li><a href="catalogue.html">Legno</a></li>
+              <li><a href="catalogue.html">Marmo</a></li>
+              <li><a href="catalogue.html">Pietra</a></li>
+              <li><a href="catalogue.html">Cemento</a></li>
+            </ul>
+          </div>
+          <div class="nav-col">
+            <h5>Stile</h5>
+            <ul>
+              <li><a href="catalogue.html">Urban</a></li>
+              <li><a href="catalogue.html">Country</a></li>
+              <li><a href="catalogue.html">Vintage</a></li>
+            </ul>
+          </div>
+          <div class="nav-col">
+            <h5>Ideale per</h5>
+            <ul>
+              <li><a href="catalogue.html">Soggiorno e camera</a></li>
+              <li><a href="catalogue.html">Bagno</a></li>
+              <li><a href="catalogue.html">Cucina</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li><a href="bloghome.html"><span>Idee per ristrutturare</span></a></li>
+    </ul>
+    <div class="header-btns">
+      <button class="btn samplesbtn samplesbtn-0" data-overlay="Samples"><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-0"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-1"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-2"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-3"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-4"/></svg></button>
+      <button class="btn cartbtn" data-overlay="Cart"><span>3</span><svg class="icon icon-empty"><use xlink:href="images/svgdefs.svg#icon-cart-empty"/></svg><svg class="icon icon-full"><use xlink:href="images/svgdefs.svg#icon-cart-full"/></svg></button>
+      <button class="btn menubtn" data-overlay="Menu"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-menu"/></svg></button>
+    </div>
 
-  <a href="{% url 'account'%}">         {% trans 'account' %} </a>
-  <a href="{% url 'logout' %}?next=/">  {% trans 'logout' %} </a>
+    <div class="overlay" id="overlayAuth">
 
-{% else %}
+  <div class="overlay-title">
+    <h4>Sei già registrato?</h4>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+  </div>
 
-
-  {% if loginform.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
-
-
-  <form method="post" action="{% url 'login' %}?next={{request.get_full_path|urlencode}}">
-  {% csrf_token %}
-  <table>
-
-  <tr>
-    <td>{{ loginform.username.label_tag }}</td>
-    <td>{{ loginform.username }}</td>
-  </tr>
-
-  <tr>
-    <td>{{ loginform.password.label_tag }}</td>
-    <td>{{ loginform.password }}</td>
-  </tr>
-  </table>
-
-  <input type="submit" value="login" />
-   <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  <form action="account.html">
+    <div class="formrow">
+      <label for="loginEmail">Email</label>
+      <input type="text" id="loginEmail" tabindex="1">
+    </div>
+    <div class="formrow">
+      <label for="loginPassword">Password<a href="">Ho dimenticato la password</a></label>
+      <input type="password" id="loginPassword" tabindex="2">
+    </div>
+    <input type="submit" class="btn btn-primary" value="Login">
   </form>
 
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  <h4>Vuoi registrarti?</h4>
+  <p class="note">Crea un account per ricevere un campionario gratuito, effettuare ordini e tenere traccia degli ordini passati</p>
+
+  <form action="">
+    <div class="formrow">
+      <label for="signupEmail">Inserisci la tua email</label>
+      <input type="text" id="signupEmail" tabindex="3">
+    </div>
+    <p class="note">Ti invieremo una password a questo indirizzo</p>
+    <input type="submit" class="btn btn-primary" value="Registrati">
+  </form>
+
+</div>
+    <div class="overlay" id="overlaySamples">
+
+  <div class="overlay-title">
+    <h4>Il tuo campionario</h4>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+  </div>
+
+  <div class="grid grid-sampleslots">
+    <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
+      <a href="catalogue-item.html">
+        <div class="sampleslot-name">
+          <h5>Nome Serie</h5>
+          <span>Nome Prodotto</span>
+        </div>
+      </a>
+      <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+    </div>
+    <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
+      <a href="catalogue-item.html">
+        <div class="sampleslot-name">
+          <h5>Nome Serie</h5>
+          <span>Nome Prodotto</span>
+        </div>
+      </a>
+      <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+    </div>
+    <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
+      <a href="catalogue-item.html">
+        <div class="sampleslot-name">
+          <h5>Nome Serie</h5>
+          <span>Nome Prodotto</span>
+        </div>
+      </a>
+      <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+    </div>
+    <div class="sampleslot"></div>
+  </div>
+
+  <button class="btn btn-primary"><span>Ricevi questi campioni a casa</span><svg class="icon icon-m"><use xlink:href="images/svgdefs.svg#icon-arrow-right"/></svg></button>
+
+  <p class="note"><a href="" data-overlay="Auth">Registrati o effetta il login</a> per avere sempre a disposizione il tuo campionario</p>
+
+</div>
+    <div class="overlay" id="overlayCart">
+
+  <div class="overlay-title">
+    <h4>Il tuo carrello</h4>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+  </div>
+
+  <div class="cartitem">
+    <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
+    <div class="cartitem-main">
+      <div class="cartitem-name">
+        <span><strong>Nome Prodotto</strong></span>
+        <span>20x20 / grigio chiaro</span>
+      </div>
+      <div class="cartitem-amount">
+        <span>88 m&sup2;</span>
+        <span class="cartitem-price">€ 3960</span>
+      </div>
+    </div>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+  </div>
+
+  <div class="cartitem">
+    <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
+    <div class="cartitem-main">
+      <div class="cartitem-name">
+        <span><strong>Nome Prodotto</strong></span>
+        <span>45x45 / rosso</span>
+      </div>
+      <div class="cartitem-amount">
+        <span>50 m&sup2;</span>
+        <span class="cartitem-price">€ 2000</span>
+      </div>
+    </div>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+  </div>
+
+  <div class="cartitem">
+    <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb-complementary.png')"></a>
+    <div class="cartitem-main">
+      <div class="cartitem-name">
+        <span><strong>Battiscopa</strong></span>
+        <span>grigio chiaro</span>
+      </div>
+      <div class="cartitem-amount">
+        <span>16 m</span>
+        <span class="cartitem-price">€ 432</span>
+      </div>
+    </div>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+  </div>
+
+  <div class="cartitem-total">
+    <span>Totale</span>
+    <strong>€ 3960</strong>
+  </div>
+
+  <a href="checkout-1.html" class="btn btn-primary"><span>Procedi con l'ordine</span><svg class="icon icon-m"><use xlink:href="images/svgdefs.svg#icon-arrow-right"/></svg></a>
+
+  <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
+  <p class="note">Potrai pagare con bonifico bancario</p>
+
+</div>
+
+    <div class="nav-mobile overlay" id="overlayMenu">
+
+  <div class="overlay-title">
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="catalogue.html"><span>Catalogo</span></a>
+        <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
+        <div class="openable nav-col-container">
+          <div class="nav-col">
+            <h5>Effetto</h5>
+            <ul>
+              <li><a href="catalogue.html">Legno</a></li>
+              <li><a href="catalogue.html">Marmo</a></li>
+              <li><a href="catalogue.html">Pietra</a></li>
+              <li><a href="catalogue.html">Cemento</a></li>
+            </ul>
+          </div>
+          <div class="nav-col">
+            <h5>Stile</h5>
+            <ul>
+              <li><a href="catalogue.html">Urban</a></li>
+              <li><a href="catalogue.html">Country</a></li>
+              <li><a href="catalogue.html">Vintage</a></li>
+            </ul>
+          </div>
+          <div class="nav-col">
+            <h5>Ideale per</h5>
+            <ul>
+              <li><a href="catalogue.html">Soggiorno e camera</a></li>
+              <li><a href="catalogue.html">Bagno</a></li>
+              <li><a href="catalogue.html">Cucina</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>
+      <li><a href="{% url 'support'%}"><span>{% trans 'support'|title %}</span></a></li>
+
+      <li><a href="" data-overlay="Auth"><span>Login / Registrati</span></a></li>
+      <li class="settingsmenu">
+        <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>Italiano</span></div>
+        <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
+        <div class="openable">
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-en"/></svg><span>English</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>Italiano</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-fr"/></svg><span>Français</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-de"/></svg><span>Deutsch</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-sv"/></svg><span>Svenska</span></a>
+        </div>
+      </li>
+      <li class="settingsmenu">
+        <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>Euro</span></div>
+        <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
+        <div class="openable">
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>Euro</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-gbp"/></svg><span>British Pound</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-sek"/></svg><span>Swedish Krona</span></a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <ul class="nav-mobile-social">
+    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-facebook"/></svg></a></li>
+    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-instagram"/></svg></a></li>
+    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-pinterest"/></svg></a></li>
+  </ul>
+
+</div>
+
+    <div class="notification">
+
+  <div class="notification-body">
+    <p><strong>88 m&sup2;</strong> di <strong>Nome Prodotto</strong><br>aggiunti al carrello</p>
+    <p class="note"><a href="" data-overlay="Cart">Apri il carrello</a></p>
+  </div>
+
+</div>
+
+  </nav>
+
+  <div class="logo">
+    <a href="index.html"><img src="{% static 'images/tot-logo-no-background.svg' %}" alt="Tale of Tiles"></a>
+  </div>
 
 
-{% endif %}
+</header>
 
-{% trans 'language' %}
-{% trans 'currency' %}
-
-</menu>
-
-<!--  LOGO !-->
-<a href="{% url 'index' %}"> <img src="{% static 'images/logo.png' %}" width="100"> </a>
-
-<!--  CATALOGUE !-->
-
-{% url 'catalogue' as catalogue_url %}
-{% if catalogue_url|starts_with:request.path %} WE ARE IN CAT {% endif %}
-
-<a href="{% url 'catalogue'%}"> {% trans 'catalogue-menu' %} </a>
-
-{% for cat in menu_cats %}
-<a href="{% url 'catalogue' cat.slug %}"> {{cat}} </a>   
-{% endfor %}
-
-<!--  BLOG !-->
-{% url 'blog' as blog_url %}
-{% if blog_url|starts_with:request.path %} WE ARE IN BLOG {% endif %}
-
-<a href="{% url 'blog'%}"> {% trans 'blog-menu' %} </a>
-
-
-SAMPLER
-## {{ sampler.all_samples|length }}  ##
-{% for sample in sampler.all_samples %}
-  {{sample.product}}
-  <a href="{% url 'del_chart' sample.pk True %}"> del this</a> 
-{% endfor %}
-
-
-CHART
-
-## {{ num_ch_i }} ##
-## {{ chart.all_items|length }}  ##
-
-{% for chart in charts.all %}
-  {% for chart_item in chart.all_items %}
-    {{chart_item.product}}
-    <a href="{% url 'del_chart' chart_item.pk False %}"> del this</a> 
-  {% endfor %}
-{% endfor %}
-
-<a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> CHECKOUT</a> 
-<hr>
-
-
-SIGNUP
-
-{% if signupform.errors %}
-  <p>{{message}}. Please try again.</p>
-{% endif %}
-
-
-<form method="post" action="{% url 'add_user' %}">
-{% csrf_token %}
-<table>
-
-<tr>
-  <td>{{ signupform.username.label_tag }}</td>
-  <td>{{ signupform.username }}</td>
-
-</tr>
-
-
-</table>
-
-<input type="submit" value="{% trans 'register' %}" />
-<input type="hidden" name="next" value="{{ request.get_full_path }} " />
-
-</form>
-
-SESSION:{{session}}
-<hr/>
 
 {% block content %} {% endblock %}
 
-<hr/>
-<!--============================
-=            Footer            =
-=============================-->
-
-<footer class="footer">
-  some footer content
-
+<footer>
+  <div class="content grid grid4">
+    <div>
+      <p><strong>Tale of Tiles s.r.l.</strong><br>di Donatella Mattonella<br>Via di qua, 32/b<br>00172 Roma<br>P.IVA 012345678901234</p>
+      <a href="" class="btn-link btn-link-arrow">Privacy Policy</a>
+      <a href="" class="btn-link btn-link-arrow">Cookie Policy</a>
+    </div>
+    <ul class="linkslist">
+      <li><a href="catalogue.html">Mattonelle artigianali</a></li>
+      <li><a href="catalogue.html">Mattonelle effetto legno</a></li>
+      <li><a href="catalogue.html">Mattonelle effetto marmo</a></li>
+      <li><a href="catalogue.html">Mattonelle effetto pietra</a></li>
+      <li><a href="catalogue.html">Mattonelle effetto cemento</a></li>
+    </ul>
+    <ul class="linkslist">
+      <li><a href="catalogue.html">Mattonelle stile urban</a></li>
+      <li><a href="catalogue.html">Mattonelle stile country</a></li>
+      <li><a href="catalogue.html">Mattonelle stile vintage</a></li>
+      <li><a href="catalogue.html">Mattonelle per soggiorno e camera</a></li>
+      <li><a href="catalogue.html">Mattonelle per bagno</a></li>
+      <li><a href="catalogue.html">Mattonelle per cucina</a></li>
+    </ul>
+    <div>
+      <img src="images/tot-logo-mono-dark.svg" class="logo-footer" alt="Tale of Tiles">
+    </div>
+   </div>
 </footer>
 
+  <script src="{% static 'js/scripts.js' %}"></script>
+
 </body>
-
 </html>
-
-
-

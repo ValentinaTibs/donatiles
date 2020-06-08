@@ -8,20 +8,97 @@
 
 {% block content %}
 
-{{ layout_elems|get_elem:'cover-claim' }}
-{{ layout_elems|get_elem:'cover-img' }}
+<div class="cover cover-home" style="background-image: url('{{ layout_elems|get_elem:'cover-img' }}')">
+  <div class="content">
+    <div class="cover-title">
+      <div class="bgtxt"><h1><span>{{ layout_elems|get_elem:'cover-claim' }}</span></h1></div>
+    </div>
+  </div>
+  <div class="cover-home-links">
+    <div class="content">
+      <ul>
+      {% for tag in tags|filter_tags:'effect' %}
 
-{{ layout_elems|get_elem:'square-effect-1' }}
-{{ layout_elems|get_elem:'square-effect-2' }}
-{{ layout_elems|get_elem:'square-effect-3' }}
-{{ layout_elems|get_elem:'square-effect-4' }}
+        {% with y=forloop.counter|stringformat:"s" %}
+        {% with img_name="square-effect-"|add:y %}
 
-{% for tag in tags|filter_tags:'effect' %}
-	{{tag}}
-{% endfor %}
+        		<li style="background-image: url('{{ layout_elems|get_elem:img_name }}')"><a href="catalogue.html" class="btn-gridbox">
+        		{% trans 'effect'|capfirst %} {{tag}}</a></li>
 
-{{ layout_elems|get_elem:'strength-pt-1' }}
-{{ layout_elems|get_elem:'strength-pt-2' }}
+        {% endwith %}
+        {% endwith %}
+
+      {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="content grid grid-homeintro">
+    <a href="catalogue.html" class="btn-gridbox">
+    	<h3>{{ layout_elems|get_elem:'strength-pt-1' }}</h3></a>
+    <div><h3>{{ layout_elems|get_elem:'strength-pt-2'}}</h3></div>
+    <div class="grid-homeintro-main">
+      <h2>Tocca con mano</h2>
+      <h3>Ricevi gratuitamente a casa un campionario</h3>
+      <p>{ testo che spiega che nelle pagine dei prodotti si può aggiungere ognuno al proprio “campionario”, e richiedere la spedizione gratuita a casa, se sei un nuovo cliente }</p>
+      <svg class="icon"><use xlink:href="images/svgdefs.svg#icon-sample-help"/></svg>
+    </div>
+    <div><h3>Ricevi le tue mattonelle a casa <strong>senza spese di spedizione</strong></h3></div>
+    <a href="bloghome.html" class="btn-gridbox"><h3>Leggi i nostri suggerimenti per <strong>ristrutturare senza errori</strong></h3></a>
+  </div>
+</div>
+
+<div class="block block-lightbg block-fullheight">
+  <div class="content grid grid-homeblog">
+    <a href="blogpost.html" class="blogpost-thumb blogpost-thumb-large btn-gridbox" style="background-image:url('images/blog/blogpost.jpg')">
+  <div class="bgtxt"><h3><span>Titolo di questo articolo del blog che parla di questo</span></h3></div>
+</a>
+    <a href="blogpost.html" class="blogpost-thumb btn-gridbox">
+  <h3>Titolo di questo articolo del blog che parla di questo</h3>
+  <div class="blogpost-thumb-img" style="background-image:url('images/blog/blogpost.jpg')"></div>
+</a>
+    <a href="bloghome.html" class="grid-homeblog-about btn-gridbox">
+      <h2>Idee per ristrutturare</h2>
+      <p class="large">Sottotitolo del blog che introduce il genere di contenuti da aspettarsi qui tra gli articoli pubblicati</p>
+    </a>
+  </div>
+</div>
+
+<div class="block block-coldbg block-fullheight">
+  <div class="content grid grid-homesupport">
+    <div class="grid-homesupport-main">
+      <h2>{% trans 'title-faq-home' %}</h2>
+    </div>
+    {% define layout_elems|get_elem:'home-faq-1-question' as faq1 %}
+    <a href="support.html" class="faqquestion-thumb btn-gridbox">
+	  <h3>{{ faq1.name }}</h3>
+	  <span>{% trans 'read-answer' %}</span>
+	</a>
+	
+  </div>
+</div>
+
+<div class="block block-warmbg block-fullheight">
+  <div class="content grid grid-homeabout">
+    <div class="grid-homeabout-main">
+      <h2>Donatella Mattonella</h2>
+      <p><em>Fondatrice di Tale of Tiles</em></p>
+      <p>{ Testo che racconta la persona, la sua professionalità, il team e la sua storia, con richiamo ad account social. Testo che racconta la persona, la sua professionalità, il team e la sua storia, con richiamo ad account social. }</p>
+    </div>
+    <div class="grid-homeabout-quote"><blockquote>Citazione frase detta da un cliente albergatore</blockquote><p class="note">– nome cliente, nome albergo</p></div>
+    <div class="grid-homeabout-quote"><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, voluptatum, eos. Quam eius magnam porro?</blockquote><p class="note">– nome cliente, nome albergo</p></div>
+    <div class="grid-homeabout-quote"><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum pariatur minus nesciunt totam, quia, natus consectetur veritatis voluptatem! Iste vel, neque nemo cumque. At, quia.</blockquote><p class="note">– nome cliente, nome albergo</p></div>
+    <div class="grid-homeabout-quote"><blockquote>Citazione frase detta da un cliente albergatore</blockquote><p class="note">– nome cliente, nome albergo</p></div>
+  </div>
+</div>
+
+
+
+
+
 {{ layout_elems|get_elem:'strength-pt-3' }}
 {{ layout_elems|get_elem:'strength-pt-4' }}
 
@@ -39,12 +116,8 @@
 
 <hr>
 
-{% trans 'title-faq-home' %}
 
-{% define layout_elems|get_elem:'home-faq-1-question' as faq1 %}
-	{{ faq1.name }}
-	{{ faq1.content }}
-	{% trans 'read-answer' %}
+
 
 
 {% define layout_elems|get_elem:'home-faq-2-question' as faq2 %}
