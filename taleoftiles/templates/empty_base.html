@@ -32,30 +32,30 @@
 
   <nav class="nav-secondary">
     <ul>
-      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-social-facebook"/></svg></a></li>
-      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-social-instagram"/></svg></a></li>
-      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-social-pinterest"/></svg></a></li>
-      <li><a href="support.html"><span>Assistenza</span></a></li>
-      <li><a href="" data-overlay="Auth"><span>Login / Registrati</span></a></li>
+      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-facebook' %} "/></svg></a></li>
+      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a></li>
+      <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a></li>
+      <li><a href="{% url 'support'%}"><span>{% trans 'support' %}</span></a></li>
+      <li><a href="" data-overlay="Auth"><span> {% trans 'login-register' %}</span></a></li>
       <li>
         <div class="nav-dropdown">
-          <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>ITA</span></div>
+          <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>ITA</span></div>
           <div class="nav-dropdown-options">
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-en"/></svg><span>ENG</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>ITA</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-fr"/></svg><span>FRA</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-de"/></svg><span>DEU</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-sv"/></svg><span>SWE</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-en' %}"/></svg><span>ENG</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>ITA</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-fr' %}"/></svg><span>FRA</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-de' %}"/></svg><span>DEU</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-sv' %}"/></svg><span>SWE</span></div>
           </div>
         </div>
       </li>
       <li>
         <div class="nav-dropdown nav-dropdown-currency">
-          <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>EUR</span></div>
+          <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>EUR</span></div>
           <div class="nav-dropdown-options">
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>EUR</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-gbp"/></svg><span>GBP</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-sek"/></svg><span>SEK</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>EUR</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-gbp' %}"/></svg><span>GBP</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-sek' %}"/></svg><span>SEK</span></div>
           </div>
         </div>
       </li>
@@ -64,51 +64,54 @@
 
   <nav class="nav-primary">
 
-    <div><a href="index.html"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
+    <div><a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
     <ul>
-      <li>
-        <a href="catalogue.html"><span>Catalogo</span></a>
+      {% url 'catalogue' as catalogue_url %}
+      <li class="{% if catalogue_url|starts_with:request.path %} selected {% endif %}">
+        <a href="{% url 'catalogue' %}"><span>{% trans 'catalogue-menu' %}</span></a>
         <div class="nav-primary-expanded">
-          <div class="nav-col">
-            <h5>Effetto</h5>
-            <ul>
-              <li><a href="catalogue.html">Legno</a></li>
-              <li><a href="catalogue.html">Marmo</a></li>
-              <li><a href="catalogue.html">Pietra</a></li>
-              <li><a href="catalogue.html">Cemento</a></li>
-            </ul>
-          </div>
-          <div class="nav-col">
-            <h5>Stile</h5>
-            <ul>
-              <li><a href="catalogue.html">Urban</a></li>
-              <li><a href="catalogue.html">Country</a></li>
-              <li><a href="catalogue.html">Vintage</a></li>
-            </ul>
-          </div>
-          <div class="nav-col">
-            <h5>Ideale per</h5>
-            <ul>
-              <li><a href="catalogue.html">Soggiorno e camera</a></li>
-              <li><a href="catalogue.html">Bagno</a></li>
-              <li><a href="catalogue.html">Cucina</a></li>
-            </ul>
-          </div>
+          {% for cat in menu_cats %}
+            <div class="nav-col">
+              <h5>{{cat}}</h5>
+              <ul>
+                {% for child_cat in cat.child.all %}
+                  <li><a href="{% url 'catalogue' child_cat.slug %}">{{child_cat}} </a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
         </div>
       </li>
-      <li><a href="bloghome.html"><span>Idee per ristrutturare</span></a></li>
+
+      {% url 'blog' as blog_url %}
+      <li class="{% if blog_url|starts_with:request.path %} selected {% endif %}">
+        <a href="{% url 'blog'%}"><span> {% trans 'blog-menu' %}</span></a></li>
     </ul>
     <div class="header-btns">
-      <button class="btn samplesbtn samplesbtn-0" data-overlay="Samples"><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-0"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-1"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-2"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-3"/></svg><svg class="icon"><use xlink:href="images/svgdefs.svg#icon-samples-4"/></svg></button>
-      <button class="btn cartbtn" data-overlay="Cart"><span>3</span><svg class="icon icon-empty"><use xlink:href="images/svgdefs.svg#icon-cart-empty"/></svg><svg class="icon icon-full"><use xlink:href="images/svgdefs.svg#icon-cart-full"/></svg></button>
-      <button class="btn menubtn" data-overlay="Menu"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-menu"/></svg></button>
+      <button class="btn samplesbtn samplesbtn-0" data-overlay="Samples">
+        <svg class="icon">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-0' %}"/></svg>
+          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-1' %}"/></svg>
+          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-2' %}"/></svg>
+          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-3' %}"/></svg>
+          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-4' %}"/></svg>
+        </button>
+      <button class="btn cartbtn" data-overlay="Cart">
+        <span>3</span>
+        <svg class="icon icon-empty">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-cart-empty' %}"/></svg>
+          <svg class="icon icon-full">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-cart-full' %}"/></svg>
+        </button>
+      <button class="btn menubtn" data-overlay="Menu"><svg class="icon icon-l">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-menu' %}"/></svg></button>
     </div>
 
     <div class="overlay" id="overlayAuth">
 
   <div class="overlay-title">
     <h4>Sei già registrato?</h4>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
   <form action="account.html">
@@ -140,7 +143,8 @@
 
   <div class="overlay-title">
     <h4>Il tuo campionario</h4>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+    <button class="btn"><svg class="icon icon-l">
+      <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
   <div class="grid grid-sampleslots">
@@ -151,7 +155,7 @@
           <span>Nome Prodotto</span>
         </div>
       </a>
-      <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+      <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
     </div>
     <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
       <a href="catalogue-item.html">
@@ -169,12 +173,12 @@
           <span>Nome Prodotto</span>
         </div>
       </a>
-      <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+      <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
     </div>
     <div class="sampleslot"></div>
   </div>
 
-  <button class="btn btn-primary"><span>Ricevi questi campioni a casa</span><svg class="icon icon-m"><use xlink:href="images/svgdefs.svg#icon-arrow-right"/></svg></button>
+  <button class="btn btn-primary"><span>Ricevi questi campioni a casa</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button>
 
   <p class="note"><a href="" data-overlay="Auth">Registrati o effetta il login</a> per avere sempre a disposizione il tuo campionario</p>
 
@@ -198,7 +202,7 @@
         <span class="cartitem-price">€ 3960</span>
       </div>
     </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
   </div>
 
   <div class="cartitem">
@@ -228,7 +232,7 @@
         <span class="cartitem-price">€ 432</span>
       </div>
     </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete"/></svg></button>
   </div>
 
   <div class="cartitem-total">
@@ -236,7 +240,7 @@
     <strong>€ 3960</strong>
   </div>
 
-  <a href="checkout-1.html" class="btn btn-primary"><span>Procedi con l'ordine</span><svg class="icon icon-m"><use xlink:href="images/svgdefs.svg#icon-arrow-right"/></svg></a>
+  <a href="checkout-1.html" class="btn btn-primary"><span>Procedi con l'ordine</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
 
   <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
   <p class="note">Potrai pagare con bonifico bancario</p>
@@ -298,26 +302,26 @@
         </div>
       </li>
       <li class="settingsmenu">
-        <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>Euro</span></div>
+        <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>Euro</span></div>
         <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
         <div class="openable">
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-eur"/></svg><span>Euro</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-gbp"/></svg><span>British Pound</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-currency-sek"/></svg><span>Swedish Krona</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>Euro</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-gbp' %}"/></svg><span>British Pound</span></a>
+          <a href=""><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-sek' %}"/></svg><span>Swedish Krona</span></a>
         </div>
       </li>
     </ul>
   </nav>
 
   <ul class="nav-mobile-social">
-    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-facebook"/></svg></a></li>
-    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-instagram"/></svg></a></li>
-    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-pinterest"/></svg></a></li>
+    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-facebook' %}"/></svg></a></li>
+    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a></li>
+    <li><a href="" target="_blank"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a></li>
   </ul>
 
 </div>
 
-    <div class="notification">
+<div class="notification">
 
   <div class="notification-body">
     <p><strong>88 m&sup2;</strong> di <strong>Nome Prodotto</strong><br>aggiunti al carrello</p>
@@ -329,7 +333,7 @@
   </nav>
 
   <div class="logo">
-    <a href="index.html"><img src="{% static 'images/tot-logo-no-background.svg' %}" alt="Tale of Tiles"></a>
+    <a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-no-background.svg' %}" alt="Tale of Tiles"></a>
   </div>
 
 
@@ -361,7 +365,7 @@
       <li><a href="catalogue.html">Mattonelle per cucina</a></li>
     </ul>
     <div>
-      <img src="images/tot-logo-mono-dark.svg" class="logo-footer" alt="Tale of Tiles">
+      <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">
     </div>
    </div>
 </footer>

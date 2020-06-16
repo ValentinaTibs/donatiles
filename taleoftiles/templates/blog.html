@@ -1,0 +1,42 @@
+{% extends "empty_base.html" %}
+{% load i18n %}
+{% load view_extra %}
+
+{% block title%} {% trans 'blog-page-name' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="cover cover-compact" style="background-image: url('{{ layout_elems|get_elem:'cover-blog' }}')">
+  <div class="content">
+    <div class="cover-title">
+      <div class="bgtxt"><h1><span>{% trans 'blog-page-name' %}</span></h1></div>
+      <h3>{{ layout_elems|get_elem:'cover-blog-text' }}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="block block-lightbg">
+  <div class="content grid grid2">
+
+
+
+{% for post in all_post%}
+	
+	<a href="{% url 'post' post.publication.slug %}" class="blogpost-thumb btn-gridbox">
+	  <h3>{{post.publication.title|title }}</h3>
+	  <div class="blogpost-thumb-img" style="background-image:url('{{post.image.imagefile.url}}')"></div>
+	</a>
+	
+{% endfor %}
+
+  </div>
+</div>
+
+
+
+{% endblock %}
+

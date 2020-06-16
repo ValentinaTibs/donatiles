@@ -22,8 +22,10 @@
         {% with y=forloop.counter|stringformat:"s" %}
         {% with img_name="square-effect-"|add:y %}
 
-        		<li style="background-image: url('{{ layout_elems|get_elem:img_name }}')"><a href="catalogue.html" class="btn-gridbox">
-        		{% trans 'effect'|capfirst %} {{tag}}</a></li>
+        		<li style="background-image: url('{{ layout_elems|get_elem:img_name }}')">
+              <a href="{% url 'catalogue' tag.slug %}" class="btn-gridbox">
+        		  {% trans 'effect'|capfirst %} {{tag}}</a>
+          </li>
 
         {% endwith %}
         {% endwith %}
@@ -42,12 +44,14 @@
     <div><h3>{{ layout_elems|get_elem:'strength-pt-2'}}</h3></div>
     <div class="grid-homeintro-main">
       <h2>Tocca con mano</h2>
-      <h3>Ricevi gratuitamente a casa un campionario</h3>
-      <p>{ testo che spiega che nelle pagine dei prodotti si può aggiungere ognuno al proprio “campionario”, e richiedere la spedizione gratuita a casa, se sei un nuovo cliente }</p>
+      <h3>{{ layout_elems|get_elem:'strength-campionario-up' }}</h3>
+      <p>{{ layout_elems|get_elem:'strength-campionario-description' }}</p>
       <svg class="icon"><use xlink:href="images/svgdefs.svg#icon-sample-help"/></svg>
     </div>
-    <div><h3>Ricevi le tue mattonelle a casa <strong>senza spese di spedizione</strong></h3></div>
-    <a href="bloghome.html" class="btn-gridbox"><h3>Leggi i nostri suggerimenti per <strong>ristrutturare senza errori</strong></h3></a>
+    <div><h3>{{ layout_elems|get_elem:'strength-pt-3' }}</h3></div>
+    
+
+    <a href="bloghome.html" class="btn-gridbox"><h3>{{ layout_elems|get_elem:'strength-pt-4' }}</h3></a>
   </div>
 </div>
 
@@ -58,11 +62,11 @@
 </a>
     <a href="blogpost.html" class="blogpost-thumb btn-gridbox">
   <h3>Titolo di questo articolo del blog che parla di questo</h3>
-  <div class="blogpost-thumb-img" style="background-image:url('images/blog/blogpost.jpg')"></div>
+<div class="blogpost-thumb-img" style="background-image:url('images/blog/blogpost.jpg')"></div>
 </a>
     <a href="bloghome.html" class="grid-homeblog-about btn-gridbox">
-      <h2>Idee per ristrutturare</h2>
-      <p class="large">Sottotitolo del blog che introduce il genere di contenuti da aspettarsi qui tra gli articoli pubblicati</p>
+      <h2>{% trans 'title-renovate-home' %}</h2>
+      <p class="large">{% trans 'subtitle-renovate-home' %} Sottotitolo del blog che introduce il genere di contenuti da aspettarsi qui tra gli articoli pubblicati</p>
     </a>
   </div>
 </div>
@@ -76,7 +80,23 @@
     <a href="support.html" class="faqquestion-thumb btn-gridbox">
 	  <h3>{{ faq1.name }}</h3>
 	  <span>{% trans 'read-answer' %}</span>
-	</a>
+	  </a>
+
+
+    {% define layout_elems|get_elem:'home-faq-2-question' as faq2 %}
+    <a href="support.html" class="faqquestion-thumb btn-gridbox">
+    <h3>{{ faq2.name }}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+
+
+    {% define layout_elems|get_elem:'home-faq-3-question' as faq3 %}
+    <a href="support.html" class="faqquestion-thumb btn-gridbox">
+    <h3>{{ faq3.name }}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+
+
 	
   </div>
 </div>
@@ -84,81 +104,26 @@
 <div class="block block-warmbg block-fullheight">
   <div class="content grid grid-homeabout">
     <div class="grid-homeabout-main">
-      <h2>Donatella Mattonella</h2>
-      <p><em>Fondatrice di Tale of Tiles</em></p>
-      <p>{ Testo che racconta la persona, la sua professionalità, il team e la sua storia, con richiamo ad account social. Testo che racconta la persona, la sua professionalità, il team e la sua storia, con richiamo ad account social. }</p>
+      <h2>{% trans 'founder-name' %}</h2>
+      <p><em>{{ layout_elems|get_elem:'home-founder-description' }}</em></p>
+      <p>{{ layout_elems|get_elem:'home-founder-text' }}</p>
     </div>
-    <div class="grid-homeabout-quote"><blockquote>Citazione frase detta da un cliente albergatore</blockquote><p class="note">– nome cliente, nome albergo</p></div>
-    <div class="grid-homeabout-quote"><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, voluptatum, eos. Quam eius magnam porro?</blockquote><p class="note">– nome cliente, nome albergo</p></div>
-    <div class="grid-homeabout-quote"><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum pariatur minus nesciunt totam, quia, natus consectetur veritatis voluptatem! Iste vel, neque nemo cumque. At, quia.</blockquote><p class="note">– nome cliente, nome albergo</p></div>
-    <div class="grid-homeabout-quote"><blockquote>Citazione frase detta da un cliente albergatore</blockquote><p class="note">– nome cliente, nome albergo</p></div>
+
+
+    <div class="grid-homeabout-quote"><blockquote>{{ layout_elems|get_elem:'home-cite-1' }}</blockquote><p class="note">– {{ layout_elems|get_elem:'home-cite-auth-1' }}</p></div>
+    <div class="grid-homeabout-quote"><blockquote>{{ layout_elems|get_elem:'home-cite-2' }}</blockquote><p class="note">– {{ layout_elems|get_elem:'home-cite-auth-2' }}</p></div>
+    <div class="grid-homeabout-quote"><blockquote>{{ layout_elems|get_elem:'home-cite-3' }}</blockquote><p class="note">– {{ layout_elems|get_elem:'home-cite-auth-3' }}</p></div>
+    <div class="grid-homeabout-quote"><blockquote>{{ layout_elems|get_elem:'home-cite-4' }}</blockquote><p class="note">– {{ layout_elems|get_elem:'home-cite-auth-4' }}</p></div>
   </div>
 </div>
 
 
-
-
-
-{{ layout_elems|get_elem:'strength-pt-3' }}
-{{ layout_elems|get_elem:'strength-pt-4' }}
-
-{{ layout_elems|get_elem:'strength-campionario-up' }}
-{{ layout_elems|get_elem:'strength-campionario-description' }}
-
-<hr>
-
-{% trans 'title-renovate-home' %}
 
 {% for post in posts %}
 	{{post}}
 	{% trans 'read' %}
 {% endfor %}
 
-<hr>
-
-
-
-
-
-{% define layout_elems|get_elem:'home-faq-2-question' as faq2 %}
-	{{ faq2.name }}
-	{{ faq2.content }}
-	{% trans 'read-answer' %}
-
-
-{% define layout_elems|get_elem:'home-faq-3-question' as faq3 %}
-	{{ faq3.name }}
-	{{ faq3.content }}
-	{% trans 'read-answer' %}
-
-
-{% define layout_elems|get_elem:'home-faq-4-question' as faq4 %}
-	{{ faq4.name }}
-	{{ faq4.content }}
-	{% trans 'read-answer' %}
-
-
-
-<hr>
-{% trans 'title-team-home' %}
-
-{% trans 'founder-name' %}
-
-{{ layout_elems|get_elem:'home-founder-description' }}
-{{ layout_elems|get_elem:'home-founder-text' }}
-
-
-{{ layout_elems|get_elem:'home-cite-1' }}
-{{ layout_elems|get_elem:'home-cite-auth-1' }}
-
-{{ layout_elems|get_elem:'home-cite-2' }}
-{{ layout_elems|get_elem:'home-cite-auth-2' }}
-
-{{ layout_elems|get_elem:'home-cite-3' }}
-{{ layout_elems|get_elem:'home-cite-auth-3' }}
-
-{{ layout_elems|get_elem:'home-cite-4' }}
-{{ layout_elems|get_elem:'home-cite-auth-4' }}
 
 
 {% endblock %}

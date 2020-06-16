@@ -141,6 +141,13 @@ class Product(models.Model):
     def has_single_sell(self):
         return true
 
+    def serie(self,):
+        try:
+            serie = self.tags.get(parent__slug = 'serie')
+        except ObjectDoesNotExist:
+            serie = "None"
+        return serie
+
     def get_tag(self,tag_slug):
         try:
             serie = self.tags.get(parent__slug = tag_slug)
