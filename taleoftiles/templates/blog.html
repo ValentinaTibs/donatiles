@@ -28,7 +28,7 @@
 	
 	<a href="{% url 'post' post.publication.slug %}" class="blogpost-thumb btn-gridbox">
 	  <h3>{{post.publication.title|title }}</h3>
-	  <div class="blogpost-thumb-img" style="background-image:url('{{post.image.imagefile.url}}')"></div>
+	  <div class="blogpost-thumb-img" style="background-image:url('{{post.cover.imagefile.url}}')"></div>
 	</a>
 	
 {% endfor %}
