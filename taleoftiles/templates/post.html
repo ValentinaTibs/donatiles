@@ -12,7 +12,8 @@
 <div class="cover" style="background-image: url('{{post.image.imagefile.url}}')">
   <div class="content">
     <div class="cover-title">
-      <a href="{% url 'blog' %}" class="btn-link"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-arrow-left"/></svg>Tutti gli articoli</a>
+      <a href="{% url 'blog' %}" class="btn-link"><svg class="icon-l icon">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Tutti gli articoli</a>
       <div class="bgtxt"><h1><span>{{post.publication.title |title}}
 </span></h1></div>
     </div>
@@ -29,9 +30,12 @@
     <aside>
       <div class="sharebtns">
         <h5>Condividi su</h5>
-        <a href=""><svg class="icon-facebook icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-facebook"/></svg></a>
-        <a href=""><svg class="icon-instagram icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-instagram"/></svg></a>
-        <a href=""><svg class="icon-pinterest icon-l icon"><use xlink:href="images/svgdefs.svg#icon-social-pinterest"/></svg></a>
+        <a href=""><svg class="icon-facebook icon-l icon">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-social-facebook' %}"/></svg></a>
+        <a href=""><svg class="icon-instagram icon-l icon">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a>
+        <a href=""><svg class="icon-pinterest icon-l icon">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a>
       </div>
     </aside>
   </div>
@@ -40,6 +44,10 @@
 <div class="block block-lightbg">
   <div class="content grid grid4">
     <h2>Dai un'occhiata a questi!</h2>
+
+    {% for prod in post.related_products.all %}
+      {% product_thumb prod %}
+    {% endfor %}
 
   </div>
 </div>

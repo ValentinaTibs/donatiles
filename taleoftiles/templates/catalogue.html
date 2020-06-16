@@ -155,19 +155,7 @@
     <div class="grid grid-catalogue-products">
 
     {% for product in products %}
-
-
-        <div class="product-thumb">
-          <a href="catalogue-item.html" class="product-thumb-img">
-            <img src="{{ product.thumb }}" alt="{{ product.name }} / {{ product.serie.name }}">
-          </a>
-          <a href="catalogue-item.html" class="product-thumb-title">
-            <h5>{{ product.serie.name }}</h5>
-            <h4>{{ product.name }}</h4>
-          </a>
-          <button class="btn btn-overlay"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-        </div>
-
+        {% product_thumb product %}
     {% endfor %}
 
     </div>
