@@ -12,10 +12,9 @@ class Post(models.Model):
     tags        = models.ManyToManyField(Tag, blank= True, related_name='posts')
     publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='post' )
     related_products = models.ManyToManyField(Product, blank= True, related_name='posts')
-
-    deleted = models.BooleanField(default = False)
-    order  = models.PositiveIntegerField( default=0, )   
-    in_home = models.BooleanField(default = False)
+    deleted     = models.BooleanField(default = False)
+    order       = models.PositiveIntegerField( default=0, )   
+    #in_home     = models.BooleanField(default = False)
 
     objects = models.Manager() # The default manager.
     active  = ActivePostManager() # The Active Charts

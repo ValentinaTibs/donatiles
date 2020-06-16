@@ -11,14 +11,18 @@ from blog.models        import Post
 
 from CRM.forms          import NewChartItemForm
 
+
 def index(request):  
-    home_elems = Element.objects.filter(tag__parent__slug = 'home', public = True)
-    home_tags = Tag.objects.filter(in_home = True, public = True)
-    home_post = Post.active.filter(tags__slug='in-home')
+    home_elems      = Element.objects.filter(tag__parent__slug = 'home', public = True)
+    home_tags       = Tag.objects.filter(in_home = True, public = True)
+    secondary_post  = Post.active.get(tags__slug='secondary-post')
+    main_post       = Post.active.get(tags__slug='main-post')
+
     return render(request, "home.html",{
         'layout_elems'  : home_elems,
         'tags'          : home_tags,
-        'posts'         : home_post,
+        'secondary_post': secondary_post,
+        'main_post'     : main_post
         })
 
 def custom_merge(unit1, unit2):

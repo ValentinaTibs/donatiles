@@ -57,14 +57,16 @@
 
 <div class="block block-lightbg block-fullheight">
   <div class="content grid grid-homeblog">
-    <a href="blogpost.html" class="blogpost-thumb blogpost-thumb-large btn-gridbox" style="background-image:url('images/blog/blogpost.jpg')">
-  <div class="bgtxt"><h3><span>Titolo di questo articolo del blog che parla di questo</span></h3></div>
-</a>
-    <a href="blogpost.html" class="blogpost-thumb btn-gridbox">
-  <h3>Titolo di questo articolo del blog che parla di questo</h3>
-<div class="blogpost-thumb-img" style="background-image:url('images/blog/blogpost.jpg')"></div>
-</a>
-    <a href="bloghome.html" class="grid-homeblog-about btn-gridbox">
+    
+    <a href="{% url 'post' main_post.publication.slug %}" class="blogpost-thumb blogpost-thumb-large btn-gridbox" style="background-image:url('{{main_post.cover.imagefile.url}}')">
+    <div class="bgtxt">
+      <h3><span>{{main_post.publication.title}}</span></h3></div>
+    </a>
+    <a href="{% url 'post' secondary_post.publication.slug %}" class="blogpost-thumb btn-gridbox">
+      <h3>{{secondary_post.publication.title}}</h3>
+      <div class="blogpost-thumb-img" style="background-image:url('{{secondary_post.cover.imagefile.url}}')"></div>
+    </a>
+    <a href="{% url 'blog'%}" class="grid-homeblog-about btn-gridbox">
       <h2>{% trans 'title-renovate-home' %}</h2>
       <p class="large">{% trans 'subtitle-renovate-home' %} Sottotitolo del blog che introduce il genere di contenuti da aspettarsi qui tra gli articoli pubblicati</p>
     </a>
@@ -119,10 +121,7 @@
 
 
 
-{% for post in posts %}
-	{{post}}
-	{% trans 'read' %}
-{% endfor %}
+
 
 
 
