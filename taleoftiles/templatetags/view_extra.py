@@ -81,6 +81,10 @@ def effects(product):
         return product.filter_tags("effect")
     return "-"
 
+@register.inclusion_tag('include/productthumb.html')
+def product_thumb(product):
+    return {'product':product}    
+
 
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):

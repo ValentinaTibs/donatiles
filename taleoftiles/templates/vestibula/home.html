@@ -1,0 +1,92 @@
+{% extends "empty_base.html" %}
+{% load view_extra %}
+{% load i18n %}
+
+{% block title%} {% trans 'home-page-name' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+{{ layout_elems|get_elem:'cover-claim' }}
+{{ layout_elems|get_elem:'cover-img' }}
+
+{{ layout_elems|get_elem:'square-effect-1' }}
+{{ layout_elems|get_elem:'square-effect-2' }}
+{{ layout_elems|get_elem:'square-effect-3' }}
+{{ layout_elems|get_elem:'square-effect-4' }}
+
+{% for tag in tags|filter_tags:'effect' %}
+	{{tag}}
+{% endfor %}
+
+{{ layout_elems|get_elem:'strength-pt-1' }}
+{{ layout_elems|get_elem:'strength-pt-2' }}
+{{ layout_elems|get_elem:'strength-pt-3' }}
+{{ layout_elems|get_elem:'strength-pt-4' }}
+
+{{ layout_elems|get_elem:'strength-campionario-up' }}
+{{ layout_elems|get_elem:'strength-campionario-description' }}
+
+<hr>
+
+{% trans 'title-renovate-home' %}
+
+{% for post in posts %}
+	{{post}}
+	{% trans 'read' %}
+{% endfor %}
+
+<hr>
+
+{% trans 'title-faq-home' %}
+
+{% define layout_elems|get_elem:'home-faq-1-question' as faq1 %}
+	{{ faq1.name }}
+	{{ faq1.content }}
+	{% trans 'read-answer' %}
+
+
+{% define layout_elems|get_elem:'home-faq-2-question' as faq2 %}
+	{{ faq2.name }}
+	{{ faq2.content }}
+	{% trans 'read-answer' %}
+
+
+{% define layout_elems|get_elem:'home-faq-3-question' as faq3 %}
+	{{ faq3.name }}
+	{{ faq3.content }}
+	{% trans 'read-answer' %}
+
+
+{% define layout_elems|get_elem:'home-faq-4-question' as faq4 %}
+	{{ faq4.name }}
+	{{ faq4.content }}
+	{% trans 'read-answer' %}
+
+
+
+<hr>
+{% trans 'title-team-home' %}
+
+{% trans 'founder-name' %}
+
+{{ layout_elems|get_elem:'home-founder-description' }}
+{{ layout_elems|get_elem:'home-founder-text' }}
+
+
+{{ layout_elems|get_elem:'home-cite-1' }}
+{{ layout_elems|get_elem:'home-cite-auth-1' }}
+
+{{ layout_elems|get_elem:'home-cite-2' }}
+{{ layout_elems|get_elem:'home-cite-auth-2' }}
+
+{{ layout_elems|get_elem:'home-cite-3' }}
+{{ layout_elems|get_elem:'home-cite-auth-3' }}
+
+{{ layout_elems|get_elem:'home-cite-4' }}
+{{ layout_elems|get_elem:'home-cite-auth-4' }}
+
+
+{% endblock %}
+

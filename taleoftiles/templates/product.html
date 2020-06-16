@@ -3,18 +3,175 @@
 {% load i18n %}
 
 {% block title%} {{ product.publication.title }} {% endblock%}
-
 {% load static %}
-
-
 {% block content %}
 
-{{ product.publication.title }}
-
-<br/>
 
 
-{{product|serie}}
+
+<div class="content product-header">
+  <ul class="breadcrumb">
+    <li><a href="catalogue.html">Tutti i prodotti</a></li>
+    <svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-caret-right"/></svg>
+    <li><a href="catalogue.html">{{product|serie}}</a></li>
+  </ul>
+  <h1>{{ product.publication.title }}</h1>
+  <div class="product-samplebtn">
+    <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-samples-add"/></svg><span>Aggiungi al campionario</span></button>
+    <p class="note">Confronta questo prodotto con gli altri, o fatti spedire un campione a casa</p>
+  </div>
+</div>
+
+<div class="content grid grid-product">
+
+  <div class="product-gallery">
+    <img src="images/products/product-main1.png" alt="Olmo naturale – Millelegni Remake">
+  </div>
+
+  <div class="product-selection">
+
+    <div class="product-options">
+      <h5>Formati</h5>
+      <input type="radio" name="product-size" id="product-size1" checked><label for="product-size1">Quadrato piccolo<br>20x20</label>
+      <input type="radio" name="product-size" id="product-size2"><label for="product-size2">Quadrato grande<br>40x40</label>
+      <input type="radio" name="product-size" id="product-size3"><label for="product-size3">Rettangolare piccolo<br>100x25</label>
+      <h5>Finiture</h5>
+      <input type="radio" name="product-finish" id="product-finish1" checked><label for="product-finish1">Finitura A</label>
+      <input type="radio" name="product-finish" id="product-finish2"><label for="product-finish2">Finitura B</label>
+    </div>
+
+    <div class="product-addtocartbox">
+
+      <div>
+        <div class="row">
+          <div><strong>Codice: EH2H</strong><br>20x20<br>Finitura A</div>
+          <div><div class="product-figure">€ 45</div><div class="product-note">al m&sup2;</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div>
+            <strong>Superficie da rivestire</strong><br>minimo: 10 m&sup2;
+          </div>
+          <div class="input-qty">
+            <input type="number" value="80" min="10" max="1000" step="0.01">
+            <div class="product-qtybtns">
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div><strong>Totale</strong></div>
+          <div class="product-figure">€ 3960</div>
+        </div>
+        <div class="row">
+          <div class="checkbox">
+            <input type="checkbox" id="includeOffCut" checked>
+            <label for="includeOffCut">Includi 10% di sfrido</label>
+          </div>
+          <div>
+            <button class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-info"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btnAddToCart"><span>Aggiungi al carrello <strong>88 m&sup2;</strong></span></button>
+
+    </div>
+
+    <div class="product-shippinginfo">
+      <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
+      <p class="note">Questo prodotto può essere spedito<br><strong>entro 2 settimane</strong></p>
+      <p class="note">Hai qualche dubbio?<br><a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
+    </div>
+
+  </div>
+
+  <div class="product-main">
+    
+	{% autoescape off %}
+		{{ product.publication.content }} 
+	{% endautoescape %}
+
+
+    <div class="product-marks">
+      <img src="images/products/mark1.png" alt="">
+      <img src="images/products/mark2.png" alt="">
+      <img src="images/products/mark3.png" alt="">
+    </div>
+    <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-download"/></svg><span>Scheda tecnica [PDF]</span></button>
+  </div>
+
+  <div class="product-meta">
+    <ul class="product-thumbs">
+      <li class="selected"><img src="images/products/productthumb.png" alt=""></li>
+      <li><img src="images/products/product-thumb2.png" alt=""></li>
+      <li><img src="images/products/product-thumb3.png" alt=""></li>
+    </ul>
+
+	{% for effect in product|effects %}  
+		<a href="catalogue.html" class="tag">{{effect.name}}</a><br>
+	{% endfor %}
+
+    {% for colour in product|colour %}  
+		<a href="catalogue.html" class="tag">{{colour.name}}</a><br>
+	{% endfor %}
+
+
+
+
+
+    
+    <a href="catalogue.html" class="tag">Vintage</a><br>
+    <a href="catalogue.html" class="tag">Grigio chiaro</a>
+
+
+
+
+    <h5>{% trans 'settings' %}</h5>
+    
+    {% for style in product|styles %}  
+		{{style.name}}       
+	{% endfor %}
+
+    <a href="catalogue.html" class="tag">Soggiorno o Camera</a><br>
+    <a href="catalogue.html" class="tag">Cucina</a>
+  </div>
+
+</div>
+
+<div class="block block-lightestbg">
+  <div class="content">
+    <h2>{% trans 'product-support' %}</h2>
+  </div>
+  <div class="content grid grid4">
+	{% for support in product.supports.all %}  
+		{% product_thumb support %}
+	{% endfor %}
+  </div>
+</div>
+
+<div class="block block-lightbg">
+  <div class="content">
+    <h2>{% trans 'product-same-serie' %}</h2>
+  </div>
+  <div class="content grid grid4">
+
+	{% for brother_product in products_series.all %}  
+		{% product_thumb brother_product %}
+	{% endfor %}
+
+  </div>
+</div>
+
+
+
+
+
 
 {% for image in product.images.all %}  
 <img  src="{{ image.imagefile.url }}" >
@@ -22,9 +179,6 @@
 
 <br/>
 
-{% autoescape off %}
-	{{ product.publication.content }} 
-{% endautoescape %}
 
 <!-- scheda tecnica -->
 {{ product.techspec }} 
@@ -34,37 +188,12 @@
 	<img  src="{{ icon.imagefile.url }}" >
 {% endfor %}
 
-{% for colour in product|colour %}  
-	{{colour.name}}       
-{% endfor %}
 
-{% for effect in product|effects %}  
-	{{effect.name}}       
-{% endfor %}
-
-
-{% for style in product|styles %}  
-	{{style.name}}       
-{% endfor %}
-
-
-{% for finish in product|finishes %}  
-	{{finish.name}}       
-{% endfor %}
 
 
 {{product.price}}
 
-<h3>{% trans 'product-support' %}</h3>
 
-{% for support in product.supports.all %}  
-	{{support}}
-{% endfor %}
-
-<h3>{% trans 'product-same-serie' %}</h3>
-{% for brother_product in products_series.all %}  
-	{{brother_product}}
-{% endfor %}
 
 <hr>
 <!-- SAMPLER !-->
@@ -87,6 +216,11 @@
 {% trans 'add-sampler-text' %}
 
 <hr>
+
+
+	{% for finish in product|finishes %}  
+		{{finish.name}}       
+	{% endfor %}
 
 <!-- 
 <form  action="{{request.get_full_path|urlencode}}" method="POST"> 

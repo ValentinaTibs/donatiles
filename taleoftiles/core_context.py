@@ -16,7 +16,7 @@ class SessionStore(DbSessionStore):
 #####  -----------        
 
 def category_menu(context):
-    cats = Tag.objects.filter(public = True, in_menu = True)
+    cats = Tag.objects.filter(public = True, child__in_menu = True).distinct()
     return {'menu_cats': cats} 
 
 def user_menu(context):

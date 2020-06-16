@@ -15,7 +15,7 @@ class ElementTag(models.Model):
     slug    = models.CharField  (max_length=200, unique=True)
     public  = models.BooleanField(default = True)
     summary = models.CharField  (max_length=200, null=True, blank=True,)
-    parent  = models.ForeignKey ("self",        null=True, blank=True, on_delete=models.SET_NULL, related_name='childs' )    
+    parent  = models.ForeignKey ("self",         null=True, blank=True, on_delete=models.SET_NULL, related_name='childs' )    
     
     class Meta:
         verbose_name_plural = "Tags"
@@ -46,7 +46,6 @@ class Element(models.Model):
     
     def data(self):
         if self.data_type == 'i' and  self.image and self.is_img() :
-            return mark_safe('<img src="{0}">'.format(self.image.imagefile.url))
             return self.image.imagefile.url
         return self.content    
 
@@ -139,7 +138,7 @@ class Image(models.Model):
     product     = models.ForeignKey     (Product,   blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     element     = models.OneToOneField  (Element,   blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
     icon        = models.OneToOneField  (Icon,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
-    post        = models.OneToOneField  (Post,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
+    post        = models.OneToOneField  (Post,      blank = True, null = True,on_delete=models.SET_NULL, related_name='cover' )
     
     order       = models.PositiveIntegerField( default=0, )   
     is_cover    = models.BooleanField(default = False)
