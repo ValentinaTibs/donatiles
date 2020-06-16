@@ -51,19 +51,19 @@
     <div><h3>{{ layout_elems|get_elem:'strength-pt-3' }}</h3></div>
     
 
-    <a href="bloghome.html" class="btn-gridbox"><h3>{{ layout_elems|get_elem:'strength-pt-4' }}</h3></a>
+    <a href="{% url 'blog'%}" class="btn-gridbox"><h3>{{ layout_elems|get_elem:'strength-pt-4' }}</h3></a>
   </div>
 </div>
 
 <div class="block block-lightbg block-fullheight">
   <div class="content grid grid-homeblog">
-    
+
     <a href="{% url 'post' main_post.publication.slug %}" class="blogpost-thumb blogpost-thumb-large btn-gridbox" style="background-image:url('{{main_post.cover.imagefile.url}}')">
     <div class="bgtxt">
-      <h3><span>{{main_post.publication.title}}</span></h3></div>
+      <h3><span>{{main_post.publication.title |title}}</span></h3></div>
     </a>
     <a href="{% url 'post' secondary_post.publication.slug %}" class="blogpost-thumb btn-gridbox">
-      <h3>{{secondary_post.publication.title}}</h3>
+      <h3>{{secondary_post.publication.title |title}}</h3>
       <div class="blogpost-thumb-img" style="background-image:url('{{secondary_post.cover.imagefile.url}}')"></div>
     </a>
     <a href="{% url 'blog'%}" class="grid-homeblog-about btn-gridbox">
