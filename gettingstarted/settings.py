@@ -112,6 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # as in ->https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes     
 
 USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 LANGUAGES = (
     ('en', _('English')),
@@ -122,8 +124,6 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'en'
 TIME_ZONE = "UTC"
-USE_L10N = True
-USE_TZ = True
 
 
 LOGIN_URL = '/' 

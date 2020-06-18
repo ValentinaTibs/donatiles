@@ -15,6 +15,8 @@ import layout.views
 urlpatterns = [ ]
 i18n_patterns(*urlpatterns  , prefix_default_language = False)
 
+
+
 urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
     path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
@@ -73,7 +75,8 @@ urlpatterns += i18n_patterns(
 urlpatterns += (
     path("admin/", admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('i18n/', include('django.conf.urls.i18n'))
     )
 
 

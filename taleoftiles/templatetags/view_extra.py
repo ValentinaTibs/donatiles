@@ -86,6 +86,12 @@ def product_thumb(product):
     return {'product':product}    
 
 
+from django.urls import translate_url
+
+@register.simple_tag(takes_context=True)
+def change_lang(context, lang=None):    
+    return translate_url(context['request'].path, lang)
+
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
 #   guy_name = user.userprofile.centre.related.slug.split('-')[0].capitalize()

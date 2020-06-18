@@ -20,7 +20,6 @@
   <link type="text/css" href="{% static 'style/style.css' %}" rel="stylesheet">
 
   {% block meta-tag %} {% endblock %}
-
 </head>
 
 <body>
@@ -36,16 +35,36 @@
       <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a></li>
       <li><a href="" target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a></li>
       <li><a href="{% url 'support'%}"><span>{% trans 'support' %}</span></a></li>
-      <li><a href="" data-overlay="Auth"><span> {% trans 'login-register' %}</span></a></li>
+
+{% if user.is_authenticated %}
+    <li><a href="{% url 'account'%}"        ><span> {% trans 'account' %}</span></a></li>
+    <li><a href="{% url 'logout' %}?next=/" ><span> {% trans 'logout' %}</span></a></li>
+{% else %}
+    <li><a href="" data-overlay="Auth"><span> {% trans 'login-register' %}</span></a></li>
+{% endif %}
+
       <li>
         <div class="nav-dropdown">
-          <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>ITA</span></div>
+          
+          {% get_current_language as LANGUAGE_CODE %}
+          {% with img_name="images/svgdefs.svg#icon-lang-"|add:LANGUAGE_CODE %}
+          <div><svg class="icon-s icon"><use xlink:href="{% static img_name %}"/></svg><span>{{LANGUAGE_CODE}}</span></div>
+          {% endwith %}
+
           <div class="nav-dropdown-options">
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-en' %}"/></svg><span>ENG</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>ITA</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-fr' %}"/></svg><span>FRA</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-de' %}"/></svg><span>DEU</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-sv' %}"/></svg><span>SWE</span></div>
+
+            {% get_available_languages as LANGUAGES %}
+              {% for lang in LANGUAGES %} 
+                {% with img_name="images/svgdefs.svg#icon-lang-"|add:lang.0 %}
+                <div>
+                    <a href="{% change_lang lang.0 %}">
+                    <svg class="icon-s icon"><use xlink:href="{% static img_name %}"/></svg>
+                    <span>{{lang.0}}</span>
+                  </a>
+                </div>
+                {% endwith %}
+            {% endfor %}   
+
           </div>
         </div>
       </li>
@@ -107,75 +126,75 @@
         <use xlink:href="{% static 'images/svgdefs.svg#icon-menu' %}"/></svg></button>
     </div>
 
-    <div class="overlay" id="overlayAuth">
+{% if not user.is_authenticated %}
+
+<div class="overlay" id="overlayAuth">
 
   <div class="overlay-title">
-    <h4>Sei già registrato?</h4>
+    <h4>{% trans 'already-registered' %}</h4>
     <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
-  <form action="account.html">
+  <form method="post" action="{% url 'login' %}?next={{request.get_full_path|urlencode}}">
+  {% csrf_token %}
+
     <div class="formrow">
-      <label for="loginEmail">Email</label>
-      <input type="text" id="loginEmail" tabindex="1">
+      {{ loginform.username.label_tag }}
+      {{ loginform.username }}
     </div>
     <div class="formrow">
-      <label for="loginPassword">Password<a href="">Ho dimenticato la password</a></label>
-      <input type="password" id="loginPassword" tabindex="2">
+      {{ loginform.password.label_tag }}
+      <a href="{% url 'password_reset' %}"> {% trans 'password-reset' %} </a>
+      {{ loginform.password }}
     </div>
     <input type="submit" class="btn btn-primary" value="Login">
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
   </form>
 
-  <h4>Vuoi registrarti?</h4>
-  <p class="note">Crea un account per ricevere un campionario gratuito, effettuare ordini e tenere traccia degli ordini passati</p>
 
-  <form action="">
+  <h4>{% trans 'wanna-register' %}</h4>
+  <p class="note">{% trans 'wanna-register-incentive' %}</p>
+
+  <form method="post" action="{% url 'add_user' %}">
+    {% csrf_token %}
     <div class="formrow">
-      <label for="signupEmail">Inserisci la tua email</label>
-      <input type="text" id="signupEmail" tabindex="3">
+      {{ signupform.username.label_tag }}
+      {{ signupform.username }}
     </div>
     <p class="note">Ti invieremo una password a questo indirizzo</p>
-    <input type="submit" class="btn btn-primary" value="Registrati">
-  </form>
+    <input type="submit" class="btn btn-primary" value="{% trans 'register' %}">
+    <input type="hidden" name="next" value="{{ request.get_full_path }} " />
 
+  </form>
 </div>
+{% endif %}
     <div class="overlay" id="overlaySamples">
 
   <div class="overlay-title">
-    <h4>Il tuo campionario</h4>
+    <h4>{% trans 'your-sampler' %}</h4>
     <button class="btn"><svg class="icon icon-l">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
   <div class="grid grid-sampleslots">
-    <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
+
+  {% for sample in sampler.all_samples %}
+    
+    <div class="sampleslot" style="background-image:url('{{sample.product.thumb}}')">
       <a href="catalogue-item.html">
         <div class="sampleslot-name">
-          <h5>Nome Serie</h5>
-          <span>Nome Prodotto</span>
+          <h5>{{sample.product.serie}}</h5>
+          <span>{{sample.product.name}}</span>
         </div>
       </a>
-      <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-    </div>
-    <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
-      <a href="catalogue-item.html">
-        <div class="sampleslot-name">
-          <h5>Nome Serie</h5>
-          <span>Nome Prodotto</span>
-        </div>
+      <a href="{% url 'del_chart' sample.pk True %}">
+        <button class="btn" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
       </a>
-      <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
     </div>
-    <div class="sampleslot" style="background-image:url('images/products/productthumb.png')">
-      <a href="catalogue-item.html">
-        <div class="sampleslot-name">
-          <h5>Nome Serie</h5>
-          <span>Nome Prodotto</span>
-        </div>
-      </a>
-      <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-    </div>
-    <div class="sampleslot"></div>
+
+  {% endfor %}
+
+    
   </div>
 
   <button class="btn btn-primary"><span>Ricevi questi campioni a casa</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button>
@@ -186,7 +205,7 @@
     <div class="overlay" id="overlayCart">
 
   <div class="overlay-title">
-    <h4>Il tuo carrello</h4>
+    <h4>{% trans 'your-chart' %}</h4>
     <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
   </div>
 
@@ -247,7 +266,7 @@
 
 </div>
 
-    <div class="nav-mobile overlay" id="overlayMenu">
+<div class="nav-mobile overlay" id="overlayMenu">
 
   <div class="overlay-title">
     <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
@@ -289,16 +308,22 @@
       <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>
       <li><a href="{% url 'support'%}"><span>{% trans 'support'|title %}</span></a></li>
 
-      <li><a href="" data-overlay="Auth"><span>Login / Registrati</span></a></li>
+      <li><a href="" data-overlay="Auth"><span>{% trans 'login-register' %}</span></a></li>
       <li class="settingsmenu">
-        <div><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>Italiano</span></div>
-        <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
+        <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it"/></svg><span>Italiano</span></div>
+        <button class="btn btn-tree"><svg class="icon icon-l">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable">
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-en"/></svg><span>English</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-it"/></svg><span>Italiano</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-fr"/></svg><span>Français</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-de"/></svg><span>Deutsch</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="images/svgdefs.svg#icon-lang-sv"/></svg><span>Svenska</span></a>
+          <a href=""><svg class="icon-s icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-en' %}"/></svg><span>English</span></a>
+          <a href=""><svg class="icon-s icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>Italiano</span></a>
+          <a href=""><svg class="icon-s icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-fr' %}"/></svg><span>Français</span></a>
+          <a href=""><svg class="icon-s icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-de' %}"/></svg><span>Deutsch</span></a>
+          <a href=""><svg class="icon-s icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-sv' %}"/></svg><span>Svenska</span></a>
         </div>
       </li>
       <li class="settingsmenu">
