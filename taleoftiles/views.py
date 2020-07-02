@@ -36,7 +36,8 @@ def custom_merge(unit1, unit2):
 def catalogue(request, the_filter = None):
 
     catalogue_prod = Product.active.filter(available = True)
-    query_dict = {}
+    query_dict  = {}
+    query_items = {}
     try: 
         cat = Catalogue.objects.get(active = True)
     except ObjectDoesNotExist:
@@ -53,13 +54,20 @@ def catalogue(request, the_filter = None):
     if request.method == 'POST':
         query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
 
+    for key in query_dict:
+        if key  != 'csrfmiddlewaretoken':
+            query_items[Tag.objects.get(slug=key).slug] = []
+            for val in query_dict[key]:
+                query_items[key].append(Tag.objects.get(slug=val))
+
     catalogue_tags = cat.tags()
     catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
 
     return render(request, "catalogue.html",{   
         "tags"          : catalogue_tags,  
         "products"      : catalogue_prod,
-        "active_tags"   : query_dict
+        "active_tags"   : query_dict,
+        "active_tags_items"   : query_items
         })
 
 def product(request, product_code, chi_form = None ):    

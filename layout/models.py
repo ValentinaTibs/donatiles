@@ -112,11 +112,13 @@ class MailTemplate(models.Model):
 
     def send_first_password(self,email_rec,pwd):
         da_mail = MailTemplate.objects.filter(slug='first-password').first()
-        da_mail.send(email_rec, pwd)
+        if da_mail:
+            da_mail.send(email_rec, pwd)
     
     def send_password_reset(self,email_rec):
         da_mail = MailTemplate.objects.filter(slug='password-reset').first()
-        da_mail.send(email_rec)
+        if da_mail:
+            da_mail.send(email_rec)
     
 
 class Icon(models.Model):  

@@ -20,26 +20,24 @@
         <ul>
 
             {% for effect in tags.effect.child.all %}
-                <li class="
+                <li>
+                <input type="checkbox" id="{{effect.slug}}" name="{{ tags.effect.slug }}" value="{{effect.slug}}"
                 {% if effect.slug in active_tags|get_item:tags.effect.slug  %}
-                    selected
-                {% endif %}">
-                    <a href="">{{effect.name}}</a>
-                            <input type="checkbox" name="{{ tags.effect.slug }}" value="{{effect.slug}}"
-            style="display: none;"
-            {% if effect.slug in active_tags|get_item:tags.effect.slug  %}
-               checked 
-            {% endif %}
-            >
-        </li>
-
-            
+                    checked 
+                {% endif %}>
+                <label for="{{effect.slug}}">{{effect.name}}</label></li>
             {% endfor %}
+
         </ul>
+
         <h5>{{ tags.style.name }} </h5>
         <ul>
             {% for style in tags.style.child.all %}
-              <li><a href="">{{style.name}}</a></li>
+                <li><input type="checkbox" id="{{style.slug}}" name="{{ tags.style.slug }}" value="{{style.slug}}"
+                {% if style.slug in active_tags|get_item:tags.style.slug  %}
+                    checked
+                {% endif %}>
+                <label for="{{style.slug}}">{{style.name}}</label></li>
             {% endfor %}
         </ul>
          
@@ -47,29 +45,55 @@
         <h5>{{ tags.colour.name }} </h5>
         <ul class="colorswatches">
             {% for colour in tags.colour.child.all %}
-                      <li><a href=""><div style="background-color:#{{colour.summary}}"></div></a></li>
+                <input type="checkbox" id={{colour.slug}} name="{{ tags.colour.slug }}" value="{{colour.slug}}"
+                    {% if colour.slug in active_tags|get_item:tags.colour.slug  %}
+                       checked 
+                    {% endif %}
+                    >
+                <li>  <a href=""><div style="background-color:#{{colour.summary}}"></div></a></li>
             {% endfor %}
+
         </ul>
         <h5>{{ tags.setting.name }}</h5>
         <ul>
             {% for setting in tags.setting.child.all %}
-          <li><a href="">{{setting.name}}</a></li>
+                <li><input type="checkbox" id="{{setting.slug}}" name="{{ tags.format.slug }}" value="{{format.slug}}" 
+                {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
+                    checked
+                {% endif %}>
+                <label for="{{setting.slug}}">{{setting.name}}</label></li>
+
             {% endfor %}
         </ul>
         <h5>{{ tags.format.name }} </h5>
         <ul>
-            {% for format in tags.format.child.all %}
-          <li><a href="">{{format.name}}       </a>
-            <button class="btn btn-tree"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
-            <ul class="openable" style="--tree-height:4.5rem">
+
+        {% for format in tags.format.child.all %}
+            
+            <input type="checkbox" id="{{ format.slug }}"
+            name="{{ tags.format.slug }}"  value="{{format.slug}}" 
+            {% if format.slug in active_tags|get_item:tags.format.slug  %}
+               checked 
+            {% endif %}
+            >
+            {{format.name}}       
+            
+            <ul>
             {% for more_format in format.child.all %}
-              <li><a href="">{{more_format.name}}</a></li>
-            {% endfor %}
+            <input type="checkbox"  id="{{ more_format.slug }}"
+            name="{{ tags.format.slug }}" value="{{more_format.slug}}" 
+            {% if more_format.slug in active_tags|get_item:tags.format.slug  %}
+               checked 
+            {% endif %}
+            >
+
+                <li><label for="{{more_format.slug }}" >{{more_format.name}}</label>  </li>
+            {% endfor %}            
             </ul>
-          </li>
-          {% endfor %}
+        {% endfor %}
          
         </ul>
+
         <div class="checkbox">
 
         <input type="checkbox" id="filter-sampleable" name="{{ tags.handmade.slug }}"  value="{{tags.handmade.slug}}"
@@ -131,10 +155,13 @@
 
     <div class="catalogue-filters">
     
-        {{active_tags}}
+        {% for tag in active_tags_items %}
+            {% for sel_tag in active_tags_items|get_item:tag %}
+            <span class="tag tag-removable">{{sel_tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
+            {% endfor %}
+        {% endfor %}
 
-        <span class="tag tag-removable">Effetto marmo<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
-        <span class="tag tag-removable">Ideale per: Bagno<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
+
     </div>
     <h1>Tutti i prodotti</h1>
     <div class="catalogue-data">
