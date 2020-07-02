@@ -166,10 +166,10 @@
     <h1>Tutti i prodotti</h1>
     <div class="catalogue-data">
       <div class="catalogue-data-num">
-        <strong>126</strong> prodotti
+        <strong>{{products|length }}</strong> {% trans 'products' %}
       </div>
       <div class="catalogue-data-sorting">
-        <span>Ordina per:</span>
+        <span>{% trans 'order for' %}:</span>
         <input type="radio" name="sortorder" id="sortorder-trending" checked>
         <label for="sortorder-trending">Trending</label>
         <input type="radio" name="sortorder" id="sortorder-new">

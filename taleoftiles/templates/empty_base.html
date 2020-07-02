@@ -181,7 +181,8 @@
   {% for sample in sampler.all_samples %}
     
     <div class="sampleslot" style="background-image:url('{{sample.product.thumb}}')">
-      <a href="catalogue-item.html">
+
+      <a href="{% url 'product' sample.product.code %}">
         <div class="sampleslot-name">
           <h5>{{sample.product.serie}}</h5>
           <span>{{sample.product.name}}</span>
