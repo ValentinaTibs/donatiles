@@ -23,9 +23,15 @@ def duplicate_product(modeladmin, request, queryset):
         e.save()
         for tag in cc:
             e.tags.add(tag)
+
+def duplicate_plain(modeladmin, request, queryset):
+    for e in queryset:
+        e.pk = None
+        e.save()
             
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
+duplicate_plain.short_description = "Duplicate selected items"
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -61,13 +67,14 @@ class PriceStackedAdmin(admin.StackedInline):
 class PriceAdmin(admin.ModelAdmin):
 
     model = Price
+    actions = [duplicate_plain,]
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "size":
             kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
-    list_display = ("product","size","euros")
+    list_display = ("product","size","euros","m2_box","weight_box")
 
 class TagAdmin(admin.ModelAdmin):
     model = Tag
