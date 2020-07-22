@@ -17,15 +17,35 @@
   </ul>
   <h1>{{ product.publication.title }}</h1>
   <div class="product-samplebtn">
-    <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-samples-add"/></svg><span>Aggiungi al campionario</span></button>
-    <p class="note">Confronta questo prodotto con gli altri, o fatti spedire un campione a casa</p>
+    
+{% if sampler and sampler.all_samples.count >= 4 %}
+
+  <p class="note">{% trans 'full-sampler' %} </p>
+{% elif sampler|is_in_sample:product.code %}
+
+  <p class="note">{% trans 'already-in-sampler' %} </p>
+
+{% elif product.is_samplable %}
+  <form  action="{% url 'add_sample' product.code %}" method="POST"> 
+    {% csrf_token %}
+        <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-samples-add"/></svg><span>{% trans 'add-sampler-button' %}</span></button>
+  </form>
+    <p class="note">{% trans 'add-sampler-text' %}</p>
+
+{% else %}    
+    <p class="note">{% trans 'not-samplable' %} </p>
+{% endif %}
+
   </div>
 </div>
 
 <div class="content grid grid-product">
 
   <div class="product-gallery">
-    <img src="images/products/product-main1.png" alt="Olmo naturale – Millelegni Remake">
+
+  {% for image in product.images.all %}  
+  <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}">
+  {% endfor %}
   </div>
 
   <div class="product-selection">
@@ -173,9 +193,6 @@
 
 
 
-{% for image in product.images.all %}  
-<img  src="{{ image.imagefile.url }}" >
-{% endfor %}
 
 <br/>
 
@@ -198,22 +215,7 @@
 <hr>
 <!-- SAMPLER !-->
 
-{% if sampler and sampler.all_samples.count >= 4 %}
 
-	HAI RIEMPITO IL SAMPLER
-{% elif sampler|is_in_sample:product.code %}
-
-	QUESTO PRODOTTO E' NEL SAMPLER 
-
-{% else %}
-
-	<form  action="{% url 'add_sample' product.code %}" method="POST"> 
-		{% csrf_token %}
-		<button > {% trans 'add-sampler-button' %}</button>
-	</form>
-{% endif %}
-
-{% trans 'add-sampler-text' %}
 
 <hr>
 
