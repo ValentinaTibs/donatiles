@@ -135,13 +135,10 @@
 
       {% for image in product.images.all %}  
       
-        <li><img src="{{ image.imagefile.url }}" alt=""></li>
+        <li><img src="{{ image.thumb_ }}" alt=""></li>
 
       {% endfor %}
-
       
-      <li><img src="images/products/product-thumb2.png" alt=""></li>
-      <li><img src="images/products/product-thumb3.png" alt=""></li>
     </ul>
 
 	{% for effect in product|effects %}  
@@ -152,16 +149,9 @@
 		<a href="catalogue.html" class="tag">{{colour.name}}</a><br>
 	{% endfor %}
 
-
-
-
-
     
     <a href="catalogue.html" class="tag">Vintage</a><br>
     <a href="catalogue.html" class="tag">Grigio chiaro</a>
-
-
-
 
     <h5>{% trans 'settings' %}</h5>
     
