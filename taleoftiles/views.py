@@ -33,9 +33,8 @@ def custom_merge(unit1, unit2):
                out[key] = value + unit1[key]
    return out
 
-@staticmethod
-def catalogue(request,arg):
-    print(arg)
+def catalogue(request, the_filter = None):
+
     catalogue_prod = Product.active.filter(available = True)
     query_dict  = {}
     query_items = {}
