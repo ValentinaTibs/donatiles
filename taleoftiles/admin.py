@@ -39,7 +39,8 @@ class PhotoStackedAdmin(admin.StackedInline):
 
     list_display = ('name',  )
     search_fields = ('name', )
-    exclude = ('name','element','icon' )
+    exclude = ('name','element','icon','post' )
+
 
 class IconImageStackedAdmin(admin.StackedInline):
     model = Image
@@ -138,6 +139,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     def tags_(self, obj):
         return "\n".join([p.name + ' * ' for p in obj.tags.all()])    
+
 
 class TechnicalSpecAdmin(admin.ModelAdmin):
     model = TechnicalSpec

@@ -52,9 +52,13 @@
 
     <div class="product-options">
       <h5>Formati</h5>
-      <input type="radio" name="product-size" id="product-size1" checked><label for="product-size1">Quadrato piccolo<br>20x20</label>
-      <input type="radio" name="product-size" id="product-size2"><label for="product-size2">Quadrato grande<br>40x40</label>
-      <input type="radio" name="product-size" id="product-size3"><label for="product-size3">Rettangolare piccolo<br>100x25</label>
+      {% for format in product.formats.all %}  
+
+      <input type="radio" name="product-size" id="product-size1" checked><label for="product-size1">{% trans format.name% }</label>
+
+      {% endfor %}
+      
+
       <h5>Finiture</h5>
       <input type="radio" name="product-finish" id="product-finish1" checked><label for="product-finish1">Finitura A</label>
       <input type="radio" name="product-finish" id="product-finish2"><label for="product-finish2">Finitura B</label>
@@ -128,7 +132,14 @@
 
   <div class="product-meta">
     <ul class="product-thumbs">
-      <li class="selected"><img src="images/products/productthumb.png" alt=""></li>
+
+      {% for image in product.images.all %}  
+      
+        <li><img src="{{ image.imagefile.url }}" alt=""></li>
+
+      {% endfor %}
+
+      
       <li><img src="images/products/product-thumb2.png" alt=""></li>
       <li><img src="images/products/product-thumb3.png" alt=""></li>
     </ul>

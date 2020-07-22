@@ -8,6 +8,7 @@ from taleoftiles.models import Product, Tag
 from captcha.fields import ReCaptchaField
 from django.core.exceptions import NON_FIELD_ERRORS
 
+
 class CustomProductModelForm(forms.ModelForm):
     
     series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)

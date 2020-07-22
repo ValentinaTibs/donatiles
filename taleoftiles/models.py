@@ -161,6 +161,13 @@ class Product(models.Model):
             res= "none"
         return res
 
+    def formats(self):
+        res = self.tags.filter(parent__slug = "format")
+        if res.count() == 0:
+            res= "none"
+        return res
+
+
 
     def price(self,size):
         try: 
@@ -175,7 +182,9 @@ class Product(models.Model):
 class Price(models.Model):
     size    = models.ForeignKey(Tag,     blank = True, null = True, on_delete=models.SET_NULL, related_name='prices')
     product = models.ForeignKey(Product, blank = True, null = True, on_delete=models.SET_NULL, related_name='prices' )
-    euros   = models.PositiveIntegerField(default = 10)
+    euros       = models.PositiveIntegerField(default = 10)
+    m2_box      = models.PositiveIntegerField(default = 10)
+    weight_box  = models.PositiveIntegerField(default = 10)
 
     def __str__(self):
         return self.size.name + self.product.publication.title + str(self.euros)

@@ -137,6 +137,7 @@ class Image(models.Model):
 
     name        = models.CharField (max_length = 100 , null = True, blank=True)
     imagefile   = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
+    thumbnail   = models.ImageField(upload_to='thumbs', null=True, editable=False)
     product     = models.ForeignKey     (Product,   blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     element     = models.OneToOneField  (Element,   blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
     icon        = models.OneToOneField  (Icon,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
@@ -144,6 +145,9 @@ class Image(models.Model):
     
     order       = models.PositiveIntegerField( default=0, )   
     is_cover    = models.BooleanField(default = False)
+
+    format_tag  = models.ForeignKey  (Tag,  blank = True, null = True, on_delete=models.SET_NULL, related_name='format_images' )
+    finish_tag  = models.ForeignKey  (Tag,  blank = True, null = True, on_delete=models.SET_NULL, related_name='finish_images' )
 
     class Meta:
         ordering = ["order"]    
@@ -167,7 +171,43 @@ class Image(models.Model):
         return '%s' % (self.name,)
 
     def save(self, *args, **kwargs):
+
         if(self.name == None):
             self.name = self.imagefile.name
+
+        if not self.make_thumbnail():
+            raise Exception('Could not create thumbnail - is the file type valid?')
+
         super().save(*args, **kwargs)  # Call the "real" save() method.
+
+    def make_thumbnail(self):
+
+        image = Image.open(self.imagefile)
+        image.thumbnail(THUMB_SIZE, Image.ANTIALIAS)
+
+        thumb_name, thumb_extension = os.path.splitext(self.photo.name)
+        thumb_extension = thumb_extension.lower()
+
+        thumb_filename = thumb_name + '_thumb' + thumb_extension
+
+        if thumb_extension in ['.jpg', '.jpeg']:
+            FTYPE = 'JPEG'
+        elif thumb_extension == '.gif':
+            FTYPE = 'GIF'
+        elif thumb_extension == '.png':
+            FTYPE = 'PNG'
+        else:
+            return False    # Unrecognized file type
+
+        # Save thumbnail to in-memory file as StringIO
+        temp_thumb = BytesIO()
+        image.save(temp_thumb, FTYPE)
+        temp_thumb.seek(0)
+
+        # set save=False, otherwise it will run in an infinite loop
+        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+        temp_thumb.close()
+
+        return True
+
 
