@@ -1,3 +1,11 @@
+staticfiles/css/
+staticfiles/js/script.8a174c734d7c.js
+staticfiles/js/script.8a174c734d7c.js.gz
+staticfiles/js/script.js
+staticfiles/js/script.js.gz
+staticfiles/lang-logo.019c8743b7cf.png
+staticfiles/lang-logo.png
+staticfiles/plugins/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

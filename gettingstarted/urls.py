@@ -15,12 +15,13 @@ import layout.views
 urlpatterns = [ ]
 i18n_patterns(*urlpatterns  , prefix_default_language = False)
 
-
+urlpatterns += i18n_patterns(
+    #re_path(r'^catalogue/(?:(\w+)=(\w+)(\&?))*$', taleoftiles.views.catalogue, name="catalogue"),
+    path(r'^catalogue/?q=(?P<query_search>\w+)$', 'taleoftiles.views.catalogue', name='catalogue'),
+)
 
 urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
-    path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
-    path("catalogue/<slug:the_filter>/",taleoftiles.views.catalogue, name="catalogue"),
 
     path("product/<slug:product_code>", taleoftiles.views.product,  name="product"),
 

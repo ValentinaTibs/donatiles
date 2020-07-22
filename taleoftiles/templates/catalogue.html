@@ -57,7 +57,7 @@
         <h5>{{ tags.setting.name }}</h5>
         <ul>
             {% for setting in tags.setting.child.all %}
-                <li><input type="checkbox" id="{{setting.slug}}" name="{{ tags.format.slug }}" value="{{format.slug}}" 
+                <li><input type="checkbox" id="{{setting.slug}}" name="{{ tags.setting.slug }}" value="{{setting.slug}}" 
                 {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
                     checked
                 {% endif %}>

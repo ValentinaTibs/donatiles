@@ -33,8 +33,9 @@ def custom_merge(unit1, unit2):
                out[key] = value + unit1[key]
    return out
 
-def catalogue(request, the_filter = None):
-
+@staticmethod
+def catalogue(request,arg):
+    print(arg)
     catalogue_prod = Product.active.filter(available = True)
     query_dict  = {}
     query_items = {}
@@ -43,20 +44,20 @@ def catalogue(request, the_filter = None):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"There is no active catalogue",})
 
-    if the_filter:
-        try: 
-            tag = Tag.objects.get(slug = the_filter)
-        except ObjectDoesNotExist:
-            return render(request, "404.html",{"message":"There is no active catalogue",})        
+    # if the_filter:
+    #     try: 
+    #         tag = Tag.objects.get(slug = the_filter)
+    #     except ObjectDoesNotExist:
+    #         return render(request, "404.html",{"message":"There is no active catalogue",})        
         
-        query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
+    #     query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
 
     if request.method == 'POST':
         query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
 
     for key in query_dict:
-        if key  != 'csrfmiddlewaretoken':
-            query_items[Tag.objects.get(slug=key).slug] = []
+        if key  != 'csrfmiddlewaretoken' and query_dict[key] != [''] :
+            query_items[key] = []
             for val in query_dict[key]:
                 query_items[key].append(Tag.objects.get(slug=val))
 
