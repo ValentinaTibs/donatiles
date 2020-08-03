@@ -134,8 +134,8 @@
     <ul class="product-thumbs">
 
       {% for image in product.images.all %}  
-      
-        <li><img src="{{ image.thumb_ }}" alt=""></li>
+
+        <li>{{ image.thumb_ }}</li>
 
       {% endfor %}
       
