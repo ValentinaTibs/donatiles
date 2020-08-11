@@ -14,8 +14,8 @@
 
 <div class="content product-header">
   <ul class="breadcrumb">
-    <li><a href="catalogue.html"> {% trans 'all-products' %}</a></li>
-    <svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-caret-right"/></svg>
+    <li><a href="{% url 'catalogue' %}"> {% trans 'all-products' %}</a></li>
+    <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg>
     <li>
       {% with serie=product|serie %}
         <a href="{% url 'catalogue' the_filter=serie.slug %}" >{{serie}} </a><br>
@@ -36,7 +36,7 @@
   <form  action="{% url 'add_sample' product.code %}" method="POST"> 
     {% csrf_token %}
         <button class="btn btn-secondary"><svg class="icon-l icon">
-          <use xlink:href="images/svgdefs.svg#icon-samples-add"/></svg>
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg>
           <span>{% trans 'add-sampler-button' %}</span>
         </button>
   </form>
@@ -58,7 +58,14 @@
   {% endfor %}
   </div>
 
-
+  <script>
+    function compute_money(){
+      alert("carlotta");
+    }
+    </script>
+    
+    <button onclick="compute_money()">say carlotta</button>
+    
   <div class="product-selection">
     <form  action="{% url 'add_chart' product.code %}" method="POST"> 
       {% csrf_token %}
@@ -67,13 +74,15 @@
       <h5>{% trans 'formats' %}</h5>
 
       {% for format in product.formats.all %}  
-        <input type="radio" name="product-size" id="product-size1" checked><label for="product-size1">{{ format.name }}</label>
+        <input type="radio" name="product-size" id="{{ format.slug }}" checked>
+        <label for="{{ format.slug }}">{{ format.name }}</label>
       {% endfor %}
       
       {% if product.finish %}
         <h5>{% trans 'finish' %}</h5>
         {% for format in product.finish.all %}  
-          <input type="radio" name="product-finish" id="product-finish1" checked><label for="product-finish1">{{ finish.name }}</label>
+          <input type="radio" name="product-finish" id="{{ finish.slug }}" checked>
+          <label for="{{ finish.slug }}">{{ finish.name }}</label>
         {% endfor %}
       {% endif %}
     </div>
@@ -82,7 +91,7 @@
 
       <div>
         <div class="row">
-          <div><strong>Codice: EH2H</strong><br>20x20<br>Finitura A</div>
+          <div><strong>Codice: EH2H</strong><br>20x20<br>{% trans 'finish' %} A</div>
           <div><div class="product-figure">€ 45</div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
@@ -90,17 +99,16 @@
       <div>
         <div class="row">
           <div>
-            <strong>Superficie da rivestire</strong><br>minimo: 10 m&sup2;
+            <strong>Superficie da rivestire</strong><br>{% trans 'min' %}: {{product.min_ammount}} m&sup2;
           </div>
           <div class="input-qty">
           
             {{chi_form.quantity}}
             
             <div class="product-qtybtns">
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button>
-              <span class="product-note">m&sup2;</span><button class="btn">
-                <svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg>
-              </button>
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg></button>
+              <span class="product-note">m&sup2;</span>
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg></button>
             </div>
           </div>
         </div>
@@ -117,7 +125,7 @@
             <label for="includeOffCut">Includi 10% di sfrido</label>
           </div>
           <div>
-            <button class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-info"/></svg></button>
+            <button class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></button>
           </div>
         </div>
       </div>
@@ -128,8 +136,9 @@
 
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
-      <p class="note">Questo prodotto può essere spedito<br><strong>entro 2 settimane</strong></p>
-      <p class="note">Hai qualche dubbio?<br><a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
+      <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} settimane</strong></p>
+      <p class="note">Hai qualche dubbio?<br>
+        <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>
   </form>
 
@@ -147,16 +156,14 @@
       <img src="images/products/mark2.png" alt="">
       <img src="images/products/mark3.png" alt="">
     </div>
-    <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-download"/></svg><span>Scheda tecnica [PDF]</span></button>
+    <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-download' %}"/></svg><span>Scheda tecnica [PDF]</span></button>
   </div>
 
   <div class="product-meta">
     <ul class="product-thumbs">
 
       {% for image in product.images.all %}  
-
         <li>{{ image.thumb_ }}</li>
-
       {% endfor %}
       
     </ul>
@@ -220,7 +227,8 @@
 	<img  src="{{ icon.imagefile.url }}" >
 {% endfor %}
 
-GINO
+
+<!-- GINO
 {{product.price}}
 
 
@@ -231,9 +239,6 @@ GINO
 {{chi_form.has_frido.label_tag}}
 
 {{chi_form.quantity.label_tag}}
-
-
-<!-- 
 <form  action="{{request.get_full_path|urlencode}}" method="POST"> 
 	{% csrf_token %}
 
