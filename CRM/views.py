@@ -114,10 +114,10 @@ def add_user(request):
 
 def del_chart(request, item_id, is_sample):
 
-    if context.user.is_authenticated:
-        query = Q(chart__user = context.user) 
-    elif context.session.exists(context.session.session_key):
-        query = Q(chart__session_id  = context.session.session_key) 
+    if request.user.is_authenticated:
+        query = Q(chart__user = request.user) 
+    elif request.session.exists(request.session.session_key):
+        query = Q(chart__session_id  = request.session.session_key) 
 
     try: 
         chart_item = ChartItem.objects.get(query, chart__is_sample = is_sample, pk = item_id, status = 'ok' )
@@ -152,13 +152,15 @@ def add_sample(request, product_code):
         chart_item = ChartItem.objects.get(chart = chart, product = product, status = 'ok')
     except ObjectDoesNotExist:
         remove_stat = 'ok'
+        #2do this might cause db collapse
         if (chart.all_samples().count() > 4):
             remove_stat = 'le'
         #2do this might cause db collapse
         if (not product.is_samplable):
             remove_stat = 'ns'          
-        chart_item = ChartItem(chart  = chart, product = product, status = remove_stat)
-        chart_item.save()
+        if remove_stat == 'ok':
+            chart_item = ChartItem(chart  = chart, product = product, status = remove_stat)
+            chart_item.save()
 
     return redirect('product', product_code= product_code )
 

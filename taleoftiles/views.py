@@ -43,13 +43,13 @@ def catalogue(request, the_filter = None):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"There is no active catalogue",})
 
-    # if the_filter:
-    #     try: 
-    #         tag = Tag.objects.get(slug = the_filter)
-    #     except ObjectDoesNotExist:
-    #         return render(request, "404.html",{"message":"There is no active catalogue",})        
+    if the_filter:
+        try: 
+            tag = Tag.objects.get(slug = the_filter)
+        except ObjectDoesNotExist:
+            return render(request, "404.html",{"message":"There is no active catalogue",})        
         
-    #     query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
+        query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
 
     if request.method == 'POST':
         query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 

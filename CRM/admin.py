@@ -11,6 +11,16 @@ class ProfileAdmin(admin.ModelAdmin):
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
+    list_display = ('chart','product','status','chart__is_sample','chart__user')
+
+    def chart__is_sample(self, obj):
+        return obj.chart.is_sample
+    
+    def chart__user(self, obj):
+        if obj.chart.user:
+            return obj.chart.user
+        else :
+            return "User NonReg"
 
 class OrderAdmin(admin.ModelAdmin):
     model = Order

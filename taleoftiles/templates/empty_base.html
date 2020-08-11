@@ -207,7 +207,7 @@
 
   <div class="overlay-title">
     <h4>{% trans 'your-chart' %}</h4>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
   <div class="cartitem">
@@ -237,7 +237,7 @@
         <span class="cartitem-price">€ 2000</span>
       </div>
     </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
   </div>
 
   <div class="cartitem">
@@ -252,7 +252,7 @@
         <span class="cartitem-price">€ 432</span>
       </div>
     </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
   </div>
 
   <div class="cartitem-total">
@@ -260,7 +260,8 @@
     <strong>€ 3960</strong>
   </div>
 
-  <a href="checkout-1.html" class="btn btn-primary"><span>Procedi con l'ordine</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
+  <a href="checkout-1.html" class="btn btn-primary"><span>Procedi con l'ordine</span>
+    <svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
 
   <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
   <p class="note">Potrai pagare con bonifico bancario</p>
@@ -270,40 +271,28 @@
 <div class="nav-mobile overlay" id="overlayMenu">
 
   <div class="overlay-title">
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-overlay-close"/></svg></button>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
   <nav>
+
     <ul>
       <li>
-        <a href="catalogue.html"><span>Catalogo</span></a>
-        <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
+        <a href="{% url 'catalogue' %}"><span>{% trans 'catalogue-menu' %}</span></a>
+        <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable nav-col-container">
+
+          {% for cat in menu_cats %}
           <div class="nav-col">
-            <h5>Effetto</h5>
+            <h5>{{cat}}</h5>
             <ul>
-              <li><a href="catalogue.html">Legno</a></li>
-              <li><a href="catalogue.html">Marmo</a></li>
-              <li><a href="catalogue.html">Pietra</a></li>
-              <li><a href="catalogue.html">Cemento</a></li>
+              {% for child_cat in cat.child.all %}
+              <li><a href="{% url 'catalogue' the_filter=child_cat.slug %}">{{child_cat}} </a></li>
+              {% endfor %}
             </ul>
           </div>
-          <div class="nav-col">
-            <h5>Stile</h5>
-            <ul>
-              <li><a href="catalogue.html">Urban</a></li>
-              <li><a href="catalogue.html">Country</a></li>
-              <li><a href="catalogue.html">Vintage</a></li>
-            </ul>
-          </div>
-          <div class="nav-col">
-            <h5>Ideale per</h5>
-            <ul>
-              <li><a href="catalogue.html">Soggiorno e camera</a></li>
-              <li><a href="catalogue.html">Bagno</a></li>
-              <li><a href="catalogue.html">Cucina</a></li>
-            </ul>
-          </div>
+          {% endfor %}
+
         </div>
       </li>
       <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>

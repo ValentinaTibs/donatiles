@@ -2,38 +2,14 @@
 {% load view_extra %}
 {% load static %}
 
- <div class="product-thumb">
+<div class="product-thumb">
   <a href="{% url 'product' product.code %}" class="product-thumb-img">
     <img src="{{ product.thumb_ }}" alt="{{ product.name }} / {{ product.serie.name }}">
-
-
   </a>
   <a href="{% url 'product' product.code %}" class="product-thumb-title">
     <h5>{{ product.serie.name }}</h5>
     <h4>{{ product.name }}</h4>
   </a>
 
-{% if sampler and sampler.all_samples.count >= 4 %}
-
-	<br/>
-{% elif sampler|is_in_sample:product.code %}
-
-	<br/>
-{% elif product.is_samplable %}
-
-	<form  action="{% url 'add_sample' product.code %}" method="POST"> 
-		{% csrf_token %}
-		<button class="btn btn-overlay"><svg class="icon-l icon">
-		<use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-	</form>
-
-  
-{% else %}	
-
-{% trans 'product-not-samplable' %}
-
-{% endif %}
-
-
-  
+   
 </div>

@@ -7,18 +7,25 @@
 {% block content %}
 
 
+<script>
 
+  
+</script>
 
 <div class="content product-header">
   <ul class="breadcrumb">
     <li><a href="catalogue.html"> {% trans 'all-products' %}</a></li>
     <svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-caret-right"/></svg>
-    <li><a href="catalogue.html">{{product|serie}}</a></li>
+    <li>
+      {% with serie=product|serie %}
+        <a href="{% url 'catalogue' the_filter=serie.slug %}" >{{serie}} </a><br>
+      {% endwith %}
+    </li>
   </ul>
   <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
     
-{% if sampler and sampler.all_samples.count >= 4 %}
+{% if sampler and sampler.all_samples.count > 4 %}
 
   <p class="note">{% trans 'full-sampler' %} </p>
 {% elif sampler|is_in_sample:product.code %}
@@ -155,29 +162,24 @@
     </ul>
 
 	{% for effect in product|effects %}  
-		<a href="catalogue.html" class="tag">{{effect.name}}</a><br>
+    <a href="{% url 'catalogue' the_filter=effect.slug %}"  class="tag">{{effect.name}} </a><br>
 	{% endfor %}
 
-    {% for colour in product|colour %}  
-		<a href="catalogue.html" class="tag">{{colour.name}}</a><br>
+  {% for colour in product|colour %}  
+    <a href="{% url 'catalogue' the_filter=colour.slug %}"  class="tag">{{colour.name}} </a><br>
 	{% endfor %}
 
+
+  <h5>{% trans 'settings' %}</h5>
     
-    <a href="catalogue.html" class="tag">Vintage</a><br>
-    <a href="catalogue.html" class="tag">Grigio chiaro</a>
-
-    <h5>{% trans 'settings' %}</h5>
-    
-    {% for style in product|styles %}  
-		{{style.name}}       
-	{% endfor %}
-
-    <a href="catalogue.html" class="tag">Soggiorno o Camera</a><br>
-    <a href="catalogue.html" class="tag">Cucina</a>
+  {% for style in product|styles %}  
+      <a href="{% url 'catalogue' the_filter=style.slug %}"  class="tag">{{style.name}} </a><br>
+  {% endfor %}
   </div>
 
 </div>
 
+{% if product.supports.count > 0 %}
 <div class="block block-lightestbg">
   <div class="content">
     <h2>{% trans 'product-support' %}</h2>
@@ -188,7 +190,9 @@
 	{% endfor %}
   </div>
 </div>
+{% endif %}
 
+{% if brother_product.count > 0 %}
 <div class="block block-lightbg">
   <div class="content">
     <h2>{% trans 'product-same-serie' %}</h2>
@@ -201,8 +205,7 @@
 
   </div>
 </div>
-
-
+{% endif %}
 
 
 
