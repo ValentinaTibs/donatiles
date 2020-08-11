@@ -11,11 +11,11 @@
 
 <div class="content product-header">
   <ul class="breadcrumb">
-    <li><a href="catalogue.html">Tutti i prodotti</a></li>
+    <li><a href="catalogue.html"> {% trans 'all-products' %}</a></li>
     <svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-caret-right"/></svg>
     <li><a href="catalogue.html">{{product|serie}}</a></li>
   </ul>
-  <h1>{{ product.publication.title }}</h1>
+  <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
     
 {% if sampler and sampler.all_samples.count >= 4 %}
@@ -28,9 +28,12 @@
 {% elif product.is_samplable %}
   <form  action="{% url 'add_sample' product.code %}" method="POST"> 
     {% csrf_token %}
-        <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-samples-add"/></svg><span>{% trans 'add-sampler-button' %}</span></button>
+        <button class="btn btn-secondary"><svg class="icon-l icon">
+          <use xlink:href="images/svgdefs.svg#icon-samples-add"/></svg>
+          <span>{% trans 'add-sampler-button' %}</span>
+        </button>
   </form>
-    <p class="note">{% trans 'add-sampler-text' %}</p>
+  <p class="note">{% trans 'add-sampler-text' %}</p>
 
 {% else %}    
     <p class="note">{% trans 'not-samplable' %} </p>
@@ -48,20 +51,24 @@
   {% endfor %}
   </div>
 
+
   <div class="product-selection">
-
+    <form  action="{% url 'add_chart' product.code %}" method="POST"> 
+      {% csrf_token %}
     <div class="product-options">
-      <h5>Formati</h5>
+
+      <h5>{% trans 'formats' %}</h5>
+
       {% for format in product.formats.all %}  
-
-      <input type="radio" name="product-size" id="product-size1" checked><label for="product-size1">{% trans format.name% }</label>
-
+        <input type="radio" name="product-size" id="product-size1" checked><label for="product-size1">{{ format.name }}</label>
       {% endfor %}
       
-
-      <h5>Finiture</h5>
-      <input type="radio" name="product-finish" id="product-finish1" checked><label for="product-finish1">Finitura A</label>
-      <input type="radio" name="product-finish" id="product-finish2"><label for="product-finish2">Finitura B</label>
+      {% if product.finish %}
+        <h5>{% trans 'finish' %}</h5>
+        {% for format in product.finish.all %}  
+          <input type="radio" name="product-finish" id="product-finish1" checked><label for="product-finish1">{{ finish.name }}</label>
+        {% endfor %}
+      {% endif %}
     </div>
 
     <div class="product-addtocartbox">
@@ -79,9 +86,14 @@
             <strong>Superficie da rivestire</strong><br>minimo: 10 m&sup2;
           </div>
           <div class="input-qty">
-            <input type="number" value="80" min="10" max="1000" step="0.01">
+          
+            {{chi_form.quantity}}
+            
             <div class="product-qtybtns">
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button>
+              <span class="product-note">m&sup2;</span><button class="btn">
+                <svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -103,15 +115,16 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" id="btnAddToCart"><span>Aggiungi al carrello <strong>88 m&sup2;</strong></span></button>
+      <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong>88 m&sup2;</strong></span></button>
 
-    </div>
+    </div>  <!-- product-addtocartbox -->
 
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
       <p class="note">Questo prodotto può essere spedito<br><strong>entro 2 settimane</strong></p>
       <p class="note">Hai qualche dubbio?<br><a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>
+  </form>
 
   </div>
 
@@ -193,8 +206,6 @@
 
 
 
-
-
 <br/>
 
 
@@ -206,24 +217,18 @@
 	<img  src="{{ icon.imagefile.url }}" >
 {% endfor %}
 
-
-
-
+GINO
 {{product.price}}
 
 
+{{chi_form.size.label_tag}}
+{{chi_form.size}}
+{{chi_form.product}}
+{{chi_form.has_frido}}
+{{chi_form.has_frido.label_tag}}
 
-<hr>
-<!-- SAMPLER !-->
+{{chi_form.quantity.label_tag}}
 
-
-
-<hr>
-
-
-	{% for finish in product|finishes %}  
-		{{finish.name}}       
-	{% endfor %}
 
 <!-- 
 <form  action="{{request.get_full_path|urlencode}}" method="POST"> 
@@ -238,25 +243,9 @@
  -->
 
 <!-- CHART calc !-->
+<div>
 
-<form  action="{% url 'add_chart' product.code %}" method="POST"> 
-
-	{% csrf_token %}
-
-	{{chi_form.size.label_tag}}
-	{{chi_form.size}}
-	{{chi_form.product}}
-	{{chi_form.has_frido}}
-	{{chi_form.has_frido.label_tag}}
-	
-	{{chi_form.quantity.label_tag}}
-	{{chi_form.quantity}}
-
-
-	<button> {% trans 'add-chart-button' %} </button>
-
-</form>
-
+</div>  
 
 {% endblock %}
 

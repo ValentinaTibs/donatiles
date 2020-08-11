@@ -113,13 +113,16 @@ def add_user(request):
     return redirect(request.META.get('HTTP_REFERER'))
 
 def del_chart(request, item_id, is_sample):
-    sess_k =request.session.session_key
+
+    if context.user.is_authenticated:
+        query = Q(chart__user = context.user) 
+    elif context.session.exists(context.session.session_key):
+        query = Q(chart__session_id  = context.session.session_key) 
 
     try: 
-        chart_item = ChartItem.objects.get(chart__session_id  = sess_k, chart__is_sample = is_sample, 
-            pk = item_id, status = 'ok' )
+        chart_item = ChartItem.objects.get(query, chart__is_sample = is_sample, pk = item_id, status = 'ok' )
     except ObjectDoesNotExist:
-        return render(request, "404.html",{"message": "Removing something that wasnt in your chart/sampler " + product_code,})
+        return render(request, "404.html",{"message": "Removing something that wasnt in your chart/sampler " + ChartItem.product,})
     chart_item.status = 'ru'
     chart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
@@ -131,17 +134,20 @@ def add_sample(request, product_code):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no product with code " + product_code,})
 
-    if not request.session.exists(request.session.session_key):
-        request.session.create() 
-
+    query = Q()
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        if not request.session.exists(request.session.session_key):
+            request.session.create()     
+        query = Q(session_id  = request.session.session_key) 
     try: 
-        chart = Chart.objects.get( session_id  = request.session.session_key, is_sample = True )
+        chart = Chart.objects.get( query, is_sample = True )
     except ObjectDoesNotExist:
         chart = Chart(session_id  = request.session.session_key, is_sample = True)
         if request.user.is_authenticated:
             chart.user = request.user
         chart.save()
-
     try:
         chart_item = ChartItem.objects.get(chart = chart, product = product, status = 'ok')
     except ObjectDoesNotExist:

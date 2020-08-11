@@ -84,7 +84,7 @@ class ActiveChartManager(models.Manager):
         )
         return qs
 
-# return all charts that are samples and have at least one item            
+# return all charts that are samples and have at least one item 
 class ActiveSamplesManager(models.Manager):
     def get_queryset(self):
         qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(

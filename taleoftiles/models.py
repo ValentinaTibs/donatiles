@@ -162,12 +162,10 @@ class Product(models.Model):
         return res
 
     def formats(self):
-        res = self.tags.filter(parent__slug = "format")
+        res = self.tags.filter(parent__parent__slug = "format")
         if res.count() == 0:
             res= "none"
         return res
-
-
 
     def price(self,size):
         try: 

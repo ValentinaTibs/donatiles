@@ -31,12 +31,13 @@ def user_menu(context):
                 'loginform':LoginForm, 'signupform':RegisterForm,
                 'session' : context.session.session_key
         } 
+        
    
     charts  = Chart.active.filter   ( query )
-    sampler = Chart.samples.filter  ( query ).first()
-
+    sampler = Chart.samples.filter  ( query ).first()   
     num_ch_i = charts.filter(chart_item__status='ok').aggregate(Count('chart_item'))
-
+    
+    
     return {
             'sampler': sampler,'charts':charts, 'num_ch_i':num_ch_i['chart_item__count'],
             'loginform':LoginForm, 'signupform':RegisterForm,
