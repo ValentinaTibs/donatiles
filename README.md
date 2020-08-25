@@ -126,6 +126,8 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale la
 
 # Translations -
 
+python manage.py compilemessages
+
 ## Microcopy text
 
 ```sh

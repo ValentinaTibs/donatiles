@@ -11,3 +11,4 @@ django-modeltranslation
 sendgrid
 boto3
 django-storages
+django-translations
