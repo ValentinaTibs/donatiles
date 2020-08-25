@@ -167,15 +167,15 @@ class Product(models.Model):
             res= "none"
         return res
 
-    def price(self,size):
+    def price(self,size = None):
+        if not size:
+            size = self.formats().last()
         try: 
             price = self.prices.get(size = size)
         except ObjectDoesNotExist:
             return 0
         return price.euros
 
-    def sfrido(self):
-        return 0.10
     
 class Price(models.Model):
     size    = models.ForeignKey(Tag,     blank = True, null = True, on_delete=models.SET_NULL, related_name='prices')

@@ -6,12 +6,6 @@
 {% load static %}
 {% block content %}
 
-
-<script>
-
-  
-</script>
-
 <div class="content product-header">
   <ul class="breadcrumb">
     <li><a href="{% url 'catalogue' %}"> {% trans 'all-products' %}</a></li>
@@ -48,7 +42,24 @@
 
   </div>
 </div>
+<script>
+  function compute_money(){
 
+    var formats = document.getElementsByName('product-size');
+    var sel_size; 
+    for(i = 0; i < formats.length; i++) { 
+      if(formats[i].checked) {
+        sel_size = formats[i].id;
+        break;
+      }
+    }
+    document.getElementById('selected_format').innerHTML = String(sel_size);
+    
+  }
+</script>
+  
+  <button onclick="compute_money()">say carlotta</button>
+  
 <div class="content grid grid-product">
 
   <div class="product-gallery">
@@ -58,13 +69,6 @@
   {% endfor %}
   </div>
 
-  <script>
-    function compute_money(){
-      alert("carlotta");
-    }
-    </script>
-    
-    <button onclick="compute_money()">say carlotta</button>
     
   <div class="product-selection">
     <form  action="{% url 'add_chart' product.code %}" method="POST"> 
@@ -91,8 +95,11 @@
 
       <div>
         <div class="row">
-          <div><strong>Codice: EH2H</strong><br>20x20<br>{% trans 'finish' %} A</div>
-          <div><div class="product-figure">€ 45</div><div class="product-note">al m&sup2;</div></div>
+          <div><strong>Codice: EH2H</strong>
+            <br><span id="selected_format">20x20</span>
+            <br>{% trans 'finish' %} <span id="selected_finish">A</span>
+          </div>
+          <div><div class="product-figure"><span>€</span> {{product.price}}</div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
 
@@ -116,6 +123,7 @@
 
       <div>
         <div class="row">
+          {{chi_form.product}}
           <div><strong>Totale</strong></div>
           <div class="product-figure">€ 3960</div>
         </div>
@@ -214,8 +222,6 @@
 </div>
 {% endif %}
 
-
-
 <br/>
 
 
@@ -234,7 +240,7 @@
 
 {{chi_form.size.label_tag}}
 {{chi_form.size}}
-{{chi_form.product}}
+
 {{chi_form.has_frido}}
 {{chi_form.has_frido.label_tag}}
 

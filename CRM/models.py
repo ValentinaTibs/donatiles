@@ -13,6 +13,8 @@ from django.dispatch import receiver
 from taleoftiles.models import Product, Tag
 from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
 
+from taleoftiles.utils  import compute_price
+
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
@@ -167,15 +169,8 @@ class ChartItem(models.Model):
 
     def price(self):
         if self.status == 'ok':
-            return self.tot_quantity() * self.product.price(self.size)
+            return compute_price(self.quantity, self.has_frido, self.product.price(self.size))
 
-    def tot_quantity(self):
-        if self.has_frido:
-            return math.ceil(self.product.sfrido() * self.quantity + self.quantity)
-        else:
-            return self.quantity
-
-   
 class Question(models.Model):
     content         = models.TextField()
     modified_at     = models.DateTimeField()    

@@ -37,12 +37,14 @@ class NewChartItemForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
 
-        product = args[0]['product']
+        product = args[0].get('product')
 
         if product:
             prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
             if not ('size' in args[0]):
                 args[0]['size'] = prod_sizes.first()
+        else:
+            raise forms.ValidationError(_('Wrong Product'), code='prod-error')
 
         super(NewChartItemForm, self).__init__(*args, **kwargs)
         self.fields['size'].required = True

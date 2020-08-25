@@ -152,10 +152,10 @@ def add_sample(request, product_code):
         chart_item = ChartItem.objects.get(chart = chart, product = product, status = 'ok')
     except ObjectDoesNotExist:
         remove_stat = 'ok'
-        #2do this might cause db collapse
+        #2do this might cause db collapse if saved 
         if (chart.all_samples().count() > 4):
             remove_stat = 'le'
-        #2do this might cause db collapse
+        #2do this might cause db collapse if saved
         if (not product.is_samplable):
             remove_stat = 'ns'          
         if remove_stat == 'ok':
