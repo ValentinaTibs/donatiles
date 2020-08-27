@@ -124,17 +124,13 @@ heroku pg:backups:download
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale latest.dump
 ```
 
-# Translations -
-
-python manage.py compilemessages
-
-## Microcopy text
+# Translations - Microcopy text
 
 ```sh
 
 python3 manage.py makemessages -l 'en'
 python3 manage.py compilemessages
-RESTART SERVER
+RESTART SERVER and dynos
 
 heroku run python manage.py compilemessages
 

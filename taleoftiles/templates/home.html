@@ -40,15 +40,18 @@
 <div class="block">
   <div class="content grid grid-homeintro">
     <a href="catalogue.html" class="btn-gridbox">
-    	<h3>{{ layout_elems|get_elem:'strength-pt-1' }}</h3></a>
+    	<h3>{% blocktrans %}Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>{% endblocktrans %}</h3></a>
     <div><h3>{{ layout_elems|get_elem:'strength-pt-2'}}</h3></div>
     <div class="grid-homeintro-main">
-      <h2>Tocca con mano</h2>
+      <h2>{% trans 'sample-touchhand'|capfirst %}</h2>
       <h3>{{ layout_elems|get_elem:'strength-campionario-up' }}</h3>
-      <p>{{ layout_elems|get_elem:'strength-campionario-description' }}</p>
-      <svg class="icon"><use xlink:href="images/svgdefs.svg#icon-sample-help"/></svg>
+      <p>{% trans 'sample-description'|capfirst %}</p>
+      <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-sample-help' %}"/></svg>
     </div>
-    <div><h3>{{ layout_elems|get_elem:'strength-pt-3' }}</h3></div>
+    <div>{% blocktrans %}<h3>Ricevi mattonelle a casa <strong>senza spese di spedizione</strong></h3> 
+      <br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>
+      {% endblocktrans %}
+      </div>
     
 
     <a href="{% url 'blog'%}" class="btn-gridbox"><h3>{{ layout_elems|get_elem:'strength-pt-4' }}</h3></a>
@@ -98,8 +101,6 @@
     <span>{% trans 'read-answer' %}</span>
     </a>
 
-
-	
   </div>
 </div>
 
