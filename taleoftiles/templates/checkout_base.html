@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+  <title>Tale of Tiles | {% block title %}{% endblock %} </title>
+  {% load static %}
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static '/site.webmanifest' %}">
+  <meta name="msapplication-TileColor" content="#3D312F">
+  <meta name="theme-color" content="#3D312F">
+
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link type="text/css" href="{% static 'style/style.css' %}" rel="stylesheet">
+
+  {% block meta-tag %} {% endblock %}
+</head>
+
+<body>
+
+{% load i18n %}
+{% load view_extra %}
+
+
+<header class="checkoutflow">
+
+  <nav class="nav-secondary">
+    <ul>
+      <li>
+        <div class="nav-dropdown">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% with img_name="images/svgdefs.svg#icon-lang-"|add:LANGUAGE_CODE %}
+          <div><svg class="icon-s icon"><use xlink:href="{% static img_name %}"/></svg><span>{{LANGUAGE_CODE}}</span></div>
+          {% endwith %}
+
+          
+          <div class="nav-dropdown-options">
+
+            {% get_available_languages as LANGUAGES %}
+              {% for lang in LANGUAGES %} 
+                {% with img_name="images/svgdefs.svg#icon-lang-"|add:lang.0 %}
+                <div>
+                    <a href="{% change_lang lang.0 %}">
+                    <svg class="icon-s icon"><use xlink:href="{% static img_name %}"/></svg>
+                    <span>{{lang.0}}</span>
+                  </a>
+                </div>
+                {% endwith %}
+            {% endfor %}   
+
+          </div>
+
+        </div>
+      </li>
+      <li>
+        <div class="nav-dropdown nav-dropdown-currency">
+          <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>EUR</span></div>
+          <div class="nav-dropdown-options">
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>EUR</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-gbp' %}"/></svg><span>GBP</span></div>
+            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-sek' %}"/></svg><span>SEK</span></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <nav class="nav-primary">
+
+    <a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a>
+    <ul>
+      <li><a href="checkout-1.html"><span>1. Riepilogo</span></a></li>
+      <li><a href="checkout-2.html"><span>2. Spedizione</span></a></li>
+      <li><a href="checkout-3.html"><span>3. Pagamento</span></a></li>
+    </ul>
+
+    {% include 'include/login.html' %}
+
+
+
+  </nav>
+
+</header>
+{% block content %} {% endblock %}
+<hr/>
+<!--============================
+=            Footer            =
+=============================-->
+
+<footer class="footer">
+  some footer content
+</footer>
+
+<script src="{% static 'js/scripts.js' %}"></script>
+
+</body>
+</html>
+
+
+

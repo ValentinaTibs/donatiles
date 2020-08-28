@@ -31,8 +31,8 @@ def summary(request):
         query = Q(user = request.user) 
     else:
         query = Q(session_id  = request.session.session_key) 
+    charts   = Chart.objects.filter( query )
     
-    charts   = Chart.active.filter( query )
     total = 0
     for chart in charts:
         chart.status = 'i1'
@@ -71,7 +71,7 @@ def shipping(request):
     if request.method == 'POST':
         shipping_form = ShippingForm(request.POST, instance=prev_data)
 
-        #2do mettere qui controlli sicurezza
+        #2do mettere qui controlli sicurezza (quale sicurezza?)
         prv_page = request.POST['prv']
 
         if shipping_form.is_valid():

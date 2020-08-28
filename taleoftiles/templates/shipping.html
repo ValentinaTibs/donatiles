@@ -1,0 +1,97 @@
+{% extends "checkout_base.html" %}
+{% load view_extra %}
+{% load i18n %}
+
+{% block title%} {% trans 'shipping-title' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+<div class="content grid grid-checkout">
+    <form method="post" action="{{request.get_full_path}}">
+    <div>
+  
+      <div class="checkout-title">
+        <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left ' %}"/></svg>Annulla</a>
+        <h1>{% trans 'shipping-title' %}</h1>
+      </div>
+  
+      <div class="grid subgrid-checkout">
+        <div>
+          <p class="note"><span class="hilite">Tutti i campi sono obbligatori</span></p>
+        </div>
+        <div>
+                {% csrf_token %}
+                
+            <div class="formrow">
+              
+              {{ form.fullname.label_tag }}
+              {{ form.fullname }}              
+            </div>
+            <div class="formrow">
+                {{ form.user.label_tag }}
+                {{ form.user }}              
+            </div>
+            <div class="formrow">
+              {{ form.country.label_tag }}
+              {{ form.country }}
+            </div>
+            <div class="formrow formrow-multi">
+              <div class="formitem">
+                {{ form.city.label_tag }}
+                {{ form.city }}                
+              </div>
+              <div class="formitem formitem-short">
+                {{ form.CAP.label_tag }}
+                {{ form.CAP }}
+              </div>
+            </div>
+            <div class="formrow">
+              {{ form.shipping_address.label_tag }}
+              {{ form.shipping_address }}
+            </div>
+            <div class="formrow">
+              {{ form.telephone_num.label_tag }}
+              {{ form.telephone_num }}
+
+            </div>
+
+            
+        </div>
+      </div>
+  
+    </div>
+  
+    
+    </form>
+    <aside>
+        <a href="checkout-3.html" class="btn btn-primary disabled"><span>Concludi l'ordine</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
+        <input type="hidden" name="prv" value="{{ prv_page }}">
+              <input type="submit" value="{% trans 'shipping-insert-order' %}" />
+  
+            {% if not user.is_authenticated %}
+            <div class="asidebox">
+                <h4>{% trans 'already-registered' %}</h4>
+                <p class="note">Risparmia tempo: <a href="" data-overlay="Auth">effettua il login</a> per utilizzare i tuoi dati di spedizione</p>
+            </div>
+            {% endif %}
+          
+      </aside>
+  </div>
+  
+
+<hl>
+
+
+
+
+
+<script>
+    document.querySelector( '.nav-primary > ul > li:nth-child(2)' ).classList.add( 'selected' );
+</script>
+  
+
+{% endblock %}
+

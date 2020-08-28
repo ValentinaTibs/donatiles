@@ -20,8 +20,18 @@ class ShippingForm(forms.ModelForm):
         model = Shipping
         fields = ('fullname','country','city','CAP','shipping_address','telephone_num')
         
+        widgets = { 
+            'fullname'  :forms.TextInput(),
+            'city'      :forms.TextInput(),
+            'CAP'      :forms.TextInput(),
+            'shipping_address'      :forms.TextInput(),  
+            'telephone_num'      :forms.TextInput()
+        }
+
         def __init__(self, *args, **kwargs):
             super(ShippingForm, self).__init__(*args, **kwargs)
+    
+        
 
 class NewChartItemForm(forms.ModelForm):
 

@@ -137,7 +137,7 @@ class Image(models.Model):
 
     name        = models.CharField (max_length = 100 , null = True, blank=True)
     imagefile   = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
-    thumbnail   = models.ImageField(upload_to='thumbs', null=True, editable=False)
+    thumbnail   = models.ImageField( upload_to='thumbs', null=True, editable=False)
     product     = models.ForeignKey     (Product,   blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     element     = models.OneToOneField  (Element,   blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
     icon        = models.OneToOneField  (Icon,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
@@ -159,6 +159,8 @@ class Image(models.Model):
             return mark_safe('<p>No image available</p>')
 
     def thumb_(self):
+        if not self.imagefile:
+            return 'images/products/productthumb.png'
         width = 30
         ratio = 30 / self.imagefile.width
         height = self.imagefile.height * ratio

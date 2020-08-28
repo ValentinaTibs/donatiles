@@ -1,0 +1,210 @@
+{% extends "checkout_base.html" %}
+
+{% load view_extra %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} {% trans 'summary-title' %} {% endblock%}
+
+{% block content %}
+
+{% for chart in charts %}
+
+{% if chart.is_sample %}
+
+<div class="content grid grid-checkout">
+
+	<div>
+  
+	  <div class="checkout-title">	
+		<a href="{{prv_page|urlencode}}" class="btn-link"><svg class="icon-l icon">
+			<use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'checkout-back' %}</a>
+		<h1>Riepilogo del tuo ordine</h1>
+	  </div>
+  
+	  <div class="cartrecap">
+  
+		<div class="cartreacap-header">
+			<h5 > </h5>
+		  <h5 >{% trans 'price' %}</h5>
+		
+		</div>
+
+
+		<div class="cartrecap-item">
+			{% for chart_item in chart.chart_item.all %}
+				<div class="cartrecap-thumb" 
+				style="background-image:url('{{chart_item.product.images.thumb_}}')">
+				{{chart_item.product.name}}
+			</div>
+			{% endfor %}		
+			<div class="cartrecap-main">
+			  <h5></h5>
+			  <h4>{% trans 'summary-sample-title' %}</h4>
+			  <p>{% trans 'summary-sample-subtitle' %}</p>
+			</div>
+			<div class="cartrecap-price">
+			  <span class="product-figure">€ {{chart.total_price}}</span>
+			</div>
+
+		</div>
+		  
+  
+
+		<div class="cartrecap-item cartrecap-total">
+		  <div class="cartrecap-main">
+			<h4>{% trans 'summary-total-title' %}</h4>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ {{chart.total_price}}</span>
+		  </div>
+		</div>
+  
+	  </div>
+  
+	</div>
+  
+	<aside>
+
+	  <a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}" class="btn btn-primary"><span>{% trans 'summary-insert-shipping' %}</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
+	  <p class="note">{% trans 'summary-longtext' %} </p>
+	  <div class="asidebox">
+		<h4>Considera lo sfrido</h4>
+		<p class="note">Ti consigliamo di considerare sempre il <strong>10% in più</strong> rispetto alla quantità di prodotto strettamente necessaria, per gestire bla bla bla…</p>
+	  </div>
+	</aside>
+  
+</div>
+
+
+{% else %} 
+
+
+<div class="content grid grid-checkout">
+
+	<div>
+  
+	  <div class="checkout-title">
+		
+		<a href="{{prv_page|urlencode}}" class="btn-link"><svg class="icon-l icon">
+			<use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'checkout-back' %}</a>
+		<h1>Riepilogo del tuo ordine</h1>
+	  </div>
+  
+	  <div class="cartrecap">
+  
+		<div class="cartreacap-header">
+		  <h5>Quantità</h5>
+		  <h5>Prezzo</h5>
+		</div>
+
+
+			{% for chart_item in chart.chart_item.all %}
+  
+		<div class="cartrecap-item">
+		  <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
+		  <div class="cartrecap-main">
+			<h5>{{chart_item.product.serie}}</h5>
+			<h4>{{chart_item.product.name}}</h4>
+			<p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
+		  </div>
+		  <div class="cartrecap-qty">
+			<p class="note">8 scatole</p>
+			<div class="input-qty">
+			  <input type="number" value="80" min="10" max="1000" step="0.01">
+			  <div class="product-qtybtns">
+				<button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg></button>
+				<span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg></button>
+			  </div>
+			</div>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ 3960</span>
+			<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
+		  </div>
+		</div>
+  
+
+			{% endfor %}
+		
+		<div class="cartrecap-item cartrecap-total">
+		  <div class="cartrecap-main">
+			<h4>{% trans 'summary-total-title' %}</h4>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ {{total}}</span>
+		  </div>
+		</div>
+  
+	  </div>
+  
+	</div>
+  
+	<aside>
+
+	  <a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}" class="btn btn-primary"><span>{% trans 'summary-insert-shipping' %}</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
+	  <p class="note">{% trans 'summary-longtext' %}	</p>
+	  <div class="asidebox">
+		<h4>Considera lo sfrido</h4>
+		<p class="note">Ti consigliamo di considerare sempre il <strong>10% in più</strong> rispetto alla quantità di prodotto strettamente necessaria, per gestire bla bla bla…</p>
+	  </div>
+	</aside>
+  
+</div>
+
+{% endif %} 
+
+{% endfor %} 
+  <script>
+  document.querySelector( '.nav-primary > ul > li:first-child' ).classList.add( 'selected' );
+  </script>
+
+## {{ charts.count }}
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+
+<table>
+	<tr>
+		<td>{% trans 'product' %}</td>
+		<td></td>
+		<td></td>
+		<td></td>
+
+		
+		<td>{% trans 'quantity' %}</td>
+		<td>{% trans 'price' %}</td>
+	</tr>
+	
+	
+{% for chart in charts %}
+
+	
+	{% for chart_item in chart.all_items %}
+	<tr>
+	  	<td>{{chart_item.product}}</td>
+	  	<td>{{chart_item.product.thumb_}}</td>
+	  	<td>{{chart_item.product|serie}}</td>
+	  	<td>{{chart_item.size}}</td>
+	  	
+	  	<td>{{chart_item.tot_quantity}}</td>
+		<td>{{chart_item.price}}</td>
+
+	  	<td>
+	  		<a href="{% url 'del_chart' chart_item.pk False %}">
+	  		{% trans 'delete' %}</a>
+	  	</td>
+	  </tr>
+	{% endfor %}
+{% endfor %}
+	<tr>
+		<td>{% trans 'summary-corrispond-to' %} {% trans 'box' %}</td>
+	</tr>
+</table>
+
+{% endblock %}
+

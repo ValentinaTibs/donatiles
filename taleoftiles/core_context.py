@@ -31,8 +31,7 @@ def user_menu(context):
                 'loginform':LoginForm, 'signupform':RegisterForm,
                 'session' : context.session.session_key
         } 
-        
-   
+    
     charts  = Chart.active.filter   ( query )
     sampler = Chart.samples.filter  ( query ).first()   
     num_ch_i = charts.filter(chart_item__status='ok').aggregate(Count('chart_item'))

@@ -7,6 +7,130 @@
 
 {% block content %}
 
+
+
+<div class="content grid grid-checkout">
+
+	<div>
+  
+	  <div class="checkout-title">
+		<a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-arrow-left"/></svg>Annulla</a>
+		<h1>Riepilogo del tuo ordine</h1>
+	  </div>
+  
+	  <div class="cartrecap">
+  
+		<div class="cartreacap-header">
+		  <h5>Quantità</h5>
+		  <h5>Prezzo</h5>
+		</div>
+  
+		<div class="cartrecap-item">
+		  <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
+		  <div class="cartrecap-main">
+			<h5>Nome serie</h5>
+			<h4>Nome Prodotto</h4>
+			<p>20x20 / Finitura A / grigio chiaro</p>
+		  </div>
+		  <div class="cartrecap-qty">
+			<p class="note">8 scatole</p>
+			<div class="input-qty">
+			  <input type="number" value="80" min="10" max="1000" step="0.01">
+			  <div class="product-qtybtns">
+				<button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+			  </div>
+			</div>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ 3960</span>
+			<button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+		  </div>
+		</div>
+  
+		<div class="cartrecap-item">
+		  <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
+		  <div class="cartrecap-main">
+			<h5>Nome serie</h5>
+			<h4>Nome Prodotto</h4>
+			<p>45x45 / rosso</p>
+		  </div>
+		  <div class="cartrecap-qty">
+			<p class="note">5 scatole</p>
+			<div class="input-qty">
+			  <input type="number" value="50" min="10" max="1000" step="0.01">
+			  <div class="product-qtybtns">
+				<button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+			  </div>
+			</div>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ 2000</span>
+			<button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+		  </div>
+		</div>
+  
+		<div class="cartrecap-item">
+		  <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb-complementary.png')"></div>
+		  <div class="cartrecap-main">
+			<h5>Nome serie</h5>
+			<h4>Nome Battiscopa</h4>
+			<p>grigio chiaro</p>
+		  </div>
+		  <div class="cartrecap-qty">
+			<p class="note"></p>
+			<div class="input-qty">
+			  <input type="number" value="16" min="5" max="1000" step="0.01">
+			  <div class="product-qtybtns">
+				<button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">metri</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+			  </div>
+			</div>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ 432</span>
+			<button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+		  </div>
+		</div>
+  
+		<div class="cartrecap-item">
+		  <div class="cartrecap-main">
+			<h4>Spese di spedizione</h4>
+			<p class="note">Per ogni tuo acquisto su Tale Of Tiles le spese di spedizione in tutta Europa sono sempre incluse</p>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ 0</span>
+		  </div>
+		</div>
+  
+		<div class="cartrecap-item cartrecap-total">
+		  <div class="cartrecap-main">
+			<h4>Totale ordine</h4>
+		  </div>
+		  <div class="cartrecap-price">
+			<span class="product-figure">€ 6392</span>
+		  </div>
+		</div>
+  
+	  </div>
+  
+	</div>
+  
+	<aside>
+	  <a href="checkout-2.html" class="btn btn-primary"><span>Inserisci i dati per la spedizione</span><svg class="icon icon-m"><use xlink:href="images/svgdefs.svg#icon-arrow-right"/></svg></a>
+	  <p class="note">Potrai pagare con bonifico bancario</p>
+	  <div class="asidebox">
+		<h4>Considera lo sfrido</h4>
+		<p class="note">Ti consigliamo di considerare sempre il <strong>10% in più</strong> rispetto alla quantità di prodotto strettamente necessaria, per gestire bla bla bla…</p>
+	  </div>
+	</aside>
+  
+  </div>
+  
+  <script>
+  // DEMO ONLY
+  document.querySelector( '.nav-primary > ul > li:first-child' ).classList.add( 'selected' );
+  </script>
+  
+
 ## {{ charts.count }}
 
 <style>
