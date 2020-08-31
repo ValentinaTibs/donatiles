@@ -108,15 +108,17 @@
     </ul>
     <div class="header-btns">
       <button class="btn samplesbtn samplesbtn-0" data-overlay="Samples">
-        <svg class="icon">
-          <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-0' %}"/></svg>
-          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-1' %}"/></svg>
-          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-2' %}"/></svg>
-          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-3' %}"/></svg>
-          <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-samples-4' %}"/></svg>
+        
+          
+          {% with img_suffix=sampler.all_samples|length|stringformat:"s" %}
+            {% with "images/svgdefs.svg#icon-samples-"|add:img_suffix as img_name%}
+              <svg class="icon"><use xlink:href="{% static img_name %}"/></svg>
+            {% endwith %}
+          {% endwith %}
+
         </button>
       <button class="btn cartbtn" data-overlay="Cart">
-        <span>3</span>
+        <span>{{chart.all_items |length}}</span>
         <svg class="icon icon-empty">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-cart-empty' %}"/></svg>
           <svg class="icon icon-full">
@@ -129,6 +131,7 @@
 {% if not user.is_authenticated %}
   {% include 'include/login.html' %}
 {% endif %}
+
 <div class="overlay" id="overlaySamples">
   
   <div class="overlay-title">
@@ -136,42 +139,48 @@
     <button class="btn"><svg class="icon icon-l">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
-
+  {% if sampler.all_samples|length > 0 %}
   <div class="grid grid-sampleslots">
-  
-  {% for sample in sampler.all_samples %}
-    
-    <div class="sampleslot" style="background-image:url('{{sample.product.thumb}}')">
 
-      <a href="{% url 'product' sample.product.code %}">
-        <div class="sampleslot-name">
-          <h5>{{sample.product.serie}}</h5>
-          <span>{{sample.product.name}}</span>
-        </div>
-      </a>
-      <a href="{% url 'del_chart' sample.pk True %}">
-        <button class="btn" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-      </a>
-    </div>
-
-  {% endfor %}
-
+    {% for sample in sampler.all_samples %}
+      <div class="sampleslot" style="background-image:url('{{sample.product.thumb}}')">
+        <a href="{% url 'product' sample.product.code %}">
+          <div class="sampleslot-name">
+            <h5>{{sample.product.serie}}</h5>
+            <span>{{sample.product.name}}</span>
+          </div>
+        </a>
+        <a href="{% url 'del_chart' sample.pk True %}">
+          <button class="btn" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
+        </a>
+      </div>
+    {% endfor %}
     
   </div>
-
   
-  <a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> <button class="btn btn-primary"><span>{% trans 'receive-sample-home' %}</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button></a> 
+  <a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> 
+    <button class="btn btn-primary"><span>{% trans 'receive-sample-home' %}</span><svg class="icon icon-m">
+      <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button></a> 
+  {% endif %}
 
   {% if not user.is_authenticated %}
     <p class="note"><a href="" data-overlay="Auth">{% trans 'register-login' %}</a> {% trans 'register-login-claim' %}</p>
   {% endif %}
+
+
+
 </div>
-    <div class="overlay" id="overlayCart">
+
+<div class="overlay" id="overlayCart">
 
   <div class="overlay-title">
     <h4>{% trans 'your-chart' %}</h4>
     <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
+
+  {% if chart %}
+
+  {% for chart_item in chart.all_items %}
 
   <div class="cartitem">
     <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
@@ -187,36 +196,8 @@
     </div>
     <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
   </div>
-
-  <div class="cartitem">
-    <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
-    <div class="cartitem-main">
-      <div class="cartitem-name">
-        <span><strong>Nome Prodotto</strong></span>
-        <span>45x45 / rosso</span>
-      </div>
-      <div class="cartitem-amount">
-        <span>50 m&sup2;</span>
-        <span class="cartitem-price">€ 2000</span>
-      </div>
-    </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-  </div>
-
-  <div class="cartitem">
-    <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb-complementary.png')"></a>
-    <div class="cartitem-main">
-      <div class="cartitem-name">
-        <span><strong>Battiscopa</strong></span>
-        <span>grigio chiaro</span>
-      </div>
-      <div class="cartitem-amount">
-        <span>16 m</span>
-        <span class="cartitem-price">€ 432</span>
-      </div>
-    </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-  </div>
+  {% endfor %}
+ 
 
   <div class="cartitem-total">
     <span>Totale</span>
@@ -228,6 +209,8 @@
 
   <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
   <p class="note">Potrai pagare con bonifico bancario</p>
+
+  {% endif %}
 
 </div>
 

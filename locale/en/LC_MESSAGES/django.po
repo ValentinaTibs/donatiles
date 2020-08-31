@@ -1,16 +1,16 @@
-#: CRM/forms.py:47
+#: CRM/forms.py:57
 msgid "Wrong Product"
 msgstr ""
 
-#: CRM/forms.py:60
+#: CRM/forms.py:70
 msgid "Not Enought"
 msgstr ""
 
-#: CRM/forms.py:86
+#: CRM/forms.py:96
 msgid "Invalid email"
 msgstr ""
 
-#: CRM/forms.py:90
+#: CRM/forms.py:100
 msgid "Duplicated email"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgid "product-not-samplable"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:37
-#: taleoftiles/templates/empty_base.html:299
+#: taleoftiles/templates/empty_base.html:245
 #: taleoftiles/templates/vestibula/empty_base.html:37
 msgid "support"
 msgstr ""
@@ -79,60 +79,39 @@ msgid "logout"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:43
-#: taleoftiles/templates/empty_base.html:301
+#: taleoftiles/templates/empty_base.html:247
 msgid "login-register"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:90
-#: taleoftiles/templates/empty_base.html:281
+#: taleoftiles/templates/empty_base.html:227
 #: taleoftiles/templates/vestibula/empty_base.html:90
 msgid "catalogue-menu"
 msgstr "Catalogue"
 
 #: taleoftiles/templates/empty_base.html:107
-#: taleoftiles/templates/empty_base.html:298
+#: taleoftiles/templates/empty_base.html:244
 #: taleoftiles/templates/vestibula/empty_base.html:100
 msgid "blog-menu"
 msgstr "Restoration Ideas"
 
-#: taleoftiles/templates/empty_base.html:134
-msgid "already-registered"
-msgstr ""
-
-#: taleoftiles/templates/empty_base.html:147
-msgid "password-reset"
-msgstr ""
-
-#: taleoftiles/templates/empty_base.html:155
-msgid "wanna-register"
-msgstr ""
-
-#: taleoftiles/templates/empty_base.html:156
-msgid "wanna-register-incentive"
-msgstr ""
-
-#: taleoftiles/templates/empty_base.html:165
-#: taleoftiles/templates/vestibula/empty_base.html:147
-msgid "register"
-msgstr ""
-
-#: taleoftiles/templates/empty_base.html:174
+#: taleoftiles/templates/empty_base.html:138
 msgid "your-sampler"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:201
+#: taleoftiles/templates/empty_base.html:162
 msgid "receive-sample-home"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:203
+#: taleoftiles/templates/empty_base.html:167
 msgid "register-login"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:203
+#: taleoftiles/templates/empty_base.html:167
 msgid "register-login-claim"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:209
+#: taleoftiles/templates/empty_base.html:177
 msgid "your-chart"
 msgstr ""
 
@@ -145,50 +124,54 @@ msgstr ""
 msgid "effect"
 msgstr ""
 
-#: taleoftiles/templates/home.html:43
+#: taleoftiles/templates/home.html:42
 msgid ""
 "Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
 msgstr ""
 "Choose among over 100 selected tiles in <strong> Fine Porcelain</strong>"
 
-#: taleoftiles/templates/home.html:46
+#: taleoftiles/templates/home.html:45
 msgid "sample-touchhand"
 msgstr "View the tiles directly from Home"
 
-#: taleoftiles/templates/home.html:48
+#: taleoftiles/templates/home.html:47
 msgid "sample-description"
-msgstr "Let us tell you a story from our Sample Book. Browsing through the products, you can choose up to 4 to receive for free at your home to evaluate the quality of the Italian product."
+msgstr ""
+"Let us tell you a story from our Sample Book. Browsing through the products, "
+"you can choose up to 4 to receive for free at your home to evaluate the "
+"quality of the Italian product."
 
-#: taleoftiles/templates/home.html:51
-msgid ""
-"<h3>Ricevi mattonelle a casa <strong>senza spese di spedizione</strong></"
-"h3> \n"
-"      <br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
-"      "
+#: taleoftiles/templates/home.html:50
+msgid " Ricevi mattonelle a casa "
 msgstr ""
 "<h3>Receive the tiles at home with <strong>any additional shipping cost</"
 "strong></h3> \n"
 "      <br/><h4><i>Free Shipping for all Europe</i></h4>\n"
 "      "
 
-#: taleoftiles/templates/home.html:73
+#: taleoftiles/templates/home.html:69
 #: taleoftiles/templates/vestibula/home.html:33
 msgid "title-renovate-home"
 msgstr "Ideas for rennovate"
 
-#: taleoftiles/templates/home.html:74
+#: taleoftiles/templates/home.html:70
 #, fuzzy
 #| msgid "title-renovate-home"
 msgid "subtitle-renovate-home"
 msgstr "Ideas for rennovate"
 
-#: taleoftiles/templates/home.html:82
+#: taleoftiles/templates/home.html:78
 #: taleoftiles/templates/vestibula/home.html:42
 msgid "title-faq-home"
 msgstr "Frequent Question"
 
-#: taleoftiles/templates/home.html:87 taleoftiles/templates/home.html:94
-#: taleoftiles/templates/home.html:101
+#: taleoftiles/templates/home.html:82
+msgid "faq-1"
+msgstr ""
+
+#: taleoftiles/templates/home.html:83 taleoftiles/templates/home.html:88
+#: taleoftiles/templates/home.html:93 taleoftiles/templates/home.html:98
+#: taleoftiles/templates/home.html:102 taleoftiles/templates/home.html:106
 #: taleoftiles/templates/vestibula/home.html:47
 #: taleoftiles/templates/vestibula/home.html:53
 #: taleoftiles/templates/vestibula/home.html:59
@@ -196,10 +179,52 @@ msgstr "Frequent Question"
 msgid "read-answer"
 msgstr "read answer"
 
-#: taleoftiles/templates/home.html:110
+#: taleoftiles/templates/home.html:87
+msgid "faq-2"
+msgstr ""
+
+#: taleoftiles/templates/home.html:92
+msgid "faq-3"
+msgstr ""
+
+#: taleoftiles/templates/home.html:97
+msgid "faq-4"
+msgstr ""
+
+#: taleoftiles/templates/home.html:101
+msgid "faq-5"
+msgstr ""
+
+#: taleoftiles/templates/home.html:105
+msgid "faq-6"
+msgstr ""
+
+#: taleoftiles/templates/home.html:116
 #: taleoftiles/templates/vestibula/home.html:72
 msgid "founder-name"
 msgstr "Donatella Mattonella"
+
+#: taleoftiles/templates/include/login.html:10
+#: taleoftiles/templates/shipping.html:76
+msgid "already-registered"
+msgstr ""
+
+#: taleoftiles/templates/include/login.html:23
+msgid "password-reset"
+msgstr ""
+
+#: taleoftiles/templates/include/login.html:31
+msgid "wanna-register"
+msgstr ""
+
+#: taleoftiles/templates/include/login.html:32
+msgid "wanna-register-incentive"
+msgstr ""
+
+#: taleoftiles/templates/include/login.html:41
+#: taleoftiles/templates/vestibula/empty_base.html:147
+msgid "register"
+msgstr ""
 
 #: taleoftiles/templates/post.html:6
 #: taleoftiles/templates/vestibula/post.html:6
@@ -265,6 +290,83 @@ msgstr ""
 msgid "product-same-serie"
 msgstr ""
 
+#: taleoftiles/templates/shipping.html:5 taleoftiles/templates/shipping.html:18
+#: taleoftiles/templates/vestibula/shipping.html:11
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "shipping-title"
+msgstr "Shipping"
+
+#: taleoftiles/templates/shipping.html:72
+#: taleoftiles/templates/vestibula/shipping.html:23
+msgid "shipping-insert-order"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:7
+#: taleoftiles/templates/vestibula/summary.html:6
+msgid "summary-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:21 taleoftiles/templates/summary.html:90
+#: taleoftiles/templates/vestibula/checkout_base.html:56
+msgid "checkout-back"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:29 taleoftiles/templates/summary.html:180
+#: taleoftiles/templates/vestibula/summary.html:153
+msgid "price"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:43
+#: taleoftiles/templates/vestibula/summary.html:194
+msgid "summary-sample-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:44
+#: taleoftiles/templates/vestibula/summary.html:198
+msgid "summary-sample-subtitle"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:56 taleoftiles/templates/summary.html:132
+#: taleoftiles/templates/vestibula/summary.html:215
+msgid "summary-total-title"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:69 taleoftiles/templates/summary.html:145
+#: taleoftiles/templates/vestibula/summary.html:228
+msgid "summary-insert-shipping"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:70 taleoftiles/templates/summary.html:146
+#: taleoftiles/templates/vestibula/summary.html:230
+msgid "summary-longtext"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:173
+#: taleoftiles/templates/vestibula/summary.html:146
+msgid "product"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:179
+#: taleoftiles/templates/vestibula/summary.html:152
+msgid "quantity"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:199
+#: taleoftiles/templates/vestibula/summary.html:171
+msgid "delete"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:205
+#: taleoftiles/templates/vestibula/summary.html:189
+msgid "summary-corrispond-to"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:205
+#: taleoftiles/templates/vestibula/summary.html:189
+msgid "box"
+msgstr ""
+
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 #: taleoftiles/templates/vestibula/support.html:5
 #: taleoftiles/templates/vestibula/support.html:12
@@ -289,7 +391,7 @@ msgstr ""
 msgid "samples"
 msgstr ""
 
-#: taleoftiles/templates/support.html:35
+#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:80
 msgid "payments"
 msgstr ""
 
@@ -305,10 +407,6 @@ msgstr ""
 #: taleoftiles/templates/support.html:39
 #: taleoftiles/templates/vestibula/support.html:29
 msgid "search"
-msgstr ""
-
-#: taleoftiles/templates/support.html:80
-msgid "Payments"
 msgstr ""
 
 #: taleoftiles/templates/vestibula/account.html:6
@@ -335,10 +433,6 @@ msgstr ""
 
 #: taleoftiles/templates/vestibula/checkout_base.html:53
 msgid "payment-menu"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/checkout_base.html:56
-msgid "checkout-back"
 msgstr ""
 
 #: taleoftiles/templates/vestibula/empty_base.html:33
@@ -413,76 +507,18 @@ msgstr "BPPPPPPPP"
 msgid "summary-back-home"
 msgstr "IBAN"
 
-#: taleoftiles/templates/vestibula/shipping.html:11
-#, fuzzy
-#| msgid "summary-shipping-title"
-msgid "shipping-title"
-msgstr "Shipping"
-
-#: taleoftiles/templates/vestibula/shipping.html:23
-msgid "shipping-insert-order"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:6
-msgid "summary-title"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:18
+#: taleoftiles/templates/vestibula/summary.html:142
 msgid "summary-page-title"
 msgstr ""
 
-#: taleoftiles/templates/vestibula/summary.html:22
-msgid "product"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:28
-msgid "quantity"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:29
-msgid "price"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:47
-msgid "delete"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:65
-msgid "summary-corrispond-to"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:65
-msgid "box"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:70
-msgid "summary-sample-title"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:74
-msgid "summary-sample-subtitle"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:79
+#: taleoftiles/templates/vestibula/summary.html:203
 msgid "summary-shipping-title"
 msgstr "Shipping"
 
-#: taleoftiles/templates/vestibula/summary.html:87
+#: taleoftiles/templates/vestibula/summary.html:211
 msgid "summary-shipping-subtitle"
 msgstr ""
 "For all your purhcases on TaleofTiles, shipping allover Europe is free!"
-
-#: taleoftiles/templates/vestibula/summary.html:91
-msgid "summary-total-title"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:104
-msgid "summary-insert-shipping"
-msgstr ""
-
-#: taleoftiles/templates/vestibula/summary.html:106
-msgid "summary-longtext"
-msgstr ""
 
 #: taleoftiles/templates/vestibula/support.html:20
 msgid "write-us-orders"
