@@ -32,7 +32,7 @@
 
 
 		<div class="cartrecap-item">
-			{% for chart_item in chart.chart_item.all %}
+			{% for chart_item in chart.all_samples %}
 				<div class="cartrecap-thumb" 
 				style="background-image:url('{{chart_item.product.images.thumb_}}')">
 				{{chart_item.product.name}}
@@ -99,7 +99,7 @@
 		</div>
 
 
-			{% for chart_item in chart.chart_item.all %}
+		{% for chart_item in chart.chart_item.all %}
   
 		<div class="cartrecap-item">
 		  <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
