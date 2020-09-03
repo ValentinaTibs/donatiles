@@ -177,10 +177,11 @@ class Image(models.Model):
         if(self.name == None):
             self.name = self.imagefile.name
 
+        super().save(*args, **kwargs)  # Call the "real" save() method.
         if not self.make_thumbnail():
             raise Exception('Could not create thumbnail - is the file type valid?')
 
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+       
 
     def make_thumbnail(self):
 

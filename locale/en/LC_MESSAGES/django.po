@@ -30,6 +30,72 @@ msgstr ""
 msgid "Deutch"
 msgstr ""
 
+#: taleoftiles/templates/404.html:11 taleoftiles/templates/product.html:11
+msgid "all-products"
+msgstr ""
+
+#: taleoftiles/templates/404.html:24 taleoftiles/templates/product.html:24
+msgid "full-sampler"
+msgstr ""
+
+#: taleoftiles/templates/404.html:27 taleoftiles/templates/product.html:27
+#, fuzzy
+#| msgid "read-answer"
+msgid "already-in-sampler"
+msgstr "read answer"
+
+#: taleoftiles/templates/404.html:34 taleoftiles/templates/product.html:34
+#: taleoftiles/templates/vestibula/product.html:83
+msgid "add-sampler-button"
+msgstr ""
+
+#: taleoftiles/templates/404.html:37 taleoftiles/templates/product.html:37
+#: taleoftiles/templates/vestibula/product.html:87
+msgid "add-sampler-text"
+msgstr ""
+
+#: taleoftiles/templates/404.html:40 taleoftiles/templates/product.html:40
+msgid "not-samplable"
+msgstr ""
+
+#: taleoftiles/templates/404.html:78 taleoftiles/templates/product.html:92
+msgid "formats"
+msgstr ""
+
+#: taleoftiles/templates/404.html:86 taleoftiles/templates/404.html:100
+#: taleoftiles/templates/product.html:100
+#: taleoftiles/templates/product.html:114
+msgid "finish"
+msgstr ""
+
+#: taleoftiles/templates/404.html:109 taleoftiles/templates/product.html:123
+msgid "min"
+msgstr ""
+
+#: taleoftiles/templates/404.html:141 taleoftiles/templates/product.html:156
+#: taleoftiles/templates/product.html:266
+#: taleoftiles/templates/vestibula/product.html:119
+msgid "add-chart-button"
+msgstr ""
+
+#: taleoftiles/templates/404.html:172 taleoftiles/templates/product.html:187
+msgid "download-tech-spech"
+msgstr "Technical Specifications [PDF]"
+
+#: taleoftiles/templates/404.html:194 taleoftiles/templates/product.html:209
+msgid "settings"
+msgstr ""
+
+#: taleoftiles/templates/404.html:206 taleoftiles/templates/product.html:221
+#: taleoftiles/templates/vestibula/product.html:58
+msgid "product-support"
+msgstr ""
+
+#: taleoftiles/templates/404.html:221 taleoftiles/templates/product.html:236
+#: taleoftiles/templates/vestibula/product.html:64
+msgid "product-same-serie"
+msgstr ""
+
 #: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:16
 #: taleoftiles/templates/vestibula/blog.html:6
 #: taleoftiles/templates/vestibula/blog.html:12
@@ -232,67 +298,8 @@ msgstr ""
 msgid "the_blog"
 msgstr ""
 
-#: taleoftiles/templates/product.html:11
-msgid "all-products"
-msgstr ""
-
-#: taleoftiles/templates/product.html:24
-msgid "full-sampler"
-msgstr ""
-
-#: taleoftiles/templates/product.html:27
-#, fuzzy
-#| msgid "read-answer"
-msgid "already-in-sampler"
-msgstr "read answer"
-
-#: taleoftiles/templates/product.html:34
-#: taleoftiles/templates/vestibula/product.html:83
-msgid "add-sampler-button"
-msgstr ""
-
-#: taleoftiles/templates/product.html:37
-#: taleoftiles/templates/vestibula/product.html:87
-msgid "add-sampler-text"
-msgstr ""
-
-#: taleoftiles/templates/product.html:40
-msgid "not-samplable"
-msgstr ""
-
-#: taleoftiles/templates/product.html:78
-msgid "formats"
-msgstr ""
-
-#: taleoftiles/templates/product.html:86 taleoftiles/templates/product.html:100
-msgid "finish"
-msgstr ""
-
-#: taleoftiles/templates/product.html:109
-msgid "min"
-msgstr ""
-
-#: taleoftiles/templates/product.html:141
-#: taleoftiles/templates/vestibula/product.html:119
-msgid "add-chart-button"
-msgstr ""
-
-#: taleoftiles/templates/product.html:173
-msgid "download-tech-spech"
-msgstr "Technical Specifications [PDF]"
-
-#: taleoftiles/templates/product.html:196
-msgid "settings"
-msgstr ""
-
-#: taleoftiles/templates/product.html:208
-#: taleoftiles/templates/vestibula/product.html:58
-msgid "product-support"
-msgstr ""
-
-#: taleoftiles/templates/product.html:221
-#: taleoftiles/templates/vestibula/product.html:64
-msgid "product-same-serie"
+#: taleoftiles/templates/product.html:155
+msgid "calc-price"
 msgstr ""
 
 #: taleoftiles/templates/shipping.html:5 taleoftiles/templates/shipping.html:18
@@ -378,8 +385,20 @@ msgstr ""
 msgid "support-page-name"
 msgstr ""
 
+#: taleoftiles/templates/support.html:15
+msgid "support-text-1"
+msgstr ""
+
 #: taleoftiles/templates/support.html:16 taleoftiles/templates/support.html:20
 msgid "write-us"
+msgstr ""
+
+#: taleoftiles/templates/support.html:19
+msgid "support-text-2"
+msgstr ""
+
+#: taleoftiles/templates/support.html:23
+msgid "support-text-3"
 msgstr ""
 
 #: taleoftiles/templates/support.html:24

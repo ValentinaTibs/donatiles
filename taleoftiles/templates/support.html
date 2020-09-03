@@ -12,15 +12,15 @@
   <div class="content grid grid4 grid-supportcontacts">
     <h1>{% trans 'support-page-name' %} </h1>
     <a href="mailto:info@taleoftiles.com" class="btn-gridbox">
-      <h4>{{ layout_elems|get_elem:'support-text-1' }}</h4>
+      <h4>{% trans 'support-text-1' %} </h4>
       <p>{% trans 'write-us' %} <strong>info@taleoftiles.com</strong></p>
     </a>
     <a href="mailto:orders@taleoftiles.com" class="btn-gridbox">
-      <h4>{{ layout_elems|get_elem:'support-text-2' }}</h4>
+      <h4>{% trans 'support-text-2' %} </h4>
       <p>{% trans 'write-us' %} <strong>orders@taleoftiles.com</strong></p>
     </a>
     <a href="tel:+3939212345678" class="btn-gridbox">
-      <h4>{{ layout_elems|get_elem:'support-text-3' }}</h4>
+      <h4>{% trans 'support-text-3' %} </h4>
       <p>{% trans 'contact-us' %}<strong>(+39) 392 12345678</strong></p>
     </a>
   </div>
@@ -44,10 +44,8 @@
     <h2><a name="prodotti"></a>{% trans 'products'|title  %}</h2>
     <div>
       <div class="faqquestions-question">
-        <button class="btn btn-tree"><h4>Come funziona la spedizione?</h4><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
-        <div class="openable">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum sint minus, deleniti vitae distinctio quia quasi nulla laborum neque ipsum, totam et, quos ea aliquam.</p>
-        </div>
+        <button class="btn btn-tree"><h4>{% trans 'faq-title-1'|title  %}</h4><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+        <div class="openable"><p>{% trans 'faq-body-1'|title  %}</p></div>
       </div>
       <div class="faqquestions-question">
         <button class="btn btn-tree"><h4>Come funziona la spedizione?</h4><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>

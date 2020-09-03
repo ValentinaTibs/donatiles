@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-01 16:54+0000\n"
+"POT-Creation-Date: 2020-09-03 12:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,72 @@ msgstr "Svedese"
 #: gettingstarted/settings.py:122
 msgid "Deutch"
 msgstr "Tedesco"
+
+#: taleoftiles/templates/404.html:11 taleoftiles/templates/product.html:11
+msgid "all-products"
+msgstr ""
+
+#: taleoftiles/templates/404.html:24 taleoftiles/templates/product.html:24
+msgid "full-sampler"
+msgstr ""
+
+#: taleoftiles/templates/404.html:27 taleoftiles/templates/product.html:27
+#, fuzzy
+#| msgid "read-answer"
+msgid "already-in-sampler"
+msgstr "leggi risposta"
+
+#: taleoftiles/templates/404.html:34 taleoftiles/templates/product.html:34
+#: taleoftiles/templates/vestibula/product.html:83
+msgid "add-sampler-button"
+msgstr ""
+
+#: taleoftiles/templates/404.html:37 taleoftiles/templates/product.html:37
+#: taleoftiles/templates/vestibula/product.html:87
+msgid "add-sampler-text"
+msgstr ""
+
+#: taleoftiles/templates/404.html:40 taleoftiles/templates/product.html:40
+msgid "not-samplable"
+msgstr ""
+
+#: taleoftiles/templates/404.html:78 taleoftiles/templates/product.html:92
+msgid "formats"
+msgstr ""
+
+#: taleoftiles/templates/404.html:86 taleoftiles/templates/404.html:100
+#: taleoftiles/templates/product.html:100
+#: taleoftiles/templates/product.html:114
+msgid "finish"
+msgstr ""
+
+#: taleoftiles/templates/404.html:109 taleoftiles/templates/product.html:123
+msgid "min"
+msgstr ""
+
+#: taleoftiles/templates/404.html:141 taleoftiles/templates/product.html:156
+#: taleoftiles/templates/product.html:266
+#: taleoftiles/templates/vestibula/product.html:119
+msgid "add-chart-button"
+msgstr ""
+
+#: taleoftiles/templates/404.html:172 taleoftiles/templates/product.html:187
+msgid "download-tech-spech"
+msgstr "Scheda tecnica [PDF]"
+
+#: taleoftiles/templates/404.html:194 taleoftiles/templates/product.html:209
+msgid "settings"
+msgstr ""
+
+#: taleoftiles/templates/404.html:206 taleoftiles/templates/product.html:221
+#: taleoftiles/templates/vestibula/product.html:58
+msgid "product-support"
+msgstr ""
+
+#: taleoftiles/templates/404.html:221 taleoftiles/templates/product.html:236
+#: taleoftiles/templates/vestibula/product.html:64
+msgid "product-same-serie"
+msgstr ""
 
 #: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:16
 #: taleoftiles/templates/vestibula/blog.html:6
@@ -186,7 +252,7 @@ msgstr "Domande frequenti"
 
 #: taleoftiles/templates/home.html:82
 msgid "faq-1"
-msgstr ""
+msgstr "Come posso restituire il prodotto, se cambio idea?"
 
 #: taleoftiles/templates/home.html:83 taleoftiles/templates/home.html:88
 #: taleoftiles/templates/home.html:93 taleoftiles/templates/home.html:98
@@ -200,23 +266,25 @@ msgstr "leggi risposta"
 
 #: taleoftiles/templates/home.html:87
 msgid "faq-2"
-msgstr ""
+msgstr "Quali sono i tempi di consegna?"
 
 #: taleoftiles/templates/home.html:92
 msgid "faq-3"
-msgstr ""
+msgstr "Come avverrà la consegna?"
 
 #: taleoftiles/templates/home.html:97
 msgid "faq-4"
-msgstr ""
+msgstr "Posso vedere le mattonelle prima di acquistarle?"
 
 #: taleoftiles/templates/home.html:101
 msgid "faq-5"
-msgstr ""
+msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
 
 #: taleoftiles/templates/home.html:105
 msgid "faq-6"
 msgstr ""
+"Devo avere delle accortezze particolari nel calcolare le misure o scegliere "
+"le mattonelle?"
 
 #: taleoftiles/templates/home.html:116
 #: taleoftiles/templates/vestibula/home.html:72
@@ -250,67 +318,8 @@ msgstr ""
 msgid "the_blog"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/product.html:11
-msgid "all-products"
-msgstr ""
-
-#: taleoftiles/templates/product.html:24
-msgid "full-sampler"
-msgstr ""
-
-#: taleoftiles/templates/product.html:27
-#, fuzzy
-#| msgid "read-answer"
-msgid "already-in-sampler"
-msgstr "leggi risposta"
-
-#: taleoftiles/templates/product.html:34
-#: taleoftiles/templates/vestibula/product.html:83
-msgid "add-sampler-button"
-msgstr ""
-
-#: taleoftiles/templates/product.html:37
-#: taleoftiles/templates/vestibula/product.html:87
-msgid "add-sampler-text"
-msgstr ""
-
-#: taleoftiles/templates/product.html:40
-msgid "not-samplable"
-msgstr ""
-
-#: taleoftiles/templates/product.html:78
-msgid "formats"
-msgstr ""
-
-#: taleoftiles/templates/product.html:86 taleoftiles/templates/product.html:100
-msgid "finish"
-msgstr ""
-
-#: taleoftiles/templates/product.html:109
-msgid "min"
-msgstr ""
-
-#: taleoftiles/templates/product.html:141
-#: taleoftiles/templates/vestibula/product.html:119
-msgid "add-chart-button"
-msgstr ""
-
-#: taleoftiles/templates/product.html:173
-msgid "download-tech-spech"
-msgstr "Scheda tecnica [PDF]"
-
-#: taleoftiles/templates/product.html:196
-msgid "settings"
-msgstr ""
-
-#: taleoftiles/templates/product.html:208
-#: taleoftiles/templates/vestibula/product.html:58
-msgid "product-support"
-msgstr ""
-
-#: taleoftiles/templates/product.html:221
-#: taleoftiles/templates/vestibula/product.html:64
-msgid "product-same-serie"
+#: taleoftiles/templates/product.html:155
+msgid "calc-price"
 msgstr ""
 
 #: taleoftiles/templates/shipping.html:5 taleoftiles/templates/shipping.html:18
@@ -398,14 +407,26 @@ msgstr ""
 msgid "write-us"
 msgstr ""
 
+#: taleoftiles/templates/support.html:15
+msgid "support-text-1"
+msgstr "Hai domande sui nostri prodotti, su di noi o sulle condizioni di vendita?"
+
+#: taleoftiles/templates/support.html:19
+msgid "support-text-2"
+msgstr "Hai fatto un ordine ed hai domande sulla spedizione o sulla merce ricevuta?"
+
+#: taleoftiles/templates/support.html:23
+msgid "support-text-3"
+msgstr "vuoi un consiglio su un prodotto?"
+
 #: taleoftiles/templates/support.html:24
 msgid "contact-us"
-msgstr ""
+msgstr "contattaci"
 
 #: taleoftiles/templates/support.html:31
 #: taleoftiles/templates/vestibula/support.html:14
 msgid "frequent-question"
-msgstr ""
+msgstr "Domande frequenti"
 
 #: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:65
 #: taleoftiles/templates/vestibula/support.html:42
@@ -546,19 +567,10 @@ msgstr ""
 
 #: taleoftiles/templates/vestibula/support.html:52
 msgid "payment"
-msgstr ""
+msgstr "Pagamenti"
 
 #: taleoftiles/templates/vestibula/support.html:62
 msgid "shipping"
-msgstr ""
+msgstr "Spedizioni"
 
-#~ msgid ""
-#~ "<h3>Ricevi mattonelle a casa <strong>senza spese di spedizione</strong></"
-#~ "h3> \n"
-#~ "      <br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
-#~ "      "
-#~ msgstr ""
-#~ "<h3>Ricevi mattonelle a casa <strong>senza spese di spedizione</strong></"
-#~ "h3> \n"
-#~ "      <br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
-#~ "      "
+
