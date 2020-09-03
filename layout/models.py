@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from taleoftiles.models import Product, Tag, TechnicalSpec
 from blog.models import Post
+from PIL import Image 
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -178,10 +179,10 @@ class Image(models.Model):
             self.name = self.imagefile.name
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
+        
         if not self.make_thumbnail():
-            raise Exception('Could not create thumbnail - is the file type valid?')
-
-       
+            return
+            #raise Exception('Could not create thumbnail - is the file type valid?')
 
     def make_thumbnail(self):
 
