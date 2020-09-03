@@ -110,7 +110,6 @@ class MailTemplate(models.Model):
         # message.substitution = Substitution('content', self.content, p=0)
         # message.substitution = Substitution('password', pwd, p=0)
 
-
     def send_first_password(self,email_rec,pwd):
         da_mail = MailTemplate.objects.filter(slug='first-password').first()
         if da_mail:
@@ -180,38 +179,38 @@ class Image(models.Model):
 
         super().save(*args, **kwargs)  # Call the "real" save() method.
         
-        if not self.make_thumbnail():
-            return
-            #raise Exception('Could not create thumbnail - is the file type valid?')
+        # if not self.make_thumbnail():
+        #     return
+        #     #raise Exception('Could not create thumbnail - is the file type valid?')
 
-    def make_thumbnail(self):
+    # def make_thumbnail(self):
 
-        image = Image.open(self.imagefile)
-        image.thumbnail(THUMB_SIZE, Image.ANTIALIAS)
+    #     image = Image.open(self.imagefile)
+    #     image.thumbnail(THUMB_SIZE, Image.ANTIALIAS)
 
-        thumb_name, thumb_extension = os.path.splitext(self.photo.name)
-        thumb_extension = thumb_extension.lower()
+    #     thumb_name, thumb_extension = os.path.splitext(self.photo.name)
+    #     thumb_extension = thumb_extension.lower()
 
-        thumb_filename = thumb_name + '_thumb' + thumb_extension
+    #     thumb_filename = thumb_name + '_thumb' + thumb_extension
 
-        if thumb_extension in ['.jpg', '.jpeg']:
-            FTYPE = 'JPEG'
-        elif thumb_extension == '.gif':
-            FTYPE = 'GIF'
-        elif thumb_extension == '.png':
-            FTYPE = 'PNG'
-        else:
-            return False    # Unrecognized file type
+    #     if thumb_extension in ['.jpg', '.jpeg']:
+    #         FTYPE = 'JPEG'
+    #     elif thumb_extension == '.gif':
+    #         FTYPE = 'GIF'
+    #     elif thumb_extension == '.png':
+    #         FTYPE = 'PNG'
+    #     else:
+    #         return False    # Unrecognized file type
 
-        # Save thumbnail to in-memory file as StringIO
-        temp_thumb = BytesIO()
-        image.save(temp_thumb, FTYPE)
-        temp_thumb.seek(0)
+    #     # Save thumbnail to in-memory file as StringIO
+    #     temp_thumb = BytesIO()
+    #     image.save(temp_thumb, FTYPE)
+    #     temp_thumb.seek(0)
 
-        # set save=False, otherwise it will run in an infinite loop
-        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
-        temp_thumb.close()
+    #     # set save=False, otherwise it will run in an infinite loop
+    #     self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+    #     temp_thumb.close()
 
-        return True
+    #     return True
 
 
