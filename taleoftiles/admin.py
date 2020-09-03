@@ -126,6 +126,9 @@ class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     actions = [duplicate_product]
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
+
+    search_fields = ('name', )
+    
     list_display = ('name_',
                     'wait_time',
                     'min_ammount',
