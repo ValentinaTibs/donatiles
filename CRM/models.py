@@ -13,7 +13,7 @@ from django.dispatch import receiver
 from taleoftiles.models import Product, Tag
 from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
 
-from taleoftiles.utils  import compute_price
+from taleoftiles.utils  import compute_single_price, compute_sm_price
 
 
 #### ------- Move this to SIgnals.py
@@ -169,7 +169,10 @@ class ChartItem(models.Model):
 
     def price(self):
         if self.status == 'ok':
-            return compute_price(self.quantity, self.has_frido, self.product.price(self.size))
+            if self.product.single_sell:
+                return compute_single_price(self.quantity, self.has_frido, self.product.price(self.size))
+            else:
+                return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box())
 
 class Question(models.Model):
     content         = models.TextField()

@@ -130,7 +130,8 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale la
 
 python3 manage.py makemessages -l 'en'
 python3 manage.py compilemessages
-RESTART SERVER and dynos
+heroku restart
+
 
 heroku run python manage.py compilemessages
 

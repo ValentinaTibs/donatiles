@@ -7,6 +7,8 @@ from django.db import models
 from django.db.models import Q
 from django.db.models import Count
 
+from taleoftiles.utils  import min_price
+
 import datetime as dt
 
 
@@ -138,8 +140,8 @@ class Product(models.Model):
             if image.is_cover:
                 return image.thumb_()
     
-    def has_single_sell(self):
-        return true
+    def single_sell(self):
+        return false
 
     def serie(self,):
         try:
@@ -175,6 +177,36 @@ class Product(models.Model):
         except ObjectDoesNotExist:
             return 0
         return price.euros
+
+    def m2_box(self,size = None):
+        if not size:
+            size = self.formats().last()
+        try: 
+            price = self.prices.get(size = size)
+        except ObjectDoesNotExist:
+            return 0
+        return price.m2_box
+    
+    def weight_box(self,size = None):
+        if not size:
+            size = self.formats().last()
+        try: 
+            price = self.prices.get(size = size)
+        except ObjectDoesNotExist:
+            return 0
+        return price.weight_box
+    
+    def compute_price(self, size = None):
+        if self.single_sell:
+            return compute_single_price(self.quantity, self.has_frido, self.product.price(self.size))
+        else:
+            return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box())
+    
+    def min_price(self):
+        return round(min_price(self.price(), self.m2_box(), self.weight_box()),2)
+
+    def max_price(self):
+        return round(max_price(self.price(), self.m2_box(), self.weight_box()),2)    
 
     
 class Price(models.Model):

@@ -54,28 +54,11 @@
       }
     }
     document.getElementById('selected_format').innerHTML = String(sel_size);
-    var sm = document.getElementById('id_quantity').value;
-    var min_ammount = document.getElementById('min_ammount').value;
-    if (sm < min_ammount){
-      return;
-    }
-      
-
-    var sm_price = document.getElementById('sm_price_catch').innerHTML ;
-    var sfrido = document.getElementById("includeOffCut").checked;
-
-    if(sfrido)
-        document.getElementById('price_catch').innerHTML = Math.round((sm + sm * 0.1) * sm_price );
-    else
-        document.getElementById('price_catch').innerHTML = Math.round(sm  * sm_price );
-
-    document.getElementById('sm_catch').innerHTML = sm;
-
-    document.getElementById('sm_notification').innerHTML = sm;
-    document.getElementById('product_name_notification').innerHTML = sm;
+    
   }
 </script>
   
+  <button onclick="compute_money()">say carlotta</button>
   
 <div class="content grid grid-product">
 
@@ -95,7 +78,7 @@
       <h5>{% trans 'formats' %}</h5>
 
       {% for format in product.formats.all %}  
-        <input type="radio" name="product-size" id="{{ format.slug }}" checked onclick="compute_money()">
+        <input type="radio" name="product-size" id="{{ format.slug }}" checked>
         <label for="{{ format.slug }}">{{ format.name }}</label>
       {% endfor %}
       
@@ -116,14 +99,14 @@
             <br><span id="selected_format">20x20</span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
-          <div><div class="product-figure"><span> €</span> <b id="sm_price_catch">{{product.min_price}}</b></div><div class="product-note">al m&sup2;</div></div>
+          <div><div class="product-figure"><span>€</span> {{product.price}}</div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
 
       <div>
         <div class="row">
           <div>
-            <strong>Superficie da rivestire</strong><br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;
+            <strong>Superficie da rivestire</strong><br>{% trans 'min' %}: {{product.min_ammount}} m&sup2;
           </div>
           <div class="input-qty">
           
@@ -142,11 +125,11 @@
         <div class="row">
           {{chi_form.product}}
           <div><strong>Totale</strong></div>
-          <div class="product-figure">€ <strong id="price_catch">3960</strong></div>
+          <div class="product-figure">€ 3960</div>
         </div>
         <div class="row">
           <div class="checkbox">
-            <input type="checkbox" id="includeOffCut" checked onclick="compute_money()">
+            <input type="checkbox" id="includeOffCut" checked>
             <label for="includeOffCut">Includi 10% di sfrido</label>
           </div>
           <div>
@@ -155,8 +138,7 @@
         </div>
       </div>
 
-      <div class="btn btn-primary" onclick="compute_money()" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></div>
-      <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></button>
+      <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong>88 m&sup2;</strong></span></button>
 
     </div>  <!-- product-addtocartbox -->
 
@@ -277,14 +259,6 @@
 <div>
 
 </div>  
-
-<script>
-  window.onload = function() {
-  compute_money();
-};
-  
-</script>
-
 
 {% endblock %}
 

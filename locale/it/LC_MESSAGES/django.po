@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-31 13:44+0000\n"
+"POT-Creation-Date: 2020-09-01 16:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,9 +57,10 @@ msgid "blog-page-name"
 msgstr ""
 
 #: taleoftiles/templates/catalogue.html:5
-#: taleoftiles/templates/vestibula/catalogue.html:5
-msgid "catalgoue-page-name"
-msgstr ""
+#, fuzzy
+#| msgid "catalogue-menu"
+msgid "catalogue-page-name"
+msgstr "Catalogo"
 
 #: taleoftiles/templates/catalogue.html:133
 #: taleoftiles/templates/vestibula/catalogue.html:104
@@ -294,16 +295,20 @@ msgstr ""
 msgid "add-chart-button"
 msgstr ""
 
-#: taleoftiles/templates/product.html:188
+#: taleoftiles/templates/product.html:173
+msgid "download-tech-spech"
+msgstr "Scheda tecnica [PDF]"
+
+#: taleoftiles/templates/product.html:196
 msgid "settings"
 msgstr ""
 
-#: taleoftiles/templates/product.html:200
+#: taleoftiles/templates/product.html:208
 #: taleoftiles/templates/vestibula/product.html:58
 msgid "product-support"
 msgstr ""
 
-#: taleoftiles/templates/product.html:213
+#: taleoftiles/templates/product.html:221
 #: taleoftiles/templates/vestibula/product.html:64
 msgid "product-same-serie"
 msgstr ""
@@ -427,6 +432,10 @@ msgstr ""
 
 #: taleoftiles/templates/vestibula/account.html:6
 msgid "account-page-name"
+msgstr ""
+
+#: taleoftiles/templates/vestibula/catalogue.html:5
+msgid "catalgoue-page-name"
 msgstr ""
 
 #: taleoftiles/templates/vestibula/checkout_base.html:41

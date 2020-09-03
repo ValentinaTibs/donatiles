@@ -37,9 +37,10 @@ msgid "blog-page-name"
 msgstr ""
 
 #: taleoftiles/templates/catalogue.html:5
-#: taleoftiles/templates/vestibula/catalogue.html:5
-msgid "catalgoue-page-name"
-msgstr ""
+#, fuzzy
+#| msgid "catalogue-menu"
+msgid "catalogue-page-name"
+msgstr "Catalogue"
 
 #: taleoftiles/templates/catalogue.html:133
 #: taleoftiles/templates/vestibula/catalogue.html:104
@@ -276,16 +277,20 @@ msgstr ""
 msgid "add-chart-button"
 msgstr ""
 
-#: taleoftiles/templates/product.html:188
+#: taleoftiles/templates/product.html:173
+msgid "download-tech-spech"
+msgstr "Technical Specifications [PDF]"
+
+#: taleoftiles/templates/product.html:196
 msgid "settings"
 msgstr ""
 
-#: taleoftiles/templates/product.html:200
+#: taleoftiles/templates/product.html:208
 #: taleoftiles/templates/vestibula/product.html:58
 msgid "product-support"
 msgstr ""
 
-#: taleoftiles/templates/product.html:213
+#: taleoftiles/templates/product.html:221
 #: taleoftiles/templates/vestibula/product.html:64
 msgid "product-same-serie"
 msgstr ""
@@ -411,6 +416,10 @@ msgstr ""
 
 #: taleoftiles/templates/vestibula/account.html:6
 msgid "account-page-name"
+msgstr ""
+
+#: taleoftiles/templates/vestibula/catalogue.html:5
+msgid "catalgoue-page-name"
 msgstr ""
 
 #: taleoftiles/templates/vestibula/checkout_base.html:41
