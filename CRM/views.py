@@ -184,6 +184,6 @@ def add_chart(request, product_code):
             chart_item = chi_form.save(commit=False)
             chart_item.chart = chart
             chart_item.save()
-
+    return redirect(request.META.get('HTTP_REFERER'))
     return redirect('product', product_code = product_code)
 

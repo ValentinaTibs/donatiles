@@ -59,15 +59,14 @@
     if (sm < min_ammount){
       return;
     }
-      
-
+    
     var sm_price = document.getElementById('sm_price_catch').innerHTML ;
     var sfrido = document.getElementById("includeOffCut").checked;
     
     if(sfrido)
-        document.getElementById('price_catch').innerHTML = ((Number(sm) + Number(sm * 0.1)) * sm_price );
+        document.getElementById('price_catch').innerHTML = Math.round((Number(sm) + Number(sm * 0.1)) * sm_price );
     else
-        document.getElementById('price_catch').innerHTML = (sm  * sm_price );
+        document.getElementById('price_catch').innerHTML = Math.round(sm  * sm_price );
 
     document.getElementById('sm_catch').innerHTML = sm;
 
@@ -88,8 +87,6 @@
 
     
   <div class="product-selection">
-    <form  action="{% url 'add_chart' product.code %}" method="POST"> 
-      {% csrf_token %}
     <div class="product-options">
 
       <h5>{% trans 'formats' %}</h5>
@@ -166,7 +163,7 @@
       <p class="note">Hai qualche dubbio?<br>
         <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>
-  </form>
+    
 
   </div>
 
@@ -251,17 +248,29 @@
 <br/>
 
 
+
+<form  action="{% url 'add_chart' product.code %}" method="POST"> 
+
+	{% csrf_token %}
+
+	{{chi_form.size.label_tag}}
+	{{chi_form.size}}
+	{{chi_form.product}}
+	{{chi_form.has_frido}}
+	{{chi_form.has_frido.label_tag}}
+	
+	{{chi_form.quantity.label_tag}}
+	{{chi_form.quantity}}
+
+
+	<button> {% trans 'add-chart-button' %} </button>
+
+</form>
+
 <!-- GINO
 {{product.price}}
 
 
-{{chi_form.size.label_tag}}
-{{chi_form.size}}
-
-{{chi_form.has_frido}}
-{{chi_form.has_frido.label_tag}}
-
-{{chi_form.quantity.label_tag}}
 <form  action="{{request.get_full_path|urlencode}}" method="POST"> 
 	{% csrf_token %}
 
