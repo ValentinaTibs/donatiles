@@ -63,11 +63,11 @@
 
     var sm_price = document.getElementById('sm_price_catch').innerHTML ;
     var sfrido = document.getElementById("includeOffCut").checked;
-
+    
     if(sfrido)
-        document.getElementById('price_catch').innerHTML = Math.round((sm + sm * 0.1) * sm_price );
+        document.getElementById('price_catch').innerHTML = ((Number(sm) + Number(sm * 0.1)) * sm_price );
     else
-        document.getElementById('price_catch').innerHTML = Math.round(sm  * sm_price );
+        document.getElementById('price_catch').innerHTML = (sm  * sm_price );
 
     document.getElementById('sm_catch').innerHTML = sm;
 
