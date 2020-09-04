@@ -73,8 +73,6 @@
           <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>EUR</span></div>
           <div class="nav-dropdown-options">
             <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>EUR</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-gbp' %}"/></svg><span>GBP</span></div>
-            <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-sek' %}"/></svg><span>SEK</span></div>
           </div>
         </div>
       </li>
@@ -161,6 +159,8 @@
   <a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> 
     <button class="btn btn-primary"><span>{% trans 'receive-sample-home' %}</span><svg class="icon icon-m">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button></a> 
+  {% else %}
+    {% blocktrans %} sampler-empty-claim {% endblocktrans %}
   {% endif %}
 
   {% if not user.is_authenticated %}
@@ -209,6 +209,8 @@
 
   <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
   <p class="note">Potrai pagare con bonifico bancario</p>
+  {% else %}
+  {% blocktrans %} chart-empty-claim {% endblocktrans %}
 
   {% endif %}
 
@@ -267,8 +269,6 @@
         <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable">
           <a href=""><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>Euro</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-gbp' %}"/></svg><span>British Pound</span></a>
-          <a href=""><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-sek' %}"/></svg><span>Swedish Krona</span></a>
         </div>
       </li>
     </ul>
@@ -286,7 +286,7 @@
 
   <div class="notification-body">
     <p><strong><b id="sm_notification">88</b> m&sup2;</strong> di <strong id="product_name_notification">{{ product.name }}</strong><br>aggiunti al carrello</p>
-    <p class="note"><a href="" data-overlay="Cart">Apri il carrello</a></p>
+    <p class="note"><a href="" data-overlay="Cart">{% trans 'open-chart' %}</a></p>
   </div>
 
 </div>

@@ -130,7 +130,7 @@ msgid "product-not-samplable"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:37
-#: taleoftiles/templates/empty_base.html:245
+#: taleoftiles/templates/empty_base.html:247
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 #: taleoftiles/templates/vestibula/empty_base.html:37
 msgid "support"
@@ -147,28 +147,32 @@ msgid "logout"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:43
-#: taleoftiles/templates/empty_base.html:247
+#: taleoftiles/templates/empty_base.html:249
 msgid "login-register"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:90
-#: taleoftiles/templates/empty_base.html:227
+#: taleoftiles/templates/empty_base.html:88
+#: taleoftiles/templates/empty_base.html:229
 #: taleoftiles/templates/vestibula/empty_base.html:90
 msgid "catalogue-menu"
 msgstr "Catalogue"
 
-#: taleoftiles/templates/empty_base.html:107
-#: taleoftiles/templates/empty_base.html:244
+#: taleoftiles/templates/empty_base.html:105
+#: taleoftiles/templates/empty_base.html:246
 #: taleoftiles/templates/vestibula/empty_base.html:100
 msgid "blog-menu"
 msgstr "Restoration Ideas"
 
-#: taleoftiles/templates/empty_base.html:138
+#: taleoftiles/templates/empty_base.html:136
 msgid "your-sampler"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:162
+#: taleoftiles/templates/empty_base.html:160
 msgid "receive-sample-home"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:163
+msgid " sampler-empty-claim "
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:167
@@ -181,6 +185,14 @@ msgstr ""
 
 #: taleoftiles/templates/empty_base.html:177
 msgid "your-chart"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:213
+msgid " chart-empty-claim "
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:289
+msgid "open-chart"
 msgstr ""
 
 #: taleoftiles/templates/home.html:5
@@ -205,7 +217,7 @@ msgstr "View the tiles directly from Home"
 #: taleoftiles/templates/home.html:47
 msgid "sample-description"
 msgstr ""
-"Let us tell you a story from our Sample Book. Browsing through the products, "
+"Let us tell you a story from our TaleOfTiles Book. Browsing through the products, "
 "you can choose up to 4 to receive for free at your home to evaluate the "
 "quality of the Italian product."
 

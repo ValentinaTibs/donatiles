@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-04 09:54+0000\n"
+"POT-Creation-Date: 2020-09-04 10:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,10 +59,8 @@ msgid "full-sampler"
 msgstr ""
 
 #: taleoftiles/templates/404.html:27 taleoftiles/templates/product.html:27
-#, fuzzy
-#| msgid "read-answer"
 msgid "already-in-sampler"
-msgstr "leggi risposta"
+msgstr "già aggiunto al campione"
 
 #: taleoftiles/templates/404.html:34 taleoftiles/templates/product.html:34
 #: taleoftiles/templates/vestibula/product.html:83
@@ -148,7 +146,7 @@ msgid "product-not-samplable"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:37
-#: taleoftiles/templates/empty_base.html:245
+#: taleoftiles/templates/empty_base.html:247
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 #: taleoftiles/templates/vestibula/empty_base.html:37
 msgid "support"
@@ -165,29 +163,34 @@ msgid "logout"
 msgstr ""
 
 #: taleoftiles/templates/empty_base.html:43
-#: taleoftiles/templates/empty_base.html:247
+#: taleoftiles/templates/empty_base.html:249
 msgid "login-register"
 msgstr "login-registrati"
 
-#: taleoftiles/templates/empty_base.html:90
-#: taleoftiles/templates/empty_base.html:227
+#: taleoftiles/templates/empty_base.html:88
+#: taleoftiles/templates/empty_base.html:229
 #: taleoftiles/templates/vestibula/empty_base.html:90
 msgid "catalogue-menu"
 msgstr "Catalogo"
 
-#: taleoftiles/templates/empty_base.html:107
-#: taleoftiles/templates/empty_base.html:244
+#: taleoftiles/templates/empty_base.html:105
+#: taleoftiles/templates/empty_base.html:246
 #: taleoftiles/templates/vestibula/empty_base.html:100
 msgid "blog-menu"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/empty_base.html:138
+#: taleoftiles/templates/empty_base.html:136
 msgid "your-sampler"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:162
+#: taleoftiles/templates/empty_base.html:160
 msgid "receive-sample-home"
 msgstr ""
+
+#: taleoftiles/templates/empty_base.html:163
+msgid " sampler-empty-claim "
+msgstr ""
+" <br/> Il tuo <b>TaleOfTiles Book</b> è vuoto. "
 
 #: taleoftiles/templates/empty_base.html:167
 msgid "register-login"
@@ -199,6 +202,14 @@ msgstr ""
 
 #: taleoftiles/templates/empty_base.html:177
 msgid "your-chart"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:213
+msgid " chart-empty-claim "
+msgstr "<br/> Il tuo carrello è vuoto."
+
+#: taleoftiles/templates/empty_base.html:289
+msgid "open-chart"
 msgstr ""
 
 #: taleoftiles/templates/home.html:5
@@ -223,7 +234,7 @@ msgstr "Tocca con mano"
 #: taleoftiles/templates/home.html:47
 msgid "sample-description"
 msgstr ""
-"Lasciati raccontare una storia dal nostro Sample Book. Navigando tra i "
+"Lasciati raccontare una storia dal nostro TaleOfTiles Book. Navigando tra i "
 "prodotti potrai sceglierne fino a 4 da ricevere gratuitamente a casa tua per "
 "valutare la qualità del prodotto italiano."
 
@@ -631,7 +642,7 @@ msgid "faq-order-minmax-body"
 msgstr ""
 "Sia per i prodotti industriali che per quelli artigianali è indicato nella "
 "scheda prodotto la quantità minima di m2 che puoi acquistare. Queste "
-"restrizioni sono dovute a limiti di produzione. E’ sempre però possibile "
+"restrizioni sono dovute a limiti di produzione. È sempre però possibile "
 "contattarci presso orders@taleoftiles.com per trovare una soluzione anche "
 "per piccole metrature. Per ordini sopra i 200m2 contatta orders@taleoftiles."
 "com per lo “Sconto Grandi Quantità”."
@@ -645,11 +656,11 @@ msgstr ""
 #: taleoftiles/templates/support.html:119
 msgid "faq-order-sfrido-body"
 msgstr ""
-"Lo sfrido è il calcolo degli scarti di posa delle mattonelle. è un calcolo "
+"Lo sfrido è il calcolo degli scarti di posa delle mattonelle. È un calcolo "
 "che prevede diverse variabili, come il formato delle mattonelle rispetto al "
 "forma della stanza. Il sito calcola automaticamente questo quantitativo "
 "aggiuntivo in  base all’ordine indicato, ed è la percentuale minima "
-"consigliata da aziende produttrici e posatori. è sempre consigliato  "
+"consigliata da aziende produttrici e posatori. È sempre consigliato  "
 "aggiungerlo perchè in fase di posa si prevedono degli scarti dati dai tagli "
 "delle piastrelle."
 
@@ -698,13 +709,13 @@ msgstr ""
 
 #: taleoftiles/templates/support.html:139
 msgid "faq-transport-track"
-msgstr "Posso tracciare la mia spedizione?"
+msgstr "Dove si trova la mia spedizione?"
 
 #: taleoftiles/templates/support.html:141
 msgid " faq-transport-track-body "
 msgstr ""
-"E’ possibile sapere dove si trovano le tue mattonelle inserendo il numero di "
-"spedizione ottenuto al momento dell’ordine presso questo sito *****  .In "
+"E’ possibile tracciare la posizione delle tue mattonelle inserendo il numero "
+"di spedizione ottenuto al momento dell’ordine presso questo sito ***** . In "
 "caso di problemi con la spedizione puoi contattarci presso "
 "orders@taleoftiles.com"
 
