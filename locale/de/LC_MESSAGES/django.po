@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-03 12:37+0000\n"
+"POT-Creation-Date: 2020-09-04 09:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,6 +145,7 @@ msgstr ""
 
 #: taleoftiles/templates/empty_base.html:37
 #: taleoftiles/templates/empty_base.html:245
+#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 #: taleoftiles/templates/vestibula/empty_base.html:37
 msgid "support"
 msgstr ""
@@ -381,12 +382,6 @@ msgstr ""
 msgid "box"
 msgstr ""
 
-#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
-#: taleoftiles/templates/vestibula/support.html:5
-#: taleoftiles/templates/vestibula/support.html:12
-msgid "support-page-name"
-msgstr ""
-
 #: taleoftiles/templates/support.html:15
 msgid "support-text-1"
 msgstr ""
@@ -412,20 +407,20 @@ msgstr ""
 msgid "frequent-question"
 msgstr ""
 
-#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:65
+#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:82
 #: taleoftiles/templates/vestibula/support.html:42
 msgid "samples"
 msgstr ""
 
-#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:80
-msgid "payments"
+#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:111
+msgid "orders"
 msgstr ""
 
-#: taleoftiles/templates/support.html:36 taleoftiles/templates/support.html:101
+#: taleoftiles/templates/support.html:36 taleoftiles/templates/support.html:132
 msgid "shippings"
 msgstr ""
 
-#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:126
+#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:157
 #: taleoftiles/templates/vestibula/support.html:72
 msgid "company"
 msgstr ""
@@ -433,6 +428,198 @@ msgstr ""
 #: taleoftiles/templates/support.html:39
 #: taleoftiles/templates/vestibula/support.html:29
 msgid "search"
+msgstr ""
+
+#: taleoftiles/templates/support.html:47
+msgid "faq-prod-madeitaly"
+msgstr ""
+
+#: taleoftiles/templates/support.html:48
+msgid "faq-prod-madeitaly-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:51
+msgid "faq-prod-multiface"
+msgstr ""
+
+#: taleoftiles/templates/support.html:52
+msgid "faq-prod-multiface-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:56
+msgid "faq-prod-handmade"
+msgstr ""
+
+#: taleoftiles/templates/support.html:57
+msgid "faq-prod-handmade-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:61
+msgid "faq-prod-temperature"
+msgstr ""
+
+#: taleoftiles/templates/support.html:62
+msgid "faq-prod-temperature-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:66
+msgid "faq-prod-maintenance"
+msgstr ""
+
+#: taleoftiles/templates/support.html:67
+msgid "faq-prod-maintenance-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:71
+msgid "faq-prod-decor"
+msgstr ""
+
+#: taleoftiles/templates/support.html:72
+msgid "faq-prod-decor-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:76
+msgid "faq-prod-fughe"
+msgstr ""
+
+#: taleoftiles/templates/support.html:77
+msgid "faq-prod-fughe-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:85
+msgid "faq-sample-1"
+msgstr ""
+
+#: taleoftiles/templates/support.html:86
+msgid "faq-sample-1-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:90
+msgid "faq-sample-2"
+msgstr ""
+
+#: taleoftiles/templates/support.html:91
+msgid "faq-sample-2-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:95
+msgid "faq-sample-3"
+msgstr ""
+
+#: taleoftiles/templates/support.html:96
+msgid "faq-sample-3-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:100
+msgid "faq-sample-4"
+msgstr ""
+
+#: taleoftiles/templates/support.html:101
+msgid "faq-sample-4-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:105
+msgid "faq-sample-5"
+msgstr ""
+
+#: taleoftiles/templates/support.html:106
+msgid "faq-sample-5-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:114
+msgid "faq-order-minmax"
+msgstr ""
+
+#: taleoftiles/templates/support.html:115
+msgid "faq-order-minmax-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:118
+msgid "faq-order-sfrido"
+msgstr ""
+
+#: taleoftiles/templates/support.html:119
+msgid "faq-order-sfrido-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:123
+msgid "faq-order-payment"
+msgstr ""
+
+#: taleoftiles/templates/support.html:124
+msgid "faq-order-payment-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:128
+msgid "faq-order-return"
+msgstr ""
+
+#: taleoftiles/templates/support.html:129
+msgid "faq-order-return-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:135
+msgid "faq-transport-cost"
+msgstr ""
+
+#: taleoftiles/templates/support.html:136
+msgid "faq-transport-cost-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:139
+msgid "faq-transport-track"
+msgstr ""
+
+#: taleoftiles/templates/support.html:141
+msgid " faq-transport-track-body "
+msgstr ""
+
+#: taleoftiles/templates/support.html:145
+msgid "faq-shipping-timeind"
+msgstr ""
+
+#: taleoftiles/templates/support.html:146
+msgid "faq-shipping-timeind-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:149
+msgid "faq-shipping-timehandm"
+msgstr ""
+
+#: taleoftiles/templates/support.html:150
+msgid "faq-shipping-timehandm-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:153
+msgid "faq-shipping-broken"
+msgstr ""
+
+#: taleoftiles/templates/support.html:154
+msgid "faq-shipping-broken-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:160
+msgid "faq-company-1"
+msgstr ""
+
+#: taleoftiles/templates/support.html:161
+msgid "faq-company-1-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:164
+msgid "faq-company-2"
+msgstr ""
+
+#: taleoftiles/templates/support.html:165
+msgid "faq-company-2-body"
+msgstr ""
+
+#: taleoftiles/templates/support.html:169
+msgid "faq-company-3"
+msgstr ""
+
+#: taleoftiles/templates/support.html:170
+msgid "faq-company-3-body"
 msgstr ""
 
 #: taleoftiles/templates/vestibula/account.html:6
@@ -535,6 +722,11 @@ msgstr ""
 
 #: taleoftiles/templates/vestibula/summary.html:211
 msgid "summary-shipping-subtitle"
+msgstr ""
+
+#: taleoftiles/templates/vestibula/support.html:5
+#: taleoftiles/templates/vestibula/support.html:12
+msgid "support-page-name"
 msgstr ""
 
 #: taleoftiles/templates/vestibula/support.html:20
