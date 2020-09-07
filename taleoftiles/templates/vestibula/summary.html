@@ -8,7 +8,6 @@
 {% block content %}
 
 
-
 <div class="content grid grid-checkout">
 
 	<div>
@@ -167,7 +166,7 @@ table, th, td {
 		<td>{{chart_item.price}}</td>
 
 	  	<td>
-	  		<a href="{% url 'del_chart' chart_item.pk False %}">
+	  		<a href="{% url 'del_chart' chart_item.pk %}">
 	  		{% trans 'delete' %}</a>
 	  	</td>
 	  </tr>

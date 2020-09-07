@@ -43,8 +43,6 @@ def sfrido(self):
 def compute_single_price(quantity,has_frido, sm_price, sm_per_box):
     return 0
 
-
-
 def max_price(m2_price, m2_box, weight_box):
     max_price = max(ech_price)
     weight_max_price = ech_weight[ech_price.index(max(ech_price))]

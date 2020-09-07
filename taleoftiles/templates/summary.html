@@ -8,9 +8,8 @@
 
 {% block content %}
 
-{% for chart in charts %}
 
-{% if chart.is_sample %}
+{% if sampler %}
 
 <div class="content grid grid-checkout">
 
@@ -19,7 +18,7 @@
 	  <div class="checkout-title">	
 		<a href="{{prv_page|urlencode}}" class="btn-link"><svg class="icon-l icon">
 			<use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'checkout-back' %}</a>
-		<h1>Riepilogo del tuo ordine</h1>
+		<h1>{% trans 'summary-page-name' %}</h1>
 	  </div>
   
 	  <div class="cartrecap">
@@ -30,33 +29,33 @@
 		
 		</div>
 
-
 		<div class="cartrecap-item">
-			{% for chart_item in chart.all_samples %}
-				<div class="cartrecap-thumb" 
-				style="background-image:url('{{chart_item.product.images.thumb_}}')">
-				{{chart_item.product.name}}
-			</div>
+		
+			{% for sample in sampler.all_samples %}	
+				<div class="cartrecap-thumb"  style="background-image:url('{{sample.product.images.thumb_}}')">
+					{{sample.product.name}}
+				</div>
 			{% endfor %}		
+
 			<div class="cartrecap-main">
 			  <h5></h5>
 			  <h4>{% trans 'summary-sample-title' %}</h4>
 			  <p>{% trans 'summary-sample-subtitle' %}</p>
 			</div>
 			<div class="cartrecap-price">
-			  <span class="product-figure">€ {{chart.total_price}}</span>
+			  <span class="product-figure"  
+			  {% if sampler.total_price <= 0 %}
+			   style="text-decoration: line-through;"
+			   {% endif %} >€ 25</span>
 			</div>
-
 		</div>
-		  
-  
 
 		<div class="cartrecap-item cartrecap-total">
 		  <div class="cartrecap-main">
 			<h4>{% trans 'summary-total-title' %}</h4>
 		  </div>
 		  <div class="cartrecap-price">
-			<span class="product-figure">€ {{chart.total_price}}</span>
+			<span class="product-figure">€ {{sampler.total_price}}</span>
 		  </div>
 		</div>
   
@@ -68,17 +67,13 @@
 
 	  <a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}" class="btn btn-primary"><span>{% trans 'summary-insert-shipping' %}</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
 	  <p class="note">{% trans 'summary-longtext' %} </p>
-	  <div class="asidebox">
-		<h4>Considera lo sfrido</h4>
-		<p class="note">Ti consigliamo di considerare sempre il <strong>10% in più</strong> rispetto alla quantità di prodotto strettamente necessaria, per gestire bla bla bla…</p>
-	  </div>
 	</aside>
   
 </div>
 
-
 {% else %} 
 
+{% for chart in charts %}
 
 <div class="content grid grid-checkout">
 
@@ -126,6 +121,7 @@
   
 
 			{% endfor %}
+			{% endfor %} 
 		
 		<div class="cartrecap-item cartrecap-total">
 		  <div class="cartrecap-main">
@@ -141,6 +137,7 @@
 	</div>
   
 	<aside>
+	
 
 	  <a href="{% url 'shipping' %}?prv={{prv_page|urlencode}}" class="btn btn-primary"><span>{% trans 'summary-insert-shipping' %}</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
 	  <p class="note">{% trans 'summary-longtext' %}	</p>
@@ -154,7 +151,7 @@
 
 {% endif %} 
 
-{% endfor %} 
+
   <script>
   document.querySelector( '.nav-primary > ul > li:first-child' ).classList.add( 'selected' );
   </script>
@@ -195,7 +192,7 @@ table, th, td {
 		<td>{{chart_item.price}}</td>
 
 	  	<td>
-	  		<a href="{% url 'del_chart' chart_item.pk False %}">
+	  		<a href="{% url 'del_chart' chart_item.pk %}">
 	  		{% trans 'delete' %}</a>
 	  	</td>
 	  </tr>

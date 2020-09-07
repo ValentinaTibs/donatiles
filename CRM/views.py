@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 
-from CRM.models         import Chart, ChartItem, Shipping, Order
+from CRM.models         import Chart, ChartItem, Sampler, Sample, Shipping, Order
 from CRM.models         import Profile
 from taleoftiles.models import Product
 
@@ -21,8 +21,9 @@ def account(request):
    
     return render(request, "account.html", {'profile':profile})
 
-def summary(request):
 
+
+def summary(request, is_sample = False):
     if request.method == 'GET':
         prv_page = request.GET['prv']
 
@@ -31,16 +32,23 @@ def summary(request):
         query = Q(user = request.user) 
     else:
         query = Q(session_id  = request.session.session_key) 
-    charts   = Chart.objects.filter( query )
+
+    charts = []
+    sampler = None
+    if is_sample:
+        sampler = Sampler.objects.get( query )
+    else:
+        charts = Chart.objects.filter( query )    
     
     total = 0
     for chart in charts:
         chart.status = 'i1'
         chart.save()
         total += chart.total_price()
-    return render(request, "summary.html", {'charts':charts,'prv_page':prv_page,
-        'total':total})   
-
+        
+    return render(request, "summary.html", {'charts':charts,'sampler':sampler,'prv_page':prv_page,
+        'total':total})     
+    
 def payment(request, id_):
     try:
         new_order = Order.objects.get( pk = id_)
@@ -48,6 +56,7 @@ def payment(request, id_):
             return render(request, "404.html",{"message": "This order does not exist" })
     return render(request, "payment.html", {'order':new_order,'prv_page':None})   
 
+#2do we might pass the chart or sampler here
 def shipping(request):
 
     if request.method == 'GET':
@@ -112,19 +121,19 @@ def add_user(request):
     #2do add to the redirect the form error 
     return redirect(request.META.get('HTTP_REFERER'))
 
-def del_chart(request, item_id, is_sample):
+def del_sample(request, item_id):
 
     if request.user.is_authenticated:
-        query = Q(chart__user = request.user) 
+        query = Q(sampler__user = request.user) 
     elif request.session.exists(request.session.session_key):
-        query = Q(chart__session_id  = request.session.session_key) 
+        query = Q(sampler__session_id  = request.session.session_key) 
 
     try: 
-        chart_item = ChartItem.objects.get(query, chart__is_sample = is_sample, pk = item_id, status = 'ok' )
+        sample = Sample.objects.get(query, pk = item_id, status = 'ok' )
     except ObjectDoesNotExist:
-        return render(request, "404.html",{"message": "Removing something that wasnt in your chart/sampler " + ChartItem.product,})
-    chart_item.status = 'ru'
-    chart_item.save()
+        return render(request, "404.html",{"message": "Removing something that wasnt in your sampler " + Sample.product,})
+    sample.status = 'ru'
+    sample.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
 def add_sample(request, product_code):
@@ -142,27 +151,43 @@ def add_sample(request, product_code):
             request.session.create()     
         query = Q(session_id  = request.session.session_key) 
     try: 
-        chart = Chart.objects.get( query, is_sample = True )
+        sampler = Sampler.objects.get( query )
     except ObjectDoesNotExist:
-        chart = Chart(session_id  = request.session.session_key, is_sample = True)
+        sampler = Sampler(session_id  = request.session.session_key)
         if request.user.is_authenticated:
-            chart.user = request.user
-        chart.save()
+            sampler.user = request.user
+        sampler.save()
     try:
-        chart_item = ChartItem.objects.get(chart = chart, product = product, status = 'ok')
+        sample = Sample.objects.get(sampler = sampler, product = product, status = 'ok')
     except ObjectDoesNotExist:
         remove_stat = 'ok'
         #2do this might cause db collapse if saved 
-        if (chart.all_samples().count() > 4):
+        if (sampler.all_samples().count() > 4):
             remove_stat = 'le'
         #2do this might cause db collapse if saved
         if (not product.is_samplable):
             remove_stat = 'ns'          
         if remove_stat == 'ok':
-            chart_item = ChartItem(chart  = chart, product = product, status = remove_stat)
-            chart_item.save()
+            sample = Sample(sampler  = sampler, product = product, status = remove_stat)
+            sample.save()
 
     return redirect('product', product_code= product_code )
+
+def del_chart(request, item_id):
+
+    if request.user.is_authenticated:
+        query = Q(chart__user = request.user) 
+    elif request.session.exists(request.session.session_key):
+        query = Q(chart__session_id  = request.session.session_key) 
+
+    try: 
+        chart_item = ChartItem.objects.get(query, pk = item_id, status = 'ok' )
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message": "Removing something that wasnt in your sampler " + ChartItem.product,})
+    chart_item.status = 'ru'
+    chart_item.save()
+    return redirect(request.META.get('HTTP_REFERER'))
+
 
 def add_chart(request, product_code):
 
@@ -170,10 +195,10 @@ def add_chart(request, product_code):
     if not request.session.exists(request.session.session_key):
         request.session.create() 
 
-    chart = Chart.objects.filter(session_id  = request.session.session_key, is_sample = False ).first()
+    chart = Chart.objects.filter(session_id  = request.session.session_key ).first()
 
     if not chart:
-        chart = Chart(session_id  = request.session.session_key, is_sample = False)
+        chart = Chart(session_id  = request.session.session_key)
         if request.user.is_authenticated:
             chart.user = request.user
         chart.save()
@@ -185,5 +210,4 @@ def add_chart(request, product_code):
             chart_item.chart = chart
             chart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
-    return redirect('product', product_code = product_code)
 

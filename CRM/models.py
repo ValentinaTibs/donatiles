@@ -19,7 +19,7 @@ from taleoftiles.utils  import compute_single_price, compute_sm_price
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
 
-def pour_charts(sender, user, request, **kwargs):
+def pour_charts_and_samplers(sender, user, request, **kwargs):
     session_loc_id = request.session.session_key
     if not request.session.exists(request.session.session_key):
         return
@@ -31,8 +31,16 @@ def pour_charts(sender, user, request, **kwargs):
     for chart in Chart.objects.filter( session_id  = session_loc_id): 
         chart.user = user
         chart.save()
+    
+    for sampler in Sampler.active.filter( user = user): 
+        sampler.session_id = session_loc_id
+        sampler.save()
 
-user_logged_in.connect(pour_charts)
+    for sampler in Sampler.objects.filter( session_id  = session_loc_id): 
+        sampler.user = user
+        sampler.save()
+
+user_logged_in.connect(pour_charts_and_samplers)
 
 #####  --------------
 
@@ -48,6 +56,7 @@ class Profile(models.Model):
 class Shipping(models.Model):
     #2do this must become a one to Many because we want to keep track of old shippings
     user                = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
+    email               = models.TextField(max_length=100, blank=False)
     fullname            = models.TextField(max_length=100, blank=False)
     country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
     city                = models.TextField(max_length=100, blank=False)
@@ -55,7 +64,6 @@ class Shipping(models.Model):
     shipping_address    = models.TextField(max_length=100, blank=False)
     telephone_num       = models.TextField(max_length=30, blank=False)
     is_active           = models.BooleanField(default = True)
-
 
 def create_shipping_internal_id():
     return get_random_string(length=32)
@@ -79,20 +87,10 @@ class Order(models.Model):
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
         query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
-        query = query and Q(is_sample = False)
         qs = super().get_queryset().filter(query).annotate(
             total = Count('chart_item',filter=Q(chart_item__status='ok')),
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
         )
-        return qs
-
-# return all charts that are samples and have at least one item 
-class ActiveSamplesManager(models.Manager):
-    def get_queryset(self):
-        qs = super().get_queryset().filter(completion_status = 's', is_sample = True).annotate(
-            total = Count('chart_item',filter=Q(chart_item__status='ok')),
-            count = Sum  ('chart_item',filter=Q(chart_item__status='ok'))
-            )
         return qs
         
 class Chart(models.Model):
@@ -102,15 +100,13 @@ class Chart(models.Model):
 
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     order_status        = models.CharField(max_length=2, choices=ORDER_STATUS,      default='w')
-    is_sample           = models.BooleanField(default = False)
 
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
     objects     = models.Manager() # The default manager.
     active      = ActiveChartManager() # The Active Charts
-    samples     = ActiveSamplesManager() # The Active Samples
-
+    
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
@@ -123,24 +119,14 @@ class Chart(models.Model):
 
     def total_price(self):
         total = 0
-        if self.is_sample:
-            return total
 
         for ch_i in self.chart_item.filter(status = 'ok'):
             total += ch_i.tot_quantity() * ch_i.product.price(ch_i.size)
         return total
-    
-    def all_samples(self):
-        if self.chart_item and self.is_sample:
-            return self.chart_item.filter(status = 'ok')
-    
+        
     def all_items(self):
-        if self.chart_item and (not self.is_sample):
+        if self.chart_item:
             return self.chart_item.filter(status = 'ok')
-
-    def is_in_sample(self, product_code):
-        if self.chart_item and self.is_sample:
-            return self.chart_item.filter(status = 'ok',product__code = product_code)
 
 
 class ChartItem(models.Model):
@@ -170,9 +156,79 @@ class ChartItem(models.Model):
     def price(self):
         if self.status == 'ok':
             if self.product.single_sell:
-                return compute_single_price(self.quantity, self.has_frido, self.product.price(self.size))
+                return compute_single_price(0,0,0,0)
             else:
                 return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box())
+
+    def tot_quantity(self):
+        return 1
+
+# return all charts that are samples and have at least one item 
+class ActiveSamplesManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(completion_status = 's').annotate(
+            total = Count('samples',filter=Q(samples__status='ok')),
+            count = Sum  ('samples',filter=Q(samples__status='ok'))
+            )
+        return qs
+
+class Sampler(models.Model):
+    session_id  = models.CharField ( max_length=100, default="", null = True)
+    user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='samplers' )
+
+    completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
+    
+    created_at  = models.DateTimeField(editable=False)
+    modified_at = models.DateTimeField()
+    free_shipping = models.BooleanField(default=False)
+    objects     = models.Manager() # The default manager.
+    active      = ActiveSamplesManager() # The Active Charts
+    
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super().save(*args, **kwargs)  
+
+    def __str__(self):
+        return self.session_id
+
+    def total_price(self):
+        total = 25
+        
+        #2do da riflettere meglio su questa condizione
+        finalised_charts =  Chart.objects.filter(user = self.user,completion_status='p')  
+        all_free_samples = Sampler.objects.filter(user = self.user, free_shipping = True) 
+
+        if finalised_charts.count() < (all_free_samples.count() + 1):
+            return 0
+        return total
+    
+    def all_samples(self):
+        return self.samples.filter(status = 'ok')
+    
+    def is_in_sample(self, product_code):
+        if self.samples:
+            return self.samples.filter(status = 'ok',product__code = product_code)
+
+
+class Sample(models.Model):
+    sampler     = models.ForeignKey(Sampler, verbose_name="Samples", null=True, blank = True, on_delete=models.CASCADE, related_name='samples')
+    product     = models.ForeignKey(Product,verbose_name="Products",null=True, blank = True, on_delete=models.CASCADE, related_name='samples')
+    status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
+    created_at  = models.DateTimeField(editable=False)
+    modified_at = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.sampler.session_id + ' - ' + self.product.code
 
 class Question(models.Model):
     content         = models.TextField()

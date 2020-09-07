@@ -104,10 +104,10 @@
       <li class="{% if blog_url|starts_with:request.path %} selected {% endif %}">
         <a href="{% url 'blog'%}"><span> {% trans 'blog-menu' %}</span></a></li>
     </ul>
+
+
     <div class="header-btns">
       <button class="btn samplesbtn samplesbtn-0" data-overlay="Samples">
-        
-          
           {% with img_suffix=sampler.all_samples|length|stringformat:"s" %}
             {% with "images/svgdefs.svg#icon-samples-"|add:img_suffix as img_name%}
               <svg class="icon"><use xlink:href="{% static img_name %}"/></svg>
@@ -137,7 +137,8 @@
     <button class="btn"><svg class="icon icon-l">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
-  {% if sampler.all_samples|length > 0 %}
+  
+  {% if sampler.all_samples %}
   <div class="grid grid-sampleslots">
 
     {% for sample in sampler.all_samples %}
@@ -148,7 +149,7 @@
             <span>{{sample.product.name}}</span>
           </div>
         </a>
-        <a href="{% url 'del_chart' sample.pk True %}">
+        <a href="{% url 'del_sample' sample.pk %}">
           <button class="btn" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
         </a>
       </div>
@@ -156,7 +157,7 @@
     
   </div>
   
-  <a href="{% url 'summary' %}?prv={{request.get_full_path|urlencode}}"> 
+  <a href="{% url 'summary' True %}?prv={{request.get_full_path|urlencode}}"> 
     <button class="btn btn-primary"><span>{% trans 'receive-sample-home' %}</span><svg class="icon icon-m">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button></a> 
   {% else %}

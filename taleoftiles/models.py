@@ -198,7 +198,7 @@ class Product(models.Model):
     
     def compute_price(self, size = None):
         if self.single_sell:
-            return compute_single_price(self.quantity, self.has_frido, self.product.price(self.size))
+            return compute_single_price(0,0,0,0)
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box())
     

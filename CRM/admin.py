@@ -1,5 +1,5 @@
 from django.contrib import admin
-from CRM.models import Profile, Chart, ChartItem, Shipping, Order
+from CRM.models import Profile, Chart, ChartItem, Shipping, Order, Sample, Sampler
 
 class ShippingStackedAdmin(admin.StackedInline):
     model = Shipping
@@ -11,11 +11,8 @@ class ProfileAdmin(admin.ModelAdmin):
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
-    list_display = ('chart','product','status','chart__is_sample','chart__user')
+    list_display = ('chart','product','status','chart__user')
 
-    def chart__is_sample(self, obj):
-        return obj.chart.is_sample
-    
     def chart__user(self, obj):
         if obj.chart.user:
             return obj.chart.user
@@ -25,6 +22,7 @@ class ChartItemAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     model = Order
     #inlines = ('inte',)
+
 
 class ChartItemStackedAdmin(admin.StackedInline):
     model = ChartItem
@@ -42,9 +40,9 @@ close_them.short_description = "Mark as Closed"
 class ChartAdmin(admin.ModelAdmin):
 	model = Chart
 
-	list_display = ('session_id','user','completion_status','order_status','is_sample','created_at','modified_at','_num_prods')
+	list_display = ('session_id','user','completion_status','order_status','created_at','modified_at','_num_prods')
 	actions = [close_them]
-	readonly_fields  = ( 'session_id','is_sample','created_at','modified_at')
+	readonly_fields  = ( 'session_id','created_at','modified_at')
 	inlines = [ChartItemStackedAdmin,]
 
 	def _num_prods(self, obj):
@@ -52,7 +50,22 @@ class ChartAdmin(admin.ModelAdmin):
 	_num_prods.short_description = "Number of Products"
 	_num_prods.admin_order_field = 'num_prods'
 
+
+class SampleStackedAdmin(admin.StackedInline):
+    model = Sample
+
+    search_fields = ('product__code', )
+    readonly_fields  = ('status','modified_at')
+
+
+class SamplerAdmin(admin.ModelAdmin):
+	model = Sampler
+
+	readonly_fields  = ( 'session_id','created_at','modified_at')
+	inlines = [SampleStackedAdmin,]
+
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Chart,ChartAdmin)
 admin.site.register(ChartItem,ChartItemAdmin)
+admin.site.register(Sampler,SamplerAdmin)
 admin.site.register(Order,OrderAdmin)

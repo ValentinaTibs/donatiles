@@ -104,7 +104,7 @@ SAMPLER
 ## {{ sampler.all_samples|length }}  ##
 {% for sample in sampler.all_samples %}
   {{sample.product}}
-  <a href="{% url 'del_chart' sample.pk True %}"> del this</a> 
+  <a href="{% url 'del_sample' sample.pk %}"> del this</a> 
 {% endfor %}
 
 
@@ -116,7 +116,7 @@ CHART
 {% for chart in charts.all %}
   {% for chart_item in chart.all_items %}
     {{chart_item.product}}
-    <a href="{% url 'del_chart' chart_item.pk False %}"> del this</a> 
+    <a href="{% url 'del_chart' chart_item.pk %}"> del this</a> 
   {% endfor %}
 {% endfor %}
 

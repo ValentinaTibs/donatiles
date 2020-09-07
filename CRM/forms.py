@@ -18,10 +18,11 @@ class ShippingForm(forms.ModelForm):
 
     class Meta:
         model = Shipping
-        fields = ('fullname','country','city','CAP','shipping_address','telephone_num')
+        fields = ('fullname','country','city','CAP','shipping_address','telephone_num','email')
         
         widgets = { 
             'fullname'  :forms.TextInput(),
+            'email'      :forms.TextInput(),
             'city'      :forms.TextInput(),
             'CAP'      :forms.TextInput(),
             'shipping_address'      :forms.TextInput(),  
@@ -30,6 +31,7 @@ class ShippingForm(forms.ModelForm):
 
         def __init__(self, *args, **kwargs):
             super(ShippingForm, self).__init__(*args, **kwargs)
+            
     
         
 

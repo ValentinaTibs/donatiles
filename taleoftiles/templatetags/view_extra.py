@@ -40,9 +40,9 @@ def define(val=None):
   return val
 
 @register.filter
-def is_in_sample(chart, product):
-    if chart: 
-        return chart.is_in_sample(product).count() > 0
+def is_in_sample(sample, product):
+    if sample: 
+        return sample.is_in_sample(product).count() > 0
     return False
 
 @register.filter
