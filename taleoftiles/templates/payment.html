@@ -1,0 +1,57 @@
+{% extends "checkout_base.html" %}
+{% load view_extra %}
+{% load i18n %}
+
+{% block title%} {% trans 'payment-title' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+<div class="content grid grid-checkout">
+
+  <div>
+
+    <div class="checkout-title">
+      <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Annulla</a>
+      <h1>{% trans 'summary-recipt-title' %}</h1>
+    </div>
+
+    <div class="grid subgrid-checkout">
+      <div class="paymentnotes">
+        {% blocktrans %} paying-now <strong>date-shipping</strong> paying-now{% endblocktrans %}
+      </div>
+      <div class="paymentdata">
+        <h3>{% trans 'summary-iban-claim' %}</h3>
+        <h5>{% trans 'ammount' %}</h5>
+        <h2>€ {{order.final_payment}}</h2>
+        <h5>{% trans 'summary-iban-title' %}</h5>
+        <h2>{% trans 'summary-iban' %}</h2>
+        <h5>{% trans 'summary-SWIFT-title' %}</h5>
+        <h2>{% trans 'summary-SWIFT' %}</h2>
+        <h5>{% trans 'summary-accountholder-title' %}</h5>
+        <h2>{% trans 'summary-accountholder' %}</h2>
+        <h5>{% trans 'subject' %}</h5>
+        <h2>{% trans 'order' %} {{order.internal_tracking_id}}</h2>
+        <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>Stampa questi dati</span></button>
+      </div>
+    </div>
+
+  </div>
+
+  <aside>
+    <div class="asidebox">
+      <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
+      <h4>Hai qualche dubbio?</h4>
+      <p class="note">Consulta l'<a href="support.html">{% trans 'support' %}</a> oppure scrivici a <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></p>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// DEMO ONLY
+document.querySelector( '.nav-primary > ul > li:nth-child(3)' ).classList.add( 'selected' );
+</script>
+
+{% endblock %}

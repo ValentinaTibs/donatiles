@@ -35,17 +35,19 @@ def summary(request, is_sample = False):
 
     charts = []
     sampler = None
+
+    total = 0
+    
     if is_sample:
         sampler = Sampler.objects.get( query )
     else:
         charts = Chart.objects.filter( query )    
     
-    total = 0
     for chart in charts:
         chart.status = 'i1'
         chart.save()
         total += chart.total_price()
-        
+    
     return render(request, "summary.html", {'charts':charts,'sampler':sampler,'prv_page':prv_page,
         'total':total})     
     
@@ -57,7 +59,7 @@ def payment(request, id_):
     return render(request, "payment.html", {'order':new_order,'prv_page':None})   
 
 #2do we might pass the chart or sampler here
-def shipping(request):
+def shipping(request, is_sample):
 
     if request.method == 'GET':
         prv_page = request.GET['prv']
@@ -70,11 +72,15 @@ def shipping(request):
         try:
             prev_data = Shipping.objects.get( user__user = request.user)
         except ObjectDoesNotExist:
-            prev_data = None
+            prev_data = Shipping(email = request.user.email )
     else:
         query = Q(session_id  = request.session.session_key) 
     
-    charts   = Chart.active.filter( query )
+    if (is_sample):
+        charts   = Sampler.active.filter( query )    
+    else:
+        charts   = Chart.active.filter( query )
+
     shipping_form = ShippingForm(instance=prev_data)
 
     if request.method == 'POST':
@@ -88,11 +94,14 @@ def shipping(request):
             
             new_order = Order()
             new_order.save()
-
+            
             for chart in charts:
                 chart.status = 'c'
                 chart.order = new_order
+                new_order.final_payment += chart.total_price()
                 chart.save()
+                            
+            new_order.save()
 
             #ok to keep this as this since is not possible to reach this page from anywhereselle
             return render(request, "payment.html", {'order':new_order,'prv_page':prv_page})   

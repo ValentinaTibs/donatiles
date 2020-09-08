@@ -1,8 +1,7 @@
 
 COUNTRY_LIST = (
     ('it',   'Italia'),
-    ('sv',	'Svezia'),
-
+    ('sv',	'Sverige'),
 ) 
 
 COMPLETION_STATUS = (

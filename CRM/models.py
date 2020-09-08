@@ -75,6 +75,9 @@ class Order(models.Model):
     shipping_tracking_id = models.CharField(max_length=100, default = "")
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
+    order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+
+    final_payment = models.PositiveIntegerField( default=0 )   
 
     def save(self, *args, **kwargs):
         self.internal_tracking_id = create_shipping_internal_id()
@@ -97,10 +100,9 @@ class Chart(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
-
+    
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
-    order_status        = models.CharField(max_length=2, choices=ORDER_STATUS,      default='w')
-
+    
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
@@ -175,7 +177,8 @@ class ActiveSamplesManager(models.Manager):
 class Sampler(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='samplers' )
-
+    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='samplers')
+    
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
     created_at  = models.DateTimeField(editable=False)
