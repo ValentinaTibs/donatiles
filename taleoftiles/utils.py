@@ -3,6 +3,7 @@ COUNTRY_LIST = (
     ('it',   'Italia'),
     ('sv',	'Sverige'),
 ) 
+#Italia - Svezia - Germania - Belgio - Olanda - Finlandia - Danimarca - Francia - Lussemburgo
 
 COMPLETION_STATUS = (
     ('s',   'Started'),

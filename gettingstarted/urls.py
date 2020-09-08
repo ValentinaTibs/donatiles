@@ -35,15 +35,16 @@ urlpatterns += i18n_patterns(
     path("account/",                                        CRM.views.account,    name="account"),
 
     path("add_order/<str:is_sample>", CRM.views.add_order, name="add_order"),
-    path("summary/<int:id_>",  CRM.views.summary,  name="summary"),
-    path("shipping/<int:id_>", CRM.views.shipping, name="shipping"),
-    path("payment/<int:id_>",   CRM.views.payment,  name="payment"),
+    path("summary/<str:id_>",  CRM.views.summary,  name="summary"),
+    path("shipping/<str:id_>", CRM.views.shipping, name="shipping"),
+    path("payment/<str:id_>",   CRM.views.payment,  name="payment"),
     
     path("blog/",                       blog.views.blog, name="blog"),
     path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),
     path('blog/post/<slug:post_slug>/', blog.views.post, name="post"),
 
     path("support/",  layout.views.support, name="support"),
+    
 
     # path("blog/<slug:tag_slug>",        taleoftiles.views.blog, name="blog_tag"),
     # path('blog/post/<slug:post_slug>/', taleoftiles.views.post, name="post"),

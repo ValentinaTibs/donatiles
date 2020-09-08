@@ -21,75 +21,54 @@ def account(request):
    
     return render(request, "account.html", {'profile':profile})
 
-def add_order(request, is_sample = False):
-    #2do se qui non ho già un ordine in soluto 
-
-    query = Q()
-    if request.user.is_authenticated:
-        query = Q(user = request.user) 
-    else:
-        query = Q(session_id  = request.session.session_key) 
-        
-    new_order = Order()
-    new_order.save()
-            
-
 def summary(request, id_ ):
+    
+    prv_page = None
     if request.method == 'GET':
         prv_page = request.GET['prv']
-
-    query = Q()
-    if request.user.is_authenticated:
-        query = Q(user = request.user) 
-    else:
-        query = Q(session_id  = request.session.session_key) 
-
-    charts = []
-    sampler = None
-
-    total = 0
     
-    if is_sample:
-        sampler = Sampler.objects.get( query )
-    else:
-        charts = Chart.objects.filter( query )    
-    
-    for chart in charts:
-        chart.status = 'i1'
-        chart.save()
-        total += chart.total_price()
-    
-    return render(request, "summary.html", {'charts':charts,'sampler':sampler,'prv_page':prv_page,
-        'total':total})     
+    try:
+        order = Order.objects.get( internal_tracking_id = id_)
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message": "This order does not exist" })
+    return render(request, "summary.html", {'order':order,'prv_page':prv_page})     
     
 def payment(request, id_):
+
     try:
-        new_order = Order.objects.get( pk = id_)
+        order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
-            return render(request, "404.html",{"message": "This order does not exist" })
-    return render(request, "payment.html", {'order':new_order,'prv_page':None})   
+        return render(request, "404.html",{"message": "This order does not exist" })
+
+    if order.is_sampler:
+        for sampler in order.sampler.all():
+            sampler.completion_status = 'p'
+            #sampler.save()
+    else:
+        for chart in order.charts.all():
+            chart.completion_status = 'c'
+            #chart.save()
+    return render(request, "payment.html", {'order':order,'prv_page':None})   
 
 def shipping(request, id_):
-
+    
+    prv_page = None
     if request.method == 'GET':
         prv_page = request.GET['prv']
 
     query = Q()
     prev_data = None
 
-    if request.user.is_authenticated:
-        query = Q(user = request.user)
+    try:
+        order = Order.objects.get( internal_tracking_id = id_)
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message": "This order does not exist" })
+    
+    if order.user() :
         try:
-            prev_data = Shipping.objects.get( user__user = request.user)
+            prev_data = Shipping.objects.get( user__user = order.user())
         except ObjectDoesNotExist:
             prev_data = Shipping(email = request.user.email )
-    else:
-        query = Q(session_id  = request.session.session_key) 
-    
-    if (is_sample):
-        charts   = Sampler.active.filter( query )    
-    else:
-        charts   = Chart.active.filter( query )
 
     shipping_form = ShippingForm(instance=prev_data)
 
@@ -97,34 +76,55 @@ def shipping(request, id_):
         shipping_form = ShippingForm(request.POST, instance=prev_data)
 
         #2do mettere qui controlli sicurezza (quale sicurezza?)
-        prv_page = request.POST['prv']
+        #prv_page = request.POST['prv']
 
         if shipping_form.is_valid():
-            shipping_form.save()
-            
-            new_order = Order()
-            new_order.save()
-            
-            for chart in charts:
-                chart.status = 'c'
-                chart.order = new_order
-                new_order.final_payment += chart.total_price()
-                chart.save()
-                            
-            new_order.save()
+            new_shipping = shipping_form.save()
+            if request.user.is_authenticated:
+                new_shipping.user = request.user.profile
+                new_shipping.save()            
+            order.final_payment = order.total()
+            order.save()
 
             #ok to keep this as this since is not possible to reach this page from anywhereselle
-            return render(request, "payment.html", {'order':new_order,'prv_page':prv_page})   
-
-    for chart in charts:
-        chart.status = 'i2'
-        chart.save()
-
+            return redirect('payment', id_ = order.internal_tracking_id)
+        
     return render(request, "shipping.html", {'form':shipping_form,'prv_page':prv_page})   
 
-def add_user(request):
+def add_order(request, is_sample = False):
 
+    query = Q()
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        query = Q(session_id  = request.session.session_key) 
+
+    the_chart = None
+    chart_model = None
+
+    if is_sample:
+        chart_model = Sampler
+    else:
+        chart_model = Chart
+
+    try:
+        the_chart = chart_model.objects.get( query )
+    except ObjectDoesNotExist:
+        render(request, "404.html",{"message": "Invalid sampler for user" ,})
+    
+    if not the_chart.order:
+        order = Order()
+        if is_sample:
+            order.is_sampler = True
+        order.save()
+        the_chart.order = order
+        the_chart.save()
+
+    return redirect('summary', id_ = the_chart.order.internal_tracking_id)
+
+def add_user(request):
     form = RegisterForm(request.POST or None, request.FILES or None)    
+
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()
@@ -204,7 +204,6 @@ def del_chart(request, item_id):
     chart_item.status = 'ru'
     chart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
-
 
 def add_chart(request, product_code):
 

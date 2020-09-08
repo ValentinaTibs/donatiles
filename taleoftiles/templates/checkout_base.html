@@ -75,15 +75,7 @@
 
     <a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a>
     <ul>
-      {% if sampler %}
-      <li><a href="{% url 'summary'  True %}?prv={{prv_page|urlencode}}"><span>1. Riepilogo</span></a></li>
-      <li><a href="{% url 'shipping' True %}?prv={{prv_page|urlencode}}"><span>2. Spedizione</span></a></li>
-      <li><a href="{% url 'payment' 12 %}?prv={{prv_page|urlencode}}"><span>3. Pagamento</span></a></li>
-      {% else %}
-      <li><a href="{% url 'summary'  False %}?prv={{prv_page|urlencode}}"><span>1. Riepilogo</span></a></li>
-      <li><a href="{% url 'shipping' False %}?prv={{prv_page|urlencode}}"><span>2. Spedizione</span></a></li>
-      <li><a href="{% url 'payment' 12 %}?prv={{prv_page|urlencode}}"><span>3. Pagamento</span></a></li>
-      {% endif %}
+
     </ul>
 
     {% include 'include/login.html' %}

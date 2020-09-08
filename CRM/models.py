@@ -43,18 +43,17 @@ user_logged_in.connect(pour_charts_and_samplers)
 #####  --------------
 
 class Profile(models.Model):
-    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
+    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
     bio         = models.TextField(max_length=500, blank=True)
     location    = models.CharField(max_length=30, blank=True)
     birth_date  = models.DateField(null=True, blank=True)
-    
 
     def __str__(self):
         return self.user.username        
    
 class Shipping(models.Model):
     #2do this must become a one to Many because we want to keep track of old shippings
-    user                = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
+    user                = models.OneToOneField(Profile, on_delete=models.SET_NULL, null = True)
     email               = models.TextField(max_length=100, blank=False)
     fullname            = models.TextField(max_length=100, blank=False)
     country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
@@ -65,11 +64,11 @@ class Shipping(models.Model):
     is_active           = models.BooleanField(default = True)
 
 def create_shipping_internal_id():
-    return get_random_string(length=32)
+    return get_random_string(length=12)
 
 class Order(models.Model):
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
-    note = models.TextField(max_length = 200, null = True)
+
+    note        = models.TextField(max_length = 200, null = True)
 
     internal_tracking_id    = models.CharField(max_length=100, default = "")
     shipping_tracking_id    = models.CharField(max_length=100, default = "")
@@ -77,13 +76,38 @@ class Order(models.Model):
     modified_at             = models.DateTimeField()
     order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
     final_payment           = models.PositiveIntegerField( default=0 )   
-
+    is_sampler              = models.BooleanField(default = False)
+    
     def save(self, *args, **kwargs):
         self.internal_tracking_id = create_shipping_internal_id()
         if not self.id:
             self.created_at = timezone.now()
         self.modified_at = timezone.now()
         super().save(*args, **kwargs)  # Call the "real" save() method.
+
+    def __str__(self):
+        return self.internal_tracking_id
+
+    def user(self):
+
+        if self.is_sampler:
+            chart_model = self.sampler.first()
+        else :
+            chart_model = self.charts.first()
+        
+        if chart_model.user:
+            return chart_model.user
+        else :
+            return None
+    
+    def total(self):
+        if self.is_sampler:
+            return self.sampler.first().total_price()
+        total = 0
+        for chart in self.charts:
+            total += chart.total_price()
+        return total
+                    
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
@@ -98,7 +122,7 @@ class Chart(models.Model):
 
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
-    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
+    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='charts')
     
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
@@ -176,7 +200,7 @@ class ActiveSamplesManager(models.Manager):
 class Sampler(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='samplers' )
-    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='samplers')
+    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='sampler')
     
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
