@@ -21,9 +21,20 @@ def account(request):
    
     return render(request, "account.html", {'profile':profile})
 
+def add_order(request, is_sample = False):
+    #2do se qui non ho già un ordine in soluto 
 
+    query = Q()
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        query = Q(session_id  = request.session.session_key) 
+        
+    new_order = Order()
+    new_order.save()
+            
 
-def summary(request, is_sample = False):
+def summary(request, id_ ):
     if request.method == 'GET':
         prv_page = request.GET['prv']
 
@@ -58,8 +69,7 @@ def payment(request, id_):
             return render(request, "404.html",{"message": "This order does not exist" })
     return render(request, "payment.html", {'order':new_order,'prv_page':None})   
 
-#2do we might pass the chart or sampler here
-def shipping(request, is_sample):
+def shipping(request, id_):
 
     if request.method == 'GET':
         prv_page = request.GET['prv']
@@ -112,11 +122,9 @@ def shipping(request, is_sample):
 
     return render(request, "shipping.html", {'form':shipping_form,'prv_page':prv_page})   
 
-
 def add_user(request):
 
-    form = RegisterForm(request.POST or None, request.FILES or None)
-    
+    form = RegisterForm(request.POST or None, request.FILES or None)    
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()

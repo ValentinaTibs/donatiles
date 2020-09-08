@@ -157,7 +157,7 @@
     
   </div>
   
-  <a href="{% url 'summary' True %}?prv={{request.get_full_path|urlencode}}"> 
+  <a href="{% url 'add_order' True %}?prv={{request.get_full_path|urlencode}}"> 
     <button class="btn btn-primary"><span>{% trans 'receive-sample-home' %}</span><svg class="icon icon-m">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button></a> 
   {% else %}

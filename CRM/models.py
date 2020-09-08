@@ -12,9 +12,7 @@ from django.dispatch import receiver
 
 from taleoftiles.models import Product, Tag
 from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
-
 from taleoftiles.utils  import compute_single_price, compute_sm_price
-
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
@@ -49,6 +47,7 @@ class Profile(models.Model):
     bio         = models.TextField(max_length=500, blank=True)
     location    = models.CharField(max_length=30, blank=True)
     birth_date  = models.DateField(null=True, blank=True)
+    
 
     def __str__(self):
         return self.user.username        
@@ -69,15 +68,15 @@ def create_shipping_internal_id():
     return get_random_string(length=32)
 
 class Order(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
     note = models.TextField(max_length = 200, null = True)
 
-    internal_tracking_id = models.CharField(max_length=100, default = "")
-    shipping_tracking_id = models.CharField(max_length=100, default = "")
-    created_at  = models.DateTimeField(editable=False)
-    modified_at = models.DateTimeField()
-    order_status = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
-
-    final_payment = models.PositiveIntegerField( default=0 )   
+    internal_tracking_id    = models.CharField(max_length=100, default = "")
+    shipping_tracking_id    = models.CharField(max_length=100, default = "")
+    created_at              = models.DateTimeField(editable=False)
+    modified_at             = models.DateTimeField()
+    order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+    final_payment           = models.PositiveIntegerField( default=0 )   
 
     def save(self, *args, **kwargs):
         self.internal_tracking_id = create_shipping_internal_id()
@@ -85,7 +84,6 @@ class Order(models.Model):
             self.created_at = timezone.now()
         self.modified_at = timezone.now()
         super().save(*args, **kwargs)  # Call the "real" save() method.
-
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
@@ -97,6 +95,7 @@ class ActiveChartManager(models.Manager):
         return qs
         
 class Chart(models.Model):
+
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')

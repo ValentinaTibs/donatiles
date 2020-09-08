@@ -5,8 +5,41 @@
 {% block title%} {% trans 'payment-title' %} {% endblock%}
 
 {% load static %}
-
 {% block content %}
+
+{% if order.sampler %}
+
+<div class="content grid grid-checkout">
+
+  <div>
+
+    <div class="checkout-title">
+      <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Annulla</a>
+      <h1>{% trans 'summary-recipt-title' %}</h1>
+    </div>
+
+    <div class="grid subgrid-checkout">
+      <div class="paymentnotes">
+        QUESTO ERA UNE SAMPLER
+      </div>
+      <div class="paymentdata">
+        Arriverà gratis a casa tua
+      </div>
+    </div>
+
+  </div>
+
+  <aside>
+    <div class="asidebox">
+      <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
+      <h4>Hai qualche dubbio?</h4>
+      <p class="note">Consulta l'<a href="support.html">{% trans 'support' %}</a> oppure scrivici a <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></p>
+    </div>
+  </aside>
+
+</div>
+
+{% else %}
 
 <div class="content grid grid-checkout">
 
@@ -48,6 +81,7 @@
   </aside>
 
 </div>
+{% endif %}
 
 <script>
 // DEMO ONLY
