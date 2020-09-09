@@ -79,7 +79,8 @@ class Order(models.Model):
     is_sampler              = models.BooleanField(default = False)
     
     def save(self, *args, **kwargs):
-        self.internal_tracking_id = create_shipping_internal_id()
+        if not self.if not self.id::
+            self.internal_tracking_id = create_shipping_internal_id()
         if not self.id:
             self.created_at = timezone.now()
         self.modified_at = timezone.now()

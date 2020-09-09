@@ -23,15 +23,11 @@ def account(request):
 
 def summary(request, id_ ):
     
-    prv_page = None
-    if request.method == 'GET':
-        prv_page = request.GET['prv']
-    
     try:
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-    return render(request, "summary.html", {'order':order,'prv_page':prv_page})     
+    return render(request, "summary.html", {'order':order,'prv_page':request.session['prev_page']})     
     
 def payment(request, id_):
 
@@ -42,19 +38,19 @@ def payment(request, id_):
 
     if order.is_sampler:
         for sampler in order.sampler.all():
-            sampler.completion_status = 'p'
+            if order.final_payment <= 0:
+                sampler.completion_status = 'p'
+            else:
+                chart.completion_status = 'c'    
             #sampler.save()
     else:
         for chart in order.charts.all():
             chart.completion_status = 'c'
             #chart.save()
-    return render(request, "payment.html", {'order':order,'prv_page':None})   
+    return render(request, "payment.html", {'order':order,'prv_page': request.session['prev_page']})   
 
 def shipping(request, id_):
     
-    prv_page = None
-    if request.method == 'GET':
-        prv_page = request.GET['prv']
 
     query = Q()
     prev_data = None
@@ -75,9 +71,6 @@ def shipping(request, id_):
     if request.method == 'POST':
         shipping_form = ShippingForm(request.POST, instance=prev_data)
 
-        #2do mettere qui controlli sicurezza (quale sicurezza?)
-        #prv_page = request.POST['prv']
-
         if shipping_form.is_valid():
             new_shipping = shipping_form.save()
             if request.user.is_authenticated:
@@ -86,10 +79,9 @@ def shipping(request, id_):
             order.final_payment = order.total()
             order.save()
 
-            #ok to keep this as this since is not possible to reach this page from anywhereselle
             return redirect('payment', id_ = order.internal_tracking_id)
         
-    return render(request, "shipping.html", {'form':shipping_form,'prv_page':prv_page})   
+    return render(request, "shipping.html", {'form':shipping_form,'order':order,'prv_page': request.session['prev_page']})   
 
 def add_order(request, is_sample = False):
 
@@ -119,6 +111,9 @@ def add_order(request, is_sample = False):
         order.save()
         the_chart.order = order
         the_chart.save()
+        
+    if request.method == 'GET':
+        request.session['prev_page'] = request.GET['prv']
 
     return redirect('summary', id_ = the_chart.order.internal_tracking_id)
 

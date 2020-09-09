@@ -43,7 +43,7 @@ close_them.short_description = "Mark as Closed"
 class ChartAdmin(admin.ModelAdmin):
 	model = Chart
 
-	list_display = ('session_id','user','completion_status','created_at','modified_at','_num_prods','order')
+	list_display = ('session_id','user','completion_status','created_at','modified_at','order')
 	actions = [close_them]
 	readonly_fields  = ( 'session_id','created_at','modified_at')
     
@@ -65,8 +65,9 @@ class SampleStackedAdmin(admin.StackedInline):
 class SamplerAdmin(admin.ModelAdmin):
 	model = Sampler
 
-	readonly_fields  = ( 'session_id','created_at','modified_at','order')
-	inlines = [SampleStackedAdmin]
+    list_display = ('session_id','user','completion_status','created_at','modified_at','_num_prods','order')
+	readonly_fields  = ( 'session_id','created_at','modified_at')
+	inlines = [SampleStackedAdmin,'order']
 
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Chart,ChartAdmin)

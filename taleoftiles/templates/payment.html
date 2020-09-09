@@ -23,7 +23,11 @@
         QUESTO ERA UNE SAMPLER
       </div>
       <div class="paymentdata">
-        Arriverà gratis a casa tua
+        {% if order.sampler %}
+          Arriverà gratis a casa tua
+        {% else %}
+          
+        {% endif %}
       </div>
     </div>
 

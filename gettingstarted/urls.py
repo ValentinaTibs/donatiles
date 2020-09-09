@@ -44,7 +44,6 @@ urlpatterns += i18n_patterns(
     path('blog/post/<slug:post_slug>/', blog.views.post, name="post"),
 
     path("support/",  layout.views.support, name="support"),
-    
 
     # path("blog/<slug:tag_slug>",        taleoftiles.views.blog, name="blog_tag"),
     # path('blog/post/<slug:post_slug>/', taleoftiles.views.post, name="post"),
