@@ -14,7 +14,6 @@
   <div>
 
     <div class="checkout-title">
-      <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Annulla</a>
       <h1>{% trans 'summary-recipt-title' %}</h1>
     </div>
 
@@ -23,10 +22,10 @@
         QUESTO ERA UNE SAMPLER
       </div>
       <div class="paymentdata">
-        {% if order.sampler %}
+        {% if order.is_paid %}
           Arriverà gratis a casa tua
         {% else %}
-          
+          Paga e lo avrai perché hai esaurito i tuoi campioni gratis
         {% endif %}
       </div>
     </div>

@@ -7,8 +7,6 @@ COUNTRY_LIST = (
 
 COMPLETION_STATUS = (
     ('s',   'Started'),
-    ('i1',  'In Checkout 1'),
-    ('i2',  'In Checkout 2'),
     ('c',   'Completed'),
     ('p',   'Payed'),
     ('ex',  'Expired'),

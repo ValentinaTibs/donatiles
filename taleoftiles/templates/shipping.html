@@ -13,8 +13,8 @@
     <div>
   
       <div class="checkout-title">
-        <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left ' %}"/></svg>Annulla</a>
+        <a href="{{prv_page|urlencode}}" class="btn-link"><svg class="icon-l icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left ' %}"/></svg>{% trans 'checkout-back' %}</a>
         <h1>{% trans 'shipping-title' %}</h1>
       </div>
   

@@ -27,6 +27,10 @@ def summary(request, id_ ):
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
+    
+    if order.is_paid():
+        return redirect('payment', id_ = order.internal_tracking_id)
+            
     return render(request, "summary.html", {'order':order,'prv_page':request.session['prev_page']})     
     
 def payment(request, id_):
@@ -35,31 +39,33 @@ def payment(request, id_):
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-
+    
+    #2do per ragioni di sicurezza questo aggiornamento si dovrebbe fare solo se arrivo a questa pagina con una post
     if order.is_sampler:
         for sampler in order.sampler.all():
             if order.final_payment <= 0:
                 sampler.completion_status = 'p'
             else:
-                chart.completion_status = 'c'    
-            #sampler.save()
+                sampler.completion_status = 'c'    
+            sampler.save()
     else:
         for chart in order.charts.all():
             chart.completion_status = 'c'
-            #chart.save()
+            chart.save()
     return render(request, "payment.html", {'order':order,'prv_page': request.session['prev_page']})   
 
 def shipping(request, id_):
     
-
     query = Q()
     prev_data = None
-
+    
     try:
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-    
+
+    if order.is_paid():
+        return redirect('payment', id_ = order.internal_tracking_id)
     if order.user() :
         try:
             prev_data = Shipping.objects.get( user__user = order.user())
@@ -100,7 +106,7 @@ def add_order(request, is_sample = False):
         chart_model = Chart
 
     try:
-        the_chart = chart_model.objects.get( query )
+        the_chart = chart_model.objects.get( query,completion_status = 's' )
     except ObjectDoesNotExist:
         render(request, "404.html",{"message": "Invalid sampler for user" ,})
     
@@ -162,13 +168,17 @@ def add_sample(request, product_code):
         if not request.session.exists(request.session.session_key):
             request.session.create()     
         query = Q(session_id  = request.session.session_key) 
+    
+    #retrieving an already ongoing sampler
     try: 
-        sampler = Sampler.objects.get( query )
+        sampler = Sampler.objects.get( query , completion_status = 's')
     except ObjectDoesNotExist:
         sampler = Sampler(session_id  = request.session.session_key)
         if request.user.is_authenticated:
             sampler.user = request.user
         sampler.save()
+
+    #avoiding double insertion
     try:
         sample = Sample.objects.get(sampler = sampler, product = product, status = 'ok')
     except ObjectDoesNotExist:

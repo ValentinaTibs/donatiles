@@ -21,6 +21,11 @@ class ChartItemAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     model = Order
+
+    list_display = ('internal_tracking_id','shipping_tracking_id','created_at','modified_at','order_status','final_payment','is_sampler','_is_paid')
+
+    def _is_paid(self, obj):
+        return obj.is_paid()
     #inlines = ('inte',)
 
 class ShippingAdmin(admin.ModelAdmin):
@@ -41,18 +46,23 @@ close_them.short_description = "Mark as Closed"
 
 
 class ChartAdmin(admin.ModelAdmin):
-	model = Chart
+    model = Chart
 
-	list_display = ('session_id','user','completion_status','created_at','modified_at','order')
-	actions = [close_them]
-	readonly_fields  = ( 'session_id','created_at','modified_at')
-    
-	inlines = [ChartItemStackedAdmin]
+    list_display = ('session_id','user','completion_status','created_at','modified_at',
+    '_num_prods','order', '_is_paid')
+    actions = [close_them]
+    readonly_fields  = ( 'session_id','created_at','modified_at')
 
-	def _num_prods(self, obj):
-		return obj.all_items()
-	_num_prods.short_description = "Number of Products"
-	_num_prods.admin_order_field = 'num_prods'
+    inlines = [ChartItemStackedAdmin]
+
+    def _num_prods(self, obj):
+        return obj.all_items()
+
+    def _is_paid(self, obj):
+        return obj.is_paid()
+
+    _num_prods.short_description = "Number of Products"
+    _num_prods.admin_order_field = 'num_prods'
 
 
 class SampleStackedAdmin(admin.StackedInline):
@@ -63,11 +73,14 @@ class SampleStackedAdmin(admin.StackedInline):
 
 
 class SamplerAdmin(admin.ModelAdmin):
-	model = Sampler
+    model = Sampler
+    list_display = ( 'session_id','created_at','modified_at','_is_paid','order')
+    readonly_fields  = ( 'session_id','created_at','modified_at','order')
+    inlines = [SampleStackedAdmin]
 
-    list_display = ('session_id','user','completion_status','created_at','modified_at','_num_prods','order')
-	readonly_fields  = ( 'session_id','created_at','modified_at')
-	inlines = [SampleStackedAdmin,'order']
+    def _is_paid(self, obj):
+        return obj.is_paid()
+
 
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Chart,ChartAdmin)

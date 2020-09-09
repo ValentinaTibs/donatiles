@@ -66,6 +66,8 @@ class Shipping(models.Model):
 def create_shipping_internal_id():
     return get_random_string(length=12)
 
+ 
+
 class Order(models.Model):
 
     note        = models.TextField(max_length = 200, null = True)
@@ -79,7 +81,7 @@ class Order(models.Model):
     is_sampler              = models.BooleanField(default = False)
     
     def save(self, *args, **kwargs):
-        if not self.if not self.id::
+        if not self.internal_tracking_id:
             self.internal_tracking_id = create_shipping_internal_id()
         if not self.id:
             self.created_at = timezone.now()
@@ -90,7 +92,6 @@ class Order(models.Model):
         return self.internal_tracking_id
 
     def user(self):
-
         if self.is_sampler:
             chart_model = self.sampler.first()
         else :
@@ -102,13 +103,24 @@ class Order(models.Model):
             return None
     
     def total(self):
-        if self.is_sampler:
-            return self.sampler.first().total_price()
         total = 0
-        for chart in self.charts:
+        for sample in self.sampler.all():
+            total += sample.total_price()
+        
+        for chart in self.charts.all():
             total += chart.total_price()
         return total
-                    
+    
+    def is_paid(self):
+        if self.is_sampler:
+            for sampler in self.sampler.all():
+                if not sampler.is_paid():
+                    return False
+        else:
+            for chart in order.charts.all():
+                if not chart.is_paid():
+                    return False
+        return True                    
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
@@ -153,7 +165,12 @@ class Chart(models.Model):
     def all_items(self):
         if self.chart_item:
             return self.chart_item.filter(status = 'ok')
-
+    
+    def is_paid(self):
+        stat = self.completion_status
+        if stat == 'p':
+            return True
+        return False
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
@@ -207,7 +224,6 @@ class Sampler(models.Model):
     
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
-    free_shipping = models.BooleanField(default=False)
     objects     = models.Manager() # The default manager.
     active      = ActiveSamplesManager() # The Active Charts
     
@@ -225,10 +241,10 @@ class Sampler(models.Model):
         total = 25
         
         #2do da riflettere meglio su questa condizione
-        finalised_charts =  Chart.objects.filter(user = self.user,completion_status='p')  
-        all_free_samples = Sampler.objects.filter(user = self.user, free_shipping = True) 
+        finalised_charts = Chart.objects.filter(user = self.user, completion_status='p')  
+        paid_samples = Sampler.objects.filter(user = self.user, completion_status='p') 
 
-        if finalised_charts.count() < (all_free_samples.count() + 1):
+        if finalised_charts.count() >= paid_samples.count()   :
             return 0
         return total
     
@@ -239,6 +255,11 @@ class Sampler(models.Model):
         if self.samples:
             return self.samples.filter(status = 'ok',product__code = product_code)
 
+    def is_paid(self):
+        stat = self.completion_status
+        if stat == 'p':
+            return True
+        return False
 
 class Sample(models.Model):
     sampler     = models.ForeignKey(Sampler, verbose_name="Samples", null=True, blank = True, on_delete=models.CASCADE, related_name='samples')
