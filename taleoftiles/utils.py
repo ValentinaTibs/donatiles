@@ -1,3 +1,4 @@
+import math  
 
 COUNTRY_LIST = (
     ('it', 'Italia'),
@@ -51,6 +52,7 @@ ITEM_STATUS = (
 
 ech_weight = (150,300,550,650,1000)
 ech_price = (145,172,272,295,371)
+IVA = 0.22
 
 def sfrido(self):
         return 0.10
@@ -78,15 +80,22 @@ def min_price(m2_price, m2_box, weight_box):
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
     if has_frido:
-        num_boxes = math.ceil(sfrido() * quantity + quantity)
+        num_boxes = math.floor(sfrido() * quantity + quantity)
     else:
-        num_boxes = math.ceil(quantity)
+        num_boxes = math.ceil(quantity /  sm_per_box)
+    tot_price_shipping = 0
     tot_quantity    = sm_per_box * num_boxes
     residual_weight = weight_box * num_boxes
+    tot_weight      = weight_box * num_boxes
     while residual_weight > 0 :
-        min_val_weight = next((x for x in ech_weight if x > tot_weight), len(ech_weight)-1)
-        idx_min = list_val.index(min_val_weight)
-        tot_price_shipping += ech_price[idx_min]
-        box_on_shipping = min_val_weight / weight_box 
-        residual_weight = box_on_shipping *  weight_box 
+        min_val_weight = next((x for x in ech_weight if x > residual_weight), ech_weight[len(ech_weight)-1])
+        idx_min = ech_weight.index(min_val_weight)
+        tot_price_shipping += ech_price[idx_min]+ ech_price[idx_min]*IVA
+        residual_weight -= ech_weight[idx_min]
     return tot_price_shipping + (sm_price * tot_quantity)
+
+
+# compute_sm_price(20,False,33.2,0.96,22.49)
+# compute_sm_price(100,False,33.2,0.96,22.49)
+# compute_sm_price(24,False,33.2,0.96,22.49) 
+# compute_sm_price(69,False,33.2,0.96,22.49)
