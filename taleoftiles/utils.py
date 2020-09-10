@@ -50,7 +50,7 @@ ITEM_STATUS = (
 ) 
 
 ech_weight = (150,300,550,650,1000)
-ech_price = (41,80,200,100)
+ech_price = (145,172,272,295,371)
 
 def sfrido(self):
         return 0.10
@@ -77,14 +77,16 @@ def min_price(m2_price, m2_box, weight_box):
     return min_cost_m2
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
-    tot_quantity = 0
-    num_boxes = 0
-
     if has_frido:
         num_boxes = math.ceil(sfrido() * quantity + quantity)
     else:
         num_boxes = math.ceil(quantity)
-
-    tot_quantity = sm_per_box * num_boxes
-    
-    return tot_quantity * max_price(sm_price, sm_per_box, weight_box)
+    tot_quantity    = sm_per_box * num_boxes
+    residual_weight = weight_box * num_boxes
+    while residual_weight > 0 :
+        min_val_weight = next((x for x in ech_weight if x > tot_weight), len(ech_weight)-1)
+        idx_min = list_val.index(min_val_weight)
+        tot_price_shipping += ech_price[idx_min]
+        box_on_shipping = min_val_weight / weight_box 
+        residual_weight = box_on_shipping *  weight_box 
+    return tot_price_shipping + (sm_price * tot_quantity)
