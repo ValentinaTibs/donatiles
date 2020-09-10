@@ -219,7 +219,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:27
 msgid "effect"
-msgstr ""
+msgstr "effetto"
 
 #: taleoftiles/templates/home.html:42
 msgid ""
