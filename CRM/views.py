@@ -19,7 +19,18 @@ def account(request):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no user for such profile " })
    
-    return render(request, "account.html", {'profile':profile})
+    try:
+        prev_data = Shipping.objects.get( user = profile)
+    except ObjectDoesNotExist:
+        prev_data = Shipping(email = request.user.email )
+    shipping_form = ShippingForm(instance=prev_data)
+    if request.method == 'POST':
+        shipping_form = ShippingForm(request.POST, instance=prev_data)
+        
+        if shipping_form.is_valid():
+            new_shipping = shipping_form.save()
+        
+    return render(request, "account.html", {'profile':profile,'shipping_form':shipping_form})
 
 def summary(request, id_ ):
     
@@ -32,7 +43,17 @@ def summary(request, id_ ):
         return redirect('payment', id_ = order.internal_tracking_id)
             
     return render(request, "summary.html", {'order':order,'prv_page':request.session['prev_page']})     
+
+def order(request, id_ ):
     
+    try:
+        order = Order.objects.get( internal_tracking_id = id_)
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message": "This order does not exist" })
+                
+    return render(request, "order.html", {'order':order})     
+
+
 def payment(request, id_):
 
     try:
@@ -53,6 +74,10 @@ def payment(request, id_):
             chart.completion_status = 'c'
             chart.save()
     return render(request, "payment.html", {'order':order,'prv_page': request.session['prev_page']})   
+
+    
+def create_one_time_password():
+    get_random_string(length=8)
 
 def shipping(request, id_):
     
@@ -77,11 +102,20 @@ def shipping(request, id_):
     if request.method == 'POST':
         shipping_form = ShippingForm(request.POST, instance=prev_data)
 
+        #2do check se la mail e gia inserita tra gli utenti invitarlo a loggarsi
         if shipping_form.is_valid():
             new_shipping = shipping_form.save()
             if request.user.is_authenticated:
                 new_shipping.user = request.user.profile
-                new_shipping.save()            
+                new_shipping.save()
+            else: 
+                new_user = User.objects.create_user( username=new_shipping.email, email=new_shipping.email,password=create_one_time_password()) 
+                new_user.set_unusable_password()
+                new_user.save()
+                da_user = Profile( user = new_user)        
+                result = da_user.save()                
+                login(request, new_user)
+                        
             order.final_payment = order.total()
             order.save()
 
@@ -114,6 +148,7 @@ def add_order(request, is_sample = False):
         order = Order()
         if is_sample:
             order.is_sampler = True
+        
         order.save()
         the_chart.order = order
         the_chart.save()

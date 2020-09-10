@@ -1,10 +1,27 @@
 
 COUNTRY_LIST = (
-    ('it',   'Italia'),
-    ('sv',	'Sverige'),
+    ('it', 'Italia'),
+    ('sv', 'Sverige'),
+    ('dk', 'Danmark'),
+    ('at', 'Österreich'),
+    ('fr', 'France'),
+    ('de', 'Deutscheland'),
+    ('be', 'Belgique'),
+    ('nl', 'Nederland'),
+    ('lu', 'Lëtzebuerg'),
 ) 
-#Italia - Svezia - Germania - Belgio - Olanda - Finlandia - Danimarca - Francia - Lussemburgo
 
+COUNTRY_LIST_COMPLETED = (
+    ('it', 'Italia','xxxxx',['07','08','09','90','91','92','93','94','95','96','97','98']),
+    ('sv', 'Sverige','xxxxx',['80','81','82','83','84','85','86','87','88','89','70','71','72','73','74','75','76','77','78','79','90','91','92','93','94','95','96','97','98']),
+    ('dk', 'Danmark','xxxx',[]),
+    ('at', 'Österreich','xxxx',[]),
+    ('fr', 'France','xxxxx',['20']),
+    ('de', 'Deutscheland','xxxxx',[]),
+    ('be', 'Belgique','xxxx',[]),
+    ('nl', 'Nederland','xxxx',[]),
+    ('lu', 'Lëtzebuerg','xxxx',[]),
+) 
 COMPLETION_STATUS = (
     ('s',   'Started'),
     ('c',   'Completed'),

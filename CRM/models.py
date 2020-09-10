@@ -41,37 +41,16 @@ def pour_charts_and_samplers(sender, user, request, **kwargs):
 user_logged_in.connect(pour_charts_and_samplers)
 
 #####  --------------
+        
 
-class Profile(models.Model):
-    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
-    bio         = models.TextField(max_length=500, blank=True)
-    location    = models.CharField(max_length=30, blank=True)
-    birth_date  = models.DateField(null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username        
-   
-class Shipping(models.Model):
-    #2do this must become a one to Many because we want to keep track of old shippings
-    user                = models.OneToOneField(Profile, on_delete=models.SET_NULL, null = True)
-    email               = models.TextField(max_length=100, blank=False)
-    fullname            = models.TextField(max_length=100, blank=False)
-    country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
-    city                = models.TextField(max_length=100, blank=False)
-    CAP                 = models.TextField(max_length=10, blank=False)
-    shipping_address    = models.TextField(max_length=100, blank=False)
-    telephone_num       = models.TextField(max_length=30, blank=False)
-    is_active           = models.BooleanField(default = True)
-
+#2do mettere qui un metodo più decente
 def create_shipping_internal_id():
     return get_random_string(length=12)
-
- 
 
 class Order(models.Model):
 
     note        = models.TextField(max_length = 200, null = True)
-
+    
     internal_tracking_id    = models.CharField(max_length=100, default = "")
     shipping_tracking_id    = models.CharField(max_length=100, default = "")
     created_at              = models.DateTimeField(editable=False)
@@ -122,6 +101,40 @@ class Order(models.Model):
                     return False
         return True                    
 
+
+
+class Profile(models.Model):
+    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
+    bio         = models.TextField(max_length=500, blank=True)
+    location    = models.CharField(max_length=30, blank=True)
+    birth_date  = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username       
+
+    def name(self):
+        if self.shipping:
+            return self.shipping.fullname
+        else:
+            self.user.email
+    
+    def orders(self):
+        query = Q(sampler__isnull = False, sampler__user = self.user) | Q(charts__isnull = False,charts__user = self.user) 
+        return Order.objects.filter(query, )    
+
+class Shipping(models.Model):
+    #2do this must become a one to Many because we want to keep track of old shippings
+    user                = models.OneToOneField(Profile, on_delete=models.SET_NULL, null = True)
+    email               = models.TextField(max_length=100, blank=False)
+    fullname            = models.TextField(max_length=100, blank=False)
+    country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
+    city                = models.TextField(max_length=100, blank=False)
+    CAP                 = models.TextField(max_length=10, blank=False)
+    shipping_address    = models.TextField(max_length=100, blank=False)
+    telephone_num       = models.TextField(max_length=30, blank=False)
+    is_active           = models.BooleanField(default = True)
+
+
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
         query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
@@ -130,13 +143,16 @@ class ActiveChartManager(models.Manager):
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
         )
         return qs
-        
+
+
 class Chart(models.Model):
 
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='charts')
     
+
+    #2do probabilmente togliere questo da qui
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
     created_at  = models.DateTimeField(editable=False)
