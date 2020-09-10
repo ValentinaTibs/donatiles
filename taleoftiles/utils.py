@@ -49,7 +49,7 @@ ITEM_STATUS = (
     ('o', 'Others')
 ) 
 
-ech_weight = (100,300,600,1000)
+ech_weight = (150,300,550,650,1000)
 ech_price = (41,80,200,100)
 
 def sfrido(self):
