@@ -23,8 +23,7 @@
           {% with img_name="square-effect-"|add:y %}
 
               <li style="background-image: url('{{ layout_elems|get_elem:img_name }}')">
-                <a href="{% url 'catalogue' tag.slug %}" class="btn-gridbox">
-                {% trans 'effect'|capfirst %} {{tag}}</a>
+                <a href="{% url 'catalogue' tag.slug %}" class="btn-gridbox">{{tag}}</a>
             </li>
 
           {% endwith %}
