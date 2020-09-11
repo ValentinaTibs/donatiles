@@ -5,11 +5,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
+from django.db.models import Q 
+from taleoftiles.utils  import compute_single_price, compute_sm_price
+
 from taleoftiles.models import Tag, Product, Catalogue
 from layout.models      import Element
 from blog.models        import Post
+from CRM.models        import Chart
 
-from CRM.forms          import NewChartItemForm
+from CRM.forms          import AddChartForm
 
 
 def index(request):  
@@ -70,6 +74,10 @@ def catalogue(request, the_filter = None):
         "active_tags_items"   : query_items
         })
 
+def compute_price(request, product_id):
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
 def product(request, product_code, chi_form = None ):    
     
     try: 
@@ -80,10 +88,49 @@ def product(request, product_code, chi_form = None ):
     #for all product in the same series that are not support and not itself
     related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
     
-    chi_form = NewChartItemForm(request.POST or {'product':product.pk,} , request.FILES or None)
+    chi_form = AddChartForm(request.POST or {'product':product.pk,} ,  None)
+    
+    query = Q()
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        if not request.session.exists(request.session.session_key):
+            request.session.create()     
+        query = Q(session_id  = request.session.session_key) 
+
+    try: 
+        chart = Chart.objects.filter( query , completion_status = 's')
+    except ObjectDoesNotExist:
+        chart = Chart(session_id  = request.session.session_key)
+        if request.user.is_authenticated:
+            chart.user = request.user
+        chart.save()
+
+    price = 0
+    if request.method == 'POST':
+        if chi_form.is_valid() and "save_it" in request.POST:
+            chart_item = chi_form.save(commit=False)
+        
+            # chart_item.chart = chart
+            # chart_item.save()
+            price = chart_item.price()
+        print( chi_form.errors)
+
+    # if request.method == 'POST':
+    #     
+    #     if chi_form.is_valid():
+    #         print("we are valid")
+    #         chart_item = chi_form.save(commit=False)
+    #         if  "save_it" in request.POST:
+    #             chart_item.chart = chart
+    #             chart_item.save()
+    #             print("we didnt saved")
+            
+    #         price = chart_item.price()
 
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,
-        "chi_form" : chi_form
+        "chi_form" : chi_form, 
+        "price":price
         })

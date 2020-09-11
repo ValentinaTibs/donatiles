@@ -45,32 +45,32 @@
 <script>
   function compute_money(){
 
-    var formats = document.getElementsByName('product-size');
-    var sel_size; 
+    
+    // var sel_size; 
+    // for(i = 0; i < formats.length; i++) { 
+    // }
+
+    var formats = document.getElementsByName('size');
+    // var sel_size; 
     for(i = 0; i < formats.length; i++) { 
-      if(formats[i].checked) {
-        sel_size = formats[i].id;
-        break;
+    //   var name = document.getElementById("id_size_"+i).value
+    //   alert(name)
+    //   alert('sm_price_catch_'+name)
+    //   document.getElementById('sm_price_catch_'+name).style.display = "none";
+    if(formats[i].checked) {
+        alert('CHECKED '+i)
+        sel_size = document.getElementById('label_id_size_'+i).innerHTML
+        document.getElementById('selected_format').innerHTML = String(sel_size);
+        alert('sm_price_catch_'+sel_size)
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+        
+
+    //     sel_size = document.getElementById("id_size_"+i).value;
+    //     document.getElementById('selected_format').innerHTML = String(sel_size);    
+    //     alert('sm_price_catch_'+String(sel_size))
+    //     document.getElementById('sm_price_catch_'+String(sel_size)).style.display = "inline";
       }
     }
-    document.getElementById('selected_format').innerHTML = String(sel_size);
-    var sm = document.getElementById('id_quantity').value;
-    var min_ammount = document.getElementById('min_ammount').value;
-    if (sm < min_ammount){
-      return;
-    }
-    
-    var sm_price = document.getElementById('sm_price_catch').innerHTML ;
-    var sfrido = document.getElementById("includeOffCut").checked;
-    
-    if(sfrido)
-        document.getElementById('price_catch').innerHTML = Math.round((Number(sm) + Number(sm * 0.1)) * sm_price );
-    else
-        document.getElementById('price_catch').innerHTML = Math.round(sm  * sm_price );
-
-    document.getElementById('sm_catch').innerHTML = sm;
-    document.getElementById('sm_notification').innerHTML = sm;
-    document.getElementById('product_name_notification').innerHTML = sm;
   }
 </script>
   
@@ -90,29 +90,42 @@
 
       <h5>{% trans 'formats' %}</h5>
 
-      {% for format in product.formats.all %}  
-        <input type="radio" name="product-size" id="{{ format.slug }}" checked onclick="compute_money()">
-        <label for="{{ format.slug }}">{{ format.name }}</label>
-      {% endfor %}
+      
+      <ul> 
+        {% for choice in chi_form.size %}<li> 
+          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" onclick="compute_money()">{{ choice.choice_label }}</label> 
+          {{ choice.tag }}
+        </li>{% endfor %}
+      </ul>
       
       {% if product.finish %}
         <h5>{% trans 'finish' %}</h5>
         {% for format in product.finish.all %}  
           <input type="radio" name="product-finish" id="{{ finish.slug }}" checked>
           <label for="{{ finish.slug }}">{{ finish.name }}</label>
+
         {% endfor %}
       {% endif %}
     </div>
 
-    <div class="product-addtocartbox">
+<form  action="{% url 'product' product.code %}" method="POST"> 
+{% csrf_token %} 
 
+    <div class="product-addtocartbox">
       <div>
         <div class="row">
           <div><strong>Codice: {{product.code}}</strong>
             <br><span id="selected_format">20x20</span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
-          <div><div class="product-figure"><span> €</span> <b id="sm_price_catch">{{product.min_price}}</b></div><div class="product-note">al m&sup2;</div></div>
+          <div><div class="product-figure"><span> €</span> 
+            
+            {% for choice in chi_form.size %}
+            <b style="display:none;" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
+            {% endfor %}
+
+
+          </div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
 
@@ -138,12 +151,12 @@
         <div class="row">
           {{chi_form.product}}
           <div><strong>Totale</strong></div>
-          <div class="product-figure">€ <strong id="price_catch">3960</strong></div>
+          <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
         </div>
         <div class="row">
           <div class="checkbox">
             <input type="checkbox" id="includeOffCut" checked onclick="compute_money()">
-            <label for="includeOffCut">Includi 10% di sfrido</label>
+            <label for="includeOffCut">{% trans 'include-sfrido' %}</label>
           </div>
           <div>
             <button class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></button>
@@ -151,13 +164,14 @@
         </div>
       </div>
 
-      <div class="btn btn-primary" onclick="compute_money()" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></div>
-      <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></button>
-
+      <button class="btn btn-primary" onclick="compute_money()" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
+    
+    
     </div>  <!-- product-addtocartbox -->
-
+    </form>
+    <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></button>
     <div class="product-shippinginfo">
-      <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
+      <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
       <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} settimane</strong></p>
       <p class="note">Hai qualche dubbio?<br>
         <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
@@ -248,18 +262,17 @@
 
 
 
-<form  action="{% url 'add_chart' product.code %}" method="POST"> 
 
-	{% csrf_token %}
 
-	{{chi_form.size.label_tag}}
-	{{chi_form.size}}
 	{{chi_form.product}}
 	{{chi_form.has_frido}}
 	{{chi_form.has_frido.label_tag}}
 	
 	{{chi_form.quantity.label_tag}}
 	{{chi_form.quantity}}
+
+{{chi_form.save_it.label}}
+{{chi_form.save_it.as_hidden}}
 
 
 	<button> {% trans 'add-chart-button' %} </button>
@@ -288,6 +301,8 @@
 
 <script>
   window.onload = function() {
+  var formats = document.getElementsByName('size');
+  var last = formats.length-1;
   compute_money();
 };
   

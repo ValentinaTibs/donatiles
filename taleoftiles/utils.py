@@ -80,7 +80,7 @@ def min_price(m2_price, m2_box, weight_box):
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
     if has_frido:
-        num_boxes = math.floor(sfrido() * quantity + quantity)
+        num_boxes = math.floor((0.10 * quantity + quantity)/sm_per_box)
     else:
         num_boxes = math.ceil(quantity /  sm_per_box)
     tot_price_shipping = 0

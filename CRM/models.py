@@ -213,11 +213,10 @@ class ChartItem(models.Model):
             return self.status
 
     def price(self):
-        if self.status == 'ok':
-            if self.product.single_sell:
-                return compute_single_price(0,0,0,0)
-            else:
-                return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box())
+        if self.product.single_sell():
+            return compute_single_price(0,0,0,0)
+        else:
+            return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box())
 
     def tot_quantity(self):
         return 1
