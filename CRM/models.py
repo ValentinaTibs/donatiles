@@ -96,12 +96,10 @@ class Order(models.Model):
                 if not sampler.is_paid():
                     return False
         else:
-            for chart in order.charts.all():
+            for chart in self.charts.all():
                 if not chart.is_paid():
                     return False
         return True                    
-
-
 
 class Profile(models.Model):
     user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
@@ -193,6 +191,7 @@ class ChartItem(models.Model):
     product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     quantity    = models.PositiveIntegerField( default=1 )       
+    #saved_price = models.PositiveIntegerField( )       
     has_frido   = models.BooleanField(default = True)
 
     status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')

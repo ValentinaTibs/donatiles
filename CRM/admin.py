@@ -14,7 +14,7 @@ class ChartItemAdmin(admin.ModelAdmin):
     list_display = ('chart','product','status','chart__user')
 
     def chart__user(self, obj):
-        if obj.chart.user:
+        if obj.chart and obj.chart.user:
             return obj.chart.user
         else :
             return "User Non Reg"

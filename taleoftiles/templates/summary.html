@@ -56,11 +56,110 @@
 
 	{% endfor %} 
 {% else %} 
-	{% for chart in order.charts.all %}
+	
 
-		{{order.charts}}
+
+    <div class="cartrecap">
+
+      <div class="cartreacap-header">
+        <h5>Quantità</h5>
+        <h5>Prezzo</h5>
+      </div>
+	{% for chart in order.charts.all %}
+	{% for chart_item in chart.chart_item.all %}
+		<div class="cartrecap-item">
+        <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
+        <div class="cartrecap-main">
+          <h5>{{chart_item.product.serie}}</h5>
+          <h4>{{chart_item.product.name}}</h4>
+          <p>{{chart_item.size}} / {{chart_item.finish}} / grigio chiaro</p>
+        </div>
+        <div class="cartrecap-qty">
+          <p class="note">8 scatole</p>
+          <div class="input-qty">
+            <input type="number" value="80" min="10" max="1000" step="0.01">
+            <div class="product-qtybtns">
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure">€ {{chart_item.price}}</span>
+          <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+        </div>
+      </div>
+	{% endfor %} 
+
+      
+
+      <!-- <div class="cartrecap-item">
+        <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
+        <div class="cartrecap-main">
+          <h5>Nome serie</h5>
+          <h4>Nome Prodotto</h4>
+          <p>45x45 / rosso</p>
+        </div>
+        <div class="cartrecap-qty">
+          <p class="note">5 scatole</p>
+          <div class="input-qty">
+            <input type="number" value="50" min="10" max="1000" step="0.01">
+            <div class="product-qtybtns">
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">m&sup2;</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure">€ 2000</span>
+          <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+        </div>
+      </div> -->
+
+      <!-- <div class="cartrecap-item">
+        <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb-complementary.png')"></div>
+        <div class="cartrecap-main">
+          <h5>Nome serie</h5>
+          <h4>Nome Battiscopa</h4>
+          <p>grigio chiaro</p>
+        </div>
+        <div class="cartrecap-qty">
+          <p class="note"></p>
+          <div class="input-qty">
+            <input type="number" value="16" min="5" max="1000" step="0.01">
+            <div class="product-qtybtns">
+              <button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-minus"/></svg></button><span class="product-note">metri</span><button class="btn"><svg class="icon-m icon"><use xlink:href="images/svgdefs.svg#icon-add"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure">€ 432</span>
+          <button class="btn"><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-delete"/></svg></button>
+        </div>
+      </div> -->
+
+    
+
+  
 
 	{% endfor %} 
+	</div>
+	     <div class="cartrecap-item">
+        <div class="cartrecap-main">
+          <h4>Spese di spedizione</h4>
+          <p class="note">Per ogni tuo acquisto su Tale Of Tiles le spese di spedizione in tutta Europa sono sempre incluse</p>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure">€ 0</span>
+        </div>
+      </div>
+
+      <div class="cartrecap-item cartrecap-total">
+        <div class="cartrecap-main">
+          <h4>Totale ordine</h4>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure">€ 6392</span>
+        </div>
+      </div>
 {% endif %} 
 		
   

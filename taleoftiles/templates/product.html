@@ -51,6 +51,8 @@
       if(formats[i].checked) {
         document.getElementById('selected_format').innerHTML = String(sel_size);
         document.getElementById('sm_price_catch_'+sel_size).style.display = "inline"; 
+        document.getElementById('sm_catch').innerHTML = document.getElementById('id_quantity').value ;
+        document.getElementById('sm_notification').innerHTML = document.getElementById('id_quantity').value ;
       }
     }
   }
@@ -73,7 +75,7 @@
   {% endfor %}
   </div>
 
-    <form  action="{% url 'product' product.code %}"  name="product_ship" method="POST"> 
+<form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST"> 
 {% csrf_token %} 
 
   <div class="product-selection">
@@ -93,7 +95,7 @@
       <div>
         <div class="row">
           <div><strong>Codice: {{product.code}}</strong>
-            <br><span id="selected_format">20x20</span>
+            <br><span id="selected_format"></span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
           <div><div class="product-figure"><span> €</span> 
@@ -108,6 +110,8 @@
       </div>
 
       <div>
+        <div class="row">{{errors}}</div>
+        
         <div class="row">
           <div>
             <strong>Superficie da rivestire</strong><br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;
@@ -145,7 +149,7 @@
 
       {{chi_form.save_it.as_hidden}}
       <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
-    
+      <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div> 
     
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
@@ -159,7 +163,7 @@
   </div>
 
  </form>
-    <!-- <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div> -->
+    
    
   <div class="product-main">
     
@@ -243,6 +247,29 @@
 
 
 <script>
+
+  function create_post(){
+  // console.log("create post is working!") // sanity check
+  //   $.ajax({
+  //       url : "create_post/", // the endpoint
+  //       type : "POST", // http method
+  //       data : { the_post : $('#post-text').val() }, // data sent with the post request
+
+  //       // handle a successful response
+  //       success : function(json) {
+  //           $('#post-text').val(''); // remove the value from the input
+  //           console.log(json); // log the returned json to the console
+  //           console.log("success"); // another sanity check
+  //       },
+
+  //       // handle a non-successful response
+  //       error : function(xhr,errmsg,err) {
+  //           $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+  //               " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+  //           console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+  //       }
+  //   });
+  };
   window.onload = function() {
   var rad = document.product_ship.size;
   var prev = null;
@@ -256,7 +283,17 @@
       });
   }
 
+  
+
   compute_money()
+  
+//   document.product_ship.addEventListener('submit', function(event){
+//     event.preventDefault();
+//     console.log("form submitted!")  // sanity check
+//     create_post();
+// });
+
+  
   
 };
   

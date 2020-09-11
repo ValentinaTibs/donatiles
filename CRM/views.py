@@ -123,7 +123,7 @@ def shipping(request, id_):
         
     return render(request, "shipping.html", {'form':shipping_form,'order':order,'prv_page': request.session['prev_page']})   
 
-def add_order(request, is_sample = False):
+def add_order(request, is_sample):
 
     query = Q()
     if request.user.is_authenticated:
@@ -132,31 +132,33 @@ def add_order(request, is_sample = False):
         query = Q(session_id  = request.session.session_key) 
 
     the_chart = None
-    chart_model = None
-
-    if is_sample:
-        chart_model = Sampler
+    the_model = None
+    if is_sample == True:
+        the_model = Sampler
     else:
-        chart_model = Chart
+        the_model = Chart
 
-    try:
-        the_chart = chart_model.objects.get( query,completion_status = 's' )
-    except ObjectDoesNotExist:
-        render(request, "404.html",{"message": "Invalid sampler for user" ,})
-    
-    if not the_chart.order:
+    order = None
+    the_charts = the_model.objects.filter( query,completion_status = 's', order__isnull = True )
+    # se nessun carrello ha un ordine fai un ordine - 
+    if the_charts or the_charts.count() <= 0:
         order = Order()
-        if is_sample:
-            order.is_sampler = True
-        
+        order.is_sampler = is_sample
         order.save()
-        the_chart.order = order
-        the_chart.save()
+    else : 
+        # altrimenti prendi l'ordine del primo dei carrelli 
+        good_chart = the_charts.filter(query,completion_status = 's',order__isnull = False).first()
+        order = good_chart.order
+    # assegna questo ordine a ciascun carrello presente
+    for chart in the_charts:
+        if not chart.order:
+            chart.order = order
+            chart.save()
         
     if request.method == 'GET':
         request.session['prev_page'] = request.GET['prv']
 
-    return redirect('summary', id_ = the_chart.order.internal_tracking_id)
+    return redirect('summary', id_ = order.internal_tracking_id)
 
 def add_user(request):
     form = RegisterForm(request.POST or None, request.FILES or None)    

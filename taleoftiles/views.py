@@ -99,22 +99,23 @@ def product(request, product_code, chi_form = None ):
         query = Q(session_id  = request.session.session_key) 
 
     try: 
-        chart = Chart.objects.filter( query , completion_status = 's')
+        chart = Chart.objects.filter( query , completion_status = 's').first()
     except ObjectDoesNotExist:
         chart = Chart(session_id  = request.session.session_key)
         if request.user.is_authenticated:
             chart.user = request.user
         chart.save()
-
     price = 0
+    errors = None
     if request.method == 'POST':
         if chi_form.is_valid() and "save_it" in request.POST:
-            chart_item = chi_form.save(commit=False)
-        
-            # chart_item.chart = chart
-            # chart_item.save()
+            chart_item = chi_form.save(commit=False)        
             price = chart_item.price()
-        print( chi_form.errors)
+            chart_item.save_price = chart_item.price()
+            chart_item.chart = chart
+            chart_item.save()
+                    
+        errors = (chi_form.errors)
 
     # if request.method == 'POST':
     #     
@@ -126,11 +127,11 @@ def product(request, product_code, chi_form = None ):
     #             chart_item.save()
     #             print("we didnt saved")
             
-    #         price = chart_item.price()
 
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,
         "chi_form" : chi_form, 
+        "errors" : errors,
         "price":price
         })

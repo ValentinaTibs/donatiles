@@ -116,7 +116,7 @@
 
         </button>
       <button class="btn cartbtn" data-overlay="Cart">
-        <span>{{chart.all_items |length}}</span>
+        <span>{{num_ch_i}}</span>
         <svg class="icon icon-empty">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-cart-empty' %}"/></svg>
           <svg class="icon icon-full">
@@ -179,33 +179,37 @@
     <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
-  {% if chart %}
+  {% if charts.count > 0 %}
+    {% for chart in charts %}
+      {% for chart_item in chart.all_items %}
 
-  {% for chart_item in chart.all_items %}
+        <div class="cartitem">
+          <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
+          <div class="cartitem-main">
+            <div class="cartitem-name">
+              <span><strong>{{chart_item.product.serie}}</strong></span>
+              <span>{{chart_item.size}} / {{chart_item.product.name}}</span>
+            </div>
+            <div class="cartitem-amount">
+              <span>{{chart_item.quantity}} m&sup2;</span>
+              <span class="cartitem-price">€ {{chart_item.price}}</span>
+            </div>
+          </div>
+          <a href="{% url 'del_chart' chart_item.pk %}"> 
+          <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
+          </a> 
+        </div>
 
-  <div class="cartitem">
-    <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
-    <div class="cartitem-main">
-      <div class="cartitem-name">
-        <span><strong>Nome Prodotto</strong></span>
-        <span>20x20 / grigio chiaro</span>
-      </div>
-      <div class="cartitem-amount">
-        <span>88 m&sup2;</span>
-        <span class="cartitem-price">€ 3960</span>
-      </div>
-    </div>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-  </div>
+    {% endfor %}
   {% endfor %}
  
 
   <div class="cartitem-total">
     <span>Totale</span>
-    <strong>€ 3960</strong>
+    <strong>€ {{chart.price}}</strong>
   </div>
 
-  <a href="checkout-1.html" class="btn btn-primary"><span>Procedi con l'ordine</span>
+  <a href="{% url 'add_order' False %}?prv={{request.get_full_path|urlencode}}" class="btn btn-primary"><span>Procedi con l'ordine</span>
     <svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
 
   <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
@@ -276,9 +280,9 @@
   </nav>
 
   <ul class="nav-mobile-social">
-    <li><a href="https://www.facebook.com/taleoftiles" target="_blank"><svg class="icon-l icon">    <use xlink:href="{% static 'images/svgdefs.svg#icon-social-facebook' %}"/></svg></a></li>
-    <li><a href="https://www.instagram.com/tale.of.tiles/" target="_blank"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a></li>
-    <li><a href="https://www.pinterest.se/taleoftiles1/" target="_blank"><svg class="icon-l icon">  <use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a></li>
+    <li><a href="https://www.facebook.com/taleoftiles" target="_blank">     <svg class="icon-l icon">   <use xlink:href="{% static 'images/svgdefs.svg#icon-social-facebook' %}"/></svg></a></li>
+    <li><a href="https://www.instagram.com/tale.of.tiles/" target="_blank"> <svg class="icon-l icon">   <use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a></li>
+    <li><a href="https://www.pinterest.se/taleoftiles1/" target="_blank">   <svg class="icon-l icon">   <use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a></li>
   </ul>
 
 </div>
@@ -286,7 +290,7 @@
 <div class="notification">
 
   <div class="notification-body">
-    <p><strong><b id="sm_notification">88</b> m&sup2;</strong> di <strong id="product_name_notification">{{ product.name }}</strong><br>aggiunti al carrello</p>
+    <p><strong><b id="sm_notification"></b> m&sup2;</strong> {% trans 'of' %} <strong id="product_name_notification">{{ product.name }}</strong><br>{% trans 'added-to-chart' %}</p>
     <p class="note"><a href="" data-overlay="Cart">{% trans 'open-chart' %}</a></p>
   </div>
 
