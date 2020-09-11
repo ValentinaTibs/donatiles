@@ -84,32 +84,21 @@
   {% endfor %}
   </div>
 
-    
+    <form  action="{% url 'product' product.code %}" method="POST"> 
+{% csrf_token %} 
+
   <div class="product-selection">
     <div class="product-options">
 
       <h5>{% trans 'formats' %}</h5>
-
-      
-      <ul> 
-        {% for choice in chi_form.size %}<li> 
-          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" onclick="compute_money()">{{ choice.choice_label }}</label> 
+      {% for choice in chi_form.size %}
           {{ choice.tag }}
-        </li>{% endfor %}
+          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label> 
+      {% endfor %}
       </ul>
-      
-      {% if product.finish %}
-        <h5>{% trans 'finish' %}</h5>
-        {% for format in product.finish.all %}  
-          <input type="radio" name="product-finish" id="{{ finish.slug }}" checked>
-          <label for="{{ finish.slug }}">{{ finish.name }}</label>
 
-        {% endfor %}
-      {% endif %}
     </div>
 
-<form  action="{% url 'product' product.code %}" method="POST"> 
-{% csrf_token %} 
 
     <div class="product-addtocartbox">
       <div>
@@ -139,9 +128,9 @@
             {{chi_form.quantity}}
             
             <div class="product-qtybtns">
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg></button>
+              <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
               <span class="product-note">m&sup2;</span>
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg></button>
+              <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
             </div>
           </div>
         </div>
@@ -155,21 +144,21 @@
         </div>
         <div class="row">
           <div class="checkbox">
-            <input type="checkbox" id="includeOffCut" checked onclick="compute_money()">
+            
+            {{chi_form.has_frido}}
             <label for="includeOffCut">{% trans 'include-sfrido' %}</label>
           </div>
           <div>
-            <button class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></button>
+            <div class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></div>
           </div>
         </div>
       </div>
 
-      <button class="btn btn-primary" onclick="compute_money()" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
+      {{chi_form.save_it.as_hidden}}
+      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
     
     
     </div>  <!-- product-addtocartbox -->
-    </form>
-    <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></button>
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
       <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} settimane</strong></p>
@@ -180,6 +169,9 @@
 
   </div>
 
+ </form>
+    <!-- <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div> -->
+   
   <div class="product-main">
     
 	{% autoescape off %}
@@ -301,9 +293,7 @@
 
 <script>
   window.onload = function() {
-  var formats = document.getElementsByName('size');
-  var last = formats.length-1;
-  compute_money();
+  
 };
   
 </script>
