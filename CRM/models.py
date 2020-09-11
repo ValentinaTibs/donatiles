@@ -58,6 +58,7 @@ class Order(models.Model):
     order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
     final_payment           = models.PositiveIntegerField( default=0 )   
     is_sampler              = models.BooleanField(default = False)
+    shipping_date           = models.DateTimeField(editable=True)
     
     def save(self, *args, **kwargs):
         if not self.internal_tracking_id:

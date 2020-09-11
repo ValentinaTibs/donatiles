@@ -15,85 +15,50 @@
 
     <div class="checkout-title">
       <a href="account.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="images/svgdefs.svg#icon-arrow-left"/></svg>Torna ai tuoi ordini</a>
-      <h1>Ordine 2020IT126C</h1>
+      <h1>{% trans 'order'|title %} {{order.internal_tracking_ids}} 2020IT126C</h1>
     </div>
 
     <div class="cartrecap">
 
       <div class="cartreacap-header">
-        <h5>Quantità</h5>
-        <h5>Prezzo</h5>
+        <h5>{% trans 'quantity'|title %}</h5>
+        <h5>{% trans 'price'|title %}</h5>
       </div>
 
+{% for chart in order.charts.all %}
+	{% for chart_item in chart.chart_item.all %}
+	
       <div class="cartrecap-item">
         <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
         <div class="cartrecap-main">
-          <h5>Nome serie</h5>
-          <h4>Nome Prodotto</h4>
-          <p>20x20 / Finitura A / grigio chiaro</p>
+          <h5>{{product.serie}}</h5>
+          <h4>{{chart_item.product.name}}</h4>
+          <p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
         </div>
         <div class="cartrecap-qty">
-          <p class="note">8 scatole</p>
+          <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
           <div class="input-qty">
-            <span class="product-figure">80</span>
+            <span class="product-figure">{{chart_item.quantity}}</span>
             <div class="product-qtybtns">
               <span class="product-note">m&sup2;</span>
             </div>
           </div>
         </div>
         <div class="cartrecap-price">
-          <span class="product-figure">€ 3960</span>
+          <span class="product-figure">€ {{chart_item.price}}</span>
         </div>
       </div>
+	{% endfor %}
+	{% endfor %} 
 
-      <div class="cartrecap-item">
-        <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
-        <div class="cartrecap-main">
-          <h5>Nome serie</h5>
-          <h4>Nome Prodotto</h4>
-          <p>45x45 / rosso</p>
-        </div>
-        <div class="cartrecap-qty">
-          <p class="note">5 scatole</p>
-          <div class="input-qty">
-            <span class="product-figure">50</span>
-            <div class="product-qtybtns">
-              <span class="product-note">m&sup2;</span>
-            </div>
-          </div>
-        </div>
-        <div class="cartrecap-price">
-          <span class="product-figure">€ 2000</span>
-        </div>
-      </div>
-
-      <div class="cartrecap-item">
-        <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb-complementary.png')"></div>
-        <div class="cartrecap-main">
-          <h5>Nome serie</h5>
-          <h4>Nome Battiscopa</h4>
-          <p>grigio chiaro</p>
-        </div>
-        <div class="cartrecap-qty">
-          <p class="note"></p>
-          <div class="input-qty">
-            <span class="product-figure">16</span>
-            <div class="product-qtybtns">
-              <span class="product-note">metri</span>
-            </div>
-          </div>
-        </div>
-        <div class="cartrecap-price">
-          <span class="product-figure">€ 432</span>
-        </div>
-      </div>
+     
 
       <div class="cartrecap-item cartrecap-total">
         <div class="cartrecap-main">
-          <h4>Totale ordine</h4>
+          <h4>{% trans 'order-total' %}</h4>
         </div>
         <div class="cartrecap-price">
-          <span class="product-figure">€ 6392</span>
+          <span class="product-figure">€ {{order.total}}</span>
         </div>
       </div>
 
@@ -104,11 +69,12 @@
   <aside>
     <div class="asidebox">
       <h5>Effettuato il</h5>
-      <p class="note"><span class="hilite">24 Febbraio 2020</span></p>
-      <h5>Spedito il</h5>
-      <p class="note"><span class="hilite">7 Marzo 2020</span></p>
-      <h5>Indirizzo di spedizione</h5>
-      <p class="note">Piero Ciarfaglia<br>Vocabolo Chiorano snc<br>02046 Magliano Sabina – Italia</p>
+      <p class="note"><span class="hilite">{{order.created_at}}</span></p>
+
+      <h5>{% trans 'shipping-date' %}</h5>
+      <p class="note"><span class="hilite">{{order.shipping_date}}</span></p>
+      <h5>{% trans 'shipping-address' %}</h5>
+      <p class="note">{{order.shipping.fullname}}</p>
     </div>
   </aside>
 

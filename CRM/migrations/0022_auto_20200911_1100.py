@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='chartitem',
-            name='saved_price',
-            field=models.PositiveIntegerField(default=0, null=True),
-        ),
+
     ]

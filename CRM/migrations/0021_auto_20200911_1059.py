@@ -10,11 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='chartitem',
-            name='saved_price',
-            field=models.PositiveIntegerField(default=-1, null=True),
-        ),
         migrations.AlterField(
             model_name='shipping',
             name='country',

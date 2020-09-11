@@ -83,8 +83,6 @@ TEMPLATES = [
     }
 ]
 
-
-
 WSGI_APPLICATION = "gettingstarted.wsgi.application"
 
 # Database
