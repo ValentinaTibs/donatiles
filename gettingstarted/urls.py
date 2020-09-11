@@ -34,10 +34,11 @@ urlpatterns += i18n_patterns(
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
     path("account/",                                        CRM.views.account,    name="account"),
 
-    path("summary/<str:is_sample>",  CRM.views.summary,  name="summary"),
-    
-    path("shipping/",           CRM.views.shipping, name="shipping"),
-    path("payment/<int:id_>",   CRM.views.payment,  name="payment"),
+    path("add_order/<str:is_sample>", CRM.views.add_order, name="add_order"),
+    path("summary/<str:id_>",  CRM.views.summary,  name="summary"),
+    path("shipping/<str:id_>", CRM.views.shipping, name="shipping"),
+    path("payment/<str:id_>",   CRM.views.payment,  name="payment"),
+    path("order/<str:id_>",   CRM.views.order,  name="order"),
     
     path("blog/",                       blog.views.blog, name="blog"),
     path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),

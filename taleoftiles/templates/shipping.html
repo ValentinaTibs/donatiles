@@ -13,8 +13,8 @@
     <div>
   
       <div class="checkout-title">
-        <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left ' %}"/></svg>Annulla</a>
+        <a href="{{prv_page|urlencode}}" class="btn-link"><svg class="icon-l icon">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left ' %}"/></svg>{% trans 'checkout-back' %}</a>
         <h1>{% trans 'shipping-title' %}</h1>
       </div>
   
@@ -65,32 +65,32 @@
     </div>
   
     
-    </form>
-    <aside>
-        <a href="checkout-3.html" class="btn btn-primary disabled"><span>Concludi l'ordine</span><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
-        <input type="hidden" name="prv" value="{{ prv_page }}">
-              <input type="submit" value="{% trans 'shipping-insert-order' %}" />
-  
+       <aside>
+            <input type="hidden" name="prv" value="{{ prv_page }}">
+            <button  id="insert_shipping_button"  class="btn btn-primary disabled"><span>{% trans 'shipping-insert-order' %}</span><svg class="icon icon-m">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button>
+          
             {% if not user.is_authenticated %}
             <div class="asidebox">
                 <h4>{% trans 'already-registered' %}</h4>
                 <p class="note">Risparmia tempo: <a href="" data-overlay="Auth">effettua il login</a> per utilizzare i tuoi dati di spedizione</p>
             </div>
             {% endif %}
-          
+
       </aside>
+
+    </form>
+ 
   </div>
   
 
-<hl>
-
-
-
-
-
 <script>
-    document.querySelector( '.nav-primary > ul > li:nth-child(2)' ).classList.add( 'selected' );
+
+document.querySelector( '#insert_shipping_button' ).classList.remove( 'disabled' );
+document.querySelector( '.nav-primary > ul > li:nth-child(2)' ).classList.add( 'selected' );
+
 </script>
+
   
 
 {% endblock %}

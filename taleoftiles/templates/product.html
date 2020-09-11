@@ -44,34 +44,24 @@
 </div>
 <script>
   function compute_money(){
-
-    var formats = document.getElementsByName('product-size');
-    var sel_size; 
+    var formats = document.getElementsByName('size');
     for(i = 0; i < formats.length; i++) { 
+      var sel_size = document.getElementById('label_id_size_'+i).innerHTML
+      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
       if(formats[i].checked) {
-        sel_size = formats[i].id;
-        break;
+        document.getElementById('selected_format').innerHTML = String(sel_size);
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline"; 
+        document.getElementById('sm_catch').innerHTML = document.getElementById('id_quantity').value ;
+        document.getElementById('sm_notification').innerHTML = document.getElementById('id_quantity').value ;
       }
     }
-    document.getElementById('selected_format').innerHTML = String(sel_size);
-    var sm = document.getElementById('id_quantity').value;
-    var min_ammount = document.getElementById('min_ammount').value;
-    if (sm < min_ammount){
-      return;
-    }
-    
-    var sm_price = document.getElementById('sm_price_catch').innerHTML ;
-    var sfrido = document.getElementById("includeOffCut").checked;
-    
-    if(sfrido)
-        document.getElementById('price_catch').innerHTML = Math.round((Number(sm) + Number(sm * 0.1)) * sm_price );
-    else
-        document.getElementById('price_catch').innerHTML = Math.round(sm  * sm_price );
+  }
+  function add_quantity(){
+  document.getElementById('id_quantity').value = Number(document.getElementById('id_quantity').value) + Number(1); 
+  }
 
-    document.getElementById('sm_catch').innerHTML = sm;
-
-    document.getElementById('sm_notification').innerHTML = sm;
-    document.getElementById('product_name_notification').innerHTML = sm;
+  function minus_quantity(){
+    document.getElementById('id_quantity').value = document.getElementById('id_quantity').value -1;
   }
 </script>
   
@@ -85,39 +75,43 @@
   {% endfor %}
   </div>
 
-    
+<form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST"> 
+{% csrf_token %} 
+
   <div class="product-selection">
     <div class="product-options">
 
       <h5>{% trans 'formats' %}</h5>
-
-      {% for format in product.formats.all %}  
-        <input type="radio" name="product-size" id="{{ format.slug }}" checked onclick="compute_money()">
-        <label for="{{ format.slug }}">{{ format.name }}</label>
+      {% for choice in chi_form.size %}
+          {{ choice.tag }}
+          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label> 
       {% endfor %}
-      
-      {% if product.finish %}
-        <h5>{% trans 'finish' %}</h5>
-        {% for format in product.finish.all %}  
-          <input type="radio" name="product-finish" id="{{ finish.slug }}" checked>
-          <label for="{{ finish.slug }}">{{ finish.name }}</label>
-        {% endfor %}
-      {% endif %}
+      </ul>
+
     </div>
 
-    <div class="product-addtocartbox">
 
+    <div class="product-addtocartbox">
       <div>
         <div class="row">
           <div><strong>Codice: {{product.code}}</strong>
-            <br><span id="selected_format">20x20</span>
+            <br><span id="selected_format"></span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
-          <div><div class="product-figure"><span> €</span> <b id="sm_price_catch">{{product.min_price}}</b></div><div class="product-note">al m&sup2;</div></div>
+          <div><div class="product-figure"><span> €</span> 
+            
+            {% for choice in chi_form.size %}
+            <b style="display:none;" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
+            {% endfor %}
+
+
+          </div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
 
       <div>
+        <div class="row">{{errors}}</div>
+        
         <div class="row">
           <div>
             <strong>Superficie da rivestire</strong><br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;
@@ -127,9 +121,9 @@
             {{chi_form.quantity}}
             
             <div class="product-qtybtns">
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg></button>
+              <svg class="icon-m icon" style="cursor:pointer;" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
               <span class="product-note">m&sup2;</span>
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg></button>
+              <svg class="icon-m icon" style="cursor:pointer;" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
             </div>
           </div>
         </div>
@@ -139,26 +133,27 @@
         <div class="row">
           {{chi_form.product}}
           <div><strong>Totale</strong></div>
-          <div class="product-figure">€ <strong id="price_catch">3960</strong></div>
+          <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
         </div>
         <div class="row">
           <div class="checkbox">
-            <input type="checkbox" id="includeOffCut" checked onclick="compute_money()">
-            <label for="includeOffCut">Includi 10% di sfrido</label>
+            
+            {{chi_form.has_frido}}
+            <label for="includeOffCut">{% trans 'include-sfrido' %}</label>
           </div>
           <div>
-            <button class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></button>
+            <div class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></div>
           </div>
         </div>
       </div>
 
-      <div class="btn btn-primary" onclick="compute_money()" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></div>
-      <button class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></button>
-
+      {{chi_form.save_it.as_hidden}}
+      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
+      <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div> 
+    
     </div>  <!-- product-addtocartbox -->
-
     <div class="product-shippinginfo">
-      <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
+      <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
       <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} settimane</strong></p>
       <p class="note">Hai qualche dubbio?<br>
         <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
@@ -167,6 +162,9 @@
 
   </div>
 
+ </form>
+    
+   
   <div class="product-main">
     
 	{% autoescape off %}
@@ -245,51 +243,58 @@
 </div>
 {% endif %}
 
-<br/>
 
 
-
-<form  action="{% url 'add_chart' product.code %}" method="POST"> 
-
-	{% csrf_token %}
-
-	{{chi_form.size.label_tag}}
-	{{chi_form.size}}
-	{{chi_form.product}}
-	{{chi_form.has_frido}}
-	{{chi_form.has_frido.label_tag}}
-	
-	{{chi_form.quantity.label_tag}}
-	{{chi_form.quantity}}
-
-
-	<button> {% trans 'add-chart-button' %} </button>
-
-</form>
-
-<!-- GINO
-{{product.price}}
-
-
-<form  action="{{request.get_full_path|urlencode}}" method="POST"> 
-	{% csrf_token %}
-
-	{% for price in product.prices.all %}  
-		<input type="radio" name="size" value="{{price.size.name}}">{{price.size.name}} 
-	{% endfor %}
-
-	<button > refresh price</button>
-</form>
- -->
-
-<!-- CHART calc !-->
-<div>
-
-</div>  
 
 <script>
+
+  function create_post(){
+  // console.log("create post is working!") // sanity check
+  //   $.ajax({
+  //       url : "create_post/", // the endpoint
+  //       type : "POST", // http method
+  //       data : { the_post : $('#post-text').val() }, // data sent with the post request
+
+  //       // handle a successful response
+  //       success : function(json) {
+  //           $('#post-text').val(''); // remove the value from the input
+  //           console.log(json); // log the returned json to the console
+  //           console.log("success"); // another sanity check
+  //       },
+
+  //       // handle a non-successful response
+  //       error : function(xhr,errmsg,err) {
+  //           $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+  //               " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+  //           console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+  //       }
+  //   });
+  };
   window.onload = function() {
-  compute_money();
+  var rad = document.product_ship.size;
+  var prev = null;
+  for (var i = 0; i < rad.length; i++) {
+      rad[i].addEventListener('change', function() {
+          (prev) ? console.log(prev.value): null;
+          if (this !== prev) {
+              prev = this;
+          }
+          compute_money()
+      });
+  }
+
+  
+
+  compute_money()
+  
+//   document.product_ship.addEventListener('submit', function(event){
+//     event.preventDefault();
+//     console.log("form submitted!")  // sanity check
+//     create_post();
+// });
+
+  
+  
 };
   
 </script>

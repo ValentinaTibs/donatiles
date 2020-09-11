@@ -75,14 +75,13 @@
 
     <a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a>
     <ul>
-      <li><a href="checkout-1.html"><span>1. Riepilogo</span></a></li>
-      <li><a href="checkout-2.html"><span>2. Spedizione</span></a></li>
-      <li><a href="checkout-3.html"><span>3. Pagamento</span></a></li>
+      
+      <li><a href="{% url 'summary'  order.internal_tracking_id %}"><span>1. {% trans 'summary'|title %}</span></a></li>
+      <li><a href="{% url 'shipping' order.internal_tracking_id %}"><span>2. {% trans 'shipping'|title %}</span></a></li>
+      <li><a href="{% url 'payment' order.internal_tracking_id %}"><span>3. {% trans 'payment'|title %}</span></a></li>
     </ul>
 
     {% include 'include/login.html' %}
-
-
 
   </nav>
 

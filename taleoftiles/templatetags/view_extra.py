@@ -14,6 +14,8 @@ def has(dict,val):
     #     return True
     return False
 
+
+
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
@@ -39,6 +41,11 @@ def filter_tags(queryset, key):
 def define(val=None):
   return val
 
+@register.simple_tag
+def min_price(obj, min_price, *args):
+    method = getattr(obj, min_price)
+    return method(*args)
+    
 @register.filter
 def is_in_sample(sample, product):
     if sample: 

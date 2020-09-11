@@ -141,7 +141,7 @@ class Product(models.Model):
                 return image.thumb_()
     
     def single_sell(self):
-        return false
+        return False
 
     def serie(self,):
         try:
@@ -149,6 +149,13 @@ class Product(models.Model):
         except ObjectDoesNotExist:
             serie = "None"
         return serie
+
+    def colour(self,):
+        try:
+            col = self.tags.filter(parent__slug = 'colour').first()
+        except ObjectDoesNotExist:
+            col = "None"
+        return col        
 
     def get_tag(self,tag_slug):
         try:
@@ -173,7 +180,7 @@ class Product(models.Model):
         if not size:
             size = self.formats().last()
         try: 
-            price = self.prices.get(size = size)
+            price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
             return 0
         return price.euros
@@ -182,7 +189,7 @@ class Product(models.Model):
         if not size:
             size = self.formats().last()
         try: 
-            price = self.prices.get(size = size)
+            price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
             return 0
         return price.m2_box
@@ -191,7 +198,7 @@ class Product(models.Model):
         if not size:
             size = self.formats().last()
         try: 
-            price = self.prices.get(size = size)
+            price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
             return 0
         return price.weight_box
@@ -201,12 +208,18 @@ class Product(models.Model):
             return compute_single_price(0,0,0,0)
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box())
-    
+
     def min_price(self):
         return round(min_price(self.price(), self.m2_box(), self.weight_box()),2)
 
     def max_price(self):
         return round(max_price(self.price(), self.m2_box(), self.weight_box()),2)    
+
+    def min_price(self,format):
+        return round(min_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)
+
+    def max_price(self,format):
+        return round(max_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)    
 
     
 class Price(models.Model):

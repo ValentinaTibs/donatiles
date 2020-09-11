@@ -9,6 +9,7 @@ from django import forms
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User,Group
+from taleoftiles.utils  import compute_single_price, compute_sm_price
 
 from CRM.models import Shipping,ChartItem,Tag
 from taleoftiles.models import Product
@@ -32,8 +33,6 @@ class ShippingForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
             super(ShippingForm, self).__init__(*args, **kwargs)
             
-    
-        
 
 class NewChartItemForm(forms.ModelForm):
 
@@ -50,11 +49,9 @@ class NewChartItemForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
 
         product = args[0].get('product')
-
+        size = args[0].get('size')
         if product:
             prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
-            if not ('size' in args[0]):
-                args[0]['size'] = prod_sizes.first()
         else:
             raise forms.ValidationError(_('Wrong Product'), code='prod-error')
 
@@ -63,6 +60,13 @@ class NewChartItemForm(forms.ModelForm):
         self.fields['size'].empty_label = None
         self.fields['size'].queryset = prod_sizes
         self.fields['quantity'].required = True   
+        
+        # self.fields['size'].initial =prod_sizes[:1].get()
+        # print(self.fields['size'].initial)
+    #             default_device = Device.objects.get(user_id=user_id, is_validated=True, is_default=True)
+    # prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
+
+        
         
     def clean(self):
 
@@ -74,6 +78,19 @@ class NewChartItemForm(forms.ModelForm):
             return super(NewChartItemForm, self).clean()
 
         self._errors['starting_date'] = ['min-ammount-error']
+
+class AddChartForm(NewChartItemForm):
+
+    save_it = forms.BooleanField(required=False)
+
+    class Meta(NewChartItemForm.Meta):
+        fields = NewChartItemForm.Meta.fields + ('save_it',)
+
+    def clean(self):
+        cleaned_data = super(AddChartForm, self).clean()
+        
+
+    #     return super(AddChartForm, self).clean()
 
 def create_first_pwd():
     return get_random_string(length=9)

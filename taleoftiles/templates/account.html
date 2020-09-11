@@ -1,0 +1,117 @@
+{% extends "empty_base.html" %}
+{% load i18n %}
+
+{% load view_extra %}
+
+{% block title%} {% trans 'account-page-name' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+<div class="block block-coldbg accounttitle">
+  <div class="content">
+    <div class="accounttitle-actions">
+      <a href="{% url 'logout' %}?next=/" class="btn-link btn-link-arrow"> Logout </a></div>
+    <h1>Ciao <strong>{{ profile.name }}</strong></h1>
+  </div>
+</div>
+
+<div class="content grid grid-account">
+
+  <div>
+
+    <h2>{% trans 'orders' %}</h2>
+    {% for order in profile.orders.all %}
+      {% if order.is_sampler %}    
+        <a href="{% url 'order' order.internal_tracking_id %}" class="accountorder">
+          <div class="accountorder-name"><strong>{% trans 'sampler'|title %}</strong></div>
+          <div class="accountorder-status">Spedito il <strong>7 Marzo 2020</strong></div>
+          <div class="accountorder-total">
+            <span class="product-figure">€ {{order.final_payment}}</span>
+          </div>
+        </a>
+      {% else %}
+        <a href="{% url 'order' order.internal_tracking_id %}" class="accountorder">
+          <div class="accountorder-name">Ordine <strong>{{ order.internal_tracking_id }}</strong></div>
+          <div class="accountorder-status">
+            In attesa di pagamento
+          </div>
+          <div class="accountorder-total">
+            <span class="product-figure">€ {{ order.final_payment }}</span>
+          </div>
+        </a>
+      {% endif %}
+    {% endfor %}
+
+
+    <div class="accountorder-footer">
+      <p class="note">C'è qualche problema con un ordine?<br>Scrivici a <a href="">orders@taleoftiles.com</a></p>
+    </div>
+
+  </div>
+
+  <div>
+
+    <h2>{% trans 'shipping-data' %}</h2>
+
+    <form  method="post" action="{{request.get_full_path}}">
+      {% csrf_token %}
+      <div class="formrow">
+        {{ shipping_form.fullname.label_tag }}
+        {{ shipping_form.fullname }}    
+      </div>
+      <div class="formrow">
+        {{ shipping_form.country.label_tag }}
+        {{ shipping_form.country }}
+      </div>
+      <div class="formrow formrow-multi">
+        <div class="formitem">
+          <label for="shippingCity">Città</label>
+          <input type="text" id="shippingCity" value="Magliano Sabina (RI)">
+        </div>
+        <div class="formitem formitem-short">
+                {{ shipping_form.CAP.label_tag }}
+                {{ shipping_form.CAP }}        
+        </div>
+      </div>
+      <div class="formrow">
+        <label for="shippingAddress">Indirizzo di spedizione</label>
+        <input type="text" id="shippingAddress" value="Via di Qua, 32">
+      </div>
+      <div class="formrow">
+        <label for="shippingPhone">Numero di telefono</label>
+        <input type="tel" id="shippingPhone" value="+39 392 4494104">
+      </div>
+      <div class="formactions">
+        <input type="submit" class="btn btn-primary" value="Salva">
+      </div>
+    </form>
+
+    <h2>{% trans 'login-data' %}</h2>
+
+    <form action="">
+      <div class="formrow">
+        <label for="userEmail">Email</label>
+        <input type="email" id="userEmail" value="zen@zenoid.it">
+      </div>
+      <div class="formrow">
+        <label for="userPassword">Password</label>
+        <input type="password" id="userPassword" value="password">
+      </div>
+      <div class="formactions">
+        <input type="submit" class="btn btn-primary" value="Salva">
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+
+
+<script>
+// DEMO ONLY
+document.querySelector( '.nav-primary > ul > li:first-child' ).classList.add( 'selected' );
+</script>
+{% endblock %}

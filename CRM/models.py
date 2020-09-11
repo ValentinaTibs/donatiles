@@ -12,9 +12,7 @@ from django.dispatch import receiver
 
 from taleoftiles.models import Product, Tag
 from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
-
 from taleoftiles.utils  import compute_single_price, compute_sm_price
-
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
@@ -43,19 +41,89 @@ def pour_charts_and_samplers(sender, user, request, **kwargs):
 user_logged_in.connect(pour_charts_and_samplers)
 
 #####  --------------
+        
+
+#2do mettere qui un metodo più decente
+def create_shipping_internal_id():
+    return get_random_string(length=12)
+
+class Order(models.Model):
+
+    note        = models.TextField(max_length = 200, null = True)
+    
+    internal_tracking_id    = models.CharField(max_length=100, default = "")
+    shipping_tracking_id    = models.CharField(max_length=100, default = "")
+    created_at              = models.DateTimeField(editable=False)
+    modified_at             = models.DateTimeField()
+    order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+    final_payment           = models.PositiveIntegerField( default=0 )   
+    is_sampler              = models.BooleanField(default = False)
+    shipping_date           = models.DateTimeField(editable=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.internal_tracking_id:
+            self.internal_tracking_id = create_shipping_internal_id()
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+    def __str__(self):
+        return self.internal_tracking_id
+
+    def user(self):
+        if self.is_sampler:
+            chart_model = self.sampler.first()
+        else :
+            chart_model = self.charts.first()
+        
+        if chart_model.user:
+            return chart_model.user
+        else :
+            return None
+    
+    def total(self):
+        total = 0
+        for sample in self.sampler.all():
+            total += sample.total_price()
+        
+        for chart in self.charts.all():
+            total += chart.total_price()
+        return total
+    
+    def is_paid(self):
+        if self.is_sampler:
+            for sampler in self.sampler.all():
+                if not sampler.is_paid():
+                    return False
+        else:
+            for chart in self.charts.all():
+                if not chart.is_paid():
+                    return False
+        return True                    
 
 class Profile(models.Model):
-    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
+    user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
     bio         = models.TextField(max_length=500, blank=True)
     location    = models.CharField(max_length=30, blank=True)
     birth_date  = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.user.username        
-   
+        return self.user.username       
+
+    def name(self):
+        if self.shipping:
+            return self.shipping.fullname
+        else:
+            self.user.email
+    
+    def orders(self):
+        query = Q(sampler__isnull = False, sampler__user = self.user) | Q(charts__isnull = False,charts__user = self.user) 
+        return Order.objects.filter(query, )    
+
 class Shipping(models.Model):
     #2do this must become a one to Many because we want to keep track of old shippings
-    user                = models.OneToOneField(Profile, on_delete=models.CASCADE, null = True)
+    user                = models.OneToOneField(Profile, on_delete=models.SET_NULL, null = True)
     email               = models.TextField(max_length=100, blank=False)
     fullname            = models.TextField(max_length=100, blank=False)
     country             = models.CharField(max_length=2, choices=COUNTRY_LIST, default='it')
@@ -64,24 +132,6 @@ class Shipping(models.Model):
     shipping_address    = models.TextField(max_length=100, blank=False)
     telephone_num       = models.TextField(max_length=30, blank=False)
     is_active           = models.BooleanField(default = True)
-
-def create_shipping_internal_id():
-    return get_random_string(length=32)
-
-class Order(models.Model):
-    note = models.TextField(max_length = 200, null = True)
-
-    internal_tracking_id = models.CharField(max_length=100, default = "")
-    shipping_tracking_id = models.CharField(max_length=100, default = "")
-    created_at  = models.DateTimeField(editable=False)
-    modified_at = models.DateTimeField()
-
-    def save(self, *args, **kwargs):
-        self.internal_tracking_id = create_shipping_internal_id()
-        if not self.id:
-            self.created_at = timezone.now()
-        self.modified_at = timezone.now()
-        super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
 class ActiveChartManager(models.Manager):
@@ -92,15 +142,17 @@ class ActiveChartManager(models.Manager):
             count = Sum('chart_item',filter=Q(chart_item__status='ok'))
         )
         return qs
-        
+
+
 class Chart(models.Model):
+
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
-    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.CASCADE, related_name='charts')
-
+    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='charts')
+    
+    #2do probabilmente togliere questo da qui
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
-    order_status        = models.CharField(max_length=2, choices=ORDER_STATUS,      default='w')
-
+    
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
 
@@ -119,21 +171,27 @@ class Chart(models.Model):
 
     def total_price(self):
         total = 0
-
-        for ch_i in self.chart_item.filter(status = 'ok'):
-            total += ch_i.tot_quantity() * ch_i.product.price(ch_i.size)
+        
+        for chart_item in self.chart_item.all():
+            total += chart_item.price()
         return total
         
     def all_items(self):
         if self.chart_item:
             return self.chart_item.filter(status = 'ok')
-
+    
+    def is_paid(self):
+        stat = self.completion_status
+        if stat == 'p':
+            return True
+        return False
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     quantity    = models.PositiveIntegerField( default=1 )       
+    #saved_price = models.PositiveIntegerField( )       
     has_frido   = models.BooleanField(default = True)
 
     status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
@@ -154,11 +212,10 @@ class ChartItem(models.Model):
             return self.status
 
     def price(self):
-        if self.status == 'ok':
-            if self.product.single_sell:
-                return compute_single_price(0,0,0,0)
-            else:
-                return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box())
+        if self.product.single_sell():
+            return compute_single_price(0,0,0,0)
+        else:
+            return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box())
 
     def tot_quantity(self):
         return 1
@@ -175,12 +232,12 @@ class ActiveSamplesManager(models.Manager):
 class Sampler(models.Model):
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='samplers' )
-
+    order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='sampler')
+    
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
-    free_shipping = models.BooleanField(default=False)
     objects     = models.Manager() # The default manager.
     active      = ActiveSamplesManager() # The Active Charts
     
@@ -198,10 +255,10 @@ class Sampler(models.Model):
         total = 25
         
         #2do da riflettere meglio su questa condizione
-        finalised_charts =  Chart.objects.filter(user = self.user,completion_status='p')  
-        all_free_samples = Sampler.objects.filter(user = self.user, free_shipping = True) 
+        finalised_charts = Chart.objects.filter(user = self.user, completion_status='p')  
+        paid_samples = Sampler.objects.filter(user = self.user, completion_status='p') 
 
-        if finalised_charts.count() < (all_free_samples.count() + 1):
+        if finalised_charts.count() >= paid_samples.count()   :
             return 0
         return total
     
@@ -212,6 +269,11 @@ class Sampler(models.Model):
         if self.samples:
             return self.samples.filter(status = 'ok',product__code = product_code)
 
+    def is_paid(self):
+        stat = self.completion_status
+        if stat == 'p':
+            return True
+        return False
 
 class Sample(models.Model):
     sampler     = models.ForeignKey(Sampler, verbose_name="Samples", null=True, blank = True, on_delete=models.CASCADE, related_name='samples')
