@@ -150,6 +150,13 @@ class Product(models.Model):
             serie = "None"
         return serie
 
+    def colour(self,):
+        try:
+            col = self.tags.filter(parent__slug = 'colour').first()
+        except ObjectDoesNotExist:
+            col = "None"
+        return col        
+
     def get_tag(self,tag_slug):
         try:
             serie = self.tags.get(parent__slug = tag_slug)

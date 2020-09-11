@@ -149,7 +149,6 @@ class Chart(models.Model):
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='charts')
     
-
     #2do probabilmente togliere questo da qui
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
@@ -171,9 +170,9 @@ class Chart(models.Model):
 
     def total_price(self):
         total = 0
-
-        for ch_i in self.chart_item.filter(status = 'ok'):
-            total += ch_i.tot_quantity() * ch_i.product.price(ch_i.size)
+        
+        for chart_item in self.chart_item.all():
+            total += chart_item.price()
         return total
         
     def all_items(self):
