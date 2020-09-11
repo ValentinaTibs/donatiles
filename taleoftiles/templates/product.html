@@ -44,33 +44,22 @@
 </div>
 <script>
   function compute_money(){
-
-    
-    // var sel_size; 
-    // for(i = 0; i < formats.length; i++) { 
-    // }
-
     var formats = document.getElementsByName('size');
-    // var sel_size; 
     for(i = 0; i < formats.length; i++) { 
-    //   var name = document.getElementById("id_size_"+i).value
-    //   alert(name)
-    //   alert('sm_price_catch_'+name)
-    //   document.getElementById('sm_price_catch_'+name).style.display = "none";
-    if(formats[i].checked) {
-        alert('CHECKED '+i)
-        sel_size = document.getElementById('label_id_size_'+i).innerHTML
+      var sel_size = document.getElementById('label_id_size_'+i).innerHTML
+      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
+      if(formats[i].checked) {
         document.getElementById('selected_format').innerHTML = String(sel_size);
-        alert('sm_price_catch_'+sel_size)
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
-        
-
-    //     sel_size = document.getElementById("id_size_"+i).value;
-    //     document.getElementById('selected_format').innerHTML = String(sel_size);    
-    //     alert('sm_price_catch_'+String(sel_size))
-    //     document.getElementById('sm_price_catch_'+String(sel_size)).style.display = "inline";
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline"; 
       }
     }
+  }
+  function add_quantity(){
+  document.getElementById('id_quantity').value = Number(document.getElementById('id_quantity').value) + Number(1); 
+  }
+
+  function minus_quantity(){
+    document.getElementById('id_quantity').value = document.getElementById('id_quantity').value -1;
   }
 </script>
   
@@ -84,7 +73,7 @@
   {% endfor %}
   </div>
 
-    <form  action="{% url 'product' product.code %}" method="POST"> 
+    <form  action="{% url 'product' product.code %}"  name="product_ship" method="POST"> 
 {% csrf_token %} 
 
   <div class="product-selection">
@@ -128,9 +117,9 @@
             {{chi_form.quantity}}
             
             <div class="product-qtybtns">
-              <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+              <svg class="icon-m icon" style="cursor:pointer;" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
               <span class="product-note">m&sup2;</span>
-              <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              <svg class="icon-m icon" style="cursor:pointer;" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
             </div>
           </div>
         </div>
@@ -250,49 +239,24 @@
 </div>
 {% endif %}
 
-<br/>
 
 
-
-
-
-	{{chi_form.product}}
-	{{chi_form.has_frido}}
-	{{chi_form.has_frido.label_tag}}
-	
-	{{chi_form.quantity.label_tag}}
-	{{chi_form.quantity}}
-
-{{chi_form.save_it.label}}
-{{chi_form.save_it.as_hidden}}
-
-
-	<button> {% trans 'add-chart-button' %} </button>
-
-</form>
-
-<!-- GINO
-{{product.price}}
-
-
-<form  action="{{request.get_full_path|urlencode}}" method="POST"> 
-	{% csrf_token %}
-
-	{% for price in product.prices.all %}  
-		<input type="radio" name="size" value="{{price.size.name}}">{{price.size.name}} 
-	{% endfor %}
-
-	<button > refresh price</button>
-</form>
- -->
-
-<!-- CHART calc !-->
-<div>
-
-</div>  
 
 <script>
   window.onload = function() {
+  var rad = document.product_ship.size;
+  var prev = null;
+  for (var i = 0; i < rad.length; i++) {
+      rad[i].addEventListener('change', function() {
+          (prev) ? console.log(prev.value): null;
+          if (this !== prev) {
+              prev = this;
+          }
+          compute_money()
+      });
+  }
+
+  compute_money()
   
 };
   

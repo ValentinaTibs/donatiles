@@ -92,7 +92,7 @@ def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
         idx_min = ech_weight.index(min_val_weight)
         tot_price_shipping += ech_price[idx_min]+ ech_price[idx_min]*IVA
         residual_weight -= ech_weight[idx_min]
-    return tot_price_shipping + (sm_price * tot_quantity)
+    return int(tot_price_shipping + (sm_price * tot_quantity))
 
 
 # compute_sm_price(20,False,33.2,0.96,22.49)
