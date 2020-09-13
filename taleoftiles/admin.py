@@ -134,7 +134,7 @@ class ProductAdmin(admin.ModelAdmin):
     actions = [duplicate_product]
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
-    search_fields = ('name', )
+    search_fields = ('name', 'code','publication')
     
     list_display = ('name_',
                     'wait_time',

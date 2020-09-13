@@ -140,6 +140,11 @@ class Product(models.Model):
             if image.is_cover:
                 return image.thumb_()
     
+    def cover(self):
+        for image in self.images.all():
+            if image.is_cover:
+                return image
+    
     def single_sell(self):
         return False
 
@@ -209,13 +214,8 @@ class Product(models.Model):
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box())
 
-    def min_price(self):
-        return round(min_price(self.price(), self.m2_box(), self.weight_box()),2)
-
-    def max_price(self):
-        return round(max_price(self.price(), self.m2_box(), self.weight_box()),2)    
-
     def min_price(self,format):
+        return 1
         return round(min_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)
 
     def max_price(self,format):

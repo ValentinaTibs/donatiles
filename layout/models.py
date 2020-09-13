@@ -133,6 +133,12 @@ class Icon(models.Model):
     def __str__(self):
         return '%s' % (self.name, )
 
+
+# class CoverManager(models.Manager):
+#     def get_queryset(self):
+#         qs = super().get_queryset().filter(is_cover = True)
+#         return qs
+
 class Image(models.Model):  
 
     name        = models.CharField (max_length = 100 , null = True, blank=True)
@@ -148,6 +154,8 @@ class Image(models.Model):
 
     format_tag  = models.ForeignKey  (Tag,  blank = True, null = True, on_delete=models.SET_NULL, related_name='format_images' )
     finish_tag  = models.ForeignKey  (Tag,  blank = True, null = True, on_delete=models.SET_NULL, related_name='finish_images' )
+
+#    cover       = CoverManager() 
 
     class Meta:
         ordering = ["order"]    

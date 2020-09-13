@@ -89,7 +89,6 @@ $ psql postgres
 
 ```
 heroku run python manage.py showmigrations
-
 python manage.py migrate --fake taleoftiles zero
 
 ```
@@ -121,6 +120,7 @@ python3 manage.py migrate --fake-initial
 ```sh
 heroku pg:backups:capture
 heroku pg:backups:download
+pg_dump vale
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale latest.dump
 ```
 

@@ -94,7 +94,7 @@
     <div class="product-addtocartbox">
       <div>
         <div class="row">
-          <div><strong>Codice: {{product.code}}</strong>
+          <div><strong>{% trans 'code'%}: {{product.code}}</strong>
             <br><span id="selected_format"></span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
@@ -191,7 +191,7 @@
   <div class="product-meta">
     <ul class="product-thumbs">
       {% for image in product.images.all %}  
-        <li>{{ image.thumb_ }}</li>
+        <li> <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}"></li> 
       {% endfor %}
     </ul>
 
