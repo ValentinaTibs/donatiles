@@ -3,7 +3,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
-from taleoftiles.models import  Product,Tag, Publication, Price
+from taleoftiles.models import  Product, Tag, Publication, Price
 from taleoftiles.models import TechnicalSpec, Catalogue
 from layout.models      import Image, Icon
 
@@ -46,6 +46,13 @@ class PhotoStackedAdmin(admin.StackedInline):
     list_display = ('name',  )
     search_fields = ('name', )
     exclude = ('name','element','icon','post' )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "format_tag":
+            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
+        if db_field.name == "finish_tag":
+            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='finish')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class IconImageStackedAdmin(admin.StackedInline):
