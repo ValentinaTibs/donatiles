@@ -153,11 +153,11 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # ---- SENDGRID -------
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
-SENDGRID_ECHO_TO_STDOUT=True
+SENDGRID_ECHO_TO_STDOUT = False
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_USER = 'apikey' 
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -166,8 +166,6 @@ EMAIL_USE_TLS = True
 DEFAULT_FILE_STORAGE    = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_ACCESS_KEY_ID       = 'AKIAJS6CLBOAQSAVY4CA'
 AWS_SECRET_ACCESS_KEY   = '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'
-# AWS_ACCESS_KEY_ID       = 'AKIAZQZXNAQGHHNKWVVF'
-# AWS_SECRET_ACCESS_KEY   = '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'
 
 AWS_STORAGE_BUCKET_NAME = 'taleoftiles'
 AWS_S3_CUSTOM_DOMAIN    = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
@@ -175,4 +173,3 @@ AWS_S3_CUSTOM_DOMAIN    = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_DEFAULT_ACL         = 'public-read'
 MEDIA_URL               = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
 
-#MEDIA_URL               = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'

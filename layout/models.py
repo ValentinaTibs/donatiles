@@ -72,6 +72,12 @@ import json
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, From, To, Subject, PlainTextContent, HtmlContent, SendGridException
 
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+
 
 def get_mock_personalization_dict():
     """Get a dict of personalization mock."""
@@ -116,12 +122,24 @@ class MailTemplate(models.Model):
     no_reply        = models.BooleanField(default = False)
 
 
-    def caval_donato(self):
-        message = Mail(from_email=From('from@example.com.com', 'Example From Name'),
-                to_emails=To('to@example.com', 'Example To Name'),
-                subject=Subject('Sending with SendGrid is Fun'),
+    def send_password_reset(self,user):
+        email_template_name = "password/password_reset_email.txt"
+        c = {
+                "email":user.email,
+                'domain':'https://www.taleoftiles.com',
+                'site_name': 'TaleOfTiles',
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "user": user,
+                'token': default_token_generator.make_token(user),
+                'protocol': 'http',
+                }
+        email = render_to_string(email_template_name, c)
+
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTile tech'),
+                to_emails=To(user.email, user.email),
+                subject=Subject("Password Reset Requested"),
                 plain_text_content=PlainTextContent('and easy to do anywhere, even with Python'),
-                html_content=HtmlContent('<strong>and easy to do anywhere, even with Python</strong>'))
+                html_content=HtmlContent('email'))
 
         try:
             print(json.dumps(message.get(), sort_keys=True, indent=4))
@@ -130,24 +148,12 @@ class MailTemplate(models.Model):
         except SendGridException as e:
             print(e.message)
 
-        for cc_addr in personalization['cc_list']:
-            mock_personalization.add_to(cc_addr)
+        sendgrid_client = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sendgrid_client.send(message=mock_personalization)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
 
-        for bcc_addr in personalization['bcc_list']:
-            mock_personalization.add_bcc(bcc_addr)
-
-        for header in personalization['headers']:
-            mock_personalization.add_header(header)
-
-        for substitution in personalization['substitutions']:
-            mock_personalization.add_substitution(substitution)
-
-        for arg in personalization['custom_args']:
-            mock_personalization.add_custom_arg(arg)
-
-        mock_personalization.subject = personalization['subject']
-        mock_personalization.send_at = personalization['send_at']
-        return mock_personalization
 
     def send(self,email_rec,pwd):
         pass
@@ -182,10 +188,25 @@ class MailTemplate(models.Model):
         if da_mail:
             da_mail.send(email_rec, pwd)
     
-    def send_password_reset(self,email_rec):
-        da_mail = MailTemplate.objects.filter(slug='password-reset').first()
-        if da_mail:
-            da_mail.send(email_rec)
+
+        # for cc_addr in personalization['cc_list']:
+        #     mock_personalization.add_to(cc_addr)
+
+        # for bcc_addr in personalization['bcc_list']:
+        #     mock_personalization.add_bcc(bcc_addr)
+
+        # for header in personalization['headers']:
+        #     mock_personalization.add_header(header)
+
+        # for substitution in personalization['substitutions']:
+        #     mock_personalization.add_substitution(substitution)
+
+        # for arg in personalization['custom_args']:
+        #     mock_personalization.add_custom_arg(arg)
+
+        # mock_personalization.subject = personalization['subject']
+        # mock_personalization.send_at = personalization['send_at']
+
 
 class Icon(models.Model):  
     name        = models.CharField (max_length = 100 , null = False, blank=False, unique=True)
