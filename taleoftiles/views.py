@@ -37,46 +37,67 @@ def custom_merge(unit1, unit2):
                out[key] = value + unit1[key]
    return out
 
-def catalogue(request, the_filter = None):
 
-    catalogue_prod = Product.active.filter(available = True)
-    query_dict  = {}
-    query_items = {}
-    try: 
-        cat = Catalogue.objects.get(active = True)
-    except ObjectDoesNotExist:
-        return render(request, "404.html",{"message":"There is no active catalogue",})
+from django.views.generic.list import ListView
 
-    if the_filter:
+class catalogue(ListView):
+    model = Product 
+    paginate_by = 6
+    context_object_name = 'products'
+    template_name = 'productthumb.html'
+    ordering = ['name']
+
+    def get_context_data(self, **kwargs):
+        context = super(catalogue, self).get_context_data(**kwargs)
+
         try: 
-            tag = Tag.objects.get(slug = the_filter)
+            cat = Catalogue.objects.get(active = True)
         except ObjectDoesNotExist:
-            return render(request, "404.html",{"message":"There is no active catalogue",})        
+            return render(request, "404.html",{"message":"There is no active catalogue",})
+        context['tags'] = cat.tags()        
+        return context
+
+
+# def catalogue(request, the_filter = None):
+
+#     catalogue_prod = Product.active.filter(available = True)
+#     query_dict  = {}
+#     query_items = {}
+#     try: 
+#         cat = Catalogue.objects.get(active = True)
+#     except ObjectDoesNotExist:
+#         return render(request, "404.html",{"message":"There is no active catalogue",})
+
+#     if the_filter:
+#         try: 
+#             tag = Tag.objects.get(slug = the_filter)
+#         except ObjectDoesNotExist:
+#             return render(request, "404.html",{"message":"There is no active catalogue",})        
         
-        query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
+#         query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
 
-    if request.method == 'POST':
-        query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
+#     if request.method == 'POST':
+#         query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
 
-    for key in query_dict:
-        if key  != 'csrfmiddlewaretoken' and query_dict[key] != [''] :
-            query_items[key] = []
-            for val in query_dict[key]:
-                query_items[key].append(Tag.objects.get(slug=val))
+#     for key in query_dict:
+#         if key  != 'csrfmiddlewaretoken' and query_dict[key] != [''] :
+#             query_items[key] = []
+#             for val in query_dict[key]:
+#                 query_items[key].append(Tag.objects.get(slug=val))
 
-    catalogue_tags = cat.tags()
-    catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
+#     catalogue_tags = cat.tags()
+#     catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
 
-    return render(request, "catalogue.html",{   
-        "tags"          : catalogue_tags,  
-        "products"      : catalogue_prod,
-        "active_tags"   : query_dict,
-        "active_tags_items"   : query_items
-        })
+#     return render(request, "catalogue.html",{   
+#         "tags"          : catalogue_tags,  
+#         "products"      : catalogue_prod,
+#         "active_tags"   : query_dict,
+#         "active_tags_items"   : query_items
+#         })
+
 
 def compute_price(request, product_id):
     return redirect(request.META.get('HTTP_REFERER'))
-
 
 def product(request, product_code, chi_form = None ):    
     
