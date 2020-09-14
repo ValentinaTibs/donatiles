@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib.auth import views as auth_views #import this
 
 admin.autodiscover()
 
@@ -20,6 +21,14 @@ i18n_patterns(*urlpatterns  , prefix_default_language = False)
 #     path(r'^catalogue/?q=(?P<query_search>\w+)$', 'taleoftiles.views.catalogue', name='catalogue'),
 # )
 
+urlpatterns += (
+    path("admin/", admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('i18n/', include('django.conf.urls.i18n'))
+    )
+
+
 urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
     path('catalogue/',                  taleoftiles.views.catalogue.as_view(),         name="catalogue"),
@@ -34,6 +43,10 @@ urlpatterns += i18n_patterns(
 
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
     path("account/",                                        CRM.views.account,    name="account"),
+    path('password_reset/done/',    auth_views.PasswordResetDoneView.as_view(template_name='password/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="password/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/',             auth_views.PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), name='password_reset_complete'),      
+    path("accounts/password_reset/",layout.views.password_reset_request, name="password_reset"),
 
     path("add_order/<str:is_sample>", CRM.views.add_order, name="add_order"),
     path("summary/<str:id_>",  CRM.views.summary,  name="summary"),
@@ -79,12 +92,6 @@ urlpatterns += i18n_patterns(
     # url(r'^tinymce/', include('tinymce.urls')),
 )
 
-urlpatterns += (
-    path("admin/", admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('i18n/', include('django.conf.urls.i18n'))
-    )
 
 
 if settings.DEBUG: # new

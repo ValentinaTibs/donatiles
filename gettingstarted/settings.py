@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'modeltranslation',
     'captcha',
+    'crispy_forms',
 
     "django.contrib.admin",
     "django.contrib.auth",
@@ -153,7 +154,7 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_ECHO_TO_STDOUT=True
-SENDGRID_SANDBOX_MODE_IN_DEBUG = True
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'

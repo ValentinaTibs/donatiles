@@ -59,7 +59,7 @@ class catalogue(ListView):
     
     def get_queryset(self):
         #return Product.objects.filter(lab__acronym=self.kwargs['lab'])
-        return Product.objects.filter(active=True)
+        return Product.objects.filter(is_active=True)
 
 
 # def catalogue(request, the_filter = None):

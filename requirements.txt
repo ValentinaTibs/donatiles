@@ -5,10 +5,10 @@ requests
 pillow
 django-summernote
 django_reverse_admin
-django-recaptcha
 numpy
 django-modeltranslation
 sendgrid
 boto3
 django-storages
 django-translations
+django-crispy-forms

@@ -67,9 +67,43 @@ class Config(models.Model):
 	def __str__(self):
 		return '%s' % (self.tag,)
 
-from sendgrid.helpers.mail import *   
-from sendgrid import SendGridAPIClient
 import os
+import json
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail, From, To, Subject, PlainTextContent, HtmlContent, SendGridException
+
+
+def get_mock_personalization_dict():
+    """Get a dict of personalization mock."""
+    mock_pers = dict()
+
+    mock_pers['to_list'] = [To("test1@example.com",
+                                  "Example User"),
+                            To("test2@example.com",
+                                  "Example User")]
+
+    mock_pers['cc_list'] = [To("test3@example.com",
+                                  "Example User"),
+                            To("test4@example.com",
+                                  "Example User")]
+
+    mock_pers['bcc_list'] = [To("test5@example.com"),
+                             To("test6@example.com")]
+
+    mock_pers['subject'] = ("Hello World from the Personalized "
+                            "SendGrid Python Library")
+
+    mock_pers['headers'] = [Header("X-Test", "test"),
+                            Header("X-Mock", "true")]
+
+    mock_pers['substitutions'] = [Substitution("%name%", "Example User"),
+                                  Substitution("%city%", "Denver")]
+
+    mock_pers['custom_args'] = [CustomArg("user_id", "343"),
+                                CustomArg("type", "marketing")]
+
+    mock_pers['send_at'] = 1443636843
+    return mock_pers
 
 
 class MailTemplate(models.Model):
@@ -81,6 +115,39 @@ class MailTemplate(models.Model):
     template_vs     = models.CharField(max_length=50, null = False, blank=False) 
     no_reply        = models.BooleanField(default = False)
 
+
+    def caval_donato(self):
+        message = Mail(from_email=From('from@example.com.com', 'Example From Name'),
+                to_emails=To('to@example.com', 'Example To Name'),
+                subject=Subject('Sending with SendGrid is Fun'),
+                plain_text_content=PlainTextContent('and easy to do anywhere, even with Python'),
+                html_content=HtmlContent('<strong>and easy to do anywhere, even with Python</strong>'))
+
+        try:
+            print(json.dumps(message.get(), sort_keys=True, indent=4))
+            return message.get()
+
+        except SendGridException as e:
+            print(e.message)
+
+        for cc_addr in personalization['cc_list']:
+            mock_personalization.add_to(cc_addr)
+
+        for bcc_addr in personalization['bcc_list']:
+            mock_personalization.add_bcc(bcc_addr)
+
+        for header in personalization['headers']:
+            mock_personalization.add_header(header)
+
+        for substitution in personalization['substitutions']:
+            mock_personalization.add_substitution(substitution)
+
+        for arg in personalization['custom_args']:
+            mock_personalization.add_custom_arg(arg)
+
+        mock_personalization.subject = personalization['subject']
+        mock_personalization.send_at = personalization['send_at']
+        return mock_personalization
 
     def send(self,email_rec,pwd):
         pass
@@ -119,7 +186,6 @@ class MailTemplate(models.Model):
         da_mail = MailTemplate.objects.filter(slug='password-reset').first()
         if da_mail:
             da_mail.send(email_rec)
-    
 
 class Icon(models.Model):  
     name        = models.CharField (max_length = 100 , null = False, blank=False, unique=True)
