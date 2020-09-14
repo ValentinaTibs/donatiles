@@ -1,4 +1,4 @@
-{{% extends "empty_base.html" %}
+{% extends "empty_base.html" %}
 {% load view_extra %}
 {% load i18n %}
 
@@ -11,8 +11,9 @@
 <div class="content grid grid-catalogue">
 <form method="POST" action="{% url 'catalogue' %}">
   <aside>
-{% csrf_token %}
-    <button class="filtersheader-btn btn btn-secondary btn-tree"><span>Filtri</span><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+  {% csrf_token %}
+    <button class="filtersheader-btn btn btn-secondary btn-tree">
+    <span>{% trans 'filters' %}</span><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
 
     <div class="openable">
       <div class="filtersbody">

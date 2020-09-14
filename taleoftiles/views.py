@@ -56,6 +56,10 @@ class catalogue(ListView):
             return render(request, "404.html",{"message":"There is no active catalogue",})
         context['tags'] = cat.tags()        
         return context
+    
+    def get_queryset(self):
+        #return Product.objects.filter(lab__acronym=self.kwargs['lab'])
+        return Product.objects.filter(active=True)
 
 
 # def catalogue(request, the_filter = None):
