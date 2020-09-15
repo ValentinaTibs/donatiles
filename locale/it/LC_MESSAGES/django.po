@@ -288,7 +288,7 @@ msgstr ""
 #: taleoftiles/templates/home.html:115
 #: taleoftiles/templates/vestibula/home.html:72
 msgid "founder-name"
-msgstr "Tale of Tiles siamo noi"
+msgstr "Noi siamo Tale of Tiles"
 
 #: taleoftiles/templates/include/login.html:10
 #: taleoftiles/templates/shipping.html:75
