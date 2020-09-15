@@ -212,7 +212,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:41
 msgid "choose-home-claim"
-msgstr "Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
+msgstr "Scegli le tue mattonelle tra la nostra <strong>selezione di oltre 200 prodotti</strong>"
 
 #: taleoftiles/templates/home.html:44
 msgid "sample-touchhand"
@@ -428,7 +428,7 @@ msgstr "Idee per ristrutturare"
 
 #: taleoftiles/templates/product.html:11
 msgid "all-products"
-msgstr ""
+msgstr "Tutti i prodotti"
 
 #: taleoftiles/templates/product.html:24
 msgid "full-sampler"
