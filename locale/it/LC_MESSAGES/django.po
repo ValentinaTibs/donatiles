@@ -293,7 +293,7 @@ msgstr "Tale of Tiles siamo noi"
 #: taleoftiles/templates/include/login.html:10
 #: taleoftiles/templates/shipping.html:75
 msgid "already-registered"
-msgstr ""
+msgstr "Già registrato?"
 
 #: taleoftiles/templates/include/login.html:23
 msgid "password-reset"
