@@ -165,9 +165,11 @@ def product(request, product_code, chi_form = None ):
         if request.user.is_authenticated:
             chart.user = request.user
         chart.save()
+    
     price = 0
     errors = None
     if request.method == 'POST':
+    
         if chi_form.is_valid() and "save_it" in request.POST:
             chart_item = chi_form.save(commit=False)        
             price = chart_item.price()
@@ -187,7 +189,7 @@ def product(request, product_code, chi_form = None ):
     #             chart_item.save()
     #             print("we didnt saved")
             
-
+    
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,

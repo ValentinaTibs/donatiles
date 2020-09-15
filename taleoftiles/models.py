@@ -181,38 +181,33 @@ class Product(models.Model):
             res= "none"
         return res
 
-    def price(self,size = None):
-        if not size:
-            size = self.formats().last()
+    def price(self,size ):
         try: 
             price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
-            return 0
+            return 1
         return price.euros
 
-    def m2_box(self,size = None):
-        if not size:
-            size = self.formats().last()
+    def m2_box(self,size ):
+        
         try: 
             price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
-            return 0
+            return 1
         return price.m2_box
     
-    def weight_box(self,size = None):
-        if not size:
-            size = self.formats().last()
+    def weight_box(self,size ):
         try: 
             price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
-            return 0
+            return 1
         return price.weight_box
     
     def compute_price(self, size = None):
         if self.single_sell:
             return compute_single_price(0,0,0,0)
         else:
-            return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box())
+            return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box(self.size))
 
     def min_price(self,format):
         return round(min_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)
