@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-15 09:16+0000\n"
+"POT-Creation-Date: 2020-09-15 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:41
 msgid "choose-home-claim"
-msgstr ""
+msgstr "Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
 
 #: taleoftiles/templates/home.html:44
 msgid "sample-touchhand"
@@ -1043,12 +1043,3 @@ msgstr ""
 #: taleoftiles/templates/vestibula/support.html:26
 msgid "write-us-support"
 msgstr ""
-
-#~ msgid "effect"
-#~ msgstr "effetto"
-
-#~ msgid ""
-#~ "Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
-#~ msgstr ""
-#~ "Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 "
-#~ "prodotti</strong>"

@@ -198,7 +198,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:41
 msgid "choose-home-claim"
-msgstr ""
+msgstr "Choose your tiles among our <strong>200 products selections</strong>"
 
 #: taleoftiles/templates/home.html:44
 msgid "sample-touchhand"
