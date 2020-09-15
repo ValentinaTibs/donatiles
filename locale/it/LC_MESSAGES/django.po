@@ -306,6 +306,7 @@ msgstr "Vuoi registrarti?"
 #: taleoftiles/templates/include/login.html:32
 msgid "wanna-register-incentive"
 msgstr "Registrati per ricevere il Tale of Tiles Book, effettuare ordini" 
+
 "e tenere traccia dei tuoi ordini passati."
 
 #: taleoftiles/templates/include/login.html:41
