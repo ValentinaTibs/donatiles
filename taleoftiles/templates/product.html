@@ -53,6 +53,7 @@
         document.getElementById('sm_price_catch_'+sel_size).style.display = "inline"; 
         document.getElementById('sm_catch').innerHTML = document.getElementById('id_quantity').value ;
         document.getElementById('sm_notification').innerHTML = document.getElementById('id_quantity').value ;
+        //document.getElementById('sm_image_'+sel_size).style.display = "none";
       }
     }
   }
@@ -69,10 +70,9 @@
 <div class="content grid grid-product">
 
   <div class="product-gallery">
-
-  {% for image in product.images.all %}  
-  <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}">
-  {% endfor %}
+    {% for image in product.images.all %}  
+    <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
+    {% endfor %}
   </div>
 
 <form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST"> 
@@ -273,18 +273,20 @@
   window.onload = function() {
   var rad = document.product_ship.size;
   var prev = null;
+  var rad = document.getElementsByName('size');
+  console.log(rad.length);
+
+  // if none is checked - check the first and add a listner
+  var someone_checked = false;
   for (var i = 0; i < rad.length; i++) {
+    someone_checked = document.getElementsByName("size")[i].checked 
       rad[i].addEventListener('change', function() {
-          (prev) ? console.log(prev.value): null;
-          if (this !== prev) {
-              prev = this;
-          }
           compute_money()
       });
   }
-
-  
-
+  if (!someone_checked){
+    document.getElementById("id_size_0").checked = true;
+  }
   compute_money()
   
 //   document.product_ship.addEventListener('submit', function(event){
@@ -293,7 +295,6 @@
 //     create_post();
 // });
 
-  
   
 };
   

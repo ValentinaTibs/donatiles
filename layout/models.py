@@ -187,26 +187,7 @@ class MailTemplate(models.Model):
         da_mail = MailTemplate.objects.filter(slug='first-password').first()
         if da_mail:
             da_mail.send(email_rec, pwd)
-    
-
-        # for cc_addr in personalization['cc_list']:
-        #     mock_personalization.add_to(cc_addr)
-
-        # for bcc_addr in personalization['bcc_list']:
-        #     mock_personalization.add_bcc(bcc_addr)
-
-        # for header in personalization['headers']:
-        #     mock_personalization.add_header(header)
-
-        # for substitution in personalization['substitutions']:
-        #     mock_personalization.add_substitution(substitution)
-
-        # for arg in personalization['custom_args']:
-        #     mock_personalization.add_custom_arg(arg)
-
-        # mock_personalization.subject = personalization['subject']
-        # mock_personalization.send_at = personalization['send_at']
-
+ 
 
 class Icon(models.Model):  
     name        = models.CharField (max_length = 100 , null = False, blank=False, unique=True)

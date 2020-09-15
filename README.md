@@ -124,6 +124,9 @@ pg_dump vale
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale latest.dump
 ```
 
+###pg_admin url
+http://127.0.0.1:58993/browser/#
+
 # Translations - Microcopy text
 
 ```sh
