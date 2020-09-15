@@ -19,6 +19,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link type="text/css" href="{% static 'style/style.css' %}" rel="stylesheet">
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-178049116-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-178049116-1');
+</script>
+
+
   {% block meta-tag %} {% endblock %}
 </head>
 
