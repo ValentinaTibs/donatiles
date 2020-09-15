@@ -223,7 +223,7 @@ msgstr "effetto"
 
 #: taleoftiles/templates/home.html:42
 msgid ""
-"Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
+"Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
 msgstr ""
 "Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
 
