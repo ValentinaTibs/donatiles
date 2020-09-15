@@ -223,9 +223,9 @@ msgstr "effetto"
 
 #: taleoftiles/templates/home.html:42
 msgid ""
-"Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
+"Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
 msgstr ""
-"Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
+"Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
 
 #: taleoftiles/templates/home.html:45
 msgid "sample-touchhand"
@@ -234,7 +234,7 @@ msgstr "Tocca con mano"
 #: taleoftiles/templates/home.html:47
 msgid "sample-description"
 msgstr ""
-"Lasciati raccontare una storia dal nostro TaleOfTiles Book. Navigando tra i "
+"Lasciati raccontare una storia dal nostro Tale Of Tiles Book. Navigando tra i "
 "prodotti potrai sceglierne fino a 4 da ricevere gratuitamente a casa tua per "
 "valutare la qualità del prodotto italiano."
 
@@ -301,7 +301,7 @@ msgstr ""
 #: taleoftiles/templates/home.html:116
 #: taleoftiles/templates/vestibula/home.html:72
 msgid "founder-name"
-msgstr "Donatella Mattonella"
+msgstr "Tale of Tiles siamo noi"
 
 #: taleoftiles/templates/include/login.html:10
 #: taleoftiles/templates/shipping.html:76
