@@ -175,7 +175,7 @@ msgstr " <br/> Il tuo <b>Tale of Tiles Book</b> è vuoto. "
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login"
-msgstr "Registrati-login"
+msgstr "Registrati-Login"
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login-claim"
@@ -242,7 +242,7 @@ msgstr "Idee per ristrutturare"
 #, fuzzy
 #| msgid "title-renovate-home"
 msgid "subtitle-renovate-home"
-msgstr "Idee per ristrutturare"
+msgstr ""
 
 #: taleoftiles/templates/home.html:77
 #: taleoftiles/templates/vestibula/home.html:42
