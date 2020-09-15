@@ -43,9 +43,7 @@ def define(val=None):
 
 @register.simple_tag
 def min_price(obj, min_price, *args):
-    print("ECCOCI")
     method = getattr(obj, min_price)
-    print(method)
     return method(*args)
     
 @register.filter

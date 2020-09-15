@@ -60,14 +60,7 @@ class NewChartItemForm(forms.ModelForm):
         self.fields['size'].empty_label = None
         self.fields['size'].queryset = prod_sizes
         self.fields['quantity'].required = True   
-        
-        # self.fields['size'].initial =prod_sizes[:1].get()
-        # print(self.fields['size'].initial)
-    #             default_device = Device.objects.get(user_id=user_id, is_validated=True, is_default=True)
-    # prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
-
-        
-        
+                
     def clean(self):
 
         quantity    = self.cleaned_data.get('quantity')
