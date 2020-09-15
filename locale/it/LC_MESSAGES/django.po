@@ -20,7 +20,7 @@ msgstr ""
 
 #: CRM/forms.py:56
 msgid "Wrong Product"
-msgstr ""
+msgstr "Prodotto Errato"
 
 #: CRM/forms.py:76
 msgid "Not Enought"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: CRM/forms.py:115
 msgid "Invalid email"
-msgstr ""
+msgstr "Email non valida"
 
 #: CRM/forms.py:119
 msgid "Duplicated email"
@@ -53,7 +53,7 @@ msgstr "Tedesco"
 #: taleoftiles/templates/account.html:6
 #: taleoftiles/templates/vestibula/account.html:6
 msgid "account-page-name"
-msgstr ""
+msgstr "Il tuo account"
 
 #: taleoftiles/templates/account.html:24 taleoftiles/templates/support.html:35
 #: taleoftiles/templates/support.html:111
@@ -74,13 +74,13 @@ msgstr "Spedizioni"
 
 #: taleoftiles/templates/account.html:91
 msgid "login-data"
-msgstr ""
+msgstr "login"
 
 #: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:16
 #: taleoftiles/templates/vestibula/blog.html:6
 #: taleoftiles/templates/vestibula/blog.html:12
 msgid "blog-page-name"
-msgstr ""
+msgstr "Tale of Tiles Blog"
 
 #: taleoftiles/templates/catalogue.html:5
 #: taleoftiles/templates/productthumb.html:5
@@ -93,7 +93,7 @@ msgstr "Catalogo"
 #: taleoftiles/templates/productthumb.html:132
 #: taleoftiles/templates/vestibula/catalogue.html:104
 msgid "cat-menu-all"
-msgstr ""
+msgstr "Tutti i prodotti"
 
 #: taleoftiles/templates/catalogue.html:169
 #: taleoftiles/templates/productthumb.html:168
@@ -105,16 +105,16 @@ msgstr "prodotti"
 #: taleoftiles/templates/catalogue.html:172
 #: taleoftiles/templates/productthumb.html:171
 msgid "order for"
-msgstr ""
+msgstr "ordina per"
 
 #: taleoftiles/templates/catalogue.html:208
 #: taleoftiles/templates/productthumb.html:207
 msgid "product-not-samplable"
-msgstr ""
+msgstr "non campionabile"
 
 #: taleoftiles/templates/checkout_base.html:79
 msgid "summary"
-msgstr ""
+msgstr "Riepilogo del tuo ordine"
 
 #: taleoftiles/templates/checkout_base.html:80
 #: taleoftiles/templates/vestibula/support.html:62
@@ -137,12 +137,12 @@ msgstr "assistenza"
 #: taleoftiles/templates/empty_base.html:40
 #: taleoftiles/templates/vestibula/empty_base.html:41
 msgid "account"
-msgstr ""
+msgstr "profilo"
 
 #: taleoftiles/templates/empty_base.html:41
 #: taleoftiles/templates/vestibula/empty_base.html:42
 msgid "logout"
-msgstr ""
+msgstr "logout"
 
 #: taleoftiles/templates/empty_base.html:43
 #: taleoftiles/templates/empty_base.html:254
@@ -163,31 +163,31 @@ msgstr "Idee per ristrutturare"
 
 #: taleoftiles/templates/empty_base.html:136
 msgid "your-sampler"
-msgstr ""
+msgstr "Il tuo Tale of Tiles Book"
 
 #: taleoftiles/templates/empty_base.html:161
 msgid "receive-sample-home"
-msgstr ""
+msgstr "Ricevi questi campioni a casa"
 
 #: taleoftiles/templates/empty_base.html:164
 msgid " sampler-empty-claim "
-msgstr " <br/> Il tuo <b>TaleOfTiles Book</b> è vuoto. "
+msgstr " <br/> Il tuo <b>Tale of Tiles Book</b> è vuoto. "
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login"
-msgstr ""
+msgstr "Registrati-login"
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login-claim"
-msgstr ""
+msgstr "<strong>Registrati o effettua il login</strong> per avere sempre a tua disposizione il tuo Tale of Tiles Book"
 
 #: taleoftiles/templates/empty_base.html:178
 msgid "your-chart"
-msgstr ""
+msgstr "Carrello"
 
 #: taleoftiles/templates/empty_base.html:208
 msgid "total"
-msgstr ""
+msgstr "Totale"
 
 #: taleoftiles/templates/empty_base.html:218
 msgid " chart-empty-claim "
@@ -195,15 +195,15 @@ msgstr "<br/> Il tuo carrello è vuoto."
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "of"
-msgstr ""
+msgstr "di"
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "added-to-chart"
-msgstr ""
+msgstr "aggiungi al carrello"
 
 #: taleoftiles/templates/empty_base.html:294
 msgid "open-chart"
-msgstr ""
+msgstr "apri il carrello"
 
 #: taleoftiles/templates/home.html:5
 #: taleoftiles/templates/vestibula/home.html:5
@@ -293,24 +293,25 @@ msgstr "Tale of Tiles siamo noi"
 #: taleoftiles/templates/include/login.html:10
 #: taleoftiles/templates/shipping.html:75
 msgid "already-registered"
-msgstr ""
+msgstr "Già registrato?"
 
 #: taleoftiles/templates/include/login.html:23
 msgid "password-reset"
-msgstr ""
+msgstr "reset password"
 
 #: taleoftiles/templates/include/login.html:31
 msgid "wanna-register"
-msgstr ""
+msgstr "Vuoi registrarti?"
 
 #: taleoftiles/templates/include/login.html:32
 msgid "wanna-register-incentive"
-msgstr ""
+msgstr "Registrati per ricevere il Tale of Tiles Book, effettuare ordini" 
+"e tenere traccia dei tuoi ordini passati."
 
 #: taleoftiles/templates/include/login.html:41
 #: taleoftiles/templates/vestibula/empty_base.html:147
 msgid "register"
-msgstr ""
+msgstr "Registrati"
 
 #: taleoftiles/templates/order.html:6
 #, fuzzy
@@ -321,25 +322,25 @@ msgstr "Catalogo"
 #: taleoftiles/templates/order.html:18 taleoftiles/templates/payment.html:71
 #: taleoftiles/templates/vestibula/payment.html:19
 msgid "order"
-msgstr ""
+msgstr "ordine"
 
 #: taleoftiles/templates/order.html:24
 #: taleoftiles/templates/vestibula/summary.html:151
 msgid "quantity"
-msgstr ""
+msgstr "quantità"
 
 #: taleoftiles/templates/order.html:25 taleoftiles/templates/summary.html:23
 #: taleoftiles/templates/vestibula/summary.html:152
 msgid "price"
-msgstr ""
+msgstr "prezzo"
 
 #: taleoftiles/templates/order.html:39 taleoftiles/templates/summary.html:78
 msgid "boxes"
-msgstr ""
+msgstr "scatole"
 
 #: taleoftiles/templates/order.html:58 taleoftiles/templates/summary.html:110
 msgid "order-total"
-msgstr ""
+msgstr "totale dell'ordine"
 
 #: taleoftiles/templates/order.html:74
 #, fuzzy
@@ -355,7 +356,7 @@ msgstr "spedizione"
 
 #: taleoftiles/templates/password/password_reset.html:24
 msgid "send-password"
-msgstr ""
+msgstr "Ti invieremo una password a questo indirizzo"
 
 #: taleoftiles/templates/payment.html:5
 #, fuzzy
