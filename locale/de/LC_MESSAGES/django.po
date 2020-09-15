@@ -220,8 +220,8 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:42
 msgid ""
-"Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
-msgstr ""
+"choose-home-claim"
+msgstr "Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
 
 #: taleoftiles/templates/home.html:45
 msgid "sample-touchhand"
