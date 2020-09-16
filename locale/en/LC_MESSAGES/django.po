@@ -1,39 +1,39 @@
 #: CRM/forms.py:56
 msgid "Wrong Product"
-msgstr ""
+msgstr "Wrong Product"
 
 #: CRM/forms.py:76
 msgid "Not Enought"
-msgstr ""
+msgstr "Not Enought"
 
 #: CRM/forms.py:115
 msgid "Invalid email"
-msgstr ""
+msgstr "Invalid email"
 
 #: CRM/forms.py:119
 msgid "Duplicated email"
-msgstr ""
+msgstr "Duplicated email"
 
 #: gettingstarted/settings.py:118
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: gettingstarted/settings.py:119
 msgid "Italiano"
-msgstr ""
+msgstr "Italiano"
 
 #: gettingstarted/settings.py:120
 msgid "Svenska"
-msgstr ""
+msgstr "Svenska"
 
 #: gettingstarted/settings.py:121
 msgid "Deutch"
-msgstr ""
+msgstr "Deutch"
 
 #: taleoftiles/templates/account.html:6
 #: taleoftiles/templates/vestibula/account.html:6
 msgid "account-page-name"
-msgstr ""
+msgstr "Your account "
 
 #: taleoftiles/templates/account.html:24 taleoftiles/templates/support.html:35
 #: taleoftiles/templates/support.html:111
@@ -56,13 +56,13 @@ msgstr "Shipping"
 
 #: taleoftiles/templates/account.html:91
 msgid "login-data"
-msgstr ""
+msgstr "Login"
 
 #: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:16
 #: taleoftiles/templates/vestibula/blog.html:6
 #: taleoftiles/templates/vestibula/blog.html:12
 msgid "blog-page-name"
-msgstr ""
+msgstr "Tale of Tiles Blog"
 
 #: taleoftiles/templates/catalogue.html:5
 #: taleoftiles/templates/productthumb.html:5
@@ -75,14 +75,14 @@ msgstr "Catalogue"
 #: taleoftiles/templates/productthumb.html:132
 #: taleoftiles/templates/vestibula/catalogue.html:104
 msgid "cat-menu-all"
-msgstr ""
+msgstr "All products"
 
 #: taleoftiles/templates/catalogue.html:169
 #: taleoftiles/templates/productthumb.html:168
 #: taleoftiles/templates/support.html:33 taleoftiles/templates/support.html:44
 #: taleoftiles/templates/vestibula/support.html:32
 msgid "products"
-msgstr ""
+msgstr "products"
 
 #: taleoftiles/templates/catalogue.html:172
 #: taleoftiles/templates/productthumb.html:171
@@ -94,7 +94,7 @@ msgstr "order"
 #: taleoftiles/templates/catalogue.html:208
 #: taleoftiles/templates/productthumb.html:207
 msgid "product-not-samplable"
-msgstr ""
+msgstr "Not Samplable"
 
 #: taleoftiles/templates/checkout_base.html:79
 #, fuzzy
@@ -105,12 +105,12 @@ msgstr "IBAN"
 #: taleoftiles/templates/checkout_base.html:80
 #: taleoftiles/templates/vestibula/support.html:62
 msgid "shipping"
-msgstr ""
+msgstr "Shipping"
 
 #: taleoftiles/templates/checkout_base.html:81
 #: taleoftiles/templates/vestibula/support.html:52
 msgid "payment"
-msgstr ""
+msgstr "Payment"
 
 #: taleoftiles/templates/empty_base.html:37
 #: taleoftiles/templates/empty_base.html:252
@@ -118,22 +118,22 @@ msgstr ""
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 #: taleoftiles/templates/vestibula/empty_base.html:37
 msgid "support"
-msgstr ""
+msgstr "Support"
 
 #: taleoftiles/templates/empty_base.html:40
 #: taleoftiles/templates/vestibula/empty_base.html:41
 msgid "account"
-msgstr ""
+msgstr "Account"
 
 #: taleoftiles/templates/empty_base.html:41
 #: taleoftiles/templates/vestibula/empty_base.html:42
 msgid "logout"
-msgstr ""
+msgstr "Logout"
 
 #: taleoftiles/templates/empty_base.html:43
 #: taleoftiles/templates/empty_base.html:254
 msgid "login-register"
-msgstr ""
+msgstr "Login or Register"
 
 #: taleoftiles/templates/empty_base.html:88
 #: taleoftiles/templates/empty_base.html:234
@@ -149,39 +149,40 @@ msgstr "Restoration Ideas"
 
 #: taleoftiles/templates/empty_base.html:136
 msgid "your-sampler"
-msgstr ""
+msgstr "Your Tale of Tiles Book"
 
 #: taleoftiles/templates/empty_base.html:161
 msgid "receive-sample-home"
-msgstr ""
+msgstr "Receive your Tale of Tiles Book"
 
 #: taleoftiles/templates/empty_base.html:164
 msgid " sampler-empty-claim "
-msgstr ""
+msgstr "Your Tale of Tiles Book is empty"
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login"
-msgstr ""
+msgstr "Login or Register"
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login-claim"
-msgstr ""
+msgstr "Register your account to receive your"
+"Tale of Tiles Book or to place an order"
 
 #: taleoftiles/templates/empty_base.html:178
 msgid "your-chart"
-msgstr ""
+msgstr "Chart"
 
 #: taleoftiles/templates/empty_base.html:208
 msgid "total"
-msgstr ""
+msgstr "total"
 
 #: taleoftiles/templates/empty_base.html:218
 msgid " chart-empty-claim "
-msgstr ""
+msgstr "Your chart is empty"
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "of"
-msgstr ""
+msgstr "of"
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "added-to-chart"
@@ -202,7 +203,7 @@ msgstr "Choose your tiles among our <strong>200 products selections</strong>"
 
 #: taleoftiles/templates/home.html:44
 msgid "sample-touchhand"
-msgstr "View the tiles directly from Home"
+msgstr "Touch with your hands"
 
 #: taleoftiles/templates/home.html:46
 msgid "sample-description"
@@ -222,13 +223,13 @@ msgstr ""
 #: taleoftiles/templates/home.html:68
 #: taleoftiles/templates/vestibula/home.html:33
 msgid "title-renovate-home"
-msgstr "Ideas for rennovate"
+msgstr "Ideas for renovate"
 
 #: taleoftiles/templates/home.html:69
 #, fuzzy
 #| msgid "title-renovate-home"
 msgid "subtitle-renovate-home"
-msgstr "Ideas for rennovate"
+msgstr "How to renove your home with our simple tips"
 
 #: taleoftiles/templates/home.html:77
 #: taleoftiles/templates/vestibula/home.html:42
@@ -237,7 +238,7 @@ msgstr "Frequent Question"
 
 #: taleoftiles/templates/home.html:81
 msgid "faq-1"
-msgstr ""
+msgstr "How can I return the product if I change my mind?"
 
 #: taleoftiles/templates/home.html:82 taleoftiles/templates/home.html:87
 #: taleoftiles/templates/home.html:92 taleoftiles/templates/home.html:97
@@ -251,50 +252,51 @@ msgstr "read answer"
 
 #: taleoftiles/templates/home.html:86
 msgid "faq-2"
-msgstr ""
+msgstr "What are the delivery times?"
 
 #: taleoftiles/templates/home.html:91
 msgid "faq-3"
-msgstr ""
+msgstr "How will the delivery take place?"
 
 #: taleoftiles/templates/home.html:96
 msgid "faq-4"
-msgstr ""
+msgstr "Can I see the tiles before buying them?"
 
 #: taleoftiles/templates/home.html:100
 msgid "faq-5"
-msgstr ""
+msgstr "Are the products Italian? Are they handmade products?"
 
 #: taleoftiles/templates/home.html:104
 msgid "faq-6"
-msgstr ""
+msgstr "Do I have to have special precautions when" 
+"calculating the measurements to choose the tiles?"
 
 #: taleoftiles/templates/home.html:115
 #: taleoftiles/templates/vestibula/home.html:72
 msgid "founder-name"
-msgstr "Donatella Mattonella"
+msgstr "We are Tale of Tiles"
 
 #: taleoftiles/templates/include/login.html:10
 #: taleoftiles/templates/shipping.html:75
 msgid "already-registered"
-msgstr ""
+msgstr "Already Registered?"
 
 #: taleoftiles/templates/include/login.html:23
 msgid "password-reset"
-msgstr ""
+msgstr "reset your password"
 
 #: taleoftiles/templates/include/login.html:31
 msgid "wanna-register"
-msgstr ""
+msgstr "Do you want to register?"
 
 #: taleoftiles/templates/include/login.html:32
 msgid "wanna-register-incentive"
-msgstr ""
-
+msgstr "Register your account to receive your"
+"Tale of Tiles Book or to place an order"
 #: taleoftiles/templates/include/login.html:41
 #: taleoftiles/templates/vestibula/empty_base.html:147
 msgid "register"
-msgstr ""
+msgstr "Register"
 
 #: taleoftiles/templates/order.html:6
 #, fuzzy
@@ -310,16 +312,16 @@ msgstr "order"
 #: taleoftiles/templates/order.html:24
 #: taleoftiles/templates/vestibula/summary.html:151
 msgid "quantity"
-msgstr ""
+msgstr "Quantity"
 
 #: taleoftiles/templates/order.html:25 taleoftiles/templates/summary.html:23
 #: taleoftiles/templates/vestibula/summary.html:152
 msgid "price"
-msgstr ""
+msgstr "Price"
 
 #: taleoftiles/templates/order.html:39 taleoftiles/templates/summary.html:78
 msgid "boxes"
-msgstr ""
+msgstr "Boxes"
 
 #: taleoftiles/templates/order.html:58 taleoftiles/templates/summary.html:110
 #, fuzzy
@@ -341,7 +343,7 @@ msgstr "Shipping"
 
 #: taleoftiles/templates/password/password_reset.html:24
 msgid "send-password"
-msgstr ""
+msgstr "we will send you a new password to this address"
 
 #: taleoftiles/templates/payment.html:5
 #, fuzzy
