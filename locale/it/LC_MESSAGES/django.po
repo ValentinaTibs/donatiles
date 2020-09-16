@@ -195,7 +195,7 @@ msgstr "<br/> Il tuo carrello è vuoto."
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "of"
-msgstr "di"
+msgstr ""
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "added-to-chart"
@@ -242,7 +242,7 @@ msgstr "Idee per ristrutturare"
 #, fuzzy
 #| msgid "title-renovate-home"
 msgid "subtitle-renovate-home"
-msgstr ""
+msgstr "Come rinnovare la tua casa con i nostri consigli"
 
 #: taleoftiles/templates/home.html:77
 #: taleoftiles/templates/vestibula/home.html:42
@@ -282,7 +282,7 @@ msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
 #: taleoftiles/templates/home.html:104
 msgid "faq-6"
 msgstr ""
-"Devo avere delle accortezze particolari nel calcolare le misure o scegliere "
+"Devo avere delle accortezze particolari nel calcolare le misure per scegliere "
 "le mattonelle?"
 
 #: taleoftiles/templates/home.html:115
