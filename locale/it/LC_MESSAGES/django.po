@@ -175,7 +175,7 @@ msgstr " <br/> Il tuo <b>Tale of Tiles Book</b> è vuoto. "
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login"
-msgstr "Registrati-login"
+msgstr "Registrati-Login"
 
 #: taleoftiles/templates/empty_base.html:168
 msgid "register-login-claim"
@@ -195,7 +195,7 @@ msgstr "<br/> Il tuo carrello è vuoto."
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "of"
-msgstr "di"
+msgstr ""
 
 #: taleoftiles/templates/empty_base.html:293
 msgid "added-to-chart"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:41
 msgid "choose-home-claim"
-msgstr "Scegli le tue mattonelle tra la nostra in <strong>selezione di oltre 200 prodotti</strong>"
+msgstr "Scegli le tue mattonelle tra la nostra <strong>selezione di oltre 200 prodotti</strong>"
 
 #: taleoftiles/templates/home.html:44
 msgid "sample-touchhand"
@@ -242,7 +242,7 @@ msgstr "Idee per ristrutturare"
 #, fuzzy
 #| msgid "title-renovate-home"
 msgid "subtitle-renovate-home"
-msgstr "Idee per ristrutturare"
+msgstr "Come rinnovare la tua casa con i nostri consigli"
 
 #: taleoftiles/templates/home.html:77
 #: taleoftiles/templates/vestibula/home.html:42
@@ -282,13 +282,13 @@ msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
 #: taleoftiles/templates/home.html:104
 msgid "faq-6"
 msgstr ""
-"Devo avere delle accortezze particolari nel calcolare le misure o scegliere "
+"Devo avere delle accortezze particolari nel calcolare le misure per scegliere "
 "le mattonelle?"
 
 #: taleoftiles/templates/home.html:115
 #: taleoftiles/templates/vestibula/home.html:72
 msgid "founder-name"
-msgstr "Tale of Tiles siamo noi"
+msgstr "Noi siamo Tale of Tiles"
 
 #: taleoftiles/templates/include/login.html:10
 #: taleoftiles/templates/shipping.html:75
@@ -306,6 +306,7 @@ msgstr "Vuoi registrarti?"
 #: taleoftiles/templates/include/login.html:32
 msgid "wanna-register-incentive"
 msgstr "Registrati per ricevere il Tale of Tiles Book, effettuare ordini" 
+
 "e tenere traccia dei tuoi ordini passati."
 
 #: taleoftiles/templates/include/login.html:41
@@ -427,7 +428,7 @@ msgstr "Idee per ristrutturare"
 
 #: taleoftiles/templates/product.html:11
 msgid "all-products"
-msgstr ""
+msgstr "Tutti i prodotti"
 
 #: taleoftiles/templates/product.html:24
 msgid "full-sampler"
