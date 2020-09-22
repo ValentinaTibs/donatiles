@@ -18,7 +18,7 @@
   </ul>
   <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
-    
+
 {% if sampler and sampler.all_samples.count > 4 %}
 
   <p class="note">{% trans 'full-sampler' %} </p>
@@ -27,7 +27,7 @@
   <p class="note">{% trans 'already-in-sampler' %} </p>
 
 {% elif product.is_samplable %}
-  <form  action="{% url 'add_sample' product.code %}" method="POST"> 
+  <form  action="{% url 'add_sample' product.code %}" method="POST">
     {% csrf_token %}
         <button class="btn btn-secondary"><svg class="icon-l icon">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg>
@@ -36,7 +36,7 @@
   </form>
   <p class="note">{% trans 'add-sampler-text' %}</p>
 
-{% else %}    
+{% else %}
     <p class="note">{% trans 'not-samplable' %} </p>
 {% endif %}
 
@@ -45,12 +45,12 @@
 <script>
   function compute_money(){
     var formats = document.getElementsByName('size');
-    for(i = 0; i < formats.length; i++) { 
+    for(i = 0; i < formats.length; i++) {
       var sel_size = document.getElementById('label_id_size_'+i).innerHTML
       document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
       if(formats[i].checked) {
         document.getElementById('selected_format').innerHTML = String(sel_size);
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline"; 
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
         document.getElementById('sm_catch').innerHTML = document.getElementById('id_quantity').value ;
         document.getElementById('sm_notification').innerHTML = document.getElementById('id_quantity').value ;
         //document.getElementById('sm_image_'+sel_size).style.display = "none";
@@ -58,25 +58,25 @@
     }
   }
   function add_quantity(){
-  document.getElementById('id_quantity').value = Number(document.getElementById('id_quantity').value) + Number(1); 
+  document.getElementById('id_quantity').value = Number(document.getElementById('id_quantity').value) + Number(1);
   }
 
   function minus_quantity(){
     document.getElementById('id_quantity').value = document.getElementById('id_quantity').value -1;
   }
 </script>
-  
-  
+
+
 <div class="content grid grid-product">
 
   <div class="product-gallery">
-    {% for image in product.images.all %}  
+    {% for image in product.images.all %}
     <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
     {% endfor %}
   </div>
 
-<form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST"> 
-{% csrf_token %} 
+<form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST">
+{% csrf_token %}
 
   <div class="product-selection">
     <div class="product-options">
@@ -84,7 +84,7 @@
       <h5>{% trans 'formats' %}</h5>
       {% for choice in chi_form.size %}
           {{ choice.tag }}
-          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label> 
+          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
       {% endfor %}
       </ul>
 
@@ -98,8 +98,8 @@
             <br><span id="selected_format"></span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
-          <div><div class="product-figure"><span> €</span> 
-            
+          <div><div class="product-figure"><span> €</span>
+
             {% for choice in chi_form.size %}
             <b style="display:none;" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
             {% endfor %}
@@ -111,15 +111,15 @@
 
       <div>
         <div class="row">{{errors}}</div>
-        
+
         <div class="row">
           <div>
             <strong>Superficie da rivestire</strong><br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;
           </div>
           <div class="input-qty">
-          
+
             {{chi_form.quantity}}
-            
+
             <div class="product-qtybtns">
               <svg class="icon-m icon" style="cursor:pointer;" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
               <span class="product-note">m&sup2;</span>
@@ -137,7 +137,7 @@
         </div>
         <div class="row">
           <div class="checkbox">
-            
+
             {{chi_form.has_frido}}
             <label for="includeOffCut">{% trans 'include-sfrido' %}</label>
           </div>
@@ -149,8 +149,8 @@
 
       {{chi_form.save_it.as_hidden}}
       <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
-      <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div> 
-    
+      <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
+
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
@@ -158,22 +158,22 @@
       <p class="note">Hai qualche dubbio?<br>
         <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>
-    
+
 
   </div>
 
  </form>
-    
-   
+
+
   <div class="product-main">
-    
+
 	{% autoescape off %}
-		{{ product.publication.content }} 
+		{{ product.publication.content }}
 	{% endautoescape %}
 
     <!-- ICONE scheda tecnica -->
     <div class="product-marks">
-      {% for icon in product.techspec.icons.all %}  
+      {% for icon in product.techspec.icons.all %}
         <img  src="{{ icon.imagefile.url }}" >
       {% endfor %}
     </div>
@@ -190,23 +190,23 @@
 
   <div class="product-meta">
     <ul class="product-thumbs">
-      {% for image in product.images.all %}  
-        <li> <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}"></li> 
+      {% for image in product.images.all %}
+        <li> <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}"></li>
       {% endfor %}
     </ul>
 
-	{% for effect in product|effects %}  
+	{% for effect in product|effects %}
     <a href="{% url 'catalogue' the_filter=effect.slug %}"  class="tag">{{effect.name}} </a><br>
 	{% endfor %}
 
-  {% for colour in product|colour %}  
+  {% for colour in product|colour %}
     <a href="{% url 'catalogue' the_filter=colour.slug %}"  class="tag">{{colour.name}} </a><br>
 	{% endfor %}
 
 
   <h5>{% trans 'settings' %}</h5>
-    
-  {% for style in product|styles %}  
+
+  {% for style in product|styles %}
       <a href="{% url 'catalogue' the_filter=style.slug %}"  class="tag">{{style.name}} </a><br>
   {% endfor %}
   </div>
@@ -219,7 +219,7 @@
     <h2>{% trans 'product-support' %}</h2>
   </div>
   <div class="content grid grid4">
-	{% for support in product.supports.all %}  
+	{% for support in product.supports.all %}
 		{% product_thumb support %}
 	{% endfor %}
   </div>
@@ -235,7 +235,7 @@
   </div>
 
   <div class="content grid grid4">
-    {% for brother_product in products_series.all %}  
+    {% for brother_product in products_series.all %}
       {% product_thumb brother_product %}
     {% endfor %}
   </div>
@@ -279,7 +279,7 @@
   // if none is checked - check the first and add a listner
   var someone_checked = false;
   for (var i = 0; i < rad.length; i++) {
-    someone_checked = document.getElementsByName("size")[i].checked 
+    someone_checked = document.getElementsByName("size")[i].checked
       rad[i].addEventListener('change', function() {
           compute_money()
       });
@@ -288,16 +288,16 @@
     document.getElementById("id_size_0").checked = true;
   }
   compute_money()
-  
+
 //   document.product_ship.addEventListener('submit', function(event){
 //     event.preventDefault();
 //     console.log("form submitted!")  // sanity check
 //     create_post();
 // });
 
-  
+
 };
-  
+
 </script>
 
 
