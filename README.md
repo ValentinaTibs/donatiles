@@ -9,13 +9,13 @@ This application supports the [Getting Started with Python on Heroku](https://de
 Make sure you have Python 3.7 [installed locally](http://install.python-guide.org). To push to Heroku, you'll need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), as well as [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
 ```sh
-$ git clone https://github.com/heroku/python-getting-started.git
-$ cd python-getting-started
+$ git clone https://github.com/ValentinaTibs/donatiles.git
+$ cd donatiles
 
-$ python3 -m venv getting-started
+$ python3 -m venv donatiles
 $ pip install -r requirements.txt
 
-$ createdb python_getting_started
+$ createdb vale
 
 $ python manage.py migrate
 $ python manage.py collectstatic
@@ -26,16 +26,15 @@ $ heroku local
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku
-###nightly push
+
+### nightly push
 ```sh
 $ git push heroku master
 ```
 
-
-###freshly made repo
+### freshly made repo
 ```sh
 $ heroku create
-
 $ git push heroku master
 ```
 
@@ -58,19 +57,20 @@ _______________________________________________________________________________
 
 # SERVER RUN 
 
+on Windows
+
 ```
 heroku local web -f Procfile.windows
 ```
 
-or 
+otherwise
 
 ```
 heroku local web 
 ```
 
 
-
-##3 Gunicorn let Connecion opened on 5000
+## Gunicorn let Connecion opened on 5000
 
 ```
 kill -9 $(lsof -i:5000 -t) 2> /dev/null
@@ -83,6 +83,7 @@ kill -9 $(lsof -i:5000 -t) 2> /dev/null
 ```
 $ brew services start postgresql
 $ psql postgres
+
 ```
 
 ## remote check and deploy of migrations
@@ -114,7 +115,6 @@ python3 manage.py migrate --fake-initial
 
 ```
 
-
 ## Download and test remote database
 
 ```sh
@@ -124,7 +124,7 @@ pg_dump vale
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale latest.dump
 ```
 
-###pg_admin url
+### pg_admin url
 http://127.0.0.1:58993/browser/#
 
 # Translations - Microcopy text
