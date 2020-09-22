@@ -80,7 +80,7 @@ def min_price(m2_price, m2_box, weight_box):
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
     if has_frido:
-        num_boxes = math.floor((0.10 * quantity + quantity)/sm_per_box)
+        num_boxes = math.ceil((0.10 * quantity + quantity)/sm_per_box)
     else:
         num_boxes = math.ceil(quantity /  sm_per_box)
     tot_price_shipping = 0
@@ -92,6 +92,7 @@ def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
         idx_min = ech_weight.index(min_val_weight)
         tot_price_shipping += ech_price[idx_min]+ ech_price[idx_min]*IVA
         residual_weight -= ech_weight[idx_min]
+    
     return int(tot_price_shipping + (sm_price * tot_quantity))
 
 
