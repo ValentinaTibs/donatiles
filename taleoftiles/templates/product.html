@@ -279,7 +279,8 @@
   // if none is checked - check the first and add a listner
   var someone_checked = false;
   for (var i = 0; i < rad.length; i++) {
-    someone_checked = document.getElementsByName("size")[i].checked 
+    if(!someone_checked)
+      someone_checked = document.getElementsByName("size")[i].checked 
       rad[i].addEventListener('change', function() {
           compute_money()
       });
