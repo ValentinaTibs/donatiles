@@ -193,7 +193,8 @@
         </a>
 
         {% if sampler|is_in_sample:product.code %}
-          <button class="btn btn-overlay">IN SAMPLE</button>
+        <button class="btn btn-overlay" onClick="Javascript:removeFromSampler('{{ product.code }}')"><svg class="icon-l icon">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-remove' %}"/></svg></button>
         {% elif sampler and sampler.all_samples.count > 4%}
 
         <button class="btn btn-overlay">FULL SAMPLE</button>
@@ -268,6 +269,28 @@
         });
     }
 
+
+    function removeFromSampler( pId ) {
+      console.log( pId );
+        $.ajax({
+            type: "POST",
+            // TODO: make this url dynamic
+            url: "/it/del_sample/" + pId,
+            data: {
+                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+            },
+            success: function(result) {
+                console.log('ok');
+                // TODO:
+                // - update sampler: show empty slot and update main sampler button
+                // - update "add to sampler" button if product is listed or product detail page is open
+            },
+            error: function(result) {
+                console.log('error');
+            }
+        });
+    }
+    
     </script>
 
 
