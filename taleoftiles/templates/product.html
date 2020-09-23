@@ -6,6 +6,8 @@
 {% load static %}
 {% block content %}
 
+{% csrf_token %}
+
 <div class="content product-header">
   <ul class="breadcrumb">
     <li><a href="{% url 'catalogue' %}"> {% trans 'all-products' %}</a></li>
@@ -28,7 +30,6 @@
 
 {% elif product.is_samplable %}
   <form  action="{% url 'add_sample' product.code %}" method="POST">
-    {% csrf_token %}
         <button class="btn btn-secondary"><svg class="icon-l icon">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg>
           <span>{% trans 'add-sampler-button' %}</span>
@@ -42,30 +43,6 @@
 
   </div>
 </div>
-<script>
-  function compute_money(){
-    var formats = document.getElementsByName('size');
-    for(i = 0; i < formats.length; i++) {
-      var sel_size = document.getElementById('label_id_size_'+i).innerHTML
-      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
-      if(formats[i].checked) {
-        document.getElementById('selected_format').innerHTML = String(sel_size);
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
-        document.getElementById('sm_catch').innerHTML = document.getElementById('id_quantity').value ;
-        document.getElementById('sm_notification').innerHTML = document.getElementById('id_quantity').value ;
-        //document.getElementById('sm_image_'+sel_size).style.display = "none";
-      }
-    }
-  }
-  function add_quantity(){
-  document.getElementById('id_quantity').value = Number(document.getElementById('id_quantity').value) + Number(1);
-  }
-
-  function minus_quantity(){
-    document.getElementById('id_quantity').value = document.getElementById('id_quantity').value -1;
-  }
-</script>
-
 
 <div class="content grid grid-product">
 
@@ -74,9 +51,6 @@
     <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
     {% endfor %}
   </div>
-
-<form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST">
-{% csrf_token %}
 
   <div class="product-selection">
     <div class="product-options">
@@ -149,7 +123,7 @@
 
       {{chi_form.save_it.as_hidden}}
       <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
-      <div class="btn btn-primary" id="btnAddToCart"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
+      <div class="btn btn-primary" id="btnAddToCart" onClick="Javascript:addToCart()"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
 
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
@@ -159,11 +133,7 @@
         <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>
 
-
   </div>
-
- </form>
-
 
   <div class="product-main">
 
@@ -243,10 +213,34 @@
 </div>
 {% endif %}
 
-
-
-
 <script>
+
+  var qtyField = $( '#id_quantity' );
+
+  function compute_money(){
+    var formats = document.getElementsByName('size');
+    for(i = 0; i < formats.length; i++) {
+      var sel_size = document.getElementById('label_id_size_'+i).innerHTML
+      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
+      if(formats[i].checked) {
+        document.getElementById('selected_format').innerHTML = String(sel_size);
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+        document.getElementById('sm_catch').innerHTML = qtyField.val();
+        document.getElementById('sm_notification').innerHTML = qtyField.val();
+        //document.getElementById('sm_image_'+sel_size).style.display = "none";
+      }
+    }
+  }
+
+  function add_quantity(){
+    qtyField.val( +qtyField.val() + 1 );
+    compute_money();
+  }
+
+  function minus_quantity(){
+    qtyField.val( +qtyField.val() - 1 );
+    compute_money();
+  }
 
   function create_post(){
   // console.log("create post is working!") // sanity check
@@ -270,33 +264,54 @@
   //       }
   //   });
   };
+
   window.onload = function() {
-  var rad = document.product_ship.size;
-  var prev = null;
-  var rad = document.getElementsByName('size');
-  console.log(rad.length);
+    var prev = null;
+    var rad = document.getElementsByName('size');
+    console.log(rad.length);
 
-  // if none is checked - check the first and add a listner
-  var someone_checked = false;
-  for (var i = 0; i < rad.length; i++) {
-    someone_checked = document.getElementsByName("size")[i].checked
-      rad[i].addEventListener('change', function() {
-          compute_money()
-      });
+    // if none is checked - check the first and add a listner
+    var someone_checked = false;
+    for (var i = 0; i < rad.length; i++) {
+      someone_checked = document.getElementsByName("size")[i].checked
+        rad[i].addEventListener('change', function() {
+            compute_money()
+        });
+    }
+    if (!someone_checked){
+      document.getElementById("id_size_0").checked = true;
+    }
+    compute_money()
+
+  //   document.product_ship.addEventListener('submit', function(event){
+  //     event.preventDefault();
+  //     console.log("form submitted!")  // sanity check
+  //     create_post();
+  // });
+  };
+
+  function addToCart() {
+    $.ajax({
+      type: "POST",
+          // TODO: fix this url
+      url: "{% url 'product' product.code %}",
+      data: {
+          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+          // TODO:
+          // - add quantity, format and finish as parameters here
+      },
+      success: function(result) {
+          console.log('ok');
+          // TODO:
+          // - show notification
+          // - update cart
+          // - empty form fields
+      },
+      error: function(result) {
+          console.log('error');
+      }
+    });
   }
-  if (!someone_checked){
-    document.getElementById("id_size_0").checked = true;
-  }
-  compute_money()
-
-//   document.product_ship.addEventListener('submit', function(event){
-//     event.preventDefault();
-//     console.log("form submitted!")  // sanity check
-//     create_post();
-// });
-
-
-};
 
 </script>
 
