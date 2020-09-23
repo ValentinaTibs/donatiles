@@ -160,9 +160,7 @@
             <span>{{sample.product.name}}</span>
           </div>
         </a>
-        <a href="{% url 'del_sample' sample.pk %}">
-          <button class="btn" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-        </a>
+        <button class="btn" onClick="removeFromSampler('{{ sample.pk }}')"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
       </div>
     {% endfor %}
     
@@ -182,6 +180,32 @@
 
 
 </div>
+
+<script src="{% static 'js/jquery-2.2.4.min.js' %}" ></script>
+
+<script type="text/javascript">
+  
+    function removeFromSampler( pId ) {
+      console.log( pId );
+        $.ajax({
+            type: "POST",
+            // TODO: make this url dynamic
+            url: "/it/del_sample/" + pId,
+            data: {
+                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+            },
+            success: function(result) {
+                console.log('ok');
+                // TODO:
+                // - update sampler: show empty slot and update main sampler button
+                // - update "add to sampler" button if product is listed or product detail page is open
+            },
+            error: function(result) {
+                console.log('error');
+            }
+        });
+    }
+</script>
 
 <div class="overlay" id="overlayCart">
 
