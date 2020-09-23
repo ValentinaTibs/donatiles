@@ -47,9 +47,18 @@
 <div class="content grid grid-product">
 
   <div class="product-gallery">
+    <div class="product-gallery-container">
     {% for image in product.images.all %}
-    <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
+      <div class="product-gallery-item">
+        <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
+      </div>
     {% endfor %}
+    </div>
+    <div class="product-gallery-controls">
+      <button class="btn" id="gallerybtn-prev"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-left' %}"/></svg></button>
+      <ul></ul>
+      <button class="btn" id="gallerybtn-next"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg></button>
+    </div>
   </div>
 
   <div class="product-selection">
@@ -159,11 +168,6 @@
   </div>
 
   <div class="product-meta">
-    <ul class="product-thumbs">
-      {% for image in product.images.all %}
-        <li> <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}"></li>
-      {% endfor %}
-    </ul>
 
 	{% for effect in product|effects %}
     <a href="{% url 'catalogue' the_filter=effect.slug %}"  class="tag">{{effect.name}} </a><br>
