@@ -47,7 +47,7 @@ urlpatterns += i18n_patterns(
     path("account/",                                        CRM.views.account,    name="account"),
     path('password_reset/done/',    auth_views.PasswordResetDoneView.as_view(template_name='password/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="password/password_reset_confirm.html"), name='password_reset_confirm'),
-    path('reset/done/',             auth_views.PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), name='password_reset_complete'),      
+    path('reset/done/',             auth_views.PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), name='password_reset_complete'),
     path("accounts/password_reset/",layout.views.password_reset_request, name="password_reset"),
 
     path("add_order/<str:is_sample>", CRM.views.add_order, name="add_order"),
@@ -55,7 +55,7 @@ urlpatterns += i18n_patterns(
     path("shipping/<str:id_>", CRM.views.shipping, name="shipping"),
     path("payment/<str:id_>",   CRM.views.payment,  name="payment"),
     path("order/<str:id_>",   CRM.views.order,  name="order"),
-    
+
     path("blog/",                       blog.views.blog, name="blog"),
     path("blog/<slug:the_filter>/",     blog.views.blog, name="blog"),
     path('blog/post/<slug:post_slug>/', blog.views.post, name="post"),
@@ -66,11 +66,11 @@ urlpatterns += i18n_patterns(
     # path('blog/post/<slug:post_slug>/', taleoftiles.views.post, name="post"),
 
     # path("collections/",                        taleoftiles.views.collections, name="collections"),
-    # path("collections/<slug:tag_slug>/",        taleoftiles.views.collections, name="collections"),    
+    # path("collections/<slug:tag_slug>/",        taleoftiles.views.collections, name="collections"),
     # path("collection/<slug:collection_slug>/",  taleoftiles.views.collection, name="collection"),
 
-    # path("settings/",                   taleoftiles.views.settings, name="settings"),    
-    # path("settings/<slug:tag_slug>",    taleoftiles.views.settings, name="settings"),    
+    # path("settings/",                   taleoftiles.views.settings, name="settings"),
+    # path("settings/<slug:tag_slug>",    taleoftiles.views.settings, name="settings"),
     # path("setting/<slug:setting_slug>", taleoftiles.views.setting,  name="setting"),
 
     # path("products/",                   taleoftiles.views.products, name="products"),
@@ -86,8 +86,8 @@ urlpatterns += i18n_patterns(
     # path("shipping",        taleoftiles.views.shipping, name="shipping"),
     # path("shipping/<slug:internal_tracking_id>", taleoftiles.views.shipping, name="shipping"),
 
-    # path("chart",           taleoftiles.views.chart,    name="chart"),   
-    # path("about/",          taleoftiles.views.about,    name="about"), 
+    # path("chart",           taleoftiles.views.chart,    name="chart"),
+    # path("about/",          taleoftiles.views.about,    name="about"),
     # path("contacts/",       taleoftiles.views.contacts, name="contacts"),
     # path("askaquestion/",   taleoftiles.views.askaquestion, name="askaquestion"),
     # path("termsandcond/",   taleoftiles.views.termsandcond, name="termsandcond"),
@@ -98,4 +98,3 @@ urlpatterns += i18n_patterns(
 
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    

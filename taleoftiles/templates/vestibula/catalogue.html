@@ -12,109 +12,109 @@
 {{active_tags}}
 <form method="POST" action="{% url 'catalogue' %}">
 {% csrf_token %}
-	       
-        {{ tags.effect.name }} 
+
+        {{ tags.effect.name }}
         {% for effect in tags.effect.child.all %}
 
         	<input type="checkbox" name="{{ tags.effect.slug }}" value="{{effect.slug}}"
             {% if effect.slug in active_tags|get_item:tags.effect.slug  %}
-               checked 
+               checked
             {% endif %}
             >
-            
+
             {{effect.name}}
 
 		{% endfor %}
 
 
 		<br/>
-	       
-        {{ tags.style.name }} 
+
+        {{ tags.style.name }}
         {% for style in tags.style.child.all %}
         	<input type="checkbox" name="{{ tags.style.slug }}" value="{{style.slug}}"
             {% if style.slug in active_tags|get_item:tags.style.slug  %}
-               checked 
+               checked
             {% endif %}
-            >{{style.name}}       
+            >{{style.name}}
 		{% endfor %}
-                
+
 		<br/>
-           
-        {{ tags.colour.name }} 
+
+        {{ tags.colour.name }}
         {% for colour in tags.colour.child.all %}
         	<input type="checkbox" name="{{ tags.colour.slug }}" value="{{colour.slug}}"
             {% if colour.slug in active_tags|get_item:tags.colour.slug  %}
-               checked 
+               checked
             {% endif %}
-            >{{colour.name}}       
+            >{{colour.name}}
 		{% endfor %}
-           
+
 		<br/>
-           
+
         {{ tags.setting.name }}
         {% for setting in tags.setting.child.all %}
         	<input type="checkbox" name="{{ tags.setting.slug }}" value="{{setting.slug}}"
             {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
-               checked 
+               checked
             {% endif %}
-            >{{setting.name}}       
+            >{{setting.name}}
 		{% endfor %}
-          
-		<br/>
-           
-        {{ tags.format.name }} 
-        {% for format in tags.format.child.all %}
-        	<input type="checkbox" name="{{ tags.format.slug }}" value="{{format.slug}}" 
-            {% if format.slug in active_tags|get_item:tags.format.slug  %}
-               checked 
-            {% endif %}
-            >
-            {{format.name}}       
-            {% for more_format in format.child.all %}
-                {{more_format.name}}       
-            {% endfor %}            
-		{% endfor %}
-    
-    	<br/>
-        
-        <input type="checkbox" name="{{ tags.handmade.slug }}" 	value="{{tags.handmade.slug}}"
-        {% if tags.handmade.slug in active_tags|get_item:tags.handmade.slug  %}
-           checked 
-        {% endif %}
-        >{{tags.handmade.name}}       
-		<input type="checkbox" name="{{ tags.samplable.slug }}" value="{{tags.samplable.slug}}">{{tags.samplable.name}}       
 
 		<br/>
-		
-        {{ tags.serie.name }} 
+
+        {{ tags.format.name }}
+        {% for format in tags.format.child.all %}
+        	<input type="checkbox" name="{{ tags.format.slug }}" value="{{format.slug}}"
+            {% if format.slug in active_tags|get_item:tags.format.slug  %}
+               checked
+            {% endif %}
+            >
+            {{format.name}}
+            {% for more_format in format.child.all %}
+                {{more_format.name}}
+            {% endfor %}
+		{% endfor %}
+
+    	<br/>
+
+        <input type="checkbox" name="{{ tags.handmade.slug }}" 	value="{{tags.handmade.slug}}"
+        {% if tags.handmade.slug in active_tags|get_item:tags.handmade.slug  %}
+           checked
+        {% endif %}
+        >{{tags.handmade.name}}
+		<input type="checkbox" name="{{ tags.samplable.slug }}" value="{{tags.samplable.slug}}">{{tags.samplable.name}}
+
+		<br/>
+
+        {{ tags.serie.name }}
         <select name="{{ tags.serie.slug }}" multiple>
-       
-                <option value="" 
+
+                <option value=""
                 {% if '' in active_tags|get_item:tags.serie.slug  %}
-                    selected 
+                    selected
                 {% endif %}
 
                 {% if active_tags|get_item:tags.serie.slug|length == 0  %}
-                    selected 
+                    selected
                 {% endif %}
 
                 {% if active_tags|get_item:tags.serie.slug|length > 0  %}
                     disabled
                 {% endif %}
-                >{% trans 'cat-menu-all' %}</option>       
-            
+                >{% trans 'cat-menu-all' %}</option>
+
 
             {% for serie in tags.serie.child.all %}
-                <option value="{{serie.slug}}" 
+                <option value="{{serie.slug}}"
                 {% if serie.slug in active_tags|get_item:tags.serie.slug  %}
-                   selected 
+                   selected
                 {% endif %}
-                >{{serie.name}}</option>       
+                >{{serie.name}}</option>
     		{% endfor %}
 
         </select>
-       
-    <input type="submit" value="SEARCH" />      
+
+    <input type="submit" value="SEARCH" />
 
 </form>
 

@@ -8,6 +8,8 @@
 
 {% block content %}
 
+{% csrf_token %}
+
 <div class="content grid grid-catalogue">
 <form method="POST" action="{% url 'catalogue' %}">
   <aside>
@@ -24,7 +26,7 @@
                 <li>
                 <input type="checkbox" id="{{effect.slug}}" name="{{ tags.effect.slug }}" value="{{effect.slug}}"
                 {% if effect.slug in active_tags|get_item:tags.effect.slug  %}
-                    checked 
+                    checked
                 {% endif %}>
                 <label for="{{effect.slug}}">{{effect.name}}</label></li>
             {% endfor %}
@@ -41,14 +43,14 @@
                 <label for="{{style.slug}}">{{style.name}}</label></li>
             {% endfor %}
         </ul>
-         
+
 
         <h5>{{ tags.colour.name }} </h5>
         <ul class="colorswatches">
             {% for colour in tags.colour.child.all %}
                 <input type="checkbox" id={{colour.slug}} name="{{ tags.colour.slug }}" value="{{colour.slug}}"
                     {% if colour.slug in active_tags|get_item:tags.colour.slug  %}
-                       checked 
+                       checked
                     {% endif %}
                     >
                 <li>  <a href=""><div style="background-color:#{{colour.summary}}"></div></a></li>
@@ -58,7 +60,7 @@
         <h5>{{ tags.setting.name }}</h5>
         <ul>
             {% for setting in tags.setting.child.all %}
-                <li><input type="checkbox" id="{{setting.slug}}" name="{{ tags.setting.slug }}" value="{{setting.slug}}" 
+                <li><input type="checkbox" id="{{setting.slug}}" name="{{ tags.setting.slug }}" value="{{setting.slug}}"
                 {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
                     checked
                 {% endif %}>
@@ -70,36 +72,36 @@
         <ul>
 
         {% for format in tags.format.child.all %}
-            
+
             <input type="checkbox" id="{{ format.slug }}"
-            name="{{ tags.format.slug }}"  value="{{format.slug}}" 
+            name="{{ tags.format.slug }}"  value="{{format.slug}}"
             {% if format.slug in active_tags|get_item:tags.format.slug  %}
-               checked 
+               checked
             {% endif %}
             >
-            {{format.name}}       
-            
+            {{format.name}}
+
             <ul>
             {% for more_format in format.child.all %}
             <input type="checkbox"  id="{{ more_format.slug }}"
-            name="{{ tags.format.slug }}" value="{{more_format.slug}}" 
+            name="{{ tags.format.slug }}" value="{{more_format.slug}}"
             {% if more_format.slug in active_tags|get_item:tags.format.slug  %}
-               checked 
+               checked
             {% endif %}
             >
 
                 <li><label for="{{more_format.slug }}" >{{more_format.name}}</label>  </li>
-            {% endfor %}            
+            {% endfor %}
             </ul>
         {% endfor %}
-         
+
         </ul>
 
         <div class="checkbox">
 
         <input type="checkbox" id="filter-sampleable" name="{{ tags.handmade.slug }}"  value="{{tags.handmade.slug}}"
         {% if tags.handmade.slug in active_tags|get_item:tags.handmade.slug  %}
-           checked 
+           checked
         {% endif %}
         >
         <label for="filter-sampleable">{{tags.handmade.name}}</label>
@@ -108,7 +110,7 @@
         <div class="checkbox">
             <input type="checkbox" id="filter-handmade" name="{{ tags.samplable.slug }}" value="{{tags.samplable.slug}}"
             {% if tags.samplable.slug in active_tags|get_item:tags.samplable.slug  %}
-                checked 
+                checked
             {% endif %}
             >
             <label for="filter-handmade">{{tags.samplable.name}} </label>
@@ -116,28 +118,28 @@
         <h5>{{ tags.serie.name }} </h5>
 
         <select name="{{ tags.serie.slug }}" >
-       
-                <option value="" 
+
+                <option value=""
                 {% if '' in active_tags|get_item:tags.serie.slug  %}
-                    selected 
+                    selected
                 {% endif %}
 
                 {% if active_tags|get_item:tags.serie.slug|length == 0  %}
-                    selected 
+                    selected
                 {% endif %}
 
                 {% if active_tags|get_item:tags.serie.slug|length > 0  %}
                     disabled
                 {% endif %}
-                >{% trans 'cat-menu-all' %}</option>       
-            
+                >{% trans 'cat-menu-all' %}</option>
+
 
             {% for serie in tags.serie.child.all %}
-                <option value="{{serie.slug}}" 
+                <option value="{{serie.slug}}"
                 {% if serie.slug in active_tags|get_item:tags.serie.slug  %}
-                   selected 
+                   selected
                 {% endif %}
-                >{{serie.name}}</option>       
+                >{{serie.name}}</option>
             {% endfor %}
 
         </select>
@@ -146,14 +148,14 @@
     </div>
 
   </aside>
-      <input type="submit" value="SEARCH" />      
+      <input type="submit" value="SEARCH" />
 
 </form>
 
   <section>
 
     <div class="catalogue-filters">
-    
+
         {% for tag in active_tags_items %}
             {% for sel_tag in active_tags_items|get_item:tag %}
             <span class="tag tag-removable">{{sel_tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
@@ -189,24 +191,22 @@
           <h5>{{ product.serie.name }}</h5>
           <h4>{{ product.name }}</h4>
         </a>
-      
+
         {% if sampler|is_in_sample:product.code %}
-          <button class="btn btn-overlay">IN SAMPLE</button>
+        <button class="btn btn-overlay" onClick="Javascript:removeFromSampler('{{ product.code }}')"><svg class="icon-l icon">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-remove' %}"/></svg></button>
         {% elif sampler and sampler.all_samples.count > 4%}
-      
+
         <button class="btn btn-overlay">FULL SAMPLE</button>
         {% elif product.is_samplable %}
-      
-          <form  action="{% url 'add_sample' product.code %}" method="POST"> 
-            {% csrf_token %}
-            <button class="btn btn-overlay"><svg class="icon-l icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-          </form>
-          
-        {% else %}	
+
+        <button class="btn btn-overlay" onClick="Javascript:addToSampler('{{ product.code }}')"><svg class="icon-l icon">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
+
+        {% else %}
           {% trans 'product-not-samplable' %}
         {% endif %}
-          
+
     </div>
     {% endfor %}
 
@@ -225,11 +225,6 @@
     </div>
 </div>
 
-
-    <script src="{% static 'js/jquery-2.2.4.min.js' %}" ></script>
-    <script src="{% static 'js/jquery.waypoints.min.js' %}" ></script>
-    <script src="{% static 'js/infinite.min.js' %}" ></script>
-  
     <script>
     var infinite = new Waypoint.Infinite({
         element: $('.infinite-container')[0],
@@ -245,7 +240,50 @@
     $('.spinner-border').hide();
     }
 
-    });
+    });    
+
+    function addToSampler( pId ) {
+        $.ajax({
+            type: "POST",
+            // TODO: make this url dynamic
+            url: "/it/add_sample/" + pId,
+            data: {
+                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+            },
+            success: function(result) {
+                console.log('ok');
+                // TODO:
+                // - update sampler
+                // - show notification
+                // - change "add to sample" icon
+                // - change "add to sample" action to "removeFromSampler"
+            },
+            error: function(result) {
+                console.log('error');
+            }
+        });
+    }
+
+
+    function removeFromSampler( pId ) {
+        $.ajax({
+            type: "POST",
+            // TODO: make this url dynamic
+            url: "/it/del_sample/" + pId,
+            data: {
+                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+            },
+            success: function(result) {
+                console.log('ok');
+                // TODO:
+                // - update sampler: show empty slot and update main sampler button
+                // - update "add to sampler" button if product is listed or product detail page is open
+            },
+            error: function(result) {
+                console.log('error');
+            }
+        });
+    }
 
     </script>
 
