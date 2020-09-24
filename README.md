@@ -13,7 +13,7 @@ $ git clone https://github.com/ValentinaTibs/donatiles.git
 $ cd donatiles
 
 $ python3 -m venv donatiles
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 
 $ createdb vale
 
@@ -124,6 +124,16 @@ pg_dump vale
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U vale -d vale latest.dump
 ```
 
+## start a new DB
+
+```sh
+pip3 install gunicorn
+postgres=# CREATE ROLE vale superuser;
+postgres=# ALTER ROLE vale WITH LOGIN;
+
+```
+
+
 ### pg_admin url
 http://127.0.0.1:58993/browser/#
 
@@ -136,6 +146,9 @@ python3 manage.py compilemessages
 heroku restart
 
 ```
+
+
+
 
 
 
