@@ -132,14 +132,15 @@
 
       {{chi_form.save_it.as_hidden}}
       <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
-      <div class="btn btn-primary" id="btnAddToCart" onClick="Javascript:addToCart()"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
+      <div class="btn btn-primary" id="btnAddToCart" onClick="Javascript:addToCart()"><span>{% trans 'add-chart-button' %} 
+        <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
 
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
-      <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} settimane</strong></p>
-      <p class="note">Hai qualche dubbio?<br>
-        <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
+      <p class="note">{% trans 'receive-date' %}<br><strong>{% trans 'before' %} {% woking_days product.wait_time %} </strong></p>
+      <p class="note">{% trans 'any-doubt' %}?<br>
+        <a href="{% url 'support'%}">{% trans 'contact-assistence-claim' %}</a></p>
     </div>
 
   </div>

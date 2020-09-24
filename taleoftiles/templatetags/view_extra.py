@@ -1,19 +1,12 @@
 import datetime
 from django import template
+from django.urls import translate_url
 
 register = template.Library()
 
 @register.filter(name = 'starts_with')
 def starts_with(expected,actual):
     return actual.startswith(expected);
-
-
-@register.filter
-def has(dict,val):
-    # if dict[val]: 
-    #     return True
-    return False
-
 
 
 @register.filter
@@ -37,9 +30,14 @@ def filter_tags(queryset, key):
     elems = queryset.filter(parent__slug=key)
     return(elems)
 
+# @register.simple_tag
+# def define(val=None):
+#   return val
+import numpy as np
 @register.simple_tag
-def define(val=None):
-  return val
+def woking_days(days):
+    the_day = np.busday_offset(np.datetime64('today'), days, roll='forward')
+    return the_day.item().strftime('%d.%m.%Y')
 
 @register.simple_tag
 def min_price(obj, min_price, *args):
@@ -93,7 +91,6 @@ def product_thumb(product):
     return {'product':product}    
 
 
-from django.urls import translate_url
 
 @register.simple_tag(takes_context=True)
 def change_lang(context, lang=None):    
