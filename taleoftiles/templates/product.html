@@ -160,11 +160,10 @@
     <!-- Scheda Tecnica -->
     {% if product.techspec %}
 
-      <a href="{{ product.techspec.file.url }}" download>
+      <a href="{{ product.techspec.file.url }}" download  target="_blank">
         <button class="btn btn-secondary"><svg class="icon-l icon">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-download' %}"/></svg>
           <span>{% trans 'download-tech-spech' %}</span>
-          {{ product.techspec }}
         </button>
       </a>
 
