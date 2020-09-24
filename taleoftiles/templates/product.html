@@ -47,18 +47,9 @@
 <div class="content grid grid-product">
 
   <div class="product-gallery">
-    <div class="product-gallery-container">
     {% for image in product.images.all %}
-      <div class="product-gallery-item">
-        <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
-      </div>
+    <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
     {% endfor %}
-    </div>
-    <div class="product-gallery-controls">
-      <button class="btn" id="gallerybtn-prev"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-left' %}"/></svg></button>
-      <ul></ul>
-      <button class="btn" id="gallerybtn-next"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg></button>
-    </div>
   </div>
 
   <div class="product-selection">
@@ -132,15 +123,14 @@
 
       {{chi_form.save_it.as_hidden}}
       <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
-      <div class="btn btn-primary" id="btnAddToCart" onClick="Javascript:addToCart()"><span>{% trans 'add-chart-button' %} 
-        <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
+      <div class="btn btn-primary" id="btnAddToCart" onClick="Javascript:addToCart()"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
 
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
-      <p class="note">{% trans 'receive-date' %}<br><strong>{% trans 'before' %} {% woking_days product.wait_time %} </strong></p>
-      <p class="note">{% trans 'any-doubt' %}?<br>
-        <a href="{% url 'support'%}">{% trans 'contact-assistence-claim' %}</a></p>
+      <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} settimane</strong></p>
+      <p class="note">Hai qualche dubbio?<br>
+        <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>
 
   </div>
@@ -159,19 +149,22 @@
     </div>
 
     <!-- Scheda Tecnica -->
-    {% if product.techspec %}
-
+    {% if product.techspec %} 
       <a href="{{ product.techspec.file.url }}" download  target="_blank">
         <button class="btn btn-secondary"><svg class="icon-l icon">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-download' %}"/></svg>
           <span>{% trans 'download-tech-spech' %}</span>
         </button>
       </a>
-
     {% endif %}
   </div>
 
   <div class="product-meta">
+    <ul class="product-thumbs">
+      {% for image in product.images.all %}
+        <li> <img  src="{{ image.imagefile.url }}" alt="{{ product.publication.title }}"></li>
+      {% endfor %}
+    </ul>
 
 	{% for effect in product|effects %}
     <a href="{% url 'catalogue' the_filter=effect.slug %}"  class="tag">{{effect.name}} </a><br>
@@ -274,7 +267,6 @@
   };
 
   window.onload = function() {
-
     var prev = null;
     var rad = document.getElementsByName('size');
     console.log(rad.length);
@@ -282,9 +274,8 @@
     // if none is checked - check the first and add a listner
     var someone_checked = false;
     for (var i = 0; i < rad.length; i++) {
-      if(!someone_checked)
-        someone_checked = document.getElementsByName("size")[i].checked
-      rad[i].addEventListener('change', function() {
+      someone_checked = document.getElementsByName("size")[i].checked
+        rad[i].addEventListener('change', function() {
             compute_money()
         });
     }
@@ -292,6 +283,7 @@
       document.getElementById("id_size_0").checked = true;
     }
     compute_money()
+
   //   document.product_ship.addEventListener('submit', function(event){
   //     event.preventDefault();
   //     console.log("form submitted!")  // sanity check
@@ -326,4 +318,3 @@
 
 
 {% endblock %}
-

@@ -107,7 +107,7 @@
             <div class="nav-col">
               <h5>{{cat}}</h5>
               <ul>
-                {% for child_cat in cat.child.all %}
+                {% for child_cat in cat.all_menu_childs %}
                   <li><a href="{% url 'catalogue' the_filter=child_cat.slug %}">{{child_cat}} </a></li>
                 {% endfor %}
               </ul>
@@ -277,7 +277,7 @@
           <div class="nav-col">
             <h5>{{cat}}</h5>
             <ul>
-              {% for child_cat in cat.child.all %}
+              {% for child_cat in cat.all_menu_childs %}
               <li><a href="{% url 'catalogue' the_filter=child_cat.slug %}">{{child_cat}} </a></li>
               {% endfor %}
             </ul>

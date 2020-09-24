@@ -19,7 +19,6 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
-
 class Tag(models.Model):
     name    = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -34,8 +33,8 @@ class Tag(models.Model):
 
     data_type   = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
     order       = models.PositiveIntegerField(default = 0)
-
-    #catalogue = models.ForeignKey(Catalogue, blank= True, null = True,on_delete=models.SET_NULL,related_name='all_tags' )
+    
+    objects     = models.Manager() # The default manager.
     
     class Meta:
         # Gives the proper plural name for admin
@@ -56,6 +55,15 @@ class Tag(models.Model):
     def has_childs(self):
         return (Tag.objects.filter(parent = self).count > 0)
 
+    def all_menu_childs(self):
+        return Tag.objects.filter(parent = self,in_menu = True, public = True)
+
+class MenuTagManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(
+            in_menu = True, 
+            is_active = True)
+        return qs
 
 class Publication(models.Model):
     title   = models.CharField(max_length=200, unique = True)

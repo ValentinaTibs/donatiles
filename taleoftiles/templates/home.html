@@ -21,7 +21,6 @@
       {% for tag in tags|filter_tags:'effect' %}
         {% with y=forloop.counter|stringformat:"s" %}
           {% with img_name="square-effect-"|add:y %}
-
               <li style="background-image: url('{{ layout_elems|get_elem:img_name }}')">
                 <a href="{% url 'catalogue' tag.slug %}" class="btn-gridbox">{{tag}}</a>
             </li>

@@ -43,7 +43,8 @@ from django.views.generic.list import ListView
 
 def filter_catalogue(request, the_filter = None):
     print("PARMIGGIANO")
-
+    if request.method == 'GET':
+        print("GRANA")
     if request.method == 'POST':
         print("REGGIANO")
         return redirect(request.META.get('HTTP_REFERER'))
