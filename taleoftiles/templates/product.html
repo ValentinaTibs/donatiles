@@ -159,11 +159,15 @@
 
     <!-- Scheda Tecnica -->
     {% if product.techspec %}
-    <button class="btn btn-secondary"><svg class="icon-l icon">
-      <use xlink:href="{% static 'images/svgdefs.svg#icon-download' %}"/></svg>
-      <span>{% trans 'download-tech-spech' %}</span>
-      {{ product.techspec }}
-    </button>
+
+      <a href="{{ product.techspec.file.url }}" download>
+        <button class="btn btn-secondary"><svg class="icon-l icon">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-download' %}"/></svg>
+          <span>{% trans 'download-tech-spech' %}</span>
+          {{ product.techspec }}
+        </button>
+      </a>
+
     {% endif %}
   </div>
 
@@ -316,7 +320,6 @@
           console.log('error');
       }
     });
->>>>>>> d14f6aad5e5fdcbe76594a7b8e5f32fac1211129
   }
 
 </script>
