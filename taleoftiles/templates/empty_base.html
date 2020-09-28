@@ -108,7 +108,7 @@
               <h5>{{cat}}</h5>
               <ul>
                 {% for child_cat in cat.all_menu_childs %}
-                  <li><a href="{% url 'catalogue' the_filter=child_cat.slug %}">{{child_cat}} </a></li>
+                  <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{{child_cat}} </a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -278,7 +278,7 @@
             <h5>{{cat}}</h5>
             <ul>
               {% for child_cat in cat.all_menu_childs %}
-              <li><a href="{% url 'catalogue' the_filter=child_cat.slug %}">{{child_cat}} </a></li>
+              <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{{child_cat}} </a></li>
               {% endfor %}
             </ul>
           </div>

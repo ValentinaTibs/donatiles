@@ -12,7 +12,7 @@
 
   <aside>
 
-    <button class="filtersheader-btn btn btn-secondary btn-tree"><span>Filtri</span><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
+    <button class="filtersheader-btn btn btn-secondary btn-tree"><span>{% trans 'filters'|title %}</span><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
 
     <div class="openable">
       <div class="filtersbody">
@@ -35,7 +35,8 @@
         <h5>{{ tags.colour.name }}</h5>
         <ul class="colorswatches">
           {% for colour in tags.colour.child.all %}
-          <li><a href="{{colour.slug}}"><div style="background-color:#{{colour.summary}}"></div></a></li>
+            <li  class=" {% if style in active_tags  %} selected {% endif %}">
+            <a href="{{colour.slug}}"><div style="background-color:#{{colour.summary}}"></div></a></li>
           {% endfor %}
         
         </ul>
@@ -54,10 +55,12 @@
         {% for format in tags.format.child.all %}
 
           <li><a href="">{{format.name}}</a>
-            <button class="btn btn-tree"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+            <button class="btn btn-tree"><svg class="icon icon-m">
+              <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
             <ul class="openable" style="--tree-height:4.5rem">
             {% for more_format in format.child.all %}
-              <li><a href="">{{more_format.name}}</a></li>
+              <li class=" {% if more_format in active_tags  %} selected {% endif %}" >
+                  <a href="">{{more_format.name}}</a></li>
             {% endfor %}
             </ul>
           </li>
@@ -66,12 +69,12 @@
 
         </ul>
         <div class="checkbox">
-          <input type="checkbox" id="filter-sampleable">
-          <label for="filter-sampleable">Disponibile per invio campione</label>
+          <input type="checkbox" id="filter-sampleable" {% if tags.samplable.slug in active_tags%} checked {% endif %}>
+          <label for="filter-sampleable">{{tags.samplable.name}} </label>
         </div>
         <div class="checkbox">
-          <input type="checkbox" id="filter-handmade">
-          <label for="filter-handmade">Prodotto artigianale</label>
+          <input type="checkbox" id="filter-handmade" {% if tags.handmade.slug in active_tags%} checked {% endif %}>
+          <label for="filter-handmade">{{tags.handmade.name}}</label>
         </div>
         <h5>{{ tags.serie.name }}</h5>
         <select name="" id="">
@@ -82,11 +85,7 @@
                    selected
                 {% endif %}  >{{serie.name}}</option>
             {% endfor %}
-          <option value="">Nome serie</option>
-          <option value="">Nome serie</option>
-          <option value="">Nome serie</option>
-          <option value="">Nome serie</option>
-          <option value="">Nome serie</option>
+
         </select>
       </div>
     </div>
@@ -100,13 +99,13 @@
         <span class="tag tag-removable">{{tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
       {% endfor %}
       </div>
-    <h1>Tutti i prodotti</h1>
+    <h1>{% trans 'all-products' %}</h1>
     <div class="catalogue-data">
       <div class="catalogue-data-num">
-        <strong>126</strong> prodotti
+        <strong>{{products|length }}</strong> {% trans 'products' %}
       </div>
       <div class="catalogue-data-sorting">
-        <span>Ordina per:</span>
+        <span>{% trans 'order-for' %}:</span>
         <input type="radio" name="sortorder" id="sortorder-trending" checked><label for="sortorder-trending">Trending</label>
         <input type="radio" name="sortorder" id="sortorder-new"><label for="sortorder-new">Novità</label>
         <input type="radio" name="sortorder" id="sortorder-price"><label for="sortorder-price">Prezzo</label>
@@ -148,6 +147,77 @@
   </section>
 
 </div>
+
+{% if page_obj.has_next %}
+<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{page_obj.next_page_number}}" ></a>
+{% endif %}
+<div class="d-flex justify-content-center" style="display:none;">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<script>
+var infinite = new Waypoint.Infinite({
+    element: $('.infinite-container')[0],
+    handler: function(direction) {
+
+},
+offset: 'bottom-in-view',
+
+onBeforePageLoad: function () {
+$('.spinner-border').show();
+},
+onAfterPageLoad: function () {
+$('.spinner-border').hide();
+}
+
+});    
+
+function addToSampler( pId ) {
+    $.ajax({
+        type: "POST",
+        // TODO: make this url dynamic
+        url: "/it/add_sample/" + pId,
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+        },
+        success: function(result) {
+            console.log('ok');
+            // TODO:
+            // - update sampler
+            // - show notification
+            // - change "add to sample" icon
+            // - change "add to sample" action to "removeFromSampler"
+        },
+        error: function(result) {
+            console.log('error');
+        }
+    });
+}
+
+
+function removeFromSampler( pId ) {
+    $.ajax({
+        type: "POST",
+        // TODO: make this url dynamic
+        url: "/it/del_sample/" + pId,
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
+        },
+        success: function(result) {
+            console.log('ok');
+            // TODO:
+            // - update sampler: show empty slot and update main sampler button
+            // - update "add to sampler" button if product is listed or product detail page is open
+        },
+        error: function(result) {
+            console.log('error');
+        }
+    });
+}
+
+</script>
 
 
 
