@@ -8,9 +8,9 @@
 
 {% block content %}
 
-{% csrf_token %}
 
 <div class="content grid grid-catalogue">
+    
 <form method="POST" action="{% url 'catalogue' %}">
   <aside>
   {% csrf_token %}
@@ -155,7 +155,7 @@
   <section>
 
     <div class="catalogue-filters">
-
+ATTITIVI {{active_tags}} {{active_tags_items}}
         {% for tag in active_tags_items %}
             {% for sel_tag in active_tags_items|get_item:tag %}
             <span class="tag tag-removable">{{sel_tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
@@ -213,7 +213,6 @@
     </div>
 
   </section>
-
 </div>
 
 {% if page_obj.has_next %}

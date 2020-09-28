@@ -9,180 +9,114 @@
 {% block content %}
 
 <div class="content grid grid-catalogue">
-<form method="POST" action="{% url 'catalogue' %}">
+
   <aside>
-{% csrf_token %}
-    <button class="filtersheader-btn btn btn-secondary btn-tree"><span>Filtri</span><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+
+    <button class="filtersheader-btn btn btn-secondary btn-tree"><span>Filtri</span><svg class="icon icon-l"><use xlink:href="images/svgdefs.svg#icon-caret-down"/></svg></button>
 
     <div class="openable">
       <div class="filtersbody">
-        <h5>{{ tags.effect.name }} </h5>
+        <h5>{{ tags.effect.name }}</h5>
         <ul>
-
-            {% for effect in tags.effect.child.all %}
-                <li>
-                <input type="checkbox" id="{{effect.slug}}" name="{{ tags.effect.slug }}" value="{{effect.slug}}"
-                {% if effect.slug in active_tags|get_item:tags.effect.slug  %}
-                    checked
-                {% endif %}>
-                <label for="{{effect.slug}}">{{effect.name}}</label></li>
-            {% endfor %}
-
-        </ul>
-
-        <h5>{{ tags.style.name }} </h5>
-        <ul>
-            {% for style in tags.style.child.all %}
-                <li><input type="checkbox" id="{{style.slug}}" name="{{ tags.style.slug }}" value="{{style.slug}}"
-                {% if style.slug in active_tags|get_item:tags.style.slug  %}
-                    checked
-                {% endif %}>
-                <label for="{{style.slug}}">{{style.name}}</label></li>
+           {% for effect in tags.effect.child.all %}
+                <li class=" {% if effect in active_tags  %}
+                    selected {% endif %}" >
+                    <a href="" > {{effect.name}}</a></li>
             {% endfor %}
         </ul>
-
-
-        <h5>{{ tags.colour.name }} </h5>
+        <h5>{{ tags.style.name }}</h5>
+        <ul>
+           {% for style in tags.style.child.all %}
+                <li class=" {% if style in active_tags  %}
+                    selected {% endif %}" >
+                    <a href="" > {{style.name}}</a></li>
+            {% endfor %}
+        </ul>
+        <h5>{{ tags.colour.name }}</h5>
         <ul class="colorswatches">
-            {% for colour in tags.colour.child.all %}
-                <input type="checkbox" id={{colour.slug}} name="{{ tags.colour.slug }}" value="{{colour.slug}}"
-                    {% if colour.slug in active_tags|get_item:tags.colour.slug  %}
-                       checked
-                    {% endif %}
-                    >
-                <li>  <a href=""><div style="background-color:#{{colour.summary}}"></div></a></li>
-            {% endfor %}
-
+          {% for colour in tags.colour.child.all %}
+          <li><a href="{{colour.slug}}"><div style="background-color:#{{colour.summary}}"></div></a></li>
+          {% endfor %}
+        
         </ul>
         <h5>{{ tags.setting.name }}</h5>
         <ul>
-            {% for setting in tags.setting.child.all %}
-                <li><input type="checkbox" id="{{setting.slug}}" name="{{ tags.setting.slug }}" value="{{setting.slug}}"
-                {% if setting.slug in active_tags|get_item:tags.setting.slug  %}
-                    checked
-                {% endif %}>
-                <label for="{{setting.slug}}">{{setting.name}}</label></li>
+          {% for setting in tags.setting.child.all %}
+              <li class=" {% if setting in active_tags  %}
+                  selected {% endif %}" >
+                  <a href="" > {{setting.name}}</a></li>
+          {% endfor %}
 
-            {% endfor %}
         </ul>
-        <h5>{{ tags.format.name }} </h5>
+        <h5>{{ tags.format.name }}</h5>
         <ul>
 
         {% for format in tags.format.child.all %}
 
-            <input type="checkbox" id="{{ format.slug }}"
-            name="{{ tags.format.slug }}"  value="{{format.slug}}"
-            {% if format.slug in active_tags|get_item:tags.format.slug  %}
-               checked
-            {% endif %}
-            >
-            {{format.name}}
-
-            <ul>
+          <li><a href="">{{format.name}}</a>
+            <button class="btn btn-tree"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+            <ul class="openable" style="--tree-height:4.5rem">
             {% for more_format in format.child.all %}
-            <input type="checkbox"  id="{{ more_format.slug }}"
-            name="{{ tags.format.slug }}" value="{{more_format.slug}}"
-            {% if more_format.slug in active_tags|get_item:tags.format.slug  %}
-               checked
-            {% endif %}
-            >
-
-                <li><label for="{{more_format.slug }}" >{{more_format.name}}</label>  </li>
+              <li><a href="">{{more_format.name}}</a></li>
             {% endfor %}
             </ul>
-        {% endfor %}
+          </li>
+
+      {% endfor %}
 
         </ul>
-
         <div class="checkbox">
-
-        <input type="checkbox" id="filter-sampleable" name="{{ tags.handmade.slug }}"  value="{{tags.handmade.slug}}"
-        {% if tags.handmade.slug in active_tags|get_item:tags.handmade.slug  %}
-           checked
-        {% endif %}
-        >
-        <label for="filter-sampleable">{{tags.handmade.name}}</label>
-
+          <input type="checkbox" id="filter-sampleable">
+          <label for="filter-sampleable">Disponibile per invio campione</label>
         </div>
         <div class="checkbox">
-            <input type="checkbox" id="filter-handmade" name="{{ tags.samplable.slug }}" value="{{tags.samplable.slug}}"
-            {% if tags.samplable.slug in active_tags|get_item:tags.samplable.slug  %}
-                checked
-            {% endif %}
-            >
-            <label for="filter-handmade">{{tags.samplable.name}} </label>
+          <input type="checkbox" id="filter-handmade">
+          <label for="filter-handmade">Prodotto artigianale</label>
         </div>
-        <h5>{{ tags.serie.name }} </h5>
-
-
-
-        <select name="{{ tags.serie.slug }}" >
-
-                <option value=""
-                {% if '' in active_tags|get_item:tags.serie.slug  %}
-                    selected
-                {% endif %}
-
-                {% if active_tags|get_item:tags.serie.slug|length == 0  %}
-                    selected
-                {% endif %}
-
-                {% if active_tags|get_item:tags.serie.slug|length > 0  %}
-                    disabled
-                {% endif %}
-                >{% trans 'cat-menu-all' %}</option>
-
-
+        <h5>{{ tags.serie.name }}</h5>
+        <select name="" id="">
+          <option value="">Tutte</option>
             {% for serie in tags.serie.child.all %}
                 <option value="{{serie.slug}}"
-                {% if serie.slug in active_tags|get_item:tags.serie.slug  %}
+                {% if serie in active_tags  %}
                    selected
-                {% endif %}
-                >{{serie.name}}</option>
+                {% endif %}  >{{serie.name}}</option>
             {% endfor %}
-
+          <option value="">Nome serie</option>
+          <option value="">Nome serie</option>
+          <option value="">Nome serie</option>
+          <option value="">Nome serie</option>
+          <option value="">Nome serie</option>
         </select>
-
       </div>
     </div>
 
   </aside>
-      <input type="submit" value="SEARCH" />
-
-</form>
 
   <section>
 
     <div class="catalogue-filters">
-
-        {% for tag in active_tags_items %}
-            {% for sel_tag in active_tags_items|get_item:tag %}
-            <span class="tag tag-removable">{{sel_tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
-            {% endfor %}
-        {% endfor %}
-
-
-    </div>
+      {% for tag in active_tags %}            
+        <span class="tag tag-removable">{{tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
+      {% endfor %}
+      </div>
     <h1>Tutti i prodotti</h1>
     <div class="catalogue-data">
       <div class="catalogue-data-num">
-        <strong>{{products|length }}</strong> {% trans 'products' %}
+        <strong>126</strong> prodotti
       </div>
       <div class="catalogue-data-sorting">
-        <span>{% trans 'order for' %}:</span>
-        <input type="radio" name="sortorder" id="sortorder-trending" checked>
-        <label for="sortorder-trending">Trending</label>
-        <input type="radio" name="sortorder" id="sortorder-new">
-        <label for="sortorder-new">Novità</label>
-        <input type="radio" name="sortorder" id="sortorder-price">
-        <label for="sortorder-price">Prezzo</label>
+        <span>Ordina per:</span>
+        <input type="radio" name="sortorder" id="sortorder-trending" checked><label for="sortorder-trending">Trending</label>
+        <input type="radio" name="sortorder" id="sortorder-new"><label for="sortorder-new">Novità</label>
+        <input type="radio" name="sortorder" id="sortorder-price"><label for="sortorder-price">Prezzo</label>
       </div>
     </div>
 
     <div class="grid grid-catalogue-products">
 
     {% for product in products %}
-    <div class="product-thumb">
+    <div class="product-thumb infinite-item">
         <a href="{% url 'product' product.code %}" class="product-thumb-img">
           <img  src="{{ product.cover.imagefile.url }}" alt="{{ product.name }} / {{ product.serie.name }}">
         </a>
@@ -192,17 +126,15 @@
         </a>
 
         {% if sampler|is_in_sample:product.code %}
-          <button class="btn btn-overlay">IN SAMPLE</button>
+        <button class="btn btn-overlay" onClick="Javascript:removeFromSampler('{{ product.code }}')"><svg class="icon-l icon">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-remove' %}"/></svg></button>
         {% elif sampler and sampler.all_samples.count > 4%}
 
         <button class="btn btn-overlay">FULL SAMPLE</button>
         {% elif product.is_samplable %}
 
-          <form  action="{% url 'add_sample' product.code %}" method="POST">
-            {% csrf_token %}
-            <button class="btn btn-overlay"><svg class="icon-l icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-          </form>
+        <button class="btn btn-overlay" onClick="Javascript:addToSampler('{{ product.code }}')"><svg class="icon-l icon">
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
 
         {% else %}
           {% trans 'product-not-samplable' %}

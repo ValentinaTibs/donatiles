@@ -29,60 +29,63 @@ def index(request):
         'main_post'     : main_post
         })
 
-def custom_merge(unit1, unit2):
-   # Merge dictionaries and concat values of same keys if list
-   out = {**unit1, **unit2}
-   for key, value in out.items():
-       if key in unit1 and key in unit2 :
-               out[key] = value + unit1[key]
-   return out
+# def {custom_merge}(unit1, unit2):
+#    # Merge dictionaries and concat values of same keys if list
+#    out = {**unit1, **unit2}
+#    for key, value in out.items():
+#        if key in unit1 and key in unit2 :
+#                out[key] = value + unit1[key]
+#    return out
 
 
 from django.views.generic.list import ListView
 
 
-def filter_catalogue(request, the_filter = None):
-    print("PARMIGGIANO")
-    if request.method == 'GET':
-        print("GRANA")
-    if request.method == 'POST':
-        print("REGGIANO")
-        return redirect(request.META.get('HTTP_REFERER'))
+def filter_catalogue(request):
+    pass
 
-    # catalogue_prod = Product.active.filter(available = True)
-    # query_dict  = {}
-    # query_items = {}
-    # try: 
-    #     cat = Catalogue.objects.get(active = True)
-    # except ObjectDoesNotExist:
-    #     return render(request, "404.html",{"message":"There is no active catalogue",})
+#     if request.method == 'POST':
+#         print("REGGIANO")
+#         return redirect(request.META.get('HTTP_REFERER'))
 
-    # if the_filter:
-    #     try: 
-    #         tag = Tag.objects.get(slug = the_filter)
-    #     except ObjectDoesNotExist:
-    #         return render(request, "404.html",{"message":"There is no active catalogue",})        
+#     catalogue_prod = Product.active.filter(available = True)
+#     query_dict  = {}
+#     # query_items = {}
+#     try: 
+#         cat = Catalogue.objects.get(active = True)
+#     except ObjectDoesNotExist:
+#         return render(request, "404.html",{"message":"There is no active catalogue",})
+
+#     # if the_filter:
+#     #     try: 
+#     #         tag = Tag.objects.get(slug = the_filter)
+#     #     except ObjectDoesNotExist:
+#     #         return render(request, "404.html",{"message":"There is no active catalogue",})        
         
-    #     query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
+#     #     query_dict = {custom_merge}(query_dict, {tag.parent.slug:[the_filter]})
 
-    # if request.method == 'POST':
-    #     query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
+#     # if request.method == 'POST':
+#     #     query_dict = {custom_merge}(query_dict,(dict(request.POST.lists()))) 
 
-    # for key in query_dict:
-    #     if key  != 'csrfmiddlewaretoken' and query_dict[key] != [''] :
-    #         query_items[key] = []
-    #         for val in query_dict[key]:
-    #             query_items[key].append(Tag.objects.get(slug=val))
+#     # for key in query_dict:
+#     #     if key  != 'csrfmiddlewaretoken' and query_dict[key] != [''] :
+#     #         query_items[key] = []
+#     #         for val in query_dict[key]:
+#     #             query_items[key].append(Tag.objects.get(slug=val))
 
-    # catalogue_tags = cat.tags()
-    # catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
+#     # for val in query_dict[key]:
+#     #     query_items[key].append(Tag.objects.get(slug=val))
 
-#     return render(request, "catalogue.html",{   
-#         "tags"          : catalogue_tags,  
-#         "products"      : catalogue_prod,
-#         "active_tags"   : query_dict,
-#         "active_tags_items"   : query_items
-#         })
+#     catalogue_tags = cat.tags()
+#     catalogue_prod = cat.filter_products(catalogue_prod,filters)
+
+# #     return render(request, "catalogue.html",{   
+# #         "tags"          : catalogue_tags,  
+# #         "products"      : catalogue_prod,
+# #         "active_tags"   : query_dict,
+# #         "active_tags_items"   : query_items
+# #         })
+#     return "GIANNA "
     
 #def scrematura():
 # catalogue_prod = Product.active.filter(available = True)
@@ -99,10 +102,10 @@ def filter_catalogue(request, the_filter = None):
 #     except ObjectDoesNotExist:
 #         return render(request, "404.html",{"message":"There is no active catalogue",})        
 
-#     query_dict = custom_merge(query_dict, {tag.parent.slug:[the_filter]})
+#     query_dict = {custom_merge}(query_dict, {tag.parent.slug:[the_filter]})
 
 # if request.method == 'POST':
-#     query_dict = custom_merge(query_dict,(dict(request.POST.lists()))) 
+#     query_dict = {custom_merge}(query_dict,(dict(request.POST.lists()))) 
 
 # for key in query_dict:
 #     if key  != 'csrfmiddlewaretoken' and query_dict[key] != [''] :
@@ -114,26 +117,42 @@ def filter_catalogue(request, the_filter = None):
 # catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
 
 class catalogue(ListView):
+    active_tags = None
     model = Product 
-    paginate_by = 12
+    paginate_by = 100
     context_object_name = 'products'
-    template_name = 'productthumb.html'
-    ordering = ['name']
+    template_name = 'catalogue.html'
+    ordering = ['name']    
 
     def get_context_data(self, **kwargs):
+        
         context = super(catalogue, self).get_context_data(**kwargs)
-
+        
         try: 
             cat = Catalogue.objects.get(active = True)
         except ObjectDoesNotExist:
             return render(request, "404.html",{"message":"There is no active catalogue",})
-        context['tags'] = cat.tags()        
-        filter_catalogue(self.request)
+        all_tags = Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')   
+        context['tags'] = all_tags
+        context['active_tags']  = self.active_tags
+
         return context
     
     def get_queryset(self):
-        #return Product.objects.filter(lab__acronym=self.kwargs['lab'])
-        return Product.objects.filter(is_active=True)
+        
+        if self.request.method == 'GET':
+            filters  = self.request.GET.get('filters', '').split('.')       
+
+        tag_query = Q()
+        tag_len = 0
+        for value in filters:
+            tag_query = tag_query | Q(slug = value)
+            tag_len = tag_len + 1
+        
+        self.active_tags = Tag.objects.filter(tag_query)
+
+        #prods.filter(tags__in=active_tags)
+        return Product.objects.filter(is_active=True,tags__in=self.active_tags)#.annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
 
 def compute_price(request, product_id):

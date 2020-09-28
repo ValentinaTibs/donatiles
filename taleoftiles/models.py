@@ -39,7 +39,7 @@ class Tag(models.Model):
     class Meta:
         # Gives the proper plural name for admin
         verbose_name_plural = "Tags"
-        ordering = ["order"] 
+        ordering = ["order","name"] 
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -241,19 +241,19 @@ class Catalogue(models.Model):
     def tags(self):
         return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
 
-    def filter_products(self,prods,query_dictionary):
+    # def filter_products(self,prods,query_dictionary):
         
-        tag_query = Q()
-        tag_len = 0
-        for key, value in query_dictionary.items():
-            if(key != 'csrfmiddlewaretoken') and len(value[0]) >0:
-                tag_query = tag_query | Q(slug = value[0])
-                tag_len = tag_len + 1
+    #     tag_query = Q()
+    #     tag_len = 0
+    #     for key, value in query_dictionary.items():
+    #         if(key != 'csrfmiddlewaretoken') and len(value[0]) >0:
+    #             tag_query = tag_query | Q(slug = value[0])
+    #             tag_len = tag_len + 1
         
-        if tag_query == Q():
-            return prods
-        active_tags = Tag.objects.filter(tag_query)
-        return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+    #     if tag_query == Q():
+    #         return prods
+    #     active_tags = Tag.objects.filter(tag_query)
+    #     return prods.filter(tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
     def __str__(self):
         return self.title

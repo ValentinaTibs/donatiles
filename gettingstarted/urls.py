@@ -32,6 +32,7 @@ urlpatterns += (
 urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
     path('catalogue/',                  taleoftiles.views.catalogue.as_view(),         name="catalogue"),
+    
     #path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
     path("catalogue/<slug:the_filter>/",taleoftiles.views.catalogue.as_view(), name="catalogue"),
     path("filter_catalogue/",            taleoftiles.views.filter_catalogue,  name="filter_catalogue"),
