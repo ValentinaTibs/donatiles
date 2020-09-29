@@ -57,8 +57,23 @@
     s = e.length,
     a = document.getElementById("gallerybtn-prev"),
     d = document.getElementById("gallerybtn-next"),
-
     
+    [].forEach.call(e, function(e, t) {
+        e.dataset.id = t;
+        var n = document.createElement("li");
+        l.appendChild(n),
+        n.addEventListener("click", function() {
+            o(t)
+        })
+    }),
+    n = l.querySelectorAll("li"),
+    d.addEventListener("click", function() {
+        s - 1 <= r || o(+e[++r].dataset.id)
+    }),
+    a.addEventListener("click", function() {
+        r <= 0 || o(+e[--r].dataset.id)
+    }),
+    o(0),
     document.querySelectorAll("[data-overlay]").forEach(function(e) {
         e.addEventListener("click", function(e) {
             t(e, document.getElementById("overlay" + this.dataset.overlay))
