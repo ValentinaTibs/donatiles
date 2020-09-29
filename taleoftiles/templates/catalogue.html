@@ -21,23 +21,22 @@
         <ul>
            {% for effect in tags.effect.child.all %}
                 <li class=" {% if effect in active_tags  %}
-                    selected {% endif %}" >
-                    <a href="" > {{effect.name}}</a></li>
+                    selected {% endif %}"  onClick="Javascript:toggleFilter('{{ effect.slug }}')" >
+                    <a > {{effect.name}}</a></li>
             {% endfor %}
         </ul>
         <h5>{{ tags.style.name }}</h5>
         <ul>
            {% for style in tags.style.child.all %}
-                <li class=" {% if style in active_tags  %}
-                    selected {% endif %}" >
-                    <a href="" > {{style.name}}</a></li>
+                <li class=" {% if style in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ style.slug }}')">
+                    <a > {{style.name}}</a></li>
             {% endfor %}
         </ul>
         <h5>{{ tags.colour.name }}</h5>
         <ul class="colorswatches">
           {% for colour in tags.colour.child.all %}
-            <li class="{% if colour in active_tags  %}selected{% endif %}" >
-            <a href="{{colour.slug}}"><div style="background-color:#{{colour.summary}}"></div></a>
+            <li class="{% if colour in active_tags  %}selected{% endif %}" onClick="Javascript:toggleFilter('{{ colour.slug }}')"  >
+            <a ><div style="background-color:#{{colour.summary}}"></div></a>
             </li>
           {% endfor %}
         </ul>
@@ -45,8 +44,8 @@
         <h5>{{ tags.setting.name }}</h5>
         <ul>
           {% for setting in tags.setting.child.all %}
-              <li class="{% if setting in active_tags  %} selected {% endif %}" >
-                  <a href="" > {{setting.name}}</a></li>
+              <li class="{% if setting in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ setting.slug }}')" >
+                  <a  > {{setting.name}}</a></li>
           {% endfor %}
         </ul>
 
@@ -56,32 +55,33 @@
 
         {% for format in tags.format.child.all %}
           <li><a href="">{{format.name}}</a>
-            <button class="btn btn-tree"><svg class="icon icon-m">
-              <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+            <button class="btn btn-tree"
+            {% if format in active_tags  %}btn-tree-open{% endif %}
+            ><svg class="icon icon-m">
+            <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
             <ul class="openable" style="--tree-height:4.5rem">
             {% for more_format in format.child.all %}
-              <li class=" {% if more_format in active_tags  %} selected {% endif %}" >
-                  <a href="">{{more_format.name}}</a></li>
+              <li class=" {% if more_format in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ more_format.slug }}')" >
+                  <a >{{more_format.name}}</a></li>
             {% endfor %}
             </ul>
           </li>
         {% endfor %}
 
         </ul>
-
         <div class="checkbox">
-          <input type="checkbox" id="filter-sampleable" {% if tags.samplable.slug in active_tags%} checked {% endif %}>
+          <input type="checkbox" id="filter-sampleable" {% if tags.samplable in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.samplable.slug }}')">
           <label for="filter-sampleable">{{tags.samplable.name}} </label>
         </div>
         <div class="checkbox">
-          <input type="checkbox" id="filter-handmade" {% if tags.handmade.slug in active_tags%} checked {% endif %}>
+          <input type="checkbox" id="filter-handmade" {% if tags.handmade in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.handmade.slug }}')">
           <label for="filter-handmade">{{tags.handmade.name}}</label>
         </div>
         <h5>{{ tags.serie.name }}</h5>
-        <select name="" id="">
-          <option value="">Tutte</option>
+        <select name="" id="series-select" >
+          <option value="all-series">{% trans 'all-series' %}</option>
             {% for serie in tags.serie.child.all %}
-                <option value="{{serie.slug}}"
+                <option value="{{serie.slug}}" 
                 {% if serie in active_tags  %}
                    selected
                 {% endif %}  >{{serie.name}}</option>
@@ -117,10 +117,8 @@
 
     <div class="grid grid-catalogue-products" id="grid-catalogue-products">
 
-    {% for product in products %}
-
-    {% endfor %}
-
+      {% include 'productgrid.html' %}
+      
     </div>
 
   </section>
@@ -152,73 +150,38 @@ $('.spinner-border').hide();
 
 });    
 
-function addToSampler( pId ) {
-    $.ajax({
-        type: "POST",
-        // TODO: make this url dynamic
-        url: "/it/add_sample/" + pId,
-        data: {
-            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
-        },
-        success: function(result) {
-            console.log('ok');
-            // TODO:
-            // - update sampler
-            // - show notification
-            // - change "add to sample" icon
-            // - change "add to sample" action to "removeFromSampler"
-        },
-        error: function(result) {
-            console.log('error');
+(function () {
+    var previous;
+
+    $("#series-select").on('focus', function () {
+        previous = this.value;
+    }).change(function() {
+        // tolgo il precedente
+        if(previous != 'all-series'){
+          toggleFilter(previous);
+        }
+        if(this.value != 'all-series'){
+          toggleFilter(this.value);
         }
     });
-}
-
-
-function removeFromSampler( pId ) {
-    $.ajax({
-        type: "POST",
-        // TODO: make this url dynamic
-        url: "/it/del_sample/" + pId,
-        data: {
-            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
-        },
-        success: function(result) {
-            console.log('ok');
-            // TODO:
-            // - update sampler: show empty slot and update main sampler button
-            // - update "add to sampler" button if product is listed or product detail page is open
-        },
-        error: function(result) {
-            console.log('error');
-        }
-    });
-}
+})();
 
 function toggleFilter( tagSlug ) {
-  
     $.ajax({
+      
         type: "POST",
-        url: "{% url 'toggle_filter' %}",
+        url: "{% url 'catalogue' %}",
         data: {
             csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
             url_data : '{{url_data}}', 
             toggleFilter : tagSlug
         },
         success: function(result) {
-            console.log('ok');
-            console.log(result)
-            window.history.pushState("object or string", "Title", "catalogue/?filters={{url_data}}");
-            const parent = document.getElementById("grid-catalogue-products")
-            while (parent.firstChild) {
-                parent.firstChild.remove()
-            }
+            
+            //window.history.pushState("object or string", "Title", "{% url 'catalogue' %}?filters={{url_data}}");
+            // console.log('{{url_data}}')
+            $("#content").html(result)
 
-
-
-            // TODO:
-            // - update sampler: show empty slot and update main sampler button
-            // - update "add to sampler" button if product is listed or product detail page is open
         },
         error: function(result) {
             console.log('error');

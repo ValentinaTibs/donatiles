@@ -35,59 +35,51 @@ from django.shortcuts import render
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 
-class LazyEncoder(DjangoJSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, YourCustomType):
-            return str(obj)
-        return super().default(obj)
-
-def toggleFilter(request):
-
-    if request.method == "POST" and request.is_ajax():
-        url_data = request.POST.get('url_data', '').split('.')
-        the_filter = request.POST.get('toggleFilter', '')
-        if (the_filter in url_data):
-            url_data.remove(the_filter)
-        else:
-            url_data.append(the_filter)
-
-        tag_query = Q()
-        tag_len = 0
-        for value in url_data:
-            tag_query = tag_query | Q(slug = value)
-            tag_len = tag_len + 1
-
-        if tag_len == 0 :
-            products = Product.objects.filter(is_active=True)
-
-        active_tags = Tag.objects.filter(tag_query)
-        products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all()
-        
-        url_data_string = '.'.join(url_data) 
-        data = {
-            "products": serializers.serialize('json', products, cls=LazyEncoder),
-            "active_tags" : serializers.serialize('json', active_tags, cls=LazyEncoder),
-            "url_data" : url_data_string
-        }
-   
-        return JsonResponse(data, safe = False, status = 200)
-    return JsonResponse({}, safe = False, status = 200)
-
 
 from django.views.generic.list import ListView
 
 class catalogue(ListView):
     active_tags = None
     url_data = ''
-    
+
     model = Product 
     paginate_by = 100
     context_object_name = 'products'
     template_name = 'catalogue.html'
     ordering = ['name']    
 
-    def get_context_data(self, **kwargs):
+    #2do maybe here using the self instance might save us time
+    def post(self, request):
 
+        if self.request.is_ajax():
+            url_data = request.POST.get('url_data', '').split('_')
+            the_filter = request.POST.get('toggleFilter', '')
+            
+            if (the_filter in url_data):
+                url_data.remove(the_filter)
+
+            else:
+                url_data.append(the_filter)
+            #2do this must became a function
+            tag_query = Q()
+            tag_len = 0
+            for value in url_data:
+                tag_query = tag_query | Q(slug = value)
+                tag_len = tag_len + 1
+
+            all_tags = Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')   
+            active_tags = None
+
+            if tag_len == 0 :
+                products = Product.objects.filter(is_active=True)
+            else:
+                active_tags = Tag.objects.filter(tag_query)
+                products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all()
+            
+            return render(request, "catalogue.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
+
+    def get_context_data(self, **kwargs):
+        
         context = super(catalogue, self).get_context_data(**kwargs)
         try: 
             cat = Catalogue.objects.get(active = True)
@@ -102,12 +94,13 @@ class catalogue(ListView):
         return context
     
     def get_queryset(self):
+        
         if self.request.method == 'GET':
             self.url_data = self.request.GET.get('filters', '')  
                 
         tag_query = Q()
         tag_len = 0
-        for value in self.url_data.split('.'):
+        for value in self.url_data.split('_'):
             tag_query = tag_query | Q(slug = value)
             tag_len = tag_len + 1
         if tag_len == 0 :

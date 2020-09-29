@@ -33,7 +33,6 @@ urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
 
     path('catalogue/',                  taleoftiles.views.catalogue.as_view(),  name="catalogue"),
-    path('catalogue/toggleFilter',      taleoftiles.views.toggleFilter,  name="toggle_filter"),
     
     path("product/<slug:product_code>", taleoftiles.views.product,  name="product"),
 
