@@ -47,6 +47,7 @@ class catalogue(ListView):
     paginate_by = 300
     context_object_name = 'products'
     template_name = 'catalogue.html'
+    #2do put here a custom ordering
     ordering = ['name']    
 
     #2do maybe here using the self instance might save us time
@@ -80,7 +81,7 @@ class catalogue(ListView):
                 active_tags = Tag.objects.filter(tag_query)
                 products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all()
             
-            return render(request, "catalogue.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
+            return render(request, "cataloguegrid.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
 
     def get_context_data(self, **kwargs):
         

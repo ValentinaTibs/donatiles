@@ -8,132 +8,8 @@
 
 {% block content %}
 
-{% csrf_token %}
+{% include 'cataloguegrid.html' %}
 
-<div class="content grid grid-catalogue">
-
-  <aside>
-    <button class="filtersheader-btn btn btn-secondary btn-tree"><span>{% trans 'filters'|title %}</span><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
-
-    <div class="openable">
-      <div class="filtersbody">
-        <h5>{{ tags.effect.name }}</h5>
-        <ul>
-           {% for effect in tags.effect.child.all %}
-                <li class=" {% if effect in active_tags  %}
-                    selected {% endif %}"  onClick="Javascript:toggleFilter('{{ effect.slug }}')" >
-                    <a > {{effect.name}}</a></li>
-            {% endfor %}
-        </ul>
-        <h5>{{ tags.style.name }}</h5>
-        <ul>
-           {% for style in tags.style.child.all %}
-                <li class=" {% if style in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ style.slug }}')">
-                    <a > {{style.name}}</a></li>
-            {% endfor %}
-        </ul>
-        <h5>{{ tags.colour.name }}</h5>
-        <ul class="colorswatches">
-          {% for colour in tags.colour.child.all %}
-            <li class="{% if colour in active_tags  %}selected{% endif %}" onClick="Javascript:toggleFilter('{{ colour.slug }}')"  >
-            <a ><div style="background-color:#{{colour.summary}}"></div></a>
-            </li>
-          {% endfor %}
-        </ul>
-
-        <h5>{{ tags.setting.name }}</h5>
-        <ul>
-          {% for setting in tags.setting.child.all %}
-              <li class="{% if setting in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ setting.slug }}')" >
-                  <a  > {{setting.name}}</a></li>
-          {% endfor %}
-        </ul>
-
-        <h5>{{ tags.format.name }}</h5>
-        
-        <ul>
-
-        {% for format in tags.format.child.all %}
-          <li><a href="">{{format.name}}</a>
-            <button class="btn btn-tree"
-            {% if format in active_tags  %}btn-tree-open{% endif %}
-            ><svg class="icon icon-m">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
-            <ul class="openable" style="--tree-height:4.5rem">
-            {% for more_format in format.child.all %}
-              <li class=" {% if more_format in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ more_format.slug }}')" >
-                  <a >{{more_format.name}}</a></li>
-            {% endfor %}
-            </ul>
-          </li>
-        {% endfor %}
-
-        </ul>
-        <div class="checkbox">
-          <input type="checkbox" id="filter-sampleable" {% if tags.samplable in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.samplable.slug }}')">
-          <label for="filter-sampleable">{{tags.samplable.name}} </label>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" id="filter-handmade" {% if tags.handmade in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.handmade.slug }}')">
-          <label for="filter-handmade">{{tags.handmade.name}}</label>
-        </div>
-        <h5>{{ tags.serie.name }}</h5>
-        <select name="" id="series-select" >
-          <option value="all-series">{% trans 'all-series' %}</option>
-            {% for serie in tags.serie.child.all %}
-                <option value="{{serie.slug}}" 
-                {% if serie in active_tags  %}
-                   selected
-                {% endif %}  >{{serie.name}}</option>
-            {% endfor %}
-
-        </select>
-      </div>
-    </div>
-
-  </aside>
-
-  <section>
-
-    <div class="catalogue-filters">
-      {% for tag in active_tags %}
-      
-        <span class="tag tag-removable">{{tag}}<button class="btn" onClick="Javascript:toggleFilter('{{ tag.slug }}')" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
-      
-      {% endfor %}
-      </div>
-    <h1>{% trans 'all-products' %}</h1>
-    <div class="catalogue-data">
-      <div class="catalogue-data-num">
-        <strong>{{products|length }}</strong> {% trans 'products' %}
-      </div>
-      <!-- <div class="catalogue-data-sorting">
-        <span>{% trans 'order-for' %}:</span>
-        <input type="radio" name="sortorder" id="sortorder-trending" checked><label for="sortorder-trending">Trending</label>
-        <input type="radio" name="sortorder" id="sortorder-new"><label for="sortorder-new">Novità</label>
-        <input type="radio" name="sortorder" id="sortorder-price"><label for="sortorder-price">Prezzo</label>
-      </div> -->
-    </div>
-
-    <div class="grid grid-catalogue-products" id="grid-catalogue-products">
-      {% for product in products %}
-        {% include 'productthumb.html' %}
-      {% endfor %}
-
-    </div>
-
-  </section>
-
-</div>
-
-{% if page_obj.has_next %}
-<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{page_obj.next_page_number}}" ></a>
-{% endif %}
-<div class="d-flex justify-content-center" style="display:none;">
-    <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
 
 <script>
 var infinite = new Waypoint.Infinite({
@@ -161,6 +37,7 @@ $('.spinner-border').hide();
         if(previous != 'all-series'){
           toggleFilter(previous);
         }
+        // aggiungo attuale
         if(this.value != 'all-series'){
           toggleFilter(this.value);
         }
@@ -178,9 +55,33 @@ function toggleFilter( tagSlug ) {
             toggleFilter : tagSlug
         },
         success: function(result) {
-            
             //window.history.pushState("object or string", "Title", "{% url 'catalogue' %}?filters={{url_data}}");
-            $("#content").html(result)
+            $("#content").html(result);
+        },
+        error: function(result) {
+            console.log('error');
+        }
+    });
+}
+
+
+function addToSampler( pId ) {
+
+    $.ajax({
+        type: "POST",
+        url: "{% url 'ajax_add_sample' %}",
+        
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            product_code : pId
+        },
+        success: function(result) {
+            
+            $("#overlaySamples").html(result);
+            $("#overlaySamples").addClass('visible');
+            $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-remove' %}");        
+            $("#btn-prod-thumb-"+pId).attr("onclick","Javascript:removeFromSampler('"+pId+"')");
+
 
         },
         error: function(result) {
@@ -190,10 +91,29 @@ function toggleFilter( tagSlug ) {
 }
 
 
+function removeFromSampler( pId ) {
+    $.ajax({
+        type: "POST",
+        
+        url: "{% url 'ajax_del_sample' %}",
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            product_code : pId
+        },
+        success: function(result) {
+
+            $("#overlaySamples").html(result);
+            $("#overlaySamples").addClass('visible');       
+            $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-add' %}");        
+            $("#btn-prod-thumb-"+pId).attr("onclick","Javascript:addToSampler('"+pId+"')");
+        },
+        error: function(result) {
+            console.log('error');
+            $("#overlaySamples").addClass('visible');
+        }
+    });
+}
+
 </script>
-
-
-
-
 {% endblock %}
 

@@ -14,7 +14,7 @@
     <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg>
     <li>
       {% with serie=product|serie %}
-        <a href="{% url 'catalogue' the_filter=serie.slug %}" >{{serie}} </a><br>
+        <a href="{% url 'catalogue' %}?filter=serie.slug" >{{serie}} </a><br>
       {% endwith %}
     </li>
   </ul>
@@ -167,18 +167,18 @@
     </ul>
 
 	{% for effect in product|effects %}
-    <a href="{% url 'catalogue' the_filter=effect.slug %}"  class="tag">{{effect.name}} </a><br>
+    <a href="{% url 'catalogue' %}?filters=effect.slug"  class="tag">{{effect.name}} </a><br>
 	{% endfor %}
 
   {% for colour in product|colour %}
-    <a href="{% url 'catalogue' the_filter=colour.slug %}"  class="tag">{{colour.name}} </a><br>
+    <a href="{% url 'catalogue' %}?filters=colour.slug"  class="tag">{{colour.name}} </a><br>
 	{% endfor %}
 
 
   <h5>{% trans 'settings' %}</h5>
 
   {% for style in product|styles %}
-      <a href="{% url 'catalogue' the_filter=style.slug %}"  class="tag">{{style.name}} </a><br>
+      <a href="{% url 'catalogue'  %}?filter=style.slug"  class="tag">{{style.name}} </a><br>
   {% endfor %}
   </div>
 

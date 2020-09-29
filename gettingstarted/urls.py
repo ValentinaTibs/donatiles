@@ -33,13 +33,14 @@ urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
 
     path('catalogue/',                  taleoftiles.views.catalogue.as_view(),  name="catalogue"),
-    
     path("product/<slug:product_code>", taleoftiles.views.product,  name="product"),
 
-    path("add_chart/<slug:product_code>",                   CRM.views.add_chart,  name="add_chart"),
-    path("del_chart/<int:item_id>",                         CRM.views.del_chart,  name="del_chart"),
-    path("add_sample/<slug:product_code>",                  CRM.views.add_sample, name="add_sample"),
-    path("del_sample/<int:item_id>",                        CRM.views.del_sample, name="del_sample"),
+    path("add_chart/<slug:product_code>",   CRM.views.add_chart,  name="add_chart"),
+    path("del_chart/<int:item_id>",         CRM.views.del_chart,  name="del_chart"),
+    path("add_sample/<slug:product_code>",  CRM.views.add_sample, name="add_sample"),
+    path("del_sample/<int:item_id>",        CRM.views.del_sample, name="del_sample"),
+    path("ajax_add_sample",                 CRM.views.ajax_add_sample, name="ajax_add_sample"),
+    path("ajax_del_sample",                 CRM.views.ajax_del_sample, name="ajax_del_sample"),
 
     path("add_user/",                                       CRM.views.add_user,   name="add_user"),
     path("account/",                                        CRM.views.account,    name="account"),
