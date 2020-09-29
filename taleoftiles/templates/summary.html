@@ -24,7 +24,7 @@
 
 		<div class="cartrecap-item">
 			{% for sample in sampler.all_samples %}	
-				<div class="cartrecap-thumb"  style="background-image:url('{{sample.product.images.thumb_}}')">
+				<div class="cartrecap-thumb"  style="background-image:url('{{sample.product.cover.imagefile.url}}')">
 					{{sample.product.name}}
 				</div>
 			{% endfor %}		

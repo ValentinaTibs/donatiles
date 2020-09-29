@@ -33,14 +33,14 @@ def account(request):
     return render(request, "account.html", {'profile':profile,'shipping_form':shipping_form})
 
 def summary(request, id_ ):
-    
+
     try:
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
     
-    if order.is_paid():
-        return redirect('payment', id_ = order.internal_tracking_id)
+    # if order.is_paid():
+    #     return redirect('payment', id_ = order.internal_tracking_id)
             
     return render(request, "summary.html", {'order':order,'prv_page':request.session['prev_page']})     
 
@@ -88,9 +88,7 @@ def shipping(request, id_):
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-
-    if order.is_paid():
-        return redirect('payment', id_ = order.internal_tracking_id)
+    print(order.user())
     if order.user() :
         try:
             prev_data = Shipping.objects.get( user__user = order.user())
@@ -117,29 +115,53 @@ def shipping(request, id_):
                 login(request, new_user)
                         
             order.final_payment = order.total()
+            #order.shipping = new_shipping
             order.save()
 
             return redirect('payment', id_ = order.internal_tracking_id)
         
     return render(request, "shipping.html", {'form':shipping_form,'order':order,'prv_page': request.session['prev_page']})   
 
-def add_order(request, is_sample):
 
+def add_sample_order(request):
+    
     query = Q()
     if request.user.is_authenticated:
         query = Q(user = request.user) 
     else:
         query = Q(session_id  = request.session.session_key) 
 
-    the_chart = None
-    the_model = None
-    if is_sample == True:
-        the_model = Sampler
-    else:
-        the_model = Chart
+    the_charts = Sampler.objects.filter( query,completion_status = 's', order__isnull = True )
+    # se nessun carrello ha un ordine fai un ordine - 
+    if the_charts or the_charts.count() <= 0:
+        order = Order()
+        order.is_sampler = True
+        order.save()
+    else : 
+        # altrimenti prendi l'ordine del primo dei carrelli 
+        good_chart = the_charts.first()
+        order = good_chart.order
 
+    # assegna questo ordine a ciascun carrello presente
+    for chart in the_charts:
+        if not chart.order:
+            chart.order = order
+            chart.save()
+        
+    if request.method == 'GET':
+        request.session['prev_page'] = request.GET['prv']
+
+    return redirect('summary', id_ = order.internal_tracking_id)
+
+
+def add_order(request, is_sample):
+    query = Q()
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        query = Q(session_id  = request.session.session_key) 
     order = None
-    the_charts = the_model.objects.filter( query,completion_status = 's', order__isnull = True )
+    the_charts = Chart.objects.filter( query,completion_status = 's', order__isnull = True )
     # se nessun carrello ha un ordine fai un ordine - 
     if the_charts or the_charts.count() <= 0:
         order = Order()
@@ -147,8 +169,9 @@ def add_order(request, is_sample):
         order.save()
     else : 
         # altrimenti prendi l'ordine del primo dei carrelli 
-        good_chart = the_charts.filter(query,completion_status = 's',order__isnull = False).first()
+        good_chart = the_charts.first()
         order = good_chart.order
+
     # assegna questo ordine a ciascun carrello presente
     for chart in the_charts:
         if not chart.order:

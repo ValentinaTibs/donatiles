@@ -7,7 +7,7 @@
 {% load static %}
 {% block content %}
 
-{% if order.sampler == True %}
+{% if order.is_sampler %}
 
 <div class="content grid grid-checkout">
 
@@ -20,6 +20,7 @@
     <div class="grid subgrid-checkout">
       <div class="paymentnotes">
         QUESTO ERA UNE SAMPLER
+        
       </div>
       <div class="paymentdata">
         {% if order.is_paid %}

@@ -42,66 +42,7 @@ user_logged_in.connect(pour_charts_and_samplers)
 
 #####  --------------
         
-
-#2do mettere qui un metodo più decente
-def create_shipping_internal_id():
-    return get_random_string(length=12)
-
-class Order(models.Model):
-
-    note        = models.TextField(max_length = 200, null = True)
-    
-    internal_tracking_id    = models.CharField(max_length=100, default = "")
-    shipping_tracking_id    = models.CharField(max_length=100, default = "")
-    created_at              = models.DateTimeField(editable=False)
-    modified_at             = models.DateTimeField()
-    order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
-    final_payment           = models.PositiveIntegerField( default=0 )   
-    is_sampler              = models.BooleanField(default = False)
-    shipping_date           = models.DateTimeField(editable=True,null= True)
-    
-    def save(self, *args, **kwargs):
-        if not self.internal_tracking_id:
-            self.internal_tracking_id = create_shipping_internal_id()
-        if not self.id:
-            self.created_at = timezone.now()
-        self.modified_at = timezone.now()
-        
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-
-    def __str__(self):
-        return self.internal_tracking_id
-
-    def user(self):
-        if self.is_sampler:
-            chart_model = self.sampler.first()
-        else :
-            chart_model = self.charts.first()
-        
-        if chart_model.user:
-            return chart_model.user
-        else :
-            return None
-    
-    def total(self):
-        total = 0
-        for sample in self.sampler.all():
-            total += sample.total_price()
-        
-        for chart in self.charts.all():
-            total += chart.total_price()
-        return total
-    
-    def is_paid(self):
-        if self.is_sampler:
-            for sampler in self.sampler.all():
-                if not sampler.is_paid():
-                    return False
-        else:
-            for chart in self.charts.all():
-                if not chart.is_paid():
-                    return False
-        return True                    
+                
 
 class Profile(models.Model):
     user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
@@ -134,6 +75,68 @@ class Shipping(models.Model):
     telephone_num       = models.TextField(max_length=30, blank=False)
     is_active           = models.BooleanField(default = True)
 
+
+
+#2do mettere qui un metodo più decente
+def create_shipping_internal_id():
+    return get_random_string(length=12)
+
+class Order(models.Model):
+
+    note        = models.TextField(max_length = 200, null = True, blank=True)
+    
+    internal_tracking_id    = models.CharField(max_length=100, default = "")
+    shipping_tracking_id    = models.CharField(max_length=100, default = "", blank=True)
+    created_at              = models.DateTimeField(editable=False)
+    modified_at             = models.DateTimeField()
+    order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
+    final_payment           = models.PositiveIntegerField( default=0 )   
+    is_sampler              = models.BooleanField(default = False)
+    shipping_date           = models.DateTimeField(editable=True,null= True, blank=True)
+    #shipping                = models.ForeignKey(Shipping, null= True,on_delete=models.SET_NULL)
+    
+    def save(self, *args, **kwargs):
+        if not self.internal_tracking_id:
+            self.internal_tracking_id = create_shipping_internal_id()
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+    
+    def __str__(self):
+        return self.internal_tracking_id
+
+   
+    def user(self):
+        if self.is_sampler:
+            chart_model = self.sampler.first()
+        else :
+            chart_model = self.charts.first()
+        if chart_model.user:
+            return chart_model.user
+        else :
+            return None
+    
+    def total(self):
+        total = 0
+        for sample in self.sampler.all():
+            total += sample.total_price()
+        
+        for chart in self.charts.all():
+            total += chart.total_price()
+        return total
+    
+    def is_paid(self):
+        if self.is_sampler:
+            for sampler in self.sampler.all():
+                if not sampler.is_paid():
+                    return False
+        else:
+            for chart in self.charts.all():
+                if not chart.is_paid():
+                    return False
+        return True    
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):

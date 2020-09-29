@@ -14,7 +14,8 @@
   <div class="grid grid-sampleslots">
 
     {% for sample in sampler.all_samples %}
-      <div class="sampleslot" style="background-image:url('{{sample.product.thumb}}')">
+      <div class="sampleslot" style="background-image:url('{{ sample.product.cover.imagefile.url }}')">
+
         <a href="{% url 'product' sample.product.code %}">
           <div class="sampleslot-name">
             <h5>{{sample.product.serie}}</h5>
@@ -27,7 +28,7 @@
     
   </div>
   
-  <a href="{% url 'add_order' True %}?prv={{request.get_full_path|urlencode}}"> 
+  <a href="{% url 'add_sample_order' %}?prv={{request.get_full_path|urlencode}}"> 
     <button class="btn btn-primary"><span>{% trans 'receive-sample-home' %}</span><svg class="icon icon-m">
       <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button></a> 
   {% else %}

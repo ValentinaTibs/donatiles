@@ -26,7 +26,9 @@
       {% if order.is_sampler %}    
         <a href="{% url 'order' order.internal_tracking_id %}" class="accountorder">
           <div class="accountorder-name"><strong>{% trans 'sampler'|title %}</strong></div>
-          <div class="accountorder-status">Spedito il <strong>7 Marzo 2020</strong></div>
+          <div class="accountorder-status">{% trans 'order-status' %} <strong>{{order.get_order_status_display}}</strong></div>
+          <div class="accountorder-status">{% trans 'sent-date' %} <strong>{{order.shipping_date}}</strong></div>
+          	
           <div class="accountorder-total">
             <span class="product-figure">€ {{order.final_payment}}</span>
           </div>

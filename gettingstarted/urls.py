@@ -49,6 +49,7 @@ urlpatterns += i18n_patterns(
     path('reset/done/',             auth_views.PasswordResetCompleteView.as_view(template_name='password/password_reset_complete.html'), name='password_reset_complete'),
     path("accounts/password_reset/",layout.views.password_reset_request, name="password_reset"),
 
+    path("add_sample_order", CRM.views.add_sample_order, name="add_sample_order"),
     path("add_order/<str:is_sample>", CRM.views.add_order, name="add_order"),
     path("summary/<str:id_>",  CRM.views.summary,  name="summary"),
     path("shipping/<str:id_>", CRM.views.shipping, name="shipping"),
