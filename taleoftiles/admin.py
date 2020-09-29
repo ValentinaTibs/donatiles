@@ -102,9 +102,9 @@ class SerieAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-class PublicationAdminSelf(SummernoteModelAdmin):
+class PublicationAdminSelf(admin.ModelAdmin):
     model = Publication
-    summernote_fields = ('content_it','content_de','content_en','content_sv',)
+    
     fields = ('title_it','title_de','title_en','title_sv','content_it','content_de','content_en','content_sv',
         'publish_date','slug')
 
