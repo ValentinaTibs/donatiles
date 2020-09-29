@@ -172,3 +172,20 @@ AWS_S3_CUSTOM_DOMAIN    = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_DEFAULT_ACL         = 'public-read'
 MEDIA_URL               = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
 
+# ----- SUMMERNOTE   ----- 
+SUMMERNOTE_CONFIG = {
+# You can put custom Summernote settings
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+        'toolbar': [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+            
+        ],
+    }
+}

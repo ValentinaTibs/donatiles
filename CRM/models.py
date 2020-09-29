@@ -58,7 +58,7 @@ class Order(models.Model):
     order_status            = models.CharField(max_length=2, choices=ORDER_STATUS, default='w')
     final_payment           = models.PositiveIntegerField( default=0 )   
     is_sampler              = models.BooleanField(default = False)
-    shipping_date           = models.DateTimeField(editable=True)
+    shipping_date           = models.DateTimeField(editable=True,null= True)
     
     def save(self, *args, **kwargs):
         if not self.internal_tracking_id:
@@ -66,6 +66,7 @@ class Order(models.Model):
         if not self.id:
             self.created_at = timezone.now()
         self.modified_at = timezone.now()
+        
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
     def __str__(self):
