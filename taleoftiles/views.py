@@ -43,7 +43,8 @@ class catalogue(ListView):
     url_data = ''
 
     model = Product 
-    paginate_by = 100
+    #2do put here back pagination
+    paginate_by = 300
     context_object_name = 'products'
     template_name = 'catalogue.html'
     ordering = ['name']    
@@ -52,14 +53,17 @@ class catalogue(ListView):
     def post(self, request):
 
         if self.request.is_ajax():
-            url_data = request.POST.get('url_data', '').split('_')
+            url_data =[]
+            url_data_string = request.POST.get('url_data', None)
+            if url_data_string:
+                url_data = url_data_string.split('_')
             the_filter = request.POST.get('toggleFilter', '')
-            
+
             if (the_filter in url_data):
                 url_data.remove(the_filter)
-
             else:
                 url_data.append(the_filter)
+
             #2do this must became a function
             tag_query = Q()
             tag_len = 0
@@ -97,16 +101,20 @@ class catalogue(ListView):
         
         if self.request.method == 'GET':
             self.url_data = self.request.GET.get('filters', '')  
-                
-        tag_query = Q()
-        tag_len = 0
-        for value in self.url_data.split('_'):
-            tag_query = tag_query | Q(slug = value)
-            tag_len = tag_len + 1
-        if tag_len == 0 :
-            return Product.objects.filter(is_active=True)
-        self.active_tags = Tag.objects.filter(tag_query)
-        return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+
+            if not self.url_data :
+                return Product.objects.filter(is_active=True)
+
+            tag_query = Q()
+            tag_len = 0
+
+            for value in self.url_data.split('_'):
+                tag_query = tag_query | Q(slug = value)
+                tag_len = tag_len + 1
+            if tag_len == 0 :
+                return Product.objects.filter(is_active=True)
+            self.active_tags = Tag.objects.filter(tag_query)
+            return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
 
 def compute_price(request, product_id):

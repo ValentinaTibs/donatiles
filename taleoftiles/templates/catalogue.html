@@ -116,9 +116,10 @@
     </div>
 
     <div class="grid grid-catalogue-products" id="grid-catalogue-products">
+      {% for product in products %}
+        {% include 'productthumb.html' %}
+      {% endfor %}
 
-      {% include 'productgrid.html' %}
-      
     </div>
 
   </section>
@@ -179,7 +180,6 @@ function toggleFilter( tagSlug ) {
         success: function(result) {
             
             //window.history.pushState("object or string", "Title", "{% url 'catalogue' %}?filters={{url_data}}");
-            // console.log('{{url_data}}')
             $("#content").html(result)
 
         },
