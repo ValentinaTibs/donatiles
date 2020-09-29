@@ -31,12 +31,10 @@ urlpatterns += (
 
 urlpatterns += i18n_patterns(
     path("",                            taleoftiles.views.index,     name="index"),
-    path('catalogue/',                  taleoftiles.views.catalogue.as_view(),         name="catalogue"),
-    
-    #path("catalogue/",                  taleoftiles.views.catalogue, name="catalogue"),
-    path("catalogue/<slug:the_filter>/",taleoftiles.views.catalogue.as_view(), name="catalogue"),
-    path("filter_catalogue/",            taleoftiles.views.filter_catalogue,  name="filter_catalogue"),
 
+    path('catalogue/',                  taleoftiles.views.catalogue.as_view(),  name="catalogue"),
+    path('catalogue/toggleFilter',      taleoftiles.views.toggleFilter,  name="toggle_filter"),
+    
     path("product/<slug:product_code>", taleoftiles.views.product,  name="product"),
 
     path("add_chart/<slug:product_code>",                   CRM.views.add_chart,  name="add_chart"),

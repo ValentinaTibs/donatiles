@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.utils.translation import ugettext
@@ -29,10 +28,58 @@ def index(request):
         'main_post'     : main_post
         })
 
+
+from django.http import JsonResponse
+from django.shortcuts import render
+
+from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
+
+class LazyEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, YourCustomType):
+            return str(obj)
+        return super().default(obj)
+
+def toggleFilter(request):
+
+    if request.method == "POST" and request.is_ajax():
+        url_data = request.POST.get('url_data', '').split('.')
+        the_filter = request.POST.get('toggleFilter', '')
+        if (the_filter in url_data):
+            url_data.remove(the_filter)
+        else:
+            url_data.append(the_filter)
+
+        tag_query = Q()
+        tag_len = 0
+        for value in url_data:
+            tag_query = tag_query | Q(slug = value)
+            tag_len = tag_len + 1
+
+        if tag_len == 0 :
+            products = Product.objects.filter(is_active=True)
+
+        active_tags = Tag.objects.filter(tag_query)
+        products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all()
+        
+        url_data_string = '.'.join(url_data) 
+        data = {
+            "products": serializers.serialize('json', products, cls=LazyEncoder),
+            "active_tags" : serializers.serialize('json', active_tags, cls=LazyEncoder),
+            "url_data" : url_data_string
+        }
+   
+        return JsonResponse(data, safe = False, status = 200)
+    return JsonResponse({}, safe = False, status = 200)
+
+
 from django.views.generic.list import ListView
 
 class catalogue(ListView):
     active_tags = None
+    url_data = ''
+    
     model = Product 
     paginate_by = 100
     context_object_name = 'products'
@@ -48,22 +95,24 @@ class catalogue(ListView):
             return render(request, "404.html",{"message":"There is no active catalogue",})
 
         all_tags = Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')   
-        context['tags'] = all_tags
+        context['tags']         = all_tags
         context['active_tags']  = self.active_tags
+        context['url_data']     = self.url_data
 
         return context
     
     def get_queryset(self):
-        
         if self.request.method == 'GET':
-            filters  = self.request.GET.get('filters', '').split('.')       
-
+            self.url_data = self.request.GET.get('filters', '')  
+                
         tag_query = Q()
         tag_len = 0
-        for value in filters:
+        for value in self.url_data.split('.'):
             tag_query = tag_query | Q(slug = value)
             tag_len = tag_len + 1
-        self.active_tags = Tag.objects.filter(tag_query)            
+        if tag_len == 0 :
+            return Product.objects.filter(is_active=True)
+        self.active_tags = Tag.objects.filter(tag_query)
         return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
 
@@ -208,3 +257,45 @@ def filter_catalogue(request):
 
 # catalogue_tags = cat.tags()
 # catalogue_prod = cat.filter_products(catalogue_prod,query_dict)
+
+
+                #     self.request.POST.get('toggle', '')
+        #     if()
+        #     print("request.POST.")
+        #     print(request.POST)
+        #     self.url_data = request.POST.get('url_data', '').split('.')
+        #     print(self.url_data)
+        #     if (the_filter in self.url_data):
+        #         self.url_data.remove(the_filter)
+        #     else:
+        #         self.url_data.append('the_filter')
+
+# def ProductList(request):
+# 	return render(request, "catalogue.html", {})
+
+
+# class ProductListing(ListAPIView):
+#     # set the pagination and serializer class
+
+# 	pagination_class = StandardResultsSetPagination
+# 	serializer_class = ProductSerializers
+
+# 	def get_queryset(self):
+#         # filter the queryset based on the filters applied
+
+# 		queryList = Product.objects.all()
+# 		name = self.request.query_params.get('name', None)
+# 		code = self.request.query_params.get('code', None)
+		
+# 		if name:
+# 		    queryList = queryList.filter(name = name)
+# 		if code:
+# 		    queryList = queryList.filter(code = code)
+
+#         # sort it if applied on based on price/points
+
+# 		if sort_by == "price":
+# 		    queryList = queryList.order_by("name")
+# 		elif sort_by == "points":
+# 		    queryList = queryList.order_by("code")
+# 		return queryList

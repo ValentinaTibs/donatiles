@@ -8,10 +8,11 @@
 
 {% block content %}
 
+{% csrf_token %}
+
 <div class="content grid grid-catalogue">
 
   <aside>
-
     <button class="filtersheader-btn btn btn-secondary btn-tree"><span>{% trans 'filters'|title %}</span><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
 
     <div class="openable">
@@ -35,25 +36,25 @@
         <h5>{{ tags.colour.name }}</h5>
         <ul class="colorswatches">
           {% for colour in tags.colour.child.all %}
-            <li  class=" {% if style in active_tags  %} selected {% endif %}">
-            <a href="{{colour.slug}}"><div style="background-color:#{{colour.summary}}"></div></a></li>
+            <li class="{% if colour in active_tags  %}selected{% endif %}" >
+            <a href="{{colour.slug}}"><div style="background-color:#{{colour.summary}}"></div></a>
+            </li>
           {% endfor %}
-        
         </ul>
+
         <h5>{{ tags.setting.name }}</h5>
         <ul>
           {% for setting in tags.setting.child.all %}
-              <li class=" {% if setting in active_tags  %}
-                  selected {% endif %}" >
+              <li class="{% if setting in active_tags  %} selected {% endif %}" >
                   <a href="" > {{setting.name}}</a></li>
           {% endfor %}
-
         </ul>
+
         <h5>{{ tags.format.name }}</h5>
+        
         <ul>
 
         {% for format in tags.format.child.all %}
-
           <li><a href="">{{format.name}}</a>
             <button class="btn btn-tree"><svg class="icon icon-m">
               <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
@@ -64,10 +65,10 @@
             {% endfor %}
             </ul>
           </li>
-
-      {% endfor %}
+        {% endfor %}
 
         </ul>
+
         <div class="checkbox">
           <input type="checkbox" id="filter-sampleable" {% if tags.samplable.slug in active_tags%} checked {% endif %}>
           <label for="filter-sampleable">{{tags.samplable.name}} </label>
@@ -95,8 +96,10 @@
   <section>
 
     <div class="catalogue-filters">
-      {% for tag in active_tags %}            
-        <span class="tag tag-removable">{{tag}}<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
+      {% for tag in active_tags %}
+      
+        <span class="tag tag-removable">{{tag}}<button class="btn" onClick="Javascript:toggleFilter('{{ tag.slug }}')" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
+      
       {% endfor %}
       </div>
     <h1>{% trans 'all-products' %}</h1>
@@ -112,34 +115,10 @@
       </div>
     </div>
 
-    <div class="grid grid-catalogue-products">
+    <div class="grid grid-catalogue-products" id="grid-catalogue-products">
 
     {% for product in products %}
-    <div class="product-thumb infinite-item">
-        <a href="{% url 'product' product.code %}" class="product-thumb-img">
-          <img  src="{{ product.cover.imagefile.url }}" alt="{{ product.name }} / {{ product.serie.name }}">
-        </a>
-        <a href="{% url 'product' product.code %}" class="product-thumb-title">
-          <h5>{{ product.serie.name }}</h5>
-          <h4>{{ product.name }}</h4>
-        </a>
 
-        {% if sampler|is_in_sample:product.code %}
-        <button class="btn btn-overlay" onClick="Javascript:removeFromSampler('{{ product.code }}')"><svg class="icon-l icon">
-        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-remove' %}"/></svg></button>
-        {% elif sampler and sampler.all_samples.count > 4%}
-
-        <button class="btn btn-overlay">FULL SAMPLE</button>
-        {% elif product.is_samplable %}
-
-        <button class="btn btn-overlay" onClick="Javascript:addToSampler('{{ product.code }}')"><svg class="icon-l icon">
-        <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-
-        {% else %}
-          {% trans 'product-not-samplable' %}
-        {% endif %}
-
-    </div>
     {% endfor %}
 
     </div>
@@ -161,7 +140,6 @@
 var infinite = new Waypoint.Infinite({
     element: $('.infinite-container')[0],
     handler: function(direction) {
-
 },
 offset: 'bottom-in-view',
 
@@ -217,7 +195,40 @@ function removeFromSampler( pId ) {
     });
 }
 
+function toggleFilter( tagSlug ) {
+  
+    $.ajax({
+        type: "POST",
+        url: "{% url 'toggle_filter' %}",
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            url_data : '{{url_data}}', 
+            toggleFilter : tagSlug
+        },
+        success: function(result) {
+            console.log('ok');
+            console.log(result)
+            window.history.pushState("object or string", "Title", "catalogue/?filters={{url_data}}");
+            const parent = document.getElementById("grid-catalogue-products")
+            while (parent.firstChild) {
+                parent.firstChild.remove()
+            }
+
+
+
+            // TODO:
+            // - update sampler: show empty slot and update main sampler button
+            // - update "add to sampler" button if product is listed or product detail page is open
+        },
+        error: function(result) {
+            console.log('error');
+        }
+    });
+}
+
+
 </script>
+
 
 
 
