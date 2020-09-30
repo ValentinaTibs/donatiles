@@ -268,13 +268,7 @@ def add_sample(request, product_code):
         sample = Sample.objects.get(sampler = sampler, product = product, status = 'ok')
         return render(request, "include/sampler.html",{"message": "Already in your sample "})
     except ObjectDoesNotExist:
-        remove_stat = 'ok'
-        #2do this might cause db collapse if saved 
-        if (sampler.all_samples().count() > 4):
-            remove_stat = 'le'
-        #2do this might cause db collapse if saved
-        if (not product.is_samplable):
-            remove_stat = 'ns'          
+        remove_stat = 'ok'       
         if remove_stat == 'ok':
             sample = Sample(sampler  = sampler, product = product, status = remove_stat)
             sample.save()

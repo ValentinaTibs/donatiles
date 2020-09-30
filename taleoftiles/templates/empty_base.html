@@ -147,82 +147,12 @@
 {% endif %}
 
 <div class="overlay" id="overlaySamples">
-  
  {% include 'include/sampler.html' %}
-
 </div>
 
-<script type="text/javascript">
-  
-    function removeFromSampler( pId ) {
-      console.log( pId );
-        $.ajax({
-            type: "POST",
-            // TODO: make this url dynamic
-            url: "/it/del_sample/" + pId,
-            data: {
-                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
-            },
-            success: function(result) {
-                console.log('ok');
-                // TODO:
-                // - update sampler: show empty slot and update main sampler button
-                // - update "add to sampler" button if product is listed or product detail page is open
-            },
-            error: function(result) {
-                console.log('error');
-            }
-        });
-    }
-</script>
 
 <div class="overlay" id="overlayCart">
-
-  <div class="overlay-title">
-    <h4>{% trans 'your-chart' %}</h4>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
-  </div>
-
-  {% if charts.count > 0 %}
-    {% for chart in charts %}
-      {% for chart_item in chart.all_items %}
-
-        <div class="cartitem">
-          <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
-          <div class="cartitem-main">
-            <div class="cartitem-name">
-              <span><strong>{{chart_item.product.serie}}</strong></span>
-              <span>{{chart_item.size}} / {{chart_item.product.name}}</span>
-            </div>
-            <div class="cartitem-amount">
-              <span>{{chart_item.quantity}} m&sup2;</span>
-              <span class="cartitem-price">€ {{chart_item.price}}</span>
-            </div>
-          </div>
-          <a href="{% url 'del_chart' chart_item.pk %}"> 
-          <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-          </a> 
-        </div>
-
-    {% endfor %}
-  {% endfor %}
- 
-
-  <div class="cartitem-total">
-    <span>{% trans 'total'|title %}</span>
-    <strong>€ {{chart.price}}</strong>
-  </div>
-
-  <a href="{% url 'add_order' False %}?prv={{request.get_full_path|urlencode}}" class="btn btn-primary"><span>Procedi con l'ordine</span>
-    <svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
-
-  <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
-  <p class="note">Potrai pagare con bonifico bancario</p>
-  {% else %}
-  {% blocktrans %} chart-empty-claim {% endblocktrans %}
-
-  {% endif %}
-
+ {% include 'include/chart.html' %}
 </div>
 
 <div class="nav-mobile overlay" id="overlayMenu">

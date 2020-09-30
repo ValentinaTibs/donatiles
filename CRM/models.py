@@ -142,9 +142,10 @@ class ActiveChartManager(models.Manager):
     def get_queryset(self):
         query = Q(completion_status = 's') | Q(completion_status = 'i1') | Q(completion_status = 'i2') 
         qs = super().get_queryset().filter(query).annotate(
-            total = Count('chart_item',filter=Q(chart_item__status='ok')),
-            count = Sum('chart_item',filter=Q(chart_item__status='ok'))
-        )
+            chart_item_count = Sum('chart_item',filter=Q(chart_item__status='ok'))
+        ).filter(chart_item_count__gt = 0)
+        #qs = super().get_queryset().filter(query).annotate(total = Sum('chart_item')).filter(total=0)
+
         return qs
 
 
@@ -224,13 +225,12 @@ class ChartItem(models.Model):
     def tot_quantity(self):
         return 1
 
-# return all charts that are samples and have at least one item 
+# return all charts that are samples and have at least one Active sample in them 
 class ActiveSamplesManager(models.Manager):
     def get_queryset(self):
         qs = super().get_queryset().filter(completion_status = 's').annotate(
-            total = Count('samples',filter=Q(samples__status='ok')),
-            count = Sum  ('samples',filter=Q(samples__status='ok'))
-            )
+            samples_count__gt = Sum  ('samples',filter=Q(samples__status='ok'))
+            ).filter(samples_count__gt = 0)
         return qs
 
 class Sampler(models.Model):
