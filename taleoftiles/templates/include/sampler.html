@@ -6,8 +6,8 @@
  <div class="overlay-title">
      
     <h4>{% trans 'your-sampler' %}</h4>
-    <button class="btn"><svg class="icon icon-l">
-      <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}" onclick="Javascript:closeSampler()"/></svg></button>
+    <button class="btn"  onclick="Javascript:closeSampler()"><svg class="icon icon-l">
+      <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
   
   {% if sampler.all_samples %}

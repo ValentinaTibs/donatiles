@@ -116,8 +116,10 @@ class CustomProductModelForm(forms.ModelForm):
             for style in self.cleaned_data.get('styles'):
                     product.tags.add(style) 
 
-        effetcs = product.tags.filter(parent__slug='effetc') 
-        for effect in effetcs:
+        # ---- EFFECT UPDATE -----
+        effects = product.tags.filter(parent__slug='effect') 
+    
+        for effect in effects:
             product.tags.remove(effect.pk)
         if self.cleaned_data.get('effects'):
             for effect in self.cleaned_data.get('effects'):

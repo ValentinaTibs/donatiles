@@ -11,21 +11,9 @@
 {% include 'cataloguegrid.html' %}
 
 
+
 <script>
-var infinite = new Waypoint.Infinite({
-    element: $('.infinite-container')[0],
-    handler: function(direction) {
-},
-offset: 'bottom-in-view',
 
-onBeforePageLoad: function () {
-$('.spinner-border').show();
-},
-onAfterPageLoad: function () {
-$('.spinner-border').hide();
-}
-
-});    
 
 (function () {
     var previous;
@@ -55,7 +43,6 @@ function toggleFilter( tagSlug ) {
             toggleFilter : tagSlug
         },
         success: function(result) {
-            //window.history.pushState("object or string", "Title", "{% url 'catalogue' %}?filters={{url_data}}");
             $("#content").html(result);
         },
         error: function(result) {
@@ -76,13 +63,11 @@ function addToSampler( pId ) {
             product_code : pId
         },
         success: function(result) {
-            
             $("#overlaySamples").html(result);
             $("#overlaySamples").addClass('visible');
             $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-remove' %}");        
             $("#btn-prod-thumb-"+pId).attr("onclick","Javascript:removeFromSampler('"+pId+"')");
-
-
+            // update sampler icon to correct number
         },
         error: function(result) {
             console.log('error');
@@ -106,6 +91,7 @@ function removeFromSampler( pId ) {
             $("#overlaySamples").addClass('visible');       
             $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-add' %}");        
             $("#btn-prod-thumb-"+pId).attr("onclick","Javascript:addToSampler('"+pId+"')");
+            // update sampler icon to correct number
         },
         error: function(result) {
             console.log('error');
