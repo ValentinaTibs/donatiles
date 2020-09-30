@@ -303,7 +303,7 @@ def ajax_add_sample(request, ):
                 sampler.user = request.user
             sampler.save()
         if (sampler.all_samples().count() > 4):
-            return render(request, "include/sampler.html", {"all_samples": sample.sampler,'user':request.user })
+            return render(request, "include/sampler.html", {"all_samples": sampler,'user':request.user })
 
         #avoiding double insertion
         try:
@@ -314,7 +314,7 @@ def ajax_add_sample(request, ):
                 sample = Sample(sampler  = sampler, product = product, status = remove_stat)
                 sample.save()       
                     
-        return render(request, "include/sampler.html", {"all_samples": sample.sampler,'user':request.user })
+        return render(request, "include/sampler.html", {"all_samples": sampler,'user':request.user })
     
 
 def del_chart(request, item_id):
