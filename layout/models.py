@@ -226,7 +226,7 @@ class Image(models.Model):
 #    cover       = CoverManager() 
 
     class Meta:
-        ordering = ["-order"]    
+        ordering = ["order"]    
 
     def image_(self):
         if self.imagefile:
