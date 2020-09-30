@@ -7,7 +7,7 @@
      
     <h4>{% trans 'your-sampler' %}</h4>
     <button class="btn"><svg class="icon icon-l">
-      <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
+      <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}" onclick="Javascript:closeSampler()"/></svg></button>
   </div>
   
   {% if sampler.all_samples %}
@@ -41,3 +41,10 @@
 
 
   {{message}}
+
+<script>
+  function closeSampler(  ) {
+    $("#overlaySamples").removeClass('visible');     
+}
+
+</script>
