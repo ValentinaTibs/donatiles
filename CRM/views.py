@@ -88,7 +88,7 @@ def shipping(request, id_):
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-    print(order.user())
+    
     if order.user() :
         try:
             prev_data = Shipping.objects.get( user__user = order.user())
@@ -131,13 +131,14 @@ def add_sample_order(request):
     else:
         query = Q(session_id  = request.session.session_key) 
 
-    the_charts = Sampler.objects.filter( query,completion_status = 's', order__isnull = True )
+    the_charts = Sampler.objects.filter( query,completion_status = 's', order__isnull = False )
+    
     # se nessun carrello ha un ordine fai un ordine - 
-    if the_charts or the_charts.count() <= 0:
+    if not the_charts or the_charts.count() <= 0:
         order = Order()
         order.is_sampler = True
         order.save()
-    else : 
+    else :         
         # altrimenti prendi l'ordine del primo dei carrelli 
         good_chart = the_charts.first()
         order = good_chart.order
@@ -161,11 +162,10 @@ def add_order(request, is_sample):
     else:
         query = Q(session_id  = request.session.session_key) 
     order = None
-    the_charts = Chart.objects.filter( query,completion_status = 's', order__isnull = True )
+    the_charts = Chart.objects.filter( query,completion_status = 's', order__isnull = False )
     # se nessun carrello ha un ordine fai un ordine - 
-    if the_charts or the_charts.count() <= 0:
+    if not the_charts or the_charts.count() <= 0:
         order = Order()
-        order.is_sampler = is_sample
         order.save()
     else : 
         # altrimenti prendi l'ordine del primo dei carrelli 
