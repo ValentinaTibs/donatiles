@@ -13,24 +13,50 @@
 
 
 <script>
+    
 
 
-(function () {
-    var previous;
+// .change(function() {
+//         // tolgo il precedente
+//         if(previous != 'all-series'){
+//             console.log(previous);
+//             toggleFilter(previous);
+//             console.log("DONE");
+//         }
+//         // aggiungo attuale
+//         if(this.value != 'all-series'){
+//             console.log("IN");
+//             console.log(this.value);
+//             toggleFilter(this.value);
+//             previous = this.value     ;     
+//             console.log("DONE2");
+//         }
+//     });
 
-    $("#series-select").on('focus', function () {
-        previous = this.value;
-    }).change(function() {
-        // tolgo il precedente
-        if(previous != 'all-series'){
-          toggleFilter(previous);
-        }
-        // aggiungo attuale
-        if(this.value != 'all-series'){
-          toggleFilter(this.value);
-        }
-    });
-})();
+// (function () {
+//     var previous;
+//     $( "#series-select" ).click(function() {
+//         previous = this.value;
+        
+//     }).change(function() {
+//         // tolgo il precedente
+//         if(previous != 'all-series'){
+//             console.log(previous);
+//             toggleFilter(previous);
+//             console.log("DONE");
+//         }
+//         // aggiungo attuale
+//         if(this.value != 'all-series'){
+//             console.log("IN");
+//             console.log(this.value);
+//             toggleFilter(this.value);
+//             previous = this.value     ;     
+//             console.log("DONE2");
+//         }
+//     });
+
+
+// })();
 
 function toggleFilter( tagSlug ) {
     $.ajax({
@@ -39,17 +65,22 @@ function toggleFilter( tagSlug ) {
         url: "{% url 'catalogue' %}",
         data: {
             csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-            url_data : '{{url_data}}', 
+            url_data : $( 'input[id="hidden_url_data"]' ).val(), 
             toggleFilter : tagSlug
         },
         success: function(result) {
             $("#content").html(result);
+            // parse the query string into an object
+            
         },
         error: function(result) {
             console.log('error');
         }
     });
 }
+
+
+
 
 
 function addToSampler( pId ) {
@@ -63,6 +94,8 @@ function addToSampler( pId ) {
             product_code : pId
         },
         success: function(result) {
+
+
             $("#overlaySamples").html(result);
             $("#overlaySamples").addClass('visible');
             $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-remove' %}");        

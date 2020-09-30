@@ -14,7 +14,7 @@
       <div class="filtersbody">
         <h5>{{ tags.effect.name }}</h5>
         <ul>
-           {% for effect in tags.effect.child.all %}
+           {% for effect in tags.effect.all_catalogue_childs %}
                 <li class=" {% if effect in active_tags  %}
                     selected {% endif %}"  onClick="Javascript:toggleFilter('{{ effect.slug }}')" >
                     <a > {{effect.name}}</a></li>
@@ -22,14 +22,14 @@
         </ul>
         <h5>{{ tags.style.name }}</h5>
         <ul>
-           {% for style in tags.style.child.all %}
+           {% for style in tags.style.all_catalogue_childs %}
                 <li class=" {% if style in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ style.slug }}')">
                     <a > {{style.name}}</a></li>
             {% endfor %}
         </ul>
         <h5>{{ tags.colour.name }}</h5>
         <ul class="colorswatches">
-          {% for colour in tags.colour.child.all %}
+          {% for colour in tags.colour.all_catalogue_childs %}
             <li class="{% if colour in active_tags  %}selected{% endif %}" onClick="Javascript:toggleFilter('{{ colour.slug }}')"  >
             <a ><div style="background-color:#{{colour.summary}}"></div></a>
             </li>
@@ -38,7 +38,7 @@
 
         <h5>{{ tags.setting.name }}</h5>
         <ul>
-          {% for setting in tags.setting.child.all %}
+          {% for setting in tags.setting.all_catalogue_childs %}
               <li class="{% if setting in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ setting.slug }}')" >
                   <a  > {{setting.name}}</a></li>
           {% endfor %}
@@ -73,7 +73,7 @@
           <label for="filter-handmade">{{tags.handmade.name}}</label>
         </div>
         <h5>{{ tags.serie.name }}</h5>
-        <select name="" id="series-select" >
+        <select name="series-select" id="series-select" >
           <option value="all-series">{% trans 'all-series' %}</option>
             {% for serie in tags.serie.child.all %}
                 <option value="{{serie.slug}}" 
@@ -93,7 +93,7 @@
     <div class="catalogue-filters">
       {% for tag in active_tags %}
       
-        <span class="tag tag-removable">{{tag}}<button class="btn" onClick="Javascript:toggleFilter('{{ tag.slug }}')" ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
+        <span class="tag tag-removable" onClick="Javascript:toggleFilter('{{ tag.slug }}')">{{tag}}<button class="btn"  ><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-remove' %}"/></svg></button></span>
       
       {% endfor %}
       </div>
@@ -120,6 +120,8 @@
   </section>
 
 </div>
+{{url_data}}
+<input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
 
 {% if is_paginated %}
     <div class="pagination">
@@ -137,3 +139,33 @@
     </div>
 {% endif %}
 
+
+
+<script>
+    
+
+
+$( "#series-select" ).on('focusin', function(){
+    $(this).data('val', $(this).val());
+});
+
+$( "#series-select" ).on('change', function(){
+    
+    var prev = $(this).data('val');
+    var current = $(this).val();
+    if(current == "all-series")
+        toggleFilter(prev);
+    else{
+      var hv = $('#hidden_url_data').val();
+      var hv_array = hv.split(" ");
+      hv_array = jQuery.grep(hv_array, function(value) {
+        return value != prev;
+      });
+
+      $('#hidden_url_data').val(hv_array.join("_"));
+      toggleFilter(current);
+    } 
+  
+});
+
+</script>

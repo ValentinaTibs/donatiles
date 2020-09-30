@@ -59,12 +59,12 @@ class catalogue(ListView):
             if url_data_string:
                 url_data = url_data_string.split('_')
             the_filter = request.POST.get('toggleFilter', '')
-
+            
             if (the_filter in url_data):
                 url_data.remove(the_filter)
             else:
                 url_data.append(the_filter)
-
+            
             #2do this must became a function
             tag_query = Q()
             tag_len = 0
@@ -72,7 +72,7 @@ class catalogue(ListView):
                 tag_query = tag_query | Q(slug = value)
                 tag_len = tag_len + 1
 
-            all_tags = Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')   
+            all_tags = Tag.objects.filter(in_catalogue = True ,parent__isnull = True, public = True).in_bulk(field_name='slug')   
             active_tags = None
 
             if tag_len == 0 :
@@ -91,8 +91,8 @@ class catalogue(ListView):
         except ObjectDoesNotExist:
             return render(request, "404.html",{"message":"There is no active catalogue",})
 
-        all_tags = Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')   
-        context['tags']         = all_tags
+        
+        context['tags']         = self.all_tags.in_bulk(field_name='slug')
         context['active_tags']  = self.active_tags
         context['url_data']     = self.url_data
 
@@ -100,22 +100,21 @@ class catalogue(ListView):
     
     def get_queryset(self):
         
-        if self.request.method == 'GET':
-            self.url_data = self.request.GET.get('filters', '')  
+        self.url_data = self.request.GET.get('filters', '')  
+        self.all_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True, public = True)
+        if not self.url_data :
+            return Product.objects.filter(is_active=True)
 
-            if not self.url_data :
-                return Product.objects.filter(is_active=True)
+        tag_query = Q()
+        tag_len = 0
 
-            tag_query = Q()
-            tag_len = 0
-
-            for value in self.url_data.split('_'):
-                tag_query = tag_query | Q(slug = value)
-                tag_len = tag_len + 1
-            if tag_len == 0 :
-                return Product.objects.filter(is_active=True)
-            self.active_tags = Tag.objects.filter(tag_query)
-            return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+        for value in self.url_data.split('_'):
+            tag_query = tag_query | Q(slug = value)
+            tag_len = tag_len + 1
+        if tag_len == 0 :
+            return Product.objects.filter(is_active=True)
+        self.active_tags = self.all_tags.filter(tag_query)
+        return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
 
 def compute_price(request, product_id):

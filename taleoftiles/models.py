@@ -19,6 +19,21 @@ DATA_TYPE = (
     ('i', 'Integer')
 ) 
 
+class MenuTagManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(
+            in_menu = True, 
+            public = True,)
+        return qs
+
+class CatalogueTagManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().filter(
+            in_catalogue = True, 
+            public = True,
+            )
+        return qs
+
 class Tag(models.Model):
     name    = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -35,6 +50,7 @@ class Tag(models.Model):
     order       = models.PositiveIntegerField(default = 0)
     
     objects     = models.Manager() # The default manager.
+    catalogues   = CatalogueTagManager()
     
     class Meta:
         # Gives the proper plural name for admin
@@ -58,12 +74,10 @@ class Tag(models.Model):
     def all_menu_childs(self):
         return Tag.objects.filter(parent = self,in_menu = True, public = True)
 
-class MenuTagManager(models.Manager):
-    def get_queryset(self):
-        qs = super().get_queryset().filter(
-            in_menu = True, 
-            is_active = True)
-        return qs
+    def all_catalogue_childs(self):
+        return Tag.objects.filter(parent = self,in_catalogue = True, public = True)
+
+
 
 class Publication(models.Model):
     title   = models.CharField(max_length=200, unique = True)
