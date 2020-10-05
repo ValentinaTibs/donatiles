@@ -131,13 +131,13 @@ def add_sample_order(request):
     else:
         query = Q(session_id  = request.session.session_key) 
 
-    the_charts = Sampler.objects.filter( query,completion_status = 's', order__isnull = False )
-    
+    the_charts = Sampler.objects.filter( query,completion_status = 's' )
     # se nessun carrello ha un ordine fai un ordine - 
-    if not the_charts or the_charts.count() <= 0:
+    if not the_charts or the_charts.count() <= 0 or not the_charts.first().order :
         order = Order()
         order.is_sampler = True
         order.save()
+
     else :         
         # altrimenti prendi l'ordine del primo dei carrelli 
         good_chart = the_charts.first()

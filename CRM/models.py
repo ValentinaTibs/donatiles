@@ -294,7 +294,7 @@ class Sample(models.Model):
         return super().save(*args, **kwargs)
     
     def __str__(self):
-        return self.sampler.session_id + ' - ' + self.product.code
+        return self.sampler.session_id 
 
 class Question(models.Model):
     content         = models.TextField()

@@ -2,7 +2,7 @@
 {% load view_extra %}
 {% load static %}
 
-
+{% csrf_token %}
  <div class="overlay-title">
      
     <h4>{% trans 'your-sampler' %}</h4>
@@ -54,10 +54,12 @@ function simpleRemoveFromSampler( pId ) {
         
         url: "{% url 'ajax_del_sample' %}",
         data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
             product_code : pId
         },
         success: function(result) {
             console.log('cool');
+            $("#overlaySamples").html(result);
             // update sampler icon to correct number
         },
         error: function(result) {
@@ -66,5 +68,7 @@ function simpleRemoveFromSampler( pId ) {
         }
     });
 }
+
+
 
 </script>

@@ -145,4 +145,4 @@ db.sqlite3-journal
 .DS_Store
 
 sendgrid.env
-latest.dump
+latest.dump*
