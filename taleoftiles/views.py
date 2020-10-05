@@ -43,7 +43,7 @@ class catalogue(ListView):
 
     model = Product 
     
-    #paginate_by = 20
+    paginate_by = 300
     context_object_name = 'products'
     template_name = 'catalogue.html'
     #2do put here a custom ordering
