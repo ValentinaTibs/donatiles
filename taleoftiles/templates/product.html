@@ -51,7 +51,11 @@
      <div class="product-gallery-container">
     {% for image in product.images.all %}
       <div class="product-gallery-item">
-        <img  src="{{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
+        {% if image.imagefile %} 
+        <img  src=" {{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
+        {% else %}
+        <div> ECCO PROBLEMA</div>
+        {% endif %}
       </div>
       {% endfor %}
       </div>
