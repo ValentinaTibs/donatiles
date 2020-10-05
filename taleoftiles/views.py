@@ -128,7 +128,9 @@ def product(request, product_code, chi_form = None ):
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
     #for all product in the same series that are not support and not itself
-    related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
+    serie = tags = product.get_tag('serie')
+    if serie:
+        related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
     
     chi_form = AddChartForm(request.POST or {'product':product.pk,} ,  None)
     
