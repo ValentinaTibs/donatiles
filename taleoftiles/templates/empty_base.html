@@ -249,21 +249,16 @@
       <a href="" class="btn-link btn-link-arrow">Privacy Policy</a>
       <a href="" class="btn-link btn-link-arrow">Cookie Policy</a>
     </div>
-    <ul class="linkslist">
-      <li><a href="catalogue.html">Mattonelle artigianali</a></li>
-      <li><a href="catalogue.html">Mattonelle effetto legno</a></li>
-      <li><a href="catalogue.html">Mattonelle effetto marmo</a></li>
-      <li><a href="catalogue.html">Mattonelle effetto pietra</a></li>
-      <li><a href="catalogue.html">Mattonelle effetto cemento</a></li>
-    </ul>
-    <ul class="linkslist">
-      <li><a href="catalogue.html">Mattonelle stile urban</a></li>
-      <li><a href="catalogue.html">Mattonelle stile country</a></li>
-      <li><a href="catalogue.html">Mattonelle stile vintage</a></li>
-      <li><a href="catalogue.html">Mattonelle per soggiorno e camera</a></li>
-      <li><a href="catalogue.html">Mattonelle per bagno</a></li>
-      <li><a href="catalogue.html">Mattonelle per cucina</a></li>
-    </ul>
+
+
+    {% for cat in footer_tags %}
+        <ul class="linkslist">
+          {% for child_cat in cat.all_footer_childs %}
+            <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{% trans 'tiles'|title %} {{cat|title}} {{child_cat}} </a></li>
+          {% endfor %}
+          </ul>
+    {% endfor %}
+
     <div>
       <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">
     </div>

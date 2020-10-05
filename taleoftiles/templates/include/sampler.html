@@ -16,13 +16,13 @@
     {% for sample in sampler.all_samples %}
       <div class="sampleslot" style="background-image:url('{{ sample.product.cover.imagefile.url }}')">
 
-        
+        <a href=" {% if sample.product %} {% url 'product' sample.product.code %}  {% endif %} ">
           <div class="sampleslot-name">
             <h5>{{sample.product.serie}}</h5>
             <span>{{sample.product.name}}</span>
           </div>
-        
-        <button class="btn" onClick="removeFromSampler('{{ sample.product.code }}')"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
+        </a>
+        <button class="btn" onClick="simpleRemoveFromSampler('{{ sample.product.code }}')"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
       </div>
     {% endfor %}
     
@@ -45,6 +45,26 @@
 <script>
   function closeSampler(  ) {
     $("#overlaySamples").removeClass('visible');     
+}
+
+
+function simpleRemoveFromSampler( pId ) {
+    $.ajax({
+        type: "POST",
+        
+        url: "{% url 'ajax_del_sample' %}",
+        data: {
+            product_code : pId
+        },
+        success: function(result) {
+            console.log('cool');
+            // update sampler icon to correct number
+        },
+        error: function(result) {
+            console.log('error');
+
+        }
+    });
 }
 
 </script>

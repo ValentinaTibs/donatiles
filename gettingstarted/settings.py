@@ -77,6 +77,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "taleoftiles.core_context.category_menu",
+                "taleoftiles.core_context.footer_menu",
                 "taleoftiles.core_context.user_menu",
             ]
         },

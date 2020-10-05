@@ -14,7 +14,7 @@
     <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg>
     <li>
       {% with serie=product|serie %}
-        <a href="{% url 'catalogue' %}?filter=serie.slug" >{{serie}} </a><br>
+        <a href="{% url 'catalogue' %}?filters={{serie.slug}}" >{{serie}} </a><br>
       {% endwith %}
     </li>
   </ul>

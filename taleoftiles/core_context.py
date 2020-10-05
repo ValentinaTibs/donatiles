@@ -19,6 +19,10 @@ def category_menu(context):
     cats = Tag.objects.filter(public = True, child__in_menu = True).distinct()
     return {'menu_cats': cats} 
 
+def footer_menu(context):
+    tags_cat = Tag.objects.filter(public = True, child__in_footer = True).distinct()
+    return {'footer_tags': tags_cat} 
+
 def user_menu(context):
     query = Q()
 

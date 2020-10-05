@@ -44,6 +44,7 @@ class Tag(models.Model):
     in_menu         = models.BooleanField(default = False)    
     in_home         = models.BooleanField(default = False)    
     in_product_edit = models.BooleanField(default = False)    
+    in_footer       = models.BooleanField(default = False)    
     parent      = models.ForeignKey("self", blank = True, null = True, on_delete=models.SET_NULL, related_name='child' )
 
     data_type   = models.CharField(max_length=2, choices=DATA_TYPE, default='t')
@@ -73,6 +74,9 @@ class Tag(models.Model):
 
     def all_menu_childs(self):
         return Tag.objects.filter(parent = self,in_menu = True, public = True)
+
+    def all_footer_childs(self):
+        return Tag.objects.filter(parent = self,in_footer = True, public = True)
 
     def all_catalogue_childs(self):
         return Tag.objects.filter(parent = self,in_catalogue = True, public = True)
