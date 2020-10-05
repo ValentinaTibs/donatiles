@@ -110,7 +110,7 @@
       </div> -->
     </div>
 
-    <div class="grid grid-catalogue-products" id="grid-catalogue-products">
+    <div class="grid grid-catalogue-products infinite-container" id="grid-catalogue-products">
       {% for product in products %}
         {% include 'productthumb.html' %}
       {% endfor %}
@@ -123,20 +123,29 @@
 
 <input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
 
-
 {% if page_obj.has_next %}
-<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{page_obj.next_page_number}}" ></a>
+<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{page_obj.next_page_number}}&filter={{url_data}}" ></a>
 {% endif %}
 <div class="d-flex justify-content-center" style="display:none;">
     <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>
+<script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
 
 
 <script>
-    
-
+  
 
 $( "#series-select" ).on('focusin', function(){
     $(this).data('val', $(this).val());

@@ -16,12 +16,12 @@
     {% for sample in sampler.all_samples %}
       <div class="sampleslot" style="background-image:url('{{ sample.product.cover.imagefile.url }}')">
 
-        <a href="{% url 'product' sample.product.code %}">
+        
           <div class="sampleslot-name">
             <h5>{{sample.product.serie}}</h5>
             <span>{{sample.product.name}}</span>
           </div>
-        </a>
+        
         <button class="btn" onClick="removeFromSampler('{{ sample.product.code }}')"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
       </div>
     {% endfor %}

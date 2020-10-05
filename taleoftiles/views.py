@@ -33,7 +33,6 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from django.core import serializers
-from django.core.serializers.json import DjangoJSONEncoder
 
 
 from django.views.generic.list import ListView
@@ -43,7 +42,7 @@ class catalogue(ListView):
     url_data = ''
 
     model = Product 
-    #2do put here back pagination
+    
     paginate_by = 20
     context_object_name = 'products'
     template_name = 'catalogue.html'
@@ -99,22 +98,23 @@ class catalogue(ListView):
         return context
     
     def get_queryset(self):
-        
-        self.url_data = self.request.GET.get('filters', '')  
-        self.all_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True, public = True)
-        if not self.url_data :
-            return Product.objects.filter(is_active=True)
+        if self.request.method == 'GET':
+            self.url_data = self.request.GET.get('filters', '')  
+            self.all_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True, public = True)
+            if not self.url_data :
+                return Product.objects.filter(is_active=True)
 
-        tag_query = Q()
-        tag_len = 0
+            tag_query = Q()
+            tag_len = 0
 
-        for value in self.url_data.split('_'):
-            tag_query = tag_query | Q(slug = value)
-            tag_len = tag_len + 1
-        if tag_len == 0 :
-            return Product.objects.filter(is_active=True)
-        self.active_tags = self.all_tags.filter(tag_query)
-        return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+            for value in self.url_data.split('_'):
+                tag_query = tag_query | Q(slug = value)
+                tag_len = tag_len + 1
+            if tag_len == 0 :
+                return Product.objects.filter(is_active=True)
+            
+            self.active_tags =  Tag.objects.filter( tag_query,public=True)
+            return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
 
 def compute_price(request, product_id):
