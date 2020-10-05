@@ -107,12 +107,12 @@ class PublicationAdminSelf(SummernoteModelAdmin):
     summernote_fields = ('content_it','content_de','content_en','content_sv',)
     fields = ('title_it','title_de','title_en','title_sv','content_it','content_de','content_en','content_sv',
         'publish_date','slug')
+    list_display = ('id','title_','created_at','publish_date','slug','author')
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         super().save_model(request, obj, form, change)
 
-    list_display = ('title_', 'slug')
 
     def title_(self, obj):
         if obj.title == '':
@@ -136,7 +136,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     search_fields = ('name', 'code')
     
-    list_display = ('name_',
+    list_display = ('id','name_',
                     'wait_time',
                     'min_ammount',
                     'code',
