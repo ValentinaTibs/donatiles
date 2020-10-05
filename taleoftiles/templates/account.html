@@ -69,8 +69,9 @@
       </div>
       <div class="formrow formrow-multi">
         <div class="formitem">
-          <label for="shippingCity">Città</label>
-          <input type="text" id="shippingCity" value="Magliano Sabina (RI)">
+          {{ shipping_form.city.label_tag }}
+          {{ shipping_form.city }}
+
         </div>
         <div class="formitem formitem-short">
                 {{ shipping_form.CAP.label_tag }}
@@ -78,15 +79,18 @@
         </div>
       </div>
       <div class="formrow">
-        <label for="shippingAddress">Indirizzo di spedizione</label>
-        <input type="text" id="shippingAddress" value="Via di Qua, 32">
+
+          {{ shipping_form.shipping_address.label_tag }}
+          {{ shipping_form.shipping_address }}
+        
       </div>
       <div class="formrow">
-        <label for="shippingPhone">Numero di telefono</label>
-        <input type="tel" id="shippingPhone" value="+39 392 4494104">
+          {{ shipping_form.telephone_num.label_tag }}
+          {{ shipping_form.telephone_num }}
+
       </div>
       <div class="formactions">
-        <input type="submit" class="btn btn-primary" value="Salva">
+        <input type="submit" class="btn btn-primary" value="{% trans 'save' %}">
       </div>
     </form>
 
