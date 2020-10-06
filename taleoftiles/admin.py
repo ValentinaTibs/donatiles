@@ -51,7 +51,7 @@ class PhotoStackedAdmin(admin.StackedInline):
         if db_field.name == "format_tag":
             kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format').order_by('-slug')
         if db_field.name == "finish_tag":
-            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='finish').order_by('-slug')
+            kwargs["queryset"] = Tag.objects.filter(parent__slug='finish').order_by('-slug')
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
@@ -69,6 +69,7 @@ class PriceStackedAdmin(admin.StackedInline):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "size":
             kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
+            
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 class PriceAdmin(admin.ModelAdmin):
