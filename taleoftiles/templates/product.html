@@ -6,7 +6,8 @@
 {% load static %}
 {% block content %}
 
-{% csrf_token %}
+
+
 
 <div class="content product-header">
   <ul class="breadcrumb">
@@ -45,6 +46,7 @@
   </div>
 </div>
 
+
 <div class="content grid grid-product">
 
   <div class="product-gallery">
@@ -52,9 +54,11 @@
     {% for image in product.images.all %}
       <div class="product-gallery-item">
         {% if image.imagefile %} 
-        <img  src=" {{ image.imagefile.url }}" id="sm_image_{{ image.format }}" alt="{{ product.publication.title }}">
+        <img  src=" {{ image.imagefile.url }}" 
+        {% if image.format_tag %} id="sm_image_{{ image.format_tag }}" {% endif %}
+        alt="{{ product.publication.title }}">
         {% else %}
-        <div> ECCO PROBLEMA</div>
+        <div> </div>
         {% endif %}
       </div>
       {% endfor %}
@@ -78,7 +82,8 @@
 
     </div>
 
-
+<!-- <form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST">  -->
+{% csrf_token %}
     <div class="product-addtocartbox">
       <div>
         <div class="row">
@@ -136,8 +141,11 @@
       </div>
 
       {{chi_form.save_it.as_hidden}}
-      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" ><span>{% trans 'calc-price' %} </span></button>
-      <div class="btn btn-primary" id="btnAddToCart" onClick="Javascript:addToCart()"><span>{% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></span></div>
+      {{chi_form.product.as_hidden}}
+      
+      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></button>
+      
+<!-- </form> -->
 
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
@@ -253,10 +261,11 @@
     compute_money();
   }
 
+
+
   window.onload = function() {
     var prev = null;
     var rad = document.getElementsByName('size');
-    console.log(rad.length);
 
     // if none is checked - check the first and add a listner
     var someone_checked = false;
@@ -269,24 +278,32 @@
     if (!someone_checked){
       document.getElementById("id_size_0").checked = true;
     }
+
+      $( ".target" ).change(function() {
+      alert( "Handler for .change() called." );
+    });
+
+    document.getElementById('id_quantity').addEventListener('input', function () {
+        compute_money()
+    });
+
     compute_money()
 
-  //   document.product_ship.addEventListener('submit', function(event){
-  //     event.preventDefault();
-  //     console.log("form submitted!")  // sanity check
-  //     create_post();
-  // });
   };
 
   function addToCart() {
     $.ajax({
       type: "POST",
-          // TODO: fix this url
+ 
       url: "{% url 'product' product.code %}",
       data: {
-          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val()
-          // TODO:
-          // - add quantity, format and finish as parameters here
+          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+          
+          quantity: $( 'input[id="id_quantity"]' ).val(),
+          product : $( 'input[id="id_product"]' ).val(),
+          save_it : $( 'input[name="id_save_it"]' ).val(),
+          size : $( 'input[name="size"]' ).val(),
+          has_frido :$( 'input[id="id_has_frido"]' ).val()
       },
       success: function(result) {
           console.log('ok');
@@ -294,6 +311,7 @@
           // - show notification
           // - update cart
           // - empty form fields
+          $(".cartbtn span").html('<span>GIANNA</span>');
       },
       error: function(result) {
           console.log('error');

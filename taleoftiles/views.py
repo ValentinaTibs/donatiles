@@ -79,7 +79,7 @@ class catalogue(ListView):
             else:
                 active_tags = Tag.objects.filter(tag_query)
                 products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all()
-            
+            #2do move the cataloguegrid into include folder
             return render(request, "cataloguegrid.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
 
     def get_context_data(self, **kwargs):
@@ -133,47 +133,41 @@ def product(request, product_code, chi_form = None ):
         related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
     
     chi_form = AddChartForm(request.POST or {'product':product.pk,} ,  None)
-    
     query = Q()
-    if request.user.is_authenticated:
-        query = Q(user = request.user) 
-    else:
-        if not request.session.exists(request.session.session_key):
-            request.session.create()     
-        query = Q(session_id  = request.session.session_key) 
-
-    try: 
-        chart = Chart.objects.filter( query , completion_status = 's').first()
-    except ObjectDoesNotExist:
-        chart = Chart(session_id  = request.session.session_key)
-        if request.user.is_authenticated:
-            chart.user = request.user
-        chart.save()
-    
+   
     price = 0
     errors = None
-    if request.method == 'POST':
-    
+    if request.is_ajax():
+
         if chi_form.is_valid() and "save_it" in request.POST:
+            if request.user.is_authenticated:
+                query = Q(user = request.user) 
+            else:
+                if not request.session.exists(request.session.session_key):
+                    request.session.create()     
+                query = Q(session_id  = request.session.session_key) 
+
+            try: 
+                chart = Chart.objects.filter( query , completion_status = 's').first()
+            except ObjectDoesNotExist:
+                chart = Chart(session_id  = request.session.session_key)
+                if request.user.is_authenticated:
+                    chart.user = request.user
+                chart.save()
+                
             chart_item = chi_form.save(commit=False)        
             price = chart_item.price()
             chart_item.save_price = chart_item.price()
             chart_item.chart = chart
             chart_item.save()
-                    
-        errors = (chi_form.errors)
 
-    # if request.method == 'POST':
-    #     
-    #     if chi_form.is_valid():
-    #         print("we are valid")
-    #         chart_item = chi_form.save(commit=False)
-    #         if  "save_it" in request.POST:
-    #             chart_item.chart = chart
-    #             chart_item.save()
-    #             print("we didnt saved")
-            
-    
+            # num_ch_i = charts.filter(chart_item__status='ok').aggregate(Count('chart_item'))
+
+            # return {
+            # 'sampler': sampler, 'charts':charts, 'num_ch_i':num_ch_i['chart_item__count'],
+                        
+            # return render(request, "cataloguegrid.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
+
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,

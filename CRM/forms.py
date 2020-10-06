@@ -83,8 +83,6 @@ class AddChartForm(NewChartItemForm):
         cleaned_data = super(AddChartForm, self).clean()
         
 
-    #     return super(AddChartForm, self).clean()
-
 def create_first_pwd():
     return get_random_string(length=9)
 
