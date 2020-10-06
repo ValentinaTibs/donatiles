@@ -223,7 +223,6 @@ class Image(models.Model):
     format_tag  = models.ForeignKey  (Tag,  blank = True, null = True, on_delete=models.SET_NULL, related_name='format_images' )
     finish_tag  = models.ForeignKey  (Tag,  blank = True, null = True, on_delete=models.SET_NULL, related_name='finish_images' )
 
-#    cover       = CoverManager() 
 
     class Meta:
         ordering = ["order"]    

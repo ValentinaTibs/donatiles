@@ -17,6 +17,7 @@ class CustomProductModelForm(forms.ModelForm):
     settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
     styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
     effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect'), required = False)
+    finishes    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='finish'), required = False)
 
     class Meta:
         model = Product
@@ -34,6 +35,7 @@ class CustomProductModelForm(forms.ModelForm):
         settings    = kwargs['instance'].tags.filter(parent__slug='setting')
         styles      = kwargs['instance'].tags.filter(parent__slug='style')
         effects     = kwargs['instance'].tags.filter(parent__slug='effect')
+        finishes    = kwargs['instance'].tags.filter(parent__slug='finish')
         
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
         if serie:
@@ -68,6 +70,13 @@ class CustomProductModelForm(forms.ModelForm):
             for effect in effects:
                 effects_iv.append(effect.pk)
             self.initial['effects'] = effects_iv  
+
+        if finishes:
+            finishes_iv = []
+            for finish in finishes:
+                finishes_iv.append(finish.pk)
+            self.initial['finishes'] = finishes_iv  
+            
         return
 
     def save(self, commit=True):
@@ -104,7 +113,7 @@ class CustomProductModelForm(forms.ModelForm):
         settings = product.tags.filter(parent__slug='setting') 
         for setting in settings:
             product.tags.remove(setting.pk)
-        if self.cleaned_data.get('styles'):
+        if self.cleaned_data.get('settings'):
             for setting in self.cleaned_data.get('settings'):
                     product.tags.add(setting)                                     
 
@@ -125,5 +134,13 @@ class CustomProductModelForm(forms.ModelForm):
             for effect in self.cleaned_data.get('effects'):
                     product.tags.add(effect)
                     
+        finishes = product.tags.filter(parent__slug='finish') 
+    
+        for finish in finishes:
+            product.tags.remove(finish.pk)
+        if self.cleaned_data.get('finishes'):
+            for finish in self.cleaned_data.get('finishes'):
+                    product.tags.add(finish)
+
         return super(CustomProductModelForm, self).save(True)
 
