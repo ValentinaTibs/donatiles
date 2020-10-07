@@ -34,6 +34,7 @@ urlpatterns += i18n_patterns(
 
     path('catalogue/',                  taleoftiles.views.catalogue.as_view(),  name="catalogue"),
     path("product/<slug:product_code>", taleoftiles.views.product,  name="product"),
+    path("compute_price/",              taleoftiles.views.compute_price,  name="compute_price"),
 
     path("add_chart/<slug:product_code>",   CRM.views.add_chart,  name="add_chart"),
     path("del_chart/<int:item_id>",         CRM.views.del_chart,  name="del_chart"),

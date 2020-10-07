@@ -249,6 +249,27 @@
         //document.getElementById('sm_image_'+sel_size).style.display = "none";
       }
     }
+
+    $.ajax({
+      type: "POST",
+ 
+      url: "{% url 'compute_price'  %}",
+      data: {
+          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+          
+          quantity: $( 'input[id="id_quantity"]' ).val(),
+          product : $( 'input[id="id_product"]' ).val(),
+          size : $( 'input[name="size"]' ).val(),
+          has_frido :$( 'input[id="id_has_frido"]' ).val()
+      },
+      success: function(result) {
+          $("#price_catch").html(result['tot_price']);
+      },
+      error: function(result) {
+          console.log('error');
+      }
+    });
+
   }
 
   function add_quantity(){
@@ -291,7 +312,10 @@
 
   };
 
+
   function addToCart() {
+    $( 'input[name="id_save_it"]' ).val("True");
+    console.log($( 'input[name="id_save_it"]' ).val());
     $.ajax({
       type: "POST",
  
@@ -307,10 +331,12 @@
       },
       success: function(result) {
           console.log('ok');
+
           // TODO:
           // - show notification
           // - update cart
           // - empty form fields
+          $("#id_quantity").val();
           $(".cartbtn span").html('<span>GIANNA</span>');
       },
       error: function(result) {

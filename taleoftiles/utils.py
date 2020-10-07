@@ -79,6 +79,10 @@ def min_price(m2_price, m2_box, weight_box):
     return min_cost_m2
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
+    quantity = int(quantity)
+    sm_price = float(sm_price)
+    sm_per_box = float(sm_per_box)
+    weight_box = float(weight_box)
     if has_frido:
         num_boxes = math.ceil((0.10 * quantity + quantity)/sm_per_box)
     else:

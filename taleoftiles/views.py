@@ -29,7 +29,6 @@ def index(request):
         })
 
 
-from django.http import JsonResponse
 from django.shortcuts import render
 
 from django.core import serializers
@@ -116,9 +115,18 @@ class catalogue(ListView):
             self.active_tags =  Tag.objects.filter( tag_query,public=True)
             return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
+from django.http import JsonResponse
+def compute_price(request):
+    
+    product = Product.active.get(pk = request.POST.get('product', None))
+    size = Tag.objects.get(pk = request.POST.get('size', None))
+    quantity = request.POST.get('quantity')
+    price = product.price(size)
 
-def compute_price(request, product_id):
-    return redirect(request.META.get('HTTP_REFERER'))
+    definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
+    
+    data = {'tot_price': definitive_price}
+    return JsonResponse(data, safe=False)   
 
 def product(request, product_code, chi_form = None ):    
     
