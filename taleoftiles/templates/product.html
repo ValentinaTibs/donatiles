@@ -250,6 +250,7 @@
       }
     }
 
+
     $.ajax({
       type: "POST",
  
@@ -259,7 +260,7 @@
           
           quantity: $( 'input[id="id_quantity"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
-          size : $( 'input[name="size"]' ).val(),
+          size : $( 'input[name="size"]:checked' ).val(),
           has_frido :$( 'input[id="id_has_frido"]' ).val()
       },
       success: function(result) {
@@ -314,8 +315,6 @@
 
 
   function addToCart() {
-    $( 'input[name="id_save_it"]' ).val("True");
-    console.log($( 'input[name="id_save_it"]' ).val());
     $.ajax({
       type: "POST",
  
@@ -326,18 +325,17 @@
           quantity: $( 'input[id="id_quantity"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
           save_it : $( 'input[name="id_save_it"]' ).val(),
-          size : $( 'input[name="size"]' ).val(),
+          size : $( 'input[name="size"]:checked' ).val(),
           has_frido :$( 'input[id="id_has_frido"]' ).val()
       },
       success: function(result) {
           console.log('ok');
-
-          // TODO:
-          // - show notification
-          // - update cart
-          // - empty form fields
-          $("#id_quantity").val();
-          $(".cartbtn span").html('<span>GIANNA</span>');
+          var num_chi = Number($(".cartbtn span").html()) +1;
+          $(".cartbtn span").html(num_chi);
+          $("#overlayMenu").html(result['chart']);
+          $("#id_quantity").val('');
+          compute_money();
+          
       },
       error: function(result) {
           console.log('error');
@@ -421,11 +419,7 @@
         r <= 0 || o(+e[--r].dataset.id)
     }),
     o(0),
-    document.querySelectorAll("[data-overlay]").forEach(function(e) {
-        e.addEventListener("click", function(e) {
-            t(e, document.getElementById("overlay" + this.dataset.overlay))
-        })
-    }),
+
     document.querySelectorAll(".overlay-title .btn").forEach(function(e) {
         e.addEventListener("click", function() {
             c(this.parentElement.parentElement)

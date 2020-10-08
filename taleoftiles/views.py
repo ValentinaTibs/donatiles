@@ -116,17 +116,19 @@ class catalogue(ListView):
             return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
 from django.http import JsonResponse
-def compute_price(request):
-    
-    product = Product.active.get(pk = request.POST.get('product', None))
-    size = Tag.objects.get(pk = request.POST.get('size', None))
-    quantity = request.POST.get('quantity')
-    price = product.price(size)
 
-    definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
-    
-    data = {'tot_price': definitive_price}
-    return JsonResponse(data, safe=False)   
+def compute_price(request):
+    quantity = request.POST.get('quantity', None)
+    if quantity and int(quantity) > 0:
+        product = Product.active.get(pk = request.POST.get('product', None))
+        size = Tag.objects.get(pk = request.POST.get('size', None))
+        quantity = request.POST.get('quantity')
+        price = product.price(size)
+        definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
+        
+        data = {'tot_price': definitive_price}
+        return JsonResponse(data, safe=False) 
+    return JsonResponse({})   
 
 def product(request, product_code, chi_form = None ):    
     
@@ -146,8 +148,9 @@ def product(request, product_code, chi_form = None ):
     price = 0
     errors = None
     if request.is_ajax():
-
-        if chi_form.is_valid() and "save_it" in request.POST:
+        
+        if chi_form.is_valid() :
+            
             if request.user.is_authenticated:
                 query = Q(user = request.user) 
             else:
@@ -155,27 +158,25 @@ def product(request, product_code, chi_form = None ):
                     request.session.create()     
                 query = Q(session_id  = request.session.session_key) 
 
-            try: 
-                chart = Chart.objects.filter( query , completion_status = 's').first()
-            except ObjectDoesNotExist:
+            chart = Chart.objects.filter( query , completion_status = 's').first()
+            if not chart:
                 chart = Chart(session_id  = request.session.session_key)
                 if request.user.is_authenticated:
                     chart.user = request.user
                 chart.save()
+                print("saving_chart")
                 
             chart_item = chi_form.save(commit=False)        
-            price = chart_item.price()
             chart_item.save_price = chart_item.price()
             chart_item.chart = chart
             chart_item.save()
 
-            # num_ch_i = charts.filter(chart_item__status='ok').aggregate(Count('chart_item'))
+            return render(request, "include/chart.html", {"charts": chart})
 
-            # return {
-            # 'sampler': sampler, 'charts':charts, 'num_ch_i':num_ch_i['chart_item__count'],
-                        
-            # return render(request, "cataloguegrid.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
-
+        else:
+            print('errors')
+            print(chi_form.errors)
+            
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,

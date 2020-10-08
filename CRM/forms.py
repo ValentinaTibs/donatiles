@@ -65,6 +65,7 @@ class NewChartItemForm(forms.ModelForm):
 
         quantity    = self.cleaned_data.get('quantity')
         product     = self.cleaned_data.get('product')
+
         if quantity < product.min_ammount:
             raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
         else:
