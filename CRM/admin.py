@@ -11,7 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
-    list_display = ('chart','product','status','chart__user')
+    list_display = ('id','chart','product','status','chart__user')
 
     def chart__user(self, obj):
         if obj.chart and obj.chart.user:

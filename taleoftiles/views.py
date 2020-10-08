@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
+from django.core import serializers
+from django.views.generic.list import ListView
+from django.http import JsonResponse
 
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
@@ -28,13 +32,6 @@ def index(request):
         'main_post'     : main_post
         })
 
-
-from django.shortcuts import render
-
-from django.core import serializers
-
-
-from django.views.generic.list import ListView
 
 class catalogue(ListView):
     active_tags = None
@@ -115,7 +112,6 @@ class catalogue(ListView):
             self.active_tags =  Tag.objects.filter( tag_query,public=True)
             return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
 
-from django.http import JsonResponse
 
 def compute_price(request):
     quantity = request.POST.get('quantity', None)
@@ -164,7 +160,6 @@ def product(request, product_code, chi_form = None ):
                 if request.user.is_authenticated:
                     chart.user = request.user
                 chart.save()
-                print("saving_chart")
                 
             chart_item = chi_form.save(commit=False)        
             chart_item.save_price = chart_item.price()
@@ -172,10 +167,9 @@ def product(request, product_code, chi_form = None ):
             chart_item.save()
 
             return render(request, "include/chart.html", {"charts": chart})
-
+        #2do put here rendering of errors
         else:
-            print('errors')
-            print(chi_form.errors)
+            errors = chi_form.errors
             
     return render(request, "product.html",{
         "product":product,

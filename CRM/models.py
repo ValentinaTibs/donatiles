@@ -137,6 +137,7 @@ class Order(models.Model):
                 if not chart.is_paid():
                     return False
         return True    
+    
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):

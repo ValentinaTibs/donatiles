@@ -162,9 +162,9 @@ def add_order(request, is_sample):
     else:
         query = Q(session_id  = request.session.session_key) 
     order = None
-    the_charts = Chart.objects.filter( query,completion_status = 's', order__isnull = False )
+    the_charts = Chart.objects.filter( query,completion_status = 's')
     # se nessun carrello ha un ordine fai un ordine - 
-    if not the_charts or the_charts.count() <= 0:
+    if not the_charts or the_charts.count() <= 0 or not the_charts.first().order:
         order = Order()
         order.save()
     else : 
@@ -327,9 +327,8 @@ def del_chart(request, item_id):
     try: 
         chart_item = ChartItem.objects.get(query, pk = item_id, status = 'ok' )
     except ObjectDoesNotExist:
-        return render(request, "404.html",{"message": "Removing something that wasnt in your sampler " + ChartItem.product,})
-    chart_item.status = 'ru'
-    chart_item.save()
+        return render(request, "404.html",{"message": "Removing something that wasnt in your sampler ",})
+    chart_item.delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
 def add_chart(request, product_code):
