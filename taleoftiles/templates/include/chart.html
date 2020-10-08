@@ -12,7 +12,7 @@
       {% for chart_item in chart.all_items %}
 
         <div class="cartitem">
-          <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('images/products/productthumb.png')"></a>
+          <a href="catalogue-item.html" class="cartitem-thumb" style="background-image:url('{{ chart_item.product.cover.imagefile.url }}')"></a>
           <div class="cartitem-main">
             <div class="cartitem-name">
               <span><strong>{{chart_item.product.serie}}</strong></span>
@@ -30,12 +30,13 @@
 
     {% endfor %}
   {% endfor %}
- 
 
-  <div class="cartitem-total">
+   <!-- <div class="cartitem-total">
     <span>{% trans 'total'|title %}</span>
-    <strong>€ {{chart.price}}</strong>
-  </div>
+    <strong>€ {{chart.total_price}}</strong>
+  </div> -->
+
+
 
   <a href="{% url 'add_order' False %}?prv={{request.get_full_path|urlencode}}" class="btn btn-primary"><span>Procedi con l'ordine</span>
     <svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
