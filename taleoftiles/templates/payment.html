@@ -7,9 +7,10 @@
 {% load static %}
 {% block content %}
 
+<div class="content grid grid-checkout">
 {% if order.is_sampler %}
 
-<div class="content grid grid-checkout">
+
 
   <div>
 
@@ -36,16 +37,16 @@
   <aside>
     <div class="asidebox">
       <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
-      <h4>Hai qualche dubbio?</h4>
+      <h4>{% trans 'any-doubt' %}?</h4>
       <p class="note">Consulta l'<a href="support.html">{% trans 'support' %}</a> oppure scrivici a <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></p>
     </div>
   </aside>
 
-</div>
+
 
 {% else %}
 
-<div class="content grid grid-checkout">
+
 
   <div>
 
@@ -79,13 +80,14 @@
   <aside>
     <div class="asidebox">
       <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
-      <h4>Hai qualche dubbio?</h4>
+      <h4>{% trans 'any-doubt' %}?</h4>
       <p class="note">Consulta l'<a href="support.html">{% trans 'support' %}</a> oppure scrivici a <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></p>
     </div>
   </aside>
 
-</div>
+
 {% endif %}
+</div>
 
 <script>
 // DEMO ONLY
