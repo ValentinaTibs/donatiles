@@ -28,10 +28,24 @@ def duplicate_plain(modeladmin, request, queryset):
     for e in queryset:
         e.pk = None
         e.save()
-            
+
+from django.core.exceptions import ObjectDoesNotExist
+def toggle_handmade(modeladmin, request, queryset):
+    hm = Tag.objects.get(slug='handmade')
+    for product in queryset:
+        try: 
+            handmades_tag = product.tags.get(slug='handmade_button') 
+        except ObjectDoesNotExist:
+            continue
+        product.tags.add(hm.pk)
+        product.tags.remove(handmades_tag.pk)
+        product.save()
+
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
 duplicate_plain.short_description = "Duplicate selected items"
+toggle_handmade.short_description = "Toggle Handmade"
+
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -108,7 +122,7 @@ class PublicationAdminSelf(SummernoteModelAdmin):
     summernote_fields = ('content_it','content_de','content_en','content_sv',)
     fields = ('title_it','title_de','title_en','title_sv','content_it','content_de','content_en','content_sv',
         'publish_date','slug')
-    list_display = ('id','title_','created_at','publish_date','slug','author')
+    list_display = ('title_','id','created_at','publish_date','slug','author')
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
@@ -132,12 +146,13 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product]
+    actions = [duplicate_product,toggle_handmade]
+
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
     search_fields = ('name', 'code')
     
-    list_display = ('id','name_',
+    list_display = ('name_','id',
                     'wait_time',
                     'min_ammount',
                     'code',
