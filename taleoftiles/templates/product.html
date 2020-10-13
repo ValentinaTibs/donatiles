@@ -78,7 +78,15 @@
           {{ choice.tag }}
           <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
       {% endfor %}
-      </ul>
+      
+    {% if chi_form.finish.choices.queryset.all|length %}
+      <h5>{% trans 'finishes' %}</h5>
+        {% for choice in chi_form.finish %}
+            {{ choice.tag }}
+            <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
+        {% endfor %}
+    {% endif %}
+
 
     </div>
 

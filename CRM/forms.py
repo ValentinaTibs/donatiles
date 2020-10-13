@@ -76,14 +76,28 @@ class NewChartItemForm(forms.ModelForm):
 class AddChartForm(NewChartItemForm):
 
     save_it = forms.BooleanField(required=False)
+    finish  = forms.ChoiceField(required=False)
 
     class Meta(NewChartItemForm.Meta):
-        fields = NewChartItemForm.Meta.fields + ('save_it',)
+        fields = NewChartItemForm.Meta.fields + ('save_it','finish')
+
+    def __init__(self, *args, **kwargs):
+        product = args[0].get('product')
+        super(AddChartForm, self).__init__(*args, **kwargs)
+
+        if product:
+            prod_finishes = Tag.objects.filter(parent__parent__slug = 'finish', products__pk = product)
+        else:
+            raise forms.ValidationError(_('Wrong Product'), code='prod-error')
+
+        self.fields['finish'].required = True
+        self.fields['finish'].empty_label = None
+        self.fields['finish'].queryset = prod_finishes
 
     def clean(self):
         cleaned_data = super(AddChartForm, self).clean()
-        
 
+        
 def create_first_pwd():
     return get_random_string(length=9)
 

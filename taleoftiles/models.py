@@ -82,7 +82,6 @@ class Tag(models.Model):
         return Tag.objects.filter(parent = self,in_catalogue = True, public = True)
 
 
-
 class Publication(models.Model):
     title   = models.CharField(max_length=200, unique = True)
     content = models.TextField()

@@ -15,9 +15,11 @@
         <h5>{{ tags.effect.name }}</h5>
         <ul>
            {% for effect in tags.effect.all_catalogue_childs %}
+            {% if effect.data_type == 't' %}
                 <li class=" {% if effect in active_tags  %}
                     selected {% endif %}"  onClick="Javascript:toggleFilter('{{ effect.slug }}')" >
                     <a > {{effect.name}}</a></li>
+              {% endif %}
             {% endfor %}
         </ul>
         <h5>{{ tags.style.name }}</h5>
@@ -64,6 +66,9 @@
         {% endfor %}
 
         </ul>
+        
+
+            
         <div class="checkbox">
           <input type="checkbox" id="filter-sampleable" {% if tags.samplable in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.samplable.slug }}')">
           <label for="filter-sampleable">{{tags.samplable.name}} </label>

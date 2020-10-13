@@ -30,9 +30,7 @@ def filter_tags(queryset, key):
     elems = queryset.filter(parent__slug=key)
     return(elems)
 
-# @register.simple_tag
-# def define(val=None):
-#   return val
+
 import numpy as np
 @register.simple_tag
 def woking_days(days):
@@ -89,7 +87,6 @@ def effects(product):
 @register.inclusion_tag('include/productthumb.html')
 def product_thumb(product):
     return {'product':product}    
-
 
 
 @register.simple_tag(takes_context=True)
