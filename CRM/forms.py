@@ -76,7 +76,7 @@ class NewChartItemForm(forms.ModelForm):
 class AddChartForm(NewChartItemForm):
 
     save_it = forms.BooleanField(required=False)
-    finish  = forms.ChoiceField(required=False)
+    finish  = forms.ModelChoiceField(queryset=Tag.objects.filter(parent__slug = 'finish'), empty_label=None)
 
     class Meta(NewChartItemForm.Meta):
         fields = NewChartItemForm.Meta.fields + ('save_it','finish')
@@ -84,15 +84,15 @@ class AddChartForm(NewChartItemForm):
     def __init__(self, *args, **kwargs):
         product = args[0].get('product')
         super(AddChartForm, self).__init__(*args, **kwargs)
-
+        print(product)
         if product:
-            prod_finishes = Tag.objects.filter(parent__parent__slug = 'finish', products__pk = product)
+            prod_finishes =self.fields['finish'].queryset.filter( products__pk = product)
         else:
             raise forms.ValidationError(_('Wrong Product'), code='prod-error')
+        print(prod_finishes)
 
-        self.fields['finish'].required = True
-        self.fields['finish'].empty_label = None
         self.fields['finish'].queryset = prod_finishes
+        print(self.fields['finish'].queryset)
 
     def clean(self):
         cleaned_data = super(AddChartForm, self).clean()

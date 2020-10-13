@@ -79,11 +79,10 @@
           <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
       {% endfor %}
       
-    {% if chi_form.finish.choices.queryset.all|length %}
+    {% if chi_form.finish %}
       <h5>{% trans 'finishes' %}</h5>
         {% for choice in chi_form.finish %}
-            {{ choice.tag }}
-            <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
+            <label  for="{{ choice.id_for_label }}" id="label_finish_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
         {% endfor %}
     {% endif %}
 
@@ -251,6 +250,7 @@
       document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
       if(formats[i].checked) {
         document.getElementById('selected_format').innerHTML = String(sel_size);
+    
         document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
         document.getElementById('sm_catch').innerHTML = qtyField.val();
         document.getElementById('sm_notification').innerHTML = qtyField.val();
