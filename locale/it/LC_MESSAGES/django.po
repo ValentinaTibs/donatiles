@@ -114,7 +114,7 @@ msgstr "non campionabile"
 
 #: taleoftiles/templates/checkout_base.html:79
 msgid "summary"
-msgstr "Riepilogo del tuo ordine"
+msgstr "Riepilogo"
 
 #: taleoftiles/templates/checkout_base.html:80
 #: taleoftiles/templates/vestibula/support.html:62
@@ -534,30 +534,28 @@ msgid "summary-title"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:16
-#, fuzzy
-#| msgid "catalogue-menu"
 msgid "summary-page-name"
-msgstr "Catalogo"
+msgstr "Riepilogo del tuo ordine"
 
 #: taleoftiles/templates/summary.html:34
 #: taleoftiles/templates/vestibula/summary.html:193
 msgid "summary-sample-title"
-msgstr ""
+msgstr "TaleOfTiles book"
 
 #: taleoftiles/templates/summary.html:35
 #: taleoftiles/templates/vestibula/summary.html:197
 msgid "summary-sample-subtitle"
-msgstr ""
+msgstr "campioni 5cm x 5cm delle mattonelle scelte da te"
 
 #: taleoftiles/templates/summary.html:47
 #: taleoftiles/templates/vestibula/summary.html:214
 msgid "summary-total-title"
-msgstr ""
+msgstr "Totale Ordine"
 
 #: taleoftiles/templates/summary.html:123
 #: taleoftiles/templates/vestibula/summary.html:227
 msgid "summary-insert-shipping"
-msgstr ""
+msgstr "Inserisci i dati per la spedizione"
 
 #: taleoftiles/templates/summary.html:126
 #: taleoftiles/templates/vestibula/summary.html:229
