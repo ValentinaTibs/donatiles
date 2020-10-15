@@ -60,7 +60,7 @@ duplicate_product.short_description = "Duplicate selected items"
 duplicate_plain.short_description = "Duplicate selected items"
 toggle_handmade.short_description = "Toggle Handmade"
 toggle_samplable.short_description = "Toggle SAMPLABLEs"
-toggle_parent_format.short_description = "Add Parent Formats"
+toggle_parent_format.short_description = "Refresh Parent Formats"
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -161,7 +161,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,]
+    actions = [duplicate_product,toggle_parent_format]
 
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
