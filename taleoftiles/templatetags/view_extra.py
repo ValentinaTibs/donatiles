@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter(name = 'starts_with')
 def starts_with(expected,actual):
-    return actual.startswith(expected);
+    return actual.startswith(expected)
 
 
 @register.filter

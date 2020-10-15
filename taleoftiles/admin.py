@@ -41,11 +41,18 @@ def toggle_handmade(modeladmin, request, queryset):
         product.tags.remove(handmades_tag.pk)
         product.save()
 
+def toggle_samplable(modeladmin, request, queryset):
+    hm = Tag.objects.get(slug='samplable')
+    for product in queryset:
+        if product.is_samplable:
+            product.tags.add(hm.pk)
+            product.save()
+
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
 duplicate_plain.short_description = "Duplicate selected items"
 toggle_handmade.short_description = "Toggle Handmade"
-
+toggle_samplable.short_description = "Toggle SAMPLABLEs"
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -146,7 +153,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,]
+    actions = [duplicate_product,toggle_samplable]
 
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
@@ -160,10 +167,16 @@ class ProductAdmin(admin.ModelAdmin):
                     'is_samplable',
                     'available',
                     'is_active',
-                    'tags_',
+                    'formats_',
+                    'colours_',
+                    'setting_',
+                    'style_',
+                    'effect_',
+                    'finish_',
+                    'samplable_',
                     'publication',
                     'support_to',
-                    'techspec'
+                    'techspec',
                     )
     def name_(self, obj):
         if obj.name == " ":
@@ -172,6 +185,21 @@ class ProductAdmin(admin.ModelAdmin):
 
     def tags_(self, obj):
         return "\n".join([p.name + ' * ' for p in obj.tags.all()])    
+    
+    def formats_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__parent__slug='format')])    
+    def colours_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='colour')])    
+    def setting_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='setting')])    
+    def style_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='style')])    
+    def effect_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='effect')])    
+    def finish_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='finish')])    
+    def samplable_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='samplable')])    
 
 
 class TechnicalSpecAdmin(admin.ModelAdmin):

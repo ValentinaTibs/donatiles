@@ -12,13 +12,14 @@ from django.core.exceptions import NON_FIELD_ERRORS
 class CustomProductModelForm(forms.ModelForm):
     
     series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
+    samplable   = forms.BooleanField(required = False)
     colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
     formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format'), required = False)
     settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
     styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
     effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect'), required = False)
     finishes    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='finish'), required = False)
-
+    
     class Meta:
         model = Product
         fields = '__all__'
@@ -36,10 +37,15 @@ class CustomProductModelForm(forms.ModelForm):
         styles      = kwargs['instance'].tags.filter(parent__slug='style')
         effects     = kwargs['instance'].tags.filter(parent__slug='effect')
         finishes    = kwargs['instance'].tags.filter(parent__slug='finish')
+        samplable   = kwargs['instance'].tags.filter(slug='samplable').first()
+
         
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
         if serie:
             self.initial['series'] = serie.pk
+
+        if samplable:
+            self.initial['samplable'] = True
 
         if colours:
             col_iv = []
@@ -82,16 +88,23 @@ class CustomProductModelForm(forms.ModelForm):
     def save(self, commit=True):
 
         product = super(CustomProductModelForm, self).save(False)
-
-        # ---- SERIE UPDATE -----
         if not product.pk:
             super(CustomProductModelForm, self).save(True)
-            
+
+        # ---- SERIE UPDATE -----            
         series = product.tags.filter(parent__slug='serie') 
         for serie in series:
             product.tags.remove(serie.pk)
         if self.cleaned_data.get('series'):
             product.tags.add(self.cleaned_data.get('series')) 
+
+        # ---- SAMPLABLE UPDATE -----   
+        samplables = product.tags.filter(slug='samplable') 
+        samplable_tag = Tag.objects.get(slug='samplable')
+        for samplable in samplables:
+            product.tags.remove(samplable.pk)
+        if self.cleaned_data.get('series'):
+            product.tags.add(samplable_tag.pk)
 
         # ---- colors UPDATE -----
         colours = product.tags.filter(parent__slug='colour') 

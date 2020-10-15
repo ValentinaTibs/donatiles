@@ -80,6 +80,7 @@
       {% endfor %}
       
     {% if chi_form.finish %}
+
       <h5>{% trans 'finishes' %}</h5>
         {% for choice in chi_form.finish %}
             <label  for="{{ choice.id_for_label }}" id="label_finish_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
