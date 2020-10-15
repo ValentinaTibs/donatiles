@@ -41,6 +41,12 @@ def toggle_handmade(modeladmin, request, queryset):
         product.tags.remove(handmades_tag.pk)
         product.save()
 
+def tagga_terracotta(modeladmin, request, queryset):
+    hm = Tag.objects.get(slug='cotto')
+    for product in queryset:
+        product.tags.add(hm.pk)
+        product.save()
+
 def toggle_samplable(modeladmin, request, queryset):
     hm = Tag.objects.get(slug='samplable')
     for product in queryset:
@@ -62,6 +68,7 @@ duplicate_plain.short_description = "Duplicate selected items"
 toggle_handmade.short_description = "Toggle Handmade"
 toggle_samplable.short_description = "Toggle SAMPLABLEs"
 toggle_parent_format.short_description = "Refresh Parent Formats"
+tagga_terracotta.short_description = "Tagga con terracotta"
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -162,7 +169,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,]
+    actions = [duplicate_product,tagga_terracotta]
 
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
