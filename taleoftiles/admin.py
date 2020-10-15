@@ -164,7 +164,6 @@ class ProductAdmin(admin.ModelAdmin):
                     'min_ammount',
                     'code',
                     'is_decor',
-                    'is_samplable',
                     'available',
                     'is_active',
                     'formats_',
@@ -200,7 +199,8 @@ class ProductAdmin(admin.ModelAdmin):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='finish')])    
     def samplable_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='samplable')])    
-
+    def decor_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='decor')])    
 
 class TechnicalSpecAdmin(admin.ModelAdmin):
     model = TechnicalSpec

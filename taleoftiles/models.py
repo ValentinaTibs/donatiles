@@ -138,7 +138,6 @@ class Product(models.Model):
     min_ammount     = models.PositiveIntegerField(default = 5)
     code            = models.CharField(max_length=100,unique=True,)
     is_decor        = models.BooleanField(default = False)
-    is_samplable    = models.BooleanField( default=True, null = True)
     available       = models.BooleanField(default = True)
     is_active       = models.BooleanField(default = True)
     tags            = models.ManyToManyField(Tag, blank= True, related_name='products')
