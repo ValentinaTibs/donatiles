@@ -73,10 +73,19 @@
           <input type="checkbox" id="filter-sampleable" {% if tags.samplable in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.samplable.slug }}')">
           <label for="filter-sampleable">{{tags.samplable.name}} </label>
         </div>
-        <div class="checkbox">
-          <input type="checkbox" id="filter-handmade" {% if tags.handmade in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.handmade.slug }}')">
-          <label for="filter-handmade">{{tags.handmade.name}}</label>
-        </div>
+
+        {% for effect in tags.effect.all_catalogue_childs %}
+          {% if effect.data_type == 'b' %}
+
+              <div class="checkbox">
+                <input type="checkbox" id="filter-handmade" {% if effect in active_tags %} checked {% endif %} 
+                                      onClick="Javascript:toggleFilter('{{ effect.slug }}')">
+                <label for="filter-handmade">{{effect.name}}</label>
+              </div>
+              
+            {% endif %}
+          {% endfor %}
+          
         <h5>{{ tags.serie.name }}</h5>
         <select name="series-select" id="series-select" >
           <option value="all-series">{% trans 'all-series' %}</option>
