@@ -12,7 +12,7 @@ from django.core.exceptions import NON_FIELD_ERRORS
 class CustomProductModelForm(forms.ModelForm):
     
     series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie',public = True), required = False)
-    samplable   = forms.BooleanField(required = False,public = True)
+    samplable   = forms.BooleanField(required = False)
     colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour',public = True), required = False)
     formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format',public = True), required = False)
     settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting',public = True), required = False)
