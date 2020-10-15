@@ -193,18 +193,18 @@
 
 
 	{% for effect in product|effects %}
-    <a href="{% url 'catalogue' %}?filters=effect.slug"  class="tag">{{effect.name}} </a><br>
+    <a href="{% url 'catalogue' %}?filters={{effect.slug}}"  class="tag">{{effect.name}} </a><br>
 	{% endfor %}
 
   {% for colour in product|colour %}
-    <a href="{% url 'catalogue' %}?filters=colour.slug"  class="tag">{{colour.name}} </a><br>
+    <a href="{% url 'catalogue' %}?filters={{colour.slug}}"  class="tag">{{colour.name}} </a><br>
 	{% endfor %}
 
 
   <h5>{% trans 'settings' %}</h5>
 
   {% for style in product|styles %}
-      <a href="{% url 'catalogue'  %}?filter=style.slug"  class="tag">{{style.name}} </a><br>
+      <a href="{% url 'catalogue'  %}?filter={{style.slug}}"  class="tag">{{style.name}} </a><br>
   {% endfor %}
   </div>
 
