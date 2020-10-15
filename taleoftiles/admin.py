@@ -161,7 +161,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,toggle_parent_format]
+    actions = [duplicate_product,]
 
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
