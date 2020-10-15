@@ -11,14 +11,14 @@ from django.core.exceptions import NON_FIELD_ERRORS
 
 class CustomProductModelForm(forms.ModelForm):
     
-    series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie'), required = False)
-    samplable   = forms.BooleanField(required = False)
-    colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour'), required = False)
-    formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format'), required = False)
-    settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting'), required = False)
-    styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style'), required = False)
-    effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect'), required = False)
-    finishes    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='finish'), required = False)
+    series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie',public = True), required = False)
+    samplable   = forms.BooleanField(required = False,public = True)
+    colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour',public = True), required = False)
+    formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format',public = True), required = False)
+    settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting',public = True), required = False)
+    styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style',public = True), required = False)
+    effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect',public = True), required = False)
+    finishes    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='finish',public = True), required = False)
     
     class Meta:
         model = Product
