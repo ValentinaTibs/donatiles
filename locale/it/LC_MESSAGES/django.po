@@ -99,8 +99,6 @@ msgid "blog-page-name"
 msgstr "Tale of Tiles Blog"
 
 #: taleoftiles/templates/catalogue.html:5
-#, fuzzy
-#| msgid "catalogue-menu"
 msgid "catalogue-page-name"
 msgstr "Catalogo"
 

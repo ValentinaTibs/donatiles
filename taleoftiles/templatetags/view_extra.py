@@ -1,6 +1,7 @@
 import datetime
 from django import template
 from django.urls import translate_url
+from taleoftiles.models import Tag
 
 register = template.Library()
 
@@ -39,8 +40,10 @@ def woking_days(days):
 
 @register.simple_tag
 def min_price(obj, min_price, *args):
+    name = (args)[0]
+    the_tag = Tag.objects.get(name = name)
     method = getattr(obj, min_price)
-    return method(*args)
+    return method(the_tag.slug)
     
 @register.filter
 def is_in_sample(sample, product):
