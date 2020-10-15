@@ -51,10 +51,10 @@
         <ul>
 
         {% for format in tags.format.child.all %}
-          <li><a href="">{{format.name}}</a>
-            <button class="btn btn-tree"
-            {% if format in active_tags  %}btn-tree-open{% endif %}
-            ><svg class="icon icon-m">
+          <li class="{% if format in active_tags  %} selected {% endif %}" ><a onClick="Javascript:toggleFilter('{{ format.slug }}')">{{format.name}}</a>
+            <button class="btn btn-tree" 
+            {% if format in active_tags  %}btn-tree-open{% endif %}> 
+            <svg class="icon icon-m">
             <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
             <ul class="openable" style="--tree-height:4.5rem">
             {% for more_format in format.child.all %}

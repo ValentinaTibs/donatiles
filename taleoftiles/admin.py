@@ -48,11 +48,19 @@ def toggle_samplable(modeladmin, request, queryset):
             product.tags.add(hm.pk)
             product.save()
 
+def toggle_parent_format(modeladmin, request, queryset):
+    #format = Tag.objects.get(slug='format')
+    for product in queryset:
+        for format_ in product.formats():
+            product.tags.add(format_.parent)             
+            product.save()
+
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
 duplicate_plain.short_description = "Duplicate selected items"
 toggle_handmade.short_description = "Toggle Handmade"
 toggle_samplable.short_description = "Toggle SAMPLABLEs"
+toggle_parent_format.short_description = "Add Parent Formats"
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -153,7 +161,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,]
+    actions = [duplicate_product,toggle_parent_format]
 
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
@@ -166,6 +174,7 @@ class ProductAdmin(admin.ModelAdmin):
                     'is_decor',
                     'available',
                     'is_active',
+                    'formats_parent_',
                     'formats_',
                     'colours_',
                     'setting_',
@@ -187,6 +196,8 @@ class ProductAdmin(admin.ModelAdmin):
     
     def formats_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__parent__slug='format')])    
+    def formats_parent_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='format')])    
     def colours_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='colour')])    
     def setting_(self, obj):

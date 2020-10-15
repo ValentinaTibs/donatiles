@@ -118,9 +118,11 @@ class CustomProductModelForm(forms.ModelForm):
         formats = product.tags.filter(parent__parent__slug='format') 
         for format_ in formats:
             product.tags.remove(format_.pk)
+            product.tags.remove(format_.parent)
         if self.cleaned_data.get('formats'):
             for format_ in self.cleaned_data.get('formats'):
                     product.tags.add(format_) 
+                    product.tags.add(format_.parent) 
 
         # ---- SETTINGS UPDATE -----
         settings = product.tags.filter(parent__slug='setting') 
