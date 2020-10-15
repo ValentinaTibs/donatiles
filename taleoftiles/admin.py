@@ -48,6 +48,7 @@ def toggle_samplable(modeladmin, request, queryset):
             product.tags.add(hm.pk)
             product.save()
 
+# - not safe -  you should remove it all first and than add it back
 def toggle_parent_format(modeladmin, request, queryset):
     #format = Tag.objects.get(slug='format')
     for product in queryset:
@@ -161,7 +162,7 @@ class CatalogueAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,toggle_parent_format]
+    actions = [duplicate_product,]
 
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
