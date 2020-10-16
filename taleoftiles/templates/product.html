@@ -99,7 +99,10 @@
             <br><span id="selected_format"></span>
             <br>{% trans 'finish' %} <span id="selected_finish">A</span>
           </div>
-          <div><div class="product-figure"><span> €</span>
+          
+          <div>
+            <div class="product-note">{% trans 'starting-from' %}</div>
+            <div class="product-figure"><span> €</span>
 
             {% for choice in chi_form.size %}
             <b style="display:none;" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
