@@ -70,11 +70,21 @@ def max_price(m2_price, m2_box, weight_box):
     return max_cost_m2
 
 def min_price(m2_price, m2_box, weight_box):
+    to_print = False
     min_price =  ech_price[-1]
     weight_min_price = ech_weight[ech_price.index(min_price)]
     num_box = weight_min_price / weight_box
     tot_m2 = num_box * m2_box
     min_price_sm = (min_price + min_price * IVA) / tot_m2
+    if to_print:
+        print("num_box")
+        print(num_box)        
+        print("tot_m2")
+        print(tot_m2)
+        print("min_price_sm")
+        print(min_price_sm)
+        print("min_price_sm + m2_price")
+        print(min_price_sm + m2_price)
     return min_price_sm + m2_price
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
@@ -92,8 +102,6 @@ def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
     if to_print:
         print("has_frido")
         print(has_frido)
-        print("quantity")
-        print(quantity)
         print("sm_price")
         print(sm_price)
         print("sm_per_box")

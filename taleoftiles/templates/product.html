@@ -101,7 +101,7 @@
           </div>
           
           <div>
-            <div class="product-note">{% trans 'starting-from' %}</div>
+            <div class="product-note" style="color: black;">{% trans 'starting-from' %}</div>
             <div class="product-figure"><span> €</span>
 
             {% for choice in chi_form.size %}
@@ -333,7 +333,7 @@
           product : $( 'input[id="id_product"]' ).val(),
           save_it : $( 'input[name="id_save_it"]' ).val(),
           size : $( 'input[name="size"]:checked' ).val(),
-          has_frido :$( 'input[id="id_has_frido"]' ).val()
+          has_frido :$('#id_has_frido').prop('checked')
       },
       success: function(result) {
           console.log('ok');
