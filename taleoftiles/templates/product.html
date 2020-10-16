@@ -259,25 +259,19 @@
       }
     }
 
-
     $.ajax({
       type: "POST",
  
       url: "{% url 'compute_price'  %}",
       data: {
           csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-          
           quantity: $( 'input[id="id_quantity"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
           size : $( 'input[name="size"]:checked' ).val(),
-          has_frido :$( 'input[id="id_has_frido"]' ).val()
+          has_frido :$('#id_has_frido').prop('checked')
       },
-      success: function(result) {
-          $("#price_catch").html(result['tot_price']);
-      },
-      error: function(result) {
-          console.log('error');
-      }
+      success:  function(result) { $("#price_catch").html(result['tot_price']); },
+      error:    function(result) { console.log('error'); }
     });
 
   }
@@ -310,12 +304,13 @@
       document.getElementById("id_size_0").checked = true;
     }
 
-      $( ".target" ).change(function() {
-      alert( "Handler for .change() called." );
+    document.getElementById('id_quantity').addEventListener('input', function () {
+        compute_money();
     });
 
-    document.getElementById('id_quantity').addEventListener('input', function () {
-        compute_money()
+
+    document.getElementById('id_has_frido').addEventListener('change', function () {
+        compute_money();
     });
 
     compute_money()

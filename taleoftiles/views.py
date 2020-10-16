@@ -120,6 +120,7 @@ def compute_price(request):
         size = Tag.objects.get(pk = request.POST.get('size', None))
         quantity = request.POST.get('quantity')
         price = product.price(size)
+        
         definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
         
         data = {'tot_price': definitive_price}

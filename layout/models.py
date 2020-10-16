@@ -123,36 +123,24 @@ class MailTemplate(models.Model):
 
 
     def send_password_reset(self,user):
-        email_template_name = "password/password_reset_email.txt"
+        email_template_name = "email/password_reset_email.txt"
         c = {
                 "email":user.email,
-                'domain':'https://www.taleoftiles.com',
+                'domain':'www.taleoftiles.com',
                 'site_name': 'TaleOfTiles',
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,
                 'token': default_token_generator.make_token(user),
-                'protocol': 'http',
                 }
         email = render_to_string(email_template_name, c)
 
-        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTile tech'),
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTile'),
                 to_emails=To(user.email, user.email),
-                subject=Subject("Password Reset Requested"),
-                plain_text_content=PlainTextContent('and easy to do anywhere, even with Python'),
-                html_content=HtmlContent('email'))
+                subject=Subject("Password Reset"),
+                html_content=HtmlContent(email))
 
-        try:
-            print(json.dumps(message.get(), sort_keys=True, indent=4))
-            return message.get()
-
-        except SendGridException as e:
-            print(e.message)
-
-        sendgrid_client = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        response = sendgrid_client.send(message=mock_personalization)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
 
 
     def send(self,email_rec,pwd):

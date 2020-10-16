@@ -79,18 +79,42 @@ def min_price(m2_price, m2_box, weight_box):
     return min_cost_m2
 
 def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
+    to_print = False
     quantity = int(quantity)
     sm_price = float(sm_price)
     sm_per_box = float(sm_per_box)
     weight_box = float(weight_box)
-    if has_frido:
+
+    if has_frido == 'true':
         num_boxes = math.ceil((0.10 * quantity + quantity)/sm_per_box)
     else:
         num_boxes = math.ceil(quantity /  sm_per_box)
+
+    if to_print:
+        print("has_frido")
+        print(has_frido)
+        print("quantity")
+        print(quantity)
+        print("sm_price")
+        print(sm_price)
+        print("sm_per_box")
+        print(sm_per_box)
+        print("weight_box")
+        print(weight_box)
+        print("num_boxes")
+        print(num_boxes)
+                
     tot_price_shipping = 0
     tot_quantity    = sm_per_box * num_boxes
     residual_weight = weight_box * num_boxes
     tot_weight      = weight_box * num_boxes
+    if to_print:
+        print("tot_quantity")
+        print(tot_quantity)
+        print("residual_weight")
+        print(residual_weight)
+        print("tot_weight")
+        print(tot_weight)
     while residual_weight > 0 :
         min_val_weight = next((x for x in ech_weight if x > residual_weight), ech_weight[len(ech_weight)-1])
         idx_min = ech_weight.index(min_val_weight)
