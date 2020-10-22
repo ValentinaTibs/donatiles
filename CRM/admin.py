@@ -29,6 +29,7 @@ class OrderAdmin(admin.ModelAdmin):
     #inlines = ('inte',)
 
 class ShippingAdmin(admin.ModelAdmin):
+    list_display = ("user","email","fullname","country","city","CAP","shipping_address","telephone_num","is_active")
     model = Shipping
 
 class ChartItemStackedAdmin(admin.StackedInline):

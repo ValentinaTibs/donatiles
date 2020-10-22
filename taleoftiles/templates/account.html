@@ -15,7 +15,8 @@
     {% if user.is_authenticated %}
         <div class="accounttitle-actions"> <a href="{% url 'logout' %}?next=/" class="btn-link btn-link-arrow"> Logout </a></div>
     {% endif %}
-    <h1>Ciao <strong>{{ profile.name }}</strong></h1>
+    
+    <h1>Ciao <strong>{{ profile.user.email }}</strong></h1>
   </div>
 </div>
 
@@ -91,27 +92,14 @@
           {{ shipping_form.telephone_num }}
 
       </div>
+          {{ shipping_form.email.as_hidden }}    
+
       <div class="formactions">
         <input type="submit" class="btn btn-primary" value="{% trans 'save' %}">
       </div>
     </form>
 
-    <h2>{% trans 'login-data' %}</h2>
-
-    <form action="">
-      <div class="formrow">
-        <label for="userEmail">Email</label>
-        <input type="email" id="userEmail" value="zen@zenoid.it">
-      </div>
-      <div class="formrow">
-        <label for="userPassword">Password</label>
-        <input type="password" id="userPassword" value="password">
-      </div>
-      <div class="formactions">
-        <input type="submit" class="btn btn-primary" value="Salva">
-      </div>
-    </form>
-
+  
   </div>
 
 </div>

@@ -20,18 +20,20 @@ def account(request):
         profile = Profile.objects.get(user = request.user )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "There is no user for such profile " })
-   
+
     try:
         prev_data = Shipping.objects.get( user = profile)
     except ObjectDoesNotExist:
         prev_data = Shipping(email = request.user.email )
     shipping_form = ShippingForm(instance=prev_data)
+    
     if request.method == 'POST':
         shipping_form = ShippingForm(request.POST, instance=prev_data)
         
         if shipping_form.is_valid():
             new_shipping = shipping_form.save()
-        
+            new_shipping.user = profile
+                
     return render(request, "account.html", {'profile':profile,'shipping_form':shipping_form})
 
 def summary(request, id_ ):
@@ -115,6 +117,9 @@ def shipping(request, id_):
                 da_user = Profile( user = new_user)        
                 result = da_user.save()                
                 login(request, new_user)
+
+                new_shipping.user = da_user
+                new_shipping.save()
                         
             order.final_payment = order.total()
             #order.shipping = new_shipping
