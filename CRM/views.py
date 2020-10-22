@@ -12,6 +12,7 @@ from django.utils.crypto import get_random_string
 
 from CRM.forms import RegisterForm,ShippingForm,NewChartItemForm
 
+from django.http import JsonResponse
 from django.db.models import Q 
 
 #@login_required(redirect_field_name='my_redirect_field')
@@ -321,7 +322,9 @@ def ajax_add_sample(request, ):
                 sampler.user = request.user
             sampler.save()
         if (sampler.all_samples().count() >= 4):
-            return render(request, "include/sampler.html", {"all_samples": sampler,'user':request.user })
+            response = JsonResponse({"error": "Full Sampler"})
+            response.status_code = 403 # To announce that the user isn't allowed to publish
+            return response
 
         #avoiding double insertion
         try:

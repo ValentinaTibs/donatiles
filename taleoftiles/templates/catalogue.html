@@ -36,7 +36,6 @@ function toggleFilter( tagSlug ) {
 
 
 function addToSampler( pId ) {
-    
 
     $.ajax({
         type: "POST",
@@ -47,6 +46,7 @@ function addToSampler( pId ) {
             product_code : pId
         },
         success: function(result) {
+            console.log('ok');
             $("#overlaySamples").html(result);
             $("#overlaySamples").addClass('visible');
             $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-remove' %}");        
