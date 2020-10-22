@@ -1,21 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: taleoftiles\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-22 12:59+0000\n"
-"PO-Revision-Date: 2020-10-22 14:43\n"
-"Last-Translator: \n"
-"Language-Team: German, Austria\n"
-"Language: de_AT\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: taleoftiles\n"
-"X-Crowdin-Project-ID: 425794\n"
-"X-Crowdin-Language: de-AT\n"
-"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -60,22 +61,18 @@ msgid "orders"
 msgstr ""
 
 #: taleoftiles/templates/account.html:30
-#| msgid "samples"
 msgid "sampler"
 msgstr ""
 
 #: taleoftiles/templates/account.html:31 taleoftiles/templates/order.html:120
-#| msgid "order-total"
 msgid "order-status"
 msgstr ""
 
 #: taleoftiles/templates/account.html:32
-#| msgid "shipping"
 msgid "sent-date"
 msgstr ""
 
 #: taleoftiles/templates/account.html:60
-#| msgid "shipping"
 msgid "shipping-data"
 msgstr ""
 
@@ -117,7 +114,6 @@ msgid "products"
 msgstr ""
 
 #: taleoftiles/templates/cataloguegrid.html:132
-#| msgid "order for"
 msgid "order-for"
 msgstr ""
 
@@ -214,7 +210,6 @@ msgid "title-renovate-home"
 msgstr ""
 
 #: taleoftiles/templates/home.html:68
-#| msgid "title-renovate-home"
 msgid "subtitle-renovate-home"
 msgstr ""
 
@@ -317,12 +312,10 @@ msgid "register-login-claim"
 msgstr ""
 
 #: taleoftiles/templates/order.html:6
-#| msgid "catalogue-menu"
 msgid "order-page-name"
 msgstr ""
 
 #: taleoftiles/templates/order.html:18
-#| msgid "orders"
 msgid "back-to-orders"
 msgstr ""
 
@@ -365,17 +358,14 @@ msgid "create-at"
 msgstr ""
 
 #: taleoftiles/templates/order.html:111
-#| msgid "shipping"
 msgid "shipping-date"
 msgstr ""
 
 #: taleoftiles/templates/order.html:113
-#| msgid "shippings"
 msgid "shipping-address"
 msgstr ""
 
 #: taleoftiles/templates/order.html:122
-#| msgid "order-total"
 msgid "order-tracking"
 msgstr ""
 
@@ -448,12 +438,13 @@ msgid "subject"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:74
-#| msgid "login-data"
 msgid "print-data"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:85
-msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+msgid ""
+" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
+"com</a>  consult-support"
 msgstr ""
 
 #: taleoftiles/templates/post.html:6
@@ -508,7 +499,6 @@ msgid "min"
 msgstr ""
 
 #: taleoftiles/templates/product.html:145
-#| msgid "faq-order-sfrido"
 msgid "include-sfrido"
 msgstr ""
 
@@ -518,7 +508,6 @@ msgid "add-chart-button"
 msgstr ""
 
 #: taleoftiles/templates/product.html:162
-#| msgid "shipping"
 msgid "free-shipping"
 msgstr ""
 
@@ -571,7 +560,6 @@ msgid "save-time"
 msgstr ""
 
 #: taleoftiles/templates/shipping.html:80
-#| msgid "login-data"
 msgid "login-call-to-action"
 msgstr ""
 
@@ -606,12 +594,10 @@ msgid "this-product-has-frido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:101
-#| msgid "shippings"
 msgid "shipping-cost"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:102
-#| msgid "shipping"
 msgid "shipping-included"
 msgstr ""
 
@@ -626,7 +612,6 @@ msgid "summary-longtext"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:129
-#| msgid "faq-order-sfrido"
 msgid "consider-sfrido"
 msgstr ""
 
@@ -958,3 +943,11 @@ msgstr ""
 msgid "write-us-support"
 msgstr ""
 
+#~ msgid "unique_id"
+#~ msgstr "STATIC DE"
+
+#~ msgid "Sign Up"
+#~ msgstr "SIGNUP DE"
+
+#~ msgid "POCCOZIO"
+#~ msgstr "LAZYDE"
