@@ -1,16 +1,16 @@
-#: CRM/forms.py:56
+#: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
 msgstr "Wrong Product"
 
-#: CRM/forms.py:70
+#: CRM/forms.py:69
 msgid "Not Enought"
 msgstr "Not Enought"
 
-#: CRM/forms.py:107
+#: CRM/forms.py:118
 msgid "Invalid email"
 msgstr "Invalid email"
 
-#: CRM/forms.py:111
+#: CRM/forms.py:122
 msgid "Duplicated email"
 msgstr "Duplicated email"
 
@@ -35,42 +35,42 @@ msgstr "Deutch"
 msgid "account-page-name"
 msgstr "Your account "
 
-#: taleoftiles/templates/account.html:24 taleoftiles/templates/support.html:35
+#: taleoftiles/templates/account.html:26 taleoftiles/templates/support.html:35
 #: taleoftiles/templates/support.html:111
 #, fuzzy
 #| msgid "order"
 msgid "orders"
 msgstr "order"
 
-#: taleoftiles/templates/account.html:28
+#: taleoftiles/templates/account.html:30
 #, fuzzy
 #| msgid "summary-shipping-title"
 msgid "sampler"
 msgstr "Shipping"
 
-#: taleoftiles/templates/account.html:29 taleoftiles/templates/order.html:119
+#: taleoftiles/templates/account.html:31 taleoftiles/templates/order.html:120
 #, fuzzy
 #| msgid "order"
 msgid "order-status"
 msgstr "order"
 
-#: taleoftiles/templates/account.html:30
+#: taleoftiles/templates/account.html:32
 #, fuzzy
 #| msgid "summary-shipping-title"
 msgid "sent-date"
 msgstr "Shipping"
 
-#: taleoftiles/templates/account.html:58
+#: taleoftiles/templates/account.html:60
 #, fuzzy
 #| msgid "summary-shipping-title"
 msgid "shipping-data"
 msgstr "Shipping"
 
-#: taleoftiles/templates/account.html:93
+#: taleoftiles/templates/account.html:95
 msgid "save"
 msgstr ""
 
-#: taleoftiles/templates/account.html:97
+#: taleoftiles/templates/account.html:99
 msgid "login-data"
 msgstr "Login"
 
@@ -90,22 +90,22 @@ msgstr "Catalogue"
 msgid "filters"
 msgstr ""
 
-#: taleoftiles/templates/cataloguegrid.html:77
+#: taleoftiles/templates/cataloguegrid.html:103
 msgid "all-series"
 msgstr ""
 
-#: taleoftiles/templates/cataloguegrid.html:100
+#: taleoftiles/templates/cataloguegrid.html:126
 #: taleoftiles/templates/product.html:14
 msgid "all-products"
 msgstr ""
 
-#: taleoftiles/templates/cataloguegrid.html:103
+#: taleoftiles/templates/cataloguegrid.html:129
 #: taleoftiles/templates/support.html:33 taleoftiles/templates/support.html:44
 #: taleoftiles/templates/vestibula/support.html:32
 msgid "products"
 msgstr "products"
 
-#: taleoftiles/templates/cataloguegrid.html:106
+#: taleoftiles/templates/cataloguegrid.html:132
 #, fuzzy
 #| msgid "order"
 msgid "order-for"
@@ -127,10 +127,15 @@ msgstr "Shipping"
 msgid "payment"
 msgstr "Payment"
 
+#: taleoftiles/templates/checkout_base.html:127
+#: taleoftiles/templates/empty_base.html:261
+msgid "tiles"
+msgstr ""
+
 #: taleoftiles/templates/empty_base.html:53
 #: taleoftiles/templates/empty_base.html:186
-#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:84
-#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
+#: taleoftiles/templates/payment.html:41 taleoftiles/templates/support.html:5
+#: taleoftiles/templates/support.html:13
 #: taleoftiles/templates/vestibula/empty_base.html:37
 msgid "support"
 msgstr "Support"
@@ -172,10 +177,6 @@ msgstr ""
 
 #: taleoftiles/templates/empty_base.html:228
 msgid "open-chart"
-msgstr ""
-
-#: taleoftiles/templates/empty_base.html:257
-msgid "tiles"
 msgstr ""
 
 #: taleoftiles/templates/home.html:5
@@ -276,7 +277,7 @@ msgid " chart-empty-claim "
 msgstr "Your chart is empty"
 
 #: taleoftiles/templates/include/login.html:10
-#: taleoftiles/templates/shipping.html:75
+#: taleoftiles/templates/shipping.html:79
 msgid "already-registered"
 msgstr "Already Registered?"
 
@@ -336,7 +337,7 @@ msgstr "order"
 msgid "order"
 msgstr "order"
 
-#: taleoftiles/templates/order.html:29 taleoftiles/templates/order.html:63
+#: taleoftiles/templates/order.html:29 taleoftiles/templates/order.html:60
 #: taleoftiles/templates/summary.html:23
 #: taleoftiles/templates/vestibula/summary.html:152
 msgid "price"
@@ -352,34 +353,38 @@ msgstr ""
 msgid "summary-sample-subtitle"
 msgstr ""
 
-#: taleoftiles/templates/order.html:62
+#: taleoftiles/templates/order.html:59
 #: taleoftiles/templates/vestibula/summary.html:151
 msgid "quantity"
 msgstr "Quantity"
 
-#: taleoftiles/templates/order.html:74 taleoftiles/templates/summary.html:78
+#: taleoftiles/templates/order.html:75 taleoftiles/templates/summary.html:78
 msgid "boxes"
 msgstr "Boxes"
 
-#: taleoftiles/templates/order.html:94 taleoftiles/templates/summary.html:110
+#: taleoftiles/templates/order.html:95 taleoftiles/templates/summary.html:111
 #, fuzzy
 #| msgid "order"
 msgid "order-total"
 msgstr "order"
 
-#: taleoftiles/templates/order.html:110
+#: taleoftiles/templates/order.html:108
+msgid "create-at"
+msgstr ""
+
+#: taleoftiles/templates/order.html:111
 #, fuzzy
 #| msgid "summary-shipping-title"
 msgid "shipping-date"
 msgstr "Shipping"
 
-#: taleoftiles/templates/order.html:112
+#: taleoftiles/templates/order.html:113
 #, fuzzy
 #| msgid "summary-shipping-title"
 msgid "shipping-address"
 msgstr "Shipping"
 
-#: taleoftiles/templates/order.html:121
+#: taleoftiles/templates/order.html:122
 #, fuzzy
 #| msgid "order"
 msgid "order-tracking"
@@ -467,6 +472,18 @@ msgstr "BPPPPPPPP"
 msgid "subject"
 msgstr ""
 
+#: taleoftiles/templates/payment.html:74
+#, fuzzy
+#| msgid "login-data"
+msgid "print-data"
+msgstr "Login"
+
+#: taleoftiles/templates/payment.html:85
+msgid ""
+" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
+"com</a>  consult-support"
+msgstr ""
+
 #: taleoftiles/templates/post.html:6
 #: taleoftiles/templates/vestibula/post.html:6
 msgid "the_blog"
@@ -500,49 +517,61 @@ msgstr ""
 msgid "formats"
 msgstr ""
 
-#: taleoftiles/templates/product.html:90
+#: taleoftiles/templates/product.html:84
+msgid "finishes"
+msgstr ""
+
+#: taleoftiles/templates/product.html:98
 msgid "code"
 msgstr ""
 
-#: taleoftiles/templates/product.html:92
-msgid "finish"
+#: taleoftiles/templates/product.html:104
+msgid "starting-from"
 msgstr ""
 
-#: taleoftiles/templates/product.html:110
+#: taleoftiles/templates/product.html:120
+msgid "superficie-da-rivestire"
+msgstr ""
+
+#: taleoftiles/templates/product.html:120
 msgid "min"
 msgstr ""
 
-#: taleoftiles/templates/product.html:135
+#: taleoftiles/templates/product.html:145
 #, fuzzy
 #| msgid "order"
 msgid "include-sfrido"
 msgstr "order"
 
-#: taleoftiles/templates/product.html:146
+#: taleoftiles/templates/product.html:156
 #: taleoftiles/templates/vestibula/product.html:119
 msgid "add-chart-button"
 msgstr ""
 
-#: taleoftiles/templates/product.html:152
+#: taleoftiles/templates/product.html:162
 #, fuzzy
 #| msgid "summary-shipping-title"
 msgid "free-shipping"
 msgstr "Shipping"
 
-#: taleoftiles/templates/product.html:178
+#: taleoftiles/templates/product.html:163
+msgid "days"
+msgstr ""
+
+#: taleoftiles/templates/product.html:188
 msgid "download-tech-spech"
 msgstr "Technical Specifications [PDF]"
 
-#: taleoftiles/templates/product.html:196
+#: taleoftiles/templates/product.html:206
 msgid "settings"
 msgstr ""
 
-#: taleoftiles/templates/product.html:208
+#: taleoftiles/templates/product.html:218
 #: taleoftiles/templates/vestibula/product.html:58
 msgid "product-support"
 msgstr ""
 
-#: taleoftiles/templates/product.html:223
+#: taleoftiles/templates/product.html:233
 #: taleoftiles/templates/vestibula/product.html:64
 msgid "product-same-serie"
 msgstr ""
@@ -562,9 +591,35 @@ msgstr "Shipping"
 msgid "checkout-back"
 msgstr ""
 
-#: taleoftiles/templates/shipping.html:70
+#: taleoftiles/templates/shipping.html:23
+msgid "all-field-compulsory"
+msgstr ""
+
+#: taleoftiles/templates/shipping.html:74
 #: taleoftiles/templates/vestibula/shipping.html:23
 msgid "shipping-insert-order"
+msgstr ""
+
+#: taleoftiles/templates/shipping.html:80
+msgid "save-time"
+msgstr ""
+
+#: taleoftiles/templates/shipping.html:80
+#, fuzzy
+#| msgid "login-data"
+msgid "login-call-to-action"
+msgstr "Login"
+
+#: taleoftiles/templates/shipping.html:80
+msgid "login-call-to-action-2"
+msgstr ""
+
+#: taleoftiles/templates/shipping.html:84
+msgid "island-and-cap-title"
+msgstr ""
+
+#: taleoftiles/templates/shipping.html:85
+msgid "island-and-cap-text"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:7
@@ -583,14 +638,41 @@ msgstr "IBAN"
 msgid "summary-total-title"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:123
+#: taleoftiles/templates/summary.html:83
+msgid "this-product-has-frido"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:101
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "shipping-cost"
+msgstr "Shipping"
+
+#: taleoftiles/templates/summary.html:102
+#, fuzzy
+#| msgid "summary-shipping-title"
+msgid "shipping-included"
+msgstr "Shipping"
+
+#: taleoftiles/templates/summary.html:124
 #: taleoftiles/templates/vestibula/summary.html:227
 msgid "summary-insert-shipping"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:126
+#: taleoftiles/templates/summary.html:127
 #: taleoftiles/templates/vestibula/summary.html:229
 msgid "summary-longtext"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:129
+#, fuzzy
+#| msgid "order"
+msgid "consider-sfrido"
+msgstr "order"
+
+#: taleoftiles/templates/summary.html:131
+#, python-format
+msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/support.html:15
