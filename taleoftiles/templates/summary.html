@@ -77,11 +77,7 @@
         <div class="cartrecap-qty">
           <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
           <div class="input-qty">
-            <input type="number" value="{{chart_item.quantity}}" min="10" max="1000" step="0.01">
-            <div class="product-qtybtns">
-              <button class="btn"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg></button><span class="product-note">m&sup2;</span><button class="btn">
-				  <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg></button>
-            </div>
+            {{chart_item.quantity}}m&sup2;
           </div>
         </div>
         <div class="cartrecap-price">

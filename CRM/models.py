@@ -199,9 +199,11 @@ class ChartItem(models.Model):
     #saved_price = models.PositiveIntegerField( )       
     has_frido   = models.BooleanField(default = True)
 
+    boxes       = models.PositiveIntegerField( default=1,null=True, blank = True, )       
     status      = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
+    
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
