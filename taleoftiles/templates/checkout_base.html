@@ -103,15 +103,37 @@
 
 </header>
 {% block content %} {% endblock %}
-<hr/>
+
 <!--============================
 =            Footer            =
 =============================-->
 
-<footer class="footer">
-  
-</footer>
+<footer>
+  <div class="content grid grid4">
+    <div>
+      <p><strong>Tale of Tiles s.r.l.</strong><br>Via dei Gradini, 54<br>02043 Forano<br>Rieti<br>P.IVA 01211350572</p>
 
+      <a href="https://www.iubenda.com/privacy-policy/95217540" class="iubenda-white iubenda-embed btn-link btn-link-arrow" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+      <a href="https://www.iubenda.com/termini-e-condizioni/95217540" class="iubenda-white iubenda-embed btn-link btn-link-arrow" title="Termini e Condizioni ">Termini e Condizioni</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+
+    </div>
+
+
+    {% for cat in footer_tags %}
+      
+        <ul class="  linkslist ">
+
+          {% for child_cat in cat.all_footer_childs %}
+            <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{% trans 'tiles'|title %} {{cat|title}} {{child_cat}} </a></li>
+          {% endfor %}
+          </ul>
+    {% endfor %}
+
+    <div>
+      <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">
+    </div>
+   </div>
+</footer>
 <script src="{% static 'js/scripts.js' %}"></script>
 
 </body>

@@ -11,8 +11,10 @@
 
 <div class="block block-coldbg accounttitle">
   <div class="content">
-    <div class="accounttitle-actions">
-      <a href="{% url 'logout' %}?next=/" class="btn-link btn-link-arrow"> Logout </a></div>
+
+    {% if user.is_authenticated %}
+        <div class="accounttitle-actions"> <a href="{% url 'logout' %}?next=/" class="btn-link btn-link-arrow"> Logout </a></div>
+    {% endif %}
     <h1>Ciao <strong>{{ profile.name }}</strong></h1>
   </div>
 </div>

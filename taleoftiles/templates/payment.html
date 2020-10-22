@@ -71,7 +71,7 @@
         <h2>{% trans 'summary-accountholder' %}</h2>
         <h5>{% trans 'subject' %}</h5>
         <h2>{% trans 'order' %} {{order.internal_tracking_id}}</h2>
-        <button class="btn btn-secondary"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>Stampa questi dati</span></button>
+        <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
       </div>
     </div>
 
@@ -81,7 +81,10 @@
     <div class="asidebox">
       <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
       <h4>{% trans 'any-doubt' %}?</h4>
-      <p class="note">Consulta l'<a href="support.html">{% trans 'support' %}</a> oppure scrivici a <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></p>
+      <p class="note">
+        {% blocktrans %} consult-support <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a>  consult-support{% endblocktrans %}  
+        </p>
+      
     </div>
   </aside>
 
@@ -92,6 +95,9 @@
 <script>
 // DEMO ONLY
 document.querySelector( '.nav-primary > ul > li:nth-child(3)' ).classList.add( 'selected' );
+function printPage(){
+  window.print();
+}
 </script>
 
 {% endblock %}

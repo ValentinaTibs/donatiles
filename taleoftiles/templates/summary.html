@@ -68,7 +68,7 @@
 	{% for chart in order.charts.all %}
 	{% for chart_item in chart.chart_item.all %}
 		<div class="cartrecap-item">
-        <div class="cartrecap-thumb" style="background-image:url('images/products/productthumb.png')"></div>
+        <div class="cartrecap-thumb" style="background-image:url('{{chart_item.product.cover.imagefile.url}}')"></div>
         <div class="cartrecap-main">
           <h5>{{chart_item.product.serie}}</h5>
           <h4>{{chart_item.product.name}}</h4>
@@ -78,6 +78,11 @@
           <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
           <div class="input-qty">
             {{chart_item.quantity}}m&sup2;
+			{% if chart_item.has_frido %}
+            <div class="product-qtybtns">
+				<span class="product-note">{% trans 'this-product-has-frido' %}</span>
+            </div>
+			{% endif %}
           </div>
         </div>
         <div class="cartrecap-price">
@@ -93,8 +98,8 @@
 	</div>
 	     <div class="cartrecap-item">
         <div class="cartrecap-main">
-          <h4>Spese di spedizione</h4>
-          <p class="note">Per ogni tuo acquisto su Tale Of Tiles le spese di spedizione in tutta Europa sono sempre incluse</p>
+          <h4>{% trans 'shipping-cost' %}</h4>
+          <p class="note">{% trans 'shipping-included' %}</p>
         </div>
         <div class="cartrecap-price">
           <span class="product-figure">€ 0</span>
@@ -121,8 +126,9 @@
 	</a>
 	<p class="note">{% trans 'summary-longtext' %}	</p>
 	<div class="asidebox">
-	<h4>Considera lo sfrido</h4>
-	<p class="note">Ti consigliamo di considerare sempre il <strong>10% in più</strong> rispetto alla quantità di prodotto strettamente necessaria, per gestire bla bla bla…</p>
+	<h4>{% trans 'consider-sfrido' %}</h4>
+	<p class="note">
+		{% blocktrans %} consider-sfrido <strong>10% more</strong> consider-sfrido{% endblocktrans %}
 	</div>
 </aside>
 

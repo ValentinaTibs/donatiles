@@ -87,8 +87,9 @@ def min_price(m2_price, m2_box, weight_box):
         print(min_price_sm + m2_price)
     return min_price_sm + m2_price
 
-def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
+def compute_num_boxes(quantity,has_frido, sm_price, sm_per_box,weight_box):
     to_print = False
+
     quantity = int(quantity)
     sm_price = float(sm_price)
     sm_per_box = float(sm_per_box)
@@ -98,7 +99,7 @@ def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
         num_boxes = math.ceil((0.10 * quantity + quantity)/sm_per_box)
     else:
         num_boxes = math.ceil(quantity /  sm_per_box)
-
+    
     if to_print:
         print("has_frido")
         print(has_frido)
@@ -110,6 +111,13 @@ def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
         print(weight_box)
         print("num_boxes")
         print(num_boxes)
+
+    return num_boxes
+
+def compute_sm_price(quantity,has_frido, sm_price, sm_per_box,weight_box):
+
+    to_print = False
+    num_boxes = compute_num_boxes(quantity,has_frido, sm_price, sm_per_box,weight_box)
                 
     tot_price_shipping = 0
     tot_quantity    = sm_per_box * num_boxes

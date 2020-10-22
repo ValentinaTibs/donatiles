@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="content grid grid-checkout">
-    <form method="post" action="{{request.get_full_path}}">
+    <form method="post" action="{{request.get_full_path}}" name="shipping_form">
     <div>
   
       <div class="checkout-title">
@@ -20,7 +20,7 @@
   
       <div class="grid subgrid-checkout">
         <div>
-          <p class="note"><span class="hilite">Tutti i campi sono obbligatori</span></p>
+          <p class="note"><span class="hilite">{% trans 'all-field-compulsory' %}</span></p>
         </div>
         <div>
                 {% csrf_token %}
@@ -64,23 +64,27 @@
   
     </div>
   
-    
+
+
+    </form>
+
+     
        <aside>
             <input type="hidden" name="prv" value="{{ prv_page }}">
-            <button  id="insert_shipping_button"  class="btn btn-primary disabled"><span>{% trans 'shipping-insert-order' %}</span><svg class="icon icon-m">
+            <button  id="insert_shipping_button"  class="btn btn-primary disabled" onclick="formSubmit()"><span>{% trans 'shipping-insert-order' %}</span><svg class="icon icon-m">
             <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></button>
           
             {% if not user.is_authenticated %}
             <div class="asidebox">
                 <h4>{% trans 'already-registered' %}</h4>
-                <p class="note">Risparmia tempo: <a href="" data-overlay="Auth">effettua il login</a> per utilizzare i tuoi dati di spedizione</p>
+                <p class="note">{% trans 'save-time' %} <a href="" data-overlay="Auth">{% trans 'login-call-to-action' %}</a> {% trans 'login-call-to-action-2' %}</p>
             </div>
             {% endif %}
-
+            <div class="asidebox">
+                <h4>{% trans 'island-and-cap-title' %}</h4>
+                <p class="note">{% trans 'island-and-cap-text' %} </p>
+            </div>
       </aside>
-
-    </form>
- 
   </div>
   
 
@@ -88,6 +92,13 @@
 
 document.querySelector( '#insert_shipping_button' ).classList.remove( 'disabled' );
 document.querySelector( '.nav-primary > ul > li:nth-child(2)' ).classList.add( 'selected' );
+
+function formSubmit() {
+    // Se è stato inserito un nome verrà effettuato il submit
+    document.shipping_form.submit();
+    return true;
+  }
+
 
 </script>
 

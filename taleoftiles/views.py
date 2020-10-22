@@ -166,6 +166,7 @@ def product(request, product_code, chi_form = None ):
             chart_item = chi_form.save(commit=False)        
             chart_item.save_price = chart_item.price()
             chart_item.chart = chart
+            chart_item.boxes = chart_item.compute_num_boxes()
             chart_item.save()
             
             return render(request, "include/chart.html", {"charts": charts})

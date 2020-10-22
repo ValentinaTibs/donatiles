@@ -12,7 +12,7 @@ from django.dispatch import receiver
 
 from taleoftiles.models import Product, Tag
 from taleoftiles.utils  import COUNTRY_LIST, COMPLETION_STATUS, ORDER_STATUS, ITEM_STATUS
-from taleoftiles.utils  import compute_single_price, compute_sm_price
+from taleoftiles.utils  import compute_single_price, compute_sm_price, compute_num_boxes
 
 #### ------- Move this to SIgnals.py
 from django.contrib.auth.signals import user_logged_in
@@ -223,6 +223,10 @@ class ChartItem(models.Model):
             return compute_single_price(0,0,0,0)
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box(self.size))
+
+    def compute_num_boxes(self):
+        return compute_num_boxes(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box(self.size))
+
 
     def tot_quantity(self):
         return 1

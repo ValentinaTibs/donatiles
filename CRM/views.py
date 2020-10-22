@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from CRM.models         import Chart, ChartItem, Sampler, Sample, Shipping, Order
 from CRM.models         import Profile
 from taleoftiles.models import Product
+from django.contrib.auth.models import User
+from django.utils.crypto import get_random_string
 
 from CRM.forms import RegisterForm,ShippingForm,NewChartItemForm
 

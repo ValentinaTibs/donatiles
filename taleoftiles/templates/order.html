@@ -55,18 +55,19 @@
 {% else %} 
 
 {% for chart in order.charts.all %}
-	{% for chart_item in chart.chart_item.all %}
-     
-
       <div class="cartreacap-header">
         <h5>{% trans 'quantity'|title %}</h5>
         <h5>{% trans 'price'|title %}</h5>
       </div>
+
+	{% for chart_item in chart.chart_item.all %}
+     
+
 	
       <div class="cartrecap-item">
-        <div class="cartrecap-thumb" style="background-image:url('chart_item.product.cover.imagefile.url')"></div>
+        <div class="cartrecap-thumb" style="background-image:url('{{chart_item.product.cover.imagefile.url}}')"></div>
         <div class="cartrecap-main">
-          <h5>{{product.serie}}</h5>
+          <h5>{{chart_item.product.serie}}</h5>
           <h4>{{chart_item.product.name}}</h4>
           <p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
         </div>
@@ -104,7 +105,7 @@
 
   <aside>
     <div class="asidebox">
-      <h5>Effettuato il</h5>
+      <h5>{% trans 'create-at' %}</h5>
       <p class="note"><span class="hilite">{{order.created_at}}</span></p>
 
       <h5>{% trans 'shipping-date' %}</h5>
