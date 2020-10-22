@@ -279,6 +279,7 @@ def add_sample(request, product_code):
         if request.user.is_authenticated:
             sampler.user = request.user
         sampler.save()
+        
 
     #avoiding double insertion
     try:
@@ -319,7 +320,7 @@ def ajax_add_sample(request, ):
             if request.user.is_authenticated:
                 sampler.user = request.user
             sampler.save()
-        if (sampler.all_samples().count() > 4):
+        if (sampler.all_samples().count() >= 4):
             return render(request, "include/sampler.html", {"all_samples": sampler,'user':request.user })
 
         #avoiding double insertion

@@ -36,6 +36,7 @@ function toggleFilter( tagSlug ) {
 
 
 function addToSampler( pId ) {
+    
 
     $.ajax({
         type: "POST",
@@ -50,6 +51,7 @@ function addToSampler( pId ) {
             $("#overlaySamples").addClass('visible');
             $("#button-prod-thumb-"+pId).attr('xlink:href',"{% static 'images/svgdefs.svg#icon-samples-remove' %}");        
             $("#btn-prod-thumb-"+pId).attr("onclick","Javascript:removeFromSampler('"+pId+"')");
+            
             // update sampler icon to correct number
         },
         error: function(result) {

@@ -184,7 +184,14 @@ class Product(models.Model):
             col = self.tags.filter(parent__slug = 'colour').first()
         except ObjectDoesNotExist:
             col = "None"
-        return col        
+        return col    
+
+    def is_samplable(self,):
+        try:
+            se = self.tags.get(slug = 'samplable')
+        except ObjectDoesNotExist:
+            return False    
+        return True
 
     def get_tag(self,tag_slug):
         try:
