@@ -141,6 +141,11 @@ msgstr "Spedizioni"
 msgid "payment"
 msgstr "Pagamenti"
 
+#: taleoftiles/templates/product.html:43
+msgid "days"
+msgstr "giorni"
+
+
 #: taleoftiles/templates/empty_base.html:53
 #: taleoftiles/templates/empty_base.html:186
 #: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:84
