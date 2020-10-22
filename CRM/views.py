@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from CRM.models         import Chart, ChartItem, Sampler, Sample, Shipping, Order
 from CRM.models         import Profile
 from taleoftiles.models import Product
+from layout.models import  MailTemplate
+
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 
@@ -77,6 +79,9 @@ def payment(request, id_):
         for chart in order.charts.all():
             chart.completion_status = 'c'
             chart.save()
+    new_mail = MailTemplate()
+    new_mail.send_order(order.user(),order)
+
     return render(request, "payment.html", {'order':order,'prv_page': request.session['prev_page']})   
 
     
@@ -110,6 +115,7 @@ def shipping(request, id_):
             if request.user.is_authenticated:
                 new_shipping.user = request.user.profile
                 new_shipping.save()
+                order.user = request.user.profile
             else: 
                 new_user = User.objects.create_user( username=new_shipping.email, email=new_shipping.email,password=create_one_time_password()) 
                 new_user.set_unusable_password()
@@ -118,8 +124,12 @@ def shipping(request, id_):
                 result = da_user.save()                
                 login(request, new_user)
 
+                new_mail = MailTemplate()
+                new_mail.send_welcome(new_user)
+
                 new_shipping.user = da_user
                 new_shipping.save()
+                order.user = da_user
                         
             order.final_payment = order.total()
             #order.shipping = new_shipping

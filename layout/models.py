@@ -142,6 +142,40 @@ class MailTemplate(models.Model):
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
 
+    def send_order(self,user,order):
+        email_template_name = "email/order_email.txt"
+        c = {
+                "order_id":order.internal_tracking_id,
+                'domain':'www.taleoftiles.com',
+                'site_name': 'TaleOfTiles',
+                "user": user,
+                }
+        email = render_to_string(email_template_name, c)
+
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
+                to_emails=To(user.email, user.email),
+                subject=Subject("Order num."+ order.internal_tracking_id+" Received "),
+                html_content=HtmlContent(email))
+
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+
+    def send_welcome(self,user):
+        email_template_name = "email/welcome_email.txt"
+        c = {
+                'domain':'www.taleoftiles.com',
+                'site_name': 'TaleOfTiles',
+                "user": user,
+                }
+        email = render_to_string(email_template_name, c)
+
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
+                to_emails=To(user.email, user.email),
+                subject=Subject("Welcome in TaleOfTiles"),
+                html_content=HtmlContent(email))
+
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
 
     def send(self,email_rec,pwd):
         pass
