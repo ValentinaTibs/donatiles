@@ -145,32 +145,34 @@ def product(request, product_code, chi_form = None ):
     price = 0
     errors = None
     if request.is_ajax():
-        
         if chi_form.is_valid() :
-            
             if request.user.is_authenticated:
                 query = Q(user = request.user) 
             else:
                 if not request.session.exists(request.session.session_key):
                     request.session.create()     
+
                 query = Q(session_id  = request.session.session_key) 
 
-            chart = Chart.objects.filter( query , completion_status = 's').first()
-            if not chart:
+            charts = Chart.objects.filter( query , completion_status = 's')
+            if charts.count() <= 0:
                 chart = Chart(session_id  = request.session.session_key)
                 if request.user.is_authenticated:
                     chart.user = request.user
                 chart.save()
+            else:
+                chart = charts.first()
                 
             chart_item = chi_form.save(commit=False)        
             chart_item.save_price = chart_item.price()
             chart_item.chart = chart
             chart_item.save()
-
-            return render(request, "include/chart.html", {"charts": chart})
+            
+            return render(request, "include/chart.html", {"charts": charts})
         #2do put here rendering of errors
         else:
             errors = chi_form.errors
+            
             
     return render(request, "product.html",{
         "product":product,

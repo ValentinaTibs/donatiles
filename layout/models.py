@@ -134,7 +134,7 @@ class MailTemplate(models.Model):
                 }
         email = render_to_string(email_template_name, c)
 
-        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTile'),
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
                 to_emails=To(user.email, user.email),
                 subject=Subject("Password Reset"),
                 html_content=HtmlContent(email))

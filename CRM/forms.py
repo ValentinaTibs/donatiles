@@ -65,7 +65,6 @@ class NewChartItemForm(forms.ModelForm):
 
         quantity    = self.cleaned_data.get('quantity')
         product     = self.cleaned_data.get('product')
-
         if quantity < product.min_ammount:
             raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
         else:
@@ -90,6 +89,7 @@ class AddChartForm(NewChartItemForm):
             raise forms.ValidationError(_('Wrong Product'), code='prod-error')
 
         self.fields['finish'].queryset = prod_finishes
+        self.fields['finish'].required = False
 
     def clean(self):
         cleaned_data = super(AddChartForm, self).clean()
