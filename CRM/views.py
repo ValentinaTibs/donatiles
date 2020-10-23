@@ -207,12 +207,13 @@ def add_user(request):
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()
-            #new_user.set_unusable_password()
+            
             new_user.email = new_user.username
-            one_time_pwd = create_one_time_password()
-
-            new_user.set_password(one_time_pwd)            
+            #one_time_pwd = create_one_time_password()
+            new_user.set_password(one_time_pwd)      
+            new_user.set_unusable_password()      
             new_user.save()
+
             new_mail = MailTemplate()
             new_mail.send_register(new_user,one_time_pwd)
             
