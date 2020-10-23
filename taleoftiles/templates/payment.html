@@ -20,7 +20,7 @@
 
     <div class="grid subgrid-checkout">
       <div class="paymentnotes">
-        QUESTO ERA UNE SAMPLER
+        {% trans 'this-was-a-sampler' %}
         
       </div>
       <div class="paymentdata">
@@ -38,7 +38,7 @@
     <div class="asidebox">
       <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
       <h4>{% trans 'any-doubt' %}?</h4>
-      <p class="note">Consulta l'<a href="support.html">{% trans 'support' %}</a> oppure scrivici a <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></p>
+      {% blocktrans %} consult-support <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a>  consult-support{% endblocktrans %}  
     </div>
   </aside>
 
@@ -53,12 +53,16 @@
     <div class="checkout-title">
       <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Annulla</a>
       <h1>{% trans 'summary-recipt-title' %}</h1>
+      
     </div>
 
     <div class="grid subgrid-checkout">
       <div class="paymentnotes">
         {% blocktrans %} paying-now <strong>date-shipping</strong> paying-now{% endblocktrans %}
+
+
       </div>
+      
       <div class="paymentdata">
         <h3>{% trans 'summary-iban-claim' %}</h3>
         <h5>{% trans 'ammount' %}</h5>
@@ -74,6 +78,7 @@
         <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
       </div>
     </div>
+    
 
   </div>
 

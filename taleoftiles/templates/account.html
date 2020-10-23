@@ -16,7 +16,7 @@
         <div class="accounttitle-actions"> <a href="{% url 'logout' %}?next=/" class="btn-link btn-link-arrow"> Logout </a></div>
     {% endif %}
     
-    <h1>Ciao <strong>{{ profile.user.email }}</strong></h1>
+    <h1>Ciao <strong>{{ profile }}</strong></h1>
   </div>
 </div>
 
@@ -38,7 +38,7 @@
         </a>
       {% else %}
         <a href="{% url 'order' order.internal_tracking_id %}" class="accountorder">
-          <div class="accountorder-name">Ordine <strong>{{ order.internal_tracking_id }}</strong></div>
+          <div class="accountorder-name">{% trans 'order' %} <strong>{{ order.internal_tracking_id }}</strong></div>
           <div class="accountorder-status">
             In attesa di pagamento
           </div>

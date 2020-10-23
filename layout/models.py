@@ -77,39 +77,7 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
-
-
-def get_mock_personalization_dict():
-    """Get a dict of personalization mock."""
-    mock_pers = dict()
-
-    mock_pers['to_list'] = [To("test1@example.com",
-                                  "Example User"),
-                            To("test2@example.com",
-                                  "Example User")]
-
-    mock_pers['cc_list'] = [To("test3@example.com",
-                                  "Example User"),
-                            To("test4@example.com",
-                                  "Example User")]
-
-    mock_pers['bcc_list'] = [To("test5@example.com"),
-                             To("test6@example.com")]
-
-    mock_pers['subject'] = ("Hello World from the Personalized "
-                            "SendGrid Python Library")
-
-    mock_pers['headers'] = [Header("X-Test", "test"),
-                            Header("X-Mock", "true")]
-
-    mock_pers['substitutions'] = [Substitution("%name%", "Example User"),
-                                  Substitution("%city%", "Denver")]
-
-    mock_pers['custom_args'] = [CustomArg("user_id", "343"),
-                                CustomArg("type", "marketing")]
-
-    mock_pers['send_at'] = 1443636843
-    return mock_pers
+from python_http_client import exceptions
 
 
 class MailTemplate(models.Model):
@@ -159,6 +127,27 @@ class MailTemplate(models.Model):
 
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
+
+    def send_register(self,user,one_time_pwd):
+        email_template_name = "email/register_email.txt"
+        c = {
+                'domain':'www.taleoftiles.com',
+                'site_name': 'TaleOfTiles',
+                'pwd':one_time_pwd,
+                "user": user,
+                }
+        email = render_to_string(email_template_name, c)
+
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
+                to_emails=To(user.email, user.email),
+                subject=Subject("Welcome in TaleOfTiles"),
+                html_content=HtmlContent(email))
+
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        try:
+            response = sg.send(message)
+        except exceptions.BadRequestsError as e:
+            print(e.body)
 
     def send_welcome(self,user):
         email_template_name = "email/welcome_email.txt"

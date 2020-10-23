@@ -87,7 +87,7 @@ def payment(request, id_):
 
     
 def create_one_time_password():
-    get_random_string(length=8)
+    return get_random_string(length=8)
 
 def shipping(request, id_):
     
@@ -207,9 +207,15 @@ def add_user(request):
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()
-            #new_user.is_active = False
             #new_user.set_unusable_password()
+            new_user.email = new_user.username
+            one_time_pwd = create_one_time_password()
+
+            new_user.set_password(one_time_pwd)            
             new_user.save()
+            new_mail = MailTemplate()
+            new_mail.send_register(new_user,one_time_pwd)
+            
             da_user = Profile( user = new_user)        
             da_user.save()
             login(request, new_user)
