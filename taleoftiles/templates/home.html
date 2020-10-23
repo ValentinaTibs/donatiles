@@ -38,12 +38,13 @@
   <div class="content grid grid-homeintro">
     <a href="{% url 'catalogue' %}" class="btn-gridbox">
     	<h3>{% blocktrans %}choose-home-claim{% endblocktrans %}</h3></a>
-    <div><h3>{{ layout_elems|get_elem:'strength-pt-2'}}</h3></div>
+    <div><img  style="width: 100%;" src="{% static 'images/tot_home_1.png' %}" alt="TaleofTiles Book"></div>
     <div class="grid-homeintro-main">
       <h2>{% trans 'sample-touchhand'|capfirst %}</h2>
       <h3>{{ layout_elems|get_elem:'strength-campionario-up' }}</h3>
       <p>{% trans 'sample-description'|capfirst %}</p>
       <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-sample-help' %}"/></svg>
+      <img src="{% static 'images/tot_home.png' %}" alt="TaleofTiles Book">
     </div>
     <div>{% blocktrans %} Ricevi mattonelle a casa {% endblocktrans %}</div>
 
