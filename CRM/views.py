@@ -219,7 +219,6 @@ def add_user(request):
             
             da_user = Profile( user = new_user)        
             da_user.save()
-            login(request, new_user)
             
     #2do add to the redirect the form error 
     return redirect(request.META.get('HTTP_REFERER'))
