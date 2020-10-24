@@ -14,6 +14,8 @@ from CRM.forms import RegisterForm,ShippingForm,NewChartItemForm
 
 from django.http import JsonResponse
 from django.db.models import Q 
+import logging
+
 
 #@login_required(redirect_field_name='my_redirect_field')
 def account(request):
