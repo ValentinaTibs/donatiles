@@ -112,9 +112,10 @@ class MailTemplate(models.Model):
         try:
             response = sg.send(message)
         except exceptions.BadRequestsError as e:
+            print("we are here")
             logger = logging.getLogger('email')
             logger.error(e.body)
-
+            print(e.body)
 
     def send_order(self,user,order):
         email_template_name = "email/order_email.txt"
