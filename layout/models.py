@@ -148,10 +148,16 @@ class MailTemplate(models.Model):
                 to_emails=To(user.email, user.email),
                 subject=Subject("Welcome in TaleOfTiles"),
                 html_content=HtmlContent(email))
-
+        logger = logging.getLogger('email')
+        logger.error(os.environ.get('SENDGRID_API_KEY'))
+        print(os.environ.get('SENDGRID_API_KEY'))
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        
         try:
             response = sg.send(message)
+            print(response)
+            logger = logging.getLogger('email')
+            logger.error(response)
         except exceptions.BadRequestsError as e:
             print(e.body)
             logger = logging.getLogger('email')
