@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-22 12:59+0000\n"
-"PO-Revision-Date: 2020-10-24 09:43\n"
+"PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -636,7 +636,7 @@ msgstr "Considera lo sfrido"
 
 #: taleoftiles/templates/summary.html:131
 #, python-format
-msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
+msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgstr "Ti consigliamo di considerare sempre il <strong>10% in più <strong>rispetto alla quantità di mattonelle strettamente necessarie, per ulteriori chiarimenti ti invitiamo a consultare le FAQ."
 
 #: taleoftiles/templates/support.html:15
