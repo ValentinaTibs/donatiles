@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-22 12:59+0000\n"
-"PO-Revision-Date: 2020-10-24 09:43\n"
+"PO-Revision-Date: 2020-10-24 10:42\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
@@ -632,7 +632,7 @@ msgstr ""
 
 #: taleoftiles/templates/summary.html:131
 #, python-format
-msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
+msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/support.html:15
