@@ -112,7 +112,6 @@ class MailTemplate(models.Model):
         try:
             response = sg.send(message)
         except exceptions.BadRequestsError as e:
-            print("we are here")
             logger = logging.getLogger('email')
             logger.error(e.body)
             print(e.body)
@@ -155,6 +154,9 @@ class MailTemplate(models.Model):
             response = sg.send(message)
         except exceptions.BadRequestsError as e:
             print(e.body)
+            logger = logging.getLogger('email')
+            logger.error(e.body)
+
 
     def send_welcome(self,user):
         email_template_name = "email/welcome_email.txt"
