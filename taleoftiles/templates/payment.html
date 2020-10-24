@@ -47,7 +47,17 @@
 {% else %}
 
 
-
+<style>
+#paypal-container{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-height: 35px;
+    min-width: 200px;
+    max-width: 750px;
+    font-size: 0;
+    }
+</style>
   <div>
 
     <div class="checkout-title">
@@ -59,9 +69,9 @@
     <div class="grid subgrid-checkout">
       <div class="paymentnotes">
         {% blocktrans %} paying-now <strong>date-shipping</strong> paying-now{% endblocktrans %}
-
-
       </div>
+
+
       
       <div class="paymentdata">
         <h3>{% trans 'summary-iban-claim' %}</h3>

@@ -189,3 +189,7 @@ SUMMERNOTE_CONFIG = {
         ],
     }
 }
+
+
+
+# ------ LOGGING ------

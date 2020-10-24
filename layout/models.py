@@ -79,6 +79,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from python_http_client import exceptions
 
+import logging
 
 class MailTemplate(models.Model):
     slug            = models.CharField(max_length=50, unique=True)
@@ -108,7 +109,12 @@ class MailTemplate(models.Model):
                 html_content=HtmlContent(email))
 
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        response = sg.send(message)
+        try:
+            response = sg.send(message)
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)
+
 
     def send_order(self,user,order):
         email_template_name = "email/order_email.txt"
