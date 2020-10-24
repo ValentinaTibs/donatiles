@@ -204,6 +204,10 @@ def add_order(request, is_sample):
 def add_user(request):
     form = RegisterForm(request.POST or None, request.FILES or None)    
 
+    print("add_user")
+    logger = logging.getLogger('email')
+    logger.error("add_user")
+
     if request.method == 'POST':
         if form.is_valid():
             new_user = form.save()
@@ -219,6 +223,13 @@ def add_user(request):
             
             da_user = Profile( user = new_user)        
             da_user.save()
+        else:
+
+            print("not_valid")
+            print(form.errors)
+            logger = logging.getLogger('email')
+            logger.error("not valid")
+            logger.error(form.errors)
             
     #2do add to the redirect the form error 
     return redirect(request.META.get('HTTP_REFERER'))
