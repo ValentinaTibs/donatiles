@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 09:02+0000\n"
+"POT-Creation-Date: 2020-10-25 12:53+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -557,29 +557,29 @@ msgstr "Aggiungi al carrello"
 msgid "free-shipping"
 msgstr "Spedizione gratuita"
 
-#: taleoftiles/templates/product.html:163
-msgid "days"
-msgstr "Giorni"
+#: taleoftiles/templates/product.html:165
+msgid "receive-date"
+msgstr "Ordinando oggi stesso, riceverai il prodotto a casa tua"
 
-#: taleoftiles/templates/product.html:188
+#: taleoftiles/templates/product.html:165
+msgid "untill"
+msgstr "entro il"
+
+#: taleoftiles/templates/product.html:191
 msgid "download-tech-spech"
 msgstr "Scheda tecnica [PDF]"
 
-#: taleoftiles/templates/product.html:206
+#: taleoftiles/templates/product.html:209
 msgid "settings"
 msgstr "Stili"
 
-#: taleoftiles/templates/product.html:218
+#: taleoftiles/templates/product.html:221
 msgid "product-support"
 msgstr "Prodotto di supporto"
 
-#: taleoftiles/templates/product.html:233
+#: taleoftiles/templates/product.html:236
 msgid "product-same-serie"
 msgstr "Prodotti della stessa serie"
-
-#: taleoftiles/templates/productthumb.html:24
-msgid "product-not-samplable"
-msgstr "Non campionabile"
 
 #: taleoftiles/templates/registration/login.html:53
 #, fuzzy
@@ -1055,6 +1055,12 @@ msgstr ""
 "Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
 "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
 "(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
+
+#~ msgid "days"
+#~ msgstr "Giorni"
+
+#~ msgid "product-not-samplable"
+#~ msgstr "Non campionabile"
 
 #~ msgid "login-data"
 #~ msgstr "Login"

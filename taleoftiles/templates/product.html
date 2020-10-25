@@ -160,7 +160,10 @@
     </div>  <!-- product-addtocartbox -->
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
-      <p class="note">Questo prodotto può essere spedito<br><strong>entro {{product.wait_time}} {% trans 'days' %} </strong></p>
+      <p class="note">
+        
+        {% trans 'receive-date' %}<br><strong>{% trans 'untill' %} {% woking_days product.wait_time %} </strong></p>
+        
       <p class="note">Hai qualche dubbio?<br> 
         <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
     </div>

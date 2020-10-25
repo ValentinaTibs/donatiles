@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 09:02+0000\n"
+"POT-Creation-Date: 2020-10-25 12:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -512,28 +512,28 @@ msgstr ""
 msgid "free-shipping"
 msgstr ""
 
-#: taleoftiles/templates/product.html:163
-msgid "days"
+#: taleoftiles/templates/product.html:165
+msgid "receive-date"
 msgstr ""
 
-#: taleoftiles/templates/product.html:188
+#: taleoftiles/templates/product.html:165
+msgid "untill"
+msgstr ""
+
+#: taleoftiles/templates/product.html:191
 msgid "download-tech-spech"
 msgstr ""
 
-#: taleoftiles/templates/product.html:206
+#: taleoftiles/templates/product.html:209
 msgid "settings"
 msgstr ""
 
-#: taleoftiles/templates/product.html:218
+#: taleoftiles/templates/product.html:221
 msgid "product-support"
 msgstr ""
 
-#: taleoftiles/templates/product.html:233
+#: taleoftiles/templates/product.html:236
 msgid "product-same-serie"
-msgstr ""
-
-#: taleoftiles/templates/productthumb.html:24
-msgid "product-not-samplable"
 msgstr ""
 
 #: taleoftiles/templates/registration/login.html:53
