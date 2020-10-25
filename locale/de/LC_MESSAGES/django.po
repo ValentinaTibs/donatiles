@@ -1,22 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 09:02+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2020-10-25 12:53+0000\n"
+"PO-Revision-Date: 2020-10-25 13:02\n"
+"Last-Translator: \n"
+"Language-Team: German, Austria\n"
+"Language: de_AT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: taleoftiles\n"
+"X-Crowdin-Project-ID: 425794\n"
+"X-Crowdin-Language: de-AT\n"
+"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -370,10 +369,12 @@ msgid "enter-new-password"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:10
+#| msgid "password-reset"
 msgid "password-reset-sent"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:19
+#| msgid "password-reset"
 msgid "password-reset-sent-longtext"
 msgstr ""
 
@@ -390,6 +391,7 @@ msgid "this-was-a-sampler"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:30
+#| msgid "receive-sample-home"
 msgid "free-samples-finished"
 msgstr ""
 
@@ -443,9 +445,7 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:123
-msgid ""
-" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
-"com</a>  consult-support"
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:94
@@ -512,31 +512,32 @@ msgstr ""
 msgid "free-shipping"
 msgstr ""
 
-#: taleoftiles/templates/product.html:163
-msgid "days"
+#: taleoftiles/templates/product.html:165
+msgid "receive-date"
 msgstr ""
 
-#: taleoftiles/templates/product.html:188
+#: taleoftiles/templates/product.html:165
+msgid "untill"
+msgstr ""
+
+#: taleoftiles/templates/product.html:191
 msgid "download-tech-spech"
 msgstr ""
 
-#: taleoftiles/templates/product.html:206
+#: taleoftiles/templates/product.html:209
 msgid "settings"
 msgstr ""
 
-#: taleoftiles/templates/product.html:218
+#: taleoftiles/templates/product.html:221
 msgid "product-support"
 msgstr ""
 
-#: taleoftiles/templates/product.html:233
+#: taleoftiles/templates/product.html:236
 msgid "product-same-serie"
 msgstr ""
 
-#: taleoftiles/templates/productthumb.html:24
-msgid "product-not-samplable"
-msgstr ""
-
 #: taleoftiles/templates/registration/login.html:53
+#| msgid "already-registered"
 msgid "already-logged-in"
 msgstr ""
 
@@ -613,7 +614,7 @@ msgid "consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:143
-#, python-format
+#| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
@@ -849,11 +850,66 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
-#~ msgid "unique_id"
-#~ msgstr "STATIC DE"
+#~ msgid "days"
+#~ msgstr "Giorni"
 
-#~ msgid "Sign Up"
-#~ msgstr "SIGNUP DE"
+#~ msgid "product-not-samplable"
+#~ msgstr "Non campionabile"
 
-#~ msgid "POCCOZIO"
-#~ msgstr "LAZYDE"
+#~ msgid "login-data"
+#~ msgstr "Login"
+
+#~ msgid "catalgoue-page-name"
+#~ msgstr "Catalogo"
+
+#~ msgid "cat-menu-all"
+#~ msgstr "Tutti i prodotti"
+
+#~ msgid "language"
+#~ msgstr "Lingua"
+
+#~ msgid "currency"
+#~ msgstr "Valuta"
+
+#~ msgid "facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "pinterest"
+#~ msgstr "Pinterest"
+
+#~ msgid "instagram"
+#~ msgstr "Instagram"
+
+#~ msgid "read"
+#~ msgstr "Leggi"
+
+#~ msgid "title-team-home"
+#~ msgstr "Chi siamo"
+
+#~ msgid "summary-long-text1"
+#~ msgstr "Potrai pagare con bonifico bancario"
+
+#~ msgid "summary-page-title"
+#~ msgstr "Riepilogo del tuo ordine"
+
+#~ msgid "product"
+#~ msgstr "Prodotto"
+
+#~ msgid "delete"
+#~ msgstr "Cancella"
+
+#~ msgid "box"
+#~ msgstr "Scatola"
+
+#~ msgid "support-page-name"
+#~ msgstr "Assistenza"
+
+#~ msgid "write-us-orders"
+#~ msgstr "Contattaci per il tuo ordine"
+
+#~ msgid "write-us-sells"
+#~ msgstr "Contattaci"
+
+#~ msgid "write-us-support"
+#~ msgstr "Contattaci per avere assistenza"
+
