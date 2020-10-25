@@ -37,7 +37,7 @@
       {{ signupform.username.label_tag }}
       {{ signupform.username }}
     </div>
-    <p class="note">Ti invieremo una password a questo indirizzo</p>
+    <p class="note">{% trans 'register-and-we-will-send-password' %}</p>
     <input type="submit" class="btn btn-primary" value="{% trans 'register' %}">
     <input type="hidden" name="next" value="{{ request.get_full_path }} " />
 

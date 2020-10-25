@@ -11,6 +11,18 @@
 <div class="content grid grid-checkout">
 	<div>
 	<div class="checkout-title">	
+		{% if prev_page %}
+			<a href="{{prv_page|urlencode}}" class="btn btn-primary">
+				<svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>
+				<span>{% trans 'summary-back-home' %} </span>
+			</a>
+		{% else %}
+			<a href="{% url 'account'%}" class="btn btn-primary">
+				<svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>
+				<span>{% trans 'summary-back-home' %} </span>
+			</a>
+		{% endif %}
+		
 		<!-- <a href="{{prv_page|urlencode}}" class="btn-link"><svg class="icon-l icon">
 			<use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'checkout-back' %}</a> -->
 		<h1>{% trans 'summary-page-name' %}</h1>

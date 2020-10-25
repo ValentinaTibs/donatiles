@@ -27,7 +27,23 @@
         {% if order.is_paid %}
           Arriverà gratis a casa tua
         {% else %}
-          Paga e lo avrai perché hai esaurito i tuoi campioni gratis
+          {% trans 'free-samples-finished' %}
+
+          <div class="paymentdata">
+          <h3>{% trans 'summary-iban-claim' %}</h3>
+          <h5>{% trans 'ammount' %}</h5>
+          <h2>€ {{order.final_payment}}</h2>
+          <h5>{% trans 'summary-iban-title' %}</h5>
+          <h2>{% trans 'summary-iban' %}</h2>
+          <h5>{% trans 'summary-SWIFT-title' %}</h5>
+          <h2>{% trans 'summary-SWIFT' %}</h2>
+          <h5>{% trans 'summary-accountholder-title' %}</h5>
+          <h2>{% trans 'summary-accountholder' %}</h2>
+          <h5>{% trans 'subject' %}</h5>
+          <h2>{% trans 'order' %} {{order.internal_tracking_id}}</h2>
+          <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
+      </div>
+
         {% endif %}
       </div>
     </div>
@@ -61,7 +77,14 @@
   <div>
 
     <div class="checkout-title">
-      <a href="catalogue-item.html" class="btn-link"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Annulla</a>
+
+        {% if prev_page %}
+          <a href="{{prv_page|urlencode}}" class="btn btn-primary">
+            <svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'back-to-orders'%}</a>
+        {% else %}
+          <a href="{% url 'account'%}" class="btn btn-primary">
+            <svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'back-to-orders'%}</a>
+        {% endif %}
       <h1>{% trans 'summary-recipt-title' %}</h1>
       
     </div>

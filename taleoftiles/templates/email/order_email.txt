@@ -2,15 +2,15 @@
 
 Grazie per averci scelto!<br/>
 Abbiamo ricevuto l'ordine num. {{order_id}} <br/>
-puoi revisionare il contenuto del tuo ordine  
-<a href="{{domain}}{% url 'order' order_id %}"> nella pagina dell'ordine</a> 
+puoi revisionare il contenuto del tuo ordine  nella pagine relativa
+<a href="{{domain}}{% url 'order' order_id %}"> {{domain}}{% url 'order' order_id %}</a> 
 <br/>
 
 Entro 24h ti faremo sapere via mail con precisione quando le tue mattonelle saranno spedite ed entro qualche 
 ora verrai contattato dal corriere per concordare la data di consegna. 
 Assicurati che il tuo profilo abbia un numero di telefono corretto comprensivo di prefisso internazionale in modo
 che il corriere ti possa contattare.  
-La pagina del <a href="{{domain}}{% url 'account' %}"> tuo account</a> 
+La pagina del tuo account <a href="{{domain}}{% url 'account' %}"> {{domain}}{% url 'account' %}</a> 
 <br/><br/>
 Enjoy your italian tiles!
 <br/><br/>

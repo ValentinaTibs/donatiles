@@ -14,7 +14,8 @@ Approfitta della spedizione gratuita su tutti gli ordini per ricevere le tue nuo
 Questa è la tua password di accesso momentanea:<b> {{pwd}}</b>
 <br/><br/>
 Puoi seguire i nostri consigli su come ristrutturare i tuoi spazi sul nostro blog
-{{domain}}{% url 'blog' %} 
+
+<a href="{{domain}}{% url 'blog' %} ">{{domain}}{% url 'blog' %} </a> 
 
 <br/><br/>
 Enjoy your italian tiles!

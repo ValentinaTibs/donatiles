@@ -121,9 +121,6 @@ class RegisterForm(UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError(_('Duplicated email'), code='duplicated-user-error')
         
-        #send welcome email with pwd 
-        MailTemplate().send_first_password(username,self.cleaned_data.get('password1'))
-        
         return self.cleaned_data    
 
     def save(self, commit=True):

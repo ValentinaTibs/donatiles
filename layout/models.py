@@ -10,7 +10,6 @@ DATA_TYPE = (
     ('i', 'Image')
 ) 
 
-
 class ElementTag(models.Model):
     name    = models.CharField  (max_length=200)
     slug    = models.CharField  (max_length=200, unique=True)
@@ -90,7 +89,6 @@ class MailTemplate(models.Model):
     template_vs     = models.CharField(max_length=50, null = False, blank=False) 
     no_reply        = models.BooleanField(default = False)
 
-
     def send_password_reset(self,user):
         email_template_name = "email/password_reset_email.txt"
         c = {
@@ -114,7 +112,6 @@ class MailTemplate(models.Model):
         except exceptions.BadRequestsError as e:
             logger = logging.getLogger('email')
             logger.error(e.body)
-            print(e.body)
 
     def send_order(self,user,order):
         email_template_name = "email/order_email.txt"
@@ -148,18 +145,12 @@ class MailTemplate(models.Model):
                 to_emails=To(user.email, user.email),
                 subject=Subject("Welcome in TaleOfTiles"),
                 html_content=HtmlContent(email))
-        logger = logging.getLogger('email')
-        logger.error(os.environ.get('SENDGRID_API_KEY'))
-        print(os.environ.get('SENDGRID_API_KEY'))
+
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         
         try:
             response = sg.send(message)
-            print(response)
-            logger = logging.getLogger('email')
-            logger.error(response)
         except exceptions.BadRequestsError as e:
-            print(e.body)
             logger = logging.getLogger('email')
             logger.error(e.body)
 
@@ -179,39 +170,15 @@ class MailTemplate(models.Model):
                 html_content=HtmlContent(email))
 
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        response = sg.send(message)
-
-    def send(self,email_rec,pwd):
-        pass
-
-        message = Mail()
-        message.to_emails = To("tibaldo.valentina@gmail.com")
-        message.subject = Subject(self.subj, p=0)
-        message.from_email = Email(self.sender)
-        message.html_content = HtmlContent(self.content)
-
         try:
-            sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
             response = sg.send(message)
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)
 
-        except Exception as e:
-            print(str(e))
-            print(str(e.body))
 
-        # mail_settings               = MailSettings()
-        # mail_settings.sandbox_mode  = SandBoxMode(True)
-        # message.mail_settings       = mail_settings
-        # message.template_id         = TemplateId(self.template_id)
 
-        # message.substitution = Substitution('content', self.content, p=0)
-        # message.substitution = Substitution('password', pwd, p=0)
-
-    def send_first_password(self,email_rec,pwd):
-        da_mail = MailTemplate.objects.filter(slug='first-password').first()
-        if da_mail:
-            da_mail.send(email_rec, pwd)
  
-
 class Icon(models.Model):  
     name        = models.CharField (max_length = 100 , null = False, blank=False, unique=True)
     description = models.TextField()

@@ -70,22 +70,26 @@ def payment(request, id_):
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
     
-    #2do per ragioni di sicurezza questo aggiornamento si dovrebbe fare solo se arrivo a questa pagina con una post
-    if order.is_sampler:
-        for sampler in order.sampler.all():
-            if order.final_payment <= 0:
-                sampler.completion_status = 'p'
-            else:
-                sampler.completion_status = 'c'    
-            sampler.save()
-    else:
-        for chart in order.charts.all():
-            chart.completion_status = 'c'
-            chart.save()
-    new_mail = MailTemplate()
-    new_mail.send_order(order.user(),order)
+    if order.order_status == 'w':
+        #2do per ragioni di sicurezza questo aggiornamento si dovrebbe fare solo se arrivo a questa pagina con una post
+        if order.is_sampler:
+            for sampler in order.sampler.all():
+                if order.final_payment <= 0:
+                    sampler.completion_status = 'p'
+                else:
+                    sampler.completion_status = 'c'    
+                sampler.save()
+        else:
+            for chart in order.charts.all():
+                chart.completion_status = 'c'
+                chart.save()
+        order.order_status = 'i'
+        order.save()
+        new_mail = MailTemplate()
+        new_mail.send_order(order.user(),order)
 
-    return render(request, "payment.html", {'order':order,'prv_page': request.session['prev_page']})   
+    prv_page = request.session.get('prev_page')
+    return render(request, "payment.html", {'order':order,'prv_page':prv_page })   
 
     
 def create_one_time_password():
@@ -206,9 +210,6 @@ def add_order(request, is_sample):
 def add_user(request):
     form = RegisterForm(request.POST or None, request.FILES or None)    
 
-    print("add_user")
-    logger = logging.getLogger('email')
-    logger.error("add_user")
 
     if request.method == 'POST':
         if form.is_valid():
@@ -226,11 +227,7 @@ def add_user(request):
             da_user = Profile( user = new_user)        
             da_user.save()
         else:
-
-            print("not_valid")
-            print(form.errors)
-            logger = logging.getLogger('email')
-            logger.error("not valid")
+            logger = logging.getLogger('view')
             logger.error(form.errors)
             
     #2do add to the redirect the form error 
