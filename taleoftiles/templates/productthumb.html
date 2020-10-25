@@ -20,9 +20,6 @@
     {% elif product.is_samplable %}
         <button class="btn btn-overlay" id="btn-prod-thumb-{{product.code}}" onClick="Javascript:addToSampler('{{ product.code }}')"><svg class="icon-l icon">
         <use id="button-prod-thumb-{{product.code}}" xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-    {% else %}
-        {% trans 'product-not-samplable' %}
-        
     {% endif %}
 
 </div>
