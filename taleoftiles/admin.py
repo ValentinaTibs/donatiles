@@ -147,6 +147,8 @@ class PublicationAdminSelf(SummernoteModelAdmin):
         'publish_date','slug')
     list_display = ('title_','id','created_at','publish_date','slug','author')
 
+    search_fields = ('title_it','title_de','title_en','title_sv','slug')
+
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         super().save_model(request, obj, form, change)
