@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 12:08+0000\n"
-"PO-Revision-Date: 2020-10-26 08:26\n"
+"PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: German, Austria\n"
 "Language: de_AT\n"
@@ -446,9 +446,7 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
-msgid ""
-" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
-"com</a>  consult-support"
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:92
@@ -861,3 +859,4 @@ msgstr ""
 
 #~ msgid "POCCOZIO"
 #~ msgstr "LAZYDE"
+
