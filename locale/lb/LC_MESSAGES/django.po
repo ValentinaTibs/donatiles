@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: lb\n"
-"X-Crowdin-File: /master/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 48\n"
+"X-Crowdin-File: /master/locale/lb/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 50\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -851,66 +851,12 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
-#~ msgid "days"
-#~ msgstr "Giorni"
+#~ msgid "unique_id"
+#~ msgstr "STATIC DE"
 
-#~ msgid "product-not-samplable"
-#~ msgstr "Non campionabile"
+#~ msgid "Sign Up"
+#~ msgstr "SIGNUP DE"
 
-#~ msgid "login-data"
-#~ msgstr "Login"
-
-#~ msgid "catalgoue-page-name"
-#~ msgstr "Catalogo"
-
-#~ msgid "cat-menu-all"
-#~ msgstr "Tutti i prodotti"
-
-#~ msgid "language"
-#~ msgstr "Lingua"
-
-#~ msgid "currency"
-#~ msgstr "Valuta"
-
-#~ msgid "facebook"
-#~ msgstr "Facebook"
-
-#~ msgid "pinterest"
-#~ msgstr "Pinterest"
-
-#~ msgid "instagram"
-#~ msgstr "Instagram"
-
-#~ msgid "read"
-#~ msgstr "Leggi"
-
-#~ msgid "title-team-home"
-#~ msgstr "Chi siamo"
-
-#~ msgid "summary-long-text1"
-#~ msgstr "Potrai pagare con bonifico bancario"
-
-#~ msgid "summary-page-title"
-#~ msgstr "Riepilogo del tuo ordine"
-
-#~ msgid "product"
-#~ msgstr "Prodotto"
-
-#~ msgid "delete"
-#~ msgstr "Cancella"
-
-#~ msgid "box"
-#~ msgstr "Scatola"
-
-#~ msgid "support-page-name"
-#~ msgstr "Assistenza"
-
-#~ msgid "write-us-orders"
-#~ msgstr "Contattaci per il tuo ordine"
-
-#~ msgid "write-us-sells"
-#~ msgstr "Contattaci"
-
-#~ msgid "write-us-support"
-#~ msgstr "Contattaci per avere assistenza"
+#~ msgid "POCCOZIO"
+#~ msgstr "LAZYDE"
 
