@@ -4,6 +4,7 @@ from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
 from layout.models      import Element, Mail, MailTemplate
+from taleoftiles.models import Publication
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 
@@ -14,6 +15,13 @@ def support(request):
     return render(request, "support.html",{
         'layout_elems'  : dyn_elements,
         })
+
+def termsandconds(request):  
+    termsandconds = Publication.objects.filter(slug = 'termsandconds')
+    return render(request, "empty.html",{
+        'text'  : termsandconds,
+        })
+
 
 def password_reset_request(request):
     if request.method == "POST":

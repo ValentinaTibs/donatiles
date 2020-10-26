@@ -65,6 +65,7 @@ urlpatterns += i18n_patterns(
     path('blog/post/<slug:post_slug>/', blog.views.post, name="post"),
 
     path("support/",  layout.views.support, name="support"),
+    path("termsandconds/",  layout.views.termsandconds, name="termsandconds"),
 
 )
 

@@ -8,33 +8,81 @@
 {% block content %}
 
 {% csrf_token %}
-<script
-  src="https://www.paypal.com/sdk/js?client-id=ATSymw6LJvP32iJy2Ze93pCO4Z6i4W60-jxyf6rdCqYV7pI0lZ0OZ9o8xt2W0fDrdLHeCsHEPDgh_ePK&currency=EUR&intent=authorize"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-</script>
 
 <div class="content grid grid-checkout">
 {% if order.is_sampler %}
-
   <div>
 
-    <div class="checkout-title"> <h1>{% trans 'summary-recipt-title' %}</h1></div>
+    <div class="checkout-title">
+      <h1>{% trans 'summary-recipt-title' %}</h1>
+    </div>
+
     <div class="grid subgrid-checkout">
-      <div class="paymentnotes"> {% trans 'this-was-a-sampler' %} </div>
-      <div class="paymentdata"> {% include 'include/payment_options.html' %} </div>
+      <div class="paymentnotes">
+        {% trans 'this-was-a-sampler' %}
+        
+      </div>
+      <div class="paymentdata">
+        {% if order.is_paid %}
+          {% trans 'free-sample-arriving' %}
+        {% else %}
+          {% trans 'free-samples-finished' %}
+
+          <div class="paymentdata">
+          <h3>{% trans 'summary-iban-claim' %}</h3>
+          <h5>{% trans 'ammount' %}</h5>
+          <h2 >€ {{order.final_payment}}</h2>
+          <h5>{% trans 'summary-iban-title' %}</h5>
+          <h2>{% trans 'summary-iban' %}</h2>
+          <h5>{% trans 'summary-SWIFT-title' %}</h5>
+          <h2>{% trans 'summary-SWIFT' %}</h2>
+          <h5>{% trans 'summary-accountholder-title' %}</h5>
+          <h2>{% trans 'summary-accountholder' %}</h2>
+          <h5>{% trans 'subject' %}</h5>
+          <h2>{{order.internal_tracking_id}}</h2>
+          <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
+      </div>
+
+        {% endif %}
+      </div>
     </div>
 
   </div>
+
+  <aside>
+    <div class="asidebox">
+      <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
+      <h4>{% trans 'any-doubt' %}?</h4>
+      {% blocktrans %} consult-support <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a>  consult-support{% endblocktrans %}  
+    </div>
+  </aside>
 
 
 
 {% else %}
 
 
+<style>
+#paypal-container{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-height: 35px;
+    min-width: 200px;
+    max-width: 750px;
+    font-size: 0;
+    }
+</style>
+
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=ATSymw6LJvP32iJy2Ze93pCO4Z6i4W60-jxyf6rdCqYV7pI0lZ0OZ9o8xt2W0fDrdLHeCsHEPDgh_ePK&currency=EUR&intent=authorize"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+  </script>
+
 
   <div>
 
-      <div class="checkout-title">
-        
+    <div class="checkout-title">
+
         {% if prev_page %}
           <a href="{{prv_page|urlencode}}" class="btn btn-primary">
             <svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'back-to-orders'%}</a>
@@ -48,27 +96,46 @@
 
     <div class="grid subgrid-checkout">
       <div class="paymentnotes">
-        {% blocktrans with shipping_date_t=order.wait_time|working_days email_t=order.user.email %} working_days {{ shipping_date_t }} {{ email_t }} {% endblocktrans %}          
+
+        {% blocktrans with shipping_date_t=order.wait_time|working_days email_t=order.user.email %} working_days {{ shipping_date_t }} {{ email_t }} {% endblocktrans %}
+
+
       </div>
 
       <div class="paymentdata">
-        {% include 'include/payment_options.html' %}
+        
+        <h3>{% trans 'summary-iban-claim' %}</h3>
+        <h5>{% trans 'ammount' %}</h5>
+        <h2>€ <span id="id_order_final_payment">{{order.final_payment}}</span></h2>
+        <h5>{% trans 'summary-iban-title' %}</h5>
+        <h2>{% trans 'summary-iban' %}</h2>
+        <h5>{% trans 'summary-SWIFT-title' %}</h5>
+        <h2>{% trans 'summary-SWIFT' %}</h2>
+        <h5>{% trans 'summary-accountholder-title' %}</h5>
+        <h2>{% trans 'summary-accountholder' %}</h2>
+        <h5>{% trans 'subject' %}</h5>
+        <h2 >{% trans 'order' %} <span id="id_order_internal_id">{{order.internal_tracking_id}}</span></h2>
+        <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
       </div>
-
+      
     </div>
-  
-  </div>
+    
 
-{% endif %}
+  </div>
 
   <aside>
     <div class="asidebox">
-      <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home'|title %} </span></a>
+      <a href="{% url 'account'%}" class="btn btn-primary"><span>{% trans 'summary-back-home' %} </span></a>
       <h4>{% trans 'any-doubt' %}?</h4>
-      {% blocktrans %} consult-support <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a>  consult-support{% endblocktrans %}  
+      <p class="note">
+        {% blocktrans %} consult-support <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a>  consult-support{% endblocktrans %}  
+        </p>
+      
     </div>
   </aside>
-  
+
+
+{% endif %}
 </div>
 
 <script>
@@ -78,30 +145,10 @@ function printPage(){
   window.print();
 }
 
-function pay_order(){
-  $.ajax({
-      
-            type: "POST",
-            url: "{% url 'ajax_pay_order' %}",
-            data: {
-                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-                order_id : $( '#id_order_internal_id' ).html(),
-            },
-            success: function(result) {
-              
-                $(".paymentdata").empty();
-                $(".paymentdata").html(result);
 
-            },
-            error: function(result) {
-                console.log('error');
-            }
-        });
-}
 </script>
-<button onclick="pay_order();"> MEH</button>
-<script>
 
+<script>
 
  paypal.Buttons({
     createOrder: function(data, actions) {
@@ -122,8 +169,8 @@ function pay_order(){
 
       return actions.order.authorize().then(function(details) {
         // This function shows a transaction success message to your buyer.
-       pay_order();
        
+        
       });
     }
   }).render('#paypal-button-container');
