@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: fr-BE\n"
-"X-Crowdin-File: /master/locale/fr/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 48\n"
+"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -369,10 +369,12 @@ msgid "enter-new-password"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:10
+#| msgid "password-reset"
 msgid "password-reset-sent"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:19
+#| msgid "password-reset"
 msgid "password-reset-sent-longtext"
 msgstr ""
 
@@ -389,10 +391,12 @@ msgid "this-was-a-sampler"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:25
+#| msgid "receive-sample-home"
 msgid "free-sample-arriving"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:27
+#| msgid "receive-sample-home"
 msgid "free-samples-finished"
 msgstr ""
 
@@ -539,6 +543,7 @@ msgid "product-same-serie"
 msgstr ""
 
 #: taleoftiles/templates/registration/login.html:53
+#| msgid "already-registered"
 msgid "already-logged-in"
 msgstr ""
 
@@ -615,7 +620,7 @@ msgid "consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:143
-#, python-format
+#| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
@@ -850,6 +855,18 @@ msgstr ""
 #: taleoftiles/templates/support.html:170
 msgid "faq-company-3-body"
 msgstr ""
+
+#, fuzzy, python-format
+#~ msgid "paying-now %(date_shipping)s paying-now"
+#~ msgstr ""
+#~ "Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
+#~ "%(date_shipping)s </strong>\n"
+#~ "Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
+#~ "<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
+#~ "preparazione del tuo ordine!\n"
+#~ "\n"
+#~ "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
+#~ "confermato."
 
 #~ msgid "days"
 #~ msgstr "Giorni"
