@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2020-10-25 13:03\n"
+"PO-Revision-Date: 2020-10-26 08:26\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
