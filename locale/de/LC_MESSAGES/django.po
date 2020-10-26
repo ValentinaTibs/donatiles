@@ -1,3 +1,22 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: taleoftiles\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-26 13:16+0000\n"
+"PO-Revision-Date: 2020-10-26 14:07\n"
+"Last-Translator: \n"
+"Language-Team: German, Austria\n"
+"Language: de_AT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: taleoftiles\n"
+"X-Crowdin-Project-ID: 425794\n"
+"X-Crowdin-Language: de-AT\n"
+"X-Crowdin-File: /master/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 24\n"
+
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
 msgstr ""
@@ -427,9 +446,7 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
-msgid ""
-" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
-"com</a>  consult-support"
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:92
@@ -598,7 +615,7 @@ msgid "consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:143
-#, python-format
+#| msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
@@ -833,3 +850,79 @@ msgstr ""
 #: taleoftiles/templates/support.html:170
 msgid "faq-company-3-body"
 msgstr ""
+
+#, fuzzy, python-format
+#~ msgid "paying-now %(date_shipping)s paying-now"
+#~ msgstr ""
+#~ "Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
+#~ "%(date_shipping)s </strong>\n"
+#~ "Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
+#~ "<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
+#~ "preparazione del tuo ordine!\n"
+#~ "\n"
+#~ "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
+#~ "confermato."
+
+#~ msgid "days"
+#~ msgstr "Giorni"
+
+#~ msgid "product-not-samplable"
+#~ msgstr "Non campionabile"
+
+#~ msgid "login-data"
+#~ msgstr "Login"
+
+#~ msgid "catalgoue-page-name"
+#~ msgstr "Catalogo"
+
+#~ msgid "cat-menu-all"
+#~ msgstr "Tutti i prodotti"
+
+#~ msgid "language"
+#~ msgstr "Lingua"
+
+#~ msgid "currency"
+#~ msgstr "Valuta"
+
+#~ msgid "facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "pinterest"
+#~ msgstr "Pinterest"
+
+#~ msgid "instagram"
+#~ msgstr "Instagram"
+
+#~ msgid "read"
+#~ msgstr "Leggi"
+
+#~ msgid "title-team-home"
+#~ msgstr "Chi siamo"
+
+#~ msgid "summary-long-text1"
+#~ msgstr "Potrai pagare con bonifico bancario"
+
+#~ msgid "summary-page-title"
+#~ msgstr "Riepilogo del tuo ordine"
+
+#~ msgid "product"
+#~ msgstr "Prodotto"
+
+#~ msgid "delete"
+#~ msgstr "Cancella"
+
+#~ msgid "box"
+#~ msgstr "Scatola"
+
+#~ msgid "support-page-name"
+#~ msgstr "Assistenza"
+
+#~ msgid "write-us-orders"
+#~ msgstr "Contattaci per il tuo ordine"
+
+#~ msgid "write-us-sells"
+#~ msgstr "Contattaci"
+
+#~ msgid "write-us-support"
+#~ msgstr "Contattaci per avere assistenza"
+
