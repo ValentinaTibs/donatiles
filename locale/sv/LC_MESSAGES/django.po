@@ -4,15 +4,18 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 12:08+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
+"Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: sv-SE\n"
-"X-Crowdin-File: /master/locale/nl/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 52\n"
+"X-Crowdin-File: /master/locale/lb/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 50\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -848,105 +851,12 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
-#~ msgid "product-not-samplable"
-#~ msgstr "Not Samplable"
+#~ msgid "unique_id"
+#~ msgstr "STATIC DE"
 
-#~ msgid "login-data"
-#~ msgstr "Login"
+#~ msgid "Sign Up"
+#~ msgstr "SIGNUP DE"
 
-#~ msgid "cat-menu-all"
-#~ msgstr "All products"
-
-#~ msgid "read"
-#~ msgstr "read"
-
-#~ msgid "title-team-home"
-#~ msgstr "The Team"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "summary-long-text1"
-#~ msgstr "Shipping"
-
-#~ msgid "summary-shipping-title"
-#~ msgstr "Shipping"
-
-#~ msgid "summary-shipping-subtitle"
-#~ msgstr ""
-#~ "For all your purhcases on TaleofTiles, shipping allover Europe is free!"
-
-#~ msgid ""
-#~ "Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
-#~ msgstr ""
-#~ "Choose among over 100 selected tiles in <strong> Fine Porcelain</strong>"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-3"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-4"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-4-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-5"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-5-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-6"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-6-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "order"
-#~ msgid "faq-order-2"
-#~ msgstr "order"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-order-2-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "order"
-#~ msgid "faq-order-3"
-#~ msgstr "order"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-order-3-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-payment-3"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-payment-4"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-payment-5"
-#~ msgstr "Shipping"
+#~ msgid "POCCOZIO"
+#~ msgstr "LAZYDE"
 
