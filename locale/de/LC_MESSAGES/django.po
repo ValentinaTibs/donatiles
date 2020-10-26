@@ -4,15 +4,18 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 12:08+0000\n"
 "PO-Revision-Date: 2020-10-26 12:56\n"
+"Last-Translator: \n"
 "Language-Team: German, Austria\n"
 "Language: de_AT\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: de-AT\n"
-"X-Crowdin-File: /master/locale/nl/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 52\n"
+"X-Crowdin-File: /master/locale/fr/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 48\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -848,105 +851,66 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
+#~ msgid "days"
+#~ msgstr "Giorni"
+
 #~ msgid "product-not-samplable"
-#~ msgstr "Not Samplable"
+#~ msgstr "Non campionabile"
 
 #~ msgid "login-data"
 #~ msgstr "Login"
 
+#~ msgid "catalgoue-page-name"
+#~ msgstr "Catalogo"
+
 #~ msgid "cat-menu-all"
-#~ msgstr "All products"
+#~ msgstr "Tutti i prodotti"
+
+#~ msgid "language"
+#~ msgstr "Lingua"
+
+#~ msgid "currency"
+#~ msgstr "Valuta"
+
+#~ msgid "facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "pinterest"
+#~ msgstr "Pinterest"
+
+#~ msgid "instagram"
+#~ msgstr "Instagram"
 
 #~ msgid "read"
-#~ msgstr "read"
+#~ msgstr "Leggi"
 
 #~ msgid "title-team-home"
-#~ msgstr "The Team"
+#~ msgstr "Chi siamo"
 
-#, fuzzy
-#~| msgid "summary-shipping-title"
 #~ msgid "summary-long-text1"
-#~ msgstr "Shipping"
+#~ msgstr "Potrai pagare con bonifico bancario"
 
-#~ msgid "summary-shipping-title"
-#~ msgstr "Shipping"
+#~ msgid "summary-page-title"
+#~ msgstr "Riepilogo del tuo ordine"
 
-#~ msgid "summary-shipping-subtitle"
-#~ msgstr ""
-#~ "For all your purhcases on TaleofTiles, shipping allover Europe is free!"
+#~ msgid "product"
+#~ msgstr "Prodotto"
 
-#~ msgid ""
-#~ "Scegli tra oltre 100 mattonelle in <strong>Gres Fine Porcellanto</strong>"
-#~ msgstr ""
-#~ "Choose among over 100 selected tiles in <strong> Fine Porcelain</strong>"
+#~ msgid "delete"
+#~ msgstr "Cancella"
 
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-3"
-#~ msgstr "Shipping"
+#~ msgid "box"
+#~ msgstr "Scatola"
 
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-4"
-#~ msgstr "Shipping"
+#~ msgid "support-page-name"
+#~ msgstr "Assistenza"
 
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-4-body"
-#~ msgstr "Shipping"
+#~ msgid "write-us-orders"
+#~ msgstr "Contattaci per il tuo ordine"
 
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-5"
-#~ msgstr "Shipping"
+#~ msgid "write-us-sells"
+#~ msgstr "Contattaci"
 
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-5-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-6"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-shipping-6-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "order"
-#~ msgid "faq-order-2"
-#~ msgstr "order"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-order-2-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "order"
-#~ msgid "faq-order-3"
-#~ msgstr "order"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-order-3-body"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-payment-3"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-payment-4"
-#~ msgstr "Shipping"
-
-#, fuzzy
-#~| msgid "summary-shipping-title"
-#~ msgid "faq-payment-5"
-#~ msgstr "Shipping"
+#~ msgid "write-us-support"
+#~ msgstr "Contattaci per avere assistenza"
 
