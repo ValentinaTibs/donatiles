@@ -29,7 +29,7 @@
           <div class="paymentdata">
           <h3>{% trans 'summary-iban-claim' %}</h3>
           <h5>{% trans 'ammount' %}</h5>
-          <h2>€ {{order.final_payment}}</h2>
+          <h2 >€ {{order.final_payment}}</h2>
           <h5>{% trans 'summary-iban-title' %}</h5>
           <h2>{% trans 'summary-iban' %}</h2>
           <h5>{% trans 'summary-SWIFT-title' %}</h5>
@@ -37,7 +37,7 @@
           <h5>{% trans 'summary-accountholder-title' %}</h5>
           <h2>{% trans 'summary-accountholder' %}</h2>
           <h5>{% trans 'subject' %}</h5>
-          <h2>{% trans 'order' %} {{order.internal_tracking_id}}</h2>
+          <h2>{{order.internal_tracking_id}}</h2>
           <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
       </div>
 
@@ -71,6 +71,12 @@
     font-size: 0;
     }
 </style>
+
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=ATSymw6LJvP32iJy2Ze93pCO4Z6i4W60-jxyf6rdCqYV7pI0lZ0OZ9o8xt2W0fDrdLHeCsHEPDgh_ePK&currency=EUR&intent=authorize"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+  </script>
+
+
   <div>
 
     <div class="checkout-title">
@@ -91,14 +97,17 @@
 
         {% blocktrans with shipping_date_t=order.wait_time|working_days email_t=order.user.email %} working_days {{ shipping_date_t }} {{ email_t }} {% endblocktrans %}
 
+          
+
       </div>
 
-
-      
       <div class="paymentdata">
+        <h3>{% trans 'pay_via_paypal_or_creditcard' %}</h3>
+        <div id="paypal-button-container"></div>
+
         <h3>{% trans 'summary-iban-claim' %}</h3>
         <h5>{% trans 'ammount' %}</h5>
-        <h2>€ {{order.final_payment}}</h2>
+        <h2>€ <span id="id_order_final_payment">{{order.final_payment}}</span></h2>
         <h5>{% trans 'summary-iban-title' %}</h5>
         <h2>{% trans 'summary-iban' %}</h2>
         <h5>{% trans 'summary-SWIFT-title' %}</h5>
@@ -106,9 +115,10 @@
         <h5>{% trans 'summary-accountholder-title' %}</h5>
         <h2>{% trans 'summary-accountholder' %}</h2>
         <h5>{% trans 'subject' %}</h5>
-        <h2>{% trans 'order' %} {{order.internal_tracking_id}}</h2>
+        <h2 >{% trans 'order' %} <span id="id_order_internal_id">{{order.internal_tracking_id}}</span></h2>
         <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span></button>
       </div>
+      
     </div>
     
 
@@ -135,6 +145,53 @@ document.querySelector( '.nav-primary > ul > li:nth-child(3)' ).classList.add( '
 function printPage(){
   window.print();
 }
+
 </script>
 
+<script>
+
+ paypal.Buttons({
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        id: $( '#id_order_internal_id' ).html(),
+        "intent": "AUTHORIZE",
+        purchase_units: [{
+          amount: {
+            "currency_code": "EUR",
+            value: String($( '#id_order_final_payment' ).html()),
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+
+      return actions.order.authorize().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+       
+        $.ajax({
+      
+            type: "POST",
+            url: "{% url 'ajax_pay_order' %}",
+            data: {
+                order_id : $( '#id_order_internal_id' ).html(),
+                confirmation_id : $( '#id_order_internal_id' ).html(),
+                paymen_by : 'paypal'
+            },
+            success: function(result) {
+                // parse the query string into an object 
+            },
+            error: function(result) {
+                console.log('error');
+            }
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+
+
 {% endblock %}
+
+        

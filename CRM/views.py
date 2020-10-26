@@ -390,3 +390,7 @@ def add_chart(request, product_code):
             chart_item.save()
     return redirect(request.META.get('HTTP_REFERER'))
 
+
+
+def ajax_pay_order(request):
+    return render(request, "", {" ": None,' ':None })

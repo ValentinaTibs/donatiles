@@ -35,10 +35,20 @@
 </script>
 
 
+<!-- PayPal -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+
   {% block meta-tag %} {% endblock %}
+
+  
 </head>
 
 <body>
+
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=ATSymw6LJvP32iJy2Ze93pCO4Z6i4W60-jxyf6rdCqYV7pI0lZ0OZ9o8xt2W0fDrdLHeCsHEPDgh_ePK"> 
+  </script>
 
 {% load i18n %}
 {% load view_extra %}
@@ -102,6 +112,8 @@
   </nav>
 
 </header>
+
+
 {% block content %} {% endblock %}
 
 <!--============================
