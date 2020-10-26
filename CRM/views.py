@@ -141,8 +141,8 @@ def shipping(request, id_):
             order.save()
 
             return redirect('payment', id_ = order.internal_tracking_id)
-        
-    return render(request, "shipping.html", {'form':shipping_form,'order':order,'prv_page': request.session['prev_page']})   
+    prv_page = request.session.get('prev_page')
+    return render(request, "shipping.html", {'form':shipping_form,'order':order,'prv_page': prv_page})   
 
 
 def add_sample_order(request):
