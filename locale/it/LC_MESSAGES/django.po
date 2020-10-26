@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 12:53+0000\n"
+"POT-Creation-Date: 2020-10-26 12:08+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -71,7 +71,7 @@ msgid "sent-date"
 msgstr "Data d'invio"
 
 #: taleoftiles/templates/account.html:41 taleoftiles/templates/order.html:19
-#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:110
+#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:109
 msgid "order"
 msgstr "Ordine"
 
@@ -126,48 +126,48 @@ msgid "payment"
 msgstr "Pagamenti"
 
 #: taleoftiles/templates/checkout_base.html:127
-#: taleoftiles/templates/empty_base.html:261
+#: taleoftiles/templates/empty_base.html:263
 msgid "tiles"
 msgstr "Mattonelle"
 
-#: taleoftiles/templates/empty_base.html:53
-#: taleoftiles/templates/empty_base.html:186
+#: taleoftiles/templates/empty_base.html:55
+#: taleoftiles/templates/empty_base.html:188
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 msgid "support"
 msgstr "Assistenza"
 
-#: taleoftiles/templates/empty_base.html:56
+#: taleoftiles/templates/empty_base.html:58
 msgid "account"
 msgstr "Il tuo Account"
 
-#: taleoftiles/templates/empty_base.html:57
+#: taleoftiles/templates/empty_base.html:59
 msgid "logout"
 msgstr "Logout"
 
-#: taleoftiles/templates/empty_base.html:59
-#: taleoftiles/templates/empty_base.html:188
+#: taleoftiles/templates/empty_base.html:61
+#: taleoftiles/templates/empty_base.html:190
 msgid "login-register"
 msgstr "Login-Registrati"
 
-#: taleoftiles/templates/empty_base.html:104
-#: taleoftiles/templates/empty_base.html:168
+#: taleoftiles/templates/empty_base.html:106
+#: taleoftiles/templates/empty_base.html:170
 msgid "catalogue-menu"
 msgstr "Catalogo"
 
-#: taleoftiles/templates/empty_base.html:121
-#: taleoftiles/templates/empty_base.html:185
+#: taleoftiles/templates/empty_base.html:123
+#: taleoftiles/templates/empty_base.html:187
 msgid "blog-menu"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/empty_base.html:227
+#: taleoftiles/templates/empty_base.html:229
 msgid "of"
 msgstr "Di"
 
-#: taleoftiles/templates/empty_base.html:227
+#: taleoftiles/templates/empty_base.html:229
 msgid "added-to-chart"
 msgstr "Aggiunto al carrello"
 
-#: taleoftiles/templates/empty_base.html:228
+#: taleoftiles/templates/empty_base.html:230
 msgid "open-chart"
 msgstr "Vai al carrello"
 
@@ -318,8 +318,8 @@ msgstr ""
 msgid "order-page-name"
 msgstr "Negozio online di mattonelle per pavimenti e rivestimenti"
 
-#: taleoftiles/templates/order.html:18 taleoftiles/templates/payment.html:83
-#: taleoftiles/templates/payment.html:86
+#: taleoftiles/templates/order.html:18 taleoftiles/templates/payment.html:80
+#: taleoftiles/templates/payment.html:83
 msgid "back-to-orders"
 msgstr "Torna indietro"
 
@@ -410,15 +410,25 @@ msgstr ""
 msgid "payment-title"
 msgstr "Pagamenti"
 
-#: taleoftiles/templates/payment.html:18 taleoftiles/templates/payment.html:88
+#: taleoftiles/templates/payment.html:15 taleoftiles/templates/payment.html:85
 msgid "summary-recipt-title"
 msgstr "Come effettuare il pagamento"
 
-#: taleoftiles/templates/payment.html:23
+#: taleoftiles/templates/payment.html:20
 msgid "this-was-a-sampler"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:30
+#: taleoftiles/templates/payment.html:25
+#, fuzzy
+#| msgid "receive-sample-home"
+msgid "free-sample-arriving"
+msgstr ""
+"Hai terminato i TaleOfTiles book gratuiti a tua disposizione. Per avere "
+"nuovi TaleOfTiles book gratuiti completa un ordine. \n"
+" Puoi comunque riceverlo a casa tua con un piccolo contributo per le spese "
+"di spedizione."
+
+#: taleoftiles/templates/payment.html:27
 #, fuzzy
 #| msgid "receive-sample-home"
 msgid "free-samples-finished"
@@ -428,68 +438,69 @@ msgstr ""
 " Puoi comunque riceverlo a casa tua con un piccolo contributo per le spese "
 "di spedizione."
 
-#: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:100
+#: taleoftiles/templates/payment.html:30 taleoftiles/templates/payment.html:99
 msgid "summary-iban-claim"
 msgstr "Effettua un bonifico con questi dati per confermare il tuo ordine:"
 
-#: taleoftiles/templates/payment.html:34 taleoftiles/templates/payment.html:101
+#: taleoftiles/templates/payment.html:31 taleoftiles/templates/payment.html:100
 msgid "ammount"
 msgstr "Quantità"
 
-#: taleoftiles/templates/payment.html:36 taleoftiles/templates/payment.html:103
+#: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:102
 msgid "summary-iban-title"
 msgstr "Iban"
 
-#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:104
+#: taleoftiles/templates/payment.html:34 taleoftiles/templates/payment.html:103
 msgid "summary-iban"
 msgstr "IT 72Q0832773030000000002858"
 
-#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:105
+#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:104
 msgid "summary-SWIFT-title"
 msgstr "swift code"
 
-#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:106
+#: taleoftiles/templates/payment.html:36 taleoftiles/templates/payment.html:105
 msgid "summary-SWIFT"
 msgstr "----"
 
-#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:107
+#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:106
 msgid "summary-accountholder-title"
 msgstr "intestato a"
 
-#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:108
+#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:107
 msgid "summary-accountholder"
 msgstr "Tale of Tiles srls"
 
-#: taleoftiles/templates/payment.html:42 taleoftiles/templates/payment.html:109
+#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:108
 msgid "subject"
 msgstr "Oggetto"
 
-#: taleoftiles/templates/payment.html:44 taleoftiles/templates/payment.html:111
+#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:110
 msgid "print-data"
 msgstr "Stampa questa pagina"
 
-#: taleoftiles/templates/payment.html:55 taleoftiles/templates/payment.html:120
+#: taleoftiles/templates/payment.html:52 taleoftiles/templates/payment.html:119
 #: taleoftiles/templates/summary.html:17 taleoftiles/templates/summary.html:22
 msgid "summary-back-home"
 msgstr "Torna a Tale of Tiles"
 
-#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:121
+#: taleoftiles/templates/payment.html:53 taleoftiles/templates/payment.html:120
 msgid "any-doubt"
 msgstr "Hai qualche dubbio"
 
-#: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:123
+#: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
 msgstr "Consulta l'assistenza oppure scrivici a info@taleoftiles.com"
 
-#: taleoftiles/templates/payment.html:94
-msgid " paying-now <strong>date-shipping</strong> paying-now"
+#: taleoftiles/templates/payment.html:92
+#, python-format
+msgid " working_days %(shipping_date_t)s %(email_t)s "
 msgstr ""
-"Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong>date-"
-"shipping </strong>\n"
-"Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
-"<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
+"Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> %(shipping_date_t)s </"
+"strong><br/><br/>"
+"Appena riceveremo il pagamento, ti invieremo una email di conferma a  "
+"<strong> %(email_t)s </strong> ed avvieremo subito la "
 "preparazione del tuo ordine!\n"
 "\n"
 "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
@@ -1055,6 +1066,18 @@ msgstr ""
 "Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
 "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
 "(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
+
+#, fuzzy, python-format
+#~ msgid "paying-now %(date_shipping)s paying-now"
+#~ msgstr ""
+#~ "Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
+#~ "%(date_shipping)s </strong>\n"
+#~ "Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
+#~ "<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
+#~ "preparazione del tuo ordine!\n"
+#~ "\n"
+#~ "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
+#~ "confermato."
 
 #~ msgid "days"
 #~ msgstr "Giorni"
