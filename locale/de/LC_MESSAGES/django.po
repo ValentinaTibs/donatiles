@@ -3,7 +3,11 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 12:08+0000\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2020-10-26 08:26\n"
+=======
+"PO-Revision-Date: 2020-10-26 12:56\n"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 "Last-Translator: \n"
 "Language-Team: German, Austria\n"
 "Language: de_AT\n"
@@ -14,8 +18,8 @@ msgstr ""
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: de-AT\n"
-"X-Crowdin-File: /master/locale/de/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 20\n"
+"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -369,10 +373,12 @@ msgid "enter-new-password"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:10
+#| msgid "password-reset"
 msgid "password-reset-sent"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:19
+#| msgid "password-reset"
 msgid "password-reset-sent-longtext"
 msgstr ""
 
@@ -389,10 +395,18 @@ msgid "this-was-a-sampler"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:25
+<<<<<<< HEAD
+=======
+#| msgid "receive-sample-home"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 msgid "free-sample-arriving"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:27
+<<<<<<< HEAD
+=======
+#| msgid "receive-sample-home"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 msgid "free-samples-finished"
 msgstr ""
 
@@ -446,9 +460,13 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
+<<<<<<< HEAD
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
+=======
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 msgstr ""
 
 #: taleoftiles/templates/payment.html:92
@@ -541,6 +559,7 @@ msgid "product-same-serie"
 msgstr ""
 
 #: taleoftiles/templates/registration/login.html:53
+#| msgid "already-registered"
 msgid "already-logged-in"
 msgstr ""
 
@@ -617,7 +636,7 @@ msgid "consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:143
-#, python-format
+#| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
@@ -853,11 +872,83 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
-#~ msgid "unique_id"
-#~ msgstr "STATIC DE"
+#, fuzzy, python-format
+#~ msgid "paying-now %(date_shipping)s paying-now"
+#~ msgstr ""
+#~ "Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
+#~ "%(date_shipping)s </strong>\n"
+#~ "Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
+#~ "<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
+#~ "preparazione del tuo ordine!\n"
+#~ "\n"
+#~ "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
+#~ "confermato."
 
-#~ msgid "Sign Up"
-#~ msgstr "SIGNUP DE"
+#~ msgid "days"
+#~ msgstr "Giorni"
 
+#~ msgid "product-not-samplable"
+#~ msgstr "Non campionabile"
+
+#~ msgid "login-data"
+#~ msgstr "Login"
+
+#~ msgid "catalgoue-page-name"
+#~ msgstr "Catalogo"
+
+#~ msgid "cat-menu-all"
+#~ msgstr "Tutti i prodotti"
+
+#~ msgid "language"
+#~ msgstr "Lingua"
+
+#~ msgid "currency"
+#~ msgstr "Valuta"
+
+#~ msgid "facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "pinterest"
+#~ msgstr "Pinterest"
+
+#~ msgid "instagram"
+#~ msgstr "Instagram"
+
+#~ msgid "read"
+#~ msgstr "Leggi"
+
+#~ msgid "title-team-home"
+#~ msgstr "Chi siamo"
+
+#~ msgid "summary-long-text1"
+#~ msgstr "Potrai pagare con bonifico bancario"
+
+#~ msgid "summary-page-title"
+#~ msgstr "Riepilogo del tuo ordine"
+
+#~ msgid "product"
+#~ msgstr "Prodotto"
+
+#~ msgid "delete"
+#~ msgstr "Cancella"
+
+#~ msgid "box"
+#~ msgstr "Scatola"
+
+#~ msgid "support-page-name"
+#~ msgstr "Assistenza"
+
+#~ msgid "write-us-orders"
+#~ msgstr "Contattaci per il tuo ordine"
+
+#~ msgid "write-us-sells"
+#~ msgstr "Contattaci"
+
+<<<<<<< HEAD
 #~ msgid "POCCOZIO"
 #~ msgstr "LAZYDE"
+=======
+#~ msgid "write-us-support"
+#~ msgstr "Contattaci per avere assistenza"
+
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc

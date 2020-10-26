@@ -3,7 +3,11 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 12:08+0000\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2020-10-26 08:33\n"
+=======
+"PO-Revision-Date: 2020-10-26 12:55\n"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 "Last-Translator: \n"
 "Language-Team: Luxembourgish\n"
 "Language: lb_LU\n"
@@ -14,8 +18,8 @@ msgstr ""
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: lb\n"
-"X-Crowdin-File: /master/locale/de/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 20\n"
+"X-Crowdin-File: /master/locale/sv/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 54\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -446,9 +450,13 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
+<<<<<<< HEAD
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
+=======
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 msgstr ""
 
 #: taleoftiles/templates/payment.html:92

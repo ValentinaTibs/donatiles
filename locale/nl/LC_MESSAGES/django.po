@@ -3,16 +3,31 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 12:08+0000\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2020-10-26 08:26\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+=======
+"PO-Revision-Date: 2020-10-26 12:56\n"
+"Last-Translator: \n"
+"Language-Team: Dutch\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: nl\n"
+<<<<<<< HEAD
 "X-Crowdin-File: /master/locale/en/LC_MESSAGES/django.po\n"
 "X-Crowdin-File-ID: 24\n"
+=======
+"X-Crowdin-File: /master/locale/lb/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 50\n"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -443,9 +458,13 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
+<<<<<<< HEAD
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
+=======
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
 msgstr ""
 
 #: taleoftiles/templates/payment.html:92
@@ -850,6 +869,7 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
+<<<<<<< HEAD
 #~ msgid "product-not-samplable"
 #~ msgstr "Not Samplable"
 
@@ -951,3 +971,14 @@ msgstr ""
 #~| msgid "summary-shipping-title"
 #~ msgid "faq-payment-5"
 #~ msgstr "Shipping"
+=======
+#~ msgid "unique_id"
+#~ msgstr "STATIC DE"
+
+#~ msgid "Sign Up"
+#~ msgstr "SIGNUP DE"
+
+#~ msgid "POCCOZIO"
+#~ msgstr "LAZYDE"
+
+>>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
