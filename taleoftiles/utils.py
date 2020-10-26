@@ -34,10 +34,10 @@ COMPLETION_STATUS = (
 ORDER_STATUS = (
     ('w', 'In Wait'),
     ('i', 'Received'),
-    ('p', 'In Preparazione'),
-    ('s', 'Spedito'),
+    ('p', 'In Preparation'),
+    ('s', 'Sent'),
     ('l', 'Lost'),
-    ('r', 'Ricevuto'),
+    ('r', 'Received'),
     ('c', 'Confermato'),
 ) 
 

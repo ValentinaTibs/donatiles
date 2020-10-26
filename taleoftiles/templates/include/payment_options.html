@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load view_extra %}
+{% load static %}
+
+{% if order.is_sampler %}
+  {% if order.is_paid %}
+          <h2>{% trans 'free-sample-arriving' %}</h2>
+  {% else %}
+          <h2>{% trans 'free-samples-finished' %}</h2>
+
+          
+          <h3>{% trans 'summary-iban-claim' %}</h3>
+          <h5>{% trans 'ammount' %}</h5>
+          <h2 >€ {{order.final_payment}}</h2>
+          <h5>{% trans 'summary-iban-title' %}</h5>
+          <h2>{% trans 'summary-iban' %}</h2>
+          <h5>{% trans 'summary-SWIFT-title' %}</h5>
+          <h2>{% trans 'summary-SWIFT' %}</h2>
+          <h5>{% trans 'summary-accountholder-title' %}</h5>
+          <h2>{% trans 'summary-accountholder' %}</h2>
+          <h5>{% trans 'subject' %}</h5>
+          <h2>{{order.internal_tracking_id}}</h2>
+          <button class="btn btn-secondary" onclick="printPage();">
+            <svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg>
+            <span>{% trans 'print-data'%}</span>
+          </button>      
+  {% endif %}
+{% else %}
+
+  {% if order.is_paid %}
+            <h2>{% trans 'order' %}:{{order.internal_tracking_id}}</h2>
+            <h3>{% trans 'payment-success' %}</h3>
+            <h5>{% trans 'payment-success-subtitle' %}</h5>
+  {% else %}          
+
+            <h3>{% trans 'pay_via_paypal_or_creditcard' %}</h3>
+            <div id="paypal-button-container"></div>
+
+            <h3>{% trans 'summary-iban-claim' %}</h3>
+            <h5>{% trans 'ammount' %}</h5>
+            <h2 >€ {{order.final_payment}}</h2>
+            <h5>{% trans 'summary-iban-title' %}</h5>
+            <h2>{% trans 'summary-iban' %}</h2>
+            <h5>{% trans 'summary-SWIFT-title' %}</h5>
+            <h2>{% trans 'summary-SWIFT' %}</h2>
+            <h5>{% trans 'summary-accountholder-title' %}</h5>
+            <h2>{% trans 'summary-accountholder' %}</h2>
+            <h5>{% trans 'subject' %}</h5>
+            <h2>{{order.internal_tracking_id}}</h2>
+            <button class="btn btn-secondary" onclick="printPage();"><svg class="icon-l icon">
+              <use xlink:href="{% static 'images/svgdefs.svg#icon-print' %}"/></svg><span>{% trans 'print-data'%}</span>
+            </button>
+
+  {% endif %}
+{% endif %}        

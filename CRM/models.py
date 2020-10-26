@@ -42,7 +42,6 @@ user_logged_in.connect(pour_charts_and_samplers)
 
 #####  --------------
         
-                
 
 class Profile(models.Model):
     user        = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
@@ -149,6 +148,16 @@ class Order(models.Model):
                     my_max = max(my_max,chart_item.product.wait_time)
             return my_max
     
+    def pay_order(self):
+        if self.is_sampler:
+            for sampler in self.sampler.all():
+                sampler.pay_it()
+        else:
+            for chart in self.charts.all():
+                chart.pay_it()
+                
+        self.modified_at = timezone.now()    
+        self.save()
 
 class ActiveChartManager(models.Manager):
     def get_queryset(self):
@@ -201,6 +210,11 @@ class Chart(models.Model):
         if stat == 'p':
             return True
         return False
+    
+    def pay_it(self):
+        self.completion_status = 'p'
+        self.save()
+
 
 class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
@@ -297,6 +311,10 @@ class Sampler(models.Model):
             return True
         return False
 
+    def pay_it(self):
+        self.completion_status = 'p'
+        self.save()
+               
 class Sample(models.Model):
     sampler     = models.ForeignKey(Sampler, verbose_name="Samples", null=True, blank = True, on_delete=models.CASCADE, related_name='samples')
     product     = models.ForeignKey(Product,verbose_name="Products",null=True, blank = True, on_delete=models.CASCADE, related_name='samples')

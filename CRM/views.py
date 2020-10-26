@@ -47,11 +47,9 @@ def summary(request, id_ ):
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-    
-    # if order.is_paid():
-    #     return redirect('payment', id_ = order.internal_tracking_id)
-            
-    return render(request, "summary.html", {'order':order,'prv_page':request.session['prev_page']})     
+        
+    prv_page = request.session.get('prev_page')            
+    return render(request, "summary.html", {'order':order,'prv_page':prv_page})     
 
 def order(request, id_ ):
     
@@ -393,4 +391,16 @@ def add_chart(request, product_code):
 
 
 def ajax_pay_order(request):
-    return render(request, "", {" ": None,' ':None })
+    if request.is_ajax():
+        order_id = request.POST.get('order_id', None)
+        try:
+            order = Order.objects.get( internal_tracking_id = order_id)
+        except ObjectDoesNotExist:
+            return render(request, "empty.html",{"message": "This order does not exist" })
+        
+        if order.is_paid():
+            return render(request, "include/payment_options.html", {"order": order })
+        else:
+            order.pay_order()
+
+    return render(request, "include/payment_options.html", {"order": order })

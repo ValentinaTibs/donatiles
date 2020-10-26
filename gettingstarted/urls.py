@@ -57,7 +57,7 @@ urlpatterns += i18n_patterns(
     path("shipping/<str:id_>", CRM.views.shipping, name="shipping"),
     path("payment/<str:id_>",   CRM.views.payment,  name="payment"),
     path("order/<str:id_>",   CRM.views.order,  name="order"),
-    path("ajax_pay_order",   CRM.views.order,  name="ajax_pay_order"),
+    path("ajax_pay_order",   CRM.views.ajax_pay_order,  name="ajax_pay_order"),
     
 
     path("blog/",                       blog.views.blog, name="blog"),
