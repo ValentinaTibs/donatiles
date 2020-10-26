@@ -1,21 +1,16 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: taleoftiles\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-26 13:16+0000\n"
-"PO-Revision-Date: 2020-10-26 12:56\n"
-"Last-Translator: Valentina \n"
-"Language-Team: Italian\n"
-"Language: it_IT\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/locale/lb/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 50\n"
+"X-Crowdin-File: /master/locale/de/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 20\n"
+"Project-Id-Version: taleoftiles\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"PO-Revision-Date: 2020-10-26 14:07\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -389,14 +384,8 @@ msgid "this-was-a-sampler"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:25
-#, fuzzy
-#| msgid "receive-sample-home"
 msgid "free-sample-arriving"
 msgstr ""
-"Hai terminato i TaleOfTiles book gratuiti a tua disposizione. Per avere "
-"nuovi TaleOfTiles book gratuiti completa un ordine. \n"
-" Puoi comunque riceverlo a casa tua con un piccolo contributo per le spese "
-"di spedizione."
 
 #: taleoftiles/templates/payment.html:27
 msgid "free-samples-finished"
@@ -452,22 +441,13 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
-msgid ""
-" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
-"com</a>  consult-support"
-msgstr "Consulta l'assistenza oppure scrivici a info@taleoftiles.com"
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+msgstr ""
 
 #: taleoftiles/templates/payment.html:92
 #, python-format
 msgid " working_days %(shipping_date_t)s %(email_t)s "
 msgstr ""
-"Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
-"%(shipping_date_t)s </strong><br/><br/>Appena riceveremo il pagamento, ti "
-"invieremo una email di conferma a  <strong> %(email_t)s </strong> ed "
-"avvieremo subito la preparazione del tuo ordine!\n"
-"\n"
-"Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
-"confermato."
 
 #: taleoftiles/templates/post.html:6
 msgid "the_blog"
@@ -865,3 +845,4 @@ msgstr ""
 #: taleoftiles/templates/support.html:170
 msgid "faq-company-3-body"
 msgstr ""
+
