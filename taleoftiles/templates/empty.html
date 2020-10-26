@@ -3,5 +3,27 @@
 {% load static %}
 
 
-{{message}}
-        
+
+
+
+{% extends "empty_base.html" %}
+{% load i18n %}
+{% load view_extra %}
+
+{% block title%} {% trans 'blog-page-name' %} {% endblock%}
+
+{% load static %}
+
+{% block content %}
+
+
+        {{message}}
+
+	{% autoescape off %}
+		<p>{{ publication.content }}</p>
+	{% endautoescape %}
+
+
+
+{% endblock %}
+
