@@ -9,9 +9,6 @@
 
 <div class="content grid grid-checkout">
 {% if order.is_sampler %}
-
-
-
   <div>
 
     <div class="checkout-title">
@@ -25,7 +22,7 @@
       </div>
       <div class="paymentdata">
         {% if order.is_paid %}
-          Arriverà gratis a casa tua
+          {% trans 'free-sample-arriving' %}
         {% else %}
           {% trans 'free-samples-finished' %}
 
@@ -91,7 +88,9 @@
 
     <div class="grid subgrid-checkout">
       <div class="paymentnotes">
-        {% blocktrans %} paying-now <strong>date-shipping</strong> paying-now{% endblocktrans %}
+
+        {% blocktrans with shipping_date_t=order.wait_time|working_days email_t=order.user.email %} working_days {{ shipping_date_t }} {{ email_t }} {% endblocktrans %}
+
       </div>
 
 

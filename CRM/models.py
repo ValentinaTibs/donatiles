@@ -93,6 +93,7 @@ class Order(models.Model):
     final_payment           = models.PositiveIntegerField( default=0 )   
     is_sampler              = models.BooleanField(default = False)
     shipping_date           = models.DateTimeField(editable=True,null= True, blank=True)
+    
     #shipping                = models.ForeignKey(Shipping, null= True,on_delete=models.SET_NULL)
     
     def save(self, *args, **kwargs):
@@ -137,6 +138,16 @@ class Order(models.Model):
                 if not chart.is_paid():
                     return False
         return True    
+    
+    def wait_time(self):
+        if self.is_sampler:
+            return 5
+        else:
+            my_max = 0
+            for chart in self.charts.all():
+                for chart_item in chart.chart_item.all():
+                    my_max = max(my_max,chart_item.product.wait_time)
+            return my_max
     
 
 class ActiveChartManager(models.Manager):

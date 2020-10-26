@@ -38,6 +38,10 @@ def woking_days(days):
     the_day = np.busday_offset(np.datetime64('today'), days, roll='forward')
     return the_day.item().strftime('%d.%m.%Y')
 
+@register.filter
+def working_days(days):
+    return woking_days(days)
+
 @register.simple_tag
 def min_price(obj, min_price, *args):
     name = (args)[0]
