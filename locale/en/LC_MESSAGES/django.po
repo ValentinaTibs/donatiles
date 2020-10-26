@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-25 12:53+0000\n"
-"PO-Revision-Date: 2020-10-26 09:47\n"
+"PO-Revision-Date: 2020-10-26 08:26\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
 "Language: en_US\n"
@@ -14,127 +14,127 @@ msgstr ""
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: en\n"
-"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 28\n"
+"X-Crowdin-File: /master/locale/de/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 20\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
-msgstr "Wrong Product"
+msgstr ""
 
 #: CRM/forms.py:69
 msgid "Not Enought"
-msgstr "Not Enought"
+msgstr ""
 
 #: CRM/forms.py:118
 msgid "Invalid email"
-msgstr "Invalid email"
+msgstr ""
 
 #: CRM/forms.py:122
 msgid "Duplicated email"
-msgstr "Duplicated Email"
+msgstr ""
 
 #: gettingstarted/settings.py:118
 msgid "English"
-msgstr "English"
+msgstr ""
 
 #: gettingstarted/settings.py:119
 msgid "Italiano"
-msgstr "Italian"
+msgstr ""
 
 #: gettingstarted/settings.py:120
 msgid "Svenska"
-msgstr "Swedish"
+msgstr ""
 
 #: gettingstarted/settings.py:121
 msgid "Deutch"
-msgstr "Deutch"
+msgstr ""
 
 #: taleoftiles/templates/account.html:6
 msgid "account-page-name"
-msgstr "Your Account"
+msgstr ""
 
 #: taleoftiles/templates/account.html:27 taleoftiles/templates/support.html:35
 #: taleoftiles/templates/support.html:111
 msgid "orders"
-msgstr "Orders"
+msgstr ""
 
 #: taleoftiles/templates/account.html:31
 msgid "sampler"
-msgstr "Tale of Tiles Book"
+msgstr ""
 
 #: taleoftiles/templates/account.html:32 taleoftiles/templates/order.html:120
 msgid "order-status"
-msgstr "Order Status"
+msgstr ""
 
 #: taleoftiles/templates/account.html:33
 msgid "sent-date"
-msgstr "Sent Date"
+msgstr ""
 
 #: taleoftiles/templates/account.html:41 taleoftiles/templates/order.html:19
 #: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:110
 msgid "order"
-msgstr "order"
+msgstr ""
 
 #: taleoftiles/templates/account.html:61
 msgid "shipping-data"
-msgstr "Shipping Data"
+msgstr ""
 
 #: taleoftiles/templates/account.html:98
 msgid "save"
-msgstr "Save"
+msgstr ""
 
 #: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:16
 msgid "blog-page-name"
-msgstr "Tale of Tiles Blog"
+msgstr ""
 
 #: taleoftiles/templates/catalogue.html:5
 msgid "catalogue-page-name"
-msgstr "Catalogue"
+msgstr ""
 
 #: taleoftiles/templates/cataloguegrid.html:11
 msgid "filters"
-msgstr "Filters"
+msgstr ""
 
 #: taleoftiles/templates/cataloguegrid.html:103
 msgid "all-series"
-msgstr "All Series"
+msgstr ""
 
 #: taleoftiles/templates/cataloguegrid.html:126
 #: taleoftiles/templates/product.html:14
 msgid "all-products"
-msgstr "All Products"
+msgstr ""
 
 #: taleoftiles/templates/cataloguegrid.html:129
 #: taleoftiles/templates/support.html:33 taleoftiles/templates/support.html:44
 msgid "products"
-msgstr "Products"
+msgstr ""
 
 #: taleoftiles/templates/cataloguegrid.html:132
 msgid "order-for"
-msgstr "Order by"
+msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:95
 msgid "summary"
-msgstr "Summary"
+msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:96
 msgid "shipping"
-msgstr "Shipping"
+msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:97
 msgid "payment"
-msgstr "Payment"
+msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:127
 #: taleoftiles/templates/empty_base.html:261
 msgid "tiles"
-msgstr "tiles"
+msgstr ""
 
 #: taleoftiles/templates/empty_base.html:53
 #: taleoftiles/templates/empty_base.html:186
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 msgid "support"
-msgstr "Support"
+msgstr ""
 
 #: taleoftiles/templates/empty_base.html:56
 msgid "account"
@@ -369,12 +369,10 @@ msgid "enter-new-password"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:10
-#| msgid "password-reset"
 msgid "password-reset-sent"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:19
-#| msgid "password-reset"
 msgid "password-reset-sent-longtext"
 msgstr ""
 
@@ -391,7 +389,6 @@ msgid "this-was-a-sampler"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:30
-#| msgid "receive-sample-home"
 msgid "free-samples-finished"
 msgstr ""
 
@@ -537,7 +534,6 @@ msgid "product-same-serie"
 msgstr ""
 
 #: taleoftiles/templates/registration/login.html:53
-#| msgid "already-registered"
 msgid "already-logged-in"
 msgstr ""
 
@@ -614,7 +610,7 @@ msgid "consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:143
-#| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
+#, python-format
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
@@ -850,65 +846,12 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
-#~ msgid "days"
-#~ msgstr "Giorni"
+#~ msgid "unique_id"
+#~ msgstr "STATIC DE"
 
-#~ msgid "product-not-samplable"
-#~ msgstr "Non campionabile"
+#~ msgid "Sign Up"
+#~ msgstr "SIGNUP DE"
 
-#~ msgid "login-data"
-#~ msgstr "Login"
+#~ msgid "POCCOZIO"
+#~ msgstr "LAZYDE"
 
-#~ msgid "catalgoue-page-name"
-#~ msgstr "Catalogo"
-
-#~ msgid "cat-menu-all"
-#~ msgstr "Tutti i prodotti"
-
-#~ msgid "language"
-#~ msgstr "Lingua"
-
-#~ msgid "currency"
-#~ msgstr "Valuta"
-
-#~ msgid "facebook"
-#~ msgstr "Facebook"
-
-#~ msgid "pinterest"
-#~ msgstr "Pinterest"
-
-#~ msgid "instagram"
-#~ msgstr "Instagram"
-
-#~ msgid "read"
-#~ msgstr "Leggi"
-
-#~ msgid "title-team-home"
-#~ msgstr "Chi siamo"
-
-#~ msgid "summary-long-text1"
-#~ msgstr "Potrai pagare con bonifico bancario"
-
-#~ msgid "summary-page-title"
-#~ msgstr "Riepilogo del tuo ordine"
-
-#~ msgid "product"
-#~ msgstr "Prodotto"
-
-#~ msgid "delete"
-#~ msgstr "Cancella"
-
-#~ msgid "box"
-#~ msgstr "Scatola"
-
-#~ msgid "support-page-name"
-#~ msgstr "Assistenza"
-
-#~ msgid "write-us-orders"
-#~ msgstr "Contattaci per il tuo ordine"
-
-#~ msgid "write-us-sells"
-#~ msgstr "Contattaci"
-
-#~ msgid "write-us-support"
-#~ msgstr "Contattaci per avere assistenza"
