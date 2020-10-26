@@ -1,22 +1,28 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-25 12:53+0000\n"
+<<<<<<< HEAD
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
+=======
+"PO-Revision-Date: 2020-10-25 13:03\n"
+"Last-Translator: \n"
+"Language-Team: German, Austria\n"
+"Language: de_AT\n"
+>>>>>>> 32935d811eebef5ea77474c588adf499ecb4b625
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: taleoftiles\n"
+"X-Crowdin-Project-ID: 425794\n"
+"X-Crowdin-Language: de-AT\n"
+"X-Crowdin-File: /master/locale/de/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 20\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -387,12 +393,21 @@ msgstr ""
 
 #: taleoftiles/templates/payment.html:23
 msgid "this-was-a-sampler"
+<<<<<<< HEAD
 msgstr ""
 
 #: taleoftiles/templates/payment.html:30
 msgid "free-samples-finished"
 msgstr ""
 
+=======
+msgstr ""
+
+#: taleoftiles/templates/payment.html:30
+msgid "free-samples-finished"
+msgstr ""
+
+>>>>>>> 32935d811eebef5ea77474c588adf499ecb4b625
 #: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:100
 msgid "summary-iban-claim"
 msgstr ""
@@ -443,9 +458,17 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:123
+<<<<<<< HEAD
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
+=======
+msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+msgstr ""
+
+#: taleoftiles/templates/payment.html:94
+msgid " paying-now <strong>date-shipping</strong> paying-now"
+>>>>>>> 32935d811eebef5ea77474c588adf499ecb4b625
 msgstr ""
 
 #: taleoftiles/templates/payment.html:94
@@ -857,3 +880,4 @@ msgstr ""
 
 #~ msgid "POCCOZIO"
 #~ msgstr "LAZYDE"
+
