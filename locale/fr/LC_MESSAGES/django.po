@@ -1,17 +1,3 @@
-msgid ""
-msgstr ""
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Crowdin-Project: taleoftiles\n"
-"X-Crowdin-Project-ID: 425794\n"
-"X-Crowdin-Language: fr-BE\n"
-"X-Crowdin-File: /master/locale/sv/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 54\n"
-"Project-Id-Version: taleoftiles\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language-Team: French, Belgium\n"
-"Language: fr_BE\n"
-"PO-Revision-Date: 2020-10-26 14:08\n"
-
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
 msgstr ""
@@ -441,7 +427,9 @@ msgid "any-doubt"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
-msgid " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles.com</a>  consult-support"
+msgid ""
+" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
+"com</a>  consult-support"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:92
@@ -845,4 +833,3 @@ msgstr ""
 #: taleoftiles/templates/support.html:170
 msgid "faq-company-3-body"
 msgstr ""
-
