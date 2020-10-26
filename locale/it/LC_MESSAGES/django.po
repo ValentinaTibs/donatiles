@@ -2,13 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-26 12:08+0000\n"
-<<<<<<< HEAD
-"PO-Revision-Date: 2020-10-24 09:46\n"
-=======
+"POT-Creation-Date: 2020-10-26 13:16+0000\n"
 "PO-Revision-Date: 2020-10-26 12:56\n"
->>>>>>> b6df81d0b2b5e24ad7df8bbd6efc280d6ef32dcc
-"Last-Translator: \n"
+"Last-Translator: Valentina \n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
@@ -403,8 +399,6 @@ msgstr ""
 "di spedizione."
 
 #: taleoftiles/templates/payment.html:27
-#, fuzzy
-#| msgid "receive-sample-home"
 msgid "free-samples-finished"
 msgstr ""
 
@@ -467,11 +461,10 @@ msgstr "Consulta l'assistenza oppure scrivici a info@taleoftiles.com"
 #, python-format
 msgid " working_days %(shipping_date_t)s %(email_t)s "
 msgstr ""
-"Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> %(shipping_date_t)s </"
-"strong><br/><br/>"
-"Appena riceveremo il pagamento, ti invieremo una email di conferma a  "
-"<strong> %(email_t)s </strong> ed avvieremo subito la "
-"preparazione del tuo ordine!\n"
+"Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
+"%(shipping_date_t)s </strong><br/><br/>Appena riceveremo il pagamento, ti "
+"invieremo una email di conferma a  <strong> %(email_t)s </strong> ed "
+"avvieremo subito la preparazione del tuo ordine!\n"
 "\n"
 "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
 "confermato."
