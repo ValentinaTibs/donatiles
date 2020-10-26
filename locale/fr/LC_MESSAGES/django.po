@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-25 12:53+0000\n"
-"PO-Revision-Date: 2020-10-26 08:34\n"
+"PO-Revision-Date: 2020-10-26 08:26\n"
 "Last-Translator: \n"
 "Language-Team: French, Belgium\n"
 "Language: fr_BE\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: taleoftiles\n"
 "X-Crowdin-Project-ID: 425794\n"
 "X-Crowdin-Language: fr-BE\n"
-"X-Crowdin-File: /master/locale/sv/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 54\n"
+"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:56 CRM/forms.py:89
 msgid "Wrong Product"
@@ -369,10 +369,12 @@ msgid "enter-new-password"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:10
+#| msgid "password-reset"
 msgid "password-reset-sent"
 msgstr ""
 
 #: taleoftiles/templates/password/password_reset_done.html:19
+#| msgid "password-reset"
 msgid "password-reset-sent-longtext"
 msgstr ""
 
@@ -389,6 +391,7 @@ msgid "this-was-a-sampler"
 msgstr ""
 
 #: taleoftiles/templates/payment.html:30
+#| msgid "receive-sample-home"
 msgid "free-samples-finished"
 msgstr ""
 
@@ -534,6 +537,7 @@ msgid "product-same-serie"
 msgstr ""
 
 #: taleoftiles/templates/registration/login.html:53
+#| msgid "already-registered"
 msgid "already-logged-in"
 msgstr ""
 
@@ -610,7 +614,7 @@ msgid "consider-sfrido"
 msgstr ""
 
 #: taleoftiles/templates/summary.html:143
-#, python-format
+#| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 
@@ -846,12 +850,66 @@ msgstr ""
 msgid "faq-company-3-body"
 msgstr ""
 
-#~ msgid "unique_id"
-#~ msgstr "STATIC DE"
+#~ msgid "days"
+#~ msgstr "Giorni"
 
-#~ msgid "Sign Up"
-#~ msgstr "SIGNUP DE"
+#~ msgid "product-not-samplable"
+#~ msgstr "Non campionabile"
 
-#~ msgid "POCCOZIO"
-#~ msgstr "LAZYDE"
+#~ msgid "login-data"
+#~ msgstr "Login"
+
+#~ msgid "catalgoue-page-name"
+#~ msgstr "Catalogo"
+
+#~ msgid "cat-menu-all"
+#~ msgstr "Tutti i prodotti"
+
+#~ msgid "language"
+#~ msgstr "Lingua"
+
+#~ msgid "currency"
+#~ msgstr "Valuta"
+
+#~ msgid "facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "pinterest"
+#~ msgstr "Pinterest"
+
+#~ msgid "instagram"
+#~ msgstr "Instagram"
+
+#~ msgid "read"
+#~ msgstr "Leggi"
+
+#~ msgid "title-team-home"
+#~ msgstr "Chi siamo"
+
+#~ msgid "summary-long-text1"
+#~ msgstr "Potrai pagare con bonifico bancario"
+
+#~ msgid "summary-page-title"
+#~ msgstr "Riepilogo del tuo ordine"
+
+#~ msgid "product"
+#~ msgstr "Prodotto"
+
+#~ msgid "delete"
+#~ msgstr "Cancella"
+
+#~ msgid "box"
+#~ msgstr "Scatola"
+
+#~ msgid "support-page-name"
+#~ msgstr "Assistenza"
+
+#~ msgid "write-us-orders"
+#~ msgstr "Contattaci per il tuo ordine"
+
+#~ msgid "write-us-sells"
+#~ msgstr "Contattaci"
+
+#~ msgid "write-us-support"
+#~ msgstr "Contattaci per avere assistenza"
 
