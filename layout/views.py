@@ -19,7 +19,7 @@ def support(request):
 def termsandconds(request):  
     termsandconds = Publication.objects.get(slug = 'termsandconds')
     return render(request, "empty.html",{
-        'text'  : termsandconds,
+        'publication'  : termsandconds,
         })
 
 
