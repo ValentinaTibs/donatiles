@@ -9,12 +9,24 @@
 {% block content %}
 
 
-        {{message}}
+<div class="block block-coldbg accounttitle">
+  <div class="content">
+    <div class="accounttitle-actions">
+    <h1>{{publication.title}}</h1>
+  </div>
+</div>
+</div>
 
-	{% autoescape off %}
-		<p>{{ publication.content }}</p>
-	{% endautoescape %}
-
+<div class="content grid grid-account">
+	<div class="formrow">
+		<p>
+		{% autoescape off %}
+			{{ publication.content }}
+		{% endautoescape %}                
+			{{message}
+		</p>
+	</div>
+</div>
 
 
 {% endblock %}
