@@ -10,7 +10,7 @@ from django.db.models import Count
 from taleoftiles.utils  import min_price
 
 import datetime as dt
-
+import pytz
 
 DATA_TYPE = (
     ('t', 'Text'),

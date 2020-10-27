@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-
 from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
@@ -8,7 +7,7 @@ from taleoftiles.models import Publication
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def support(request):  
     dyn_elements = Element.objects.filter(tag__parent__slug = 'support', public = True)
@@ -17,9 +16,21 @@ def support(request):
         })
 
 def termsandconds(request):  
-    termsandconds = Publication.objects.get(slug = 'termsandconds')
+    try: 
+        termsandconds = Publication.objects.get(slug = 'termsandconds')
+    except ObjectDoesNotExist:        
+        privacypolicy = []
     return render(request, "empty.html",{
         'publication'  : termsandconds,
+        })
+
+def privacypolicy(request):  
+    try: 
+        privacypolicy = Publication.objects.get(slug = 'privacypolicy')
+    except ObjectDoesNotExist:        
+        privacypolicy = []
+    return render(request, "empty.html",{
+        'publication'  : privacypolicy,
         })
 
 
