@@ -157,7 +157,7 @@ msgstr "Catalogue"
 #: taleoftiles/templates/empty_base.html:123
 #: taleoftiles/templates/empty_base.html:187
 msgid "blog-menu"
-msgstr "Rinnovation Ideas"
+msgstr "Renovation Ideas"
 
 #: taleoftiles/templates/empty_base.html:229
 msgid "of"
