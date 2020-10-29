@@ -188,9 +188,9 @@ msgstr "Tocca con mano"
 #: taleoftiles/templates/home.html:45
 msgid "sample-description"
 msgstr ""
-"Lasciati raccontare una storia dal nostro Tale of Tiles Book. Navigando tra "
-"i prodotti potrai sceglierne fino a 4 da ricevere gratuitamente a casa tua "
-"per valutare la qualità dei nostri prodotti made in italy."
+"Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of Tiles Book. "
+"Navigando nel catalogo potrai scegliere fino a 4 campioni da ricevere gratuitamente a casa tua "
+"per sognare con i nostri prodotti made in italy."
 
 #: taleoftiles/templates/home.html:49
 msgid " Ricevi mattonelle a casa "
@@ -207,7 +207,7 @@ msgstr "Idee per ristrutturare"
 #: taleoftiles/templates/home.html:69
 msgid "subtitle-renovate-home"
 msgstr ""
-"Divertiti con le nostre idee per rinnovare lin modo semplice i tuoi ambienti."
+"Divertiti con le nostre idee per rinnovare in modo semplice i tuoi ambienti."
 
 #: taleoftiles/templates/home.html:77
 msgid "title-faq-home"
