@@ -1,5 +1,0 @@
-files:
-  - source: /locale/
-    ignore:
-      - /locale/%two_letters_code%/LC_MESSAGES/*.mo
-    translation: /locale/%two_letters_code%/LC_MESSAGES/%original_file_name%
