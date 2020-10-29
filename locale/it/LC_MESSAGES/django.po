@@ -190,7 +190,7 @@ msgid "sample-description"
 msgstr ""
 "Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of Tiles Book. "
 "Navigando nel catalogo potrai scegliere fino a 4 campioni da ricevere gratuitamente a casa tua "
-"per sognare con i nostri prodotti made in italy."
+"per sognare con i nostri prodotti esclusivamente italiani."
 
 #: taleoftiles/templates/home.html:49
 msgid " Ricevi mattonelle a casa "
