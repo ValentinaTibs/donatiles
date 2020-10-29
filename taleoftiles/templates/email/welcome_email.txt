@@ -2,20 +2,23 @@
 
 GRAZIE!<br/>
 
-Giacomo, Manuel, Valentina e Donatella vi danno il benvenuto in Taleoftiles,il nuovo modo di approcciarsi al mondo delle mattonelle Made in Italy. 
-Selezioniamo con orgoglio e passione i migliori prodotti e tutte le novità sul mercato.
+Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in Italy. 
+Selezioniamo, per voi, con orgoglio e passione i migliori prodotti esclusivamente di produzione italiana.
 <br/>
-sul nostro sito puoi selezionare fino a quattro mattonelle  da inserire nel tuo personale Tale of tiles book, e riceverlo gratuitamente a casa,  
-per toccare con mano la qualità dei nostri prodotti!
+Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la storia dei tuoi nuovi spazi da vivere! 
+Potrai selezionare fino a quattro campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo gratuitamente a casa, per toccare con mano la qualità dei nostri prodotti!
 <br/>
 Approfitta della spedizione gratuita su tutti gli ordini per ricevere le tue nuove mattonelle direttamente a casa!
 <br/>
-Puoi seguire i nostri consigli su come ristrutturare i tuoi spazi sul nostro blog
+<br/>
+Questa è la tua password di accesso momentanea:<b> {{pwd}}</b>
+<br/><br/>
+Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi spazi sul nostro blog.
 
 <a href="{{domain}}{% url 'blog' %} ">{{domain}}{% url 'blog' %} </a> 
+
 <br/><br/>
-Enjoy your italian tiles!
-<br/>
+#OurFairyTaleofTiles<br/>
 
 
 {% endautoescape %}
