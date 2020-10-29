@@ -256,7 +256,10 @@ class Price(models.Model):
     weight_box  = models.FloatField(default = 10)
 
     def __str__(self):
-        return self.size.name + self.product.publication.title + str(self.euros)
+        if self.size.name and self.product.publication.title :
+            return self.size.name + self.product.publication.title + str(self.euros)
+        else:
+            return str(self.euros)
     
 class Catalogue(models.Model):
     title = models.CharField(max_length=200, unique = True)
