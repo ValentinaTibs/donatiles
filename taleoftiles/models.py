@@ -256,7 +256,7 @@ class Price(models.Model):
     weight_box  = models.FloatField(default = 10)
 
     def __str__(self):
-        if self.size.name and self.product.publication.title :
+        if self.size and self.size.name and self.product.publication.title :
             return self.size.name + self.product.publication.title + str(self.euros)
         else:
             return str(self.euros)
