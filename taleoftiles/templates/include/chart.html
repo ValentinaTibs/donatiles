@@ -38,11 +38,12 @@
 
 
 
-  <a href="{% url 'add_order' False %}?prv={{request.get_full_path|urlencode}}" class="btn btn-primary"><span>Procedi con l'ordine</span>
+  <a href="{% url 'add_order' False %}?prv={{request.get_full_path|urlencode}}" class="btn btn-primary">
+    <span>{% trans 'proceed-with-order' %}</span>
     <svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-right' %}"/></svg></a>
 
-  <p class="note"><span class="hilite">La spedizione è gratuita</span></p>
-  <p class="note">Potrai pagare con bonifico bancario</p>
+  <p class="note"><span class="hilite">{% trans 'free-shipping-long' %}</span></p>
+  <p class="note">{% trans 'you-will-pay-with-transfert' %}</p>
   {% else %}
   {% blocktrans %} chart-empty-claim {% endblocktrans %}
 

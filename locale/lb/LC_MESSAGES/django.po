@@ -22,14 +22,6 @@ msgstr ""
 msgid "Italiano"
 msgstr ""
 
-#: gettingstarted/settings.py:120
-msgid "Svenska"
-msgstr ""
-
-#: gettingstarted/settings.py:121
-msgid "Deutch"
-msgstr ""
-
 #: taleoftiles/templates/account.html:6
 msgid "account-page-name"
 msgstr ""
@@ -43,7 +35,7 @@ msgstr ""
 msgid "sampler"
 msgstr ""
 
-#: taleoftiles/templates/account.html:32 taleoftiles/templates/order.html:120
+#: taleoftiles/templates/account.html:32 taleoftiles/templates/order.html:127
 msgid "order-status"
 msgstr ""
 
@@ -51,8 +43,9 @@ msgstr ""
 msgid "sent-date"
 msgstr ""
 
-#: taleoftiles/templates/account.html:41 taleoftiles/templates/order.html:19
-#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:109
+#: taleoftiles/templates/account.html:41
+#: taleoftiles/templates/include/payment_options.html:31
+#: taleoftiles/templates/order.html:26 taleoftiles/templates/payment.html:116
 msgid "order"
 msgstr ""
 
@@ -94,62 +87,78 @@ msgstr ""
 msgid "order-for"
 msgstr ""
 
-#: taleoftiles/templates/checkout_base.html:95
+#: taleoftiles/templates/checkout_base.html:105
 msgid "summary"
 msgstr ""
 
-#: taleoftiles/templates/checkout_base.html:96
+#: taleoftiles/templates/checkout_base.html:106
 msgid "shipping"
 msgstr ""
 
-#: taleoftiles/templates/checkout_base.html:97
+#: taleoftiles/templates/checkout_base.html:107
 msgid "payment"
 msgstr ""
 
-#: taleoftiles/templates/checkout_base.html:127
-#: taleoftiles/templates/empty_base.html:263
+#: taleoftiles/templates/checkout_base.html:129
+#: taleoftiles/templates/empty_base.html:252
+msgid "termini-e-condizioni"
+msgstr ""
+
+#: taleoftiles/templates/checkout_base.html:141
+#: taleoftiles/templates/empty_base.html:262
 msgid "tiles"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:55
-#: taleoftiles/templates/empty_base.html:188
+#: taleoftiles/templates/email/order_email.txt:6
+#, python-format
+msgid ""
+" order_email_text <a href=\"%(full_account_url_)s\">%(full_account_url_)s</a>"
+"%(order_id)s <a href=\"%(full_order_url_)s\">%(full_order_url_)s</a>"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:54
+#: taleoftiles/templates/empty_base.html:187
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 msgid "support"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:58
+#: taleoftiles/templates/empty_base.html:57
 msgid "account"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:59
+#: taleoftiles/templates/empty_base.html:58
 msgid "logout"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:61
-#: taleoftiles/templates/empty_base.html:190
+#: taleoftiles/templates/empty_base.html:60
+#: taleoftiles/templates/empty_base.html:189
 msgid "login-register"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:106
-#: taleoftiles/templates/empty_base.html:170
+#: taleoftiles/templates/empty_base.html:105
+#: taleoftiles/templates/empty_base.html:169
 msgid "catalogue-menu"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:123
-#: taleoftiles/templates/empty_base.html:187
+#: taleoftiles/templates/empty_base.html:122
+#: taleoftiles/templates/empty_base.html:186
 msgid "blog-menu"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:229
+#: taleoftiles/templates/empty_base.html:228
 msgid "of"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:229
+#: taleoftiles/templates/empty_base.html:228
 msgid "added-to-chart"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:230
+#: taleoftiles/templates/empty_base.html:229
 msgid "open-chart"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:251
+msgid "privacy-policy"
 msgstr ""
 
 #: taleoftiles/templates/home.html:5
@@ -226,7 +235,19 @@ msgstr ""
 msgid "total"
 msgstr ""
 
-#: taleoftiles/templates/include/chart.html:47
+#: taleoftiles/templates/include/chart.html:42
+msgid "proceed-with-order"
+msgstr ""
+
+#: taleoftiles/templates/include/chart.html:45
+msgid "free-shipping-long"
+msgstr ""
+
+#: taleoftiles/templates/include/chart.html:46
+msgid "you-will-pay-with-transfert"
+msgstr ""
+
+#: taleoftiles/templates/include/chart.html:48
 msgid " chart-empty-claim "
 msgstr ""
 
@@ -259,6 +280,88 @@ msgstr ""
 msgid "register"
 msgstr ""
 
+#: taleoftiles/templates/include/payment_options.html:7
+#: taleoftiles/templates/payment.html:27
+msgid "free-sample-arriving"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:9
+#: taleoftiles/templates/payment.html:29
+msgid "free-samples-finished"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:12
+#: taleoftiles/templates/include/payment_options.html:39
+#: taleoftiles/templates/payment.html:32 taleoftiles/templates/payment.html:106
+msgid "summary-iban-claim"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:13
+#: taleoftiles/templates/include/payment_options.html:40
+#: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:107
+msgid "ammount"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:15
+#: taleoftiles/templates/include/payment_options.html:42
+#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:109
+msgid "summary-iban-title"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:16
+#: taleoftiles/templates/include/payment_options.html:43
+#: taleoftiles/templates/payment.html:36 taleoftiles/templates/payment.html:110
+msgid "summary-iban"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:17
+#: taleoftiles/templates/include/payment_options.html:44
+#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:111
+msgid "summary-SWIFT-title"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:18
+#: taleoftiles/templates/include/payment_options.html:45
+#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:112
+msgid "summary-SWIFT"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:19
+#: taleoftiles/templates/include/payment_options.html:46
+#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:113
+msgid "summary-accountholder-title"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:20
+#: taleoftiles/templates/include/payment_options.html:47
+#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:114
+msgid "summary-accountholder"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:21
+#: taleoftiles/templates/include/payment_options.html:48
+#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:115
+msgid "subject"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:25
+#: taleoftiles/templates/include/payment_options.html:51
+#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:117
+msgid "print-data"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:32
+msgid "payment-success"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:33
+msgid "payment-success-subtitle"
+msgstr ""
+
+#: taleoftiles/templates/include/payment_options.html:36
+msgid "pay_via_paypal_or_creditcard"
+msgstr ""
+
 #: taleoftiles/templates/include/sampler.html:8
 msgid "your-sampler"
 msgstr ""
@@ -283,49 +386,49 @@ msgstr ""
 msgid "order-page-name"
 msgstr ""
 
-#: taleoftiles/templates/order.html:18 taleoftiles/templates/payment.html:80
-#: taleoftiles/templates/payment.html:83
+#: taleoftiles/templates/order.html:25 taleoftiles/templates/payment.html:88
+#: taleoftiles/templates/payment.html:91
 msgid "back-to-orders"
 msgstr ""
 
-#: taleoftiles/templates/order.html:29 taleoftiles/templates/order.html:60
+#: taleoftiles/templates/order.html:36 taleoftiles/templates/order.html:67
 #: taleoftiles/templates/summary.html:35
 msgid "price"
 msgstr ""
 
-#: taleoftiles/templates/order.html:40 taleoftiles/templates/summary.html:46
+#: taleoftiles/templates/order.html:47 taleoftiles/templates/summary.html:46
 msgid "summary-sample-title"
 msgstr ""
 
-#: taleoftiles/templates/order.html:41 taleoftiles/templates/summary.html:47
+#: taleoftiles/templates/order.html:48 taleoftiles/templates/summary.html:47
 msgid "summary-sample-subtitle"
 msgstr ""
 
-#: taleoftiles/templates/order.html:59
+#: taleoftiles/templates/order.html:66
 msgid "quantity"
 msgstr ""
 
-#: taleoftiles/templates/order.html:75 taleoftiles/templates/summary.html:90
+#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:90
 msgid "boxes"
 msgstr ""
 
-#: taleoftiles/templates/order.html:95 taleoftiles/templates/summary.html:123
+#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:123
 msgid "order-total"
 msgstr ""
 
-#: taleoftiles/templates/order.html:108
+#: taleoftiles/templates/order.html:115
 msgid "create-at"
 msgstr ""
 
-#: taleoftiles/templates/order.html:111
+#: taleoftiles/templates/order.html:118
 msgid "shipping-date"
 msgstr ""
 
-#: taleoftiles/templates/order.html:113
+#: taleoftiles/templates/order.html:120
 msgid "shipping-address"
 msgstr ""
 
-#: taleoftiles/templates/order.html:122
+#: taleoftiles/templates/order.html:129
 msgid "order-tracking"
 msgstr ""
 
@@ -353,7 +456,7 @@ msgstr ""
 msgid "password-reset-sent"
 msgstr ""
 
-#: taleoftiles/templates/password/password_reset_done.html:19
+#: taleoftiles/templates/password/password_reset_done.html:18
 msgid "password-reset-sent-longtext"
 msgstr ""
 
@@ -361,78 +464,30 @@ msgstr ""
 msgid "payment-title"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:15 taleoftiles/templates/payment.html:85
+#: taleoftiles/templates/payment.html:17 taleoftiles/templates/payment.html:93
 msgid "summary-recipt-title"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:20
+#: taleoftiles/templates/payment.html:22
 msgid "this-was-a-sampler"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:25
-msgid "free-sample-arriving"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:27
-msgid "free-samples-finished"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:30 taleoftiles/templates/payment.html:99
-msgid "summary-iban-claim"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:31 taleoftiles/templates/payment.html:100
-msgid "ammount"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:102
-msgid "summary-iban-title"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:34 taleoftiles/templates/payment.html:103
-msgid "summary-iban"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:104
-msgid "summary-SWIFT-title"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:36 taleoftiles/templates/payment.html:105
-msgid "summary-SWIFT"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:106
-msgid "summary-accountholder-title"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:107
-msgid "summary-accountholder"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:108
-msgid "subject"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:110
-msgid "print-data"
-msgstr ""
-
-#: taleoftiles/templates/payment.html:52 taleoftiles/templates/payment.html:119
+#: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:127
 #: taleoftiles/templates/summary.html:17 taleoftiles/templates/summary.html:22
 msgid "summary-back-home"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:53 taleoftiles/templates/payment.html:120
+#: taleoftiles/templates/payment.html:55 taleoftiles/templates/payment.html:128
 msgid "any-doubt"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:122
+#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:130
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:92
+#: taleoftiles/templates/payment.html:100
 #, python-format
 msgid " working_days %(shipping_date_t)s %(email_t)s "
 msgstr ""
