@@ -216,9 +216,9 @@ msgstr "See with your own eyes"
 #: taleoftiles/templates/home.html:45
 msgid "sample-description"
 msgstr ""
-"Let us tell you a story from our Tale of Tiles Book. Browsing between our "
-"products you could choose up to four to be received at your home as a gift. "
-"We want you to see and valuate the quality of our Made in Italy products."
+"Whit the Tale of Tiles Book you can write the story of your new spaces. Browsing between our "
+"products you can choose up to four samples to be received at your home as a gift. "
+"We want you to see and evaluate the quality of our Made in Italy tiles."
 
 #: taleoftiles/templates/home.html:49
 msgid " Ricevi mattonelle a casa "
@@ -229,7 +229,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:68
 msgid "title-renovate-home"
-msgstr "Renovations Ideas"
+msgstr "Renovation Ideas"
 
 #: taleoftiles/templates/home.html:69
 msgid "subtitle-renovate-home"
