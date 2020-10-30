@@ -1,3 +1,4 @@
+{% load i18n %}
 {% autoescape off %}
 
     {% url 'blog'  as blog_url %}

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% autoescape off %}
 
     {% url 'order' order_id as order_url %}
