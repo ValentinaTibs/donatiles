@@ -222,6 +222,7 @@ class ProductAdmin(admin.ModelAdmin):
     def decor_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='decor')])    
 
+
 class TechnicalSpecAdmin(admin.ModelAdmin):
     model = TechnicalSpec
     list_display = ('slug','file','icons_',)

@@ -34,8 +34,6 @@ def privacypolicy(request):
         })
 
 
-def pinterest(request):  
-    return render(request, "pinterest-737fb.html")
 
 def password_reset_request(request):
     if request.method == "POST":
