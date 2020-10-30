@@ -142,12 +142,11 @@ class SerieAdmin(admin.ModelAdmin):
 
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
-    summernote_fields = ('content_it','content_de','content_en','content_sv',)
-    fields = ('title_it','title_de','title_en','title_sv','content_it','content_de','content_en','content_sv',
-        'publish_date','slug')
+    summernote_fields = ('content_it','content_en',)
+    fields = ('title_it','title_en','content_it','content_en','publish_date','slug')
     list_display = ('title_','id','created_at','publish_date','slug','author')
 
-    search_fields = ('title_it','title_de','title_en','title_sv','slug')
+    search_fields = ('title_it','title_en','slug')
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
