@@ -93,7 +93,8 @@ class MailTemplate(models.Model):
     no_reply        = models.BooleanField(default = False)
 
     def send_password_reset(self,user):
-        email_template_name = "email/password_reset_email.txt"
+        cLng = translation.get_language()
+        email_template_name = "email/"+cLng+"/password_reset_email.txt"
         c = {
                 "email":user.email,
                 'domain':'www.taleoftiles.com',
@@ -141,7 +142,8 @@ class MailTemplate(models.Model):
             logger.error(e.body)
 
     def send_register(self,user,one_time_pwd):
-        email_template_name = "email/register_email.txt"
+        cLng = translation.get_language()
+        email_template_name = "email/"+cLng+"/register_email.txt"
         c = {
                 'domain':'www.taleoftiles.com',
                 'site_name': 'TaleOfTiles',
@@ -165,7 +167,8 @@ class MailTemplate(models.Model):
 
 
     def send_welcome(self,user):
-        email_template_name = "email/welcome_email.txt"
+        cLng = translation.get_language()
+        email_template_name = "email/"+cLng+"/welcome_email.txt"
         c = {
                 'domain':'www.taleoftiles.com',
                 'site_name': 'TaleOfTiles',
