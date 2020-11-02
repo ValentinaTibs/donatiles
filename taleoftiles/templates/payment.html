@@ -168,10 +168,26 @@ function printPage(){
       // This function captures the funds from the transaction.
 
       return actions.order.authorize().then(function(details) {
-        // This function shows a transaction success message to your buyer.
-       
-        
+        $.ajax({
+      
+            type: "POST",
+            url: "{% url 'ajax_pay_order' %}",
+            data: {
+                csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+                order_id : $( '#id_order_internal_id' ).html(),
+            },
+            success: function(result) {
+              
+                $(".paymentdata").empty();
+                $(".paymentdata").html("{% blocktrans %}payment-success{% endblocktrans %}"); 
+                // parse the query string into an object 
+            },
+            error: function(result) {
+                console.log('error');
+            }
+        });
       });
+       
     }
   }).render('#paypal-button-container');
 </script>
