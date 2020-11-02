@@ -211,15 +211,14 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:43
 msgid "sample-touchhand"
-msgstr "See with your own eyes"
+msgstr "Touch with your hands"
 
 #: taleoftiles/templates/home.html:45
 msgid "sample-description"
 msgstr ""
-"Whit the Tale of Tiles Book you can write the story of your new spaces. "
-"Browsing between our products you can choose up to four samples to be "
-"received at your home as a gift. We want you to see and evaluate the quality "
-"of our Made in Italy tiles."
+"With the Tale of Tiles Book you can write the story of your new spaces. Browsing between our "
+"products you can choose up to four samples to be received at your home as a gift. "
+"We want you to see and evaluate the quality of our Made in Italy tiles."
 
 #: taleoftiles/templates/home.html:49
 msgid " Ricevi mattonelle a casa "
