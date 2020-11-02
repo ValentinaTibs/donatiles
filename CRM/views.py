@@ -83,8 +83,8 @@ def payment(request, id_):
                 chart.save()
         order.order_status = 'i'
         order.save()
-    new_mail = MailTemplate()
-    new_mail.send_order(request,order.user(),order)
+        new_mail = MailTemplate()
+        new_mail.send_order(request,order.user(),order)
 
     prv_page = request.session.get('prev_page')
     return render(request, "payment.html", {'order':order,'prv_page':prv_page })   
