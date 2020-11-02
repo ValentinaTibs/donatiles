@@ -74,11 +74,14 @@ from sendgrid.helpers.mail import Mail, From, To, Subject, PlainTextContent, Htm
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
+from django.utils import translation
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from python_http_client import exceptions
 
 import logging
+
+
 
 class MailTemplate(models.Model):
     slug            = models.CharField(max_length=50, unique=True)
@@ -113,23 +116,29 @@ class MailTemplate(models.Model):
             logger = logging.getLogger('email')
             logger.error(e.body)
 
-    def send_order(self,user,order):
-        email_template_name = "email/order_email.txt"
+    def send_order(self,request,user,order):
+        cLng = translation.get_language()
+        email_template_name = "email/"+cLng+"/order_email.txt"
         c = {
                 "order_id":order.internal_tracking_id,
                 'domain':'www.taleoftiles.com',
                 'site_name': 'TaleOfTiles',
                 "user": user,
                 }
+        
         email = render_to_string(email_template_name, c)
-
         message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
                 to_emails=To(user.email, user.email),
                 subject=Subject("Order num."+ order.internal_tracking_id+" Received "),
                 html_content=HtmlContent(email))
 
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        response = sg.send(message)
+        try:
+            response = sg.send(message)
+
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)
 
     def send_register(self,user,one_time_pwd):
         email_template_name = "email/register_email.txt"

@@ -1,0 +1,17 @@
+{% autoescape off %}
+
+Grazie per averci scelto!<br/>
+Abbiamo ricevuto il tuo ordine num. {{order_id}} <br/>
+puoi revisionare il contenuto dell'ordine nella pagina relativa
+<a href="{{domain}}{% url 'order' order_id %}"> {{domain}}{% url 'order' order_id %}</a> 
+<br/>
+
+Entro un giorno lavorativo sarai ricontattato da noi per farti sapere, con precisione, quando le tue mattonelle saranno spedite. 
+Successivamente verrai contattato telefonicamente dal corriere per concordare la consegna. 
+Assicurati che il tuo profilo abbia un numero di telefono corretto comprensivo di prefisso internazionale in modo
+che il corriere ti possa contattare.  
+La pagina del tuo account <a href="{{domain}}{% url 'account' %}"> {{domain}}{% url 'account' %}</a> 
+<br/><br/>
+#OurFairyTaleofTiles
+<br/><br/>
+{% endautoescape %}

@@ -1,0 +1,24 @@
+{% autoescape off%}
+
+THANKS! <br/>
+
+Giacomo, Manuel, Valentina and Donatella welcome you to Tale of Tiles, the new way to approach the world of Made in Italy tiles.
+We select, for you, with pride and passion the best products exclusively of Italian production.
+<br/>
+Be the protagonist of your renovation and write with us the story of your new living spaces!
+You can select up to four samples, to be included in your personal Tale of Tiles Book and receive it for free at home, to experience the quality of our products first hand!
+<br/>
+Take advantage of free shipping on all orders to receive your new tiles directly at home!
+<br/>
+<br/>
+This is your momentary login password: <b> {{pwd}} </b>
+<br/> <br/>
+Remember that you can follow our tips on how to renovate your spaces on our blog.
+
+<a href="{{domain}}{% url 'blog' %} ">{{domain}}{% url 'blog' %} </a> 
+
+<br/> <br/>
+#OurFairyTaleofTiles <br/>
+
+
+{% endautoescape%}

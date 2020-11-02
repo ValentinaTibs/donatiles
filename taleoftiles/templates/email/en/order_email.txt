@@ -1,0 +1,17 @@
+{% autoescape off%}
+
+Thank you for choosing us! <br/>
+We have received your order no. {{order_id}} <br/>
+you can review the content of the order on the relevant page
+v
+<br/>
+
+Within one business day you will be contacted by us to let you know, precisely, when your tiles will be shipped.
+You will then be contacted by phone by the courier to arrange delivery.
+Make sure your profile has a correct phone number including country code so
+that the courier can contact you.
+Your account page <a href="{{domain}}{% url 'account' %}"> {{domain}}{% url 'account' %}</a> 
+<br/> <br/>
+#OurFairyTaleofTiles
+<br/> <br/>
+{% endautoescape%}

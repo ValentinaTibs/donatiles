@@ -59,6 +59,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -190,4 +191,6 @@ SUMMERNOTE_CONFIG = {
 
 
 
-# ------ LOGGING ------
+# ------ TERMS AND CONDS ------
+TERMS_BASE_TEMPLATE = 'empty_base.html'
+

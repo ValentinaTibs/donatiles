@@ -1,9 +1,0 @@
-{% load i18n %}
-{% autoescape off %}
-
-    {% url 'blog'  as blog_url %}
-<a href="{{domain}}{% url 'blog' %} ">{{domain}}{% url 'blog' %} 
-        {% blocktrans with full_blog_url=domain|add:blog_url  %} welcome-email <a href="{{full_blog_url}}">{{full_blog_url}}</a>{% endblocktrans %}
-    
-    
-{% endautoescape %}
