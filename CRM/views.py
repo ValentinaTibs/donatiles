@@ -122,11 +122,14 @@ def shipping(request, id_):
                 new_shipping.save()
                 order.user = request.user.profile
             else: 
-                new_user = User.objects.create_user( username=new_shipping.email, email=new_shipping.email,password=create_one_time_password()) 
-                new_user.set_unusable_password()
-                new_user.save()
-                da_user = Profile( user = new_user)        
-                result = da_user.save()                
+                try:
+                    new_user = User.objects.get( username=new_shipping.email, email=new_shipping.email) 
+                except ObjectDoesNotExist:
+                    new_user = User.objects.create_user( username=new_shipping.email, email=new_shipping.email,password=create_one_time_password()) 
+                    new_user.set_unusable_password()
+                    new_user.save()
+                    da_user = Profile( user = new_user)        
+                    result = da_user.save()                
                 login(request, new_user)
 
                 new_mail = MailTemplate()
