@@ -26,12 +26,14 @@
         {% if order.is_paid %}
           {% trans 'free-sample-arriving' %}
         {% else %}
-          {% trans 'free-samples-finished' %}
-
+          <p>{% trans 'free-samples-finished' %}</p>
+          <br/><br/>
+          <div id="paypal-button-container"></div>
+          
           <div class="paymentdata">
           <h3>{% trans 'summary-iban-claim' %}</h3>
           <h5>{% trans 'ammount' %}</h5>
-          <h2 >€ {{order.final_payment}}</h2>
+          <h2 >€ <span id="id_order_final_payment">{{order.final_payment}}</span></h2>
           <h5>{% trans 'summary-iban-title' %}</h5>
           <h2>{% trans 'summary-iban' %}</h2>
           <h5>{% trans 'summary-SWIFT-title' %}</h5>
@@ -103,7 +105,7 @@
 
       <div class="paymentdata">
         <div id="paypal-button-container"></div>
-        
+        <br/><br/>
         <h3>{% trans 'summary-iban-claim' %}</h3>
         <h5>{% trans 'ammount' %}</h5>
         <h2>€ <span id="id_order_final_payment">{{order.final_payment}}</span></h2>
@@ -145,12 +147,13 @@ function printPage(){
   window.print();
 }
 
-
 </script>
+
 
 <script>
 
  paypal.Buttons({
+   
     createOrder: function(data, actions) {
       // This function sets up the details of the transaction, including the amount and line item details.
       return actions.order.create({
@@ -159,7 +162,7 @@ function printPage(){
         purchase_units: [{
           amount: {
             "currency_code": "EUR",
-            value: String($( '#id_order_final_payment' ).html()),
+            value: Number($( '#id_order_final_payment' ).html()),
           }
         }]
       });
@@ -168,6 +171,9 @@ function printPage(){
       // This function captures the funds from the transaction.
 
       return actions.order.authorize().then(function(details) {
+        //2do put here wait for completion message
+        //$(".paymentdata").html("{% blocktrans %}payment-success{% endblocktrans %}"); 
+        
         $.ajax({
       
             type: "POST",
