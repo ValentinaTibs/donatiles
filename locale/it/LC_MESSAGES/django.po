@@ -500,7 +500,7 @@ msgstr ""
 msgid "pay_via_paypal_or_creditcard"
 msgstr ""
 "Paga via PayPal o Carta di Credito - il pagamento sarà reso effettivo dal "
-"momento dell'accettazione dell'ordine, per maggiori informazioni consulta "
+"momento dell'accettazione dell'ordine e conferma della data di consegna. Per maggiori informazioni consulta "
 "termini e condizioni."
 
 #: taleoftiles/templates/include/sampler.html:8

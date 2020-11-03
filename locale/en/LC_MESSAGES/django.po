@@ -427,7 +427,7 @@ msgstr ""
 msgid "pay_via_paypal_or_creditcard"
 msgstr ""
 "Pay via PayPal or Credit Card - the payment will be effective the time of "
-"the order acceptance, for more infos consults terms and conditions."
+"the order acceptance and shipping confirm. For more infos consults terms and conditions."
 
 #: taleoftiles/templates/include/sampler.html:8
 msgid "your-sampler"
