@@ -77,7 +77,7 @@
 </style>
 
   <script
-    src="https://www.paypal.com/sdk/js?client-id=ATSymw6LJvP32iJy2Ze93pCO4Z6i4W60-jxyf6rdCqYV7pI0lZ0OZ9o8xt2W0fDrdLHeCsHEPDgh_ePK&currency=EUR&intent=authorize"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    src="https://www.paypal.com/sdk/js?client-id=Ac3JSmUxFyhBl1yjHD1d6ejgf0F3Z-1lpT5DzUpw5Qi4Srlt-CCDQ62ZHP1moDh-TWJZAECDM7h55yOO&currency=EUR&intent=authorize"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
   </script>
 
 
@@ -185,7 +185,7 @@ function printPage(){
             success: function(result) {
               
                 $(".paymentdata").empty();
-                $(".paymentdata").html("{% blocktrans %}payment-success{% endblocktrans %}"); 
+                $(".paymentdata").html("<h2>{% trans 'payment-success' %}</h2>{% trans 'payment-success-subtitle' %}"); 
                 // parse the query string into an object 
             },
             error: function(result) {

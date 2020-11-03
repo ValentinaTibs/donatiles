@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 14:43+0000\n"
+"POT-Creation-Date: 2020-11-03 10:58+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -64,7 +64,7 @@ msgstr "Data d'invio"
 
 #: taleoftiles/templates/account.html:41
 #: taleoftiles/templates/include/payment_options.html:31
-#: taleoftiles/templates/order.html:26 taleoftiles/templates/payment.html:116
+#: taleoftiles/templates/order.html:26 taleoftiles/templates/payment.html:119
 msgid "order"
 msgstr "Ordine"
 
@@ -128,7 +128,7 @@ msgstr ""
 msgid "tiles"
 msgstr "Mattonelle"
 
-#: taleoftiles/templates/email/order_email.txt:6
+#: taleoftiles/templates/email/order_email.txt:7
 #, fuzzy, python-format
 msgid ""
 " order_email_text <a href=\"%(full_account_url_)s\">%(full_account_url_)s</a>"
@@ -148,7 +148,7 @@ msgstr ""
 "\n"
 "#OurFairyTaleofTiles"
 
-#: taleoftiles/templates/email/password_reset_email.txt:6
+#: taleoftiles/templates/email/password_reset_email.txt:7
 #, fuzzy, python-format
 #| msgid ""
 #| " password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
@@ -177,7 +177,7 @@ msgstr ""
 "\n"
 "Sincerely,The %(site_name)s Team"
 
-#: taleoftiles/templates/email/register_email.txt:5
+#: taleoftiles/templates/email/register_email.txt:6
 #, python-format
 msgid ""
 " register-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> %(pwd)s"
@@ -201,7 +201,7 @@ msgstr ""
 "\n"
 "#OurFairyTaleofTiles"
 
-#: taleoftiles/templates/email/welcome_email.txt:5
+#: taleoftiles/templates/email/welcome_email.txt:6
 #, fuzzy, python-format
 #| msgid ""
 #| " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> %(pwd)s"
@@ -426,79 +426,82 @@ msgstr ""
 
 #: taleoftiles/templates/include/payment_options.html:12
 #: taleoftiles/templates/include/payment_options.html:39
-#: taleoftiles/templates/payment.html:32 taleoftiles/templates/payment.html:106
+#: taleoftiles/templates/payment.html:34 taleoftiles/templates/payment.html:109
 msgid "summary-iban-claim"
 msgstr "Effettua un bonifico con questi dati per confermare il tuo ordine:"
 
 #: taleoftiles/templates/include/payment_options.html:13
 #: taleoftiles/templates/include/payment_options.html:40
-#: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:107
+#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:110
 msgid "ammount"
 msgstr "Quantità"
 
 #: taleoftiles/templates/include/payment_options.html:15
 #: taleoftiles/templates/include/payment_options.html:42
-#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:109
+#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:112
 msgid "summary-iban-title"
 msgstr "Iban"
 
 #: taleoftiles/templates/include/payment_options.html:16
 #: taleoftiles/templates/include/payment_options.html:43
-#: taleoftiles/templates/payment.html:36 taleoftiles/templates/payment.html:110
+#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:113
 msgid "summary-iban"
 msgstr "IT 72Q0832773030000000002858"
 
 #: taleoftiles/templates/include/payment_options.html:17
 #: taleoftiles/templates/include/payment_options.html:44
-#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:111
+#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:114
 msgid "summary-SWIFT-title"
 msgstr "swift code"
 
 #: taleoftiles/templates/include/payment_options.html:18
 #: taleoftiles/templates/include/payment_options.html:45
-#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:112
+#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:115
 msgid "summary-SWIFT"
 msgstr "----"
 
 #: taleoftiles/templates/include/payment_options.html:19
 #: taleoftiles/templates/include/payment_options.html:46
-#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:113
+#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:116
 msgid "summary-accountholder-title"
 msgstr "intestato a"
 
 #: taleoftiles/templates/include/payment_options.html:20
 #: taleoftiles/templates/include/payment_options.html:47
-#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:114
+#: taleoftiles/templates/payment.html:42 taleoftiles/templates/payment.html:117
 msgid "summary-accountholder"
 msgstr "Tale of Tiles srls"
 
 #: taleoftiles/templates/include/payment_options.html:21
 #: taleoftiles/templates/include/payment_options.html:48
-#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:115
+#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:118
 msgid "subject"
 msgstr "Oggetto"
 
 #: taleoftiles/templates/include/payment_options.html:25
 #: taleoftiles/templates/include/payment_options.html:51
-#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:117
+#: taleoftiles/templates/payment.html:45 taleoftiles/templates/payment.html:120
 msgid "print-data"
 msgstr "Stampa questa pagina"
 
 #: taleoftiles/templates/include/payment_options.html:32
-#, fuzzy
-#| msgid "payment-title"
+#: taleoftiles/templates/payment.html:175
+#: taleoftiles/templates/payment.html:188
 msgid "payment-success"
-msgstr "Pagamenti"
+msgstr "Pagamento completato con successo."
 
 #: taleoftiles/templates/include/payment_options.html:33
-#, fuzzy
-#| msgid "payment-title"
+#: taleoftiles/templates/payment.html:188
 msgid "payment-success-subtitle"
-msgstr "Pagamenti"
+msgstr ""
+"Ti contatteremo entro 24h per informarti su modi e tempi di spedizione."
 
 #: taleoftiles/templates/include/payment_options.html:36
 msgid "pay_via_paypal_or_creditcard"
 msgstr ""
+"Paga via PayPal o Carta di Credito - il pagamento sarà reso effettivo dal "
+"momento dell'accettazione dell'ordine, per maggiori informazioni consulta "
+"termini e condizioni."
 
 #: taleoftiles/templates/include/sampler.html:8
 msgid "your-sampler"
@@ -526,8 +529,8 @@ msgstr ""
 msgid "order-page-name"
 msgstr "Negozio online di mattonelle per pavimenti e rivestimenti"
 
-#: taleoftiles/templates/order.html:25 taleoftiles/templates/payment.html:88
-#: taleoftiles/templates/payment.html:91
+#: taleoftiles/templates/order.html:25 taleoftiles/templates/payment.html:90
+#: taleoftiles/templates/payment.html:93
 msgid "back-to-orders"
 msgstr "Torna indietro"
 
@@ -618,7 +621,7 @@ msgstr ""
 msgid "payment-title"
 msgstr "Pagamenti"
 
-#: taleoftiles/templates/payment.html:17 taleoftiles/templates/payment.html:93
+#: taleoftiles/templates/payment.html:17 taleoftiles/templates/payment.html:95
 msgid "summary-recipt-title"
 msgstr "Come effettuare il pagamento"
 
@@ -626,22 +629,22 @@ msgstr "Come effettuare il pagamento"
 msgid "this-was-a-sampler"
 msgstr ""
 
-#: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:127
+#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:130
 #: taleoftiles/templates/summary.html:17 taleoftiles/templates/summary.html:22
 msgid "summary-back-home"
 msgstr "Torna a Tale of Tiles"
 
-#: taleoftiles/templates/payment.html:55 taleoftiles/templates/payment.html:128
+#: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
 msgid "any-doubt"
 msgstr "Hai qualche dubbio"
 
-#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:130
+#: taleoftiles/templates/payment.html:58 taleoftiles/templates/payment.html:133
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
 msgstr "Consulta l'assistenza oppure scrivici a info@taleoftiles.com"
 
-#: taleoftiles/templates/payment.html:100
+#: taleoftiles/templates/payment.html:102
 #, python-format
 msgid " working_days %(shipping_date_t)s %(email_t)s "
 msgstr ""
