@@ -14,3 +14,4 @@ django-storages
 django-translations
 django-crispy-forms
 django_rest_framework
+django-termsandconditions

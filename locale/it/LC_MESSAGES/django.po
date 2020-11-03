@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-02 15:19+0000\n"
+"POT-Creation-Date: 2020-11-03 12:11+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -64,7 +64,7 @@ msgstr "Data d'invio"
 
 #: taleoftiles/templates/account.html:41
 #: taleoftiles/templates/include/payment_options.html:31
-#: taleoftiles/templates/order.html:26 taleoftiles/templates/payment.html:117
+#: taleoftiles/templates/order.html:26 taleoftiles/templates/payment.html:119
 msgid "order"
 msgstr "Ordine"
 
@@ -127,101 +127,6 @@ msgstr ""
 #: taleoftiles/templates/empty_base.html:262
 msgid "tiles"
 msgstr "Mattonelle"
-
-#: taleoftiles/templates/email/order_email.txt:7
-#, fuzzy, python-format
-msgid ""
-" order_email_text <a href=\"%(full_account_url_)s\">%(full_account_url_)s</a>"
-"%(order_id)s <a href=\"%(full_order_url_)s\">%(full_order_url_)s</a>"
-msgstr ""
-"Grazie per averci scelto!\n"
-"Abbiamo ricevuto il tuo ordine num. %(order_id)s \n"
-"puoi revisionare il contenuto dell'ordine nella pagina relativa <a href="
-"\"%(full_order_url_)s\">%(full_order_url_)s</a>\n"
-"Entro un giorno lavorativo sarai ricontattato da noi per farti sapere, con "
-"precisione, quando le tue mattonelle saranno spedite. Successivamente verrai "
-"contattato telefonicamente dal corriere per concordare la consegna. "
-"Assicurati che il tuo profilo abbia un numero di telefono corretto "
-"comprensivo di prefisso internazionale in modoche il corriere ti possa "
-"contattare.  La pagina del tuo account <a href=\"%(full_account_url_)s\">"
-"%(full_account_url_)s</a> \n"
-"\n"
-"#OurFairyTaleofTiles"
-
-#: taleoftiles/templates/email/password_reset_email.txt:7
-#, fuzzy, python-format
-#| msgid ""
-#| " password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
-#| "%(full_password_reset_confirm)s</a> %(site_name)s"
-msgid ""
-" password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
-"%(full_password_reset_confirm)s</a> <a href=\"%(full_password_reset)s\">"
-"%(full_password_reset)s</a> %(site_name)s"
-msgstr ""
-"Hello,\n"
-"\n"
-"\n"
-"We received a request to reset the password for your account for this email "
-"address. To initiate the password reset process for your account, click the "
-"link below.\n"
-"\n"
-"<a href=\"%(full_password_reset_confirm)s\">%(full_password_reset_confirm)s</"
-"a>  \n"
-"\n"
-"This link can only be used once. \n"
-"If you need to reset your password again, please visit <a href="
-"\"%(full_password_reset)s\">%(full_password_reset)s</a> and request another "
-"reset.\n"
-"\n"
-"If you did not make this request, you can simply ignore this email.\n"
-"\n"
-"Sincerely,The %(site_name)s Team"
-
-#: taleoftiles/templates/email/register_email.txt:6
-#, python-format
-msgid ""
-" register-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> %(pwd)s"
-msgstr ""
-"GRAZIE!\n"
-"Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of "
-"Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in "
-"Italy. Selezioniamo, per voi, con orgoglio e passione i migliori prodotti "
-"esclusivamente di produzione italiana.\n"
-"Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la "
-"storia dei tuoi nuovi spazi da vivere! Potrai selezionare fino a quattro "
-"campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo "
-"gratuitamente a casa, per toccare con mano la qualità dei nostri prodotti!\n"
-"Approfitta della spedizione gratuita su tutti gli ordini per ricevere le tue "
-"nuove mattonelle direttamente a casa!\n"
-"\n"
-"Questa è la tua password di accesso momentanea:%(pwd)s\n"
-"\n"
-"Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi "
-"spazi sul nostro blog.<a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> \n"
-"\n"
-"#OurFairyTaleofTiles"
-
-#: taleoftiles/templates/email/welcome_email.txt:6
-#, fuzzy, python-format
-#| msgid ""
-#| " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> %(pwd)s"
-msgid " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a>"
-msgstr ""
-"GRAZIE!\n"
-"Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of "
-"Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in "
-"Italy. Selezioniamo, per voi, con orgoglio e passione i migliori prodotti "
-"esclusivamente di produzione italiana.\n"
-"Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la "
-"storia dei tuoi nuovi spazi da vivere! Potrai selezionare fino a quattro "
-"campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo "
-"gratuitamente a casa, per toccare con mano la qualità dei nostri prodotti!\n"
-"Approfitta della spedizione gratuita su tutti gli ordini per ricevere le tue "
-"nuove mattonelle direttamente a casa!\n"
-"Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi "
-"spazi sul nostro blog.<a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> \n"
-"\n"
-"#OurFairyTaleofTiles"
 
 #: taleoftiles/templates/empty_base.html:54
 #: taleoftiles/templates/empty_base.html:187
@@ -422,79 +327,82 @@ msgstr ""
 
 #: taleoftiles/templates/include/payment_options.html:12
 #: taleoftiles/templates/include/payment_options.html:39
-#: taleoftiles/templates/payment.html:32 taleoftiles/templates/payment.html:107
+#: taleoftiles/templates/payment.html:34 taleoftiles/templates/payment.html:109
 msgid "summary-iban-claim"
 msgstr "Effettua un bonifico con questi dati per confermare il tuo ordine:"
 
 #: taleoftiles/templates/include/payment_options.html:13
 #: taleoftiles/templates/include/payment_options.html:40
-#: taleoftiles/templates/payment.html:33 taleoftiles/templates/payment.html:108
+#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:110
 msgid "ammount"
 msgstr "Quantità"
 
 #: taleoftiles/templates/include/payment_options.html:15
 #: taleoftiles/templates/include/payment_options.html:42
-#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:110
+#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:112
 msgid "summary-iban-title"
 msgstr "Iban"
 
 #: taleoftiles/templates/include/payment_options.html:16
 #: taleoftiles/templates/include/payment_options.html:43
-#: taleoftiles/templates/payment.html:36 taleoftiles/templates/payment.html:111
+#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:113
 msgid "summary-iban"
 msgstr "IT 72Q0832773030000000002858"
 
 #: taleoftiles/templates/include/payment_options.html:17
 #: taleoftiles/templates/include/payment_options.html:44
-#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:112
+#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:114
 msgid "summary-SWIFT-title"
 msgstr "swift code"
 
 #: taleoftiles/templates/include/payment_options.html:18
 #: taleoftiles/templates/include/payment_options.html:45
-#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:113
+#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:115
 msgid "summary-SWIFT"
-msgstr "----"
+msgstr "ROMAITRR"
 
 #: taleoftiles/templates/include/payment_options.html:19
 #: taleoftiles/templates/include/payment_options.html:46
-#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:114
+#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:116
 msgid "summary-accountholder-title"
 msgstr "intestato a"
 
 #: taleoftiles/templates/include/payment_options.html:20
 #: taleoftiles/templates/include/payment_options.html:47
-#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:115
+#: taleoftiles/templates/payment.html:42 taleoftiles/templates/payment.html:117
 msgid "summary-accountholder"
 msgstr "Tale of Tiles srls"
 
 #: taleoftiles/templates/include/payment_options.html:21
 #: taleoftiles/templates/include/payment_options.html:48
-#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:116
+#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:118
 msgid "subject"
 msgstr "Oggetto"
 
 #: taleoftiles/templates/include/payment_options.html:25
 #: taleoftiles/templates/include/payment_options.html:51
-#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:118
+#: taleoftiles/templates/payment.html:45 taleoftiles/templates/payment.html:120
 msgid "print-data"
 msgstr "Stampa questa pagina"
 
 #: taleoftiles/templates/include/payment_options.html:32
-#, fuzzy
-#| msgid "payment-title"
+#: taleoftiles/templates/payment.html:175
+#: taleoftiles/templates/payment.html:188
 msgid "payment-success"
-msgstr "Pagamenti"
+msgstr "Pagamento completato con successo."
 
 #: taleoftiles/templates/include/payment_options.html:33
-#, fuzzy
-#| msgid "payment-title"
+#: taleoftiles/templates/payment.html:188
 msgid "payment-success-subtitle"
-msgstr "Pagamenti"
+msgstr ""
+"Ti contatteremo entro 24h per informarti su modi e tempi di spedizione."
 
 #: taleoftiles/templates/include/payment_options.html:36
 msgid "pay_via_paypal_or_creditcard"
 msgstr ""
+"Paga via PayPal o Carta di Credito - il pagamento sarà reso effettivo dal "
+"momento dell'accettazione dell'ordine e conferma della data di consegna. Per "
+"maggiori informazioni consulta termini e condizioni."
 
 #: taleoftiles/templates/include/sampler.html:8
 msgid "your-sampler"
@@ -522,8 +430,8 @@ msgstr ""
 msgid "order-page-name"
 msgstr "Negozio online di mattonelle per pavimenti e rivestimenti"
 
-#: taleoftiles/templates/order.html:25 taleoftiles/templates/payment.html:88
-#: taleoftiles/templates/payment.html:91
+#: taleoftiles/templates/order.html:25 taleoftiles/templates/payment.html:90
+#: taleoftiles/templates/payment.html:93
 msgid "back-to-orders"
 msgstr "Torna indietro"
 
@@ -614,7 +522,7 @@ msgstr ""
 msgid "payment-title"
 msgstr "Pagamenti"
 
-#: taleoftiles/templates/payment.html:17 taleoftiles/templates/payment.html:93
+#: taleoftiles/templates/payment.html:17 taleoftiles/templates/payment.html:95
 msgid "summary-recipt-title"
 msgstr "Come effettuare il pagamento"
 
@@ -622,22 +530,22 @@ msgstr "Come effettuare il pagamento"
 msgid "this-was-a-sampler"
 msgstr "Hai appena ordinato il tuo TaleOfTiles Book."
 
-#: taleoftiles/templates/payment.html:54 taleoftiles/templates/payment.html:128
+#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:130
 #: taleoftiles/templates/summary.html:17 taleoftiles/templates/summary.html:22
 msgid "summary-back-home"
 msgstr "Torna a Tale of Tiles"
 
-#: taleoftiles/templates/payment.html:55 taleoftiles/templates/payment.html:129
+#: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
 msgid "any-doubt"
 msgstr "Hai qualche dubbio"
 
-#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:131
+#: taleoftiles/templates/payment.html:58 taleoftiles/templates/payment.html:133
 msgid ""
 " consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
 "com</a>  consult-support"
 msgstr "Consulta l'assistenza oppure scrivici a info@taleoftiles.com"
 
-#: taleoftiles/templates/payment.html:100
+#: taleoftiles/templates/payment.html:102
 #, python-format
 msgid " working_days %(shipping_date_t)s %(email_t)s "
 msgstr ""
@@ -1210,83 +1118,100 @@ msgstr ""
 "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
 "(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
 
-#~ msgid "Svenska"
-#~ msgstr "Svedese"
-
-#~ msgid "Deutch"
-#~ msgstr "Tedesco"
+#, fuzzy, python-format
+#~ msgid ""
+#~ " order_email_text <a href=\"%(full_account_url_)s\">"
+#~ "%(full_account_url_)s</a>%(order_id)s <a href=\"%(full_order_url_)s\">"
+#~ "%(full_order_url_)s</a>"
+#~ msgstr ""
+#~ "Grazie per averci scelto!\n"
+#~ "Abbiamo ricevuto il tuo ordine num. %(order_id)s \n"
+#~ "puoi revisionare il contenuto dell'ordine nella pagina relativa <a href="
+#~ "\"%(full_order_url_)s\">%(full_order_url_)s</a>\n"
+#~ "Entro un giorno lavorativo sarai ricontattato da noi per farti sapere, "
+#~ "con precisione, quando le tue mattonelle saranno spedite. Successivamente "
+#~ "verrai contattato telefonicamente dal corriere per concordare la "
+#~ "consegna. Assicurati che il tuo profilo abbia un numero di telefono "
+#~ "corretto comprensivo di prefisso internazionale in modoche il corriere ti "
+#~ "possa contattare.  La pagina del tuo account <a href="
+#~ "\"%(full_account_url_)s\">%(full_account_url_)s</a> \n"
+#~ "\n"
+#~ "#OurFairyTaleofTiles"
 
 #, fuzzy, python-format
-#~ msgid "paying-now %(date_shipping)s paying-now"
+#~| msgid ""
+#~| " password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
+#~| "%(full_password_reset_confirm)s</a> %(site_name)s"
+#~ msgid ""
+#~ " password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
+#~ "%(full_password_reset_confirm)s</a> <a href=\"%(full_password_reset)s\">"
+#~ "%(full_password_reset)s</a> %(site_name)s"
 #~ msgstr ""
-#~ "Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
-#~ "%(date_shipping)s </strong>\n"
-#~ "Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
-#~ "<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
-#~ "preparazione del tuo ordine!\n"
+#~ "Hello,\n"
 #~ "\n"
-#~ "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
-#~ "confermato."
+#~ "\n"
+#~ "We received a request to reset the password for your account for this "
+#~ "email address. To initiate the password reset process for your account, "
+#~ "click the link below.\n"
+#~ "\n"
+#~ "<a href=\"%(full_password_reset_confirm)s\">"
+#~ "%(full_password_reset_confirm)s</a>  \n"
+#~ "\n"
+#~ "This link can only be used once. \n"
+#~ "If you need to reset your password again, please visit <a href="
+#~ "\"%(full_password_reset)s\">%(full_password_reset)s</a> and request "
+#~ "another reset.\n"
+#~ "\n"
+#~ "If you did not make this request, you can simply ignore this email.\n"
+#~ "\n"
+#~ "Sincerely,The %(site_name)s Team"
 
-#~ msgid "days"
-#~ msgstr "Giorni"
+#, python-format
+#~ msgid ""
+#~ " register-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> "
+#~ "%(pwd)s"
+#~ msgstr ""
+#~ "GRAZIE!\n"
+#~ "Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of "
+#~ "Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in "
+#~ "Italy. Selezioniamo, per voi, con orgoglio e passione i migliori prodotti "
+#~ "esclusivamente di produzione italiana.\n"
+#~ "Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la "
+#~ "storia dei tuoi nuovi spazi da vivere! Potrai selezionare fino a quattro "
+#~ "campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo "
+#~ "gratuitamente a casa, per toccare con mano la qualità dei nostri "
+#~ "prodotti!\n"
+#~ "Approfitta della spedizione gratuita su tutti gli ordini per ricevere le "
+#~ "tue nuove mattonelle direttamente a casa!\n"
+#~ "\n"
+#~ "Questa è la tua password di accesso momentanea:%(pwd)s\n"
+#~ "\n"
+#~ "Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi "
+#~ "spazi sul nostro blog.<a href=\"%(full_blog_url)s\">%(full_blog_url)s</"
+#~ "a> \n"
+#~ "\n"
+#~ "#OurFairyTaleofTiles"
 
-#~ msgid "product-not-samplable"
-#~ msgstr "Non campionabile"
-
-#~ msgid "login-data"
-#~ msgstr "Login"
-
-#~ msgid "catalgoue-page-name"
-#~ msgstr "Catalogo"
-
-#~ msgid "cat-menu-all"
-#~ msgstr "Tutti i prodotti"
-
-#~ msgid "language"
-#~ msgstr "Lingua"
-
-#~ msgid "currency"
-#~ msgstr "Valuta"
-
-#~ msgid "facebook"
-#~ msgstr "Facebook"
-
-#~ msgid "pinterest"
-#~ msgstr "Pinterest"
-
-#~ msgid "instagram"
-#~ msgstr "Instagram"
-
-#~ msgid "read"
-#~ msgstr "Leggi"
-
-#~ msgid "title-team-home"
-#~ msgstr "Chi siamo"
-
-#~ msgid "summary-long-text1"
-#~ msgstr "Potrai pagare con bonifico bancario"
-
-#~ msgid "summary-page-title"
-#~ msgstr "Riepilogo del tuo ordine"
-
-#~ msgid "product"
-#~ msgstr "Prodotto"
-
-#~ msgid "delete"
-#~ msgstr "Cancella"
-
-#~ msgid "box"
-#~ msgstr "Scatola"
-
-#~ msgid "support-page-name"
-#~ msgstr "Assistenza"
-
-#~ msgid "write-us-orders"
-#~ msgstr "Contattaci per il tuo ordine"
-
-#~ msgid "write-us-sells"
-#~ msgstr "Contattaci"
-
-#~ msgid "write-us-support"
-#~ msgstr "Contattaci per avere assistenza"
+#, fuzzy, python-format
+#~| msgid ""
+#~| " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> "
+#~| "%(pwd)s"
+#~ msgid " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a>"
+#~ msgstr ""
+#~ "GRAZIE!\n"
+#~ "Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of "
+#~ "Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in "
+#~ "Italy. Selezioniamo, per voi, con orgoglio e passione i migliori prodotti "
+#~ "esclusivamente di produzione italiana.\n"
+#~ "Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la "
+#~ "storia dei tuoi nuovi spazi da vivere! Potrai selezionare fino a quattro "
+#~ "campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo "
+#~ "gratuitamente a casa, per toccare con mano la qualità dei nostri "
+#~ "prodotti!\n"
+#~ "Approfitta della spedizione gratuita su tutti gli ordini per ricevere le "
+#~ "tue nuove mattonelle direttamente a casa!\n"
+#~ "Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi "
+#~ "spazi sul nostro blog.<a href=\"%(full_blog_url)s\">%(full_blog_url)s</"
+#~ "a> \n"
+#~ "\n"
+#~ "#OurFairyTaleofTiles"
