@@ -166,6 +166,10 @@ msgstr ""
 msgid "sample-touchhand"
 msgstr ""
 
+#: taleoftiles/templates/home.html:44
+msgid "sample-title"
+msgstr ""
+
 #: taleoftiles/templates/home.html:45
 msgid "sample-description"
 msgstr ""
