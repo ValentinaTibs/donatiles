@@ -3,6 +3,9 @@ import math
 from django.utils.crypto import get_random_string
 from django.db import models
 from django.utils import timezone
+from django.utils.timezone import localtime, now
+
+
 from django.core.exceptions import ValidationError
 
 from django.db.models import Count, Q, Sum
@@ -74,7 +77,16 @@ class Shipping(models.Model):
     telephone_num       = models.TextField(max_length=30, blank=False)
     is_active           = models.BooleanField(default = True)
 
+    created_at              = models.DateTimeField(editable=False)
+    modified_at             = models.DateTimeField()
 
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = localtime(timezone.now()).date()
+        self.modified_at = localtime(timezone.now()).date()
+        
+        super().save(*args, **kwargs)  # Call the "real" save() method.
 
 #2do mettere qui un metodo più decente
 def create_shipping_internal_id():
@@ -115,6 +127,21 @@ class Order(models.Model):
             chart_model = self.charts.first()
         if not chart_model:
             return None    
+        if not chart_model.user.is_anonymous:
+            return None
+            
+        if chart_model.user:
+            return chart_model.user
+        else :
+            return None
+    
+    def payment_user(self):
+        if self.is_sampler:
+            chart_model = self.sampler.first()
+        else :
+            chart_model = self.charts.first()
+        if not chart_model:
+            return None                
         if chart_model.user:
             return chart_model.user
         else :

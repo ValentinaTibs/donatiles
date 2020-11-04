@@ -124,6 +124,8 @@ def shipping(request, id_):
             else: 
                 try:
                     new_user = User.objects.get( username=new_shipping.email, email=new_shipping.email) 
+                    da_user = Profile.objects.get( user = new_user)       
+                     
                 except ObjectDoesNotExist:
                     new_user = User.objects.create_user( username=new_shipping.email, email=new_shipping.email,password=create_one_time_password()) 
                     new_user.set_unusable_password()
