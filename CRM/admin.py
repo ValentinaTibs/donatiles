@@ -22,10 +22,18 @@ class ChartItemAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     model = Order
 
-    list_display = ('internal_tracking_id','shipping_tracking_id','created_at','modified_at','order_status','final_payment','is_sampler','_is_paid')
+    list_display = ('internal_tracking_id','shipping_tracking_id','user_','created_at','modified_at','order_status','final_payment','is_sampler','_is_paid')
 
     def _is_paid(self, obj):
         return obj.is_paid()
+
+    def user_(self, obj):
+        da_user = obj.user()
+        if da_user:
+            return da_user         
+        else :
+            return 'No User'
+        
     #inlines = ('inte',)
 
 class ShippingAdmin(admin.ModelAdmin):

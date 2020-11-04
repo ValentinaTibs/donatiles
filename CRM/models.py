@@ -113,6 +113,8 @@ class Order(models.Model):
             chart_model = self.sampler.first()
         else :
             chart_model = self.charts.first()
+        if not chart_model:
+            return None    
         if chart_model.user:
             return chart_model.user
         else :
