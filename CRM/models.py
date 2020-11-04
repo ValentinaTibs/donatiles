@@ -127,9 +127,11 @@ class Order(models.Model):
             chart_model = self.charts.first()
         if not chart_model:
             return None    
+        if not chart_model.user:
+            return None
+    
         if not chart_model.user.is_anonymous:
             return None
-            
         if chart_model.user:
             return chart_model.user
         else :

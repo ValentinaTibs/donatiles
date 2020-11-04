@@ -84,7 +84,7 @@ def payment(request, id_):
         order.order_status = 'i'
         order.save()
         new_mail = MailTemplate()
-        new_mail.send_order(request,order.user(),order)
+        new_mail.send_order(request,order.payment_user(),order)
 
     prv_page = request.session.get('prev_page')
     return render(request, "payment.html", {'order':order,'prv_page':prv_page })   
@@ -136,9 +136,11 @@ def shipping(request, id_):
 
                 new_mail = MailTemplate()
                 new_mail.send_welcome(new_user)
-
-                new_shipping.user = da_user
-                new_shipping.save()
+                try:
+                    new_shipping = Shipping.objects.get(user = da_user)
+                except ObjectDoesNotExist:                     
+                    new_shipping.user = da_user
+                    new_shipping.save()
                 order.user = da_user
                         
             order.final_payment = order.total()
