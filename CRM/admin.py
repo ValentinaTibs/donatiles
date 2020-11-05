@@ -83,7 +83,7 @@ class SampleStackedAdmin(admin.StackedInline):
 
 class SamplerAdmin(admin.ModelAdmin):
     model = Sampler
-    list_display = ( 'session_id','created_at','modified_at','_is_paid','order')
+    list_display = ( 'session_id','user','created_at','modified_at','_is_paid','order')
     readonly_fields  = ( 'session_id','created_at','modified_at','order')
     inlines = [SampleStackedAdmin]
 

@@ -188,21 +188,29 @@
 
       <li><a href="" data-overlay="Auth"><span>{% trans 'login-register' %}</span></a></li>
       <li class="settingsmenu">
-        <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>Italiano</span></div>
+        
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_language_info for LANGUAGE_CODE as lang %}
+          
+          {% with img_name="images/svgdefs.svg#icon-lang-"|add:lang.code %}
+            <div><svg class="icon-s icon"><use xlink:href="{% static img_name %}"/></svg><span>{{lang.name}}</span></div>
+          {% endwith %}
+
         <button class="btn btn-tree"><svg class="icon icon-l">
           <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable">
-          <a href=""><svg class="icon-s icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-en' %}"/></svg><span>English</span></a>
-          <a href=""><svg class="icon-s icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-it' %}"/></svg><span>Italiano</span></a>
-          <a href=""><svg class="icon-s icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-fr' %}"/></svg><span>Français</span></a>
-          <a href=""><svg class="icon-s icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-de' %}"/></svg><span>Deutsch</span></a>
-          <a href=""><svg class="icon-s icon">
-            <use xlink:href="{% static 'images/svgdefs.svg#icon-lang-sv' %}"/></svg><span>Svenska</span></a>
+          {% get_available_languages as LANGUAGES %}
+          {% for lang in LANGUAGES %} 
+              {% with img_name="images/svgdefs.svg#icon-lang-"|add:lang.0 %}
+                
+                {% get_language_info for lang.0 as lang__ %}          
+                <a href="{% change_lang lang.0 %}"><svg class="icon-s icon">
+                <use xlink:href="{% static img_name %}"/></svg><span>{{lang__.name}}</span></a>
+            {% endwith %}
+          {% endfor %}
         </div>
+
+
       </li>
       <li class="settingsmenu">
         <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>Euro</span></div>
