@@ -175,7 +175,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:6
 msgid "home-page-name"
-msgstr "Welcome Home"
+msgstr "Italian Luxury Tiles & Decor - E-Commerce"
 
 #: taleoftiles/templates/home.html:8
 #, fuzzy
