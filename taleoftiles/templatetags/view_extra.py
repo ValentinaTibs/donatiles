@@ -30,7 +30,7 @@ def get_elem(queryset, key):
 
 @register.filter
 def filter_tags(queryset, key):
-    elems = queryset.filter(parent__slug=key)
+    elems = queryset.filter(parent__slug=key, public = True)
     return(elems)
 
 
