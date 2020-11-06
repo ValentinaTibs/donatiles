@@ -1,6 +1,7 @@
 from django.contrib import admin
 from layout.models import Image
 from blog.models import Post
+from taleoftiles.models import Product
 
 
 class PostImageStackedAdmin(admin.StackedInline):
@@ -18,6 +19,7 @@ class PostAdmin(admin.ModelAdmin):
     inlines = (PostImageStackedAdmin,)
     #inlines = (PublicationAdmin,ImageStackedAdmin)
     list_display = ('name','publish_date','tags','in_home','order' )
+    fields = ("tags","publication","related_products","deleted","order")
 
     def name(self, obj):
         pub = obj.publication
@@ -30,11 +32,8 @@ class PostAdmin(admin.ModelAdmin):
         pub = obj.publication
         return "\n".join([p.name for p in pub.tag.all()])   
 
-    
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "related_products":
-            kwargs["queryset"] = Product.objects.filter(is_active=True).order_by('slug')
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
+    def render_change_form(self, request, context, *args, **kwargs):
+        context['adminform'].form.fields['related_products'].queryset = Product.objects.filter(is_active=True).order_by('code')
+        return super(PostAdmin, self).render_change_form(request, context, *args, **kwargs)
     
 admin.site.register(Post,PostAdmin)

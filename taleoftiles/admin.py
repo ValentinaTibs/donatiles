@@ -152,7 +152,6 @@ class PublicationAdminSelf(SummernoteModelAdmin):
         obj.author = request.user
         super().save_model(request, obj, form, change)
 
-
     def title_(self, obj):
         if obj.title == '':
             return '-'
