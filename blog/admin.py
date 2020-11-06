@@ -29,5 +29,12 @@ class PostAdmin(admin.ModelAdmin):
     def tags(self, obj):
         pub = obj.publication
         return "\n".join([p.name for p in pub.tag.all()])   
+
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "related_products":
+            kwargs["queryset"] = Product.objects.filter(is_active=True).order_by('slug')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
     
 admin.site.register(Post,PostAdmin)
