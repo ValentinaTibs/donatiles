@@ -190,6 +190,7 @@ class ProductAdmin(admin.ModelAdmin):
                     'style_',
                     'effect_',
                     'finish_',
+                    'product_edit_',
                     'samplable_',
                     'publication',
                     'support_to',
@@ -221,6 +222,8 @@ class ProductAdmin(admin.ModelAdmin):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='samplable')])    
     def decor_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='decor')])    
+    def product_edit_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(in_product_edit = True)])    
 
 
 class TechnicalSpecAdmin(admin.ModelAdmin):
