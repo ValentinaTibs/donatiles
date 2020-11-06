@@ -178,8 +178,6 @@ msgid "home-page-name"
 msgstr "Italian Luxury Tiles & Decor - E-Commerce"
 
 #: taleoftiles/templates/home.html:8
-#, fuzzy
-#| msgid "sample-description"
 msgid "home-description-meta-tag"
 msgstr ""
 "E-commerce of handcrafted handmade and industrial tiles and terracotta for "
