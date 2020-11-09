@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-06 15:07+0000\n"
+"POT-Creation-Date: 2020-11-09 16:41+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -119,57 +119,57 @@ msgid "payment"
 msgstr "Pagamenti"
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:270
 msgid "termini-e-condizioni"
 msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:277
+#: taleoftiles/templates/empty_base.html:280
 msgid "tiles"
 msgstr "Mattonelle"
 
-#: taleoftiles/templates/empty_base.html:61
-#: taleoftiles/templates/empty_base.html:194
+#: taleoftiles/templates/empty_base.html:64
+#: taleoftiles/templates/empty_base.html:197
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 msgid "support"
 msgstr "Assistenza"
 
-#: taleoftiles/templates/empty_base.html:64
+#: taleoftiles/templates/empty_base.html:67
 msgid "account"
 msgstr "Il tuo Account"
 
-#: taleoftiles/templates/empty_base.html:65
+#: taleoftiles/templates/empty_base.html:68
 msgid "logout"
 msgstr "Logout"
 
-#: taleoftiles/templates/empty_base.html:67
-#: taleoftiles/templates/empty_base.html:196
+#: taleoftiles/templates/empty_base.html:70
+#: taleoftiles/templates/empty_base.html:199
 msgid "login-register"
 msgstr "Login-Registrati"
 
-#: taleoftiles/templates/empty_base.html:112
-#: taleoftiles/templates/empty_base.html:176
+#: taleoftiles/templates/empty_base.html:115
+#: taleoftiles/templates/empty_base.html:179
 msgid "catalogue-menu"
 msgstr "Catalogo"
 
-#: taleoftiles/templates/empty_base.html:129
-#: taleoftiles/templates/empty_base.html:193
+#: taleoftiles/templates/empty_base.html:132
+#: taleoftiles/templates/empty_base.html:196
 msgid "blog-menu"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/empty_base.html:243
+#: taleoftiles/templates/empty_base.html:246
 msgid "of"
 msgstr "Di"
 
-#: taleoftiles/templates/empty_base.html:243
+#: taleoftiles/templates/empty_base.html:246
 msgid "added-to-chart"
 msgstr "Aggiunto al carrello"
 
-#: taleoftiles/templates/empty_base.html:244
+#: taleoftiles/templates/empty_base.html:247
 msgid "open-chart"
 msgstr "Vai al carrello"
 
-#: taleoftiles/templates/empty_base.html:266
+#: taleoftiles/templates/empty_base.html:269
 msgid "privacy-policy"
 msgstr ""
 
@@ -177,23 +177,35 @@ msgstr ""
 msgid "home-page-name"
 msgstr "Mattonelle, Cotto, Cementine, fatte in Italia - Vendita Online "
 
-#: taleoftiles/templates/home.html:8
+#: taleoftiles/templates/home.html:7
 msgid "home-description-meta-tag"
 msgstr ""
 "E-commerce di mattonelle e cotto artigianali ed industriali per superfici e "
 "pavimenti. Rivestimenti di design italiano: cementine, cotto, effetto legno."
 
-#: taleoftiles/templates/home.html:43
+#: taleoftiles/templates/home.html:8
+#, fuzzy
+#| msgid "home-description-meta-tag"
+msgid "home-keywords-meta-tag"
+msgstr ""
+"mattonelle, decor, mattonelle decor, mattonelle artigianali, "
+"piastrelleeffetto legno, mattonelle effetto legno, mattonele esagonali, "
+"esagono, mattonelle di lusso, piastrelle artigianali, piastrelle fatte a "
+"mano, piastrelle cucina, mattonelle cucina, mattonelle svedesi, modern "
+"design, mattonelle modern, vietri, ceramiche de maio, mutina, mattonelle "
+"mutina, marazzi, marazzi tiles, popham"
+
+#: taleoftiles/templates/home.html:42
 msgid "choose-home-claim"
 msgstr ""
 "Scegli le tue mattonelle tra la nostra <strong>selezione di oltre 200 "
 "prodotti</strong>"
 
-#: taleoftiles/templates/home.html:46
+#: taleoftiles/templates/home.html:45
 msgid "sample-touchhand"
 msgstr "Tocca con mano"
 
-#: taleoftiles/templates/home.html:48
+#: taleoftiles/templates/home.html:47
 msgid "sample-description"
 msgstr ""
 "Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of "
@@ -201,7 +213,7 @@ msgstr ""
 "ricevere gratuitamente a casa tua per sognare con i nostri prodotti "
 "esclusivamente italiani."
 
-#: taleoftiles/templates/home.html:52
+#: taleoftiles/templates/home.html:51
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 "<h3>Ricevi le tue mattonelle a casa <strong>senza spese di spedizione</"
@@ -209,52 +221,52 @@ msgstr ""
 "<br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
 "      "
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:70
 msgid "title-renovate-home"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/home.html:72
+#: taleoftiles/templates/home.html:71
 msgid "subtitle-renovate-home"
 msgstr ""
 "Divertiti con le nostre idee per rinnovare in modo semplice i tuoi ambienti."
 
-#: taleoftiles/templates/home.html:80
+#: taleoftiles/templates/home.html:79
 msgid "title-faq-home"
 msgstr "Domande frequenti"
 
-#: taleoftiles/templates/home.html:84
+#: taleoftiles/templates/home.html:83
 msgid "faq-1"
 msgstr "Come posso restituire il prodotto, se cambio idea?"
 
-#: taleoftiles/templates/home.html:85 taleoftiles/templates/home.html:90
-#: taleoftiles/templates/home.html:95 taleoftiles/templates/home.html:100
-#: taleoftiles/templates/home.html:104 taleoftiles/templates/home.html:108
+#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
 msgid "read-answer"
 msgstr "Leggi risposta"
 
-#: taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:88
 msgid "faq-2"
 msgstr "Quali sono i tempi di consegna?"
 
-#: taleoftiles/templates/home.html:94
+#: taleoftiles/templates/home.html:93
 msgid "faq-3"
 msgstr "Come avverrà la consegna?"
 
-#: taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:98
 msgid "faq-4"
 msgstr "Posso vedere le mattonelle prima di acquistarle?"
 
-#: taleoftiles/templates/home.html:103
+#: taleoftiles/templates/home.html:102
 msgid "faq-5"
 msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
 
-#: taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:106
 msgid "faq-6"
 msgstr ""
 "Devo avere delle accortezze particolari nel calcolare le misure per "
 "scegliere le mattonelle?"
 
-#: taleoftiles/templates/home.html:118
+#: taleoftiles/templates/home.html:117
 msgid "founder-name"
 msgstr "Noi siamo Tale of Tiles"
 

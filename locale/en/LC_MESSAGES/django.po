@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-06 15:07+0000\n"
+"POT-Creation-Date: 2020-11-09 16:41+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -119,57 +119,57 @@ msgid "payment"
 msgstr "Payment"
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:270
 msgid "termini-e-condizioni"
 msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:277
+#: taleoftiles/templates/empty_base.html:280
 msgid "tiles"
 msgstr "tiles"
 
-#: taleoftiles/templates/empty_base.html:61
-#: taleoftiles/templates/empty_base.html:194
+#: taleoftiles/templates/empty_base.html:64
+#: taleoftiles/templates/empty_base.html:197
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 msgid "support"
 msgstr "Support"
 
-#: taleoftiles/templates/empty_base.html:64
+#: taleoftiles/templates/empty_base.html:67
 msgid "account"
 msgstr "Your Account"
 
-#: taleoftiles/templates/empty_base.html:65
+#: taleoftiles/templates/empty_base.html:68
 msgid "logout"
 msgstr "logout"
 
-#: taleoftiles/templates/empty_base.html:67
-#: taleoftiles/templates/empty_base.html:196
+#: taleoftiles/templates/empty_base.html:70
+#: taleoftiles/templates/empty_base.html:199
 msgid "login-register"
 msgstr "Login-Register"
 
-#: taleoftiles/templates/empty_base.html:112
-#: taleoftiles/templates/empty_base.html:176
+#: taleoftiles/templates/empty_base.html:115
+#: taleoftiles/templates/empty_base.html:179
 msgid "catalogue-menu"
 msgstr "Catalogue"
 
-#: taleoftiles/templates/empty_base.html:129
-#: taleoftiles/templates/empty_base.html:193
+#: taleoftiles/templates/empty_base.html:132
+#: taleoftiles/templates/empty_base.html:196
 msgid "blog-menu"
 msgstr "Renovation Ideas"
 
-#: taleoftiles/templates/empty_base.html:243
+#: taleoftiles/templates/empty_base.html:246
 msgid "of"
 msgstr "of"
 
-#: taleoftiles/templates/empty_base.html:243
+#: taleoftiles/templates/empty_base.html:246
 msgid "added-to-chart"
 msgstr "added to chart"
 
-#: taleoftiles/templates/empty_base.html:244
+#: taleoftiles/templates/empty_base.html:247
 msgid "open-chart"
 msgstr "open chart"
 
-#: taleoftiles/templates/empty_base.html:266
+#: taleoftiles/templates/empty_base.html:269
 msgid "privacy-policy"
 msgstr ""
 
@@ -177,24 +177,37 @@ msgstr ""
 msgid "home-page-name"
 msgstr "Italian Luxury Tiles & Decor - E-Commerce"
 
-#: taleoftiles/templates/home.html:8
+#: taleoftiles/templates/home.html:7
 msgid "home-description-meta-tag"
 msgstr ""
 "E-commerce of handcrafted handmade and industrial tiles and terracotta for "
 "surfaces and floors. Italian design coatings: cement tiles, terracotta, wood "
 "effect."
 
-#: taleoftiles/templates/home.html:43
+#: taleoftiles/templates/home.html:8
+msgid "home-keywords-meta-tag"
+msgstr ""
+"tiles, decor tiles, handmade, handmade tiles, luxury, luxury tiles, decor, "
+"hipster,terracotta, terracotta tiles, tile, tiles design, design, wood "
+"effect, wood effect tiles, shower tiles, bathroom tiles, wall tiles, kitchen "
+"tilesinterior design, interior, wall tiles, ceramic tiles, hexagon tiles, "
+"forniture, terracotta, black tiles bathroom,grey tiles living, modern "
+"living, stone tiles kitchen, luxury tiles backsplash, backsplash, plain "
+"color tiles, green tiles, handpainted tiles, handmade floor tiles, handmade "
+"wall tiles, vietri, ceramiche de maio, mutina, mattonelle mutina, marazzi, "
+"marazzi tiles, popham"
+
+#: taleoftiles/templates/home.html:42
 msgid "choose-home-claim"
 msgstr ""
 "Choose your tiles among our selection of <strong>more than  200 products</"
 "strong>"
 
-#: taleoftiles/templates/home.html:46
+#: taleoftiles/templates/home.html:45
 msgid "sample-touchhand"
 msgstr "Touch with your hands"
 
-#: taleoftiles/templates/home.html:48
+#: taleoftiles/templates/home.html:47
 msgid "sample-description"
 msgstr ""
 "With the Tale of Tiles Book you can write the story of your new spaces. "
@@ -202,59 +215,59 @@ msgstr ""
 "received at your home as a gift. We want you to see and evaluate the quality "
 "of our Made in Italy tiles."
 
-#: taleoftiles/templates/home.html:52
+#: taleoftiles/templates/home.html:51
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 "<h3>Receive the tiles at your home <strong>free from shipping cost</strong></"
 "h3> \n"
 "<br/><h4><i>Free Shipping in all Europe</i></h4>"
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:70
 msgid "title-renovate-home"
 msgstr "Renovation Ideas"
 
-#: taleoftiles/templates/home.html:72
+#: taleoftiles/templates/home.html:71
 msgid "subtitle-renovate-home"
 msgstr ""
 "Have fun with our renovation ideas for refresh your home style and mood."
 
-#: taleoftiles/templates/home.html:80
+#: taleoftiles/templates/home.html:79
 msgid "title-faq-home"
 msgstr "Frequently Asked Questions"
 
-#: taleoftiles/templates/home.html:84
+#: taleoftiles/templates/home.html:83
 msgid "faq-1"
 msgstr "How can I return the goods if I'll change my mind?"
 
-#: taleoftiles/templates/home.html:85 taleoftiles/templates/home.html:90
-#: taleoftiles/templates/home.html:95 taleoftiles/templates/home.html:100
-#: taleoftiles/templates/home.html:104 taleoftiles/templates/home.html:108
+#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
 msgid "read-answer"
 msgstr "read answer"
 
-#: taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:88
 msgid "faq-2"
 msgstr "Which are the delivery times?"
 
-#: taleoftiles/templates/home.html:94
+#: taleoftiles/templates/home.html:93
 msgid "faq-3"
 msgstr "How the delivery would take place?"
 
-#: taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:98
 msgid "faq-4"
 msgstr "Can I view the tiles before buying?"
 
-#: taleoftiles/templates/home.html:103
+#: taleoftiles/templates/home.html:102
 msgid "faq-5"
 msgstr "Are all products Made in Italy? Are handmade?"
 
-#: taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:106
 msgid "faq-6"
 msgstr ""
 "Should I have any special shrewdness in measuring the surfaces while "
 "choosing the tiles?"
 
-#: taleoftiles/templates/home.html:118
+#: taleoftiles/templates/home.html:117
 msgid "founder-name"
 msgstr "We are TaleOfTiles"
 

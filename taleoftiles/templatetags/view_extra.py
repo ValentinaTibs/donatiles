@@ -22,7 +22,7 @@ def clean(value):
 
 @register.filter
 def get_elem(queryset, key):
-    elem = queryset.filter(tag__slug=key).first()
+    elem = queryset.filter(tag__slug=key,public = True).first()
     if elem:
         return(elem.data())
     else:

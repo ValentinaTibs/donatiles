@@ -100,57 +100,57 @@ msgid "payment"
 msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:270
 msgid "termini-e-condizioni"
 msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:277
+#: taleoftiles/templates/empty_base.html:280
 msgid "tiles"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:61
-#: taleoftiles/templates/empty_base.html:194
+#: taleoftiles/templates/empty_base.html:64
+#: taleoftiles/templates/empty_base.html:197
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
 msgid "support"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:64
+#: taleoftiles/templates/empty_base.html:67
 msgid "account"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:65
+#: taleoftiles/templates/empty_base.html:68
 msgid "logout"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:67
-#: taleoftiles/templates/empty_base.html:196
+#: taleoftiles/templates/empty_base.html:70
+#: taleoftiles/templates/empty_base.html:199
 msgid "login-register"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:112
-#: taleoftiles/templates/empty_base.html:176
+#: taleoftiles/templates/empty_base.html:115
+#: taleoftiles/templates/empty_base.html:179
 msgid "catalogue-menu"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:129
-#: taleoftiles/templates/empty_base.html:193
+#: taleoftiles/templates/empty_base.html:132
+#: taleoftiles/templates/empty_base.html:196
 msgid "blog-menu"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:243
+#: taleoftiles/templates/empty_base.html:246
 msgid "of"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:243
+#: taleoftiles/templates/empty_base.html:246
 msgid "added-to-chart"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:244
+#: taleoftiles/templates/empty_base.html:247
 msgid "open-chart"
 msgstr ""
 
-#: taleoftiles/templates/empty_base.html:266
+#: taleoftiles/templates/empty_base.html:269
 msgid "privacy-policy"
 msgstr ""
 
@@ -158,69 +158,73 @@ msgstr ""
 msgid "home-page-name"
 msgstr ""
 
-#: taleoftiles/templates/home.html:8
+#: taleoftiles/templates/home.html:7
 msgid "home-description-meta-tag"
 msgstr ""
 
-#: taleoftiles/templates/home.html:43
+#: taleoftiles/templates/home.html:8
+msgid "home-keywords-meta-tag"
+msgstr ""
+
+#: taleoftiles/templates/home.html:42
 msgid "choose-home-claim"
 msgstr ""
 
-#: taleoftiles/templates/home.html:46
+#: taleoftiles/templates/home.html:45
 msgid "sample-touchhand"
 msgstr ""
 
-#: taleoftiles/templates/home.html:48
+#: taleoftiles/templates/home.html:47
 msgid "sample-description"
 msgstr ""
 
-#: taleoftiles/templates/home.html:52
+#: taleoftiles/templates/home.html:51
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:70
 msgid "title-renovate-home"
 msgstr ""
 
-#: taleoftiles/templates/home.html:72
+#: taleoftiles/templates/home.html:71
 msgid "subtitle-renovate-home"
 msgstr ""
 
-#: taleoftiles/templates/home.html:80
+#: taleoftiles/templates/home.html:79
 msgid "title-faq-home"
 msgstr ""
 
-#: taleoftiles/templates/home.html:84
+#: taleoftiles/templates/home.html:83
 msgid "faq-1"
 msgstr ""
 
-#: taleoftiles/templates/home.html:85 taleoftiles/templates/home.html:90
-#: taleoftiles/templates/home.html:95 taleoftiles/templates/home.html:100
-#: taleoftiles/templates/home.html:104 taleoftiles/templates/home.html:108
+#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
 msgid "read-answer"
 msgstr ""
 
-#: taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:88
 msgid "faq-2"
 msgstr ""
 
-#: taleoftiles/templates/home.html:94
+#: taleoftiles/templates/home.html:93
 msgid "faq-3"
 msgstr ""
 
-#: taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:98
 msgid "faq-4"
 msgstr ""
 
-#: taleoftiles/templates/home.html:103
+#: taleoftiles/templates/home.html:102
 msgid "faq-5"
 msgstr ""
 
-#: taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:106
 msgid "faq-6"
 msgstr ""
 
-#: taleoftiles/templates/home.html:118
+#: taleoftiles/templates/home.html:117
 msgid "founder-name"
 msgstr ""
 
