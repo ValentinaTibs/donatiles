@@ -149,6 +149,11 @@ class Product(models.Model):
     objects     = models.Manager() # The default manager.
     active      = ActiveProductManager() # The Active Charts
 
+    class Meta:
+        # Gives the proper plural name for admin
+        verbose_name_plural = "Products"
+        ordering = ["order","name"]     
+
     def save(self, *args, **kwargs):
         if not self.code:
             self.code = self.name.replace(" ","-").lower()
