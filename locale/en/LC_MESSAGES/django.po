@@ -291,7 +291,7 @@ msgstr "The shipping is free for all Europe"
 
 #: taleoftiles/templates/include/chart.html:46
 msgid "you-will-pay-with-transfert"
-msgstr "Payment accepted: bank transfer "
+msgstr "Payment accepted: Bank Transfer, Credit Card or via PayPal"
 
 #: taleoftiles/templates/include/chart.html:48
 msgid " chart-empty-claim "
@@ -1124,90 +1124,3 @@ msgstr ""
 "For over 10 years we have owned a showroom with a physical store in Forano "
 "(RI), in the countryside of central Italy, on the border between Umbria and "
 "Lazio (easily accessible by train from Fiumicino airport)."
-
-#, fuzzy
-#~| msgid "summary-sample-title"
-#~ msgid "sample-title"
-#~ msgstr ""
-#~ "Create your custom Tale of Tile Book choosing from our free samples."
-
-#~ msgid "Svenska"
-#~ msgstr "Swedish"
-
-#~ msgid "Deutch"
-#~ msgstr "Deutch"
-
-#, fuzzy, python-format
-#~ msgid "paying-now %(date_shipping)s paying-now"
-#~ msgstr ""
-#~ "Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
-#~ "%(date_shipping)s </strong>\n"
-#~ "Appena riceveremo il bonifico, ti invieremo una email di conferma a  "
-#~ "<strong>indirizzoemailmoltolungo@email.com</strong> e avvieremo subito la "
-#~ "preparazione del tuo ordine!\n"
-#~ "\n"
-#~ "Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
-#~ "confermato."
-
-#~ msgid "days"
-#~ msgstr "Giorni"
-
-#~ msgid "product-not-samplable"
-#~ msgstr "Non campionabile"
-
-#~ msgid "login-data"
-#~ msgstr "Login"
-
-#~ msgid "catalgoue-page-name"
-#~ msgstr "Catalogo"
-
-#~ msgid "cat-menu-all"
-#~ msgstr "Tutti i prodotti"
-
-#~ msgid "language"
-#~ msgstr "Lingua"
-
-#~ msgid "currency"
-#~ msgstr "Valuta"
-
-#~ msgid "facebook"
-#~ msgstr "Facebook"
-
-#~ msgid "pinterest"
-#~ msgstr "Pinterest"
-
-#~ msgid "instagram"
-#~ msgstr "Instagram"
-
-#~ msgid "read"
-#~ msgstr "Leggi"
-
-#~ msgid "title-team-home"
-#~ msgstr "Chi siamo"
-
-#~ msgid "summary-long-text1"
-#~ msgstr "Potrai pagare con bonifico bancario"
-
-#~ msgid "summary-page-title"
-#~ msgstr "Riepilogo del tuo ordine"
-
-#~ msgid "product"
-#~ msgstr "Prodotto"
-
-#~ msgid "delete"
-#~ msgstr "Cancella"
-
-#~ msgid "box"
-#~ msgstr "Scatola"
-
-#~ msgid "support-page-name"
-#~ msgstr "Assistenza"
-
-#~ msgid "write-us-orders"
-#~ msgstr "Contattaci per il tuo ordine"
-
-#~ msgid "write-us-sells"
-#~ msgstr "Contattaci"
-
-#~ msgid "write-us-support"
-#~ msgstr "Contattaci per avere assistenza"

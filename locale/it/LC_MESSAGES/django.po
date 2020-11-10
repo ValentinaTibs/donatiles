@@ -288,7 +288,7 @@ msgstr "La spedizione è gratuita"
 
 #: taleoftiles/templates/include/chart.html:46
 msgid "you-will-pay-with-transfert"
-msgstr "Potrai pagare con bonifico bancario"
+msgstr "Potrai pagare con bonifico bancario - carta di credito o via PayPal"
 
 #: taleoftiles/templates/include/chart.html:48
 msgid " chart-empty-claim "

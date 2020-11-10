@@ -190,7 +190,6 @@ class ProductAdmin(admin.ModelAdmin):
                     'style_',
                     'effect_',
                     'finish_',
-                    'product_edit_',
                     'samplable_',
                     'publication',
                     'support_to',
