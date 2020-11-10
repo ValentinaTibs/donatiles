@@ -176,9 +176,10 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'code')
     
     list_display = ('name_','id',
+                    'code',
+                    'order',
                     'wait_time',
                     'min_ammount',
-                    'code',
                     'is_decor',
                     'available',
                     'is_active',
