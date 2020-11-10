@@ -144,6 +144,7 @@ class Product(models.Model):
     publication     = models.ForeignKey(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
     support_to      = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
     techspec        = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
+    order           = models.PositiveIntegerField(default = 0)
 
     objects     = models.Manager() # The default manager.
     active      = ActiveProductManager() # The Active Charts
