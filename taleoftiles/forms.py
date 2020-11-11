@@ -19,7 +19,7 @@ class CustomProductModelForm(forms.ModelForm):
     styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style',public = True), required = False)
     effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect',public = True), required = False)
     finishes    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='finish',public = True), required = False)
-    in_product_edits   = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(in_product_edit=True, public = True), required = False)
+    # in_product_edits   = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(in_product_edit=True, public = True), required = False)
     
     class Meta:
         model = Product
@@ -38,7 +38,7 @@ class CustomProductModelForm(forms.ModelForm):
         styles      = kwargs['instance'].tags.filter(parent__slug='style')
         effects     = kwargs['instance'].tags.filter(parent__slug='effect')
         finishes    = kwargs['instance'].tags.filter(parent__slug='finish')
-        in_product_edits = kwargs['instance'].tags.filter(in_product_edit=True)
+        # in_product_edits = kwargs['instance'].tags.filter(in_product_edit=True)
         samplable   = kwargs['instance'].tags.filter(slug='samplable').first()
 
         
@@ -85,11 +85,11 @@ class CustomProductModelForm(forms.ModelForm):
                 finishes_iv.append(finish.pk)
             self.initial['finishes'] = finishes_iv  
 
-        if in_product_edits:
-            in_product_edits_iv = []
-            for in_product_edit in in_product_edits:
-                in_product_edits_iv.append(in_product_edit.pk)
-            self.initial['in_product_edits'] = in_product_edits_iv      
+        # if in_product_edits:
+        #     in_product_edits_iv = []
+        #     for in_product_edit in in_product_edits:
+        #         in_product_edits_iv.append(in_product_edit.pk)
+        #     self.initial['in_product_edits'] = in_product_edits_iv      
             
         return
 
@@ -169,13 +169,13 @@ class CustomProductModelForm(forms.ModelForm):
 
         # ---- product edito for catalogue -----                    
                     
-        in_product_edits = product.tags.filter(in_product_edit=True) 
+        # in_product_edits = product.tags.filter(in_product_edit=True) 
     
-        for in_product_edit in in_product_edits:
-            product.tags.remove(in_product_edit.pk)
-        if self.cleaned_data.get('in_product_edits'):
-            for in_product_edit in self.cleaned_data.get('in_product_edits'):
-                    product.tags.add(in_product_edit)
+        # for in_product_edit in in_product_edits:
+        #     product.tags.remove(in_product_edit.pk)
+        # if self.cleaned_data.get('in_product_edits'):
+        #     for in_product_edit in self.cleaned_data.get('in_product_edits'):
+        #             product.tags.add(in_product_edit)
 
         return super(CustomProductModelForm, self).save(True)
 
