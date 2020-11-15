@@ -54,6 +54,14 @@ def toggle_samplable(modeladmin, request, queryset):
             product.tags.add(hm.pk)
             product.save()
 
+def assign_catalogue(modeladmin, request, queryset):
+    cat = Catalogue.objects.get(title='2020')
+    for product in queryset:
+        if product.is_active:
+            cat.products.add(product)
+            cat.save()
+            
+
 # - not safe -  you should remove it all first and than add it back
 def toggle_parent_format(modeladmin, request, queryset):
     #format = Tag.objects.get(slug='format')
@@ -69,6 +77,8 @@ toggle_handmade.short_description = "Toggle Handmade"
 toggle_samplable.short_description = "Toggle SAMPLABLEs"
 toggle_parent_format.short_description = "Refresh Parent Formats"
 tagga_terracotta.short_description = "Tagga con terracotta"
+assign_catalogue.short_description = "Assign to Catalogue 2020"
+
 
 def make_for_product(modeladmin, request, queryset):
     for e in queryset:
@@ -162,15 +172,35 @@ class IconAdminSelf(admin.ModelAdmin):
     inlines = (IconImageStackedAdmin,)
     list_display = ('name','image_','description')
 
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+
 class CatalogueAdmin(admin.ModelAdmin):
     model = Catalogue
     list_display = ('title','active')
     
+from import_export.fields import Field
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductResource(resources.ModelResource):
+    cover_img = Field()
+
+    class Meta:
+        model = Product
+        fields = ( 'name', 'code','publication__title','publication__content','cover_img')
+        export_order = ('name', 'code','publication__title','publication__content','cover_img')
+
+    def dehydrate_cover_img(self, product):
+        cv_img = product.cover()
+        if cv_img:
+            return '%s' % (cv_img.imagefile)
+        else:
+            return ''
+
+    
+class ProductAdmin(ImportExportModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,tagga_terracotta]
-
+    actions = [duplicate_product,assign_catalogue]
+    resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
     search_fields = ('name', 'code')

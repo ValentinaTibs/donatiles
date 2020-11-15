@@ -255,8 +255,8 @@ class Product(models.Model):
 
     
 class Price(models.Model):
-    size    = models.ForeignKey(Tag,     blank = True, null = True, on_delete=models.SET_NULL, related_name='prices')
-    product = models.ForeignKey(Product, blank = True, null = True, on_delete=models.SET_NULL, related_name='prices' )
+    size        = models.ForeignKey(Tag,     blank = True, null = True, on_delete=models.SET_NULL, related_name='prices')
+    product     = models.ForeignKey(Product, blank = True, null = True, on_delete=models.SET_NULL, related_name='prices' )
     euros       = models.FloatField(default = 10)
     m2_box      = models.FloatField(default = 10)
     weight_box  = models.FloatField(default = 10)
@@ -268,8 +268,9 @@ class Price(models.Model):
             return str(self.euros)
     
 class Catalogue(models.Model):
-    title = models.CharField(max_length=200, unique = True)
-    active = models.BooleanField(default = True)
+    title       = models.CharField(max_length=200, unique = True)
+    active      = models.BooleanField(default = True)
+    products    = models.ManyToManyField(Product, blank = True, null = True,  related_name='catalogues' ) 
 
     def tags(self):
         return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
