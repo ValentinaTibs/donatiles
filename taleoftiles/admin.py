@@ -182,21 +182,55 @@ class CatalogueAdmin(admin.ModelAdmin):
 from import_export.fields import Field
 
 class ProductResource(resources.ModelResource):
-    cover_img = Field()
+    
+    title = Field()
+    description = Field()
+    image_link = Field()
+    availability = Field()
+    inventory = Field()
+    condition = Field()
+    price = Field()
+    link = Field()
+    image_link = Field()
+    brand = Field()
 
     class Meta:
         model = Product
-        fields = ( 'name', 'code','publication__title','publication__content','cover_img')
-        export_order = ('name', 'code','publication__title','publication__content','cover_img')
+        fields = ( 'code','title', 'description','availability','inventory','condition','price','link','image_link','brand')
+        export_order = ( 'code','title', 'description','availability','inventory','condition','price','link','image_link','brand')
 
-    def dehydrate_cover_img(self, product):
+    def dehydrate_title(self, product):
+        return '%s - %s' % (product.publication__title,product.name)
+
+    def dehydrate_description(self, product):
+        return '%s' % (product.publication.content)
+
+    def dehydrate_image_link(self, product):
         cv_img = product.cover()
         if cv_img:
-            return '%s' % (cv_img.imagefile)
+            return 'https://taleoftiles.s3.amazonaws.com/%s' % (cv_img.imagefile)
         else:
             return ''
 
+    def dehydrate_availability(self, product):
+        return "available for order"
+
+    def dehydrate_inventory(self, product):
+        return "1000"
+
+    def dehydrate_condition(self, product):
+        return "new"
     
+    def dehydrate_price(self, product):
+        return '%s EUR' % (product.max_price(product.default_format()))
+
+    def dehydrate_link(self, product):
+        return 'https://www.taleoftiles.com/en/product/%s EUR' % (product.code)     
+           
+    def dehydrate_brand(self, product):
+        return '%s' % (product.serie())     
+           
+
 class ProductAdmin(ImportExportModelAdmin):
     form = CustomProductModelForm
     actions = [duplicate_product,assign_catalogue]

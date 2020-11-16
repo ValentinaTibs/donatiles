@@ -146,6 +146,9 @@ class Product(models.Model):
     techspec        = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
     order           = models.PositiveIntegerField(default = 0)
 
+    default_format  = models.ForeignKey(Tag, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
+    MPN             = models.CharField(max_length=100,)
+    
     objects     = models.Manager() # The default manager.
     active      = ActiveProductManager() # The Active Charts
 
@@ -217,6 +220,12 @@ class Product(models.Model):
         if res.count() == 0:
             res= "none"
         return res
+    
+    def default_format():
+        res = self.tags.filter(parent__parent__slug = "format")
+        if res.count() == 0:
+            res= "none"
+        return res.first()
 
     def price(self,size ):
         try: 
@@ -252,6 +261,8 @@ class Product(models.Model):
 
     def max_price(self,format):
         return round(max_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)    
+    
+
 
     
 class Price(models.Model):
