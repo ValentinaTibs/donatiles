@@ -3,7 +3,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django_reverse_admin import ReverseModelAdmin
 
-from taleoftiles.models import  Product, Tag, Publication, Price
+from taleoftiles.models import  Product, Tag, Publication, Price, EasyProductProxy
 from taleoftiles.models import TechnicalSpec, Catalogue
 from layout.models      import Image, Icon
 
@@ -61,7 +61,6 @@ def assign_catalogue(modeladmin, request, queryset):
             cat.products.add(product)
             cat.save()
             
-
 # - not safe -  you should remove it all first and than add it back
 def toggle_parent_format(modeladmin, request, queryset):
     #format = Tag.objects.get(slug='format')
@@ -100,6 +99,7 @@ class PhotoStackedAdmin(admin.StackedInline):
         if db_field.name == "finish_tag":
             kwargs["queryset"] = Tag.objects.filter(parent__slug='finish').order_by('-slug')
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 
 class IconImageStackedAdmin(admin.StackedInline):
@@ -229,8 +229,13 @@ class ProductResource(resources.ModelResource):
            
     def dehydrate_brand(self, product):
         return '%s' % (product.serie())     
-           
 
+class EasyProductAdmin(admin.ModelAdmin):
+    model = EasyProductProxy
+    inlines = (PriceStackedAdmin,)
+    readonly_fields = ('code','tags')
+    
+    
 class ProductAdmin(ImportExportModelAdmin):
     form = CustomProductModelForm
     actions = [duplicate_product,assign_catalogue]
@@ -299,6 +304,8 @@ class TechnicalSpecAdmin(admin.ModelAdmin):
 admin.site.register(Tag,TagAdmin)
 # admin.site.register(Tag,SerieAdmin)
 admin.site.register(Product,ProductAdmin)
+admin.site.register(EasyProductProxy,EasyProductAdmin)
+
 admin.site.register(Price,PriceAdmin)
 admin.site.register(Publication,PublicationAdminSelf)
 

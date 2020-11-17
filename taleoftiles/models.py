@@ -131,6 +131,12 @@ class ActiveProductManager(models.Manager):
             is_active = True)
         return qs
 
+# class TagsToProduct(models.Model):
+
+#     product     = models.ForeignKey('Product',  related_name='ttp', on_delete=models.SET_NULL, null=True,blank= True)
+#     tags        = models.ForeignKey('Tag',      related_name='tagsto_products', on_delete=models.SET_NULL, null=True, blank=True)
+#     default     = models.BooleanField(default = False)
+
 class Product(models.Model):
     
     name            = models.CharField(max_length=100,)
@@ -140,14 +146,15 @@ class Product(models.Model):
     is_decor        = models.BooleanField(default = False)
     available       = models.BooleanField(default = True)
     is_active       = models.BooleanField(default = True)
-    tags            = models.ManyToManyField(Tag, blank= True, related_name='products')
-    publication     = models.ForeignKey(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )
+    
+    tags            = models.ManyToManyField(Tag,  blank= True, related_name='products')
+    
+    publication     = models.ForeignKey(Publication, blank = True,  null = True,on_delete=models.CASCADE, related_name='products' )    
     support_to      = models.ForeignKey("self", blank = True, null = True,on_delete=models.SET_NULL, related_name='supports' )
     techspec        = models.ForeignKey(TechnicalSpec, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
     order           = models.PositiveIntegerField(default = 0)
 
-    default_format  = models.ForeignKey(Tag, blank = True, null = True, on_delete=models.SET_NULL, related_name='products' )
-    MPN             = models.CharField(max_length=100,)
+    MPN             = models.CharField(max_length=100, null = True, blank=True)
     
     objects     = models.Manager() # The default manager.
     active      = ActiveProductManager() # The Active Charts
@@ -264,13 +271,19 @@ class Product(models.Model):
     
 
 
-    
+class EasyProductProxy(Product):
+
+    class Meta:
+        proxy = True
+            
 class Price(models.Model):
     size        = models.ForeignKey(Tag,     blank = True, null = True, on_delete=models.SET_NULL, related_name='prices')
     product     = models.ForeignKey(Product, blank = True, null = True, on_delete=models.SET_NULL, related_name='prices' )
     euros       = models.FloatField(default = 10)
     m2_box      = models.FloatField(default = 10)
     weight_box  = models.FloatField(default = 10)
+
+    default     = models.BooleanField(default = False)
 
     def __str__(self):
         if self.size and self.size.name and self.product.publication.title :
@@ -282,6 +295,7 @@ class Catalogue(models.Model):
     title       = models.CharField(max_length=200, unique = True)
     active      = models.BooleanField(default = True)
     products    = models.ManyToManyField(Product, blank = True, null = True,  related_name='catalogues' ) 
+    
 
     def tags(self):
         return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
