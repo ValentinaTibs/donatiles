@@ -172,13 +172,15 @@ class IconAdminSelf(admin.ModelAdmin):
     inlines = (IconImageStackedAdmin,)
     list_display = ('name','image_','description')
 
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin
 
 class CatalogueAdmin(admin.ModelAdmin):
     model = Catalogue
     list_display = ('title','active')
-    
+
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportActionModelAdmin
+
 from import_export.fields import Field
 
 class ProductResource(resources.ModelResource):
@@ -195,12 +197,14 @@ class ProductResource(resources.ModelResource):
     brand = Field()
 
     class Meta:
-        model = Product
+        model = EasyProductProxy
         fields = ( 'code','title', 'description','availability','inventory','condition','price','link','image_link','brand')
         export_order = ( 'code','title', 'description','availability','inventory','condition','price','link','image_link','brand')
 
     def dehydrate_title(self, product):
-        return '%s - %s' % (product.publication__title,product.name)
+        print(product)
+        if product.publication and product.publication.title and product.name:
+            return '%s - %s - size: %s' % (product.publication.title,product.name,product.default_format())
 
     def dehydrate_description(self, product):
         return '%s' % (product.publication.content)
@@ -228,15 +232,19 @@ class ProductResource(resources.ModelResource):
         return 'https://www.taleoftiles.com/en/product/%s EUR' % (product.code)     
            
     def dehydrate_brand(self, product):
-        return '%s' % (product.serie())     
+        return '%s' % (product.MPN)     
 
-class EasyProductAdmin(admin.ModelAdmin):
+class EasyProductAdmin(ImportExportModelAdmin):
+    
     model = EasyProductProxy
     inlines = (PriceStackedAdmin,)
     readonly_fields = ('code','tags')
 
     search_fields = ('name', 'code')
     list_display = ('code','name','serie','order','MPN','default_format')
+
+    class Meta:
+        proxy = True
 
     def default_format(self, obj):
         return "\n".join([p.size.name + '\n' for p in obj.prices.filter(default = True )])    

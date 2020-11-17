@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.db.models import Count
 
-from taleoftiles.utils  import min_price
+from taleoftiles.utils  import min_price,max_price
 
 import datetime as dt
 import pytz
@@ -228,11 +228,11 @@ class Product(models.Model):
             res= "none"
         return res
     
-    def default_format():
-        res = self.tags.filter(parent__parent__slug = "format")
-        if res.count() == 0:
-            res= "none"
-        return res.first()
+    def default_format(self):
+        prices = self.prices.filter(default = True)
+        if prices.count() == 0:
+            return None
+        return prices.first().size
 
     def price(self,size ):
         try: 
@@ -286,7 +286,7 @@ class Price(models.Model):
     default     = models.BooleanField(default = False)
 
     def __str__(self):
-        if self.size and self.size.name and self.product.publication.title :
+        if self.size and self.size.name and self.product.publication and self.product.publication.title :
             return self.size.name + self.product.publication.title + str(self.euros)
         else:
             return str(self.euros)
