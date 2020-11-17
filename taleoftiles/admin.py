@@ -240,15 +240,18 @@ class EasyProductAdmin(ImportExportActionModelAdmin):
     readonly_fields = ('code','tags')
 
     search_fields = ('name', 'code')
-    list_display = ('code','name','serie','order','MPN','default_format')
+    list_display = ('code','name','serie','order','MPN','default_format','max_price')
     resource_class = ProductResource
 
     class Meta:
         proxy = True
 
     def default_format(self, obj):
-        return "\n".join([p.size.name + '\n' for p in obj.prices.filter(default = True )])    
+        return "%s " % (obj.default_format())    
     
+    def max_price(self, obj):
+        return "%s " % (obj.max_price(obj.default_format()))    
+
     
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
