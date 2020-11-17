@@ -202,7 +202,7 @@ class ProductResource(resources.ModelResource):
         export_order = ( 'code','title', 'description','availability','inventory','condition','price','link','image_link','brand')
 
     def dehydrate_title(self, product):
-        print(product)
+        
         if product.publication and product.publication.title and product.name:
             return '%s - %s - size: %s' % (product.publication.title,product.name,product.default_format())
 
@@ -234,7 +234,7 @@ class ProductResource(resources.ModelResource):
     def dehydrate_brand(self, product):
         return '%s' % (product.MPN)     
 
-class EasyProductAdmin(ImportExportModelAdmin):
+class EasyProductAdmin(ImportExportActionModelAdmin):
     
     model = EasyProductProxy
     inlines = (PriceStackedAdmin,)
@@ -242,6 +242,7 @@ class EasyProductAdmin(ImportExportModelAdmin):
 
     search_fields = ('name', 'code')
     list_display = ('code','name','serie','order','MPN','default_format')
+    resource_class = ProductResource
 
     class Meta:
         proxy = True
@@ -250,7 +251,7 @@ class EasyProductAdmin(ImportExportModelAdmin):
         return "\n".join([p.size.name + '\n' for p in obj.prices.filter(default = True )])    
     
     
-class ProductAdmin(ImportExportModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     actions = [duplicate_product,assign_catalogue]
     resource_class = ProductResource
