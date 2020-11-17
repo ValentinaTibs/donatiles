@@ -236,7 +236,7 @@ class EasyProductAdmin(admin.ModelAdmin):
     readonly_fields = ('code','tags')
 
     search_fields = ('name', 'code')
-    list_display('code','name','serie','order')
+    list_display = ('code','name','serie','order')
     
     
 class ProductAdmin(ImportExportModelAdmin):
