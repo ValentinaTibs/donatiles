@@ -178,10 +178,9 @@ class CatalogueAdmin(admin.ModelAdmin):
     list_display = ('title','active')
 
 from import_export import resources
-from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ImportExportActionModelAdmin
-
 from import_export.fields import Field
+from django.utils.html import strip_tags
 
 class ProductResource(resources.ModelResource):
     
@@ -207,7 +206,7 @@ class ProductResource(resources.ModelResource):
             return '%s - %s - size: %s' % (product.publication.title,product.name,product.default_format())
 
     def dehydrate_description(self, product):
-        return '%s' % (product.publication.content)
+        return '%s' % (strip_tags(product.publication.content))
 
     def dehydrate_image_link(self, product):
         cv_img = product.cover()
@@ -229,7 +228,7 @@ class ProductResource(resources.ModelResource):
         return '%s EUR' % (product.max_price(product.default_format()))
 
     def dehydrate_link(self, product):
-        return 'https://www.taleoftiles.com/en/product/%s EUR' % (product.code)     
+        return 'https://www.taleoftiles.com/en/product/%s ' % (product.code)     
            
     def dehydrate_brand(self, product):
         return '%s' % (product.MPN)     
