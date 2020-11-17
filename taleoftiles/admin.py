@@ -225,7 +225,10 @@ class ProductResource(resources.ModelResource):
         return "new"
     
     def dehydrate_price(self, product):
-        return '%s EUR' % (product.max_price(product.default_format()))
+        def_for = product.default_format()
+        if def_for:
+            return '%s EUR' % (product.max_price(def_for.slug))
+        return "0"
 
     def dehydrate_link(self, product):
         return 'https://www.taleoftiles.com/en/product/%s ' % (product.code)     
@@ -247,10 +250,14 @@ class EasyProductAdmin(ImportExportActionModelAdmin):
         proxy = True
 
     def default_format(self, obj):
-        return "%s " % (obj.default_format())    
+        return "%s" % (obj.default_format())    
     
     def max_price(self, obj):
-        return "%s " % (obj.max_price(obj.default_format()))    
+        def_for = obj.default_format()
+        if def_for:
+            return "%s" % (obj.max_price(def_for.slug))    
+        else:
+            return "0"
 
     
 class ProductAdmin(admin.ModelAdmin):
