@@ -234,6 +234,9 @@ class EasyProductAdmin(admin.ModelAdmin):
     model = EasyProductProxy
     inlines = (PriceStackedAdmin,)
     readonly_fields = ('code','tags')
+
+    search_fields = ('name', 'code')
+    list_display('code','name','serie')
     
     
 class ProductAdmin(ImportExportModelAdmin):
