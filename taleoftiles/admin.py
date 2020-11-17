@@ -239,7 +239,7 @@ class EasyProductAdmin(admin.ModelAdmin):
     list_display = ('code','name','serie','order','MPN','default_format')
 
     def default_format(self, obj):
-        return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__parent__slug='format',prices__default=True)])    
+        return "\n".join([p.size.name + '\n' for p in obj.prices.filter(default = True )])    
     
     
 class ProductAdmin(ImportExportModelAdmin):
