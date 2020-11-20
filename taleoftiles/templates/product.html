@@ -164,8 +164,9 @@
         
         {% trans 'receive-date' %}<br><strong>{% trans 'untill' %} {% woking_days product.wait_time %} </strong></p>
         
-      <p class="note">Hai qualche dubbio?<br> 
-        <a href="support.html">Contatta l’assistenza o consulta le domande frequenti</a></p>
+      <p class="note">{% trans 'any-doubt' %}<br> 
+        <a href="{% url 'support' %}">{% trans 'any-doubt-subtitle' %}</a></p>
+
     </div>
 
   </div>

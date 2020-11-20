@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-09 16:41+0000\n"
+"POT-Creation-Date: 2020-11-20 15:02+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -33,11 +33,11 @@ msgstr "Invalid email"
 msgid "Duplicated email"
 msgstr "Duplicated Email"
 
-#: gettingstarted/settings.py:119
+#: gettingstarted/settings.py:120
 msgid "English"
 msgstr "English"
 
-#: gettingstarted/settings.py:120
+#: gettingstarted/settings.py:121
 msgid "Italiano"
 msgstr "Italian"
 
@@ -45,8 +45,8 @@ msgstr "Italian"
 msgid "account-page-name"
 msgstr "Your Account"
 
-#: taleoftiles/templates/account.html:27 taleoftiles/templates/support.html:35
-#: taleoftiles/templates/support.html:111
+#: taleoftiles/templates/account.html:27 taleoftiles/templates/support.html:36
+#: taleoftiles/templates/support.html:112
 msgid "orders"
 msgstr "Orders"
 
@@ -76,11 +76,26 @@ msgstr "Shipping Data"
 msgid "save"
 msgstr "Save"
 
-#: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:16
+#: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:17
 msgid "blog-page-name"
 msgstr "Tale of Tiles Blog"
 
-#: taleoftiles/templates/catalogue.html:5
+#: taleoftiles/templates/blog.html:6 taleoftiles/templates/catalogue.html:7
+#: taleoftiles/templates/home.html:8 taleoftiles/templates/product.html:6
+#: taleoftiles/templates/support.html:6
+msgid "home-keywords-meta-tag"
+msgstr ""
+"tiles, decor tiles, handmade, handmade tiles, luxury, luxury tiles, decor, "
+"hipster,terracotta, terracotta tiles, tile, tiles design, design, wood "
+"effect, wood effect tiles, shower tiles, bathroom tiles, wall tiles, kitchen "
+"tilesinterior design, interior, wall tiles, ceramic tiles, hexagon tiles, "
+"forniture, terracotta, black tiles bathroom,grey tiles living, modern "
+"living, stone tiles kitchen, luxury tiles backsplash, backsplash, plain "
+"color tiles, green tiles, handpainted tiles, handmade floor tiles, handmade "
+"wall tiles, vietri, ceramiche de maio, mutina, mattonelle mutina, marazzi, "
+"marazzi tiles, popham"
+
+#: taleoftiles/templates/catalogue.html:6
 msgid "catalogue-page-name"
 msgstr "Catalogue"
 
@@ -98,7 +113,7 @@ msgid "all-products"
 msgstr "All Products"
 
 #: taleoftiles/templates/cataloguegrid.html:129
-#: taleoftiles/templates/support.html:33 taleoftiles/templates/support.html:44
+#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:45
 msgid "products"
 msgstr "Products"
 
@@ -119,57 +134,57 @@ msgid "payment"
 msgstr "Payment"
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:270
+#: taleoftiles/templates/empty_base.html:288
 msgid "termini-e-condizioni"
 msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:280
+#: taleoftiles/templates/empty_base.html:298
 msgid "tiles"
 msgstr "tiles"
 
-#: taleoftiles/templates/empty_base.html:64
-#: taleoftiles/templates/empty_base.html:197
-#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:13
+#: taleoftiles/templates/empty_base.html:82
+#: taleoftiles/templates/empty_base.html:215
+#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:14
 msgid "support"
 msgstr "Support"
 
-#: taleoftiles/templates/empty_base.html:67
+#: taleoftiles/templates/empty_base.html:85
 msgid "account"
 msgstr "Your Account"
 
-#: taleoftiles/templates/empty_base.html:68
+#: taleoftiles/templates/empty_base.html:86
 msgid "logout"
 msgstr "logout"
 
-#: taleoftiles/templates/empty_base.html:70
-#: taleoftiles/templates/empty_base.html:199
+#: taleoftiles/templates/empty_base.html:88
+#: taleoftiles/templates/empty_base.html:217
 msgid "login-register"
 msgstr "Login-Register"
 
-#: taleoftiles/templates/empty_base.html:115
-#: taleoftiles/templates/empty_base.html:179
+#: taleoftiles/templates/empty_base.html:133
+#: taleoftiles/templates/empty_base.html:197
 msgid "catalogue-menu"
 msgstr "Catalogue"
 
-#: taleoftiles/templates/empty_base.html:132
-#: taleoftiles/templates/empty_base.html:196
+#: taleoftiles/templates/empty_base.html:150
+#: taleoftiles/templates/empty_base.html:214
 msgid "blog-menu"
 msgstr "Renovation Ideas"
 
-#: taleoftiles/templates/empty_base.html:246
+#: taleoftiles/templates/empty_base.html:264
 msgid "of"
 msgstr "of"
 
-#: taleoftiles/templates/empty_base.html:246
+#: taleoftiles/templates/empty_base.html:264
 msgid "added-to-chart"
 msgstr "added to chart"
 
-#: taleoftiles/templates/empty_base.html:247
+#: taleoftiles/templates/empty_base.html:265
 msgid "open-chart"
 msgstr "open chart"
 
-#: taleoftiles/templates/empty_base.html:269
+#: taleoftiles/templates/empty_base.html:287
 msgid "privacy-policy"
 msgstr ""
 
@@ -183,19 +198,6 @@ msgstr ""
 "E-commerce of handcrafted handmade and industrial tiles and terracotta for "
 "surfaces and floors. Italian design coatings: cement tiles, terracotta, wood "
 "effect."
-
-#: taleoftiles/templates/home.html:8
-msgid "home-keywords-meta-tag"
-msgstr ""
-"tiles, decor tiles, handmade, handmade tiles, luxury, luxury tiles, decor, "
-"hipster,terracotta, terracotta tiles, tile, tiles design, design, wood "
-"effect, wood effect tiles, shower tiles, bathroom tiles, wall tiles, kitchen "
-"tilesinterior design, interior, wall tiles, ceramic tiles, hexagon tiles, "
-"forniture, terracotta, black tiles bathroom,grey tiles living, modern "
-"living, stone tiles kitchen, luxury tiles backsplash, backsplash, plain "
-"color tiles, green tiles, handpainted tiles, handmade floor tiles, handmade "
-"wall tiles, vietri, ceramiche de maio, mutina, mattonelle mutina, marazzi, "
-"marazzi tiles, popham"
 
 #: taleoftiles/templates/home.html:42
 msgid "choose-home-claim"
@@ -554,6 +556,7 @@ msgid "summary-back-home"
 msgstr "back to TaleOfTiles"
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
+#: taleoftiles/templates/product.html:167
 msgid "any-doubt"
 msgstr "Any doubt?"
 
@@ -648,19 +651,25 @@ msgstr "By ordering today, you will receive the product at your home"
 msgid "untill"
 msgstr "by"
 
-#: taleoftiles/templates/product.html:191
+#: taleoftiles/templates/product.html:168
+#, fuzzy
+#| msgid "any-doubt"
+msgid "any-doubt-subtitle"
+msgstr "Any doubt?"
+
+#: taleoftiles/templates/product.html:192
 msgid "download-tech-spech"
 msgstr "Download Technical Specifications"
 
-#: taleoftiles/templates/product.html:209
+#: taleoftiles/templates/product.html:210
 msgid "settings"
 msgstr "settings"
 
-#: taleoftiles/templates/product.html:221
+#: taleoftiles/templates/product.html:222
 msgid "product-support"
 msgstr "skirtings"
 
-#: taleoftiles/templates/product.html:236
+#: taleoftiles/templates/product.html:237
 msgid "product-same-serie"
 msgstr "products from the same serie"
 
@@ -754,56 +763,56 @@ msgstr ""
 "to the amount of tiles strictly necessary. For further clarifications please "
 "consult the FAQ."
 
-#: taleoftiles/templates/support.html:15
+#: taleoftiles/templates/support.html:16
 msgid "support-text-1"
 msgstr ""
 "Do you have any question about our products, about us or about the "
 "conditions of sale?"
 
-#: taleoftiles/templates/support.html:16 taleoftiles/templates/support.html:20
+#: taleoftiles/templates/support.html:17 taleoftiles/templates/support.html:21
 msgid "write-us"
 msgstr "write us"
 
-#: taleoftiles/templates/support.html:19
+#: taleoftiles/templates/support.html:20
 msgid "support-text-2"
 msgstr ""
 "Do you have questions about our products, us or the conditions of sale?"
 
-#: taleoftiles/templates/support.html:23
+#: taleoftiles/templates/support.html:24
 msgid "support-text-3"
 msgstr ""
 "Have you placed an order and have questions about the shipment or the goods "
 "received?"
 
-#: taleoftiles/templates/support.html:24
+#: taleoftiles/templates/support.html:25
 msgid "contact-us"
 msgstr "contact us"
 
-#: taleoftiles/templates/support.html:31
+#: taleoftiles/templates/support.html:32
 msgid "frequent-question"
 msgstr "frequently asked questions"
 
-#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:82
+#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:83
 msgid "samples"
 msgstr "Samples"
 
-#: taleoftiles/templates/support.html:36 taleoftiles/templates/support.html:132
+#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:133
 msgid "shippings"
 msgstr "Shipping"
 
-#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:157
+#: taleoftiles/templates/support.html:38 taleoftiles/templates/support.html:158
 msgid "company"
 msgstr "Company"
 
-#: taleoftiles/templates/support.html:39
+#: taleoftiles/templates/support.html:40
 msgid "search"
 msgstr "Search"
 
-#: taleoftiles/templates/support.html:47
+#: taleoftiles/templates/support.html:48
 msgid "faq-prod-madeitaly"
 msgstr "Are all the products 100% Made in Italy?"
 
-#: taleoftiles/templates/support.html:48
+#: taleoftiles/templates/support.html:49
 msgid "faq-prod-madeitaly-body"
 msgstr ""
 "Absolutely yes, all our products are exclusively selected by us, from the "
@@ -812,13 +821,13 @@ msgstr ""
 "Italian land. You will always find the Made In Italy brand on the incoming "
 "boxes"
 
-#: taleoftiles/templates/support.html:51
+#: taleoftiles/templates/support.html:52
 msgid "faq-prod-multiface"
 msgstr ""
 "Will the tiles I receive be identical to those in the photo? What is meant "
 "by the degree of shading?"
 
-#: taleoftiles/templates/support.html:52
+#: taleoftiles/templates/support.html:53
 msgid "faq-prod-multiface-body"
 msgstr ""
 "Here a little explanation is needed: the best tiles reproduce natural "
@@ -832,12 +841,12 @@ msgstr ""
 "at home does not fully describe every inch of the tile itself. However, it "
 "will help you to touch the surface effect and the color gradation live."
 
-#: taleoftiles/templates/support.html:56
+#: taleoftiles/templates/support.html:57
 msgid "faq-prod-handmade"
 msgstr ""
 "What is the difference between an industrial product and a handmade product?"
 
-#: taleoftiles/templates/support.html:57
+#: taleoftiles/templates/support.html:58
 msgid "faq-prod-handmade-body"
 msgstr ""
 "Our industrial products are made with production phases in Italian factories "
@@ -845,11 +854,11 @@ msgstr ""
 "with ancient manual techniques and are therefore always unique and "
 "unrepeatable products."
 
-#: taleoftiles/templates/support.html:61
+#: taleoftiles/templates/support.html:62
 msgid "faq-prod-temperature"
 msgstr "Do the tiles deteriorate in contact with heat or cold?"
 
-#: taleoftiles/templates/support.html:62
+#: taleoftiles/templates/support.html:63
 msgid "faq-prod-temperature-body"
 msgstr ""
 "All industrial products in fine porcelain stoneware are anti-freeze, "
@@ -863,13 +872,13 @@ msgstr ""
 "each product you are interested in, otherwise contact us at <a href=\\"
 "\"mailto:info@taleoftiles.com\\\">info@taleoftiles.com</a> "
 
-#: taleoftiles/templates/support.html:66
+#: taleoftiles/templates/support.html:67
 msgid "faq-prod-maintenance"
 msgstr ""
 "What are the most easily washable products? Is it possible to wash them with "
 "any detergent or is there a risk that they will be damaged or become dull?"
 
-#: taleoftiles/templates/support.html:67
+#: taleoftiles/templates/support.html:68
 msgid "faq-prod-maintenance-body"
 msgstr ""
 "All commercial detergents can be used without fear of damaging or dulling "
@@ -877,11 +886,11 @@ msgstr ""
 "damage the surface layer of the clay firing. Fine porcelain stoneware is "
 "antibacterial, warm water is sufficient for thorough cleaning."
 
-#: taleoftiles/templates/support.html:71
+#: taleoftiles/templates/support.html:72
 msgid "faq-prod-decor"
 msgstr "How does the product called \"decor\" work?"
 
-#: taleoftiles/templates/support.html:72
+#: taleoftiles/templates/support.html:73
 msgid "faq-prod-decor-body"
 msgstr ""
 "In products that bear the wording \"decoration\", the manufacturer will "
@@ -891,13 +900,13 @@ msgstr ""
 "each image there will be inside the box. It will be a bit like opening a "
 "pack of stickers."
 
-#: taleoftiles/templates/support.html:76
+#: taleoftiles/templates/support.html:77
 msgid "faq-prod-fughe"
 msgstr ""
 "Are glue joints always necessary? Can I lay the tiles next to each other "
 "without the grout showing?"
 
-#: taleoftiles/templates/support.html:77
+#: taleoftiles/templates/support.html:78
 msgid "faq-prod-fughe-body"
 msgstr ""
 "The joint is always necessary when laying tiles to compensate for the "
@@ -907,11 +916,11 @@ msgstr ""
 "the joint by carefully choosing the color of the grout to obtain a less "
 "visible final effect."
 
-#: taleoftiles/templates/support.html:85
+#: taleoftiles/templates/support.html:86
 msgid "faq-sample-1"
 msgstr "What's the Tale of Tiles Book?"
 
-#: taleoftiles/templates/support.html:86
+#: taleoftiles/templates/support.html:87
 msgid "faq-sample-1-body"
 msgstr ""
 "Tale of Tiles Book is a customisable sample that will allow you to touch our "
@@ -921,11 +930,11 @@ msgstr ""
 "directly to your home. With Tale of Tiles Book you will be the one to write "
 "the history of your home."
 
-#: taleoftiles/templates/support.html:90
+#: taleoftiles/templates/support.html:91
 msgid "faq-sample-2"
 msgstr "How much does the Tale of Tiles Book cost?"
 
-#: taleoftiles/templates/support.html:91
+#: taleoftiles/templates/support.html:92
 msgid "faq-sample-2-body"
 msgstr ""
 "Your first Tale of Tiles Book is shipped directly to your home for free. If "
@@ -933,11 +942,11 @@ msgstr ""
 "purchased at a price of € 25 including transport, a cost that will be "
 "deducted from the next order."
 
-#: taleoftiles/templates/support.html:95
+#: taleoftiles/templates/support.html:96
 msgid "faq-sample-3"
 msgstr "Can I have more than one Tale of Tiles Book?"
 
-#: taleoftiles/templates/support.html:96
+#: taleoftiles/templates/support.html:97
 msgid "faq-sample-3-body"
 msgstr ""
 "Your first Tale of Tiles Book is always free, however it is possible to "
@@ -945,11 +954,11 @@ msgstr ""
 "25 € including shipping costs, which will be deducted from your possible "
 "order."
 
-#: taleoftiles/templates/support.html:100
+#: taleoftiles/templates/support.html:101
 msgid "faq-sample-4"
 msgstr "Can I have a sample of a handmade product?"
 
-#: taleoftiles/templates/support.html:101
+#: taleoftiles/templates/support.html:102
 msgid "faq-sample-4-body"
 msgstr ""
 "The handmade product cannot be sampled in the Tale of Tiles Book, but it is "
@@ -957,11 +966,11 @@ msgstr ""
 "href=\\\"mailto:info@taleoftiles.com\\\">info@taleoftiles.com</a>  with your "
 "personal request."
 
-#: taleoftiles/templates/support.html:105
+#: taleoftiles/templates/support.html:106
 msgid "faq-sample-5"
 msgstr "How soon will I receive my Tale of Tiles Book?"
 
-#: taleoftiles/templates/support.html:106
+#: taleoftiles/templates/support.html:107
 msgid "faq-sample-5-body"
 msgstr ""
 "The Tale of Tiles Book is shipped directly to your home by express courier. "
@@ -969,11 +978,11 @@ msgstr ""
 "Shipments are processed within 2 working days from the request for the Tale "
 "of Tiles Book."
 
-#: taleoftiles/templates/support.html:114
+#: taleoftiles/templates/support.html:115
 msgid "faq-order-minmax"
 msgstr "Are there any minimum or maximum limits on orders' quantities?"
 
-#: taleoftiles/templates/support.html:115
+#: taleoftiles/templates/support.html:116
 msgid "faq-order-minmax-body"
 msgstr ""
 "For both industrial and artisanal products, the minimum quantity of m2 that "
@@ -983,11 +992,11 @@ msgstr ""
 "solution even for small sizes. For orders over 200m2 contact us for the "
 "“Large Quantity Discount”."
 
-#: taleoftiles/templates/support.html:118
+#: taleoftiles/templates/support.html:119
 msgid "faq-order-sfrido"
 msgstr "What is meant by scrap?"
 
-#: taleoftiles/templates/support.html:119
+#: taleoftiles/templates/support.html:120
 msgid "faq-order-sfrido-body"
 msgstr ""
 "The scrap is the calculation of the tile waste introduced by the laying "
@@ -998,19 +1007,19 @@ msgstr ""
 "recommended to add it because during the laying phase waste is expected to "
 "happens due to tile cuts. "
 
-#: taleoftiles/templates/support.html:123
+#: taleoftiles/templates/support.html:124
 msgid "faq-order-payment"
 msgstr "What payment methods do you accept?"
 
-#: taleoftiles/templates/support.html:124
+#: taleoftiles/templates/support.html:125
 msgid "faq-order-payment-body"
 msgstr "We accept Bank Transfer, PayPal and Credit Card"
 
-#: taleoftiles/templates/support.html:128
+#: taleoftiles/templates/support.html:129
 msgid "faq-order-return"
 msgstr "How can I return the product if I change my mind?"
 
-#: taleoftiles/templates/support.html:129
+#: taleoftiles/templates/support.html:130
 msgid "faq-order-return-body"
 msgstr ""
 "It is always possible to return the material that you will receive through "
@@ -1023,11 +1032,11 @@ msgstr ""
 "case of withdrawal you will be charged the cost of transport. Your payment "
 "will be returned to you within 30 days of receiving the returned goods."
 
-#: taleoftiles/templates/support.html:135
+#: taleoftiles/templates/support.html:136
 msgid "faq-transport-cost"
 msgstr "How much does it cost and what does the transport include?"
 
-#: taleoftiles/templates/support.html:136
+#: taleoftiles/templates/support.html:137
 msgid "faq-transport-cost-body"
 msgstr ""
 "Receiving the tiles from Tale of Tiles to your home is free unless in "
@@ -1039,19 +1048,19 @@ msgstr ""
 "is a standard transport with tail lift on the ground, in areas that can be "
 "easily reached by means of transport."
 
-#: taleoftiles/templates/support.html:139
+#: taleoftiles/templates/support.html:140
 msgid "faq-transport-track"
 msgstr "Where is my shipment located?"
 
-#: taleoftiles/templates/support.html:141
+#: taleoftiles/templates/support.html:142
 msgid " faq-transport-track-body "
 msgstr ""
 
-#: taleoftiles/templates/support.html:145
+#: taleoftiles/templates/support.html:146
 msgid "faq-shipping-timeind"
 msgstr "What are the delivery times for industrial products?"
 
-#: taleoftiles/templates/support.html:146
+#: taleoftiles/templates/support.html:147
 msgid "faq-shipping-timeind-body"
 msgstr ""
 "For each product, you will find the necessary processing time on its page. "
@@ -1062,11 +1071,11 @@ msgstr ""
 "withdraw the purchase and the full amount paid will be returned to you "
 "within 24 hours."
 
-#: taleoftiles/templates/support.html:149
+#: taleoftiles/templates/support.html:150
 msgid "faq-shipping-timehandm"
 msgstr "What are the delivery times for handmade products?"
 
-#: taleoftiles/templates/support.html:150
+#: taleoftiles/templates/support.html:151
 msgid "faq-shipping-timehandm-body"
 msgstr ""
 "Even for handmade products, as for industrial ones, in each product sheet "
@@ -1074,13 +1083,13 @@ msgstr ""
 "purchase. Times may vary because since these are hand-made products, the "
 "processing may vary according to the required quantities."
 
-#: taleoftiles/templates/support.html:153
+#: taleoftiles/templates/support.html:154
 msgid "faq-shipping-broken"
 msgstr ""
 "What do I do if the material arrives damaged or if the package containing it "
 "is not intact?"
 
-#: taleoftiles/templates/support.html:154
+#: taleoftiles/templates/support.html:155
 msgid "faq-shipping-broken-body"
 msgstr ""
 "When you complete your order, the instructions to follow to follow the "
@@ -1089,11 +1098,11 @@ msgstr ""
 "If the package should be damaged or opened or the material damaged, you can "
 "choose whether to receive a refund or whether to receive the goods again."
 
-#: taleoftiles/templates/support.html:160
+#: taleoftiles/templates/support.html:161
 msgid "faq-company-1"
 msgstr "Where is the company headquarters located?"
 
-#: taleoftiles/templates/support.html:161
+#: taleoftiles/templates/support.html:162
 msgid "faq-company-1-body"
 msgstr ""
 "Tale of Tiles is an all-Italian company based in Forano (RI). We select for "
@@ -1102,11 +1111,11 @@ msgstr ""
 "reliability and continuous updates. Our young team is looking for the latest "
 "trends in materials and decorations."
 
-#: taleoftiles/templates/support.html:164
+#: taleoftiles/templates/support.html:165
 msgid "faq-company-2"
 msgstr "Do you produce the tiles?"
 
-#: taleoftiles/templates/support.html:165
+#: taleoftiles/templates/support.html:166
 msgid "faq-company-2-body"
 msgstr ""
 "No, the tiles are not made by us. We are retailers with experience gained in "
@@ -1114,11 +1123,11 @@ msgstr ""
 "reason we are able to select only the best of the Italian industrial and "
 "handmade scene."
 
-#: taleoftiles/templates/support.html:169
+#: taleoftiles/templates/support.html:170
 msgid "faq-company-3"
 msgstr "Is it possible to visit you in person?"
 
-#: taleoftiles/templates/support.html:170
+#: taleoftiles/templates/support.html:171
 msgid "faq-company-3-body"
 msgstr ""
 "For over 10 years we have owned a showroom with a physical store in Forano "

@@ -79,7 +79,7 @@
       <li><a href="https://www.facebook.com/taleoftiles"     target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-facebook' %} "/></svg></a></li>
       <li><a href="https://www.instagram.com/tale.of.tiles/" target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-instagram' %}"/></svg></a></li>
       <li><a href="https://www.pinterest.se/taleoftiles1/"   target="_blank"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-social-pinterest' %}"/></svg></a></li>
-      <li><a href="{% url 'support'%}"><span>{% trans 'support' %}</span></a></li>
+      <li><a href="{% url 'support' %}"><span>{% trans 'support' %}</span></a></li>
 
 {% if user.is_authenticated %}
     <li><a href="{% url 'account'%}"        ><span> {% trans 'account' %}</span></a></li>
@@ -212,7 +212,7 @@
         </div>
       </li>
       <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>
-      <li><a href="{% url 'support'%}"><span>{% trans 'support'|title %}</span></a></li>
+      <li><a href="{% url 'support' %}"><span>{% trans 'support'|title %}</span></a></li>
 
       <li><a href="" data-overlay="Auth"><span>{% trans 'login-register' %}</span></a></li>
       <li class="settingsmenu">
