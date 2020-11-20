@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 15:02+0000\n"
+"POT-Creation-Date: 2020-11-20 15:37+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -556,7 +556,7 @@ msgid "summary-back-home"
 msgstr "back to TaleOfTiles"
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
-#: taleoftiles/templates/product.html:167
+#: taleoftiles/templates/product.html:176
 msgid "any-doubt"
 msgstr "Any doubt?"
 
@@ -635,41 +635,47 @@ msgstr "min"
 msgid "include-sfrido"
 msgstr "include scraps"
 
-#: taleoftiles/templates/product.html:156
+#: taleoftiles/templates/product.html:155
+#, fuzzy
+#| msgid "sample-description"
+msgid "sfrido-small-description"
+msgstr "The scrap is the calculation of the tile waste introduced by the laying process."
+
+#: taleoftiles/templates/product.html:165
 msgid "add-chart-button"
 msgstr "Add to Cart"
 
-#: taleoftiles/templates/product.html:162
+#: taleoftiles/templates/product.html:171
 msgid "free-shipping"
 msgstr "free shipping"
 
-#: taleoftiles/templates/product.html:165
+#: taleoftiles/templates/product.html:174
 msgid "receive-date"
 msgstr "By ordering today, you will receive the product at your home"
 
-#: taleoftiles/templates/product.html:165
+#: taleoftiles/templates/product.html:174
 msgid "untill"
 msgstr "by"
 
-#: taleoftiles/templates/product.html:168
+#: taleoftiles/templates/product.html:177
 #, fuzzy
 #| msgid "any-doubt"
 msgid "any-doubt-subtitle"
 msgstr "Contact the support or consult the frequently asked questions page."
 
-#: taleoftiles/templates/product.html:192
+#: taleoftiles/templates/product.html:201
 msgid "download-tech-spech"
 msgstr "Download Technical Specifications"
 
-#: taleoftiles/templates/product.html:210
+#: taleoftiles/templates/product.html:219
 msgid "settings"
 msgstr "settings"
 
-#: taleoftiles/templates/product.html:222
+#: taleoftiles/templates/product.html:231
 msgid "product-support"
 msgstr "skirtings"
 
-#: taleoftiles/templates/product.html:237
+#: taleoftiles/templates/product.html:246
 msgid "product-same-serie"
 msgstr "products from the same serie"
 

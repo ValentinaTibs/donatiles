@@ -144,8 +144,17 @@
             {{chi_form.has_frido}}
             <label for="includeOffCut">{% trans 'include-sfrido' %}</label>
           </div>
+          <style>
+            .btn-tooltip:hover .tooltip{
+                  visibility: visible;
+              }
+          </style>
           <div>
-            <div class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg></div>
+            <div class="btn btn-tooltip"><svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-info' %}"/></svg>
+            <div class="tooltip">
+              {% trans 'sfrido-small-description' %}
+            </div>
+            </div>
           </div>
         </div>
       </div>
