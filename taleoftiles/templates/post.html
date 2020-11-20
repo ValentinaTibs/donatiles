@@ -13,7 +13,7 @@
   <div class="content">
     <div class="cover-title">
       <a href="{% url 'blog' %}" class="btn-link"><svg class="icon-l icon">
-        <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Tutti gli articoli</a>
+        <use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>{% trans 'all-articles' %}</a>
       <div class="bgtxt"><h1><span>{{post.publication.title |title}}
 </span></h1></div>
     </div>
@@ -43,7 +43,8 @@
 
 <div class="block block-lightbg">
   <div class="content grid grid4">
-    <h2>Dai un'occhiata a questi!</h2>
+    <h2>{% trans 'give-it-alook' %}</h2>
+    
 
     {% for prod in post.related_products.all %}
       {% product_thumb prod %}

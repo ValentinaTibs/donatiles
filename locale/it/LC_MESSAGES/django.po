@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 15:47+0000\n"
+"POT-Creation-Date: 2020-11-20 15:59+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -581,6 +581,16 @@ msgstr ""
 #: taleoftiles/templates/post.html:6
 msgid "the_blog"
 msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/post.html:16
+#, fuzzy
+#| msgid "all-series"
+msgid "all-articles"
+msgstr "Tutte le serie"
+
+#: taleoftiles/templates/post.html:46
+msgid "give-it-alook"
+msgstr "Dai un'occhiata a questi!"
 
 #: taleoftiles/templates/product.html:27
 msgid "full-sampler"

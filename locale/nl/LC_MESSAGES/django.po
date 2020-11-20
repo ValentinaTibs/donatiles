@@ -503,6 +503,14 @@ msgstr ""
 msgid "the_blog"
 msgstr ""
 
+#: taleoftiles/templates/post.html:16
+msgid "all-articles"
+msgstr ""
+
+#: taleoftiles/templates/post.html:46
+msgid "give-it-alook"
+msgstr ""
+
 #: taleoftiles/templates/product.html:27
 msgid "full-sampler"
 msgstr ""
