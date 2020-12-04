@@ -51,10 +51,11 @@ def toggle_samplable(modeladmin, request, queryset):
     hm = Tag.objects.get(slug='samplable')
     for product in queryset:
         if product.is_samplable:
-            product.tags.add(hm.pk)
+            product.tags.remove(hm.pk)
             product.save()
         else:
-            product.tags.remove(hm.pk)
+
+            product.tags.add(hm.pk)
             product.save()
 
 def assign_catalogue(modeladmin, request, queryset):
@@ -269,7 +270,7 @@ class ProductAdmin(admin.ModelAdmin):
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
-    search_fields = ('name', 'code')
+    search_fields = ('code')
     
     list_display = ('name_','id',
                     'code',
