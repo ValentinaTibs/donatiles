@@ -53,7 +53,7 @@ def toggle_samplable(modeladmin, request, queryset):
         if product.is_samplable:
             product.tags.add(hm.pk)
             product.save()
-        else
+        else:
             product.tags.remove(hm.pk)
             product.save()
 
