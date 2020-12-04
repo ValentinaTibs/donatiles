@@ -54,7 +54,6 @@ def toggle_samplable(modeladmin, request, queryset):
             product.tags.remove(hm.pk)
             product.save()
         else:
-
             product.tags.add(hm.pk)
             product.save()
 
@@ -270,7 +269,7 @@ class ProductAdmin(admin.ModelAdmin):
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
-    search_fields = ('code')
+    search_fields = ( 'code',)
     
     list_display = ('name_','id',
                     'code',
