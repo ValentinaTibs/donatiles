@@ -262,7 +262,7 @@ class EasyProductAdmin(ImportExportActionModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,assign_catalogue]
+    actions = [duplicate_product,assign_catalogue,toggle_samplable]
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
