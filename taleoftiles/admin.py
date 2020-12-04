@@ -53,6 +53,9 @@ def toggle_samplable(modeladmin, request, queryset):
         if product.is_samplable:
             product.tags.add(hm.pk)
             product.save()
+        else
+            product.tags.remove(hm.pk)
+            product.save()
 
 def assign_catalogue(modeladmin, request, queryset):
     cat = Catalogue.objects.get(title='2020')
