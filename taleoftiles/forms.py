@@ -111,7 +111,7 @@ class CustomProductModelForm(forms.ModelForm):
         samplable_tag = Tag.objects.get(slug='samplable')
         for samplable in samplables:
             product.tags.remove(samplable.pk)
-        if self.cleaned_data.get('series'):
+        if self.cleaned_data.get('samplable'):
             product.tags.add(samplable_tag.pk)
 
         # ---- colors UPDATE -----
