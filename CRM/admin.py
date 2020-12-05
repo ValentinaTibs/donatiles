@@ -1,5 +1,5 @@
 from django.contrib import admin
-from CRM.models import Profile, Chart, ChartItem, Shipping, Order, Sample, Sampler
+from CRM.models import Profile, Chart, ChartItem, Shipping, Order, Sample, Sampler,Discount
 
 class ShippingStackedAdmin(admin.StackedInline):
     model = Shipping
@@ -8,6 +8,11 @@ class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     inlines = [ShippingStackedAdmin,]
     #list_display = ('user.email')
+
+class DiscountAdmin(admin.ModelAdmin):
+    model = Discount
+    list_display = ('percentage','code','number_use','actual_use','deadline')
+    readonly_fields = ('actual_use',)
 
 class ChartItemAdmin(admin.ModelAdmin):
     model = ChartItem
@@ -90,10 +95,12 @@ class SamplerAdmin(admin.ModelAdmin):
     def _is_paid(self, obj):
         return obj.is_paid()
 
-
+admin.site.register(Discount,DiscountAdmin)
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Chart,ChartAdmin)
 admin.site.register(ChartItem,ChartItemAdmin)
 admin.site.register(Sampler,SamplerAdmin)
 admin.site.register(Order,OrderAdmin)
 admin.site.register(Shipping,ShippingAdmin)
+
+

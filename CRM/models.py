@@ -88,6 +88,23 @@ class Shipping(models.Model):
         
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
+class Discount(models.Model):
+    percentage      = models.PositiveIntegerField( default=0 )
+    #ammoun          = models.PositiveIntegerField( default=0 )
+    code            = models.CharField( max_length=20,)
+#    referral code   = models.ForeignKey(Discount, verbose_name="Discounts", null=True, blank = True, on_delete=models.SET_NULL, related_name='related')
+    number_use      = models.PositiveIntegerField(default = 1)
+    actual_use      = models.PositiveIntegerField(default = 0)
+    deadline        = models.DateTimeField()
+    #type_           = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
+    #tags_only      = models.ForeignKey(Tag, verbose_name="Discounts", null=True, blank = True, on_delete=models.SET_NULL, related_name='related')
+    #min_bill        = models.PositiveIntegerField( default=0 )
+    #personal            = models.OneToOneField(User, on_delete=models.CASCADE, null = False,related_name='profile')
+
+    def total_discount(self,ammount):
+        return int(ammount*self.percentage/100.0)
+        
+  
 #2do mettere qui un metodo più decente
 def create_shipping_internal_id():
     return get_random_string(length=12)
@@ -104,6 +121,7 @@ class Order(models.Model):
     final_payment           = models.PositiveIntegerField( default=0 )   
     is_sampler              = models.BooleanField(default = False)
     shipping_date           = models.DateTimeField(editable=True,null= True, blank=True)
+    discount                = models.ForeignKey( Discount,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     
     #shipping                = models.ForeignKey(Shipping, null= True,on_delete=models.SET_NULL)
     
@@ -125,15 +143,15 @@ class Order(models.Model):
             chart_model = self.sampler.first()
         else :
             chart_model = self.charts.first()
+        print(chart_model)
+        print(chart_model.user)
         if not chart_model:
             return None    
-        if not chart_model.user:
-            return None
-    
-        if not chart_model.user.is_anonymous:
-            return None
         if chart_model.user:
             return chart_model.user
+        
+        if not chart_model.user.is_anonymous:
+            return None
         else :
             return None
     
@@ -148,8 +166,8 @@ class Order(models.Model):
             return chart_model.user
         else :
             return None
-    
-    def total(self):
+
+    def chart_price(self):
         total = 0
         for sample in self.sampler.all():
             total += sample.total_price()
@@ -157,6 +175,14 @@ class Order(models.Model):
         for chart in self.charts.all():
             total += chart.total_price()
         return total
+
+    def total(self):
+        total = self.chart_price()
+        
+        if self.discount:
+            total = total - self.discount.total_discount(total)
+        return total
+
     
     def is_paid(self):
         if self.is_sampler:
@@ -200,12 +226,12 @@ class ActiveChartManager(models.Manager):
         return qs
 
 
+
 class Chart(models.Model):
 
     session_id  = models.CharField ( max_length=100, default="", null = True)
     user        = models.ForeignKey( User,  blank = True, null = True, on_delete=models.SET_NULL, related_name='charts' )
     order       = models.ForeignKey( Order, verbose_name="Order", null = True, on_delete=models.SET_NULL, related_name='charts')
-    
     #2do probabilmente togliere questo da qui
     completion_status   = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='s')
     
@@ -382,13 +408,3 @@ class Question(models.Model):
     def published(self):
         return True #models.BooleanField(default = True)
 
-# class Discount(models.Model):
-#     percentage      = models.PositiveIntegerField( default=0 )
-#     ammoun          = models.PositiveIntegerField( default=0 )
-#     code            = models.CharField( max_length=20,)
-#     referral code   = models.ForeignKey(Discount, verbose_name="Discounts", null=True, blank = True, on_delete=models.SET_NULL, related_name='related')
-#     number_use      = models.PositiveIntegerField(default = 1)
-#     deadline        = models.DateTimeField()
-#     type_           = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
-#     min_bill        = models.PositiveIntegerField( default=0 )
-  

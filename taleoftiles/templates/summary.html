@@ -68,47 +68,45 @@
 
 	{% endfor %} 
 {% else %} 
-	
-
 
     <div class="cartrecap">
 
       <div class="cartreacap-header">
-        <h5>Quantità</h5>
-        <h5>Prezzo</h5>
+        <h5>{% trans 'quantity' %}</h5>
+        <h5>{% trans 'price' %}</h5>
       </div>
 	{% for chart in order.charts.all %}
 	{% for chart_item in chart.chart_item.all %}
 		<div class="cartrecap-item">
-        <div class="cartrecap-thumb" style="background-image:url('{{chart_item.product.cover.imagefile.url}}')"></div>
-        <div class="cartrecap-main">
-          <h5>{{chart_item.product.serie}}</h5>
-          <h4>{{chart_item.product.name}}</h4>
-          <p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
-        </div>
-        <div class="cartrecap-qty">
-          <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
-          <div class="input-qty">
-            {{chart_item.quantity}}m&sup2;
-			{% if chart_item.has_frido %}
-            <div class="product-qtybtns">
-				<span class="product-note">{% trans 'this-product-has-frido' %}</span>
-            </div>
-			{% endif %}
-          </div>
-        </div>
-        <div class="cartrecap-price">
-			<span class="product-figure">€ {{chart_item.price}}</span>
-			<a href="{% url 'del_chart' chart_item.pk %}"> 
-				
-				<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
-			</a>
-        </div>
+        	<div class="cartrecap-thumb" style="background-image:url('{{chart_item.product.cover.imagefile.url}}')">
+        	</div>
+	        <div class="cartrecap-main">
+	          <h5>{{chart_item.product.serie}}</h5>
+	          <h4>{{chart_item.product.name}}</h4>
+	          <p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
+	        </div>
+	        <div class="cartrecap-qty">
+	          <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
+	          <div class="input-qty">
+	            {{chart_item.quantity}}m&sup2;
+				{% if chart_item.has_frido %}
+	            <div class="product-qtybtns">
+					<span class="product-note">{% trans 'this-product-has-frido' %}</span>
+	            </div>
+				{% endif %}
+	          </div>
+	        </div>
+	        <div class="cartrecap-price">
+				<span class="product-figure">€ {{chart_item.price}}</span>
+				<a href="{% url 'del_chart' chart_item.pk %}"> 
+					<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
+				</a>
+	        </div>
       </div>
 	{% endfor %}
 	{% endfor %} 
 	</div>
-	     <div class="cartrecap-item">
+	<div class="cartrecap-item">
         <div class="cartrecap-main">
           <h4>{% trans 'shipping-cost' %}</h4>
           <p class="note">{% trans 'shipping-included' %}</p>
@@ -116,14 +114,24 @@
         <div class="cartrecap-price">
           <span class="product-figure">€ 0</span>
         </div>
-      </div>
+    </div>
+	{% if order.discount %}
+    <div class="cartrecap-item">
+        <div class="cartrecap-main">
+          {% trans 'applied-code' %}<h4>{{order.discount.code}}</h4>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure"> € - {{order|order_discount}}</span>
+        </div>
+    </div>
+	{% endif %}
 
       <div class="cartrecap-item cartrecap-total">
         <div class="cartrecap-main">
           <h4>{% trans 'order-total' %}</h4>
         </div>
         <div class="cartrecap-price">
-          <span class="product-figure">€ {{order.total}}</span>
+          <span class="product-figure">€ {{ order.total }}</span>
         </div>
       </div>
 {% endif %} 
@@ -142,6 +150,17 @@
 	<p class="note">
 		{% blocktrans %} consider-sfrido <strong>10% more</strong> consider-sfrido{% endblocktrans %}
 	</div>
+	{% if not order.discount %}
+	<div class="asidebox">
+		<form method="post" action="{% url 'summary' order.internal_tracking_id %}">
+			<h4>{% trans 'do-you-have-a-code' %}?</h4>
+			{% csrf_token %}
+			{{discount_form}}
+			<h5><span><button class="btn btn-primary">{% trans 'apply-coupon' %}</button></span></h5>
+		</form>
+	</div>
+	{% endif %}
+
 </aside>
 
 </div>

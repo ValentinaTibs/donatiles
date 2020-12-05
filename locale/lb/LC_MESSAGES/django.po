@@ -1,16 +1,28 @@
-#: CRM/forms.py:56 CRM/forms.py:89
+#: CRM/forms.py:31
+msgid "Not Valid Code"
+msgstr ""
+
+#: CRM/forms.py:33
+msgid "Aleady Used Code"
+msgstr ""
+
+#: CRM/forms.py:35
+msgid "Expired Code"
+msgstr ""
+
+#: CRM/forms.py:76 CRM/forms.py:109
 msgid "Wrong Product"
 msgstr ""
 
-#: CRM/forms.py:69
+#: CRM/forms.py:89
 msgid "Not Enought"
 msgstr ""
 
-#: CRM/forms.py:118
+#: CRM/forms.py:138
 msgid "Invalid email"
 msgstr ""
 
-#: CRM/forms.py:122
+#: CRM/forms.py:142
 msgid "Duplicated email"
 msgstr ""
 
@@ -172,61 +184,61 @@ msgstr ""
 msgid "choose-home-claim"
 msgstr ""
 
-#: taleoftiles/templates/home.html:45
+#: taleoftiles/templates/home.html:51
 msgid "sample-touchhand"
 msgstr ""
 
-#: taleoftiles/templates/home.html:47
+#: taleoftiles/templates/home.html:53
 msgid "sample-description"
 msgstr ""
 
-#: taleoftiles/templates/home.html:51
+#: taleoftiles/templates/home.html:57
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 
-#: taleoftiles/templates/home.html:70
+#: taleoftiles/templates/home.html:76
 msgid "title-renovate-home"
 msgstr ""
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:77
 msgid "subtitle-renovate-home"
 msgstr ""
 
-#: taleoftiles/templates/home.html:79
+#: taleoftiles/templates/home.html:85
 msgid "title-faq-home"
 msgstr ""
 
-#: taleoftiles/templates/home.html:83
+#: taleoftiles/templates/home.html:89
 msgid "faq-1"
 msgstr ""
 
-#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
-#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
-#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:90 taleoftiles/templates/home.html:95
+#: taleoftiles/templates/home.html:100 taleoftiles/templates/home.html:105
+#: taleoftiles/templates/home.html:109 taleoftiles/templates/home.html:113
 msgid "read-answer"
 msgstr ""
 
-#: taleoftiles/templates/home.html:88
+#: taleoftiles/templates/home.html:94
 msgid "faq-2"
 msgstr ""
 
-#: taleoftiles/templates/home.html:93
+#: taleoftiles/templates/home.html:99
 msgid "faq-3"
 msgstr ""
 
-#: taleoftiles/templates/home.html:98
+#: taleoftiles/templates/home.html:104
 msgid "faq-4"
 msgstr ""
 
-#: taleoftiles/templates/home.html:102
+#: taleoftiles/templates/home.html:108
 msgid "faq-5"
 msgstr ""
 
-#: taleoftiles/templates/home.html:106
+#: taleoftiles/templates/home.html:112
 msgid "faq-6"
 msgstr ""
 
-#: taleoftiles/templates/home.html:117
+#: taleoftiles/templates/home.html:123
 msgid "founder-name"
 msgstr ""
 
@@ -398,7 +410,7 @@ msgid "back-to-orders"
 msgstr ""
 
 #: taleoftiles/templates/order.html:36 taleoftiles/templates/order.html:67
-#: taleoftiles/templates/summary.html:35
+#: taleoftiles/templates/summary.html:35 taleoftiles/templates/summary.html:76
 msgid "price"
 msgstr ""
 
@@ -410,15 +422,15 @@ msgstr ""
 msgid "summary-sample-subtitle"
 msgstr ""
 
-#: taleoftiles/templates/order.html:66
+#: taleoftiles/templates/order.html:66 taleoftiles/templates/summary.html:75
 msgid "quantity"
 msgstr ""
 
-#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:90
+#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:89
 msgid "boxes"
 msgstr ""
 
-#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:123
+#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:131
 msgid "order-total"
 msgstr ""
 
@@ -632,10 +644,14 @@ msgid "login-call-to-action-2"
 msgstr ""
 
 #: taleoftiles/templates/shipping.html:84
+msgid "you-are-loged-in-as"
+msgstr ""
+
+#: taleoftiles/templates/shipping.html:90
 msgid "island-and-cap-title"
 msgstr ""
 
-#: taleoftiles/templates/shipping.html:85
+#: taleoftiles/templates/shipping.html:91
 msgid "island-and-cap-text"
 msgstr ""
 
@@ -651,33 +667,45 @@ msgstr ""
 msgid "summary-total-title"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:95
+#: taleoftiles/templates/summary.html:94
 msgid "this-product-has-frido"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:113
+#: taleoftiles/templates/summary.html:111
 msgid "shipping-cost"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:114
+#: taleoftiles/templates/summary.html:112
 msgid "shipping-included"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:136
+#: taleoftiles/templates/summary.html:121
+msgid "applied-code"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:144
 msgid "summary-insert-shipping"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:139
+#: taleoftiles/templates/summary.html:147
 msgid "summary-longtext"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:141
+#: taleoftiles/templates/summary.html:149
 msgid "consider-sfrido"
 msgstr ""
 
-#: taleoftiles/templates/summary.html:143
+#: taleoftiles/templates/summary.html:151
 #, python-format
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:156
+msgid "do-you-have-a-code"
+msgstr ""
+
+#: taleoftiles/templates/summary.html:159
+msgid "apply-coupon"
 msgstr ""
 
 #: taleoftiles/templates/support.html:16

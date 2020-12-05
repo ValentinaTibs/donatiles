@@ -10,7 +10,7 @@ from layout.models import  MailTemplate
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 
-from CRM.forms import RegisterForm,ShippingForm,NewChartItemForm
+from CRM.forms import RegisterForm,ShippingForm,NewChartItemForm,ApplyDiscountForm
 
 from django.http import JsonResponse
 from django.db.models import Q 
@@ -47,9 +47,20 @@ def summary(request, id_ ):
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
-        
+    
+    discount_form = ApplyDiscountForm(request.POST,initial={'order_code': id_,} )
+
+    if request.method == 'POST':
+        if discount_form.is_valid() :
+            discount = discount_form.cleaned_data 
+            discount.number_use = discount.number_use -1
+            discount.save()
+            order.discount = discount
+            order.save()
+            
     prv_page = request.session.get('prev_page')            
-    return render(request, "summary.html", {'order':order,'prv_page':prv_page})     
+    return render(request, "summary.html", {'order':order,'prv_page':prv_page,'discount_form':discount_form})     
+
 
 def order(request, id_ ):
     
@@ -108,7 +119,7 @@ def shipping(request, id_):
             prev_data = Shipping.objects.get( user__user = order.user())
         except ObjectDoesNotExist:
             prev_data = Shipping(email = request.user.email )
-
+    
     shipping_form = ShippingForm(instance=prev_data)
 
     if request.method == 'POST':

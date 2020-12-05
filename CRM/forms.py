@@ -11,9 +11,29 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User,Group
 from taleoftiles.utils  import compute_single_price, compute_sm_price
 
-from CRM.models import Shipping,ChartItem,Tag
+from CRM.models import Shipping,ChartItem,Tag,Discount
 from taleoftiles.models import Product
 from layout.models import  MailTemplate
+
+import datetime as dt
+import pytz
+utc=pytz.UTC
+
+class ApplyDiscountForm(forms.Form):
+    code        = forms.CharField(max_length=20)
+    order_code  = forms.HiddenInput()
+
+    def clean(self):
+        code    = self.cleaned_data.get('code')
+        try:
+            discount_code = Discount.objects.get(code=code)
+        except ObjectDoesNotExist:
+            raise forms.ValidationError(_('Not Valid Code'), code='not-existing-code')
+        if discount_code.actual_use >= discount_code.number_use:
+            raise forms.ValidationError(_('Aleady Used Code'), code='exhausted-code')
+        if utc.localize(dt.datetime.now()) > discount_code.deadline:
+            raise forms.ValidationError(_('Expired Code'), code='expired-code')
+        return discount_code
 
 class ShippingForm(forms.ModelForm):
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 15:59+0000\n"
+"POT-Creation-Date: 2020-12-05 11:01+0000\n"
 "PO-Revision-Date: 2020-10-24 09:46\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
@@ -17,19 +17,31 @@ msgstr ""
 "X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
 "X-Crowdin-File-ID: 28\n"
 
-#: CRM/forms.py:56 CRM/forms.py:89
+#: CRM/forms.py:31
+msgid "Not Valid Code"
+msgstr ""
+
+#: CRM/forms.py:33
+msgid "Aleady Used Code"
+msgstr ""
+
+#: CRM/forms.py:35
+msgid "Expired Code"
+msgstr ""
+
+#: CRM/forms.py:76 CRM/forms.py:109
 msgid "Wrong Product"
 msgstr "Prodotto non disponibile"
 
-#: CRM/forms.py:69
+#: CRM/forms.py:89
 msgid "Not Enought"
 msgstr "Non sufficiente"
 
-#: CRM/forms.py:118
+#: CRM/forms.py:138
 msgid "Invalid email"
 msgstr "Email non valida"
 
-#: CRM/forms.py:122
+#: CRM/forms.py:142
 msgid "Duplicated email"
 msgstr "Email già presente"
 
@@ -203,11 +215,11 @@ msgstr ""
 "Scegli le tue mattonelle tra la nostra <strong>selezione di oltre 200 "
 "prodotti</strong>"
 
-#: taleoftiles/templates/home.html:45
+#: taleoftiles/templates/home.html:51
 msgid "sample-touchhand"
 msgstr "Tocca con mano"
 
-#: taleoftiles/templates/home.html:47
+#: taleoftiles/templates/home.html:53
 msgid "sample-description"
 msgstr ""
 "Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of "
@@ -215,7 +227,7 @@ msgstr ""
 "ricevere gratuitamente a casa tua per sognare con i nostri prodotti "
 "esclusivamente italiani."
 
-#: taleoftiles/templates/home.html:51
+#: taleoftiles/templates/home.html:57
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 "<h3>Ricevi le tue mattonelle a casa <strong>senza spese di spedizione</"
@@ -223,52 +235,52 @@ msgstr ""
 "<br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
 "      "
 
-#: taleoftiles/templates/home.html:70
+#: taleoftiles/templates/home.html:76
 msgid "title-renovate-home"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:77
 msgid "subtitle-renovate-home"
 msgstr ""
 "Divertiti con le nostre idee per rinnovare in modo semplice i tuoi ambienti."
 
-#: taleoftiles/templates/home.html:79
+#: taleoftiles/templates/home.html:85
 msgid "title-faq-home"
 msgstr "Domande frequenti"
 
-#: taleoftiles/templates/home.html:83
+#: taleoftiles/templates/home.html:89
 msgid "faq-1"
 msgstr "Come posso restituire il prodotto, se cambio idea?"
 
-#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
-#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
-#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:90 taleoftiles/templates/home.html:95
+#: taleoftiles/templates/home.html:100 taleoftiles/templates/home.html:105
+#: taleoftiles/templates/home.html:109 taleoftiles/templates/home.html:113
 msgid "read-answer"
 msgstr "Leggi risposta"
 
-#: taleoftiles/templates/home.html:88
+#: taleoftiles/templates/home.html:94
 msgid "faq-2"
 msgstr "Quali sono i tempi di consegna?"
 
-#: taleoftiles/templates/home.html:93
+#: taleoftiles/templates/home.html:99
 msgid "faq-3"
 msgstr "Come avverrà la consegna?"
 
-#: taleoftiles/templates/home.html:98
+#: taleoftiles/templates/home.html:104
 msgid "faq-4"
 msgstr "Posso vedere le mattonelle prima di acquistarle?"
 
-#: taleoftiles/templates/home.html:102
+#: taleoftiles/templates/home.html:108
 msgid "faq-5"
 msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
 
-#: taleoftiles/templates/home.html:106
+#: taleoftiles/templates/home.html:112
 msgid "faq-6"
 msgstr ""
 "Devo avere delle accortezze particolari nel calcolare le misure per "
 "scegliere le mattonelle?"
 
-#: taleoftiles/templates/home.html:117
+#: taleoftiles/templates/home.html:123
 msgid "founder-name"
 msgstr "Noi siamo Tale of Tiles"
 
@@ -456,7 +468,7 @@ msgid "back-to-orders"
 msgstr "Torna indietro"
 
 #: taleoftiles/templates/order.html:36 taleoftiles/templates/order.html:67
-#: taleoftiles/templates/summary.html:35
+#: taleoftiles/templates/summary.html:35 taleoftiles/templates/summary.html:76
 msgid "price"
 msgstr "Prezzo"
 
@@ -468,15 +480,15 @@ msgstr "Tale of Tiles Book"
 msgid "summary-sample-subtitle"
 msgstr "Campioni 5cm x 5cm di mattonelle scelte da te"
 
-#: taleoftiles/templates/order.html:66
+#: taleoftiles/templates/order.html:66 taleoftiles/templates/summary.html:75
 msgid "quantity"
 msgstr "Quantità"
 
-#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:90
+#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:89
 msgid "boxes"
 msgstr "Scatole"
 
-#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:123
+#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:131
 msgid "order-total"
 msgstr "Totale dell'ordine"
 
@@ -727,10 +739,16 @@ msgstr ""
 "of Tiles"
 
 #: taleoftiles/templates/shipping.html:84
+#, fuzzy
+#| msgid "already-registered"
+msgid "you-are-loged-in-as"
+msgstr "Sei registrato come l'utente"
+
+#: taleoftiles/templates/shipping.html:90
 msgid "island-and-cap-title"
 msgstr "Devi rivevere il tuo ordine su isole o CAP disagiati?"
 
-#: taleoftiles/templates/shipping.html:85
+#: taleoftiles/templates/shipping.html:91
 msgid "island-and-cap-text"
 msgstr ""
 "Contattaci per ricevere un preventivo di spedizione personalizzato per isole "
@@ -748,31 +766,35 @@ msgstr "Riepilogo del tuo ordine"
 msgid "summary-total-title"
 msgstr "Totale Ordine"
 
-#: taleoftiles/templates/summary.html:95
+#: taleoftiles/templates/summary.html:94
 msgid "this-product-has-frido"
 msgstr "L'ordine include lo sfrido"
 
-#: taleoftiles/templates/summary.html:113
+#: taleoftiles/templates/summary.html:111
 msgid "shipping-cost"
 msgstr "Spese di spedizione"
 
-#: taleoftiles/templates/summary.html:114
+#: taleoftiles/templates/summary.html:112
 msgid "shipping-included"
 msgstr "Spedizione inclusa"
 
-#: taleoftiles/templates/summary.html:136
+#: taleoftiles/templates/summary.html:121
+msgid "applied-code"
+msgstr "codice sconto applicato"
+
+#: taleoftiles/templates/summary.html:144
 msgid "summary-insert-shipping"
 msgstr "Inserisci i dati per la spedizione"
 
-#: taleoftiles/templates/summary.html:139
+#: taleoftiles/templates/summary.html:147
 msgid "summary-longtext"
 msgstr "Potrai pagare con PayPal, Bonifico Bancario o Carta di Credito."
 
-#: taleoftiles/templates/summary.html:141
+#: taleoftiles/templates/summary.html:149
 msgid "consider-sfrido"
 msgstr "Considera lo sfrido"
 
-#: taleoftiles/templates/summary.html:143
+#: taleoftiles/templates/summary.html:151
 #, fuzzy, python-format
 #| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
@@ -780,6 +802,14 @@ msgstr ""
 "Ti consigliamo di considerare sempre il <strong>10% in più <strong>rispetto "
 "alla quantità di mattonelle strettamente necessarie, per ulteriori "
 "chiarimenti ti invitiamo a consultare le FAQ."
+
+#: taleoftiles/templates/summary.html:156
+msgid "do-you-have-a-code"
+msgstr "Hai un codice sconto"
+
+#: taleoftiles/templates/summary.html:159
+msgid "apply-coupon"
+msgstr "applica codice"
 
 #: taleoftiles/templates/support.html:16
 msgid "support-text-1"

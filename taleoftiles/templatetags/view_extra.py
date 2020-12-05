@@ -102,6 +102,11 @@ def product_thumb(product):
 def change_lang(context, lang=None):    
     return translate_url(context['request'].path, lang)
 
+@register.filter
+def order_discount(order):
+    return int(order.discount.total_discount(order.chart_price()))
+    
+
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):
 #   guy_name = user.userprofile.centre.related.slug.split('-')[0].capitalize()

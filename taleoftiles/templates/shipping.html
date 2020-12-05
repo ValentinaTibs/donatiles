@@ -79,6 +79,12 @@
                 <h4>{% trans 'already-registered' %}</h4>
                 <p class="note">{% trans 'save-time' %} <a href="" data-overlay="Auth">{% trans 'login-call-to-action' %}</a> {% trans 'login-call-to-action-2' %}</p>
             </div>
+            {% else %}
+            <div class="asidebox">
+                <h4>{% trans 'you-are-loged-in-as' %}</h4>
+                {{user}}
+            </div>
+
             {% endif %}
             <div class="asidebox">
                 <h4>{% trans 'island-and-cap-title' %}</h4>
