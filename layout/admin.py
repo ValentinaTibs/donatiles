@@ -51,7 +51,7 @@ from django.http import HttpResponse
 
 class TranslationFileAdmin(admin.ModelAdmin):
     model = TranslationFile 
-    readonly_fields = ('download_link',)
+    readonly_fields = ('download_link','version')
     
     # add custom view to urls
     def get_urls(self):
@@ -79,23 +79,6 @@ class TranslationFileAdmin(admin.ModelAdmin):
         # generate dynamic file content using object pk
         with open(settings.LOCALE_PATHS[0]+'/'+lan+'/LC_MESSAGES/django.po', 'r') as file1:
             response.write(file1.read())
-            # Lines = file1.readlines() 
-
-  
-            # count = 0
-            # # Strips the newline character 
-            # for line in Lines: 
-            #     print("Line{}: {}".format(count, line.strip())) 
-            
-
-        return response
-
-    # def file_link(self, obj):
-    #     fin_string = ""
-    #     for lan in settings.LANGUAGES:
-    #         fin_string = fin_string + "<a href='{% static 'translations/import_files/import_questions.xlsx' %}' download>Download "+ str(lan[1]) +"   </a>"
-        
-    #     return format_html(fin_string)
 
         
 class MailTemplateAdmin(admin.ModelAdmin):

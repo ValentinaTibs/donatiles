@@ -10,6 +10,8 @@ import sys
 import os
 
 from django.core.management import call_command
+from django.core.exceptions import ObjectDoesNotExist
+
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -19,16 +21,21 @@ DATA_TYPE = (
 class TranslationFile(models.Model):
 
     content     = models.TextField()
+    version     = models.PositiveIntegerField(default = 1,unique = True)
 
     def save(self, *args, **kwargs):
 
-        super().save(*args, **kwargs)  # Call the "real" save() method.
+        
+        already = TranslationFile.objects.filter(version=self.version)
+        if(already.count()>0):
+            self.pk = None
+            self.version = self.version + 1
 
         for lan in settings.LANGUAGES:
             field_content = getattr(self, 'content_'+lan[0])
             with open(settings.LOCALE_PATHS[0]+'/'+lan[0]+'/LC_MESSAGES/django.po', 'w') as f:
                 f.write(field_content)
-
+        super().save(*args, **kwargs)  # Call the "real" save() method.
         call_command('compilemessages', )
 
 
