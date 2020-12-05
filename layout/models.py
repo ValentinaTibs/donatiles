@@ -4,11 +4,33 @@ from django.utils.safestring import mark_safe
 from taleoftiles.models import Product, Tag, TechnicalSpec
 from blog.models import Post
 from PIL import Image 
+from django.conf import settings
+
+import sys
+import os
+
+from django.core.management import call_command
 
 DATA_TYPE = (
     ('t', 'Text'),
     ('i', 'Image')
 ) 
+
+class TranslationFile(models.Model):
+
+    content     = models.TextField()
+
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+        for lan in settings.LANGUAGES:
+            field_content = getattr(self, 'content_'+lan[0])
+            with open(settings.LOCALE_PATHS[0]+'/'+lan[0]+'/LC_MESSAGES/filename.po', 'w') as f:
+                f.write(field_content)
+
+        call_command('compilemessages', )
+
 
 class ElementTag(models.Model):
     name    = models.CharField  (max_length=200)

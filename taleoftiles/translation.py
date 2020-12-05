@@ -1,5 +1,5 @@
 from taleoftiles.models import Tag, Publication
-from layout.models import MailTemplate, Element
+from layout.models import MailTemplate, Element,TranslationFile
 from modeltranslation.translator import register, TranslationOptions
 
 
@@ -17,6 +17,10 @@ class PubTranslation(TranslationOptions):
 @register(MailTemplate)
 class MailTranslation(TranslationOptions):
     fields = ('subj','content',)
+
+@register(TranslationFile)
+class TranslationFileTranslation(TranslationOptions):
+    fields = ('content',)
 
 
 
