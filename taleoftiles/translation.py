@@ -18,6 +18,10 @@ class PubTranslation(TranslationOptions):
 class MailTranslation(TranslationOptions):
     fields = ('subj','content',)
 
+# @register(TranslationFile)
+# class TranslationFileTranslation(TranslationOptions):
+#     fields = ('content',)
+
 
 
 # @register(Icon)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from layout.models import  Element, ElementTag, MailTemplate, Image
+from layout.models import  Element, ElementTag, MailTemplate, Image,TranslationFile
 from modeltranslation.admin import TranslationAdmin
 
 # Register your models here.
@@ -44,7 +44,11 @@ class ElementTagAdmin(admin.ModelAdmin):
             return obj.parent
         else:
             return "-"
-    
+
+class TranslationFileAdmin(admin.ModelAdmin):
+    model = TranslationFile 
+
+
 class MailTemplateAdmin(admin.ModelAdmin):
     model = MailTemplate
     list_display = ("slug","subj","sender","content","template_id","template_vs","no_reply",)
@@ -56,4 +60,6 @@ class ImageAdminSelf(admin.ModelAdmin):
 admin.site.register(Element,ElementLayoutAdmin)
 admin.site.register(ElementTag,ElementTagAdmin)
 admin.site.register(MailTemplate,MailTemplateAdmin)
+admin.site.register(TranslationFile,TranslationFileAdmin)
+
 admin.site.register(Image,ImageAdminSelf)
