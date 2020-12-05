@@ -21,11 +21,14 @@ class TranslationFile(models.Model):
     content     = models.TextField()
 
     def save(self, *args, **kwargs):
+
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
-        with open(settings.LOCALE_PATHS[0]+'/filename.po', 'w') as f:
-            print("opened")
-            f.write(self.content)
+        for lan in settings.LANGUAGES:
+            field_content = getattr(self, 'content_'+lan[0])
+            with open(settings.LOCALE_PATHS[0]+'/'+lan[0]+'/LC_MESSAGES/filename.po', 'w') as f:
+                f.write(field_content)
+
         call_command('compilemessages', )
 
 

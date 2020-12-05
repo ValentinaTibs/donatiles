@@ -1,0 +1,1267 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: taleoftiles\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-20 15:59+0000\n"
+"PO-Revision-Date: 2020-10-24 09:46\n"
+"Last-Translator: \n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: taleoftiles\n"
+"X-Crowdin-Project-ID: 425794\n"
+"X-Crowdin-Language: it\n"
+"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 28\n"
+
+#: CRM/forms.py:56 CRM/forms.py:89
+msgid "Wrong Product"
+msgstr "Prodotto non disponibile"
+
+#: CRM/forms.py:69
+msgid "Not Enought"
+msgstr "Non sufficiente"
+
+#: CRM/forms.py:118
+msgid "Invalid email"
+msgstr "Email non valida"
+
+#: CRM/forms.py:122
+msgid "Duplicated email"
+msgstr "Email già presente"
+
+#: gettingstarted/settings.py:120
+msgid "English"
+msgstr "Inglese"
+
+#: gettingstarted/settings.py:121
+msgid "Italiano"
+msgstr "Italiano"
+
+#: taleoftiles/templates/account.html:6
+msgid "account-page-name"
+msgstr "Il tuo account"
+
+#: taleoftiles/templates/account.html:27 taleoftiles/templates/support.html:36
+#: taleoftiles/templates/support.html:112
+msgid "orders"
+msgstr "Ordini"
+
+#: taleoftiles/templates/account.html:31
+msgid "sampler"
+msgstr "Tale of Tiles Book"
+
+#: taleoftiles/templates/account.html:32 taleoftiles/templates/order.html:127
+msgid "order-status"
+msgstr "Stato dell'ordine"
+
+#: taleoftiles/templates/account.html:33
+msgid "sent-date"
+msgstr "Data d'invio"
+
+#: taleoftiles/templates/account.html:41
+#: taleoftiles/templates/include/payment_options.html:31
+#: taleoftiles/templates/order.html:26 taleoftiles/templates/payment.html:119
+msgid "order"
+msgstr "Ordine"
+
+#: taleoftiles/templates/account.html:61
+msgid "shipping-data"
+msgstr "I tuoi dati per la spedizione"
+
+#: taleoftiles/templates/account.html:98
+msgid "save"
+msgstr "Salva"
+
+#: taleoftiles/templates/blog.html:5 taleoftiles/templates/blog.html:17
+msgid "blog-page-name"
+msgstr "Tale of Tiles Blog"
+
+#: taleoftiles/templates/blog.html:6 taleoftiles/templates/catalogue.html:7
+#: taleoftiles/templates/home.html:8 taleoftiles/templates/product.html:6
+#: taleoftiles/templates/support.html:6
+#, fuzzy
+#| msgid "home-description-meta-tag"
+msgid "home-keywords-meta-tag"
+msgstr ""
+"mattonelle, decor, mattonelle decor, mattonelle artigianali, hipster,"
+"piastrelleeffetto legno, mattonelle effetto legno, mattonele esagonali, "
+"esagono, mattonelle di lusso, piastrelle artigianali, piastrelle fatte a "
+"mano, piastrelle cucina, mattonelle cucina, mattonelle svedesi, modern "
+"design, mattonelle modern, vietri, ceramiche de maio, mutina, mattonelle "
+"mutina, marazzi, marazzi tiles, popham"
+
+#: taleoftiles/templates/catalogue.html:6
+msgid "catalogue-page-name"
+msgstr "Catalogo"
+
+#: taleoftiles/templates/cataloguegrid.html:11
+msgid "filters"
+msgstr "Filtri"
+
+#: taleoftiles/templates/cataloguegrid.html:103
+msgid "all-series"
+msgstr "Tutte le serie"
+
+#: taleoftiles/templates/cataloguegrid.html:126
+#: taleoftiles/templates/product.html:14
+msgid "all-products"
+msgstr "Tutti i prodotti"
+
+#: taleoftiles/templates/cataloguegrid.html:129
+#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:45
+msgid "products"
+msgstr "Prodotti"
+
+#: taleoftiles/templates/cataloguegrid.html:132
+msgid "order-for"
+msgstr "Ordina per"
+
+#: taleoftiles/templates/checkout_base.html:114
+msgid "summary"
+msgstr "Riepilogo"
+
+#: taleoftiles/templates/checkout_base.html:115
+msgid "shipping"
+msgstr "Spedizioni"
+
+#: taleoftiles/templates/checkout_base.html:116
+msgid "payment"
+msgstr "Pagamenti"
+
+#: taleoftiles/templates/checkout_base.html:138
+#: taleoftiles/templates/empty_base.html:288
+msgid "termini-e-condizioni"
+msgstr ""
+
+#: taleoftiles/templates/checkout_base.html:150
+#: taleoftiles/templates/empty_base.html:298
+msgid "tiles"
+msgstr "Mattonelle"
+
+#: taleoftiles/templates/empty_base.html:82
+#: taleoftiles/templates/empty_base.html:215
+#: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:14
+msgid "support"
+msgstr "Assistenza"
+
+#: taleoftiles/templates/empty_base.html:85
+msgid "account"
+msgstr "Il tuo Account"
+
+#: taleoftiles/templates/empty_base.html:86
+msgid "logout"
+msgstr "Logout"
+
+#: taleoftiles/templates/empty_base.html:88
+#: taleoftiles/templates/empty_base.html:217
+msgid "login-register"
+msgstr "Login-Registrati"
+
+#: taleoftiles/templates/empty_base.html:133
+#: taleoftiles/templates/empty_base.html:197
+msgid "catalogue-menu"
+msgstr "Catalogo"
+
+#: taleoftiles/templates/empty_base.html:150
+#: taleoftiles/templates/empty_base.html:214
+msgid "blog-menu"
+msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/empty_base.html:264
+msgid "of"
+msgstr "Di"
+
+#: taleoftiles/templates/empty_base.html:264
+msgid "added-to-chart"
+msgstr "Aggiunto al carrello"
+
+#: taleoftiles/templates/empty_base.html:265
+msgid "open-chart"
+msgstr "Vai al carrello"
+
+#: taleoftiles/templates/empty_base.html:287
+msgid "privacy-policy"
+msgstr ""
+
+#: taleoftiles/templates/home.html:6
+msgid "home-page-name"
+msgstr "Mattonelle, Cotto, Cementine, fatte in Italia - Vendita Online "
+
+#: taleoftiles/templates/home.html:7
+msgid "home-description-meta-tag"
+msgstr ""
+"E-commerce di mattonelle e cotto artigianali ed industriali per superfici e "
+"pavimenti. Rivestimenti di design italiano: cementine, cotto, effetto legno."
+
+#: taleoftiles/templates/home.html:42
+msgid "choose-home-claim"
+msgstr ""
+"Scegli le tue mattonelle tra la nostra <strong>selezione di oltre 200 "
+"prodotti</strong>"
+
+#: taleoftiles/templates/home.html:45
+msgid "sample-touchhand"
+msgstr "Tocca con mano"
+
+#: taleoftiles/templates/home.html:47
+msgid "sample-description"
+msgstr ""
+"Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of "
+"Tiles Book. Navigando nel catalogo potrai scegliere fino a 4 campioni da "
+"ricevere gratuitamente a casa tua per sognare con i nostri prodotti "
+"esclusivamente italiani."
+
+#: taleoftiles/templates/home.html:51
+msgid " Ricevi mattonelle a casa "
+msgstr ""
+"<h3>Ricevi le tue mattonelle a casa <strong>senza spese di spedizione</"
+"strong></h3> \n"
+"<br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
+"      "
+
+#: taleoftiles/templates/home.html:70
+msgid "title-renovate-home"
+msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/home.html:71
+msgid "subtitle-renovate-home"
+msgstr ""
+"Divertiti con le nostre idee per rinnovare in modo semplice i tuoi ambienti."
+
+#: taleoftiles/templates/home.html:79
+msgid "title-faq-home"
+msgstr "Domande frequenti"
+
+#: taleoftiles/templates/home.html:83
+msgid "faq-1"
+msgstr "Come posso restituire il prodotto, se cambio idea?"
+
+#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
+msgid "read-answer"
+msgstr "Leggi risposta"
+
+#: taleoftiles/templates/home.html:88
+msgid "faq-2"
+msgstr "Quali sono i tempi di consegna?"
+
+#: taleoftiles/templates/home.html:93
+msgid "faq-3"
+msgstr "Come avverrà la consegna?"
+
+#: taleoftiles/templates/home.html:98
+msgid "faq-4"
+msgstr "Posso vedere le mattonelle prima di acquistarle?"
+
+#: taleoftiles/templates/home.html:102
+msgid "faq-5"
+msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
+
+#: taleoftiles/templates/home.html:106
+msgid "faq-6"
+msgstr ""
+"Devo avere delle accortezze particolari nel calcolare le misure per "
+"scegliere le mattonelle?"
+
+#: taleoftiles/templates/home.html:117
+msgid "founder-name"
+msgstr "Noi siamo Tale of Tiles"
+
+#: taleoftiles/templates/include/chart.html:6
+msgid "your-chart"
+msgstr "Carrello"
+
+#: taleoftiles/templates/include/chart.html:35
+msgid "total"
+msgstr "Totale"
+
+#: taleoftiles/templates/include/chart.html:42
+msgid "proceed-with-order"
+msgstr "Procedi con l'ordine"
+
+#: taleoftiles/templates/include/chart.html:45
+msgid "free-shipping-long"
+msgstr "La spedizione è gratuita"
+
+#: taleoftiles/templates/include/chart.html:46
+msgid "you-will-pay-with-transfert"
+msgstr "Potrai pagare con bonifico bancario - carta di credito o via PayPal"
+
+#: taleoftiles/templates/include/chart.html:48
+msgid " chart-empty-claim "
+msgstr "<br/> Il tuo carrello è vuoto."
+
+#: taleoftiles/templates/include/login.html:10
+#: taleoftiles/templates/shipping.html:79
+msgid "already-registered"
+msgstr "Già registrato?"
+
+#: taleoftiles/templates/include/login.html:23
+#: taleoftiles/templates/registration/login.html:30
+msgid "password-reset"
+msgstr "Reset password"
+
+#: taleoftiles/templates/include/login.html:31
+#: taleoftiles/templates/registration/login.html:38
+msgid "wanna-register"
+msgstr "Vuoi registrarti?"
+
+#: taleoftiles/templates/include/login.html:32
+#: taleoftiles/templates/registration/login.html:39
+msgid "wanna-register-incentive"
+msgstr ""
+"Registrati per ricevere il Tale of Tiles Book, effettuare ordini e tenere "
+"traccia dei tuoi ordini passati."
+
+#: taleoftiles/templates/include/login.html:40
+msgid "register-and-we-will-send-password"
+msgstr "Ti invieremo una password a questo indirizzo"
+
+#: taleoftiles/templates/include/login.html:41
+#: taleoftiles/templates/registration/login.html:48
+msgid "register"
+msgstr "Registrati"
+
+#: taleoftiles/templates/include/payment_options.html:7
+#: taleoftiles/templates/payment.html:27
+#, fuzzy
+#| msgid "receive-sample-home"
+msgid "free-sample-arriving"
+msgstr "Il tuo  Tale of Tiles Book è in arrivo a casa tua!"
+
+#: taleoftiles/templates/include/payment_options.html:9
+#: taleoftiles/templates/payment.html:29
+#, fuzzy
+#| msgid "receive-sample-home"
+msgid "free-samples-finished"
+msgstr ""
+"Hai terminato i TaleOfTiles book gratuiti a tua disposizione. Per avere "
+"nuovi TaleOfTiles book gratuiti completa un ordine. \n"
+" Puoi comunque riceverlo a casa tua con un piccolo contributo per le spese "
+"di spedizione."
+
+#: taleoftiles/templates/include/payment_options.html:12
+#: taleoftiles/templates/include/payment_options.html:39
+#: taleoftiles/templates/payment.html:34 taleoftiles/templates/payment.html:109
+msgid "summary-iban-claim"
+msgstr "Effettua un bonifico con questi dati per confermare il tuo ordine:"
+
+#: taleoftiles/templates/include/payment_options.html:13
+#: taleoftiles/templates/include/payment_options.html:40
+#: taleoftiles/templates/payment.html:35 taleoftiles/templates/payment.html:110
+msgid "ammount"
+msgstr "Quantità"
+
+#: taleoftiles/templates/include/payment_options.html:15
+#: taleoftiles/templates/include/payment_options.html:42
+#: taleoftiles/templates/payment.html:37 taleoftiles/templates/payment.html:112
+msgid "summary-iban-title"
+msgstr "Iban"
+
+#: taleoftiles/templates/include/payment_options.html:16
+#: taleoftiles/templates/include/payment_options.html:43
+#: taleoftiles/templates/payment.html:38 taleoftiles/templates/payment.html:113
+msgid "summary-iban"
+msgstr "IT 72Q0832773030000000002858"
+
+#: taleoftiles/templates/include/payment_options.html:17
+#: taleoftiles/templates/include/payment_options.html:44
+#: taleoftiles/templates/payment.html:39 taleoftiles/templates/payment.html:114
+msgid "summary-SWIFT-title"
+msgstr "swift code"
+
+#: taleoftiles/templates/include/payment_options.html:18
+#: taleoftiles/templates/include/payment_options.html:45
+#: taleoftiles/templates/payment.html:40 taleoftiles/templates/payment.html:115
+msgid "summary-SWIFT"
+msgstr "ROMAITRR"
+
+#: taleoftiles/templates/include/payment_options.html:19
+#: taleoftiles/templates/include/payment_options.html:46
+#: taleoftiles/templates/payment.html:41 taleoftiles/templates/payment.html:116
+msgid "summary-accountholder-title"
+msgstr "intestato a"
+
+#: taleoftiles/templates/include/payment_options.html:20
+#: taleoftiles/templates/include/payment_options.html:47
+#: taleoftiles/templates/payment.html:42 taleoftiles/templates/payment.html:117
+msgid "summary-accountholder"
+msgstr "Tale of Tiles srls"
+
+#: taleoftiles/templates/include/payment_options.html:21
+#: taleoftiles/templates/include/payment_options.html:48
+#: taleoftiles/templates/payment.html:43 taleoftiles/templates/payment.html:118
+msgid "subject"
+msgstr "Oggetto"
+
+#: taleoftiles/templates/include/payment_options.html:25
+#: taleoftiles/templates/include/payment_options.html:51
+#: taleoftiles/templates/payment.html:45 taleoftiles/templates/payment.html:120
+msgid "print-data"
+msgstr "Stampa questa pagina"
+
+#: taleoftiles/templates/include/payment_options.html:32
+#: taleoftiles/templates/payment.html:175
+#: taleoftiles/templates/payment.html:188
+msgid "payment-success"
+msgstr "Pagamento completato con successo."
+
+#: taleoftiles/templates/include/payment_options.html:33
+#: taleoftiles/templates/payment.html:188
+msgid "payment-success-subtitle"
+msgstr ""
+"Ti contatteremo entro 24h per informarti su modi e tempi di spedizione."
+
+#: taleoftiles/templates/include/payment_options.html:36
+msgid "pay_via_paypal_or_creditcard"
+msgstr ""
+"Paga via PayPal o Carta di Credito - il pagamento sarà reso effettivo dal "
+"momento dell'accettazione dell'ordine e conferma della data di consegna. Per "
+"maggiori informazioni consulta termini e condizioni."
+
+#: taleoftiles/templates/include/sampler.html:8
+msgid "your-sampler"
+msgstr "Il tuo Tale of Tiles Book"
+
+#: taleoftiles/templates/include/sampler.html:32
+msgid "receive-sample-home"
+msgstr "Ricevi questi campioni a casa"
+
+#: taleoftiles/templates/include/sampler.html:35
+msgid " sampler-empty-claim "
+msgstr " <br/> Il tuo <b>Tale of Tiles Book</b> è vuoto. "
+
+#: taleoftiles/templates/include/sampler.html:39
+msgid "register-login"
+msgstr "Registrati-Login"
+
+#: taleoftiles/templates/include/sampler.html:39
+msgid "register-login-claim"
+msgstr ""
+"<strong>Registrati o effettua il login</strong> per avere sempre a tua "
+"disposizione il tuo Tale of Tiles Book"
+
+#: taleoftiles/templates/order.html:6
+msgid "order-page-name"
+msgstr "Negozio online di mattonelle per pavimenti e rivestimenti"
+
+#: taleoftiles/templates/order.html:25 taleoftiles/templates/payment.html:90
+#: taleoftiles/templates/payment.html:93
+msgid "back-to-orders"
+msgstr "Torna indietro"
+
+#: taleoftiles/templates/order.html:36 taleoftiles/templates/order.html:67
+#: taleoftiles/templates/summary.html:35
+msgid "price"
+msgstr "Prezzo"
+
+#: taleoftiles/templates/order.html:47 taleoftiles/templates/summary.html:46
+msgid "summary-sample-title"
+msgstr "Tale of Tiles Book"
+
+#: taleoftiles/templates/order.html:48 taleoftiles/templates/summary.html:47
+msgid "summary-sample-subtitle"
+msgstr "Campioni 5cm x 5cm di mattonelle scelte da te"
+
+#: taleoftiles/templates/order.html:66
+msgid "quantity"
+msgstr "Quantità"
+
+#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:90
+msgid "boxes"
+msgstr "Scatole"
+
+#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:123
+msgid "order-total"
+msgstr "Totale dell'ordine"
+
+#: taleoftiles/templates/order.html:115
+msgid "create-at"
+msgstr "Creato il"
+
+#: taleoftiles/templates/order.html:118
+msgid "shipping-date"
+msgstr "Data spedizione"
+
+#: taleoftiles/templates/order.html:120
+msgid "shipping-address"
+msgstr "Indirizzo di spedizione"
+
+#: taleoftiles/templates/order.html:129
+msgid "order-tracking"
+msgstr "Tracciamento del tuo ordine"
+
+#: taleoftiles/templates/password/password_reset.html:18
+msgid "forgot-your-password"
+msgstr "hai dimenticato la tua password"
+
+#: taleoftiles/templates/password/password_reset.html:19
+msgid "enter-password-below"
+msgstr ""
+"Inserisci il tuo indirizzo di posta elettronica, e ti mandareremo una mail "
+"con le istruzioni necessarie per averne una nuova"
+
+#: taleoftiles/templates/password/password_reset.html:25
+msgid "send-password"
+msgstr "Ti invieremo una password a questo indirizzo"
+
+#: taleoftiles/templates/password/password_reset_complete.html:19
+msgid "successfull-password-reset"
+msgstr ""
+"La tua password è stata modificata con successo \n"
+" Puoi entrare nel sito con le tue nuove credenziali cliccando <b>Login</b> "
+"nell' angolo in alto a destra"
+
+#: taleoftiles/templates/password/password_reset_confirm.html:20
+msgid "enter-new-password"
+msgstr "Inserisci qui la tua nuova password"
+
+#: taleoftiles/templates/password/password_reset_done.html:10
+#, fuzzy
+#| msgid "password-reset"
+msgid "password-reset-sent"
+msgstr "Password Reset inviato con successo"
+
+#: taleoftiles/templates/password/password_reset_done.html:18
+#, fuzzy
+#| msgid "password-reset"
+msgid "password-reset-sent-longtext"
+msgstr ""
+" Ti abbiamo inviato per email le instruzioni per impostare una nuova "
+"password, nel caso in cui esista un account relativo alla mail che hai "
+"inviato. Dovresti trovarla a breve nella tua casella di posta. Nel caso in "
+"cui la mail non arrivi, controlla di aver inserito l'indirizzo con cui ti "
+"sei registrato e controlla la tua cartella SPAM."
+
+#: taleoftiles/templates/payment.html:5
+msgid "payment-title"
+msgstr "Pagamenti"
+
+#: taleoftiles/templates/payment.html:17 taleoftiles/templates/payment.html:95
+msgid "summary-recipt-title"
+msgstr "Come effettuare il pagamento"
+
+#: taleoftiles/templates/payment.html:22
+msgid "this-was-a-sampler"
+msgstr "Hai appena ordinato il tuo TaleOfTiles Book."
+
+#: taleoftiles/templates/payment.html:56 taleoftiles/templates/payment.html:130
+#: taleoftiles/templates/summary.html:17 taleoftiles/templates/summary.html:22
+msgid "summary-back-home"
+msgstr "Torna a Tale of Tiles"
+
+#: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
+#: taleoftiles/templates/product.html:176
+msgid "any-doubt"
+msgstr "Hai qualche dubbio"
+
+#: taleoftiles/templates/payment.html:58 taleoftiles/templates/payment.html:133
+msgid ""
+" consult-support <a href=\"mailto:info@taleoftiles.com\">info@taleoftiles."
+"com</a>  consult-support"
+msgstr "Consulta l'assistenza oppure scrivici a info@taleoftiles.com"
+
+#: taleoftiles/templates/payment.html:102
+#, python-format
+msgid " working_days %(shipping_date_t)s %(email_t)s "
+msgstr ""
+"Pagando adesso potrai riceve le tue nuove mattonelle entro il <strong> "
+"%(shipping_date_t)s </strong><br/><br/>Appena riceveremo il pagamento, ti "
+"invieremo una email di conferma a  <strong> %(email_t)s </strong> ed "
+"avvieremo subito la preparazione del tuo ordine!\n"
+"\n"
+"Puoi ancora modificare l'indirizzo di spedizione finché l'ordine non è "
+"confermato."
+
+#: taleoftiles/templates/post.html:6
+msgid "the_blog"
+msgstr "Idee per ristrutturare"
+
+#: taleoftiles/templates/post.html:16
+#, fuzzy
+#| msgid "all-series"
+msgid "all-articles"
+msgstr "Tutte le serie"
+
+#: taleoftiles/templates/post.html:46
+msgid "give-it-alook"
+msgstr "Dai un'occhiata a questi!"
+
+#: taleoftiles/templates/product.html:27
+msgid "full-sampler"
+msgstr "Tale of Tiles Book completo"
+
+#: taleoftiles/templates/product.html:30
+msgid "already-in-sampler"
+msgstr "Già aggiunto al Tale of Tiles Book"
+
+#: taleoftiles/templates/product.html:37
+msgid "add-sampler-button"
+msgstr "Aggiungi al Tale of Tiles Book"
+
+#: taleoftiles/templates/product.html:40
+msgid "add-sampler-text"
+msgstr ""
+"Componi il tuo Tale of Tiles Book per toccare con mano i tuoi prodotti "
+"preferiti"
+
+#: taleoftiles/templates/product.html:43
+msgid "not-samplable"
+msgstr "Non campionabile"
+
+#: taleoftiles/templates/product.html:76
+msgid "formats"
+msgstr "Formati"
+
+#: taleoftiles/templates/product.html:84
+msgid "finishes"
+msgstr "Finiture"
+
+#: taleoftiles/templates/product.html:98
+msgid "code"
+msgstr "Codice"
+
+#: taleoftiles/templates/product.html:104
+msgid "starting-from"
+msgstr "A partire da"
+
+#: taleoftiles/templates/product.html:120
+msgid "superficie-da-rivestire"
+msgstr "Superficie da rivestire"
+
+#: taleoftiles/templates/product.html:120
+msgid "min"
+msgstr "Minimo"
+
+#: taleoftiles/templates/product.html:145
+msgid "include-sfrido"
+msgstr "Includi lo sfrido"
+
+#: taleoftiles/templates/product.html:155
+#, fuzzy
+#| msgid "sample-description"
+msgid "sfrido-small-description"
+msgstr ""
+"Lo sfrido è il calcolo dello scarto di piastrelle del processo di posa."
+
+#: taleoftiles/templates/product.html:165
+msgid "add-chart-button"
+msgstr "Aggiungi al carrello"
+
+#: taleoftiles/templates/product.html:171
+msgid "free-shipping"
+msgstr "Spedizione gratuita"
+
+#: taleoftiles/templates/product.html:174
+msgid "receive-date"
+msgstr "Ordinando oggi stesso, riceverai il prodotto a casa tua"
+
+#: taleoftiles/templates/product.html:174
+msgid "untill"
+msgstr "entro il"
+
+#: taleoftiles/templates/product.html:177
+#, fuzzy
+#| msgid "any-doubt"
+msgid "any-doubt-subtitle"
+msgstr "Contatta l’assistenza o consulta le domande frequenti"
+
+#: taleoftiles/templates/product.html:201
+msgid "download-tech-spech"
+msgstr "Scheda tecnica [PDF]"
+
+#: taleoftiles/templates/product.html:219
+msgid "settings"
+msgstr "Stili"
+
+#: taleoftiles/templates/product.html:231
+msgid "product-support"
+msgstr "Prodotto di supporto"
+
+#: taleoftiles/templates/product.html:246
+msgid "product-same-serie"
+msgstr "Prodotti della stessa serie"
+
+#: taleoftiles/templates/registration/login.html:53
+#, fuzzy
+#| msgid "already-registered"
+msgid "already-logged-in"
+msgstr "Già registrato?"
+
+#: taleoftiles/templates/shipping.html:5 taleoftiles/templates/shipping.html:18
+msgid "shipping-title"
+msgstr "La tua spedizione"
+
+#: taleoftiles/templates/shipping.html:17 taleoftiles/templates/summary.html:27
+msgid "checkout-back"
+msgstr "Torna al check out"
+
+#: taleoftiles/templates/shipping.html:23
+msgid "all-field-compulsory"
+msgstr "Tutti i campi sono obbligatori"
+
+#: taleoftiles/templates/shipping.html:74
+msgid "shipping-insert-order"
+msgstr "Concludi il tuo ordine"
+
+#: taleoftiles/templates/shipping.html:80
+msgid "save-time"
+msgstr ""
+"Risparmia tempo: effettua il login per utilizzare i tuoi dati di spedizione"
+
+#: taleoftiles/templates/shipping.html:80
+msgid "login-call-to-action"
+msgstr ""
+"<strong>Registrati o effettua il login</strong> per entrare il mondo di Tale "
+"of Tiles"
+
+#: taleoftiles/templates/shipping.html:80
+msgid "login-call-to-action-2"
+msgstr ""
+"<strong>Registrati o effettua il login</strong> per entrare il mondo di Tale "
+"of Tiles"
+
+#: taleoftiles/templates/shipping.html:84
+msgid "island-and-cap-title"
+msgstr "Devi rivevere il tuo ordine su isole o CAP disagiati?"
+
+#: taleoftiles/templates/shipping.html:85
+msgid "island-and-cap-text"
+msgstr ""
+"Contattaci per ricevere un preventivo di spedizione personalizzato per isole "
+"e CAP disagiati."
+
+#: taleoftiles/templates/summary.html:7
+msgid "summary-title"
+msgstr "Riepilogo"
+
+#: taleoftiles/templates/summary.html:28
+msgid "summary-page-name"
+msgstr "Riepilogo del tuo ordine"
+
+#: taleoftiles/templates/summary.html:59
+msgid "summary-total-title"
+msgstr "Totale Ordine"
+
+#: taleoftiles/templates/summary.html:95
+msgid "this-product-has-frido"
+msgstr "L'ordine include lo sfrido"
+
+#: taleoftiles/templates/summary.html:113
+msgid "shipping-cost"
+msgstr "Spese di spedizione"
+
+#: taleoftiles/templates/summary.html:114
+msgid "shipping-included"
+msgstr "Spedizione inclusa"
+
+#: taleoftiles/templates/summary.html:136
+msgid "summary-insert-shipping"
+msgstr "Inserisci i dati per la spedizione"
+
+#: taleoftiles/templates/summary.html:139
+msgid "summary-longtext"
+msgstr "Potrai pagare con PayPal, Bonifico Bancario o Carta di Credito."
+
+#: taleoftiles/templates/summary.html:141
+msgid "consider-sfrido"
+msgstr "Considera lo sfrido"
+
+#: taleoftiles/templates/summary.html:143
+#, fuzzy, python-format
+#| msgid "consider-sfrido <strong>10% more</strong> consider-sfrido"
+msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
+msgstr ""
+"Ti consigliamo di considerare sempre il <strong>10% in più <strong>rispetto "
+"alla quantità di mattonelle strettamente necessarie, per ulteriori "
+"chiarimenti ti invitiamo a consultare le FAQ."
+
+#: taleoftiles/templates/support.html:16
+msgid "support-text-1"
+msgstr ""
+"Hai domande sui nostri prodotti, su di noi o sulle condizioni di vendita?"
+
+#: taleoftiles/templates/support.html:17 taleoftiles/templates/support.html:21
+msgid "write-us"
+msgstr "Scrivici"
+
+#: taleoftiles/templates/support.html:20
+msgid "support-text-2"
+msgstr ""
+"Hai fatto un ordine ed hai domande sulla spedizione o sulla merce ricevuta?"
+
+#: taleoftiles/templates/support.html:24
+msgid "support-text-3"
+msgstr "Vuoi un consiglio su un prodotto?"
+
+#: taleoftiles/templates/support.html:25
+msgid "contact-us"
+msgstr "Contattaci"
+
+#: taleoftiles/templates/support.html:32
+msgid "frequent-question"
+msgstr "Domande frequenti"
+
+#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:83
+msgid "samples"
+msgstr "Campioni"
+
+#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:133
+msgid "shippings"
+msgstr "Spedizione"
+
+#: taleoftiles/templates/support.html:38 taleoftiles/templates/support.html:158
+msgid "company"
+msgstr "Azienda"
+
+#: taleoftiles/templates/support.html:40
+msgid "search"
+msgstr "Cerca"
+
+#: taleoftiles/templates/support.html:48
+msgid "faq-prod-madeitaly"
+msgstr "Tutti i prodotti sono al 100% Made in Italy?"
+
+#: taleoftiles/templates/support.html:49
+msgid "faq-prod-madeitaly-body"
+msgstr ""
+"Qui è necessaria una piccola spiegazione: le migliori mattonelle riproducono "
+"effetti naturali, ed in natura è difficile che si trovino ad esempio lastre "
+"di legno identiche o ciottolati identici. Una buona mattonella darà la "
+"sensazione di trovarsi davanti la diversità di un prodotto naturale. Questa "
+"caratteristica porta il nome di grado di stonalizzazione. La caratteristica "
+"di un prodotto questo tipo di prodotti consiste nell’avere una "
+"differenziazione delle facce delle singole piastrelle, al fine di ottenere "
+"un risultato visivo vicino alla naturalezza del materiale a cui la "
+"piastrella si ispira. Il campione che riceverai a casa essendo di piccole "
+"dimensioni, non descrive completamente ogni centimetro della mattonella "
+"stessa. Ti aiuterà però a toccare dal vivo l’effetto della superficie e la "
+"gradazione di colore."
+
+#: taleoftiles/templates/support.html:52
+msgid "faq-prod-multiface"
+msgstr ""
+"Le mattonelle che riceverò saranno identiche a quelle in foto? Cosa si "
+"intende per grado di stonalizzazione?"
+
+#: taleoftiles/templates/support.html:53
+msgid "faq-prod-multiface-body"
+msgstr ""
+"Qui è necessaria una piccola spiegazione: le migliori mattonelle riproducono "
+"effetti naturali, ed in natura è difficile che si trovino ad esempio lastre "
+"di legno identiche o ciottolati identici. Una buona mattonella darà la "
+"sensazione di trovarsi davanti la diversità di un prodotto naturale. Questa "
+"caratteristica porta il nome di grado di stonalizzazione. La caratteristica "
+"di un prodotto questo tipo di prodotti consiste nell’avere una "
+"differenziazione delle facce delle singole piastrelle, al fine di ottenere "
+"un risultato visivo vicino alla naturalezza del materiale a cui la "
+"piastrella si ispira. Il campione che riceverai a casa essendo di piccole "
+"dimensioni, non descrive completamente ogni centimetro della mattonella "
+"stessa. Ti aiuterà però a toccare dal vivo l’effetto della superficie e la "
+"gradazione di colore."
+
+#: taleoftiles/templates/support.html:57
+msgid "faq-prod-handmade"
+msgstr "Qual è la differenza tra prodotto industriale e prodotto fatto a mano?"
+
+#: taleoftiles/templates/support.html:58
+msgid "faq-prod-handmade-body"
+msgstr ""
+"I nostri prodotti industriali vengono realizzati con fasi produttive in "
+"fabbriche italiane di altissima qualità. I prodotti fatti a mano vengono "
+"invece realizzati nel rispetto di antiche tecniche manuali e sono quindi "
+"sempre prodotti unici ed irripetibili."
+
+#: taleoftiles/templates/support.html:62
+msgid "faq-prod-temperature"
+msgstr "Le mattonelle si rovinano a contatto con caldo o freddo? "
+
+#: taleoftiles/templates/support.html:63
+msgid "faq-prod-temperature-body"
+msgstr ""
+"Tutti i prodotti industriali in gres porcellanato fine sono antigelivi, "
+"dunque, resistenti al gelo. Resistono inoltre ad altissime temperature "
+"quindi, ad esempio, una teglia uscita dal forno di casa ci può essere "
+"poggiata sopra senza problemi. Le altissime temperature del processo di "
+"produzione industriale garantiscono un prodotto che rimane integro e sempre "
+"uguale nel tempo.  I prodotti fatti a mano, invece, sono molto diversi dai "
+"prodotti industriali. Ciascun prodotto ha caratteristiche tecniche "
+"differenti, quindi ti invitiamo a consultare la scheda tecnica di ogni "
+"prodotto a cui sei interessato, altrimenti contattaci ad info@taleoftiles.com"
+
+#: taleoftiles/templates/support.html:67
+msgid "faq-prod-maintenance"
+msgstr ""
+"Quali sono i prodotti più facilmente lavabili? E’ possibile lavarli con ogni "
+"detersivo oppure c’è il rischio che si rovinino o diventino opache?"
+
+#: taleoftiles/templates/support.html:68
+msgid "faq-prod-maintenance-body"
+msgstr ""
+"Tutti i detersivi commerciali possono essere usati senza timori di rovinare "
+"o opacizzare le mattonelle. L’uso dell’acido per pulirle potrebbe, se non "
+"asciugato con cura, danneggiare lo strato superficiale della cottura "
+"dell’argilla. Il gres fine porcellanato è antibatterico, per una pulizia "
+"accurata è sufficiente acqua tiepida."
+
+#: taleoftiles/templates/support.html:72
+msgid "faq-prod-decor"
+msgstr "Come funziona il prodotto denominato \"decoro\"?"
+
+#: taleoftiles/templates/support.html:73
+msgid "faq-prod-decor-body"
+msgstr ""
+"Nei prodotti che riportano la dicitura \"decoro\",  il produttore inserirà, "
+"in ogni scatola, differenti disegni tra quelli disponibili. Non è possibile, "
+"né per noi, né per voi, scegliere una sola faccia tra quelle disponibili "
+"nella versione \"decoro\", nè prevedere quante facce di ciascuna immagine ci "
+"saranno all’interno della scatola. Sarà un po’ come aprire un pacchetto di "
+"figurine. "
+
+#: taleoftiles/templates/support.html:77
+msgid "faq-prod-fughe"
+msgstr ""
+"La fuga è sempre necessaria? Posso posare le mattonelle una vicina all’altra "
+"senza che si veda lo stucco?"
+
+#: taleoftiles/templates/support.html:78
+msgid "faq-prod-fughe-body"
+msgstr ""
+"La fuga è sempre necessaria nella posa delle mattonelle per compensare la "
+"naturale dilatazione dei materiali. Anche quando il prodotto è rettificato, "
+"ovvero con bordi perfettamente dritti, seppure di un solo millimetro, noi "
+"consigliamo di montare sempre con la fuga. Si può giocare molto con la "
+"visibilità della fuga scegliendo con cura il colore dello stucco per "
+"ottenere un effetto finale meno visibile. "
+
+#: taleoftiles/templates/support.html:86
+msgid "faq-sample-1"
+msgstr "Cos’è il Tale of Tiles Book?"
+
+#: taleoftiles/templates/support.html:87
+msgid "faq-sample-1-body"
+msgstr ""
+"Tale of Tiles Book è un campionario personalizzabile che ti permetterà di "
+"toccare con mano i nostri prodotti e poterne apprezzare ogni dettaglio. "
+"Contiene 4 campioni di mattonelle da te scelte, che ti regaliamo perché tu "
+"possa valutare con cura la tua scelta.  Riceverai un Tale of Tiles Book "
+"completamente gratuito direttamente a casa tua. Con Tale of Tiles Book sarai "
+"tu a scrivere la storia della tua casa."
+
+#: taleoftiles/templates/support.html:91
+msgid "faq-sample-2"
+msgstr "Quanto costa il Tale of Tiles Book?"
+
+#: taleoftiles/templates/support.html:92
+msgid "faq-sample-2-body"
+msgstr ""
+"Il tuo primo Tale of Tiles Book viene spedito direttamente a casa tua "
+"gratuitamente. Se vorrai ricevere a casa altri Tale of Tiles book, i "
+"successivi saranno acquistabili ad un prezzo di euro 25 compreso di "
+"trasporto, costo che verrà detratto dal successivo ordine."
+
+#: taleoftiles/templates/support.html:96
+msgid "faq-sample-3"
+msgstr "Posso avere più di un Tale of Tiles Book?"
+
+#: taleoftiles/templates/support.html:97
+msgid "faq-sample-3-body"
+msgstr ""
+"Il tuo primo Tale of Tiles Book è sempre gratuito, tuttavia è possibile "
+"richiederne più di uno ed i successivi saranno acquistabili ad un prezzo di "
+"25€ spese di spedizione incluse, costo che verrà detratto dal tuo eventuale "
+"ordine."
+
+#: taleoftiles/templates/support.html:101
+msgid "faq-sample-4"
+msgstr "Posso avere un campione di un prodotto fatto a mano?"
+
+#: taleoftiles/templates/support.html:102
+msgid "faq-sample-4-body"
+msgstr ""
+"Il prodotto fatto a mano, non può essere campionato nel Tale of Tiles Book, "
+"ma è sempre possibile richiederlo. Ti invitiamo a contattarci via mail ad "
+"info@taleoftiles.com con la tua personale richiesta."
+
+#: taleoftiles/templates/support.html:106
+msgid "faq-sample-5"
+msgstr "In quanto tempo riceverò il mio Tale of Tiles Book?"
+
+#: taleoftiles/templates/support.html:107
+msgid "faq-sample-5-body"
+msgstr ""
+"Il Tale of Tiles Book viene spedito direttamente a casa tua tramite corriere "
+"espresso. Al momento dell’evasione del pacco, ti verrà comunicato il "
+"tracking della spedizione. Le spedizioni vengono elaborate in 2 giorni "
+"lavorativi dalla richiesta del Tale of Tiles Book. "
+
+#: taleoftiles/templates/support.html:115
+msgid "faq-order-minmax"
+msgstr "Ci sono dei limiti minimi o massimi negli ordini?"
+
+#: taleoftiles/templates/support.html:116
+msgid "faq-order-minmax-body"
+msgstr ""
+"Sia per i prodotti industriali che per quelli artigianali è indicato nella "
+"scheda prodotto la quantità minima di m2 che puoi acquistare. Queste "
+"restrizioni sono dovute a limiti di produzione. È sempre però possibile "
+"contattarci presso orders@taleoftiles.com per trovare una soluzione anche "
+"per piccole metrature. Per ordini sopra i 200m2 contatta orders@taleoftiles."
+"com per lo “Sconto Grandi Quantità”."
+
+#: taleoftiles/templates/support.html:119
+msgid "faq-order-sfrido"
+msgstr "Cosa si intende per sfrido? "
+
+#: taleoftiles/templates/support.html:120
+msgid "faq-order-sfrido-body"
+msgstr ""
+"Lo sfrido è il calcolo degli scarti di posa delle mattonelle. È un calcolo "
+"che prevede diverse variabili, come il formato delle mattonelle rispetto al "
+"forma della stanza. Il sito calcola automaticamente questo quantitativo "
+"aggiuntivo in  base all’ordine indicato, ed è la percentuale minima "
+"consigliata da aziende produttrici e posatori. È sempre consigliato  "
+"aggiungerlo perchè in fase di posa si prevedono degli scarti dati dai tagli "
+"delle piastrelle."
+
+#: taleoftiles/templates/support.html:124
+msgid "faq-order-payment"
+msgstr "Quali metodi di pagamento accettate?"
+
+#: taleoftiles/templates/support.html:125
+msgid "faq-order-payment-body"
+msgstr "Accettiamo Bonifico Bancario, PayPal e Carta di Credito "
+
+#: taleoftiles/templates/support.html:129
+msgid "faq-order-return"
+msgstr "Come posso restituire il prodotto, se cambio idea?"
+
+#: taleoftiles/templates/support.html:130
+msgid "faq-order-return-body"
+msgstr ""
+"E’ sempre possibile restituire il materiale che riceverai tramite Tale of "
+"Tiles srls entro 14 giorni dall’arrivo nel luogo che hai indicato per la "
+"ricezione della merce. Se vorrai restituirlo sarà possibile farlo compilando "
+"il modulo di richiesta di restituzione disponibile QUI. Per ragioni "
+"logistiche il materiale per essere trasportato indietro dovrà essere re-"
+"imballato. Per questo se cambierai idea e vorrai restituire i prodotti "
+"dovrai occuparti di sigillare nuovamente il bancale in maniera analoga a "
+"quando ti è stato recapitato. In caso di recesso ti sarà addebitato il costo "
+"del trasporto. Il tuo pagamento ti sarà restituito entro 30 giorni dalla "
+"ricezione della merce restituita."
+
+#: taleoftiles/templates/support.html:136
+msgid "faq-transport-cost"
+msgstr "Quanto costa e cosa include il trasporto?"
+
+#: taleoftiles/templates/support.html:137
+msgid "faq-transport-cost-body"
+msgstr ""
+"Ricevere a casa tua le mattonelle da Tale of Tiles è gratuito a meno di casi "
+"eccezionali ad esempio isole, ztl o zone con accesso difficoltoso o remoto. "
+"Se pensi che la tua consegna sia tra questi casi, scrivici a "
+"orders@taleoftiles.com prima di effettuare l’ordine per ricevere un "
+"preventivo di spedizione personalizzata. Nel trasporto non è incluso il "
+"facchinaggio. Il nostro è un trasporto standard con sponda idraulica a "
+"terra, in zone facilmente raggiungibili con mezzi di trasporto."
+
+#: taleoftiles/templates/support.html:140
+msgid "faq-transport-track"
+msgstr "Dove si trova la mia spedizione?"
+
+#: taleoftiles/templates/support.html:142
+msgid " faq-transport-track-body "
+msgstr ""
+"E’ possibile tracciare la posizione delle tue mattonelle inserendo il numero "
+"di spedizione ottenuto al momento dell’ordine presso questo sito ***** . In "
+"caso di problemi con la spedizione puoi contattarci presso "
+"orders@taleoftiles.com"
+
+#: taleoftiles/templates/support.html:146
+msgid "faq-shipping-timeind"
+msgstr "Quali sono i tempi di consegna per i prodotti industriali?"
+
+#: taleoftiles/templates/support.html:147
+msgid "faq-shipping-timeind-body"
+msgstr ""
+"Per ogni prodotto, all’interno della sua scheda troverai il tempo necessario "
+"di lavorazione. Prima che tu concluda l’ordine, ti confermeremo le "
+"tempistiche esatte per la ricezione delle tue mattonelle. Ti garantiamo la "
+"consegna entro le tempistiche comunicate al momento dell’ordine. Qualora ci "
+"siano ritardi dovuti alla produzione delle tue mattonelle, avrai la "
+"possibilità di ripensarci e recedere l’acquisto e ti verrà restituito entro "
+"24 ore l’intero importo versato. "
+
+#: taleoftiles/templates/support.html:150
+msgid "faq-shipping-timehandm"
+msgstr "Quali sono i tempi di consegna per i prodotti fatti a mano?"
+
+#: taleoftiles/templates/support.html:151
+msgid "faq-shipping-timehandm-body"
+msgstr ""
+"Anche per i prodotti fatti a mano, come per quelli industriali, in ciascuna "
+"scheda prodotto troverai i tempi di consegna, che verranno confermati al "
+"momento dell’acquisto. I tempi potranno variare perchè trattandosi di "
+"prodotti fatti a mano la lavorazione può variare in base alle metrature "
+"richieste."
+
+#: taleoftiles/templates/support.html:154
+msgid "faq-shipping-broken"
+msgstr ""
+"Cosa faccio se il materiale arriva danneggiato o se la confezione che lo "
+"contiene non è integra?"
+
+#: taleoftiles/templates/support.html:155
+msgid "faq-shipping-broken-body"
+msgstr ""
+"Nel momento in cui completerai il tuo ordine, ti arriveranno via mail le "
+"istruzioni da seguire per seguire la spedizione delle tue mattonelle. Tutti "
+"i materiali in vendita su Tale of Tiles hanno consegna integra garantita dal "
+"produttore alla porta di casa tua. Se il pacco dovesse essere danneggiato o "
+"aperto o il materiale lesionato,  potrai scegliere se ricevere un rimborso o "
+"se ricevere nuovamente la merce."
+
+#: taleoftiles/templates/support.html:161
+msgid "faq-company-1"
+msgstr "Dov’è la sede dell’azienda?"
+
+#: taleoftiles/templates/support.html:162
+msgid "faq-company-1-body"
+msgstr ""
+"Tale of Tiles è un'azienda tutta italiana e con sede a Forano (RI). "
+"Selezioniamo per voi i materiali prodotti nel territorio italiano da aziende "
+"con le quali collaboriamo da anni e che ci garantiscono rapporto qualità-"
+"prezzo, affidabilità e continui aggiornamenti. Il nostro team giovane è alla "
+"ricerca delle ultime tendenze in materia di materiali e decorazioni."
+
+#: taleoftiles/templates/support.html:165
+msgid "faq-company-2"
+msgstr "Fate voi le mattonelle?"
+
+#: taleoftiles/templates/support.html:166
+msgid "faq-company-2-body"
+msgstr ""
+"No, le mattonelle non sono realizzate da noi. Siamo rivenditori con "
+"esperienza maturata in 10 anni di vendita al dettaglio di pavimenti e "
+"rivestimenti Made in Italy. Per questo motivo siamo in grado di selezionare "
+"solo il meglio del panorama industriale e fatto a mano italiano."
+
+#: taleoftiles/templates/support.html:170
+msgid "faq-company-3"
+msgstr "E’ possibile venirvi a trovare di persona?"
+
+#: taleoftiles/templates/support.html:171
+msgid "faq-company-3-body"
+msgstr ""
+"Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
+"(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
+"(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
+
+#, fuzzy
+#~| msgid "summary-sample-title"
+#~ msgid "sample-title"
+#~ msgstr ""
+#~ "Crea il tuo Tale of Tiles Book scegliendo tra i nostri campioni gratuiti."
+
+#, fuzzy, python-format
+#~ msgid ""
+#~ " order_email_text <a href=\"%(full_account_url_)s\">"
+#~ "%(full_account_url_)s</a>%(order_id)s <a href=\"%(full_order_url_)s\">"
+#~ "%(full_order_url_)s</a>"
+#~ msgstr ""
+#~ "Grazie per averci scelto!\n"
+#~ "Abbiamo ricevuto il tuo ordine num. %(order_id)s \n"
+#~ "puoi revisionare il contenuto dell'ordine nella pagina relativa <a href="
+#~ "\"%(full_order_url_)s\">%(full_order_url_)s</a>\n"
+#~ "Entro un giorno lavorativo sarai ricontattato da noi per farti sapere, "
+#~ "con precisione, quando le tue mattonelle saranno spedite. Successivamente "
+#~ "verrai contattato telefonicamente dal corriere per concordare la "
+#~ "consegna. Assicurati che il tuo profilo abbia un numero di telefono "
+#~ "corretto comprensivo di prefisso internazionale in modoche il corriere ti "
+#~ "possa contattare.  La pagina del tuo account <a href="
+#~ "\"%(full_account_url_)s\">%(full_account_url_)s</a> \n"
+#~ "\n"
+#~ "#OurFairyTaleofTiles"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| " password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
+#~| "%(full_password_reset_confirm)s</a> %(site_name)s"
+#~ msgid ""
+#~ " password_reset_email <a href=\"%(full_password_reset_confirm)s\">"
+#~ "%(full_password_reset_confirm)s</a> <a href=\"%(full_password_reset)s\">"
+#~ "%(full_password_reset)s</a> %(site_name)s"
+#~ msgstr ""
+#~ "Hello,\n"
+#~ "\n"
+#~ "\n"
+#~ "We received a request to reset the password for your account for this "
+#~ "email address. To initiate the password reset process for your account, "
+#~ "click the link below.\n"
+#~ "\n"
+#~ "<a href=\"%(full_password_reset_confirm)s\">"
+#~ "%(full_password_reset_confirm)s</a>  \n"
+#~ "\n"
+#~ "This link can only be used once. \n"
+#~ "If you need to reset your password again, please visit <a href="
+#~ "\"%(full_password_reset)s\">%(full_password_reset)s</a> and request "
+#~ "another reset.\n"
+#~ "\n"
+#~ "If you did not make this request, you can simply ignore this email.\n"
+#~ "\n"
+#~ "Sincerely,The %(site_name)s Team"
+
+#, python-format
+#~ msgid ""
+#~ " register-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> "
+#~ "%(pwd)s"
+#~ msgstr ""
+#~ "GRAZIE!\n"
+#~ "Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of "
+#~ "Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in "
+#~ "Italy. Selezioniamo, per voi, con orgoglio e passione i migliori prodotti "
+#~ "esclusivamente di produzione italiana.\n"
+#~ "Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la "
+#~ "storia dei tuoi nuovi spazi da vivere! Potrai selezionare fino a quattro "
+#~ "campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo "
+#~ "gratuitamente a casa, per toccare con mano la qualità dei nostri "
+#~ "prodotti!\n"
+#~ "Approfitta della spedizione gratuita su tutti gli ordini per ricevere le "
+#~ "tue nuove mattonelle direttamente a casa!\n"
+#~ "\n"
+#~ "Questa è la tua password di accesso momentanea:%(pwd)s\n"
+#~ "\n"
+#~ "Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi "
+#~ "spazi sul nostro blog.<a href=\"%(full_blog_url)s\">%(full_blog_url)s</"
+#~ "a> \n"
+#~ "\n"
+#~ "#OurFairyTaleofTiles"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a> "
+#~| "%(pwd)s"
+#~ msgid " welcome-email <a href=\"%(full_blog_url)s\">%(full_blog_url)s</a>"
+#~ msgstr ""
+#~ "GRAZIE!\n"
+#~ "Giacomo, Manuel, Valentina e Donatella ti danno il benvenuto in Tale of "
+#~ "Tiles, il nuovo modo di approcciarsi al mondo delle mattonelle Made in "
+#~ "Italy. Selezioniamo, per voi, con orgoglio e passione i migliori prodotti "
+#~ "esclusivamente di produzione italiana.\n"
+#~ "Sii il protagonista della tua ristrutturazione e scrivi insieme a noi la "
+#~ "storia dei tuoi nuovi spazi da vivere! Potrai selezionare fino a quattro "
+#~ "campioni, da inserire nel tuo personale Tale of Tiles Book e riceverlo "
+#~ "gratuitamente a casa, per toccare con mano la qualità dei nostri "
+#~ "prodotti!\n"
+#~ "Approfitta della spedizione gratuita su tutti gli ordini per ricevere le "
+#~ "tue nuove mattonelle direttamente a casa!\n"
+#~ "Ricordati che puoi seguire i nostri consigli su come ristrutturare i tuoi "
+#~ "spazi sul nostro blog.<a href=\"%(full_blog_url)s\">%(full_blog_url)s</"
+#~ "a> \n"
+#~ "\n"
+#~ "#OurFairyTaleofTiles"
