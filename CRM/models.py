@@ -381,4 +381,14 @@ class Question(models.Model):
 
     def published(self):
         return True #models.BooleanField(default = True)
+
+# class Discount(models.Model):
+#     percentage      = models.PositiveIntegerField( default=0 )
+#     ammoun          = models.PositiveIntegerField( default=0 )
+#     code            = models.CharField( max_length=20,)
+#     referral code   = models.ForeignKey(Discount, verbose_name="Discounts", null=True, blank = True, on_delete=models.SET_NULL, related_name='related')
+#     number_use      = models.PositiveIntegerField(default = 1)
+#     deadline        = models.DateTimeField()
+#     type_           = models.CharField(choices = ITEM_STATUS, max_length=2,  default='ok')
+#     min_bill        = models.PositiveIntegerField( default=0 )
   
