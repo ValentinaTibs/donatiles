@@ -26,7 +26,7 @@ class TranslationFile(models.Model):
 
         for lan in settings.LANGUAGES:
             field_content = getattr(self, 'content_'+lan[0])
-            with open(settings.LOCALE_PATHS[0]+'/'+lan[0]+'/LC_MESSAGES/filename.po', 'w') as f:
+            with open(settings.LOCALE_PATHS[0]+'/'+lan[0]+'/LC_MESSAGES/django.po', 'w') as f:
                 f.write(field_content)
 
         call_command('compilemessages', )
