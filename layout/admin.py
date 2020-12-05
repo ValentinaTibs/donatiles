@@ -1,6 +1,7 @@
 from django.contrib import admin
 from layout.models import  Element, ElementTag, MailTemplate, Image,TranslationFile
 from modeltranslation.admin import TranslationAdmin
+from django.conf import settings
 
 # Register your models here.
 
@@ -44,11 +45,59 @@ class ElementTagAdmin(admin.ModelAdmin):
             return obj.parent
         else:
             return "-"
+from django.utils.html import format_html
+from django.urls import re_path, reverse,path
+from django.http import HttpResponse
 
 class TranslationFileAdmin(admin.ModelAdmin):
     model = TranslationFile 
+    readonly_fields = ('download_link',)
+    
+    # add custom view to urls
+    def get_urls(self):
+        urls = super(TranslationFileAdmin, self).get_urls()
+        urls += [
+            path("download-file/<str:lan>",  self.download_file, name="applabel_modelname_download"),
 
+        ]
+        return urls
 
+    # custom "field" that returns a link to the custom function
+    def download_link(self, obj):
+        fin_string = ""
+        for lan in settings.LANGUAGES:
+            address = reverse('admin:applabel_modelname_download', args=[lan[0]])
+            ext_string =  "<a href="+address+">Download "+ str(lan[1]) +"   </a>"
+            fin_string = fin_string +ext_string
+        
+        return format_html(fin_string)
+
+    # add custom view function that downloads the file
+    def download_file(self, request, lan):
+        response = HttpResponse(content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename="translate_'+lan+'.po"'
+        # generate dynamic file content using object pk
+        with open(settings.LOCALE_PATHS[0]+'/'+lan+'/LC_MESSAGES/django.po', 'r') as file1:
+            response.write(file1.read())
+            # Lines = file1.readlines() 
+
+  
+            # count = 0
+            # # Strips the newline character 
+            # for line in Lines: 
+            #     print("Line{}: {}".format(count, line.strip())) 
+            
+
+        return response
+
+    # def file_link(self, obj):
+    #     fin_string = ""
+    #     for lan in settings.LANGUAGES:
+    #         fin_string = fin_string + "<a href='{% static 'translations/import_files/import_questions.xlsx' %}' download>Download "+ str(lan[1]) +"   </a>"
+        
+    #     return format_html(fin_string)
+
+        
 class MailTemplateAdmin(admin.ModelAdmin):
     model = MailTemplate
     list_display = ("slug","subj","sender","content","template_id","template_vs","no_reply",)
