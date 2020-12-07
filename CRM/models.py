@@ -143,17 +143,16 @@ class Order(models.Model):
             chart_model = self.sampler.first()
         else :
             chart_model = self.charts.first()
-        print(chart_model)
-        print(chart_model.user)
         if not chart_model:
             return None    
+        
         if chart_model.user:
             return chart_model.user
         
-        if not chart_model.user.is_anonymous:
+        if not chart_model.user or not chart_model.user.is_anonymous:
             return None
-        else :
-            return None
+
+        return None
     
     def payment_user(self):
         if self.is_sampler:
