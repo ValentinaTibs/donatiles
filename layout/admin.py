@@ -57,7 +57,7 @@ class TranslationFileAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(TranslationFileAdmin, self).get_urls()
         urls += [
-            path("download-file/<str:lan>",  self.download_file, name="applabel_modelname_download"),
+            path("download-file/<str:lan>",  self.download_file, name="download_translations"),
 
         ]
         return urls
@@ -66,7 +66,7 @@ class TranslationFileAdmin(admin.ModelAdmin):
     def download_link(self, obj):
         fin_string = ""
         for lan in settings.LANGUAGES:
-            address = reverse('admin:applabel_modelname_download', args=[lan[0]])
+            address = reverse('admin:download_translations', args=[lan[0]])
             ext_string =  "<a href="+address+">Download "+ str(lan[1]) +"   </a>"
             fin_string = fin_string +ext_string
         
@@ -79,6 +79,8 @@ class TranslationFileAdmin(admin.ModelAdmin):
         # generate dynamic file content using object pk
         with open(settings.LOCALE_PATHS[0]+'/'+lan+'/LC_MESSAGES/django.po', 'r') as file1:
             response.write(file1.read())
+        return response
+
 
         
 class MailTemplateAdmin(admin.ModelAdmin):
