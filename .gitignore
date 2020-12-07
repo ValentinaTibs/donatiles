@@ -61,6 +61,8 @@ coverage.xml
 
 # Translations
 *.pot
+*.po
+*.mo
 
 # Django stuff:
 *.log

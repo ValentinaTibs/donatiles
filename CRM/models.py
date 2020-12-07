@@ -143,6 +143,7 @@ class Order(models.Model):
             chart_model = self.sampler.first()
         else :
             chart_model = self.charts.first()
+        #2do why we could have an order without any chart?    
         if not chart_model:
             return None    
         
