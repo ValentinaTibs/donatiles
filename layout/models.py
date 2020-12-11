@@ -23,9 +23,7 @@ class TranslationFile(models.Model):
     content     = models.TextField()
     version     = models.PositiveIntegerField(default = 1,unique = True)
 
-    def save(self, *args, **kwargs):
-
-        
+    def save(self, *args, **kwargs):        
         already = TranslationFile.objects.filter(version=self.version)
         if(already.count()>0):
             self.pk = None

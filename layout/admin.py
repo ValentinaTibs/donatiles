@@ -48,10 +48,17 @@ class ElementTagAdmin(admin.ModelAdmin):
 from django.utils.html import format_html
 from django.urls import re_path, reverse,path
 from django.http import HttpResponse
+from django.core.management import call_command
+
+
+def compile_messages_(modeladmin, request, queryset):
+    call_command('compilemessages', )
+compile_messages_.short_description = "Publish messages"    
 
 class TranslationFileAdmin(admin.ModelAdmin):
     model = TranslationFile 
     readonly_fields = ('download_link','version')
+    actions = [compile_messages_,]
     
     # add custom view to urls
     def get_urls(self):
@@ -71,6 +78,10 @@ class TranslationFileAdmin(admin.ModelAdmin):
             fin_string = fin_string +ext_string
         
         return format_html(fin_string)
+
+    # def compile_messages(self,obj):
+    #     call_command('compilemessages', )
+
 
     # add custom view function that downloads the file
     def download_file(self, request, lan):
