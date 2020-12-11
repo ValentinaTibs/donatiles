@@ -43,7 +43,7 @@ class catalogue(ListView):
     context_object_name = 'products'
     template_name = 'catalogue.html'
     #2do put here a custom ordering
-    ordering = ['name']    
+    ordering = ['?']    
 
     #2do maybe here using the self instance might save us time
     def post(self, request):
@@ -74,7 +74,7 @@ class catalogue(ListView):
                 products = Product.objects.filter(is_active=True)
             else:
                 active_tags = Tag.objects.filter(tag_query)
-                products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all()
+                products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all().order_by('?')
             #2do move the cataloguegrid into include folder
             return render(request, "cataloguegrid.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
 
@@ -98,7 +98,7 @@ class catalogue(ListView):
             self.url_data = self.request.GET.get('filters', '')  
             self.all_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True, public = True)
             if not self.url_data :
-                return Product.objects.filter(is_active=True)
+                return Product.objects.filter(is_active=True).order_by('?')
 
             tag_query = Q()
             tag_len = 0
@@ -107,10 +107,10 @@ class catalogue(ListView):
                 tag_query = tag_query | Q(slug = value)
                 tag_len = tag_len + 1
             if tag_len == 0 :
-                return Product.objects.filter(is_active=True)
+                return Product.objects.filter(is_active=True).order_by('?')
             
             self.active_tags =  Tag.objects.filter( tag_query,public=True)
-            return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct()
+            return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by('?')
 
 
 def compute_price(request):
