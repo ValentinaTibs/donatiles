@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 15:59+0000\n"
+"POT-Creation-Date: 2020-12-05 11:01+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -17,19 +17,31 @@ msgstr ""
 "X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
 "X-Crowdin-File-ID: 28\n"
 
-#: CRM/forms.py:56 CRM/forms.py:89
+#: CRM/forms.py:31
+msgid "Not Valid Code"
+msgstr ""
+
+#: CRM/forms.py:33
+msgid "Aleady Used Code"
+msgstr ""
+
+#: CRM/forms.py:35
+msgid "Expired Code"
+msgstr ""
+
+#: CRM/forms.py:76 CRM/forms.py:109
 msgid "Wrong Product"
 msgstr "Wrong Product"
 
-#: CRM/forms.py:69
+#: CRM/forms.py:89
 msgid "Not Enought"
 msgstr "Not Enought"
 
-#: CRM/forms.py:118
+#: CRM/forms.py:138
 msgid "Invalid email"
 msgstr "Invalid email"
 
-#: CRM/forms.py:122
+#: CRM/forms.py:142
 msgid "Duplicated email"
 msgstr "Duplicated Email"
 
@@ -205,11 +217,11 @@ msgstr ""
 "Choose your tiles among our selection of <strong>more than  200 products</"
 "strong>"
 
-#: taleoftiles/templates/home.html:45
+#: taleoftiles/templates/home.html:51
 msgid "sample-touchhand"
 msgstr "Touch with your hands"
 
-#: taleoftiles/templates/home.html:47
+#: taleoftiles/templates/home.html:53
 msgid "sample-description"
 msgstr ""
 "With the Tale of Tiles Book you can write the story of your new spaces. "
@@ -217,59 +229,59 @@ msgstr ""
 "received at your home as a gift. We want you to see and evaluate the quality "
 "of our Made in Italy tiles."
 
-#: taleoftiles/templates/home.html:51
+#: taleoftiles/templates/home.html:57
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 "<h3>Receive the tiles at your home <strong>free from shipping cost</strong></"
 "h3> \n"
-"<br/><h4><i>Free Shipping in all Europe</i></h4>"
+"<br/><h4><i>Shipping and taxes included in all Europe</i></h4>"
 
-#: taleoftiles/templates/home.html:70
+#: taleoftiles/templates/home.html:76
 msgid "title-renovate-home"
 msgstr "Renovation Ideas"
 
-#: taleoftiles/templates/home.html:71
+#: taleoftiles/templates/home.html:77
 msgid "subtitle-renovate-home"
 msgstr ""
 "Have fun with our renovation ideas for refresh your home style and mood."
 
-#: taleoftiles/templates/home.html:79
+#: taleoftiles/templates/home.html:85
 msgid "title-faq-home"
 msgstr "Frequently Asked Questions"
 
-#: taleoftiles/templates/home.html:83
+#: taleoftiles/templates/home.html:89
 msgid "faq-1"
 msgstr "How can I return the goods if I'll change my mind?"
 
-#: taleoftiles/templates/home.html:84 taleoftiles/templates/home.html:89
-#: taleoftiles/templates/home.html:94 taleoftiles/templates/home.html:99
-#: taleoftiles/templates/home.html:103 taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:90 taleoftiles/templates/home.html:95
+#: taleoftiles/templates/home.html:100 taleoftiles/templates/home.html:105
+#: taleoftiles/templates/home.html:109 taleoftiles/templates/home.html:113
 msgid "read-answer"
 msgstr "read answer"
 
-#: taleoftiles/templates/home.html:88
+#: taleoftiles/templates/home.html:94
 msgid "faq-2"
 msgstr "Which are the delivery times?"
 
-#: taleoftiles/templates/home.html:93
+#: taleoftiles/templates/home.html:99
 msgid "faq-3"
 msgstr "How the delivery would take place?"
 
-#: taleoftiles/templates/home.html:98
+#: taleoftiles/templates/home.html:104
 msgid "faq-4"
 msgstr "Can I view the tiles before buying?"
 
-#: taleoftiles/templates/home.html:102
+#: taleoftiles/templates/home.html:108
 msgid "faq-5"
 msgstr "Are all products Made in Italy? Are handmade?"
 
-#: taleoftiles/templates/home.html:106
+#: taleoftiles/templates/home.html:112
 msgid "faq-6"
 msgstr ""
 "Should I have any special shrewdness in measuring the surfaces while "
 "choosing the tiles?"
 
-#: taleoftiles/templates/home.html:117
+#: taleoftiles/templates/home.html:123
 msgid "founder-name"
 msgstr "We are TaleOfTiles"
 
@@ -289,7 +301,7 @@ msgstr "Finalise the order"
 #, fuzzy
 #| msgid "free-shipping"
 msgid "free-shipping-long"
-msgstr "The shipping is free for all Europe"
+msgstr "Shipping and taxes included in all Europe"
 
 #: taleoftiles/templates/include/chart.html:46
 msgid "you-will-pay-with-transfert"
@@ -458,7 +470,7 @@ msgid "back-to-orders"
 msgstr "Back"
 
 #: taleoftiles/templates/order.html:36 taleoftiles/templates/order.html:67
-#: taleoftiles/templates/summary.html:35
+#: taleoftiles/templates/summary.html:35 taleoftiles/templates/summary.html:76
 msgid "price"
 msgstr "Price"
 
@@ -470,15 +482,15 @@ msgstr "Tale of Tiles Book"
 msgid "summary-sample-subtitle"
 msgstr "The 5x5cm tiles samples you choose"
 
-#: taleoftiles/templates/order.html:66
+#: taleoftiles/templates/order.html:66 taleoftiles/templates/summary.html:75
 msgid "quantity"
 msgstr "Quantity"
 
-#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:90
+#: taleoftiles/templates/order.html:82 taleoftiles/templates/summary.html:89
 msgid "boxes"
 msgstr "boxes"
 
-#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:123
+#: taleoftiles/templates/order.html:102 taleoftiles/templates/summary.html:131
 msgid "order-total"
 msgstr "order total"
 
@@ -726,14 +738,20 @@ msgstr ""
 "<strong> Register or login </strong> to enter the world of Tale of Tiles"
 
 #: taleoftiles/templates/shipping.html:84
+#, fuzzy
+#| msgid "already-logged-in"
+msgid "you-are-loged-in-as"
+msgstr "Already logged in as"
+
+#: taleoftiles/templates/shipping.html:90
 msgid "island-and-cap-title"
 msgstr ""
 "Do you have to receive your order on disadvantaged islands or postal codes?"
 
-#: taleoftiles/templates/shipping.html:85
+#: taleoftiles/templates/shipping.html:91
 msgid "island-and-cap-text"
 msgstr ""
-"Contact us to receive a personalised shipping quote for disadvantaged "
+"Contact us to receive a customized shipping quote for disadvantaged "
 "islands and postal codes."
 
 #: taleoftiles/templates/summary.html:7
@@ -748,31 +766,35 @@ msgstr "your current order summary"
 msgid "summary-total-title"
 msgstr "Total Order"
 
-#: taleoftiles/templates/summary.html:95
+#: taleoftiles/templates/summary.html:94
 msgid "this-product-has-frido"
 msgstr "scrap included"
 
-#: taleoftiles/templates/summary.html:113
+#: taleoftiles/templates/summary.html:111
 msgid "shipping-cost"
 msgstr "shipping cost"
 
-#: taleoftiles/templates/summary.html:114
+#: taleoftiles/templates/summary.html:112
 msgid "shipping-included"
-msgstr "All the shipping costs of your order are included"
+msgstr "All the shipping costs and taxes of your order are included"
 
-#: taleoftiles/templates/summary.html:136
+#: taleoftiles/templates/summary.html:121
+msgid "applied-code"
+msgstr "coupon code applied"
+
+#: taleoftiles/templates/summary.html:144
 msgid "summary-insert-shipping"
 msgstr "Insert the data needed for completing your shipping"
 
-#: taleoftiles/templates/summary.html:139
+#: taleoftiles/templates/summary.html:147
 msgid "summary-longtext"
 msgstr "You can pay with PayPal, bank transfer or credit card."
 
-#: taleoftiles/templates/summary.html:141
+#: taleoftiles/templates/summary.html:149
 msgid "consider-sfrido"
 msgstr "scrap included"
 
-#: taleoftiles/templates/summary.html:143
+#: taleoftiles/templates/summary.html:151
 #, fuzzy, python-format
 #| msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
@@ -780,6 +802,14 @@ msgstr ""
 "We recommend that you always consider <strong> 10% more <strong> than\n"
 "to the amount of tiles strictly necessary. For further clarifications please "
 "consult the FAQ."
+
+#: taleoftiles/templates/summary.html:156
+msgid "do-you-have-a-code"
+msgstr "Do you have a coupon code"
+
+#: taleoftiles/templates/summary.html:159
+msgid "apply-coupon"
+msgstr "apply code"
 
 #: taleoftiles/templates/support.html:16
 msgid "support-text-1"

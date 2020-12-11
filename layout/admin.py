@@ -53,6 +53,7 @@ from django.core.management import call_command
 
 def compile_messages_(modeladmin, request, queryset):
     call_command('compilemessages', )
+
 compile_messages_.short_description = "Publish messages"    
 
 class TranslationFileAdmin(admin.ModelAdmin):

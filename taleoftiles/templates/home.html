@@ -26,7 +26,6 @@
               <li style="background-image: url('{{ layout_elems|get_elem:img_name }}')">
                 <a href="{% url 'catalogue' %}?filters={{tag.slug}}" class="btn-gridbox">{{tag}}</a>
             </li>
-
           {% endwith %}
         {% endwith %}
       {% endfor %}
@@ -46,18 +45,52 @@
       &disablekb=1&controls=0
       <iframe width="200" height="200" src="https://www.youtube.com/embed/YlE0cMrkOFg?autoplay=1&playlist=YlE0cMrkOFg&loop=1&modestbranding=1"  frameborder="0" ></iframe> -->
 
-
     <div class="grid-homeintro-main">
       <h2>{% trans 'sample-touchhand'|capfirst %}</h2>
       <h3>{{ layout_elems|get_elem:'strength-campionario-up' }}</h3>
       <p>{% trans 'sample-description'|capfirst %}</p>
       <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-sample-help' %}"/></svg>
-      
     </div>
     <div>{% blocktrans %} Ricevi mattonelle a casa {% endblocktrans %}</div>
 
-
     <h3>{{ layout_elems|get_elem:'strength-pt-2'}}</h3>
+  </div>
+</div>
+
+<div class="block block-coldbg block-fullheight">
+  <div class="content grid grid-homesupport">
+    <div class="grid-homesupport-main">
+      <h2>{% trans 'title-faq-home' %}</h2>
+    </div>
+
+    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
+    <h3>{% trans 'faq-1'|capfirst %}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+
+    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
+    <h3>{% trans 'faq-2'|capfirst %}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+
+    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
+      <h3>{% trans 'faq-3'|capfirst %}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+
+    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
+      <h3>{% trans 'faq-4'|capfirst %}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
+      <h3>{% trans 'faq-5'|capfirst %}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
+      <h3>{% trans 'faq-6'|capfirst %}</h3>
+    <span>{% trans 'read-answer' %}</span>
+    </a>
+
   </div>
 </div>
 

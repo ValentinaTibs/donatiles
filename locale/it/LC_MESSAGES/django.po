@@ -201,13 +201,13 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:6
 msgid "home-page-name"
-msgstr "Mattonelle, Cotto, Cementine, fatte in Italia - Vendita Online "
+msgstr "Piastrelle, Cotto, Pietra, Cementine, fatte in Italia - Vendita Online "
 
 #: taleoftiles/templates/home.html:7
 msgid "home-description-meta-tag"
 msgstr ""
-"E-commerce di mattonelle e cotto artigianali ed industriali per superfici e "
-"pavimenti. Rivestimenti di design italiano: cementine, cotto, effetto legno."
+"E-commerce di piastrelle e materiali artigianali ed industriali per superfici e "
+"pavimenti. Rivestimenti di design italiano: cementine, cotto, pietra, effetto legno."
 
 #: taleoftiles/templates/home.html:42
 msgid "choose-home-claim"
@@ -228,11 +228,11 @@ msgstr ""
 "esclusivamente italiani."
 
 #: taleoftiles/templates/home.html:57
-msgid " Ricevi mattonelle a casa "
+msgid " Ricevi piastrelle direttamente a casa tua "
 msgstr ""
-"<h3>Ricevi le tue mattonelle a casa <strong>senza spese di spedizione</"
+"<h3>Ricevi le tue piastrelle a casa <strong>tutti i prezzi sono inclusi di iva e spedizione</"
 "strong></h3> \n"
-"<br/><h4><i>Spedizione Gratuita in tutta Europa</i></h4>\n"
+"<br/><h4><i>Spedizione Inclusa in tutta Europa</i></h4>\n"
 "      "
 
 #: taleoftiles/templates/home.html:76
@@ -268,7 +268,7 @@ msgstr "Come avverrà la consegna?"
 
 #: taleoftiles/templates/home.html:104
 msgid "faq-4"
-msgstr "Posso vedere le mattonelle prima di acquistarle?"
+msgstr "Posso vedere le piastrelle prima di acquistarle?"
 
 #: taleoftiles/templates/home.html:108
 msgid "faq-5"
