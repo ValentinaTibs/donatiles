@@ -46,7 +46,6 @@
       <img  style="width: 100%;" src="{% static 'images/home/taleoftiles_book_tiles_gift.gif' %}" alt="TaleofTiles Book">
 
       </video>
-
     </div>
 
       <!-- &showinfo=0&
@@ -65,44 +64,26 @@
   </div>
 </div>
 
-<!-- <div class="block block-coldbg block-fullheight">
-  <div class="content grid grid-homesupport">
-    <div class="grid-homesupport-main">
-      <h2>{% trans 'title-faq-home' %}</h2>
-    </div>
 
-    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
-    <h3>{% trans 'faq-1'|capfirst %}</h3>
-    <span>{% trans 'read-answer' %}</span>
-    </a>
-
-    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
-    <h3>{% trans 'faq-2'|capfirst %}</h3>
-    <span>{% trans 'read-answer' %}</span>
-    </a>
-
-    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
-      <h3>{% trans 'faq-3'|capfirst %}</h3>
-    <span>{% trans 'read-answer' %}</span>
-    </a>
-
-    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
-      <h3>{% trans 'faq-4'|capfirst %}</h3>
-    <span>{% trans 'read-answer' %}</span>
-    </a>
-    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
-      <h3>{% trans 'faq-5'|capfirst %}</h3>
-    <span>{% trans 'read-answer' %}</span>
-    </a>
-    <a href="{% url 'support'%}" class="faqquestion-thumb btn-gridbox">
-      <h3>{% trans 'faq-6'|capfirst %}</h3>
-    <span>{% trans 'read-answer' %}</span>
-    </a>
-
-  </div>
-</div> -->
-
+{% if home_prods %}
+ 
 <div class="block block-lightbg block-fullheight">
+  <div class="content grid grid-homesupport">
+    {% for product in home_prods %}
+        <a href="{% url 'product' product.code %}" class="faqquestion-thumb btn-gridbox product-thumb-home" >
+          <img  src="{% if  product.cover.imagefile %}  {{ product.cover.imagefile.url }} {% endif %}" alt=" {{ product.name }} / {{ product.serie.name }}">
+          <div class="product-thumb-overlay">
+            <h5>{{ product.serie.name }}</h5>
+            <h3>{{ product.name }}</h3>
+          </div>
+        </a>
+
+    {% endfor %}
+  </div>
+</div> 
+{% endif %}
+
+<div class="block block-warmbg block-fullheight">
   <div class="content grid grid-homeblog">
 
     <a href="{% url 'post' main_post.publication.slug %}" class="blogpost-thumb blogpost-thumb-large btn-gridbox" style="background-image:url('{{main_post.cover.imagefile.url}}')">

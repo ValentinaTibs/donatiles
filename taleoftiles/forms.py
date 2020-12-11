@@ -13,6 +13,7 @@ class CustomProductModelForm(forms.ModelForm):
     
     series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie',public = True), required = False)
     samplable   = forms.BooleanField(required = False)
+    in_home     = forms.BooleanField(required = False)
     colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour',public = True), required = False)
     formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format',public = True), required = False)
     settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting',public = True), required = False)
@@ -40,6 +41,7 @@ class CustomProductModelForm(forms.ModelForm):
         finishes    = kwargs['instance'].tags.filter(parent__slug='finish')
         # in_product_edits = kwargs['instance'].tags.filter(in_product_edit=True)
         samplable   = kwargs['instance'].tags.filter(slug='samplable').first()
+        in_home     = kwargs['instance'].tags.filter(slug='in_home').first()
 
         
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
@@ -48,6 +50,9 @@ class CustomProductModelForm(forms.ModelForm):
 
         if samplable:
             self.initial['samplable'] = True
+
+        if in_home:
+            self.initial['in_home'] = True
 
         if colours:
             col_iv = []
@@ -113,6 +118,14 @@ class CustomProductModelForm(forms.ModelForm):
             product.tags.remove(samplable.pk)
         if self.cleaned_data.get('samplable'):
             product.tags.add(samplable_tag.pk)
+
+        # ---- IN HOME UPDATE -----   
+        in_homes = product.tags.filter(slug='in_home') 
+        in_home_tag = Tag.objects.get(slug='in_home')
+        for in_home in in_homes:
+            product.tags.remove(in_home.pk)
+        if self.cleaned_data.get('in_home'):
+            product.tags.add(in_home_tag.pk)
 
         # ---- colors UPDATE -----
         colours = product.tags.filter(parent__slug='colour') 

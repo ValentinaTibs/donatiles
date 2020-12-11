@@ -6,3 +6,31 @@
     height: 240px;
     object-fit: cover;
 }
+
+.product-thumb-home h4{position: absolute;margin:5% 3%;padding:  3%;}
+.product-thumb-home h3{position: absolute;margin:10% 3%;padding:  3%;}
+
+.product-thumb-home:hover img {
+  opacity: 0.3;
+}
+
+.product-thumb-home:hover .product-thumb-overlay {
+  opacity: 1;
+}
+
+.product-thumb-home img {
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.product-thumb-overlay {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}

@@ -271,7 +271,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     search_fields = ( 'code',)
     
-    list_display = ('name_','id',
+    list_display = ('name_',
                     'code',
                     'order',
                     'wait_time',
@@ -287,6 +287,7 @@ class ProductAdmin(admin.ModelAdmin):
                     'effect_',
                     'finish_',
                     'samplable_',
+                    'in_home_',
                     'publication',
                     'support_to',
                     'techspec',
@@ -315,6 +316,8 @@ class ProductAdmin(admin.ModelAdmin):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='finish')])    
     def samplable_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='samplable')])    
+    def in_home_(self, obj):
+        return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='in_home')])    
     def decor_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='decor')])    
     def product_edit_(self, obj):
