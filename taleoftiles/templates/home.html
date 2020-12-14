@@ -66,34 +66,30 @@
 
 
 {% if home_prods|length == 8 %}
- <div class="block">
-  <div class="content grid grid-homeintro">
- {% for product in home_prods %}
-    
-    <div>
-    
-      <img  style="width: 100%;" src="{% if  product.cover.imagefile %}  {{ product.cover.imagefile.url }} {% endif %}" alt=" {{ product.name }} / {{ product.serie.name }}">
-
-    </div>
-{% endfor %}
-  </div>
-</div>
-<!-- 
 <div class="block block-lightbg ">
   <div class="content grid grid-homesupport">
+
     {% for product in home_prods %}
-        <a href="{% url 'product' product.code %}" class="faqquestion-thumb product-thumb-home" >
-          <img  src="{% if  product.cover.imagefile %}  {{ product.cover.imagefile.url }} {% endif %}" alt=" {{ product.name }} / {{ product.serie.name }}">
-          <div class="product-thumb-overlay">
-            <h5>{{ product.serie.name }}</h5>
-            <h3>{{ product.name }}</h3>
-          </div>
-        </a>
+
+
+         <div class="product-thumb infinite-item" >
+          <a href="{% url 'product' product.code %}" class="product-thumb-img">
+              <img src=" {{product.cover.imagefile.url}}" alt="Argento / Narciso">
+          </a>
+          <a href="{% url 'product' product.code %}" class="product-thumb-title">
+              <h5>{{ product.serie.name }}</h5>
+              <h4>{{product.name}}</h4>
+          </a>
+
+      </div>
 
     {% endfor %}
+
   </div>
-</div>  -->
+</div>
 {% endif %}
+
+
 
 <div class="block block-warmbg block-fullheight">
   <div class="content grid grid-homeblog">
