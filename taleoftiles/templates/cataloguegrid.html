@@ -123,7 +123,9 @@
       
       {% endfor %}
       </div>
-    <h1>{% trans 'all-products' %}</h1>
+    <h1>
+      {% if not active_tags %}  {% trans 'all-products' %}  {% endif %}
+    </h1>
     <div class="catalogue-data">
       <div class="catalogue-data-num">
         <strong>{{products|length }}</strong> {% trans 'products' %}

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 11:01+0000\n"
+"POT-Creation-Date: 2020-12-18 17:26+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -52,6 +52,10 @@ msgstr "Engelska"
 #: gettingstarted/settings.py:121
 msgid "Italiano"
 msgstr "Italienska"
+
+#: gettingstarted/settings.py:122
+msgid "Français"
+msgstr ""
 
 #: taleoftiles/templates/account.html:6
 msgid "account-page-name"
@@ -119,17 +123,17 @@ msgstr "Filter"
 msgid "all-series"
 msgstr "Alla serier"
 
-#: taleoftiles/templates/cataloguegrid.html:126
+#: taleoftiles/templates/cataloguegrid.html:127
 #: taleoftiles/templates/product.html:14
 msgid "all-products"
 msgstr "Alla produkter"
 
-#: taleoftiles/templates/cataloguegrid.html:129
+#: taleoftiles/templates/cataloguegrid.html:131
 #: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:45
 msgid "products"
 msgstr "Produkter"
 
-#: taleoftiles/templates/cataloguegrid.html:132
+#: taleoftiles/templates/cataloguegrid.html:134
 msgid "order-for"
 msgstr "Beställ efter"
 
@@ -211,17 +215,17 @@ msgstr ""
 "förytor och golv. Italienska designbeläggningar: cementplattor, terrakotta, "
 "träeffekt."
 
-#: taleoftiles/templates/home.html:42
+#: taleoftiles/templates/home.html:41
 msgid "choose-home-claim"
 msgstr ""
 "Choose your tiles among our selection of <strong>more than  200 products</"
 "strong>"
 
-#: taleoftiles/templates/home.html:51
+#: taleoftiles/templates/home.html:56
 msgid "sample-touchhand"
 msgstr "Touch with your hands"
 
-#: taleoftiles/templates/home.html:53
+#: taleoftiles/templates/home.html:58
 msgid "sample-description"
 msgstr ""
 "Med Tale of Tiles Book kan du skriva historien om dina nya utrymmen. "
@@ -229,59 +233,59 @@ msgstr ""
 "varamottagits hemma i gåva. Vi vill att du ska se och utvärdera kvalitetenav "
 "våra Made in Italy brickor."
 
-#: taleoftiles/templates/home.html:57
+#: taleoftiles/templates/home.html:61
 msgid " Ricevi mattonelle a casa "
 msgstr ""
 "<h3>Receive the tiles at your home <strong>free from shipping cost</strong></"
 "h3> \n"
 "<br/><h4><i>Free Shipping in all Europe</i></h4>"
 
-#: taleoftiles/templates/home.html:76
+#: taleoftiles/templates/home.html:106
 msgid "title-renovate-home"
 msgstr "Renovation Ideas"
 
-#: taleoftiles/templates/home.html:77
+#: taleoftiles/templates/home.html:107
 msgid "subtitle-renovate-home"
 msgstr ""
 "Have fun with our renovation ideas for refresh your home style and mood."
 
-#: taleoftiles/templates/home.html:85
+#: taleoftiles/templates/home.html:115
 msgid "title-faq-home"
 msgstr "Frequently Asked Questions"
 
-#: taleoftiles/templates/home.html:89
+#: taleoftiles/templates/home.html:119
 msgid "faq-1"
 msgstr "How can I return the goods if I'll change my mind?"
 
-#: taleoftiles/templates/home.html:90 taleoftiles/templates/home.html:95
-#: taleoftiles/templates/home.html:100 taleoftiles/templates/home.html:105
-#: taleoftiles/templates/home.html:109 taleoftiles/templates/home.html:113
+#: taleoftiles/templates/home.html:120 taleoftiles/templates/home.html:125
+#: taleoftiles/templates/home.html:130 taleoftiles/templates/home.html:135
+#: taleoftiles/templates/home.html:139 taleoftiles/templates/home.html:143
 msgid "read-answer"
 msgstr "read answer"
 
-#: taleoftiles/templates/home.html:94
+#: taleoftiles/templates/home.html:124
 msgid "faq-2"
 msgstr "Which are the delivery times?"
 
-#: taleoftiles/templates/home.html:99
+#: taleoftiles/templates/home.html:129
 msgid "faq-3"
 msgstr "How the delivery would take place?"
 
-#: taleoftiles/templates/home.html:104
+#: taleoftiles/templates/home.html:134
 msgid "faq-4"
 msgstr "Can I view the tiles before buying?"
 
-#: taleoftiles/templates/home.html:108
+#: taleoftiles/templates/home.html:138
 msgid "faq-5"
 msgstr "Are all products Made in Italy? Are handmade?"
 
-#: taleoftiles/templates/home.html:112
+#: taleoftiles/templates/home.html:142
 msgid "faq-6"
 msgstr ""
 "Should I have any special shrewdness in measuring the surfaces while "
 "choosing the tiles?"
 
-#: taleoftiles/templates/home.html:123
+#: taleoftiles/templates/home.html:153
 msgid "founder-name"
 msgstr "We are TaleOfTiles"
 
@@ -1183,3 +1187,8 @@ msgstr ""
 "For over 10 years we have owned a showroom with a physical store in Forano "
 "(RI), in the countryside of central Italy, on the border between Umbria and "
 "Lazio (easily accessible by train from Fiumicino airport)."
+
+#, fuzzy
+#~| msgid "all-products"
+#~ msgid "selected-products"
+#~ msgstr "Alla produkter"
