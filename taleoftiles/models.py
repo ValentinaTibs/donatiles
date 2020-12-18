@@ -67,7 +67,7 @@ class Tag(models.Model):
         return self.name
 
     def childs(self):
-        return Tag.objects.filter(parent = self)
+        return Tag.objects.filter(parent = self,public='True')
 
     def has_childs(self):
         return (Tag.objects.filter(parent = self).count > 0)

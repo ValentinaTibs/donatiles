@@ -62,14 +62,14 @@
         
         <ul>
 
-        {% for format in tags.format.child.all %}
+        {% for format in tags.format.childs %}
           <li class="{% if format in active_tags  %} selected {% endif %}" ><a onClick="Javascript:toggleFilter('{{ format.slug }}')">{{format.name}}</a>
             <button class="btn btn-tree" 
             {% if format in active_tags  %}btn-tree-open{% endif %}> 
             <svg class="icon icon-m">
             <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
             <ul class="openable" style="--tree-height:4.5rem">
-            {% for more_format in format.child.all %}
+            {% for more_format in format.childs %}
               <li class=" {% if more_format in active_tags  %} selected {% endif %}" onClick="Javascript:toggleFilter('{{ more_format.slug }}')" >
                   <a >{{more_format.name}}</a></li>
             {% endfor %}
@@ -101,7 +101,7 @@
         <h5>{{ tags.serie.name }}</h5>
         <select name="series-select" id="series-select" >
           <option value="all-series">{% trans 'all-series' %}</option>
-            {% for serie in tags.serie.child.all %}
+            {% for serie in tags.serie.childs %}
                 <option value="{{serie.slug}}" 
                 {% if serie in active_tags  %}
                    selected
