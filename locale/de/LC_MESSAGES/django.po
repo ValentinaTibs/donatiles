@@ -197,7 +197,7 @@ msgid "sample-description"
 msgstr ""
 
 #: taleoftiles/templates/home.html:61
-msgid " Ricevi mattonelle a casa "
+msgid " receive-home "
 msgstr ""
 
 #: taleoftiles/templates/home.html:106

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-18 17:26+0000\n"
+"POT-Creation-Date: 2020-12-18 17:46+0000\n"
 "PO-Revision-Date: 2020-12-17 17:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -229,8 +229,13 @@ msgstr ""
 "échantillon que vous recevrez gratuitement à votre domicile."
 
 #: taleoftiles/templates/home.html:61
-msgid " Ricevi mattonelle a casa "
-msgstr " Recevez les carreaux de ciment à la maison"
+#, fuzzy
+#| msgid "receive-sample-home"
+msgid " receive-home "
+msgstr ""
+"<h3> Recevez vos carreaux chez vous <strong> tous les prix incluentTVA et "
+"livraison </strong> </h3> \n"
+"<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4> \n"
 
 #: taleoftiles/templates/home.html:106
 msgid "title-renovate-home"
@@ -1185,6 +1190,9 @@ msgstr ""
 "physique à Forano (RI), dans la campagne du centre de l'Italie, à la "
 "frontière entre l'Ombie et le Latium (facilement accessible en train depuis "
 "l'aéroport de Fiumicino)."
+
+#~ msgid " Ricevi mattonelle a casa "
+#~ msgstr " Recevez les carreaux de ciment à la maison"
 
 #, fuzzy
 #~| msgid "all-products"

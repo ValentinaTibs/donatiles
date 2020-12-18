@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taleoftiles\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-18 17:26+0000\n"
+"POT-Creation-Date: 2020-12-18 17:46+0000\n"
 "PO-Revision-Date: 2020-10-26 12:55\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -234,11 +234,10 @@ msgstr ""
 "våra Made in Italy brickor."
 
 #: taleoftiles/templates/home.html:61
-msgid " Ricevi mattonelle a casa "
-msgstr ""
-"<h3>Receive the tiles at your home <strong>free from shipping cost</strong></"
-"h3> \n"
-"<br/><h4><i>Free Shipping in all Europe</i></h4>"
+#, fuzzy
+#| msgid "receive-sample-home"
+msgid " receive-home "
+msgstr "Receive this samples at home"
 
 #: taleoftiles/templates/home.html:106
 msgid "title-renovate-home"
@@ -1187,6 +1186,12 @@ msgstr ""
 "For over 10 years we have owned a showroom with a physical store in Forano "
 "(RI), in the countryside of central Italy, on the border between Umbria and "
 "Lazio (easily accessible by train from Fiumicino airport)."
+
+#~ msgid " Ricevi mattonelle a casa "
+#~ msgstr ""
+#~ "<h3>Receive the tiles at your home <strong>free from shipping cost</"
+#~ "strong></h3> \n"
+#~ "<br/><h4><i>Free Shipping in all Europe</i></h4>"
 
 #, fuzzy
 #~| msgid "all-products"
