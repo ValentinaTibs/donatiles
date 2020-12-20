@@ -118,8 +118,8 @@ USE_TZ = True
 
 LANGUAGES = (
     ('en', _('English')),
-    ('it', _('Italiano'))
-    #('fr', _('Français'))
+    ('it', _('Italiano')),
+    ('fr', _('Français'))
 )
 
 LANGUAGE_CODE = 'en'

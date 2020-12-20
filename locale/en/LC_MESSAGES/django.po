@@ -1,21 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: taleoftiles\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-18 17:50+0000\n"
-"PO-Revision-Date: 2020-10-26 12:55\n"
-"Last-Translator: \n"
-"Language-Team: English\n"
-"Language: en_US\n"
+"POT-Creation-Date: 2020-12-20 21:28+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: taleoftiles\n"
-"X-Crowdin-Project-ID: 425794\n"
-"X-Crowdin-Language: en\n"
-"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:31
 msgid "Not Valid Code"
@@ -234,9 +235,7 @@ msgstr ""
 "of our Made in Italy tiles."
 
 #: taleoftiles/templates/home.html:61
-#, fuzzy
-#| msgid "receive-sample-home"
-msgid " receive-home "
+msgid "receive-home-free-samples"
 msgstr ""
 "<h3>Receive your tiles at your home <strong>free from shipping cost</"
 "strong></h3> \n"
@@ -304,8 +303,6 @@ msgid "proceed-with-order"
 msgstr "Finalise the order"
 
 #: taleoftiles/templates/include/chart.html:45
-#, fuzzy
-#| msgid "free-shipping"
 msgid "free-shipping-long"
 msgstr "Shipping and taxes included in all Europe"
 
@@ -424,15 +421,11 @@ msgstr "print this page"
 #: taleoftiles/templates/include/payment_options.html:32
 #: taleoftiles/templates/payment.html:175
 #: taleoftiles/templates/payment.html:188
-#, fuzzy
-#| msgid "payment-title"
 msgid "payment-success"
 msgstr "Payment completed."
 
 #: taleoftiles/templates/include/payment_options.html:33
 #: taleoftiles/templates/payment.html:188
-#, fuzzy
-#| msgid "payment-title"
 msgid "payment-success-subtitle"
 msgstr ""
 "We will contact you within 24 hours to inform you about shipping and times."
@@ -602,8 +595,6 @@ msgid "the_blog"
 msgstr "Renovation Ideas "
 
 #: taleoftiles/templates/post.html:16
-#, fuzzy
-#| msgid "all-series"
 msgid "all-articles"
 msgstr "All Series"
 
@@ -664,8 +655,6 @@ msgid "include-sfrido"
 msgstr "include scraps"
 
 #: taleoftiles/templates/product.html:155
-#, fuzzy
-#| msgid "sample-description"
 msgid "sfrido-small-description"
 msgstr ""
 "The scrap is the calculation of the tile waste introduced by the laying "
@@ -688,8 +677,6 @@ msgid "untill"
 msgstr "by"
 
 #: taleoftiles/templates/product.html:177
-#, fuzzy
-#| msgid "any-doubt"
 msgid "any-doubt-subtitle"
 msgstr "Contact the support or consult the frequently asked questions page."
 
@@ -744,8 +731,6 @@ msgstr ""
 "<strong> Register or login </strong> to enter the world of Tale of Tiles"
 
 #: taleoftiles/templates/shipping.html:84
-#, fuzzy
-#| msgid "already-logged-in"
 msgid "you-are-loged-in-as"
 msgstr "Already logged in as"
 
@@ -801,8 +786,6 @@ msgid "consider-sfrido"
 msgstr "scrap included"
 
 #: taleoftiles/templates/summary.html:151
-#, fuzzy, python-format
-#| msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgid " consider-sfrido <strong>10%% more</strong> consider-sfrido"
 msgstr ""
 "We recommend that you always consider <strong> 10% more <strong> than\n"
@@ -1188,13 +1171,3 @@ msgstr ""
 "(RI), in the countryside of central Italy, on the border between Umbria and "
 "Lazio (easily accessible by train from Fiumicino airport)."
 
-#~ msgid " Ricevi mattonelle a casa "
-#~ msgstr ""
-#~ "<h3>Receive your tiles at your home <strong>free from shipping cost</"
-#~ "strong></h3> \n"
-#~ "<br/><h4><i>Shipping and taxes included in all Europe</i></h4>"
-
-#, fuzzy
-#~| msgid "all-products"
-#~ msgid "selected-products"
-#~ msgstr "Selected Products"

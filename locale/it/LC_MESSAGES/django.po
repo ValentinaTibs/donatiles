@@ -1,21 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: taleoftiles\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-18 17:50+0000\n"
-"PO-Revision-Date: 2020-10-24 09:46\n"
-"Last-Translator: \n"
-"Language-Team: Italian\n"
-"Language: it_IT\n"
+"POT-Creation-Date: 2020-12-20 21:20+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: taleoftiles\n"
-"X-Crowdin-Project-ID: 425794\n"
-"X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/locale/it/LC_MESSAGES/django.po\n"
-"X-Crowdin-File-ID: 28\n"
 
 #: CRM/forms.py:31
 msgid "Not Valid Code"
@@ -99,8 +100,6 @@ msgstr "Tale of Tiles Blog"
 #: taleoftiles/templates/blog.html:6 taleoftiles/templates/catalogue.html:7
 #: taleoftiles/templates/home.html:8 taleoftiles/templates/product.html:6
 #: taleoftiles/templates/support.html:6
-#, fuzzy
-#| msgid "home-description-meta-tag"
 msgid "home-keywords-meta-tag"
 msgstr ""
 "mattonelle, decor, piastrelle decor, piastrelle artigianali, hipster,"
@@ -234,11 +233,10 @@ msgstr ""
 "esclusivamente italiani."
 
 #: taleoftiles/templates/home.html:61
-#, fuzzy
-msgid " receive-home "
+msgid "receive-home-free-samples"
 msgstr ""
-"<h3>Ricevi le tue piastrelle a casa <strong>tutti i prezzi sono inclusi di "
-"iva e spedizione</strong></h3> \n"
+"Ricevi questi campioni a casa<h3>Ricevi le tue piastrelle a casa "
+"<strong>tutti i prezzi sono inclusi di iva e spedizione</strong></h3> \n"
 "<br/><h4><i>Spedizione Inclusa in tutta Europa</i></h4>\n"
 "      "
 
@@ -1199,7 +1197,3 @@ msgstr ""
 "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
 "(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
 
-#, fuzzy
-#~| msgid "all-products"
-#~ msgid "selected-products"
-#~ msgstr " CIaone"

@@ -1,17 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-18 17:50+0000\n"
-"PO-Revision-Date: 2020-12-17 17:13+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: fr\n"
+"POT-Creation-Date: 2020-12-20 21:25+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: CRM/forms.py:31
@@ -229,13 +233,11 @@ msgstr ""
 "échantillon que vous recevrez gratuitement à votre domicile."
 
 #: taleoftiles/templates/home.html:61
-#, fuzzy
-#| msgid "receive-sample-home"
-msgid " receive-home "
+msgid "receive-home-free-samples"
 msgstr ""
 "<h3> Recevez vos carreaux chez vous <strong> tous les prix incluentTVA et "
 "livraison </strong> </h3> \n"
-"<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4> \n"
+"<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4>"
 
 #: taleoftiles/templates/home.html:106
 msgid "title-renovate-home"
@@ -845,7 +847,6 @@ msgid "faq-prod-madeitaly"
 msgstr "Sont-ils tous les produits 100% fabriqués en Italie?"
 
 #: taleoftiles/templates/support.html:49
-#, fuzzy
 msgid "faq-prod-madeitaly-body"
 msgstr ""
 "Il est necessaire vous donner une explication: les meilleurs carreaux "
@@ -929,12 +930,10 @@ msgstr ""
 "nettoyage complet il suffit d'utiliser de l'eau tiéde."
 
 #: taleoftiles/templates/support.html:72
-#, fuzzy
 msgid "faq-prod-decor"
 msgstr "Comment ça marche le produit qui s'appelle \"decoro\"?"
 
 #: taleoftiles/templates/support.html:73
-#, fuzzy
 msgid "faq-prod-decor-body"
 msgstr ""
 "Dans les produits qui s'appellent \"decoro\", le producteur va insérer, dans "
@@ -1042,7 +1041,6 @@ msgid "faq-order-sfrido"
 msgstr "Qu'entend-on par «déchet»?"
 
 #: taleoftiles/templates/support.html:120
-#, fuzzy
 msgid "faq-order-sfrido-body"
 msgstr ""
 "Le déchet est le calcul de les déchets de pose des carreaux. Ce calcul "
@@ -1066,7 +1064,6 @@ msgid "faq-order-return"
 msgstr "Comment peux je retourner un produit, si j'ai changé d'avis?"
 
 #: taleoftiles/templates/support.html:130
-#, fuzzy
 msgid "faq-order-return-body"
 msgstr ""
 "Il est possible retourner le produits qui vous recevez par Tale of Tiles "
@@ -1191,10 +1188,3 @@ msgstr ""
 "frontière entre l'Ombie et le Latium (facilement accessible en train depuis "
 "l'aéroport de Fiumicino)."
 
-#~ msgid " Ricevi mattonelle a casa "
-#~ msgstr " Recevez les carreaux de ciment à la maison"
-
-#, fuzzy
-#~| msgid "all-products"
-#~ msgid "selected-products"
-#~ msgstr "Tous les produits"
