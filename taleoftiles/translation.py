@@ -13,6 +13,7 @@ class TagTranslation(TranslationOptions):
 @register(Publication)
 class PubTranslation(TranslationOptions):
     fields = ('title',	'content',)
+    required_languages = ('en', 'it','fr')
 
 @register(MailTemplate)
 class MailTranslation(TranslationOptions):

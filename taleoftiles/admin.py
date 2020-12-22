@@ -155,8 +155,8 @@ class SerieAdmin(admin.ModelAdmin):
 
 class PublicationAdminSelf(SummernoteModelAdmin):
     model = Publication
-    summernote_fields = ('content_it','content_en',)
-    fields = ('title_it','title_en','content_it','content_en','publish_date','slug')
+    summernote_fields = ('content_it','content_en','content_fr')
+    fields = ('title_it','title_en','title_fr','content_it','content_en','content_fr','publish_date','slug')
     list_display = ('title_','id','created_at','publish_date','slug','author')
 
     search_fields = ('title_it','title_en','slug')
