@@ -131,11 +131,10 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 django_heroku.settings(locals())
 
 # ---- SENDGRID -------
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
-SENDGRID_ECHO_TO_STDOUT = False
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+SENDGRID_ECHO_TO_STDOUT = True
+SENDGRID_SANDBOX_MODE_IN_DEBUG = True
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' 
