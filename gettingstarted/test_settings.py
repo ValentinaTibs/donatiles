@@ -12,7 +12,7 @@ SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -131,7 +131,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 django_heroku.settings(locals())
 
 # ---- SENDGRID -------
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_ECHO_TO_STDOUT = False
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
