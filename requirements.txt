@@ -8,7 +8,6 @@ django_reverse_admin
 django-recaptcha
 numpy
 django-modeltranslation
-sendgrid-django
 sendgrid
 boto3
 django-storages
