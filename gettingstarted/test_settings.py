@@ -1,0 +1,175 @@
+import os
+import psycopg2
+import django_heroku
+from django.utils.translation import ugettext_lazy as _
+
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DEBUG = False
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+ALLOWED_HOSTS = []
+
+# Application definition
+
+INSTALLED_APPS = [
+    'django_summernote',
+    'modeltranslation',
+    'crispy_forms',
+    'import_export',
+
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    
+    'taleoftiles',
+    'CRM',
+    'layout',
+    'blog',
+    'storages'
+]
+
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+ROOT_URLCONF = "gettingstarted.urls"
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "taleoftiles.core_context.category_menu",
+                "taleoftiles.core_context.footer_menu",
+                "taleoftiles.core_context.user_menu",
+            ]
+        },
+    }
+]
+
+WSGI_APPLICATION = "gettingstarted.wsgi.application"
+
+# Database
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+DATABASES = {
+    "default": {
+        "ENGINE" : "django.db.backends.postgresql",
+        "NAME": "vale"
+    }
+}
+
+# Password validation
+# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+]
+
+
+# Internationalization
+# as in ->https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes     
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('it', _('Italiano')),
+    ('fr',_('French'))
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_LANGUAGES = ('en', 'it','fr')
+
+LANGUAGE_CODE = 'en'
+TIME_ZONE = "UTC"
+
+LOGIN_URL = '/' 
+SESSION_ENGINE = 'taleoftiles.core_context'
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOCALE_PATHS =  [os.path.join(BASE_DIR, 'locale'),]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+django_heroku.settings(locals())
+
+# ---- SENDGRID -------
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_ECHO_TO_STDOUT = False
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' 
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# ----- AWS3   ----- 
+DEFAULT_FILE_STORAGE    = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID       = 'AKIAJS6CLBOAQSAVY4CA'
+AWS_SECRET_ACCESS_KEY   = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'taleoftiles'
+AWS_S3_CUSTOM_DOMAIN    = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_DEFAULT_ACL         = 'public-read'
+MEDIA_URL               = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
+
+# ----- SUMMERNOTE   ----- 
+SUMMERNOTE_CONFIG = {
+# You can put custom Summernote settings
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+        'toolbar': [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+            
+        ],
+    }
+}
+
+# ------ TERMS AND CONDS ------
+TERMS_BASE_TEMPLATE = 'empty_base.html'
+
