@@ -31,6 +31,11 @@ from django.utils.translation import ugettext_lazy as _
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
+DEBUG = False
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -93,13 +98,6 @@ WSGI_APPLICATION = "gettingstarted.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE" : "django.db.backends.postgresql",
-#         "NAME": "vale"
-#     }
-# }
-
 DATABASES = {
     "default": {
         "ENGINE" : "django.db.backends.sqlite3",
@@ -141,9 +139,6 @@ TIME_ZONE = "UTC"
 LOGIN_URL = '/' 
 SESSION_ENGINE = 'taleoftiles.core_context'
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
@@ -203,8 +198,5 @@ SUMMERNOTE_CONFIG = {
     }
 }
 
-
-
 # ------ TERMS AND CONDS ------
 TERMS_BASE_TEMPLATE = 'empty_base.html'
-
