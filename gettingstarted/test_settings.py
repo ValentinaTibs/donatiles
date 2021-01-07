@@ -26,12 +26,10 @@ import psycopg2
 import django_heroku
 from django.utils.translation import ugettext_lazy as _
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEBUG = True
 
-# DEBUG = False
+DEBUG = False
 # SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
