@@ -290,13 +290,12 @@ class Price(models.Model):
             return self.size.name + self.product.publication.title + str(self.euros)
         else:
             return str(self.euros)
-    
+        
 class Catalogue(models.Model):
     title       = models.CharField(max_length=200, unique = True)
     active      = models.BooleanField(default = True)
-    products    = models.ManyToManyField(Product, blank = True, null = True,  related_name='catalogues' ) 
+    products    = models.ManyToManyField(Product, blank = True, related_name='catalogues' ) 
     
-
     def tags(self):
         return Tag.objects.filter(in_catalogue = True,parent__isnull = True).in_bulk(field_name='slug')
 
