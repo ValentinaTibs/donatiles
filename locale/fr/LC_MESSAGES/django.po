@@ -638,7 +638,7 @@ msgstr "Code"
 
 #: taleoftiles/templates/product.html:104
 msgid "starting-from"
-msgstr "à partir de"
+msgstr "Prix ​​mètre carré"
 
 #: taleoftiles/templates/product.html:120
 msgid "superficie-da-rivestire"

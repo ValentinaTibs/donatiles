@@ -640,7 +640,7 @@ msgstr "code"
 
 #: taleoftiles/templates/product.html:104
 msgid "starting-from"
-msgstr "starting from"
+msgstr "Price for squared meter"
 
 #: taleoftiles/templates/product.html:120
 msgid "superficie-da-rivestire"
