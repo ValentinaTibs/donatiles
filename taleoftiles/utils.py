@@ -61,22 +61,23 @@ def compute_single_price(quantity,has_frido, sm_price, sm_per_box):
     return 0
 
 def max_price(m2_price, m2_box, weight_box):
-    to_print = False
-    max_price =  ech_price[0]
-    weight_max_price = ech_weight[ech_price.index(max_price)]
-    num_box = weight_max_price / weight_box
-    tot_m2 = num_box * m2_box
-    max_price_sm = (max_price + max_price * IVA) / tot_m2
-    if to_print:
-        print("num_box")
-        print(num_box)        
-        print("tot_m2")
-        print(tot_m2)
-        print("max_price_sm")
-        print(max_price_sm)
-        print("max_price_sm + m2_price")
-        print(max_price_sm + m2_price)
-    return max_price_sm + m2_price
+    # to_print = False
+    # max_price =  ech_price[0]
+    # weight_max_price = ech_weight[ech_price.index(max_price)]
+    # num_box = weight_max_price / weight_box
+    # tot_m2 = num_box * m2_box
+    # max_price_sm = (max_price + max_price * IVA) / tot_m2
+    # if to_print:
+    #     print("num_box")
+    #     print(num_box)        
+    #     print("tot_m2")
+    #     print(tot_m2)
+    #     print("max_price_sm")
+    #     print(max_price_sm)
+    #     print("max_price_sm + m2_price")
+    #     print(max_price_sm + m2_price)
+    # return max_price_sm + m2_price
+    return int(costo_m2_ship + m2_price)
 
 def compute_num_boxes(quantity, has_frido, sm_price, sm_per_box, weight_box):
     to_print = False

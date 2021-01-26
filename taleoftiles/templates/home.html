@@ -40,22 +40,21 @@
     <a href="{% url 'catalogue' %}" class="btn-gridbox">
     	<h3>{% blocktrans %}choose-home-claim{% endblocktrans %}</h3></a>
     <div>
-      <video width="100%" autoplay loop>
-        <source src="{% static 'images/home/taleoftiles_book_tiles_gift.mp4' %}" type="video/mp4">
- 
-      <img  style="width: 100%;" src="{% static 'images/home/taleoftiles_book_tiles_gift.gif' %}" alt="TaleofTiles Book">
-
-      </video>
+      <h5>{% trans 'secure-payment' %}</h5>
+      <h3>{% trans 'secure-payment-details' %}</h3>
+      <img src=" {% static 'images/paypal.png' %}" alt="Paypal Payment ">
+      <img src=" {% static 'images/visa.png' %}" alt="Visa Payment">
+      <img src=" {% static 'images/mastercard.png' %}" alt="Mastercard Payment">
     </div>
 
       <!-- &showinfo=0&
       &disablekb=1&controls=0
       <iframe width="200" height="200" src="https://www.youtube.com/embed/YlE0cMrkOFg?autoplay=1&playlist=YlE0cMrkOFg&loop=1&modestbranding=1"  frameborder="0" ></iframe> -->
-
-    <div class="grid-homeintro-main">
-      <h2>{% trans 'sample-touchhand'|capfirst %}</h2>
+ <!-- style="background:url({% static 'images/bkg-home.png' %}" -->
+    <div class="grid-homeintro-main" >
+      <h2>{% trans 'sample-touchhand' %}</h2>
       <h3>{{ layout_elems|get_elem:'strength-campionario-up' }}</h3>
-      <p>{% trans 'sample-description'|capfirst %}</p>
+      <p>{% trans 'sample-description' %}</p>
       <svg class="icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-sample-help' %}"/></svg>
     </div>
     <div>{% blocktrans %}receive-home-free-samples{% endblocktrans %}</div>
@@ -71,17 +70,15 @@
 
     {% for product in home_prods %}
 
-
          <div class="product-thumb infinite-item" >
-          <a href="{% url 'product' product.code %}" class="product-thumb-img">
-              <img src=" {{product.cover.imagefile.url}}" alt="Argento / Narciso">
-          </a>
-          <a href="{% url 'product' product.code %}" class="product-thumb-title">
-              <h5>{{ product.serie.name }}</h5>
-              <h4>{{product.name}}</h4>
-          </a>
-
-      </div>
+            <a href="{% url 'product' product.code %}" class="product-thumb-img">
+                <img src=" {{product.cover.imagefile.url}}" alt="Argento / Narciso">
+            </a>
+            <a href="{% url 'product' product.code %}" class="product-thumb-title">
+                <h5>{{ product.serie.name }}</h5>
+                <h4>{{product.name}}</h4>
+            </a>
+        </div>
 
     {% endfor %}
 
@@ -146,6 +143,22 @@
   </div>
 </div>
 
+
+<!-- <div class="block">
+  <div class="content grid  grid-homeintro-arch">
+    <a href="{% url 'catalogue' %}" class="btn-gridbox">
+      <h3>{% trans 'are-you-designer'|capfirst %}?</h3></a>
+    <div>{% blocktrans %}receive-home-free-samples{% endblocktrans %}</div>    
+    <div >
+      <h2>bla bla bla don don me don don me -  bla bla bla</h2>
+      <h3>{{ layout_elems|get_elem:'strength-campionario-up' }}</h3>
+    </div>
+
+  </div>
+</div>
+ -->
+
+
 <div class="block block-warmbg block-fullheight">
   <div class="content grid grid-homeabout">
 
@@ -162,7 +175,6 @@
 
   </div>
 </div>
-
 
 
 

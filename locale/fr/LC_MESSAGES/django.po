@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-20 21:25+0100\n"
+"POT-Creation-Date: 2021-01-26 08:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,16 +46,16 @@ msgstr "Email invalide"
 msgid "Duplicated email"
 msgstr "Couriel dupliqué"
 
-#: gettingstarted/settings.py:120
+#: gettingstarted/deploy_settings.py:112 gettingstarted/local_settings.py:113
 msgid "English"
 msgstr "Anglais"
 
-#: gettingstarted/settings.py:121
+#: gettingstarted/deploy_settings.py:113 gettingstarted/local_settings.py:114
 msgid "Italiano"
 msgstr "Italien"
 
-#: gettingstarted/settings.py:122
-msgid "Français"
+#: gettingstarted/deploy_settings.py:114 gettingstarted/local_settings.py:115
+msgid "French"
 msgstr ""
 
 #: taleoftiles/templates/account.html:6
@@ -221,70 +221,84 @@ msgstr ""
 "Sélectionnez votres carreaux entre notre <strong> sélection de plus de 200 "
 "produits </strong>"
 
-#: taleoftiles/templates/home.html:56
+#: taleoftiles/templates/home.html:43
+msgid "secure-payment"
+msgstr "Paiements Sécurisés"
+
+#: taleoftiles/templates/home.html:44
+msgid "secure-payment-details"
+msgstr ""
+"Paiements sécurisés, rapides et garantis via PayPal, carte de crédit ou "
+"virement bancaire."
+
+#: taleoftiles/templates/home.html:55
 msgid "sample-touchhand"
 msgstr "Touchéz du doigt"
 
-#: taleoftiles/templates/home.html:58
+#: taleoftiles/templates/home.html:57
 msgid "sample-description"
 msgstr ""
 "Écrivez vous-même l'histoire de vos espaces avec le Tale of Tales Book. En "
 "naviguant dans notre catalogue, vous pourrez sélectionner juqu'à 4 "
 "échantillon que vous recevrez gratuitement à votre domicile."
 
-#: taleoftiles/templates/home.html:61
+#: taleoftiles/templates/home.html:60 taleoftiles/templates/home.html:151
 msgid "receive-home-free-samples"
 msgstr ""
 "<h3> Recevez vos carreaux chez vous <strong> tous les prix incluentTVA et "
 "livraison </strong> </h3> \n"
 "<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4>"
 
-#: taleoftiles/templates/home.html:106
+#: taleoftiles/templates/home.html:103
 msgid "title-renovate-home"
 msgstr "Idées pur rénover"
 
-#: taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:104
 msgid "subtitle-renovate-home"
 msgstr ""
 "Amousez-vous avec nos idées pour rénover vos espaces de manière facile."
 
-#: taleoftiles/templates/home.html:115
+#: taleoftiles/templates/home.html:112
 msgid "title-faq-home"
 msgstr "Questions fréquentes"
 
-#: taleoftiles/templates/home.html:119
+#: taleoftiles/templates/home.html:116
 msgid "faq-1"
 msgstr "Comment renvoyer un produit, si je change d'avis?"
 
-#: taleoftiles/templates/home.html:120 taleoftiles/templates/home.html:125
-#: taleoftiles/templates/home.html:130 taleoftiles/templates/home.html:135
-#: taleoftiles/templates/home.html:139 taleoftiles/templates/home.html:143
+#: taleoftiles/templates/home.html:117 taleoftiles/templates/home.html:122
+#: taleoftiles/templates/home.html:127 taleoftiles/templates/home.html:132
+#: taleoftiles/templates/home.html:136 taleoftiles/templates/home.html:140
 msgid "read-answer"
 msgstr "Lisez la réponse"
 
-#: taleoftiles/templates/home.html:124
+#: taleoftiles/templates/home.html:121
 msgid "faq-2"
 msgstr "Quels sont les délais de livraison?"
 
-#: taleoftiles/templates/home.html:129
+#: taleoftiles/templates/home.html:126
 msgid "faq-3"
 msgstr "Comment sera la livraison?"
 
-#: taleoftiles/templates/home.html:134
+#: taleoftiles/templates/home.html:131
 msgid "faq-4"
 msgstr "Puis-je voir les carreaux avante de les acheter?"
 
-#: taleoftiles/templates/home.html:138
+#: taleoftiles/templates/home.html:135
 msgid "faq-5"
 msgstr "Sont les produits italiens? Sont-les fait à la main?"
 
-#: taleoftiles/templates/home.html:142
+#: taleoftiles/templates/home.html:139
 msgid "faq-6"
 msgstr ""
 "Devrais-je avoir des précautions pour calculer les mesures quand je choisis "
 "les carreaux?"
 
-#: taleoftiles/templates/home.html:153
+#: taleoftiles/templates/home.html:150
+msgid "are-you-designer"
+msgstr ""
+
+#: taleoftiles/templates/home.html:166
 msgid "founder-name"
 msgstr "Nous sommes Tale of Tiles"
 
@@ -1187,4 +1201,3 @@ msgstr ""
 "physique à Forano (RI), dans la campagne du centre de l'Italie, à la "
 "frontière entre l'Ombie et le Latium (facilement accessible en train depuis "
 "l'aéroport de Fiumicino)."
-

@@ -111,7 +111,7 @@ USE_TZ = True
 LANGUAGES = (
     ('en', _('English')),
     ('it', _('Italiano')),
-    ('fr',_('French'))
+    ('fr', _('French'))
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
@@ -119,7 +119,6 @@ MODELTRANSLATION_LANGUAGES = ('en', 'it','fr')
 
 LANGUAGE_CODE = 'en'
 TIME_ZONE = "UTC"
-
 
 LOGIN_URL = '/' 
 SESSION_ENGINE = 'taleoftiles.core_context'

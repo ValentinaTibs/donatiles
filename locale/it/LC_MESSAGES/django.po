@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-20 21:20+0100\n"
+"POT-Creation-Date: 2021-01-26 08:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,16 +46,16 @@ msgstr "Email non valida"
 msgid "Duplicated email"
 msgstr "Email già presente"
 
-#: gettingstarted/settings.py:120
+#: gettingstarted/deploy_settings.py:112 gettingstarted/local_settings.py:113
 msgid "English"
 msgstr "Inglese"
 
-#: gettingstarted/settings.py:121
+#: gettingstarted/deploy_settings.py:113 gettingstarted/local_settings.py:114
 msgid "Italiano"
 msgstr "Italiano"
 
-#: gettingstarted/settings.py:122
-msgid "Français"
+#: gettingstarted/deploy_settings.py:114 gettingstarted/local_settings.py:115
+msgid "French"
 msgstr ""
 
 #: taleoftiles/templates/account.html:6
@@ -220,11 +220,25 @@ msgstr ""
 "Scegli le tue piastrelle tra la nostra <strong>selezione di oltre 200 "
 "prodotti</strong>"
 
-#: taleoftiles/templates/home.html:56
+#: taleoftiles/templates/home.html:43
+#, fuzzy
+#| msgid "payment"
+msgid "secure-payment"
+msgstr "Pagamenti Sicuri"
+
+#: taleoftiles/templates/home.html:44
+#, fuzzy
+#| msgid "payment-title"
+msgid "secure-payment-details"
+msgstr ""
+"Pagamenti sicuri, veloci e garantiti tramite PayPal, carta di credito o "
+"bonifico bancario."
+
+#: taleoftiles/templates/home.html:55
 msgid "sample-touchhand"
 msgstr "Tocca con mano"
 
-#: taleoftiles/templates/home.html:58
+#: taleoftiles/templates/home.html:57
 msgid "sample-description"
 msgstr ""
 "Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of "
@@ -232,60 +246,64 @@ msgstr ""
 "ricevere gratuitamente a casa tua per sognare con i nostri prodotti "
 "esclusivamente italiani."
 
-#: taleoftiles/templates/home.html:61
+#: taleoftiles/templates/home.html:60 taleoftiles/templates/home.html:151
 msgid "receive-home-free-samples"
 msgstr ""
-"Ricevi questi campioni a casa<h3>Ricevi le tue piastrelle a casa "
+"<h3>Ricevi le tue piastrelle a casa "
 "<strong>tutti i prezzi sono inclusi di iva e spedizione</strong></h3> \n"
 "<br/><h4><i>Spedizione Inclusa in tutta Europa</i></h4>\n"
 "      "
 
-#: taleoftiles/templates/home.html:106
+#: taleoftiles/templates/home.html:103
 msgid "title-renovate-home"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/home.html:107
+#: taleoftiles/templates/home.html:104
 msgid "subtitle-renovate-home"
 msgstr ""
 "Divertiti con le nostre idee per rinnovare in modo semplice i tuoi ambienti."
 
-#: taleoftiles/templates/home.html:115
+#: taleoftiles/templates/home.html:112
 msgid "title-faq-home"
 msgstr "Domande frequenti"
 
-#: taleoftiles/templates/home.html:119
+#: taleoftiles/templates/home.html:116
 msgid "faq-1"
 msgstr "Come posso restituire il prodotto, se cambio idea?"
 
-#: taleoftiles/templates/home.html:120 taleoftiles/templates/home.html:125
-#: taleoftiles/templates/home.html:130 taleoftiles/templates/home.html:135
-#: taleoftiles/templates/home.html:139 taleoftiles/templates/home.html:143
+#: taleoftiles/templates/home.html:117 taleoftiles/templates/home.html:122
+#: taleoftiles/templates/home.html:127 taleoftiles/templates/home.html:132
+#: taleoftiles/templates/home.html:136 taleoftiles/templates/home.html:140
 msgid "read-answer"
 msgstr "Leggi risposta"
 
-#: taleoftiles/templates/home.html:124
+#: taleoftiles/templates/home.html:121
 msgid "faq-2"
 msgstr "Quali sono i tempi di consegna?"
 
-#: taleoftiles/templates/home.html:129
+#: taleoftiles/templates/home.html:126
 msgid "faq-3"
 msgstr "Come avverrà la consegna?"
 
-#: taleoftiles/templates/home.html:134
+#: taleoftiles/templates/home.html:131
 msgid "faq-4"
 msgstr "Posso vedere le piastrelle prima di acquistarle?"
 
-#: taleoftiles/templates/home.html:138
+#: taleoftiles/templates/home.html:135
 msgid "faq-5"
 msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
 
-#: taleoftiles/templates/home.html:142
+#: taleoftiles/templates/home.html:139
 msgid "faq-6"
 msgstr ""
 "Devo avere delle accortezze particolari nel calcolare le misure per "
 "scegliere le piastrelle?"
 
-#: taleoftiles/templates/home.html:153
+#: taleoftiles/templates/home.html:150
+msgid "are-you-designer"
+msgstr ""
+
+#: taleoftiles/templates/home.html:166
 msgid "founder-name"
 msgstr "Noi siamo Tale of Tiles"
 
@@ -1196,4 +1214,3 @@ msgstr ""
 "Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
 "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
 "(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
-

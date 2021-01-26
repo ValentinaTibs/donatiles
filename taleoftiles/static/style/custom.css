@@ -34,3 +34,13 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+.grid-homeintro-arch .btn-gridbox:hover,body:not(.touch) 
+.grid-homeintro-arch{grid-template-columns:1fr 1fr 2fr;}@media only screen and (max-width: 50em){.grid-homeintro-arch{grid-template-columns:1fr;grid-template-rows:auto}
+.grid-homeintro-arch>*:nth-child(1){height:auto !important}}@media only screen and (max-width: 35em){.grid-homeintro-arch{grid-template-columns:1fr}}
+.grid-homeintro-arch>*{position:relative;padding:1.5rem}
+.grid-homeintro-arch>* h3{font-weight:normal}
+.grid-homeintro-arch>*:nth-child(1){background-color:#ab5244;color:#fff;}
+.grid-homeintro-arch>*:nth-child(2){background-color:#ce7358;color:#fff}
+.grid-homeintro-arch>*:nth-child(3){background-color:#e0dcd1}
+.grid-homeintro-arch>*:nth-child(4){background-color:#f1b360}
+.grid-homeintro-arch>*:nth-child(5){background-color:#f6c6a2}
