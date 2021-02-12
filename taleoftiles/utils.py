@@ -157,7 +157,6 @@ def compute_sm_price(quantity, has_frido, sm_price, sm_per_box,weight_box):
     else:
         qtyt = float(quantity)
 
-
     return math.ceil( qtyt * price ) 
 
 # compute_sm_price(20,False,33.2,0.96,22.49)

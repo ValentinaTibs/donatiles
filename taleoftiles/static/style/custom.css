@@ -44,3 +44,8 @@
 .grid-homeintro-arch>*:nth-child(3){background-color:#e0dcd1}
 .grid-homeintro-arch>*:nth-child(4){background-color:#f1b360}
 .grid-homeintro-arch>*:nth-child(5){background-color:#f6c6a2}
+
+h6{font-weight: normal;font-family: Karla,-apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+}

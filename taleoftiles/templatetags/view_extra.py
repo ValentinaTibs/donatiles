@@ -51,6 +51,7 @@ def min_price(obj, min_price, *args):
     method = getattr(obj, min_price)
     return method(the_tag.slug)
     
+    
 @register.filter
 def is_in_sample(sample, product):
     if sample: 

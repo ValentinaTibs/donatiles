@@ -223,9 +223,9 @@ class Product(models.Model):
         return res
 
     def formats(self):
-        res = self.tags.filter(parent__parent__slug = "format")
+        res = self.tags.filter(parent__parent__slug = "format", public=True, prices__product__pk = self.pk)
         if res.count() == 0:
-            res= "none"
+            res= None
         return res
     
     def default_format(self):
@@ -261,15 +261,23 @@ class Product(models.Model):
             return compute_single_price(0,0,0,0)
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box(self.size))
-
     
     def min_price(self,format):
         return round(min_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)
 
     def max_price(self,format):
         return round(max_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)    
-    
 
+    def all_min_price(self):
+        da_list = []
+        formats = self.formats()
+
+        if formats:
+            for da_format in formats:
+                da_list.append(self.min_price(da_format.slug))
+            return round(min(da_list))
+        return "-"
+        # return round(min(formats, key=self.min_price))
 
 class EasyProductProxy(Product):
 

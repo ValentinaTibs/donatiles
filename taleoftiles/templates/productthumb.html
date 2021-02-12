@@ -6,12 +6,14 @@
 {% csrf_token %}
 
 <div class="product-thumb infinite-item" id="product-thumb-{{product.code}}" >
+    
     <a href="{% url 'product' product.code %}" class="product-thumb-img">
         <img  src="{% if product.cover.imagefile %}  {{ product.cover.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ product.name }} / {{ product.serie.name }}">
     </a>
     <a href="{% url 'product' product.code %}" class="product-thumb-title">
         <h5>{{ product.serie.name }}</h5>
         <h4>{{ product.name }}</h4>
+        <h6>da <b>{{ product.all_min_price }}</b>€/m2</h6>
     </a>
 
     {% if sampler|is_in_sample:product.code %}
