@@ -49,3 +49,12 @@ h6{font-weight: normal;font-family: Karla,-apple-system,BlinkMacSystemFont,"Sego
     font-size: 1.05rem;
     text-transform: uppercase;
 }
+.grid-homeintro-main{
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;  
+}
+
+.grid-homeintro-main form{
+    padding:1.5em;
+}
