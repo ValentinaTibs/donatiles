@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-26 08:39+0100\n"
+"POT-Creation-Date: 2021-02-12 17:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,57 +150,57 @@ msgid "payment"
 msgstr "Paiement"
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:288
+#: taleoftiles/templates/empty_base.html:291
 msgid "termini-e-condizioni"
 msgstr "Conditions générales"
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:298
+#: taleoftiles/templates/empty_base.html:301
 msgid "tiles"
 msgstr "Carreaux"
 
-#: taleoftiles/templates/empty_base.html:82
-#: taleoftiles/templates/empty_base.html:215
+#: taleoftiles/templates/empty_base.html:85
+#: taleoftiles/templates/empty_base.html:218
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:14
 msgid "support"
 msgstr "Assistance"
 
-#: taleoftiles/templates/empty_base.html:85
+#: taleoftiles/templates/empty_base.html:88
 msgid "account"
 msgstr "Votre compte"
 
-#: taleoftiles/templates/empty_base.html:86
+#: taleoftiles/templates/empty_base.html:89
 msgid "logout"
 msgstr "Déconnexion"
 
-#: taleoftiles/templates/empty_base.html:88
-#: taleoftiles/templates/empty_base.html:217
+#: taleoftiles/templates/empty_base.html:91
+#: taleoftiles/templates/empty_base.html:220
 msgid "login-register"
 msgstr "Connexion-Registrez vous"
 
-#: taleoftiles/templates/empty_base.html:133
-#: taleoftiles/templates/empty_base.html:197
+#: taleoftiles/templates/empty_base.html:136
+#: taleoftiles/templates/empty_base.html:200
 msgid "catalogue-menu"
 msgstr "Catalogue"
 
-#: taleoftiles/templates/empty_base.html:150
-#: taleoftiles/templates/empty_base.html:214
+#: taleoftiles/templates/empty_base.html:153
+#: taleoftiles/templates/empty_base.html:217
 msgid "blog-menu"
 msgstr "Idées pour la rénovation"
 
-#: taleoftiles/templates/empty_base.html:264
+#: taleoftiles/templates/empty_base.html:267
 msgid "of"
 msgstr "de"
 
-#: taleoftiles/templates/empty_base.html:264
+#: taleoftiles/templates/empty_base.html:267
 msgid "added-to-chart"
 msgstr "Ajouté au panier"
 
-#: taleoftiles/templates/empty_base.html:265
+#: taleoftiles/templates/empty_base.html:268
 msgid "open-chart"
 msgstr "Allez au panier"
 
-#: taleoftiles/templates/empty_base.html:287
+#: taleoftiles/templates/empty_base.html:290
 msgid "privacy-policy"
 msgstr "Politique de Confidentialité"
 
@@ -231,74 +231,78 @@ msgstr ""
 "Paiements sécurisés, rapides et garantis via PayPal, carte de crédit ou "
 "virement bancaire."
 
-#: taleoftiles/templates/home.html:55
-msgid "sample-touchhand"
-msgstr "Touchéz du doigt"
-
-#: taleoftiles/templates/home.html:57
+#: taleoftiles/templates/home.html:61
 msgid "sample-description"
 msgstr ""
 "Écrivez vous-même l'histoire de vos espaces avec le Tale of Tales Book. En "
 "naviguant dans notre catalogue, vous pourrez sélectionner juqu'à 4 "
 "échantillon que vous recevrez gratuitement à votre domicile."
 
-#: taleoftiles/templates/home.html:60 taleoftiles/templates/home.html:151
+#: taleoftiles/templates/home.html:68
+msgid "sample-touchhand"
+msgstr "Abonnez-vous à notre newsletter pour recevoir des conseils de restructuration et un 5% de réduction sur votre première commande."
+
+#: taleoftiles/templates/home.html:73
+msgid "email-c2a"
+msgstr "Votre email"
+
+#: taleoftiles/templates/home.html:98 taleoftiles/templates/home.html:189
 msgid "receive-home-free-samples"
 msgstr ""
 "<h3> Recevez vos carreaux chez vous <strong> tous les prix incluentTVA et "
 "livraison </strong> </h3> \n"
 "<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4>"
 
-#: taleoftiles/templates/home.html:103
+#: taleoftiles/templates/home.html:141
 msgid "title-renovate-home"
 msgstr "Idées pur rénover"
 
-#: taleoftiles/templates/home.html:104
+#: taleoftiles/templates/home.html:142
 msgid "subtitle-renovate-home"
 msgstr ""
 "Amousez-vous avec nos idées pour rénover vos espaces de manière facile."
 
-#: taleoftiles/templates/home.html:112
+#: taleoftiles/templates/home.html:150
 msgid "title-faq-home"
 msgstr "Questions fréquentes"
 
-#: taleoftiles/templates/home.html:116
+#: taleoftiles/templates/home.html:154
 msgid "faq-1"
 msgstr "Comment renvoyer un produit, si je change d'avis?"
 
-#: taleoftiles/templates/home.html:117 taleoftiles/templates/home.html:122
-#: taleoftiles/templates/home.html:127 taleoftiles/templates/home.html:132
-#: taleoftiles/templates/home.html:136 taleoftiles/templates/home.html:140
+#: taleoftiles/templates/home.html:155 taleoftiles/templates/home.html:160
+#: taleoftiles/templates/home.html:165 taleoftiles/templates/home.html:170
+#: taleoftiles/templates/home.html:174 taleoftiles/templates/home.html:178
 msgid "read-answer"
 msgstr "Lisez la réponse"
 
-#: taleoftiles/templates/home.html:121
+#: taleoftiles/templates/home.html:159
 msgid "faq-2"
 msgstr "Quels sont les délais de livraison?"
 
-#: taleoftiles/templates/home.html:126
+#: taleoftiles/templates/home.html:164
 msgid "faq-3"
 msgstr "Comment sera la livraison?"
 
-#: taleoftiles/templates/home.html:131
+#: taleoftiles/templates/home.html:169
 msgid "faq-4"
 msgstr "Puis-je voir les carreaux avante de les acheter?"
 
-#: taleoftiles/templates/home.html:135
+#: taleoftiles/templates/home.html:173
 msgid "faq-5"
 msgstr "Sont les produits italiens? Sont-les fait à la main?"
 
-#: taleoftiles/templates/home.html:139
+#: taleoftiles/templates/home.html:177
 msgid "faq-6"
 msgstr ""
 "Devrais-je avoir des précautions pour calculer les mesures quand je choisis "
 "les carreaux?"
 
-#: taleoftiles/templates/home.html:150
+#: taleoftiles/templates/home.html:188
 msgid "are-you-designer"
 msgstr ""
 
-#: taleoftiles/templates/home.html:166
+#: taleoftiles/templates/home.html:204
 msgid "founder-name"
 msgstr "Nous sommes Tale of Tiles"
 
