@@ -135,7 +135,7 @@
       <div>
         <div class="row">
           {{chi_form.product}}
-          <div><strong>Totale</strong></div>
+          <div><strong>{% trans 'total' %}</strong></div>
           <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
         </div>
         <div class="row">
@@ -297,8 +297,6 @@
   }
 
   function minus_quantity(){
-
-
     qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
     compute_money();
   }

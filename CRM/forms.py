@@ -85,12 +85,16 @@ class NewChartItemForm(forms.ModelForm):
 
         quantity    = self.cleaned_data.get('quantity')
         product     = self.cleaned_data.get('product')
-        if quantity < product.min_ammount:
-            raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
-        else:
-            return super(NewChartItemForm, self).clean()
+        
 
-        self._errors['starting_date'] = ['min-ammount-error']
+        # if quantity < product.min_ammount:
+        #     raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
+        # else:
+        #     return super(NewChartItemForm, self).clean()
+        # self._errors['starting_date'] = ['min-ammount-error']
+        #HERE for removed min quantity constraint
+        return super(NewChartItemForm, self).clean()
+        
 
 class AddChartForm(NewChartItemForm):
 
