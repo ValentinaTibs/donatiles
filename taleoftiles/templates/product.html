@@ -297,7 +297,9 @@
   }
 
   function minus_quantity(){
-    qtyField.val( +qtyField.val() - 1 );
+
+
+    qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
     compute_money();
   }
 
