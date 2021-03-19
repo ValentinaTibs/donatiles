@@ -143,8 +143,7 @@ django_heroku.settings(locals())
 # ---- RECAPTCHA  ------
 RECAPTCHA_PUBLIC_KEY = '6Le6idgUAAAAAPC8bqlkoCRIeU4Q4S9kVwgnRnIP'
 RECAPTCHA_PRIVATE_KEY = '6Le6idgUAAAAAGTdYuat-SXi_uQDPOeGMyJ4oAam'
-
-SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
 # ---- SENDGRID -------
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"

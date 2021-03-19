@@ -52,11 +52,11 @@ msgstr "Italiano"
 
 #: gettingstarted/deploy_settings.py:115 gettingstarted/local_settings.py:115
 msgid "French"
-msgstr ""
+msgstr "French"
 
 #: layout/views.py:25
 msgid "Request successfully sent"
-msgstr ""
+msgstr "Richiesta inviata con successo"
 
 #: taleoftiles/templates/account.html:6
 msgid "account-page-name"
@@ -200,7 +200,7 @@ msgstr "Vai al carrello"
 
 #: taleoftiles/templates/empty_base.html:290
 msgid "privacy-policy"
-msgstr ""
+msgstr "Privacy Policy"
 
 #: taleoftiles/templates/home.html:6
 msgid "home-page-name"
@@ -307,7 +307,7 @@ msgstr ""
 
 #: taleoftiles/templates/home.html:188
 msgid "are-you-designer"
-msgstr ""
+msgstr "Sei un designer?"
 
 #: taleoftiles/templates/home.html:204
 msgid "founder-name"
@@ -636,7 +636,7 @@ msgstr "Dai un'occhiata a questi!"
 
 #: taleoftiles/templates/product.html:24
 msgid "sampling-c2a"
-msgstr ""
+msgstr "Ordina il tuo campione"
 
 #: taleoftiles/templates/product.html:29
 msgid "full-sampler"

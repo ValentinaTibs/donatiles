@@ -6,14 +6,14 @@ from django.core.exceptions import ObjectDoesNotExist
 from django import forms
 from layout.models import  MailTemplate
 from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Invisible
+from captcha.widgets import ReCaptchaV3
 
 
 class ContactForm(forms.Form):
 
     email       = forms.CharField(max_length=200)
     request    	= forms.CharField(widget=forms.Textarea())
-    captcha 	= ReCaptchaField()
+    captcha 	= ReCaptchaField(widget=ReCaptchaV3)
 
     def clean(self):
         try:
