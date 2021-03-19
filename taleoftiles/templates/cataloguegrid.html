@@ -127,10 +127,13 @@
       {% if not active_tags %}  {% trans 'all-products' %}  {% endif %}
     </h1>
     <div class="catalogue-data">
+      
+      <!-- 
+
       <div class="catalogue-data-num">
         <strong>{{products|length }}</strong> {% trans 'products' %}
       </div>
-      <!-- <div class="catalogue-data-sorting">
+        <div class="catalogue-data-sorting">
         <span>{% trans 'order-for' %}:</span>
         <input type="radio" name="sortorder" id="sortorder-trending" checked><label for="sortorder-trending">Trending</label>
         <input type="radio" name="sortorder" id="sortorder-new"><label for="sortorder-new">Novità</label>
@@ -151,7 +154,8 @@
 
 <input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
 
-<!-- {% if page_obj.has_next %}
+
+{% if page_obj.has_next %}
 <a class="infinite-more-link" href="{% url 'catalogue' %}?page={{page_obj.next_page_number}}&filter={{url_data}}" ></a>
 {% endif %}
 <div class="d-flex justify-content-center" style="display:none;">
@@ -169,7 +173,7 @@
         $('.loading').hide();
       }
     });
-  </script> -->
+</script>
 
 
 <script>

@@ -34,6 +34,11 @@ def index(request):
         'home_prods'    : home_prods
         })
 
+# def catalogue(request):
+#     #filtering 
+
+#     #paginating 
+
 
 class catalogue(ListView):
     active_tags = None
@@ -41,7 +46,7 @@ class catalogue(ListView):
 
     model = Product 
     
-    paginate_by = 300
+    paginate_by = 18
     context_object_name = 'products'
     template_name = 'catalogue.html'
     #2do put here a custom ordering
