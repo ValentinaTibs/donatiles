@@ -3,6 +3,7 @@ from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
 from layout.models      import Element, Mail, MailTemplate
+from layout.forms      import ContactForm
 from taleoftiles.models import Publication
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
@@ -11,8 +12,20 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def support(request):  
     dyn_elements = Element.objects.filter(tag__parent__slug = 'support', public = True)
+    contact_form =ContactForm(request.POST or None, request.FILES or None)    
+    if request.method == "POST":
+        
+        if contact_form.is_valid():
+            email_data = contact_form.cleaned_data['email']
+            email_content = contact_form.cleaned_data['request']
+
+            new_mail = MailTemplate()
+            new_mail.send_user_request(email_data,email_content)
+
+            contact_form = _('Request successfully sent')
     return render(request, "support.html",{
         'layout_elems'  : dyn_elements,
+        'contact_form'  : contact_form
         })
 
 def termsandconds(request):  
@@ -32,7 +45,6 @@ def privacypolicy(request):
     return render(request, "empty.html",{
         'publication'  : privacypolicy,
         })
-
 
 
 def password_reset_request(request):

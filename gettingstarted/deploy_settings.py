@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'modeltranslation',
     'crispy_forms',
     'import_export',
+    'captcha',
 
     "django.contrib.admin",
     "django.contrib.auth",

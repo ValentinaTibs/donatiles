@@ -21,7 +21,9 @@
   </ul>
   <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
-
+    <p class="note">{% trans 'sampling-c2a' %}  </p>
+    
+<!-- 
 {% if sampler and sampler.all_samples.count > 4 %}
 
   <p class="note">{% trans 'full-sampler' %} </p>
@@ -41,7 +43,7 @@
 
 {% else %}
     <p class="note">{% trans 'not-samplable' %} </p>
-{% endif %}
+{% endif %} -->
 
   </div>
 </div>

@@ -16,13 +16,13 @@
         <h6>da <b>{{ product.all_min_price }}</b>€/m2</h6>
     </a>
 
-    {% if sampler|is_in_sample:product.code %}
+<!--     {% if sampler|is_in_sample:product.code %}
         <button class="btn btn-overlay" id="btn-prod-thumb-{{product.code}}" onClick="Javascript:removeFromSampler('{{ product.code }}')"><svg class="icon-l icon">
         <use id="button-prod-thumb-{{product.code}}"  xlink:href="{% static 'images/svgdefs.svg#icon-samples-remove' %}"/></svg></button>
     {% elif product.is_samplable %}
         <button class="btn btn-overlay" id="btn-prod-thumb-{{product.code}}" onClick="Javascript:addToSampler('{{ product.code }}')"><svg class="icon-l icon">
         <use id="button-prod-thumb-{{product.code}}" xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg></button>
-    {% endif %}
+    {% endif %} -->
 
 </div>
 

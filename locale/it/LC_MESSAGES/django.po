@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 17:05+0100\n"
+"POT-Creation-Date: 2021-03-19 20:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,32 +30,32 @@ msgstr "Codice già utilizzato"
 msgid "Expired Code"
 msgstr "Codice scaduto"
 
-#: CRM/forms.py:76 CRM/forms.py:109
+#: CRM/forms.py:76 CRM/forms.py:113
 msgid "Wrong Product"
 msgstr "Prodotto non disponibile"
 
-#: CRM/forms.py:89
-msgid "Not Enought"
-msgstr "Non sufficiente"
-
-#: CRM/forms.py:138
+#: CRM/forms.py:142 layout/forms.py:22
 msgid "Invalid email"
 msgstr "Email non valida"
 
-#: CRM/forms.py:142
+#: CRM/forms.py:146
 msgid "Duplicated email"
 msgstr "Email già presente"
 
-#: gettingstarted/deploy_settings.py:112 gettingstarted/local_settings.py:113
+#: gettingstarted/deploy_settings.py:113 gettingstarted/local_settings.py:113
 msgid "English"
 msgstr "Inglese"
 
-#: gettingstarted/deploy_settings.py:113 gettingstarted/local_settings.py:114
+#: gettingstarted/deploy_settings.py:114 gettingstarted/local_settings.py:114
 msgid "Italiano"
 msgstr "Italiano"
 
-#: gettingstarted/deploy_settings.py:114 gettingstarted/local_settings.py:115
+#: gettingstarted/deploy_settings.py:115 gettingstarted/local_settings.py:115
 msgid "French"
+msgstr ""
+
+#: layout/views.py:25
+msgid "Request successfully sent"
 msgstr ""
 
 #: taleoftiles/templates/account.html:6
@@ -126,12 +126,12 @@ msgstr "Tutte le serie"
 msgid "all-products"
 msgstr "Tutti i prodotti"
 
-#: taleoftiles/templates/cataloguegrid.html:131
+#: taleoftiles/templates/cataloguegrid.html:134
 #: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:45
 msgid "products"
 msgstr "Prodotti"
 
-#: taleoftiles/templates/cataloguegrid.html:134
+#: taleoftiles/templates/cataloguegrid.html:137
 msgid "order-for"
 msgstr "Ordina per"
 
@@ -248,7 +248,7 @@ msgstr ""
 "Iscriviti alla Newsletter per ricevere consigli di ristrutturazione ed un 5% "
 "di sconto sul tuo primo ordine."
 
-#: taleoftiles/templates/home.html:73
+#: taleoftiles/templates/home.html:72
 msgid "email-c2a"
 msgstr "La tua email"
 
@@ -318,6 +318,7 @@ msgid "your-chart"
 msgstr "Carrello"
 
 #: taleoftiles/templates/include/chart.html:35
+#: taleoftiles/templates/product.html:140
 msgid "total"
 msgstr "Totale"
 
@@ -597,7 +598,7 @@ msgid "summary-back-home"
 msgstr "Torna a Tale of Tiles"
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
-#: taleoftiles/templates/product.html:176
+#: taleoftiles/templates/product.html:178
 msgid "any-doubt"
 msgstr "Hai qualche dubbio"
 
@@ -633,98 +634,102 @@ msgstr "Tutte le serie"
 msgid "give-it-alook"
 msgstr "Dai un'occhiata a questi!"
 
-#: taleoftiles/templates/product.html:27
+#: taleoftiles/templates/product.html:24
+msgid "sampling-c2a"
+msgstr ""
+
+#: taleoftiles/templates/product.html:29
 msgid "full-sampler"
 msgstr "Tale of Tiles Book completo"
 
-#: taleoftiles/templates/product.html:30
+#: taleoftiles/templates/product.html:32
 msgid "already-in-sampler"
 msgstr "Già aggiunto al Tale of Tiles Book"
 
-#: taleoftiles/templates/product.html:37
+#: taleoftiles/templates/product.html:39
 msgid "add-sampler-button"
 msgstr "Aggiungi al Tale of Tiles Book"
 
-#: taleoftiles/templates/product.html:40
+#: taleoftiles/templates/product.html:42
 msgid "add-sampler-text"
 msgstr ""
 "Componi il tuo Tale of Tiles Book per toccare con mano i tuoi prodotti "
 "preferiti"
 
-#: taleoftiles/templates/product.html:43
+#: taleoftiles/templates/product.html:45
 msgid "not-samplable"
 msgstr "Non campionabile"
 
-#: taleoftiles/templates/product.html:76
+#: taleoftiles/templates/product.html:78
 msgid "formats"
 msgstr "Formati"
 
-#: taleoftiles/templates/product.html:84
+#: taleoftiles/templates/product.html:86
 msgid "finishes"
 msgstr "Finiture"
 
-#: taleoftiles/templates/product.html:98
+#: taleoftiles/templates/product.html:100
 msgid "code"
 msgstr "Codice"
 
-#: taleoftiles/templates/product.html:104
+#: taleoftiles/templates/product.html:106
 msgid "starting-from"
 msgstr "Prezzo a metro quadro"
 
-#: taleoftiles/templates/product.html:120
+#: taleoftiles/templates/product.html:122
 msgid "superficie-da-rivestire"
 msgstr "Superficie da rivestire"
 
-#: taleoftiles/templates/product.html:120
+#: taleoftiles/templates/product.html:122
 msgid "min"
 msgstr "Minimo"
 
-#: taleoftiles/templates/product.html:145
+#: taleoftiles/templates/product.html:147
 msgid "include-sfrido"
 msgstr "Includi lo sfrido"
 
-#: taleoftiles/templates/product.html:155
+#: taleoftiles/templates/product.html:157
 #, fuzzy
 #| msgid "sample-description"
 msgid "sfrido-small-description"
 msgstr ""
 "Lo sfrido è il calcolo dello scarto di piastrelle del processo di posa."
 
-#: taleoftiles/templates/product.html:165
+#: taleoftiles/templates/product.html:167
 msgid "add-chart-button"
 msgstr "Aggiungi al carrello"
 
-#: taleoftiles/templates/product.html:171
+#: taleoftiles/templates/product.html:173
 msgid "free-shipping"
 msgstr "Spedizione gratuita"
 
-#: taleoftiles/templates/product.html:174
+#: taleoftiles/templates/product.html:176
 msgid "receive-date"
 msgstr "Ordinando oggi stesso, riceverai il prodotto a casa tua"
 
-#: taleoftiles/templates/product.html:174
+#: taleoftiles/templates/product.html:176
 msgid "untill"
 msgstr "entro il"
 
-#: taleoftiles/templates/product.html:177
+#: taleoftiles/templates/product.html:179
 #, fuzzy
 #| msgid "any-doubt"
 msgid "any-doubt-subtitle"
 msgstr "Contatta l’assistenza o consulta le domande frequenti"
 
-#: taleoftiles/templates/product.html:201
+#: taleoftiles/templates/product.html:203
 msgid "download-tech-spech"
 msgstr "Scheda tecnica [PDF]"
 
-#: taleoftiles/templates/product.html:219
+#: taleoftiles/templates/product.html:221
 msgid "settings"
 msgstr "Stili"
 
-#: taleoftiles/templates/product.html:231
+#: taleoftiles/templates/product.html:233
 msgid "product-support"
 msgstr "Prodotto di supporto"
 
-#: taleoftiles/templates/product.html:246
+#: taleoftiles/templates/product.html:248
 msgid "product-same-serie"
 msgstr "Prodotti della stessa serie"
 
@@ -858,7 +863,7 @@ msgstr ""
 msgid "support-text-3"
 msgstr "Vuoi un consiglio su un prodotto?"
 
-#: taleoftiles/templates/support.html:25
+#: taleoftiles/templates/support.html:25 taleoftiles/templates/support.html:176
 msgid "contact-us"
 msgstr "Contattaci"
 
@@ -1220,3 +1225,16 @@ msgstr ""
 "Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
 "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
 "(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
+
+#: taleoftiles/templates/support.html:179
+#, fuzzy
+#| msgid "contact-us"
+msgid "faq-contact-us"
+msgstr "Contattaci"
+
+#: taleoftiles/templates/support.html:185
+msgid "send-request"
+msgstr ""
+
+#~ msgid "Not Enought"
+#~ msgstr "Non sufficiente"

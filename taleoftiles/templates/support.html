@@ -172,6 +172,23 @@
       </div>
 
     </div>
+
+    <h2><a name="azienda"></a>{% trans 'contact-us'|title  %}</h2>
+    <div>
+      <div class="faqquestions-question">
+        <button class="btn btn-tree"><h4>{% trans 'faq-contact-us'  %}</h4><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
+        <p>
+          <form method="post" action="{% url 'support' %}">
+            {% csrf_token %}
+            <p>{{contact_form}}</p>
+  
+            <input type="submit" class="btn btn-primary" value="{% trans 'send-request' %}">
+            <input type="hidden" name="next" value="{{ request.get_full_path }} " />
+
+          </form>
+      </p>
+      </div>
+    </div>
   </div>
 </div>
 

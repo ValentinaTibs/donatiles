@@ -119,6 +119,18 @@ class MailTemplate(models.Model):
     template_vs     = models.CharField(max_length=50, null = False, blank=False) 
     no_reply        = models.BooleanField(default = False)
 
+    def send_user_request(self,user_email, email_content):
+        message = Mail(from_email=From(user_email, 'TaleOfTiles'),
+                to_emails=To('info@taleoftiles.com','info@taleoftiles.com'),
+                subject=Subject("REQUEST FROM USER "),
+                html_content=HtmlContent(email_content))
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        try:
+            response = sg.send(message)
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)
+
     def send_password_reset(self,user):
         cLng = translation.get_language()
         email_template_name = "email/"+cLng+"/password_reset_email.txt"
