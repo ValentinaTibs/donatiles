@@ -1,5 +1,5 @@
 django
-gunicorn
+waitress
 django-heroku
 requests
 pillow
