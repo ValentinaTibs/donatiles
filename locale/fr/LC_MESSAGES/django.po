@@ -227,8 +227,7 @@ msgstr "Paiements Sécurisés"
 
 #: taleoftiles/templates/home.html:44
 msgid "secure-payment-details"
-msgstr ""
-"Paiements sécurisés, rapides et garantis via PayPal, carte de crédit ou "
+msgstr "Paiements sécurisés, rapides et garantis via PayPal, carte de crédit ou "
 "virement bancaire."
 
 #: taleoftiles/templates/home.html:61

@@ -221,17 +221,12 @@ msgstr ""
 "prodotti</strong>"
 
 #: taleoftiles/templates/home.html:43
-#, fuzzy
-#| msgid "payment"
 msgid "secure-payment"
 msgstr "Pagamenti Sicuri"
 
 #: taleoftiles/templates/home.html:44
-#, fuzzy
-#| msgid "payment-title"
 msgid "secure-payment-details"
-msgstr ""
-"Pagamenti sicuri, veloci e garantiti tramite PayPal, carta di credito o "
+msgstr "Pagamenti sicuri, veloci e garantiti tramite PayPal, carta di credito o "
 "bonifico bancario."
 
 #: taleoftiles/templates/home.html:61
