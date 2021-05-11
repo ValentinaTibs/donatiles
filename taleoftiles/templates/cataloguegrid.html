@@ -81,10 +81,10 @@
         
 
             
-        <div class="checkbox">
+<!--         <div class="checkbox">
           <input type="checkbox" id="filter-sampleable" {% if tags.samplable in active_tags %} checked {% endif %} onClick="Javascript:toggleFilter('{{ tags.samplable.slug }}')">
           <label for="filter-sampleable">{{tags.samplable.name}} </label>
-        </div>
+        </div> -->
 
         {% for effect in tags.effect.all_catalogue_childs %}
           {% if effect.data_type == 'b' %}
