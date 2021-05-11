@@ -38,7 +38,7 @@
     <div class="content">
       <ul>
 
-      {% for tag in tags|filter_tags:'effect' %}
+      {% for tag in tags|filter_tags:'categoria' %}
           <li >
             <a href="{% url 'catalogue' %}?filters={{tag.slug}}" class="btn-gridbox">{{tag}}</a>
         </li>
