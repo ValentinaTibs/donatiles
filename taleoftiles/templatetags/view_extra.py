@@ -47,7 +47,9 @@ def working_days(days):
 @register.simple_tag
 def min_price(obj, min_price, *args):
     name = (args)[0]
+    print(name)
     the_tag = Tag.objects.get(name = name)
+
     method = getattr(obj, min_price)
     return method(the_tag.slug)
     
