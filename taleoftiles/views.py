@@ -180,8 +180,7 @@ def product(request, product_code, chi_form = None ):
         #2do put here rendering of errors
         else:
             errors = chi_form.errors
-            
-            
+                        
     return render(request, "product.html",{
         "product":product,
         "products_series":related_series,

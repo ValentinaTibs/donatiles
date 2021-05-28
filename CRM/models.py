@@ -277,6 +277,7 @@ class ChartItem(models.Model):
     chart       = models.ForeignKey(Chart,      verbose_name="Charts",      null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
+    #finish      = models.ForeignKey(Tag,        verbose_name="Finishes",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     quantity    = models.PositiveIntegerField( default=1 )       
     #saved_price = models.PositiveIntegerField( )       
     has_frido   = models.BooleanField(default = True)

@@ -82,11 +82,14 @@
       {% endfor %}
       
     {% if chi_form.finish %}
-
       <h5>{% trans 'finishes' %}</h5>
-        {% for choice in chi_form.finish %}
-            <label  for="{{ choice.id_for_label }}" id="label_finish_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
+
+        {% for id_choice,name_choice in chi_form.fields.finish.choices %}
+            <input type="radio" name="format" value="{{id_choice}}" id="finish_{{ id_choice }}" required="">
+            <label  for="finish_{{ id_choice }}" id="label_finish_{{ id_choice }}" >{{ name_choice }}</label>
         {% endfor %}
+
+
     {% endif %}
 
 
@@ -321,23 +324,7 @@
     if (!some_size_checked){
       document.getElementById("id_size_0").checked = true;
     }
-// --------    
 
-  //enabling click on the formats
-    var prev_f = null;
-    var rad_f = document.getElementsByName('size');
-
-    var some_size_checked = false;
-    for (var i = 0; i < rad.length; i++) {
-      some_size_checked = document.getElementsByName("size")[i].checked
-        rad[i].addEventListener('change', function() {
-            compute_money()
-        });
-    }
-    if (!some_size_checked){
-      document.getElementById("id_size_0").checked = true;
-    }
-// --------
 
     document.getElementById('id_quantity').addEventListener('input', function () {
         compute_money();
