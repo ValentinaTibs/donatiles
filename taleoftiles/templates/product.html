@@ -85,7 +85,6 @@
 
       <h5>{% trans 'finishes' %}</h5>
         {% for choice in chi_form.finish %}
-          {{ choice.tag }}
             <label  for="{{ choice.id_for_label }}" id="label_finish_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
         {% endfor %}
     {% endif %}
@@ -324,20 +323,20 @@
     }
 // --------    
 
-  // //enabling click on the formats
-  //   var prev_f = null;
-  //   var rad_f = document.getElementsByName('size');
+  //enabling click on the formats
+    var prev_f = null;
+    var rad_f = document.getElementsByName('size');
 
-  //   var some_size_checked = false;
-  //   for (var i = 0; i < rad.length; i++) {
-  //     some_size_checked = document.getElementsByName("size")[i].checked
-  //       rad[i].addEventListener('change', function() {
-  //           compute_money()
-  //       });
-  //   }
-  //   if (!some_size_checked){
-  //     document.getElementById("id_size_0").checked = true;
-  //   }
+    var some_size_checked = false;
+    for (var i = 0; i < rad.length; i++) {
+      some_size_checked = document.getElementsByName("size")[i].checked
+        rad[i].addEventListener('change', function() {
+            compute_money()
+        });
+    }
+    if (!some_size_checked){
+      document.getElementById("id_size_0").checked = true;
+    }
 // --------
 
     document.getElementById('id_quantity').addEventListener('input', function () {
