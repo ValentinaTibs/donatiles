@@ -85,7 +85,7 @@
       <h5>{% trans 'finishes' %}</h5>
 
         {% for id_choice,name_choice in chi_form.fields.finish.choices %}
-            <input type="radio" name="format" value="{{id_choice}}" id="finish_{{ id_choice }}" required="">
+            <input type="radio" name="finish" value="{{id_choice}}" id="finish_{{ id_choice }}" required="">
             <label  for="finish_{{ id_choice }}" id="label_finish_{{ id_choice }}" >{{ name_choice }}</label>
         {% endfor %}
 
@@ -352,6 +352,7 @@
           product : $( 'input[id="id_product"]' ).val(),
           save_it : $( 'input[name="id_save_it"]' ).val(),
           size : $( 'input[name="size"]:checked' ).val(),
+          finish : $( 'input[name="finish"]:checked' ).val(),
           has_frido :$('#id_has_frido').prop('checked')
       },
       success: function(result) {

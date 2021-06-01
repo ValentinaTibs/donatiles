@@ -34,12 +34,6 @@ def index(request):
         'home_prods'    : home_prods
         })
 
-# def catalogue(request):
-#     #filtering 
-
-#     #paginating 
-
-
 class catalogue(ListView):
     active_tags = None
     url_data = ''

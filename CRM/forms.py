@@ -85,6 +85,7 @@ class NewChartItemForm(forms.ModelForm):
 
         quantity    = self.cleaned_data.get('quantity')
         product     = self.cleaned_data.get('product')
+        print(self.cleaned_data.get('finish'))
         
 
         # if quantity < product.min_ammount:
