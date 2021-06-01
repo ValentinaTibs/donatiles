@@ -287,16 +287,20 @@ class ProductAdmin(admin.ModelAdmin):
                     'formats_parent_',
                     'formats_',
                     'colours_',
-                    'setting_',
-                    'style_',
                     'effect_',
                     'finish_',
+                    'carta_da_parati_', 
+                    'rivestimenti_',
+                    'pavimenti_',
+                    'superficipremium_',                   
                     'samplable_',
                     'in_home_',
                     'publication',
                     'support_to',
                     'techspec',
                     )
+    
+
     def name_(self, obj):
         if obj.name == " ":
             return obj.code
@@ -319,6 +323,31 @@ class ProductAdmin(admin.ModelAdmin):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='effect')])    
     def finish_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(parent__slug='finish')])    
+
+    def carta_da_parati_(self, obj):
+        if obj.tags.filter(slug='cartadaparati'):
+            return True
+        return False
+    carta_da_parati_.boolean = True
+
+    def rivestimenti_(self, obj):
+        if obj.tags.filter(slug='rivestimenti'):
+            return True
+        return False
+    rivestimenti_.boolean = True
+
+    def pavimenti_(self, obj):
+        if obj.tags.filter(slug='pavimenti'):
+            return True
+        return False
+    pavimenti_.boolean = True
+
+    def superficipremium_(self, obj):
+        if obj.tags.filter(slug='superficipremium'):
+            return True
+        return False
+    superficipremium_.boolean = True
+
     def samplable_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='samplable')])    
     def in_home_(self, obj):
