@@ -7,7 +7,8 @@ from taleoftiles.models import  Product, Tag, Publication, Price, EasyProductPro
 from taleoftiles.models import TechnicalSpec, Catalogue
 from layout.models      import Image, Icon
 
-from taleoftiles.forms import CustomProductModelForm
+from taleoftiles.forms import CustomProductModelForm,UpdateScoreForm
+
 
 def duplicate(modeladmin, request, queryset):
     for e in queryset:
@@ -265,7 +266,11 @@ class EasyProductAdmin(ImportExportActionModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    actions = [duplicate_product,assign_catalogue,toggle_samplable]
+    action_form = UpdateScoreForm
+
+    actions = [duplicate_product,assign_catalogue,'set_tag_action']
+
+
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 
@@ -322,6 +327,20 @@ class ProductAdmin(admin.ModelAdmin):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(slug='decor')])    
     def product_edit_(self, obj):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(in_product_edit = True)])    
+
+    def set_tag_action(self, request, queryset):
+    
+        hm = Tag.objects.get(slug=request.POST['tag'])
+        for product in queryset:
+            the_tags = product.tags.filter(pk=hm.pk) 
+
+            if the_tags.count()>0:
+                product.tags.remove(hm.pk)
+            else:
+                product.tags.add(hm.pk)                
+            product.save()
+
+    set_tag_action.short_description = u'Update tag of selected products'    
 
 
 class TechnicalSpecAdmin(admin.ModelAdmin):

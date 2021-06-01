@@ -9,6 +9,11 @@ from captcha.fields import ReCaptchaField
 from django.core.exceptions import NON_FIELD_ERRORS
 
 
+from django.contrib.admin.helpers import ActionForm
+
+class UpdateScoreForm(ActionForm):
+    tag = forms.CharField()
+
 class CustomProductModelForm(forms.ModelForm):
     
     series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie',public = True), required = False)
