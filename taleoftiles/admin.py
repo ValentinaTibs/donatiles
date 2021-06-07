@@ -105,7 +105,6 @@ class PhotoStackedAdmin(admin.StackedInline):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-
 class IconImageStackedAdmin(admin.StackedInline):
     model = Image
 
@@ -113,14 +112,19 @@ class IconImageStackedAdmin(admin.StackedInline):
     search_fields = ('name', )
     exclude = ('name','product','is_cover','order','element' )
 
+from django.db.models import Q
 
 class PriceStackedAdmin(admin.StackedInline):
     model = Price
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "size":
-            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
-            
+            Q(parent__parent__slug__in='format')
+            kwargs["queryset"] = Tag.objects.filter(Q(parent__parent__slug='format') | Q(parent__slug='finish'))
+        
+            # if db_field.name == "finish_tag":
+            # kwargs["queryset"] = Tag.objects.filter(parent__slug='finish').order_by('-slug')
+        
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 class PriceAdmin(admin.ModelAdmin):
@@ -269,7 +273,6 @@ class ProductAdmin(admin.ModelAdmin):
     action_form = UpdateScoreForm
 
     actions = [duplicate_product,assign_catalogue,'set_tag_action']
-
 
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
