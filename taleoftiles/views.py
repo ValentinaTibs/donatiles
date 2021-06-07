@@ -36,12 +36,29 @@ def index(request):
 
 def catalogue(request):  
     order_by = 'name'
+
     url_data =[]
-    url_data = request.GET.get('filters', '')
-   
+
+    if request.method == 'GET':
+        url_data = [request.GET.get('filters', '')]
+    elif request.method == 'POST':
+        url_data_string = request.POST.get('url_data', '')
+        url_data = url_data_string.split('_')
+        toggle_filter = request.POST.get('toggleFilter', '')
+
+        print("    ===>  ",url_data, "  -  ", toggle_filter)
+
+        try:
+            url_data.remove(toggle_filter)
+        except ValueError:
+            url_data.append(toggle_filter)
+
+        print("  -->  ",url_data)
+        
+        
     tag_query = Q()
     tag_len = 0
-    for value in [url_data]:
+    for value in url_data:
         tag_query = tag_query | Q(slug = value)
         tag_len = tag_len + 1
 
@@ -53,6 +70,12 @@ def catalogue(request):
     
     products = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
     
+    if request.is_ajax():
+        print(url_data)
+
+
+        return render(request, "catalogue.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
+
     return render(request, "catalogue.html", {
         "products": products,"active_tags" : active_tags,
         'tags':all_tags,'url_data':'_'.join(url_data) })
