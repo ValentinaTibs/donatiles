@@ -220,12 +220,6 @@
     <a href="{% url 'catalogue' %}?filters={{colour.slug}}"  class="tag">{{colour.name}} </a><br>
 	{% endfor %}
 
-
-  <h5>{% trans 'settings' %}</h5>
-
-  {% for style in product|styles %}
-      <a href="{% url 'catalogue'  %}?filter={{style.slug}}"  class="tag">{{style.name}} </a><br>
-  {% endfor %}
   </div>
 
 </div>
