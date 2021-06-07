@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
+
 from django.shortcuts import render
 from django.core import serializers
-from django.views.generic.list import ListView
 from django.http import JsonResponse
 
 from django.utils.translation import ugettext
@@ -36,128 +37,56 @@ def index(request):
 
 def catalogue(request):  
     order_by = 'name'
-
+    results_limit = 9
     url_data =[]
+    page = 1
 
     if request.method == 'GET':
-        url_data = [request.GET.get('filters', '')]
+        do_we_have_filters = request.GET.get('filters', '')
+        if do_we_have_filters:
+            url_data = [request.GET.get('filters', '')]
+        page = request.GET.get('page', 1)
     elif request.method == 'POST':
         url_data_string = request.POST.get('url_data', '')
         url_data = url_data_string.split('_')
         toggle_filter = request.POST.get('toggleFilter', '')
-
-        print("    ===>  ",url_data, "  -  ", toggle_filter)
+        page = request.POST.get('page', 1)
 
         try:
             url_data.remove(toggle_filter)
         except ValueError:
             url_data.append(toggle_filter)
 
-        print("  -->  ",url_data)
-        
-        
+    #removing empty string
+    url_data = list(filter(('').__ne__, url_data))
     tag_query = Q()
     tag_len = 0
+
     for value in url_data:
         tag_query = tag_query | Q(slug = value)
         tag_len = tag_len + 1
 
     # tags in the catalogue shoulder    
     all_tags = Tag.objects.filter(in_catalogue = True ,parent__isnull = True, public = True).in_bulk(field_name='slug')   
-
-    # tags selected in the actual query 
-    active_tags = Tag.objects.filter(tag_query,public=True)       
-    
-    products = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
-    
-    if request.is_ajax():
-        print(url_data)
-
-
-        return render(request, "catalogue.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
+    active_tags = Tag.objects.filter(tag_query,public=True) 
+    if tag_len > 0 :      
+        products_list = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
+    else:
+        active_tags = []
+        products_list = Product.objects.filter(is_active = True).annotate(num_tags=Count('tags')).distinct().order_by(order_by)
+    print("  =>  ",tag_len,url_data,tag_query,active_tags,products_list)
+    # pagination 
+    paginator = Paginator(products_list, results_limit )
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
 
     return render(request, "catalogue.html", {
         "products": products,"active_tags" : active_tags,
         'tags':all_tags,'url_data':'_'.join(url_data) })
-
-# class catalogue_(ListView):
-#     active_tags = None
-#     url_data = ''
-
-#     model = Product 
-    
-#     paginate_by = 18
-#     context_object_name = 'products'
-#     template_name = 'catalogue.html'
-#     #2do put here a custom ordering
-#     ordering = ['?']    
-
-#     #2do maybe here using the self instance might save us time
-#     def post(self, request):
-
-#         if self.request.is_ajax():
-#             url_data =[]
-#             url_data_string = request.POST.get('url_data', None)
-#             if url_data_string:
-#                 url_data = url_data_string.split('_')
-#             the_filter = request.POST.get('toggleFilter', '')
-            
-#             if (the_filter in url_data):
-#                 url_data.remove(the_filter)
-#             else:
-#                 url_data.append(the_filter)
-            
-#             #2do this must became a function
-#             tag_query = Q()
-#             tag_len = 0
-#             for value in url_data:
-#                 tag_query = tag_query | Q(slug = value)
-#                 tag_len = tag_len + 1
-
-#             all_tags = Tag.objects.filter(in_catalogue = True ,parent__isnull = True, public = True).in_bulk(field_name='slug')   
-#             active_tags = None
-
-#             if tag_len == 0 :
-#                 products = Product.objects.filter(is_active=True)
-#             else:
-#                 active_tags = Tag.objects.filter(tag_query)
-#                 products = Product.objects.filter(is_active=True,tags__in=active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().all().order_by('?')
-#             #2do move the cataloguegrid into include folder
-#             return render(request, "cataloguegrid.html", {"products": products,"active_tags" : active_tags,'tags':all_tags,'url_data':'_'.join(url_data) })
-
-#     def get_context_data(self, **kwargs):
-        
-#         context = super(catalogue, self).get_context_data(**kwargs)
-#         try: 
-#             cat = Catalogue.objects.get(active = True)
-#         except ObjectDoesNotExist:
-#             return render(request, "404.html",{"message":"There is no active catalogue",})
-
-        
-#         context['tags']         = self.all_tags.in_bulk(field_name='slug')
-#         context['active_tags']  = self.active_tags
-#         context['url_data']     = self.url_data
-
-#         return context
-    
-#     def get_queryset(self):
-#         if self.request.method == 'GET':
-#             self.url_data = self.request.GET.get('filters', '')  
-#             self.all_tags = Tag.objects.filter(in_catalogue = True, parent__isnull = True, public = True)
-#             if not self.url_data :
-#                 return Product.objects.filter(is_active=True).order_by('?')
-
-#             tag_query = Q()
-#             tag_len = 0
-
-#             for value in self.url_data.split('_'):
-#                 tag_query = tag_query | Q(slug = value)
-#                 tag_len = tag_len + 1
-#             if tag_len == 0 :
-#                 return Product.objects.filter(is_active=True).order_by('?')
-            
-#             self.active_tags =  Tag.objects.filter( tag_query,public=True)
-#             return Product.objects.filter(is_active=True,tags__in=self.active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by('?')
 
 
 def compute_price(request):
