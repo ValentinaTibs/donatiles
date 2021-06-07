@@ -38,7 +38,7 @@ def catalogue(request):
     order_by = 'name'
     url_data =[]
     url_data = request.GET.get('filters', '')
-    print(url_data)    
+   
     tag_query = Q()
     tag_len = 0
     for value in [url_data]:
@@ -51,9 +51,8 @@ def catalogue(request):
     # tags selected in the actual query 
     active_tags = Tag.objects.filter(tag_query,public=True)       
     
-    products = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by('?')
-    products = Product.objects.filter(is_active = True, tags__in = active_tags)
-    print(products)
+    products = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
+    
     return render(request, "catalogue.html", {
         "products": products,"active_tags" : active_tags,
         'tags':all_tags,'url_data':'_'.join(url_data) })
