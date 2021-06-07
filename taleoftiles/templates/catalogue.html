@@ -162,39 +162,26 @@
 </div>
 
 <input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
+<input type="hidden" id="hidden_page" value="{{products.number}}"> 
 
 
 
-{% if products.has_other_pages %}
-  <ul class="pagination">
-    {% if products.has_previous %}
-      <li><a href="?page={{ products.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in products.paginator.page_range %}
-      {% if products.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if products.has_next %}
-      <li><a href="?page={{ products.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
+
+
+
+{% if products.has_next %}
+<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{products.next_page_number}}&filter={{url_data}}" ></a>
 {% endif %}
 
-<!-- {% if page_obj.has_next %}
-<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{page_obj.next_page_number}}&filter={{url_data}}" ></a>
-{% endif %}
-<div class="d-flex justify-content-center" style="display:none;">
+<div class="d-flex justify-content-center" >
     <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+        <h2><span class="sr-only loading">Loading...</span></h2>
     </div>
-</div> -->
+</div> 
+
+
+
+
 <script>
     var infinite = new Waypoint.Infinite({
       element: $('.infinite-container')[0],
@@ -247,7 +234,8 @@ function toggleFilter( tagSlug ) {
         data: {
             csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
             url_data : $( 'input[id="hidden_url_data"]' ).val(), 
-            toggleFilter : tagSlug
+            toggleFilter : tagSlug,
+            hidden_page : $( 'input[id="hidden_page"]' ).val(), 
         },
         success: function(result) {
             $("#content").html(result);

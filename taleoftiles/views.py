@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 from django.shortcuts import render
 from django.core import serializers
@@ -50,7 +50,8 @@ def catalogue(request):
         url_data_string = request.POST.get('url_data', '')
         url_data = url_data_string.split('_')
         toggle_filter = request.POST.get('toggleFilter', '')
-        page = request.POST.get('page', 1)
+        page = request.POST.get('hidden_page', 1)
+
 
         try:
             url_data.remove(toggle_filter)
