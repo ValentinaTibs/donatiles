@@ -37,21 +37,26 @@ def index(request):
 def catalogue(request):  
     order_by = 'name'
     url_data =[]
-    url_data = request.GET.get('filters', '')  
+    url_data = request.GET.get('filters', '')
     print(url_data)    
     tag_query = Q()
     tag_len = 0
-    for value in url_data:
+    for value in [url_data]:
         tag_query = tag_query | Q(slug = value)
         tag_len = tag_len + 1
-    
+
+    # tags in the catalogue shoulder    
+    all_tags = Tag.objects.filter(in_catalogue = True ,parent__isnull = True, public = True).in_bulk(field_name='slug')   
+
+    # tags selected in the actual query 
     active_tags = Tag.objects.filter(tag_query,public=True)       
-    print(active_tags) 
-    products = Product.objects.filter(tags__in=active_tags)
     
+    products = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by('?')
+    products = Product.objects.filter(is_active = True, tags__in = active_tags)
+    print(products)
     return render(request, "catalogue.html", {
         "products": products,"active_tags" : active_tags,
-        'tags':active_tags,'url_data':'_'.join(url_data) })
+        'tags':all_tags,'url_data':'_'.join(url_data) })
 
 # class catalogue_(ListView):
 #     active_tags = None
