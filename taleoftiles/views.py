@@ -36,7 +36,7 @@ def index(request):
         })
 
 def catalogue(request):  
-    order_by = 'name'
+    order_by = '-publication__created_at'
     results_limit = 9
     url_data =[]
     page = 1
