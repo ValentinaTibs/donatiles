@@ -74,7 +74,7 @@ def catalogue(request):
     else:
         active_tags = []
         products_list = Product.objects.filter(is_active = True).annotate(num_tags=Count('tags')).distinct().order_by(order_by)
-    print("  =>  ",tag_len,url_data,tag_query,active_tags,products_list)
+    
     # pagination 
     paginator = Paginator(products_list, results_limit )
     try:
