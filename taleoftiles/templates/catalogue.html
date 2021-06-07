@@ -22,6 +22,7 @@
 }
 </style> 
 
+
 <div class="content grid grid-catalogue">
 
   <aside>
@@ -164,20 +165,19 @@
 <input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
 <input type="hidden" id="hidden_page" value="{{products.number}}"> 
 
-
-
-
-
-
 {% if products.has_next %}
-<a class="infinite-more-link" href="{% url 'catalogue' %}?page={{products.next_page_number}}&filter={{url_data}}" ></a>
-{% endif %}
+<a class="infinite-more-link"  id ="infinite-more-link_" 
+  href="{% url 'catalogue' %}?page={{products.next_page_number}}&filters={{url_data}}"
+   ></a>
+
 
 <div class="d-flex justify-content-center" >
     <div class="spinner-border" role="status">
         <h2><span class="sr-only loading">Loading...</span></h2>
     </div>
 </div> 
+
+{% endif %}
 
 
 

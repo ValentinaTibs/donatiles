@@ -51,8 +51,6 @@ def catalogue(request):
         url_data = url_data_string.split('_')
         toggle_filter = request.POST.get('toggleFilter', '')
         page = request.POST.get('hidden_page', 1)
-
-
         try:
             url_data.remove(toggle_filter)
         except ValueError:
@@ -76,6 +74,7 @@ def catalogue(request):
         active_tags = []
         products_list = Product.objects.filter(is_active = True).annotate(num_tags=Count('tags')).distinct().order_by(order_by)
     
+
     # pagination 
     paginator = Paginator(products_list, results_limit )
     try:
