@@ -110,9 +110,12 @@
             <div class="product-figure"><span> €</span>
 
             {% for choice in chi_form.size %}
-            <b style="display:none;" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
+            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
             {% endfor %}
 
+            {% for choice in chi_form.finish %}
+            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
+            {% endfor %}
 
           </div><div class="product-note">al m&sup2;</div></div>
         </div>
@@ -275,6 +278,7 @@
     var finishes = document.getElementsByName('finish');
 
     for(var j = 0; j < finishes.length; j++) {
+
       if(finishes[j].checked) {
         var sel_finish = document.getElementById('label_finish_'+finishes[j].value).innerHTML;
         document.getElementById('selected_format').innerHTML = String(sel_finish);
