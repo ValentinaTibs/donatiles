@@ -75,13 +75,18 @@
   <div class="product-selection">
     <div class="product-options">
 
-      <h5>{% trans 'formats' %}</h5>
-      {% for choice in chi_form.size %}
-          {{ choice.tag }}
-          <label  for="{{ choice.id_for_label }}" id="label_{{ choice.id_for_label }}" >{{ choice.choice_label }}</label>
-      {% endfor %}
+    {% if chi_form.fields.size.queryset.all|length > 0 %}
+        <h5>{% trans 'size' %}</h5>
+
+          {% for id_choice,name_choice in chi_form.fields.size.choices %}
+              <input type="radio" name="size" value="{{id_choice}}" id="size_{{ id_choice }}" required="">
+              <label  for="size_{{ id_choice }}" id="label_size_{{ id_choice }}" >{{ name_choice }}</label>
+          {% endfor %}
+
+    {% endif %}
+
       
-    {% if chi_form.finish %}
+    {% if chi_form.fields.finish.queryset.all|length > 0 %}
       <h5>{% trans 'finishes' %}</h5>
 
         {% for id_choice,name_choice in chi_form.fields.finish.choices %}
@@ -258,33 +263,35 @@
 {% endif %}
 
 <script>
+
   var qtyField = $( '#id_quantity' );
 
   function compute_money(){
 
-    var formats = document.getElementsByName('size');
-    for(i = 0; i < formats.length; i++) {
-      var sel_size = document.getElementById('label_id_size_'+i).innerHTML
-      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
-      if(formats[i].checked) {
-        document.getElementById('selected_format').innerHTML = String(sel_size);
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+    var sizes = document.getElementsByName('size');
+    for(var j = 0; j < sizes.length; j++) {
+      var sel_sizes = document.getElementById('label_size_'+sizes[j].value).innerHTML;
+      document.getElementById('sm_price_catch_'+sel_sizes).style.display = "none";
+
+      if(sizes[j].checked) {        
+        document.getElementById('selected_format').innerHTML = String(sel_sizes);
+        document.getElementById('sm_price_catch_'+sel_sizes).style.display = "inline";
         document.getElementById('sm_catch').innerHTML = qtyField.val();
         document.getElementById('sm_notification').innerHTML = qtyField.val();
-        //document.getElementById('sm_image_'+sel_size).style.display = "none";
       }
     }
 
     var finishes = document.getElementsByName('finish');
-
     for(var j = 0; j < finishes.length; j++) {
-      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
+      var sel_finish = document.getElementById('label_finish_'+finishes[j].value).innerHTML;
+      document.getElementById('sm_price_catch_'+sel_finish).style.display = "none";
+
       if(finishes[j].checked) {
-        var sel_finish = document.getElementById('label_finish_'+finishes[j].value).innerHTML;
         document.getElementById('selected_format').innerHTML = String(sel_finish);
+        document.getElementById('sm_price_catch_'+sel_finish).style.display = "inline";
         document.getElementById('sm_catch').innerHTML = qtyField.val();
         document.getElementById('sm_notification').innerHTML = qtyField.val();
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+
       }
     }
 
@@ -296,8 +303,8 @@
           csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
           quantity: $( 'input[id="id_quantity"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
-          size : $( 'input[name="size"]:checked' ).val(),
-          finish : $( 'input[name="finish"]:checked' ).val(),
+          size :    $( 'input[name="size"]:checked' ).val(),
+          finish :  $( 'input[name="finish"]:checked' ).val(),
           has_frido :$('#id_has_frido').prop('checked')
       },
       success:  function(result) { $("#price_catch").html(result['tot_price']); },
@@ -305,7 +312,6 @@
     });
 
   }
-
 
   function add_quantity(){
     qtyField.val( +qtyField.val() + 1 );
@@ -320,29 +326,26 @@
   window.onload = function() {
 
     //enabling click on the sizes
-    var prev = null;
-    var rad = document.getElementsByName('size');
-
+    var rad_size = document.getElementsByName('size');
     var some_size_checked = false;
-    for (var i = 0; i < rad.length; i++) {
-      some_size_checked = document.getElementsByName("size")[i].checked
-        rad[i].addEventListener('change', function() {
+    for (var i = 0; i < rad_size.length; i++) {
+        some_size_checked = document.getElementsByName("size")[i].checked;
+        rad_size[i].addEventListener('change', function() {
             compute_money()
         });
     }
 
-    var some_finish_checked = false;
     var rad_finish = document.getElementsByName('finish');
+    var some_finish_checked = false;
     for (var i = 0; i < rad_finish.length; i++) {
-      some_finish_checked = document.getElementsByName("finish")[i].checked
+        some_finish_checked = document.getElementsByName("finish")[i].checked;
         rad_finish[i].addEventListener('change', function() {
             compute_money()
         });
     }
 
-    if (!some_size_checked){
-      document.getElementById("id_size_0").checked = true;
-    }
+
+
 
     document.getElementById('id_quantity').addEventListener('input', function () {
         compute_money();
@@ -365,12 +368,12 @@
       data: {
           csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
           
-          quantity: $( 'input[id="id_quantity"]' ).val(),
-          product : $( 'input[id="id_product"]' ).val(),
-          save_it : $( 'input[name="id_save_it"]' ).val(),
-          size : $( 'input[name="size"]:checked' ).val(),
-          finish : $( 'input[name="finish"]:checked' ).val(),
-          has_frido :$('#id_has_frido').prop('checked')
+          quantity:   $( 'input[id="id_quantity"]' ).val(),
+          product :   $( 'input[id="id_product"]' ).val(),
+          save_it :   $( 'input[name="id_save_it"]' ).val(),
+          size :      $( 'input[name="size"]:checked' ).val(),
+          finish :    $( 'input[name="finish"]:checked' ).val(),
+          has_frido : $('#id_has_frido').prop('checked')
       },
       success: function(result) {
           console.log('ok');

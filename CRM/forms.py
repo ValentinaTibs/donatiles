@@ -53,40 +53,26 @@ class ShippingForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
             super(ShippingForm, self).__init__(*args, **kwargs)
             
-
 class NewChartItemForm(forms.ModelForm):
 
     class Meta:
         model = ChartItem
-        fields = ('size', 'quantity' ,'product','chart','has_frido')
+        fields = ( 'quantity' ,'product','chart','has_frido')
         widgets = { 
             'product'   :forms.HiddenInput(),
             'chart'     :forms.HiddenInput(),
-            'size'      :forms.RadioSelect(),
             'has_frido' :forms.CheckboxInput(attrs={'checked' : True,}),
         }
 
     def __init__(self, *args, **kwargs):
-
-        product = args[0].get('product')
-        size = args[0].get('size')
-        if product:
-            prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
-        else:
-            raise forms.ValidationError(_('Wrong Product'), code='prod-error')
-
+        product = args[0].get('product')        
         super(NewChartItemForm, self).__init__(*args, **kwargs)
-        self.fields['size'].required = True
-        self.fields['size'].empty_label = None
-        self.fields['size'].queryset = prod_sizes
         self.fields['quantity'].required = True   
                 
     def clean(self):
 
         quantity    = self.cleaned_data.get('quantity')
-        product     = self.cleaned_data.get('product')
-        print(self.cleaned_data.get('finish'))
-        
+        product     = self.cleaned_data.get('product')        
 
         # if quantity < product.min_ammount:
         #     raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')
@@ -101,6 +87,7 @@ class AddChartForm(NewChartItemForm):
 
     save_it = forms.BooleanField(required=False)
     finish  = forms.ModelChoiceField(queryset=Tag.objects.filter(parent__slug = 'finish'), empty_label=None)
+    size    = forms.ModelChoiceField(queryset=Tag.objects.filter(parent__parent__slug = 'format'), empty_label=None)
 
     class Meta(NewChartItemForm.Meta):
         fields = NewChartItemForm.Meta.fields + ('save_it','finish')
@@ -109,16 +96,19 @@ class AddChartForm(NewChartItemForm):
         product = args[0].get('product')
         super(AddChartForm, self).__init__(*args, **kwargs)
         if product:
-            prod_finishes =self.fields['finish'].queryset.filter( products__pk = product)
+            prod_finishes   = self.fields['finish'].queryset.filter( products__pk = product)
+            prod_sizes      = self.fields['size'].queryset.filter( products__pk = product)
         else:
             raise forms.ValidationError(_('Wrong Product'), code='prod-error')
 
         self.fields['finish'].queryset = prod_finishes
         self.fields['finish'].required = False
 
+        self.fields['size'].queryset = prod_sizes
+        self.fields['size'].required = False
+
     def clean(self):
         cleaned_data = super(AddChartForm, self).clean()
-
         
 def create_first_pwd():
     return get_random_string(length=9)
