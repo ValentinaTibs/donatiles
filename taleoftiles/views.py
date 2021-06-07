@@ -93,7 +93,13 @@ def compute_price(request):
     quantity = request.POST.get('quantity', None)
     if quantity and int(quantity) > 0:
         product = Product.active.get(pk = request.POST.get('product', None))
-        size = Tag.objects.get(pk = request.POST.get('size', None))
+        post_size =request.POST.get('size', None)
+        if post_size:
+            size = Tag.objects.get(pk = post_size)
+        post_finish =request.POST.get('finish', None)
+        if post_finish:
+            size = Tag.objects.get(pk = post_finish)
+
         quantity = request.POST.get('quantity')
         price = product.price(size)
         

@@ -255,21 +255,31 @@
 {% endif %}
 
 <script>
-
   var qtyField = $( '#id_quantity' );
 
   function compute_money(){
+
     var formats = document.getElementsByName('size');
     for(i = 0; i < formats.length; i++) {
       var sel_size = document.getElementById('label_id_size_'+i).innerHTML
       document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
       if(formats[i].checked) {
         document.getElementById('selected_format').innerHTML = String(sel_size);
-    
         document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
         document.getElementById('sm_catch').innerHTML = qtyField.val();
         document.getElementById('sm_notification').innerHTML = qtyField.val();
         //document.getElementById('sm_image_'+sel_size).style.display = "none";
+      }
+    }
+
+    var finishes = document.getElementsByName('finish');
+
+    for(var j = 0; j < finishes.length; j++) {
+      if(finishes[j].checked) {
+        var sel_finish = document.getElementById('label_finish_'+finishes[j].value).innerHTML;
+        document.getElementById('selected_format').innerHTML = String(sel_finish);
+        document.getElementById('sm_catch').innerHTML = qtyField.val();
+        document.getElementById('sm_notification').innerHTML = qtyField.val();
       }
     }
 
@@ -282,6 +292,7 @@
           quantity: $( 'input[id="id_quantity"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
           size : $( 'input[name="size"]:checked' ).val(),
+          finish : $( 'input[name="finish"]:checked' ).val(),
           has_frido :$('#id_has_frido').prop('checked')
       },
       success:  function(result) { $("#price_catch").html(result['tot_price']); },
@@ -289,6 +300,7 @@
     });
 
   }
+
 
   function add_quantity(){
     qtyField.val( +qtyField.val() + 1 );
@@ -299,8 +311,6 @@
     qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
     compute_money();
   }
-
-
 
   window.onload = function() {
 
@@ -315,15 +325,23 @@
             compute_money()
         });
     }
+
+    var some_finish_checked = false;
+    var rad_finish = document.getElementsByName('finish');
+    for (var i = 0; i < rad_finish.length; i++) {
+      some_finish_checked = document.getElementsByName("finish")[i].checked
+        rad_finish[i].addEventListener('change', function() {
+            compute_money()
+        });
+    }
+
     if (!some_size_checked){
       document.getElementById("id_size_0").checked = true;
     }
 
-
     document.getElementById('id_quantity').addEventListener('input', function () {
         compute_money();
     });
-
 
     document.getElementById('id_has_frido').addEventListener('change', function () {
         compute_money();

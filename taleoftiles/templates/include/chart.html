@@ -4,7 +4,8 @@
 
   <div class="overlay-title">
     <h4>{% trans 'your-chart' %}</h4>
-    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
+    <button class="btn"><svg class="icon icon-l">
+      <use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
   </div>
 
   {% if charts.count > 0 %}
@@ -16,7 +17,11 @@
           <div class="cartitem-main">
             <div class="cartitem-name">
               <span><strong>{{chart_item.product.serie}}</strong></span>
-              <span>{{chart_item.size}} / {{chart_item.product.name}}</span>
+              <span>{{chart_item.product.name}} / {{chart_item.size}} 
+                {% if chart_item.finish %}
+                  / {{chart_item.finish}}
+                {% endif %}
+              </span>
             </div>
             <div class="cartitem-amount">
               <span>{{chart_item.quantity}} m&sup2;</span>
