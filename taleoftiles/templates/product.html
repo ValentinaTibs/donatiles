@@ -278,12 +278,13 @@
     var finishes = document.getElementsByName('finish');
 
     for(var j = 0; j < finishes.length; j++) {
-
+      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
       if(finishes[j].checked) {
         var sel_finish = document.getElementById('label_finish_'+finishes[j].value).innerHTML;
         document.getElementById('selected_format').innerHTML = String(sel_finish);
         document.getElementById('sm_catch').innerHTML = qtyField.val();
         document.getElementById('sm_notification').innerHTML = qtyField.val();
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
       }
     }
 
