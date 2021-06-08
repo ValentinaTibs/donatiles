@@ -45,13 +45,14 @@ def working_days(days):
     return woking_days(days)
 
 @register.simple_tag
-def min_price(obj, min_price, *args):
-    name = (args)[0]
-    the_tag = Tag.objects.get(name = name)
-
-    method = getattr(obj, min_price)
-    return method(the_tag.slug)
+def min_price_size(obj, epk):
+    the_tag = Tag.objects.get(name = epk)
+    return obj.min_price_size(the_tag)
     
+@register.simple_tag
+def min_price_finish(obj, epk):
+    the_tag = Tag.objects.get(name = epk)
+    return obj.min_price_finish(the_tag)
     
 @register.filter
 def is_in_sample(sample, product):

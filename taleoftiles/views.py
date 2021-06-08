@@ -91,17 +91,21 @@ def compute_price(request):
     quantity = request.POST.get('quantity', None)
     if quantity and int(quantity) > 0:
         product = Product.active.get(pk = request.POST.get('product', None))
+        price = 1
         post_size =request.POST.get('size', None)
         if post_size:
             size = Tag.objects.get(pk = post_size)
+            price = product.size_price(size)
+
         post_finish =request.POST.get('finish', None)
         if post_finish:
             size = Tag.objects.get(pk = post_finish)
+            price = product.finish_price(size)
 
         quantity = request.POST.get('quantity')
-        price = product.price(size)
         
-        definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
+        
+        definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),price, product.m2_box(size.slug),product.weight_box(size.slug))
         
         data = {'tot_price': definitive_price}
         return JsonResponse(data, safe=False) 

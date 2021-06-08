@@ -302,13 +302,30 @@ class ChartItem(models.Model):
             return self.status
 
     def price(self):
+        the_price = 1
+
+        if(self.size):
+            the_finish_or_size = self.size
+            the_price = self.product.size_price(the_finish_or_size)
+        if (self.finish):
+            the_finish_or_size = self.finish
+            the_price = self.product.finish_price(the_finish_or_size)
+    
         if self.product.single_sell():
             return compute_single_price(0,0,0,0)
         else:
-            return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box(self.size))
+            return compute_sm_price(self.quantity, self.has_frido, the_price,self.product.m2_box(self.size),self.product.weight_box(self.size))
 
     def compute_num_boxes(self):
-        return compute_num_boxes(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.product.weight_box(self.size))
+        the_price = 1
+
+        if(self.size):
+            the_finish_or_size = self.size
+            the_price = self.product.size_price(the_finish_or_size)
+        if (self.finish):
+            the_finish_or_size = self.finish
+            the_price = self.product.finish_price(the_finish_or_size)
+        return compute_num_boxes(self.quantity, self.has_frido, the_price,self.product.m2_box(self.size),self.product.weight_box(self.size))
 
 
     def tot_quantity(self):

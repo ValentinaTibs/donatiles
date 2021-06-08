@@ -151,11 +151,13 @@ def compute_sm_price(quantity, has_frido, sm_price, sm_per_box,weight_box):
     
     # return int(tot_price_shipping + (sm_price * tot_quantity))
     price = min_price(sm_price,0,0)
+
     qtyt = 0
     if has_frido == 'true':
         qtyt = float(quantity) + float(quantity) * 0.1
     else:
         qtyt = float(quantity)
+
 
     return math.ceil( qtyt * price ) 
 

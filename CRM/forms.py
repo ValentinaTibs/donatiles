@@ -90,7 +90,7 @@ class AddChartForm(NewChartItemForm):
     size    = forms.ModelChoiceField(queryset=Tag.objects.filter(parent__parent__slug = 'format'), empty_label=None)
 
     class Meta(NewChartItemForm.Meta):
-        fields = NewChartItemForm.Meta.fields + ('save_it','finish')
+        fields = NewChartItemForm.Meta.fields + ('save_it','finish','size')
 
     def __init__(self, *args, **kwargs):
         product = args[0].get('product')

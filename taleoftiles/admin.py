@@ -127,6 +127,13 @@ class PriceStackedAdmin(admin.StackedInline):
         
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
+# from extra_views import ModelFormSetView
+
+# class UpdateDirectory(ModelFormSetView):
+#     model = Price
+#     template_name = 'admin/edit_prices.html'
+#     form_class = forms.EditListForm
+
 class PriceAdmin(admin.ModelAdmin):
 
     model = Price

@@ -234,7 +234,14 @@ class Product(models.Model):
             return None
         return prices.first().size
 
-    def price(self,size ):
+    def finish_price(self,finish ):
+        try: 
+            price = self.prices.get(finish__slug = size)
+        except ObjectDoesNotExist:
+            return 1
+        return price.euros
+
+    def size_price(self,size ):
         try: 
             price = self.prices.get(size__slug = size)
         except ObjectDoesNotExist:
@@ -261,12 +268,15 @@ class Product(models.Model):
             return compute_single_price(0,0,0,0)
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box(self.size))
-    
-    def min_price(self,format):
-        return round(min_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)
 
-    def max_price(self,format):
-        return round(max_price(self.price(format), self.m2_box(format), self.weight_box(format)),2)    
+    def ciao_manu(self):
+        print("  \n CIAO MANU \n\n")
+    
+    def min_price_size(self,format):
+        return round(min_price(self.size_price(format), self.m2_box(format), self.weight_box(format)),2)
+
+    def max_price_finish(self,format):
+        return round(max_price(self.finish_price(format), self.m2_box(format), self.weight_box(format)),2)    
 
     def all_min_price(self):
         da_list = []
