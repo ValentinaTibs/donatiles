@@ -46,14 +46,19 @@ def working_days(days):
 
 @register.simple_tag
 def min_price_size(obj, epk):
-    the_tag = Tag.objects.get(name = epk)
-    return obj.min_price_size(the_tag)
+    the_tag = Tag.objects.filter(name = epk).first()
+    if the_tag:
+        return obj.min_price_size(the_tag)
+    return '-'
     
 @register.simple_tag
 def min_price_finish(obj, epk):
-    the_tag = Tag.objects.get(name = epk)
-    return obj.min_price_finish(the_tag)
-    
+    the_tag = Tag.objects.filter(name = epk).first()
+
+    if the_tag:
+        return obj.min_price_finish(the_tag)
+    return '-'
+
 @register.filter
 def is_in_sample(sample, product):
     if sample: 

@@ -126,7 +126,7 @@ def product(request, product_code, chi_form = None ):
     chi_form = AddChartForm(request.POST or {'product':product.pk,} ,  None)
     query = Q()
    
-    price = 0
+
     errors = None
     if request.is_ajax():
         if chi_form.is_valid() :
@@ -162,6 +162,5 @@ def product(request, product_code, chi_form = None ):
         "product":product,
         "products_series":related_series,
         "chi_form" : chi_form, 
-        "errors" : errors,
-        "price":price
+        "errors" : errors
         })
