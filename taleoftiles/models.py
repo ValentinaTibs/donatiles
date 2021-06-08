@@ -242,7 +242,7 @@ class Product(models.Model):
 
     def finish_price(self,finish ):
         try: 
-            price = self.prices.get(finish__slug = size)
+            price = self.prices.get(finish__slug = finish)
         except ObjectDoesNotExist:
             return 1
         return price.euros
