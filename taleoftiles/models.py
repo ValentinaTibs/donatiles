@@ -275,9 +275,11 @@ class Product(models.Model):
         else:
             return compute_sm_price(self.quantity, self.has_frido, self.product.price(self.size),self.product.m2_box(self.size),self.weight_box(self.size))
 
-    
     def min_price_size(self,format):
         return round(min_price(self.size_price(format), self.m2_box(format), self.weight_box(format)),2)
+    
+    def min_price_finish(self,format):
+        return round(min_price(self.finish_price(format), self.m2_box(format), self.weight_box(format)),2)
 
     def max_price_finish(self,format):
         return round(max_price(self.finish_price(format), self.m2_box(format), self.weight_box(format)),2)    
