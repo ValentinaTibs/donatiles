@@ -141,7 +141,7 @@ class PriceAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "size":
-            kwargs["queryset"] = Tag.objects.filter(parent__parent__slug='format')
+            kwargs["queryset"] = Tag.objects.filter(Q(parent__parent__slug='format') | Q(parent__slug='finish'))
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
     list_display = ("product","size","euros","m2_box","weight_box")
