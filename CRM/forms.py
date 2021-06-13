@@ -19,6 +19,24 @@ import datetime as dt
 import pytz
 utc=pytz.UTC
 
+
+class WallpaperForm(forms.Form):
+    
+    email        = forms.EmailField(required=True)
+    name_surname = forms.CharField(required=False)
+    #telephone    = forms.RegexField(regex=r'^\+?1?\d{9,15}$', error_messages = _("Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."))
+    telephone    = forms.CharField(max_length=20,required=False)
+
+    width        = forms.IntegerField(required=True)
+    height       = forms.IntegerField(required=True)
+
+    notes        = forms.CharField(widget=forms.Textarea(),label = _('notes'),required=False)
+    accept       = forms.BooleanField(required=True)
+    
+    def clean(self):
+        return super(WallpaperForm, self).clean()
+
+
 class ApplyDiscountForm(forms.Form):
     code        = forms.CharField(max_length=20)
     order_code  = forms.HiddenInput()
@@ -85,8 +103,6 @@ class NewChartItemForm(forms.ModelForm):
 
         quantity    = self.cleaned_data.get('quantity')
         product     = self.cleaned_data.get('product')
-        print(self.cleaned_data.get('finish'))
-        
 
         # if quantity < product.min_ammount:
         #     raise forms.ValidationError(_('Not Enought'), code='min-ammount-error')

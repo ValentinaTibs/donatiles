@@ -17,7 +17,7 @@ from layout.models      import Element
 from blog.models        import Post
 from CRM.models        import Chart
 
-from CRM.forms          import AddChartForm
+from CRM.forms          import AddChartForm,WallpaperForm
 from django.db.models import Count
 
 def index(request):  
@@ -121,9 +121,28 @@ def product(request, product_code, chi_form = None ):
     if serie:
         related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
     
+
+    if product.is_wallpaper():   
+        wallpaper_form = WallpaperForm(request.POST or {'product':product.pk,} ,  None)
+        if request.is_ajax():
+            if  wallpaper_form.is_valid() :
+                new_mail = MailTemplate()
+                new_mail.send_wallpaper_req(request, wallpaper_form.email, wallpaper_form.width, wallpaper_form.height, wallpaper_form.note)
+            else:
+                data = {'html_errors' : wallpaper_form.errors}
+                return JsonResponse(data, safe=False, status = 500)            
+        
+        chi_form = AddChartForm({'product':product.pk,} ,  None)
+        return render(request, "product_wallpaper.html",{
+            "product":product,
+            "products_series":related_series,
+            "chi_form" : chi_form,
+            "wallpaper_form" : wallpaper_form
+            })
+
     chi_form = AddChartForm(request.POST or {'product':product.pk,} ,  None)
+ 
     query = Q()
-   
     price = 0
     errors = None
     if request.is_ajax():

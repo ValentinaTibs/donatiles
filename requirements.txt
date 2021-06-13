@@ -16,3 +16,4 @@ django-crispy-forms
 django_rest_framework
 django-termsandconditions
 django-import_export
+phonenumber_field

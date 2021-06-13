@@ -1,0 +1,11 @@
+{% autoescape off %}
+Nuova richiesta carta da parati 
+<br/><br/>
+
+email -> {{email}} <br/>
+larghezza -> {{width}} <br/>
+altezza -> {{height}} <br/>
+note -> {{note}} <br/>
+
+<br/><br/>
+{% endautoescape %}

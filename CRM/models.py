@@ -109,6 +109,18 @@ class Discount(models.Model):
 def create_shipping_internal_id():
     return get_random_string(length=12)
 
+# class WallpaperRequest(models.Model):
+#     email        = models.EmailField()
+#     name_surname = models.CharField()
+#     telephone    = models.RegexField(regex=r'^\+?1?\d{9,15}$', 
+#                                     error_message = _("Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."))
+
+#     width        = models.IntegerField()
+#     height       = models.IntegerField()
+#     notes        = models.CharField(widget=forms.Textarea(),label = _('notes'))
+#     accept       = models.BooleanField(required=True)
+    
+
 class Order(models.Model):
 
     note        = models.TextField(max_length = 200, null = True, blank=True)

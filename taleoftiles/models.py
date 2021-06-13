@@ -34,6 +34,9 @@ class CatalogueTagManager(models.Manager):
             )
         return qs
 
+
+
+
 class Tag(models.Model):
     name    = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -171,6 +174,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.code
+
+    def is_wallpaper(self):
+        try:
+            serie = self.tags.get(slug = 'cartadaparati')
+        except ObjectDoesNotExist:
+            return False
+        return True
 
     def is_support(self,):
         return self.support_to.is_null == True

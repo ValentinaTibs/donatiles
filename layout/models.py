@@ -180,6 +180,33 @@ class MailTemplate(models.Model):
             logger = logging.getLogger('email')
             logger.error(e.body)
 
+    def send_wallpaper_req(self,request, email, width, height, note):
+        cLng = translation.get_language()
+        email_template_name = "email/"+cLng+"/wallpaper_email.txt"
+        c = {                
+                'email' : email, 
+                'width' : width, 
+                'height' : height, 
+                'note' : note,
+                'domain':'www.taleoftiles.com',
+                'site_name': 'TaleOfTiles',
+                "user": user,
+                }
+        
+        email = render_to_string(email_template_name, c)
+        message = Mail(from_email=From(email, 'Richiesta Carta da Parati'),
+                to_emails=To('info@taleoftiles.com', 'TaleOfTiles'),                
+                subject=Subject("Richiesta Carta da Parati "),
+                html_content=HtmlContent(email))
+
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        try:
+            response = sg.send(message)
+
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)
+
     def send_register(self,user,one_time_pwd):
         cLng = translation.get_language()
         email_template_name = "email/"+cLng+"/register_email.txt"
