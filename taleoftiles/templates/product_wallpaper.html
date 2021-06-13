@@ -36,7 +36,7 @@
 
   <div class="product-gallery">
      <div class="product-gallery-container">
-      <!-- {% for image in product.images.all %}
+      {% for image in product.images.all %}
         <div class="product-gallery-item">
           {% if image.imagefile %} 
           <img  src=" {{ image.imagefile.url }}" 
@@ -46,7 +46,7 @@
           <div> </div>
           {% endif %}
         </div>
-      {% endfor %} -->
+      {% endfor %}
       </div>
     <div class="product-gallery-controls">
       <button class="btn" id="gallerybtn-prev"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-left' %}"/></svg></button>
