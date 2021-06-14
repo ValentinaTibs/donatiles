@@ -131,7 +131,7 @@ def product(request, product_code, chi_form = None ):
                     wallpaper_form.cleaned_data['email'], 
                     wallpaper_form.cleaned_data['width'], 
                     wallpaper_form.cleaned_data['height'], 
-                    wallpaper_form.cleaned_data['note'],
+                    wallpaper_form.cleaned_data['notes'],
                     wallpaper_form.cleaned_data['name_surname'],  
                     wallpaper_form.cleaned_data['telephone'])
             else:

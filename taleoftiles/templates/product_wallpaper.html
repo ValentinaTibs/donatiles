@@ -221,18 +221,25 @@
 
   function compute_money(){
 
-    var formats = document.getElementsByName('size');
-    i = 0;
-    var sel_size = document.getElementById('label_id_size_'+0).innerHTML
+    var rad = document.getElementsByName('size');
 
-      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
-      if(formats[i].checked) {
-        document.getElementById('selected_format').innerHTML = String(sel_size);
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
-        document.getElementById('sm_catch').innerHTML = qtyField.val();
-        document.getElementById('sm_notification').innerHTML = qtyField.val();
-        //document.getElementById('sm_image_'+sel_size).style.display = "none";
+    //var sel_size = document.getElementById('label_id_size_'+0).innerHTML
+    for (var i = 0; i < rad.length; i++) {
+
+      some_size_checked = document.getElementsByName("size")[i].checked;
+      if (some_size_checked){
+        console.log(document.getElementsByName("size")[i]);
       }
+    }
+
+      // document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
+      // if(formats[i].checked) {
+      //   console.log(sel_size);
+      //   //document.getElementById('selected_format').innerHTML = String(sel_size);
+      //   document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+        
+      //   //document.getElementById('sm_image_'+sel_size).style.display = "none";
+      // }
     
   }
 
@@ -252,11 +259,8 @@
         });
     }
     if (!some_size_checked){
-      console.log(document.getElementsByName("size")[0]);
-      console.log(document.getElementsByName("size")[0].val());
-
-      // document.getElementById("id_size_0").checked = true;
-      // console.log(document.getElementById("id_size_0"));
+      var value = document.getElementsByName("size")[0].value;
+      document.getElementById("id_size_"+value).checked = true;
     }
 
     compute_money()
