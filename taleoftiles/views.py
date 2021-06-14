@@ -126,7 +126,9 @@ def product(request, product_code, chi_form = None ):
         wallpaper_form = WallpaperForm(request.POST or {'product':product.pk,} ,  None)
         if request.is_ajax():
             if  wallpaper_form.is_valid() :
+                print("  SENDING  ->")
                 new_mail = MailTemplate()
+                print(wallpaper_form.cleaned_data);
                 new_mail.send_wallpaper_req(request, 
                     wallpaper_form.cleaned_data['email'], 
                     wallpaper_form.cleaned_data['width'], 

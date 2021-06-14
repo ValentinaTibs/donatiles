@@ -180,14 +180,16 @@ class MailTemplate(models.Model):
             logger = logging.getLogger('email')
             logger.error(e.body)
 
-    def send_wallpaper_req(self,request, email, width, height, note, name_surname,  telephone):
+    def send_wallpaper_req(self,request, email, width, height, notes, name_surname,  telephone):
+        print( " --->")
+        print( email, width, height, notes, name_surname,  telephone)
         cLng = translation.get_language()
         email_template_name = "email/"+cLng+"/wallpaper_email.txt"
         c = {                
                 'email' : email, 
                 'width' : width, 
                 'height' : height, 
-                'note' : note,
+                'notes' : notes,
                 'name_surname' : name_surname,
                 'telephone' : telephone,
                 'domain':'www.taleoftiles.com',
