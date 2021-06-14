@@ -13,7 +13,7 @@ from django.db.models import Q
 from taleoftiles.utils  import compute_single_price, compute_sm_price
 
 from taleoftiles.models import Tag, Product, Catalogue
-from layout.models      import Element
+from layout.models      import Element, MailTemplate
 from blog.models        import Post
 from CRM.models        import Chart
 

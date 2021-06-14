@@ -62,7 +62,7 @@
       <h5>{% trans 'size' %}</h5>
 
         {% for id_choice,name_choice in chi_form.fields.size.choices %}
-            <input type="radio" name="size" value="{{id_choice}}" id="size_{{ id_choice }}" required="">
+            <input type="radio" name="size" value="{{id_choice}}" id="id_size_{{ id_choice }}" required="">
             <label  for="size_{{ id_choice }}" id="label_size_{{ id_choice }}" >{{ name_choice }}</label>
         {% endfor %}
 
@@ -73,7 +73,7 @@
       <h5>{% trans 'finishes' %}</h5>
 
         {% for id_choice,name_choice in chi_form.fields.finish.choices %}
-            <input type="radio" name="finish" value="{{id_choice}}" id="finish_{{ id_choice }}" required="">
+            <input type="radio" name="finish" value="{{id_choice}}" id="id_finish_{{ id_choice }}" required="">
             <label  for="finish_{{ id_choice }}" id="label_finish_{{ id_choice }}" >{{ name_choice }}</label>
         {% endfor %}
 
@@ -101,11 +101,6 @@
             <div class="product-figure"><span> €</span>
 
             {% for choice in chi_form.size %}
-            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
-            {% endfor %}
-
-
-            {% for choice in chi_form.finish %}
             <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
             {% endfor %}
 
@@ -257,6 +252,7 @@
 
     if (!some_size_checked){
       document.getElementById("id_size_0").checked = true;
+
     }
 
     compute_money()
