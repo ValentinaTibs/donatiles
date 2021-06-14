@@ -197,7 +197,7 @@ class MailTemplate(models.Model):
                 }
         
         email = render_to_string(email_template_name, c)
-        message = Mail(from_email=From(email, 'Richiesta Carta da Parati'),
+        message = Mail(from_email=From('info@taleoftiles.com', 'Richiesta Carta da Parati'),
                 to_emails=To('info@taleoftiles.com', 'TaleOfTiles'),                
                 subject=Subject("Richiesta Carta da Parati "),
                 html_content=HtmlContent(email))
