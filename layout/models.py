@@ -180,7 +180,7 @@ class MailTemplate(models.Model):
             logger = logging.getLogger('email')
             logger.error(e.body)
 
-    def send_wallpaper_req(self,request, email, width, height, note):
+    def send_wallpaper_req(self,request, email, width, height, note, name_surname,  telephone):
         cLng = translation.get_language()
         email_template_name = "email/"+cLng+"/wallpaper_email.txt"
         c = {                
@@ -188,9 +188,10 @@ class MailTemplate(models.Model):
                 'width' : width, 
                 'height' : height, 
                 'note' : note,
+                'name_surname' : name_surname,
+                'telephone' : telephone,
                 'domain':'www.taleoftiles.com',
-                'site_name': 'TaleOfTiles',
-                "user": user,
+                'site_name': 'TaleOfTiles'
                 }
         
         email = render_to_string(email_template_name, c)
