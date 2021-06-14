@@ -223,23 +223,15 @@
 
     var rad = document.getElementsByName('size');
 
-    //var sel_size = document.getElementById('label_id_size_'+0).innerHTML
     for (var i = 0; i < rad.length; i++) {
-
-      some_size_checked = document.getElementsByName("size")[i].checked;
-      if (some_size_checked){
-        console.log(document.getElementsByName("size")[i]);
+      var the_elem = document.getElementsByName("size")[i]
+      if (the_elem.checked){
+        var value = the_elem.value;
+        var sel_size = document.getElementById('label_size_'+value).innerHTML;
+        document.getElementById('selected_format').innerHTML = String(sel_size);
+        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
       }
     }
-
-      // document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
-      // if(formats[i].checked) {
-      //   console.log(sel_size);
-      //   //document.getElementById('selected_format').innerHTML = String(sel_size);
-      //   document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
-        
-      //   //document.getElementById('sm_image_'+sel_size).style.display = "none";
-      // }
     
   }
 
