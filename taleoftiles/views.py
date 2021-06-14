@@ -127,9 +127,13 @@ def product(request, product_code, chi_form = None ):
         if request.is_ajax():
             if  wallpaper_form.is_valid() :
                 new_mail = MailTemplate()
-                new_mail.send_wallpaper_req(request, wallpaper_form.email, 
-                    wallpaper_form.width, wallpaper_form.height, wallpaper_form.note,
-                    wallpaper_form.name_surname,  wallpaper_form.telephone)
+                new_mail.send_wallpaper_req(request, 
+                    wallpaper_form.cleaned_data['email'], 
+                    wallpaper_form.cleaned_data['width'], 
+                    wallpaper_form.cleaned_data['height'], 
+                    wallpaper_form.cleaned_data['note'],
+                    wallpaper_form.cleaned_data['name_surname'],  
+                    wallpaper_form.cleaned_data['telephone'])
             else:
                 data = {'html_errors' : wallpaper_form.errors}
                 return JsonResponse(data, safe=False, status = 500)            

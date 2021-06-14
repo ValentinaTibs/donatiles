@@ -244,52 +244,26 @@
 
     var some_size_checked = false;
     for (var i = 0; i < rad.length; i++) {
-      some_size_checked = document.getElementsByName("size")[i].checked
+
+      some_size_checked = document.getElementsByName("size")[i].checked;
+      console.log(some_size_checked)
         rad[i].addEventListener('change', function() {
             compute_money()
         });
     }
-
     if (!some_size_checked){
-      document.getElementById("id_size_0").checked = true;
+      console.log(document.getElementsByName("size")[0]);
+      console.log(document.getElementsByName("size")[0].val());
 
+      // document.getElementById("id_size_0").checked = true;
+      // console.log(document.getElementById("id_size_0"));
     }
 
     compute_money()
   };
 
 
-  function addToCart() {
-    $.ajax({
-      type: "POST",
- 
-      url: "{% url 'product' product.code %}",
-      data: {
-          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-          
-          quantity: $( 'input[id="id_quantity"]' ).val(),
-          product : $( 'input[id="id_product"]' ).val(),
-          save_it : $( 'input[name="id_save_it"]' ).val(),
-          size    : $( 'input[name="size"]:checked' ).val(),
-          finish  : $( 'input[name="finish"]:checked' ).val(),
-          has_frido :$('#id_has_frido').prop('checked')
-      },
-      success: function(result) {
-          var num_chi = Number($(".cartbtn span").html()) +1;
-          $(".cartbtn span").html(num_chi);
-          $("#overlayCart").html(result);
-          $("#id_quantity").val('');
-          $("#price_catch").html('0');
-          
-      },
-      error: function(result) {
-          console.log('error');
-          console.log(result);
-          console.log(errors);
-          
-      }
-    });
-  }
+  
 
   function sendWallPaperRequest() {
       $.ajax({
