@@ -126,9 +126,7 @@ def product(request, product_code, chi_form = None ):
         wallpaper_form = WallpaperForm(request.POST or {'product':product.pk,} ,  None)
         if request.is_ajax():
             if  wallpaper_form.is_valid() :
-                print("  SENDING  ->")
                 new_mail = MailTemplate()
-                print(wallpaper_form.cleaned_data);
                 new_mail.send_wallpaper_req(request, 
                     wallpaper_form.cleaned_data['email'], 
                     wallpaper_form.cleaned_data['width'], 
@@ -138,9 +136,8 @@ def product(request, product_code, chi_form = None ):
                     wallpaper_form.cleaned_data['telephone'])
             else:
                 data = {'html_errors' : wallpaper_form.errors}
-                print(data);
                 return JsonResponse(data, safe=False, status = 500)            
-        
+            return JsonResponse({'data':'success'}, status = 200)
         chi_form = AddChartForm({'product':product.pk,} ,  None)
         return render(request, "product_wallpaper.html",{
             "product":product,

@@ -278,24 +278,17 @@
             accept       : $( 'input[id="id_accept"]' ).prop('checked')
         },
         success: function(result) {
-            document.getElementById("wallpaper_form_errors").html("Si prega di compilare i ");
             document.getElementById("results_wallpaper").classList.toggle('hide'); 
             document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
         },
         error: function(result) {
             
             $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
-            console.log(result)
+
             const array1 = result['responseJSON']['html_errors'];
             for (const [key, value] of Object.entries(array1)) {
               document.getElementById("id_"+key).classList.toggle('error'); 
             }
-            //console.log(result);
-
-            // console.log(result['responseText']);
-            // document.getElementById("wallpaper_form_errors")
-            // $("#wallpaper_form_errors").html(result['responseText']);
-            // const array1 = result['responseJSON']['errors'];
         
         }
       });
