@@ -136,6 +136,7 @@ def product(request, product_code, chi_form = None ):
                     wallpaper_form.cleaned_data['telephone'])
             else:
                 data = {'html_errors' : wallpaper_form.errors}
+                print(data)
                 return JsonResponse(data, safe=False, status = 500)            
             return JsonResponse({'data':'success'}, status = 200)
         chi_form = AddChartForm({'product':product.pk,} ,  None)

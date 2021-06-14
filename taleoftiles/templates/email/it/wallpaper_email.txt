@@ -5,7 +5,7 @@ Nuova richiesta carta da parati
 email -> {{email}} <br/>
 larghezza -> {{width}} <br/>
 altezza -> {{height}} <br/>
-notes -> {{notes}} <br/>
+notes -> {{this_notes}} <br/>
 name_surname ->  {{name_surname}} <br/>
 telephone -> {{telephone}} <br/>
 
