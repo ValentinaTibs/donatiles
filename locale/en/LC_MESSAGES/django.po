@@ -738,43 +738,50 @@ msgstr "products from the same serie"
 
 #: taleoftiles/templates/product_wallpaper.html:103
 msgid "vogliamo-essere-sicuri"
-msgstr ""
+msgstr "We want to be sure that your wallpaper is exaclty how you imagine it.  <br/><br/> Please fill this form and we would adapt the wallpaper to your wall measurements. You would receive a simulation tailored on your needs. "
 
 #: taleoftiles/templates/product_wallpaper.html:109
 msgid "wallpaper_email"
-msgstr ""
+msgstr "Email *"
 
 #: taleoftiles/templates/product_wallpaper.html:110
 msgid "wallpaper_name_surname"
-msgstr ""
+msgstr "Name and Surname"
 
 #: taleoftiles/templates/product_wallpaper.html:111
 msgid "wallpaper_telephone"
-msgstr ""
+msgstr "Telephone"
 
 #: taleoftiles/templates/product_wallpaper.html:113
 msgid "wallpaper_width"
-msgstr ""
+msgstr "Width (in cm)*"
 
 #: taleoftiles/templates/product_wallpaper.html:114
 msgid "wallpaper_height"
-msgstr ""
+msgstr "Height (in cm)*"
 
 #: taleoftiles/templates/product_wallpaper.html:115
 msgid "wallpaper_notes"
-msgstr ""
+msgstr "Personalizations and notes"
 
 #: taleoftiles/templates/product_wallpaper.html:116
 msgid "wallpaper_accept"
-msgstr ""
+msgstr "For having read the rules for sending and authorizing the processing of"
+"personal data for the purpose of carrying out the requested service"
 
 #: taleoftiles/templates/product_wallpaper.html:119
 msgid "request-wallpaper-button"
-msgstr ""
+msgstr "Request measures check"
 
 #: taleoftiles/templates/product_wallpaper.html:126
 msgid "wallpaper_completed"
 msgstr ""
+"Our office will process the request within 24-48 and you will receive by email"
+"the instructions to finalize the purchase order. Just follow the"
+"procedure indicated in the pro-forma invoice and make the payment to"
+"via Paypal itself, credit card or bank transfer. Once"
+"received confirmation from PayPal of the payment of the pro-forma, we will start the"
+"production of your personalized wallpaper"
 
 #: taleoftiles/templates/registration/login.html:53
 msgid "already-logged-in"
