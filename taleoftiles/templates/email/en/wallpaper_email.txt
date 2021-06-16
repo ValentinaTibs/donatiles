@@ -1,7 +1,7 @@
 {% autoescape off %}
 Nuova richiesta carta da parati 
 <br/><br/>
-
+product_code -> {{product_code}}
 email -> {{email}} <br/>
 larghezza -> {{width}} <br/>
 altezza -> {{height}} <br/>

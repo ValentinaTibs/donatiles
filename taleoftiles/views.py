@@ -133,7 +133,8 @@ def product(request, product_code, chi_form = None ):
                     wallpaper_form.cleaned_data['height'], 
                     wallpaper_form.cleaned_data['notes'],
                     wallpaper_form.cleaned_data['name_surname'],  
-                    wallpaper_form.cleaned_data['telephone'])
+                    wallpaper_form.cleaned_data['telephone'],
+                    product_code)
             else:
                 data = {'html_errors' : wallpaper_form.errors}
                 print(data)

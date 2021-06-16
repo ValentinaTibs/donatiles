@@ -180,11 +180,12 @@ class MailTemplate(models.Model):
             logger = logging.getLogger('email')
             logger.error(e.body)
 
-    def send_wallpaper_req(self,request, email, width, height, notes, name_surname,  telephone):
+    def send_wallpaper_req(self,request, email, width, height, notes, name_surname,  telephone, product_code):
         print(email, width, height, notes, name_surname,  telephone)
         cLng = translation.get_language()
         email_template_name = "email/"+cLng+"/wallpaper_email.txt"
-        c = {                
+        c = { 
+                'product_code' : product_code,               
                 'email' : email, 
                 'width' : width, 
                 'height' : height, 
