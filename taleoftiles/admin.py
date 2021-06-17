@@ -31,56 +31,10 @@ def duplicate_plain(modeladmin, request, queryset):
         e.save()
 
 from django.core.exceptions import ObjectDoesNotExist
-def toggle_handmade(modeladmin, request, queryset):
-    hm = Tag.objects.get(slug='handmade')
-    for product in queryset:
-        try: 
-            handmades_tag = product.tags.get(slug='handmade_button') 
-        except ObjectDoesNotExist:
-            continue
-        product.tags.add(hm.pk)
-        product.tags.remove(handmades_tag.pk)
-        product.save()
-
-def tagga_terracotta(modeladmin, request, queryset):
-    hm = Tag.objects.get(slug='cotto')
-    for product in queryset:
-        product.tags.add(hm.pk)
-        product.save()
-
-def toggle_samplable(modeladmin, request, queryset):
-    hm = Tag.objects.get(slug='samplable')
-    for product in queryset:
-        if product.is_samplable:
-            product.tags.remove(hm.pk)
-            product.save()
-        else:
-            product.tags.add(hm.pk)
-            product.save()
-
-def assign_catalogue(modeladmin, request, queryset):
-    cat = Catalogue.objects.get(title='2020')
-    for product in queryset:
-        if product.is_active:
-            cat.products.add(product)
-            cat.save()
-            
-# - not safe -  you should remove it all first and than add it back
-def toggle_parent_format(modeladmin, request, queryset):
-    #format = Tag.objects.get(slug='format')
-    for product in queryset:
-        for format_ in product.formats():
-            product.tags.add(format_.parent)             
-            product.save()
 
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
 duplicate_plain.short_description = "Duplicate selected items"
-toggle_handmade.short_description = "Toggle Handmade"
-toggle_samplable.short_description = "Toggle SAMPLABLEs"
-toggle_parent_format.short_description = "Refresh Parent Formats"
-tagga_terracotta.short_description = "Tagga con terracotta"
-assign_catalogue.short_description = "Assign to Catalogue 2020"
 
 
 def make_for_product(modeladmin, request, queryset):
@@ -272,7 +226,7 @@ class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     action_form = UpdateScoreForm
 
-    actions = [duplicate_product,assign_catalogue,'set_tag_action']
+    actions = [duplicate_product,'set_tag_action']
 
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)

@@ -99,9 +99,17 @@ class MailTemplateAdmin(admin.ModelAdmin):
     model = MailTemplate
     list_display = ("slug","subj","sender","content","template_id","template_vs","no_reply",)
 
+def create_thumbnail(modeladmin, request, queryset):
+    for e in queryset:
+        e.make_thumbnail()        
+
+create_thumbnail.short_description = "Create Thumbnail"
+
 class ImageAdminSelf(admin.ModelAdmin):
     model = Image
     readonly_fields  = ( 'image_',)
+    actions = [create_thumbnail]
+    
 
 admin.site.register(Element,ElementLayoutAdmin)
 admin.site.register(ElementTag,ElementTagAdmin)
