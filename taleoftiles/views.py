@@ -25,7 +25,7 @@ def index(request):
     home_tags       = Tag.objects.filter(in_home = True, public = True)
     secondary_post  = Post.active.get(tags__slug='secondary-post')
     main_post       = Post.active.get(tags__slug='main-post')
-    home_prods      = Product.objects.filter(tags__slug = 'in_home',is_active = True)[:8] 
+    #home_prods      = Product.objects.filter(tags__slug = 'in_home',is_active = True)[:8] 
 
     return render(request, "home.html",{
         'layout_elems'  : home_elems,
