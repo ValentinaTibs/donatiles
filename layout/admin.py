@@ -22,7 +22,7 @@ class ElementImageStackedAdmin(admin.StackedInline):
 
 class ElementLayoutAdmin(TranslationAdmin):
     model = Element
-    list_display = ('name', 'tags',  'data_type','public' )
+    list_display = ('name', 'tags', 'content', 'data_type','public' )
     inlines = (ElementImageStackedAdmin,)
     readonly_fields  = ( 'image_', )
     
@@ -38,7 +38,6 @@ class ElementLayoutAdmin(TranslationAdmin):
 class ElementTagAdmin(admin.ModelAdmin):
     model = ElementTag
     list_display = ('name', 'summary','slug','public','parent_' )
-    search_fields = ('name', 'summary' )
     actions = [duplicate,]
 
     def parent_(self, obj):
