@@ -38,6 +38,7 @@ class ElementLayoutAdmin(TranslationAdmin):
 class ElementTagAdmin(admin.ModelAdmin):
     model = ElementTag
     list_display = ('name', 'summary','slug','public','parent_' )
+    search_fields = ('name', 'summary' )
     actions = [duplicate,]
 
     def parent_(self, obj):
