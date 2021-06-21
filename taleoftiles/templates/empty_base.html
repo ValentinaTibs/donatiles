@@ -297,7 +297,7 @@
 
         <ul class="  linkslist ">
           {% for foot_elem in elem.element.all %}
-            <li><a href="{% url 'catalogue' %}?filters={{foot_elem.name}}">{{foot_elem}} </a></li>
+            <li><a href="{% url 'catalogue' %}?filters={{foot_elem.name}}">{{foot_elem.content}} </a></li>
           {% endfor %}
         </ul>
     {% endfor %}
