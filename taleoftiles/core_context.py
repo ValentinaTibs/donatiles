@@ -5,6 +5,7 @@ from django.db.models import Count
 from taleoftiles.models import Tag
 from CRM.models import Chart, Sampler
 from CRM.forms  import LoginForm, RegisterForm
+from layout.models import ElementTag
 
 #####  -----------
 # mantaining the same session key after authentication process
@@ -20,8 +21,11 @@ def category_menu(context):
     return {'menu_cats': cats} 
 
 def footer_menu(context):
-    tags_cat = Tag.objects.filter(public = True, child__in_footer = True).distinct()
-    return {'footer_tags': tags_cat} 
+    footer_elems = ElementTag.objects.filter(parent__slug = 'footer', public = True).distinct()
+    
+    return {
+    'footer_elems':footer_elems
+    } 
 
 def user_menu(context):
     query = Q()

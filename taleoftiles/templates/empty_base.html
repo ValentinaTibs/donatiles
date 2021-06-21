@@ -293,22 +293,24 @@
     </div>
 
 
-    {% for cat in footer_tags %}
-      
+    {% for elem in footer_elems %}
+
         <ul class="  linkslist ">
-
-          {% for child_cat in cat.all_footer_childs %}
-            <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{% trans 'tiles'|title %} {{cat|title}} {{child_cat}} </a></li>
+          <li>{{elem}}</li>
+          <li>{{elem.tag}}</li>
+          <li>{{elem.child}}</li>
+          {% for foot_elem in elem.tag.all %}
+            <li><a href="{% url 'catalogue' %}?filters={{foot_elem.name}}">{{foot_elem}} </a></li>
           {% endfor %}
+        </ul>
+    {% endfor %}
 
-          <li>Icons made by</li>
+<!--           <li>Icons made by</li>
           <li> 
             <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a>
             <a href="https://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> </li>
           
-          </ul>
-    {% endfor %}
-
+ -->
       <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">
     </div>
    </div>
