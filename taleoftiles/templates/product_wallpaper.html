@@ -39,7 +39,7 @@
       {% for image in product.images.all %}
         <div class="product-gallery-item">
           {% if image.imagefile %} 
-          <img  src=" {{ image.imagefile.url }}" 
+          <img loading="lazy" src=" {{ image.imagefile.url }}" 
           {% if image.format_tag %} id="sm_image_{{ image.format_tag }}" {% endif %}
           alt="{{ product.publication.title }}">
           {% else %}

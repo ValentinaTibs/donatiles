@@ -170,6 +170,7 @@ AWS_S3_CUSTOM_DOMAIN    = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 AWS_DEFAULT_ACL         = 'public-read'
 MEDIA_URL               = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
+# -----> AWS3 <----- 
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'

@@ -332,24 +332,26 @@ class Image(models.Model):
         #     return
         #     #raise Exception('Could not create thumbnail - is the file type valid?')
 
-
     def make_thumbnail(self):
 
         image = PILImg.open(self.imagefile)
+        
+        #---  ALGO for CROPPING ----
+        w, h = image.size
         cropped_image = image.crop((0, 0, 200,200))
-        resized_image = cropped_image.resize((200, 200), PILImg.ANTIALIAS)
-
-        filename = './prova.png'
-
+        resized_image = image.resize((200, 200), PILImg.ANTIALIAS)
+        #--->  ALGO for CROPPING <----
+        
+        filename = self.name
         output = io.BytesIO()
-        resized_image.save(output, format='JPEG', quality=95)
+        resized_image.save(output, format='PNG', optimize=True)
+        #resized_image.save(output, format='PNG', quality=95)
         output.seek(0) #Change the stream position to the given byte offset.
 
 
         self.thumbnail = InMemoryUploadedFile(output,'ImageField',\
-            "%s.jpg" % filename , 'image/jpeg', output.__sizeof__(), None)
-        self.thumbnail.save()
-
+            "%s.png" % filename , 'image/png', output.__sizeof__(), None)
+        self.save()
 
     def gino(self):    
 
