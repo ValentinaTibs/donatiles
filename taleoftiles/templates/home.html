@@ -72,7 +72,7 @@
  <!-- style="background:url({% static 'images/bkg-home.png' %}" -->
     <div class="grid-homeintro-main" >
       <a class="product-thumb-img">
-      <img src="{% static 'images/mattonelle-online-home-2.jpeg' %}" alt="Argento / Narciso">
+      <img loading="lazy" src="{% static 'images/mattonelle-online-home-2.jpeg' %}" alt="Argento / Narciso">
       </a>
 
      
@@ -129,7 +129,7 @@
 
          <div class="product-thumb infinite-item" >
             <a href="{% url 'product' product.code %}" class="product-thumb-img">
-                <img src=" {{product.cover.imagefile.url}}" alt="Argento / Narciso">
+                <img loading="lazy" src=" {{product.cover.imagefile.url}}" alt="Argento / Narciso">
             </a>
             <a href="{% url 'product' product.code %}" class="product-thumb-title">
                 <h5>{{ product.serie.name }}</h5>
