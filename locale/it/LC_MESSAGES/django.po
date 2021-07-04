@@ -640,9 +640,7 @@ msgstr "Dai un'occhiata a questi!"
 #: taleoftiles/templates/product_wallpaper.html:24
 msgid "sampling-c2a"
 msgstr ""
-"<h3>Ordina il tuo campione</h3> \n"
-"<br/><h4>manda una mail per richiederlo a <i> <a href=\"mailto:"
-"info@taleoftiles.com\">info@taleoftiles.com</a></i></h4>"
+"<strong>Ordina il tuo campione</strong><br/>Richiedilo a info@taleoftiles.com"
 
 #: taleoftiles/templates/product.html:29
 msgid "full-sampler"

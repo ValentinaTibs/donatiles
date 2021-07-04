@@ -26,11 +26,9 @@
   </ul>
   <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
-    <p class="note">{% blocktrans %}sampling-c2a{% endblocktrans %}</p>
-
+    <a href="mailto:info@taleoftiles.com" class="btn btn-secondary" target="_blank"><span>{% blocktrans %}sampling-c2a{% endblocktrans %}</span></a>
   </div>
 </div>
-
 
 <div class="content grid grid-product">
 
@@ -80,22 +78,24 @@
 
     {% endif %}
     </div>
-<br/>
-    <div class="product-shippinginfo">
-      <p class="note">{% trans 'receive-date' %}<br><strong>{% trans 'untill' %} {% woking_days product.wait_time %} </strong></p>
-    </div>
 
+    <div class="product-configuratorbox">
+      <h4>Come starà a casa tua?</h4>
+      <button class="btn btn-primary" onClick=""><span><strong>Apri il configuratore</strong><br>per avere un'anteprima</span></button>
+      <p>Quando ordini una carta da parati ti inviamo <strong>sempre</strong>, prima di confermare l'ordine, un rendering della/e parete/i che vuoi tappezzare, per verificare la resa in base alle proporzioni della parete</p>
+    </div>
 
 <!-- <form  >  -->
 {% csrf_token %}
     <div class="product-addtocartbox">
+
       <div>
         <div class="row">
           <div><strong>{% trans 'code'%}: {{product.code}}</strong>
             <br><span id="selected_format"></span>
-            
+
           </div>
-          
+
           <div>
             <div class="product-note" style="color: black;">{% trans 'starting-from' %}</div>
             <div class="product-figure"><span> €</span>
@@ -104,52 +104,81 @@
             <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
             {% endfor %}
 
+            {% for choice in chi_form.finish %}
+            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
+            {% endfor %}
+
           </div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
 
-      
-    </div>  <!-- product-addtocartbox -->
-<!-- </form> -->
+      <div>
 
+        <div class="row">
+          <div>
+            <strong>{% trans 'superficie-da-rivestire' %}</strong>{% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
+          </div>
+          <div class="input-qty">
 
-    <div class="product-shippinginfo">
-      <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
-      <p class="note">
-        <h4><span >{% blocktrans %}vogliamo-essere-sicuri{% endblocktrans %}</span></h4>
-      </p>
-    </div>
+            {{chi_form.quantity}}
 
-
-    <div class="product-addtocartbox"  id="buy_wallpaper_panel">
-      <div style="padding: 2%;">
-        <div class="formrow" id="wallpaper_form_errors">   </div>
-        <div class="formrow"> {% trans 'wallpaper_email'  %} {{wallpaper_form.email}}  </div>
-        <div class="formrow"> {% trans 'wallpaper_name_surname'  %} {{wallpaper_form.name_surname}}  </div>
-        <div class="formrow"> {% trans 'wallpaper_telephone'  %} {{wallpaper_form.telephone}}  </div>
-        
-        <div class="formrow"> {% trans 'wallpaper_width'  %} {{wallpaper_form.width}}  </div>
-        <div class="formrow"> {% trans 'wallpaper_height' %} {{wallpaper_form.height}} </div>
-        <div class="formrow"> {% trans 'wallpaper_notes'  %} {{wallpaper_form.notes}}  </div>
-        <div class="formrow"> {{wallpaper_form.accept}} &nbsp; {% trans 'wallpaper_accept' %}  </div>
+            <div class="product-qtybtns">
+              <svg class="icon-m icon" style="cursor:pointer;" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+              <span class="product-note">m&sup2;</span>
+              <svg class="icon-m icon" style="cursor:pointer;" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+            </div>
+          </div>
+        </div>
       </div>
 
-     <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: 
-     center;"  onClick="Javascript:sendWallPaperRequest()" > {% trans 'request-wallpaper-button' %} </button>
+      <div>
+        <div class="row">
+          {{chi_form.product}}
+          <div><strong>{% trans 'total' %}</strong></div>
+          <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
+        </div>
+        <div class="row">
+          <div class="checkbox">
+            {{chi_form.has_frido}}
+            <label for="id_has_frido">{% trans 'include-sfrido' %}</label>
+          </div>
+        </div>
+        <div class="row">
+          {% trans 'sfrido-small-description' %}
+        </div>
+      </div>
 
-    </div>  <!-- product-addtocartbox -->
+      {{chi_form.save_it.as_hidden}}
+      {{chi_form.product.as_hidden}}
+
+      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></button>
+
 <!-- </form> -->
 
-    <div id="results_wallpaper" class="product-addtocartbox hide" >
-      <br/>
-          <div style="padding: 7%;">
-            <div class="formrow"> {% blocktrans %}wallpaper_completed{% endblocktrans %}</div>    
-        </div>  <!-- product-addtocartbox -->
+    </div>  <!-- product-addtocartbox -->
+    <div class="product-shippinginfo">
+      <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
+
+      <p class="note">{% trans 'any-doubt' %}<br>
+        <a href="{% url 'support' %}">{% trans 'any-doubt-subtitle' %}</a></p>
+
     </div>
 
   </div>
 
   <div class="product-main">
+
+    <div class="product-meta">
+
+    {% for effect in product|effects %}
+      {% if effect.slug %}<a href="{% url 'catalogue' %}?filters={{effect.slug}}"  class="tag">{{effect.name}}</a>{% endif %}
+    {% endfor %}
+
+    {% for colour in product|colour %}
+      <a href="{% url 'catalogue' %}?filters={{colour.slug}}"  class="tag">{{colour.name}} </a>
+    {% endfor %}
+
+    </div>
 
 	{% autoescape off %}
 		<p>{{ product.publication.content }}</p>
@@ -171,19 +200,6 @@
         </button>
       </a>
     {% endif %}
-  </div>
-
-  <div class="product-meta">
-
-
-	{% for effect in product|effects %}
-    <a href="{% url 'catalogue' %}?filters={{effect.slug}}"  class="tag">{{effect.name}} </a><br>
-	{% endfor %}
-
-  {% for colour in product|colour %}
-    <a href="{% url 'catalogue' %}?filters={{colour.slug}}"  class="tag">{{colour.name}} </a><br>
-	{% endfor %}
-
   </div>
 
 </div>
@@ -237,6 +253,15 @@
     
   }
 
+  function add_quantity(){
+    qtyField.val( +qtyField.val() + 1 );
+    compute_money();
+  }
+
+  function minus_quantity(){
+    qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
+    compute_money();
+  }
 
   window.onload = function() {
 
@@ -259,40 +284,6 @@
 
     compute_money()
   };
-
-
-  function sendWallPaperRequest() {
-      $.ajax({
-        type: "POST",
-   
-        url: "{% url 'product' product.code %}",
-        data: {
-            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-            
-            email        : $( 'input[id="id_email"]' ).val(),
-            name_surname : $( 'input[id="id_name_surname"]' ).val(),
-            telephone    : $( 'input[id="id_telephone"]' ).val(),
-            width        : $( 'input[id="id_width"]' ).val(),
-            height       : $( 'input[id="id_height"]' ).val(),
-            notes        : document.getElementById('id_notes').value ,
-            accept       : $( 'input[id="id_accept"]' ).prop('checked')
-        },
-        success: function(result) {
-            document.getElementById("results_wallpaper").classList.toggle('hide'); 
-            document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
-        },
-        error: function(result) {
-            
-            $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
-
-            const array1 = result['responseJSON']['html_errors'];
-            for (const [key, value] of Object.entries(array1)) {
-              document.getElementById("id_"+key).classList.toggle('error'); 
-            }
-        
-        }
-      });
-    }
 
 !function() {
     "use strict";
