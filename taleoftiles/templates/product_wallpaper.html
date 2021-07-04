@@ -81,7 +81,7 @@
 
     <div class="product-configuratorbox">
       <h4>Come starà a casa tua?</h4>
-      <button class="btn btn-primary" onClick=""><span><strong>Apri il configuratore</strong><br>per avere un'anteprima</span></button>
+      <button class="btn btn-primary" onClick="openPopup('popupWPConf')"><span><strong>Apri il configuratore</strong><br>per avere un'anteprima</span></button>
       <p>Quando ordini una carta da parati ti inviamo <strong>sempre</strong>, prima di confermare l'ordine, un rendering della/e parete/i che vuoi tappezzare, per verificare la resa in base alle proporzioni della parete</p>
     </div>
 
@@ -123,9 +123,9 @@
             {{chi_form.quantity}}
 
             <div class="product-qtybtns">
-              <svg class="icon-m icon" style="cursor:pointer;" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+              <svg class="icon-m icon" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
               <span class="product-note">m&sup2;</span>
-              <svg class="icon-m icon" style="cursor:pointer;" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              <svg class="icon-m icon" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
             </div>
           </div>
         </div>
@@ -233,6 +233,10 @@
 
 </div>
 {% endif %}
+
+<!-- POPUP wallpaper configurator -->
+{% include 'include/popup-wpconfigurator.html' %}
+<!-- /POPUP -->
 
 <script>
   var qtyField = $( '#id_quantity' );

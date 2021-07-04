@@ -1,0 +1,109 @@
+{% load static %}
+<div class="cloak" id="popupWPConf">
+  <div class="popup-container">
+    <div class="popup">
+
+      <div class="overlay-title">
+        <h4>Configura la tua parete</h4>
+        <button class="btn popup-close"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
+      </div>
+
+      <div class="popup-content configurator">
+        <div class="configurator-img">
+        </div>
+        <div class="configurator-info">
+          <h3>Quanto è grande, in centimetri, la parete da tappezzare?</h3>
+          <div class="configurator-sizes">
+            <div class="input-qty">
+              <input type="number">
+              <div class="product-qtybtns">
+                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+                <span class="product-note">cm</span>
+                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              </div>
+            </div>
+            <div class="input-qty">
+              <input type="number">
+              <div class="product-qtybtns">
+                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+                <span class="product-note">cm</span>
+                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              </div>
+            </div>
+          </div>
+          <p>Questa è un'anteprima rapida del ritaglio che otterrai sulla tua parete. Per completare la richiesta, aggiungi al carrello il prodotto: al checkout, potrai indicare le dimensioni precise e le eventuali caratteristiche delle pareti che vuoi tappezzare, e ti invieremo un preventivo preciso e un rendering dell’effetto finale.</p>
+        </div>
+      </div>
+
+      <div class="popup-actions">
+        <button class="btn btn-secondary popup-close"><span>Chiudi senza aggiungere al carrello</span></button>
+        <button class="btn btn-primary" onClick="addAndClose()"><span>Aggiungi al carrello <strong>18mq</strong></span></button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+  let popups = document.querySelectorAll(".cloak"),
+    body;
+
+  function dontPropagate(e) {
+    e.stopImmediatePropagation();
+  }
+
+  function enablePopups() {
+    body = document.body;
+    Array.from(popups).forEach((p) => {
+      p.removeEventListener("click", closePopup);
+      p.addEventListener("click", closePopup);
+    });
+    Array.from(document.querySelectorAll(".popup")).forEach((p) => {
+      p.removeEventListener("click", dontPropagate);
+      p.addEventListener("click", dontPropagate);
+    });
+    Array.from(document.querySelectorAll(".popup-close")).forEach((p) => {
+      p.removeEventListener("click", closePopup);
+      p.addEventListener("click", closePopup);
+    });
+  }
+  if (popups.length) enablePopups();
+
+  let openPopup = function (id) {
+    if (!body) enablePopups();
+    let popupToOpen = document.getElementById(id);
+    body.classList.add("noscroll");
+    popupToOpen.style.display = "block";
+    Array.from(popups).forEach((p) => {
+      p.classList.remove("visible");
+    });
+    setTimeout(function () {
+      popupToOpen.classList.add("visible");
+      try {
+        popupToOpen.init();
+      } catch (e) {}
+    }, 50);
+  };
+
+  function addAndClose() {
+    console.log("add to cart and close");
+    closePopup();
+  }
+
+  function closePopup() {
+    body.classList.remove("noscroll");
+    Array.from(popups).forEach((p) => {
+      p.classList.remove("visible");
+    });
+    setTimeout(function () {
+      Array.from(popups).forEach((p) => {
+        p.style.display = "none";
+      });
+    }, 500);
+  }
+
+  window.openPopup = openPopup;
+
+</script>
