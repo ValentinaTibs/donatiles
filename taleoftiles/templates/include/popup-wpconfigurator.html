@@ -9,25 +9,33 @@
       </div>
 
       <div class="popup-content configurator">
-        <div class="configurator-img">
+        <div class="configurator-imgholder">
+          <div class="configurator-img" id="WPConf-img">
+            <img src="https://taleoftiles.s3.amazonaws.com/photos/styleditions_carta_da_parati_bruma_minimale_marrone.jpg" onload="setWPimgSize(event)">
+            <div class="configurator-band" id="WPConf-band0"></div>
+            <div class="configurator-band" id="WPConf-band1"></div>
+          </div>
         </div>
         <div class="configurator-info">
           <h3>Quanto è grande, in centimetri, la parete da tappezzare?</h3>
           <div class="configurator-sizes">
             <div class="input-qty">
-              <input type="number">
+              <h5>Larghezza</h5>
+              <input type="number" min="0" max="10000" value="400" id="WPConf-width">
               <div class="product-qtybtns">
-                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+                <svg class="icon-m icon" onclick="removeCM('w')"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
                 <span class="product-note">cm</span>
-                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+                <svg class="icon-m icon" onclick="addCM('w')"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
               </div>
             </div>
+            <div class="configurator-times">&times;</div>
             <div class="input-qty">
-              <input type="number">
+              <h5>Altezza</h5>
+              <input type="number" min="0" max="10000" value="250" id="WPConf-height">
               <div class="product-qtybtns">
-                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+                <svg class="icon-m icon" onclick="removeCM('h')"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
                 <span class="product-note">cm</span>
-                <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+                <svg class="icon-m icon" onclick="addCM('h')"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
               </div>
             </div>
           </div>
@@ -37,7 +45,7 @@
 
       <div class="popup-actions">
         <button class="btn btn-secondary popup-close"><span>Chiudi senza aggiungere al carrello</span></button>
-        <button class="btn btn-primary" onClick="addAndClose()"><span>Aggiungi al carrello <strong>18mq</strong></span></button>
+        <button class="btn btn-primary" onClick="addAndClose()" id="WPConf-addToCart"><span>Aggiungi al carrello <strong></strong></span></button>
       </div>
 
     </div>
@@ -46,6 +54,8 @@
 </div>
 
 <script>
+
+  /* Popup */
 
   let popups = document.querySelectorAll(".cloak"),
     body;
@@ -105,5 +115,92 @@
   }
 
   window.openPopup = openPopup;
+
+  /* Change measures */
+
+  let addWPtoCart = document.getElementById("WPConf-addToCart"),
+    WPimgBand0 = document.getElementById("WPConf-band0"),
+    WPimgBand1 = document.getElementById("WPConf-band1"),
+    sizeFields = {
+      w: document.getElementById("WPConf-width"),
+      h: document.getElementById("WPConf-height")
+    },
+    imgRatio;
+
+  function setWPimgSize(e) {
+    imgRatio = e.target.naturalWidth / e.target.naturalHeight;
+    drawImgBands();
+  }
+
+  function drawImgBands() {
+    if ( !imgRatio ) return;
+    let selectedRatio = (+sizeFields.w.value) / (+sizeFields.h.value),
+      bandSize = 0;
+    if ( selectedRatio > imgRatio ) {
+      bandSize = ( 100 - ( 100*imgRatio ) / selectedRatio ) / 2;
+      WPimgBand0.style.left = 0;
+      WPimgBand0.style.right = 0;
+      WPimgBand0.style.top = 0;
+      WPimgBand0.style.bottom = "auto";
+      WPimgBand0.style.width = "auto";
+      WPimgBand0.style.height = bandSize + "%";
+      WPimgBand1.style.left = 0;
+      WPimgBand1.style.right = 0;
+      WPimgBand1.style.top = "auto";
+      WPimgBand1.style.bottom = 0;
+      WPimgBand1.style.width = "auto";
+      WPimgBand1.style.height = bandSize + "%";
+    } else if ( selectedRatio < imgRatio ) {
+      bandSize = ( 100 - ( 100/imgRatio ) * selectedRatio ) / 2;
+      WPimgBand0.style.top = 0;
+      WPimgBand0.style.bottom = 0;
+      WPimgBand0.style.left = 0;
+      WPimgBand0.style.right = "auto";
+      WPimgBand0.style.width = bandSize + "%";
+      WPimgBand0.style.height = "auto";
+      WPimgBand1.style.top = 0;
+      WPimgBand1.style.bottom = 0;
+      WPimgBand1.style.left = "auto";
+      WPimgBand1.style.right = 0;
+      WPimgBand1.style.width = bandSize + "%";
+      WPimgBand1.style.height = "auto";
+    } else {
+      WPimgBand0.style.width = 0;
+      WPimgBand0.style.height = 0;
+      WPimgBand1.style.width = 0;
+      WPimgBand1.style.height = 0;
+    }
+  }
+
+  function calcWallsize() {
+    let wallSize = Math.ceil( (+sizeFields.w.value) * (+sizeFields.h.value) / 10000 );
+    drawImgBands();
+    if ( wallSize > 0 ) {
+      addWPtoCart.querySelector('strong').innerHTML = wallSize + 'mq';
+      addWPtoCart.disabled = false;
+    } else {
+      addWPtoCart.querySelector('strong').innerHTML = '';
+      addWPtoCart.disabled = true;
+    }
+  }
+
+  function addCM(side){
+    let field = sizeFields[side];
+    field.value = Math.min(10000, +field.value + 1);
+    calcWallsize();
+  }
+
+  function removeCM(side){
+    let field = sizeFields[side];
+    field.value = Math.max(0, +field.value - 1);
+    calcWallsize();
+  }
+
+  sizeFields.w.addEventListener("change", calcWallsize);
+  sizeFields.h.addEventListener("change", calcWallsize);
+  sizeFields.w.addEventListener("keyup", calcWallsize);
+  sizeFields.h.addEventListener("keyup", calcWallsize);
+
+  calcWallsize();
 
 </script>
