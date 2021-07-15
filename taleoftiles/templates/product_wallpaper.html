@@ -276,10 +276,9 @@
     for (var i = 0; i < rad.length; i++) {
 
       some_size_checked = document.getElementsByName("size")[i].checked;
-      console.log(some_size_checked)
-        rad[i].addEventListener('change', function() {
-            compute_money()
-        });
+      rad[i].addEventListener('change', function() {
+          compute_money()
+      });
     }
     if (!some_size_checked){
       var value = document.getElementsByName("size")[0].value;
