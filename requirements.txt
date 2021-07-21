@@ -4,7 +4,6 @@ django-heroku
 requests
 pillow
 django-summernote
-django_reverse_admin
 django-recaptcha
 numpy
 django-modeltranslation

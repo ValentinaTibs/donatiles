@@ -1,14 +1,13 @@
 from django.contrib import admin
+from django.core.exceptions import ObjectDoesNotExist
 
 from django_summernote.admin import SummernoteModelAdmin
-from django_reverse_admin import ReverseModelAdmin
 
 from taleoftiles.models import  Product, Tag, Publication, Price, EasyProductProxy
 from taleoftiles.models import TechnicalSpec, Catalogue
 from layout.models      import Image, Icon
 
 from taleoftiles.forms import CustomProductModelForm,UpdateScoreForm
-
 
 def duplicate(modeladmin, request, queryset):
     for e in queryset:
@@ -30,7 +29,6 @@ def duplicate_plain(modeladmin, request, queryset):
         e.pk = None
         e.save()
 
-from django.core.exceptions import ObjectDoesNotExist
 def toggle_handmade(modeladmin, request, queryset):
     hm = Tag.objects.get(slug='handmade')
     for product in queryset:
@@ -73,6 +71,18 @@ def toggle_parent_format(modeladmin, request, queryset):
             product.tags.add(format_.parent)             
             product.save()
 
+def disable_action(modeladmin, request, queryset):
+    for product in queryset:
+        print(product)
+        product.is_active = False
+        product.available = False
+        product.save()
+
+def make_for_product(modeladmin, request, queryset):
+    for e in queryset:
+        e.in_product_edit = not(e.in_product_edit)
+        e.save() 
+
 duplicate.short_description = "Duplicate selected items"
 duplicate_product.short_description = "Duplicate selected items"
 duplicate_plain.short_description = "Duplicate selected items"
@@ -81,12 +91,7 @@ toggle_samplable.short_description = "Toggle SAMPLABLEs"
 toggle_parent_format.short_description = "Refresh Parent Formats"
 tagga_terracotta.short_description = "Tagga con terracotta"
 assign_catalogue.short_description = "Assign to Catalogue 2020"
-
-
-def make_for_product(modeladmin, request, queryset):
-    for e in queryset:
-        e.in_product_edit = not(e.in_product_edit)
-        e.save() 
+disable_action.short_description = "Disable Product"
 
 make_for_product.short_description = "Toggle availability for product edit"
 
@@ -272,7 +277,7 @@ class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     action_form = UpdateScoreForm
 
-    actions = [duplicate_product,assign_catalogue,'set_tag_action']
+    actions = [duplicate_product,assign_catalogue,disable_action,'set_tag_action']
 
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
