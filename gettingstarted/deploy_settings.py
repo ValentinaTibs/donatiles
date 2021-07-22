@@ -193,3 +193,11 @@ SUMMERNOTE_CONFIG = {
 
 # ------ TERMS AND CONDS ------
 TERMS_BASE_TEMPLATE = 'empty_base.html'
+
+# ---------- akismet anti spam ---------
+AKISMET_API_KEY = "c689f6942bd9"
+AKISMET_BLOG_URL = "https://www.taleotfiles.com"
+# --------------------------------------
+
+
+

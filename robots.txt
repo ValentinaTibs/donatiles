@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /*add-to-cart=*
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /account/
+Disallow: /summary/*
+Disallow: /shipping/*
+Disallow: /payment/*
+

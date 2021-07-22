@@ -195,7 +195,6 @@ class EasyProductAdmin(ImportExportActionModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     #action_form = UpdateScoreForm
-
     actions = [disable_action,'set_tag_action']
 
     resource_class = ProductResource
@@ -285,7 +284,7 @@ class ProductAdmin(admin.ModelAdmin):
         return "\n".join([p.name + '\n' for p in obj.tags.filter(in_product_edit = True)])    
 
     def set_tag_action(self, request, queryset):
-        print("COSA CI FACCIO QUI")
+        
         hm = Tag.objects.get(slug=request.POST['tag'])
         for product in queryset:
             the_tags = product.tags.filter(pk=hm.pk) 
