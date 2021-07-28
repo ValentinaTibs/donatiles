@@ -36,21 +36,8 @@
       background: #F1B360;
     }
 
-
   </style>
-  <div class="cover-home-links">
-    <div class="content">
-      <ul>
 
-      {% for tag in tags|filter_tags:'categoria' %}
-          <li >
-            <a href="{% url 'catalogue' %}?filters={{tag.slug}}" class="btn-gridbox">{{tag}}</a>
-        </li>
-      {% endfor %}
-
-      </ul>
-    </div>
-  </div>
 </div>
 
 

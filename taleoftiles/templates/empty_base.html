@@ -131,26 +131,25 @@
 
     <div><a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
     <ul>
+
       {% url 'catalogue' as catalogue_url %}
-      <li class="{% if catalogue_url|starts_with:request.path %} selected {% endif %}">
-        <a href="{% url 'catalogue' %}"><span>{% trans 'catalogue-menu' %}</span></a>
-        <div class="nav-primary-expanded">
-          {% for cat in menu_cats %}
-            <div class="nav-col">
-              <h5>{{cat}}</h5>
-              <ul>
-                {% for child_cat in cat.all_menu_childs %}
-                  <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{{child_cat}} </a></li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endfor %}
-        </div>
+      <li class="">
+        <a href="{% url 'catalogue' %}?filters=cartadaparati"><span> Carta da Parati</span></a>
+      </li>
+
+      <li class="">
+        <a href="{% url 'catalogue' %}?filters=cottoetrusco"><span> Cotto Etrusco</span></a>
+      </li>
+
+      <li class="">
+        <a href="{% url 'catalogue' %}?filters=superficipremium"><span> Superfici Premium</span></a>
       </li>
 
       {% url 'blog' as blog_url %}
-      <li class="{% if blog_url|starts_with:request.path %} selected {% endif %}">
-        <a href="{% url 'blog'%}"><span> {% trans 'blog-menu' %}</span></a></li>
+      <li class="selected">
+        <a href="{% url 'blog'%}"><span> Il nostro Blog</span></a>
+      </li>
+
     </ul>
 
 
