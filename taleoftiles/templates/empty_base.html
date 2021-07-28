@@ -132,17 +132,9 @@
     <div><a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
     <ul>
 
-      <li class="">
-        <a href="{% url 'catalogue' %}?filters=cartadaparati"><span> Carta da Parati</span></a>
-      </li>
-
-      <li class="">
-        <a href="{% url 'catalogue' %}?filters=cottoetrusco"><span> Cotto Etrusco</span></a>
-      </li>
-
-      <li class="">
-        <a href="{% url 'catalogue' %}?filters=superficipremium"><span> Superfici Premium</span></a>
-      </li>
+      <li class=""><a href="{% url 'catalogue' %}?filters=cartadaparati"><span> Carta da Parati</span></a></li>
+      <li class=""><a href="{% url 'catalogue' %}?filters=cottoetrusco"><span> Cotto Etrusco</span></a></li>
+      <li class=""><a href="{% url 'catalogue' %}?filters=superficipremium"><span> Superfici Premium</span></a></li>
 
       <li class="selected">
         <a href="{% url 'blog'%}"><span> Il nostro Blog</span></a>
@@ -198,17 +190,11 @@
         <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable nav-col-container">
 
-          {% for cat in menu_cats %}
-          <div class="nav-col">
-            <h5>{{cat}}</h5>
-            <ul>
-              {% for child_cat in cat.all_menu_childs %}
-              <li><a href="{% url 'catalogue' %}?filters={{child_cat.slug}}">{{child_cat}} </a></li>
-              {% endfor %}
-            </ul>
-          </div>
-          {% endfor %}
-
+          <ul>
+            <li><a href="{% url 'catalogue' %}?filters=cartadaparati">Carta da Parati </a></li>
+            <li><a href="{% url 'catalogue' %}?filters=cottoetrusco">Cotto Etrusco </a></li>
+            <li><a href="{% url 'catalogue' %}?filters=superficipremium">Superfici Premium </a></li>
+          </ul>
         </div>
       </li>
       <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>

@@ -194,7 +194,7 @@ class EasyProductAdmin(ImportExportActionModelAdmin):
     
 class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
-    #action_form = UpdateScoreForm
+    action_form = UpdateScoreForm
     actions = [disable_action,'set_tag_action']
 
     resource_class = ProductResource
