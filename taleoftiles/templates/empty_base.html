@@ -189,14 +189,20 @@
         <a href="{% url 'catalogue' %}"><span>{% trans 'catalogue-menu' %}</span></a>
         <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable nav-col-container">
-
-          <ul>
-            <li><a href="{% url 'catalogue' %}?filters=cartadaparati">Carta da Parati </a></li>
-            <li><a href="{% url 'catalogue' %}?filters=cottoetrusco">Cotto Etrusco </a></li>
-            <li><a href="{% url 'catalogue' %}?filters=superficipremium">Superfici Premium </a></li>
-          </ul>
+          <div class="nav-col">
+            <ul>
+              <li><a href="{% url 'catalogue' %}?filters=cartadaparati">Carta da Parati </a></li>
+              <li><a href="{% url 'catalogue' %}?filters=cottoetrusco">Cotto Etrusco </a></li>
+              <li><a href="{% url 'catalogue' %}?filters=superficipremium">Superfici Premium </a></li>
+            </ul>
+          </div>
         </div>
       </li>
+
+
+
+
+
       <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>
       <li><a href="{% url 'support' %}"><span>{% trans 'support'|title %}</span></a></li>
 
