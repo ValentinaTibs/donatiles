@@ -132,7 +132,6 @@
     <div><a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
     <ul>
 
-      {% url 'catalogue' as catalogue_url %}
       <li class="">
         <a href="{% url 'catalogue' %}?filters=cartadaparati"><span> Carta da Parati</span></a>
       </li>
@@ -145,7 +144,6 @@
         <a href="{% url 'catalogue' %}?filters=superficipremium"><span> Superfici Premium</span></a>
       </li>
 
-      {% url 'blog' as blog_url %}
       <li class="selected">
         <a href="{% url 'blog'%}"><span> Il nostro Blog</span></a>
       </li>
