@@ -200,7 +200,7 @@ class Product(models.Model):
 
     def serie(self,):
         try:
-            serie = self.tags.get(parent__slug = 'serie')
+            serie = self.tags.filter(parent__slug = 'serie').first()
         except ObjectDoesNotExist:
             serie = "None"
         return serie

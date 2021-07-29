@@ -207,6 +207,7 @@ class ProductAdmin(admin.ModelAdmin):
                     'order',
                     'wait_time',
                     'min_ammount',
+                    'serie',
                     'is_decor',
                     'available',
                     'is_active',
