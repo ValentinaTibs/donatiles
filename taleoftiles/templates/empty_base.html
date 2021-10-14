@@ -135,7 +135,7 @@
       <li class=""><a href="{% url 'catalogue' %}?filters=cartadaparati"><span> Carta da Parati</span></a></li>
       <li class=""><a href="{% url 'catalogue' %}?filters=capsule"><span> Capsule</span></a></li>
       <li class=""><a href="{% url 'catalogue' %}?filters=cottoetrusco"><span> Cotto Etrusco</span></a></li>
-      <li class=""><a href="{% url 'catalogue' %}?filters=superficipremium"><span> Superfici Premium</span></a></li>
+      <li class=""><a href="{% url 'catalogue' %}?filters=naturaleverticale"><span> Naturale Verticale</span></a></li>
 
       <li class="selected">
         <a href="{% url 'blog'%}"><span> Il nostro Blog</span></a>
@@ -193,8 +193,9 @@
           <div class="nav-col">
             <ul>
               <li><a href="{% url 'catalogue' %}?filters=cartadaparati">Carta da Parati </a></li>
+              <li><a href="{% url 'catalogue' %}?filters=capsule">Capsule </a></li>
               <li><a href="{% url 'catalogue' %}?filters=cottoetrusco">Cotto Etrusco </a></li>
-              <li><a href="{% url 'catalogue' %}?filters=superficipremium">Superfici Premium </a></li>
+              <li><a href="{% url 'catalogue' %}?filters=naturaleverticale">Naturale Verticale </a></li>
             </ul>
           </div>
         </div>
@@ -282,14 +283,23 @@
 
     </div>
 
-
-    {% for elem in footer_elems %}
         <ul class="  linkslist ">
-          {% for foot_elem in elem.element.all %}
-            <li><a href="{% url 'catalogue' %}?filters={{foot_elem.name}}">{{foot_elem.content}} </a></li>
-          {% endfor %}
+            <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati' %} </a></li>
+            <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati moderna' %} </a></li>
+            <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati camera da letto ' %} </a></li>
+            <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati 3d' %} </a></li>
+            <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati design' %} </a></li>
+            <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati bagno' %} </a></li>
         </ul>
-    {% endfor %}
+
+        <ul class="  linkslist ">
+            
+              <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'cotto etrusco' %} </a></li>
+              <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'cotto fatto a mano' %} </a></li>
+              <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'cotto di design' %} </a></li>
+
+        </ul>
+
     
       <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">
     </div>

@@ -70,36 +70,9 @@
 <!--End mc_embed_signup-->
 
     </div>
-<<<<<<< HEAD
     <h3>{{ layout_elems|get_elem:'home-text-4'}}</h3>
     <h4>{{ layout_elems|get_elem:'home-text-5'}}</h4>
-=======
-    <div>{% blocktrans %}receive-home-free-samples{% endblocktrans %}</div>
 
-    <h3>{{ layout_elems|get_elem:'strength-pt-2'}}</h3>
-  </div>
-</div>
-
-
-{% if home_prods|length == 8 %}
-<div class="block block-lightbg ">
-  <div class="content grid grid-homesupport">
-
-    {% for product in home_prods %}
-
-         <div class="product-thumb infinite-item" >
-            <a href="{% url 'product' product.code %}" class="product-thumb-img">
-                <img loading="lazy" src=" {{product.cover.imagefile.url}}" alt="Argento / Narciso">
-            </a>
-            <a href="{% url 'product' product.code %}" class="product-thumb-title">
-                <h5>{{ product.serie.name }}</h5>
-                <h4>{{product.name}}</h4>
-            </a>
-        </div>
-
-    {% endfor %}
-
->>>>>>> magnify-mockup
   </div>
 </div>
 
