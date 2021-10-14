@@ -1,0 +1,314 @@
+{% load static %}
+<div class="cloak" id="popupWPConf">
+  <div class="popup-container">
+    <div class="popup">
+
+      <div class="overlay-title">
+        <h4>Configura la tua parete</h4>
+        <button class="btn popup-close"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
+      </div>
+
+      <div class="popup-content configurator">
+        <div class="configurator-imgholder">
+          <div class="configurator-img" id="WPConf-img-container">
+            <img src="https://taleoftiles.s3.amazonaws.com/photos/styleditions_carta_da_parati_bruma_minimale_marrone.jpg" onload="setWPimgSize(event)" id="WPConf-img">
+            <div class="configurator-band" id="WPConf-band0"></div>
+            <div class="configurator-band" id="WPConf-band1"></div>
+          </div>
+        </div>
+        <div class="configurator-info">
+          <h3>Quanto è grande, in centimetri, la parete da tappezzare?</h3>
+          <div class="configurator-sizes">
+            <div class="input-qty">
+              <h5>Larghezza</h5>
+              <input type="number" min="0" max="10000" value="400" id="WPConf-width">
+              <div class="product-qtybtns">
+                <svg class="icon-m icon" onclick="removeCM('w')"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+                <span class="product-note">cm</span>
+                <svg class="icon-m icon" onclick="addCM('w')"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              </div>
+            </div>
+            <div class="configurator-times">&times;</div>
+            <div class="input-qty">
+              <h5>Altezza</h5>
+              <input type="number" min="0" max="10000" value="250" id="WPConf-height">
+              <div class="product-qtybtns">
+                <svg class="icon-m icon" onclick="removeCM('h')"><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
+                <span class="product-note">cm</span>
+                <svg class="icon-m icon" onclick="addCM('h')"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              </div>
+            </div>
+          </div>
+          <ol>
+            <li>Inserisci le dimensioni della parete</li>
+            <li>Trascina l'immagine per "inquadrare" la parte che vuoi mostrare sulla parete</li>
+            <li>Clicca su "Aggiungi al carrello"</li>
+            <li>Procedi al checkout per inserire altri dati o richieste particolari</li>
+            <li><strong>Ti invieremo un preventivo preciso e un rendering dell'effetto finale!</strong></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="popup-actions">
+        <button class="btn btn-secondary popup-close"><span>Chiudi senza aggiungere al carrello</span></button>
+        <button class="btn btn-primary" onClick="addAndClose()" id="WPConf-addToCart"><span>Aggiungi al carrello <strong></strong></span></button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+  /* Popup */
+
+  let popups = document.querySelectorAll(".cloak"),
+    body;
+
+  function dontPropagate(e) {
+    e.stopImmediatePropagation();
+  }
+
+  function enablePopups() {
+    body = document.body;
+    Array.from(document.querySelectorAll(".popup")).forEach((p) => {
+      p.removeEventListener("click", dontPropagate);
+      p.addEventListener("click", dontPropagate);
+    });
+    Array.from(document.querySelectorAll(".popup-close")).forEach((p) => {
+      p.removeEventListener("click", closePopup);
+      p.addEventListener("click", closePopup);
+    });
+  }
+  if (popups.length) enablePopups();
+
+  let openPopup = function (id) {
+    if (!body) enablePopups();
+    let popupToOpen = document.getElementById(id);
+    body.classList.add("noscroll");
+    popupToOpen.style.display = "block";
+    Array.from(popups).forEach((p) => {
+      p.classList.remove("visible");
+    });
+    setTimeout(function () {
+      popupToOpen.classList.add("visible");
+      try {
+        popupToOpen.init();
+      } catch (e) {}
+    }, 50);
+  };
+
+  function addAndClose() {
+
+    let configuratorSettings = {},
+      img = document.getElementById("WPConf-img"),
+      cutSize = getCutSize(),
+      bandSize;
+
+    configuratorSettings.wall = {
+      width:  +sizeFields.w.value + "cm",
+      height: +sizeFields.h.value + "cm"
+    };
+    configuratorSettings.image = {
+      width:  img.width  + "px",
+      height: img.height + "px"
+    };
+    configuratorSettings.cut = {
+      left: "0px",
+      right: "0px",
+      top: "0px",
+      bottom: "0px"
+    };
+
+    if ( cutSize.mode === 'v' ) {
+      bandSize = cutSize.bandSize*img.height/100;
+      configuratorSettings.cut.top = Math.floor( bandSize - parseInt(img.style.top) ) + "px";
+      configuratorSettings.cut.bottom = Math.floor( bandSize + parseInt(img.style.top) ) + "px";
+    } else if ( cutSize.mode === 'h' ) {
+      bandSize = cutSize.bandSize*img.width/100;
+      configuratorSettings.cut.left = Math.floor( bandSize - parseInt(img.style.left) ) + "px";
+      configuratorSettings.cut.right = Math.floor( bandSize + parseInt(img.style.left) ) + "px";
+    }
+
+    // TO DO: send configurator settings to backend
+    console.log( JSON.stringify( configuratorSettings ) );
+    closePopup();
+  }
+
+  function closePopup() {
+    body.classList.remove("noscroll");
+    Array.from(popups).forEach((p) => {
+      p.classList.remove("visible");
+    });
+    setTimeout(function () {
+      Array.from(popups).forEach((p) => {
+        p.style.display = "none";
+      });
+    }, 500);
+  }
+
+  window.openPopup = openPopup;
+
+  /* Change measures */
+
+  let addWPtoCart = document.getElementById("WPConf-addToCart"),
+    WPimgBand0 = document.getElementById("WPConf-band0"),
+    WPimgBand1 = document.getElementById("WPConf-band1"),
+    sizeFields = {
+      w: document.getElementById("WPConf-width"),
+      h: document.getElementById("WPConf-height")
+    },
+    imgRatio,
+    draggable;
+
+  function setWPimgSize(e) {
+    imgRatio = e.target.naturalWidth / e.target.naturalHeight;
+    let imgCont = document.getElementById("WPConf-img-container");
+    imgCont.style.paddingTop = Math.floor((1/imgRatio)*100) + "%";
+    drawImgBands();
+    calcWallsize();
+  }
+
+  function getCutSize() {
+    let ratio = (+sizeFields.w.value) / (+sizeFields.h.value),
+      bandSize,
+      mode = '';
+    if ( ratio > imgRatio ) {
+      bandSize = ( 100 - ( 100*imgRatio ) / ratio ) / 2;
+      mode = 'v';
+    } else if ( ratio < imgRatio ) {
+      bandSize = ( 100 - ( 100/imgRatio ) * ratio ) / 2;
+      mode = 'h';
+    }
+    return { mode, bandSize, ratio };
+  }
+
+  function drawImgBands() {
+    if ( !imgRatio ) return;
+    let imgCont = document.getElementById("WPConf-img-container");
+      cutSize = getCutSize();
+    imgCont.classList.remove("drag-v");
+    imgCont.classList.remove("drag-h");
+    if ( cutSize.mode === 'v' ) {
+      WPimgBand0.style.left = 0;
+      WPimgBand0.style.right = 0;
+      WPimgBand0.style.top = 0;
+      WPimgBand0.style.bottom = "auto";
+      WPimgBand0.style.width = "auto";
+      WPimgBand0.style.height = cutSize.bandSize + "%";
+      WPimgBand1.style.left = 0;
+      WPimgBand1.style.right = 0;
+      WPimgBand1.style.top = "auto";
+      WPimgBand1.style.bottom = 0;
+      WPimgBand1.style.width = "auto";
+      WPimgBand1.style.height = cutSize.bandSize + "%";
+      imgCont.classList.add("drag-v");
+    } else if ( cutSize.mode === 'h' ) {
+      WPimgBand0.style.top = 0;
+      WPimgBand0.style.bottom = 0;
+      WPimgBand0.style.left = 0;
+      WPimgBand0.style.right = "auto";
+      WPimgBand0.style.width = cutSize.bandSize + "%";
+      WPimgBand0.style.height = "auto";
+      WPimgBand1.style.top = 0;
+      WPimgBand1.style.bottom = 0;
+      WPimgBand1.style.left = "auto";
+      WPimgBand1.style.right = 0;
+      WPimgBand1.style.width = cutSize.bandSize + "%";
+      WPimgBand1.style.height = "auto";
+      imgCont.classList.add("drag-h");
+    } else {
+      WPimgBand0.style.width = 0;
+      WPimgBand0.style.height = 0;
+      WPimgBand1.style.width = 0;
+      WPimgBand1.style.height = 0;
+    }
+  }
+
+  function calcWallsize() {
+    let wallSize = Math.ceil( (+sizeFields.w.value) * (+sizeFields.h.value) / 10000 );
+    drawImgBands();
+    if ( wallSize > 0 ) {
+      addWPtoCart.querySelector('strong').innerHTML = wallSize + 'mq';
+      addWPtoCart.disabled = false;
+    } else {
+      addWPtoCart.querySelector('strong').innerHTML = '';
+      addWPtoCart.disabled = true;
+    }
+    resetImgDrag();
+  }
+
+  function addCM(side){
+    let field = sizeFields[side];
+    field.value = Math.min(10000, +field.value + 1);
+    calcWallsize();
+  }
+
+  function removeCM(side){
+    let field = sizeFields[side];
+    field.value = Math.max(0, +field.value - 1);
+    calcWallsize();
+  }
+
+  sizeFields.w.addEventListener("keyup", calcWallsize);
+  sizeFields.h.addEventListener("keyup", calcWallsize);
+
+  calcWallsize();
+
+  /* Drag WP image */
+
+  function resetImgDrag() {
+    if (draggable) {
+      draggable.style.top = "0px";
+      draggable.style.left = "0px";
+    }
+  }
+
+  function enableDrag() {
+
+    let startX = 0,
+      startY = 0,
+      dragX = 0,
+      dragY = 0,
+      cutSize;
+
+    draggable = document.getElementById("WPConf-img");
+    draggable.onmousedown = dragStart;
+
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      cutSize = getCutSize();
+      startX = e.clientX - draggable.offsetLeft;
+      startY = e.clientY - draggable.offsetTop;
+      document.onmouseup = dragClose;
+      document.onmousemove = dragMove;
+    }
+
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      let margin = 0;
+      if ( cutSize.mode === 'v' ) {
+        margin = draggable.height*cutSize.bandSize/100;
+        dragY = e.clientY - startY;
+        draggable.style.top = Math.max( -margin, Math.min( margin, dragY ) ) + "px";
+      } else if ( cutSize.mode === 'h' ) {
+        margin = draggable.width*cutSize.bandSize/100;
+        dragX = e.clientX - startX;
+        draggable.style.left = Math.max( -margin, Math.min( margin, dragX ) ) + "px";
+      }
+    }
+
+    function dragClose(e) {
+      e = e || window.event;
+      e.preventDefault();
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+
+  enableDrag();
+
+</script>

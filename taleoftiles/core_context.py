@@ -16,17 +16,6 @@ class SessionStore(DbSessionStore):
         pass
 #####  -----------        
 
-def category_menu(context):
-    cats = Tag.objects.filter(public = True, child__in_menu = True).distinct()
-    return {'menu_cats': cats} 
-
-def footer_menu(context):
-    footer_elems = ElementTag.objects.filter(parent__slug = 'footer', public = True).distinct()
-    
-    return {
-    'footer_elems':footer_elems
-    } 
-
 def user_menu(context):
     query = Q()
 

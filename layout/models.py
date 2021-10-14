@@ -3,15 +3,19 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from taleoftiles.models import Product, Tag, TechnicalSpec
 from blog.models import Post
-from PIL import Image 
+
 from django.conf import settings
 
 import sys
 import os
+import io
+
 
 from django.core.management import call_command
 from django.core.exceptions import ObjectDoesNotExist
-
+from PIL import Image  as PILImg
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
 
 DATA_TYPE = (
     ('t', 'Text'),
@@ -282,7 +286,7 @@ class Image(models.Model):
 
     name        = models.CharField (max_length = 100 , null = True, blank=True)
     imagefile   = models.ImageField( upload_to='photos', null=True, blank=True, help_text="Load an image.")
-    #thumbnail   = models.ImageField( upload_to='thumbs', null=True, blank=True, help_text="Load an image.")
+    thumbnail   = models.ImageField( upload_to='thumbs', null=True, blank=True, help_text="Load an image.")
     product     = models.ForeignKey     (Product,   blank = True, null = True,on_delete=models.SET_NULL, related_name='images' )
     element     = models.OneToOneField  (Element,   blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
     icon        = models.OneToOneField  (Icon,      blank = True, null = True,on_delete=models.SET_NULL, related_name='image' )
@@ -329,34 +333,61 @@ class Image(models.Model):
         #     return
         #     #raise Exception('Could not create thumbnail - is the file type valid?')
 
-    # def make_thumbnail(self):
+    def make_thumbnail(self):
 
-    #     image = Image.open(self.imagefile)
-    #     image.thumbnail(THUMB_SIZE, Image.ANTIALIAS)
+        image = PILImg.open(self.imagefile)
+        
+        #---  ALGO for CROPPING ----
+        w, h = image.size
+        cropped_image = image.crop((0, 0, 200,200))
+        resized_image = image.resize((200, 200), PILImg.ANTIALIAS)
+        #--->  ALGO for CROPPING <----
+        
+        filename = self.name
+        output = io.BytesIO()
+        resized_image.save(output, format='PNG', optimize=True)
+        #resized_image.save(output, format='PNG', quality=95)
+        output.seek(0) #Change the stream position to the given byte offset.
 
-    #     thumb_name, thumb_extension = os.path.splitext(self.photo.name)
-    #     thumb_extension = thumb_extension.lower()
 
-    #     thumb_filename = thumb_name + '_thumb' + thumb_extension
+        self.thumbnail = InMemoryUploadedFile(output,'ImageField',\
+            "%s.png" % filename , 'image/png', output.__sizeof__(), None)
+        self.save()
 
-    #     if thumb_extension in ['.jpg', '.jpeg']:
-    #         FTYPE = 'JPEG'
-    #     elif thumb_extension == '.gif':
-    #         FTYPE = 'GIF'
-    #     elif thumb_extension == '.png':
-    #         FTYPE = 'PNG'
-    #     else:
-    #         return False    # Unrecognized file type
+    def gino(self):    
 
-    #     # Save thumbnail to in-memory file as StringIO
-    #     temp_thumb = BytesIO()
-    #     image.save(temp_thumb, FTYPE)
-    #     temp_thumb.seek(0)
+        THUMB_SIZE = (250, 100)
+        image = PILImg.open(self.imagefile.path)
+        print(image)
+        # image.thumbnail(THUMB_SIZE, PILImg.BILINEAR)
 
-    #     # set save=False, otherwise it will run in an infinite loop
-    #     self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
-    #     temp_thumb.close()
+        # thumb_name, thumb_extension = os.path.splitext(self.imagefile.name)
+        # thumb_extension = thumb_extension.lower()
 
-    #     return True
+        # thumb_filename = thumb_name + '_thumb' + thumb_extension
+        # print(thumb_filename)
+        # if thumb_extension in ['.jpg', '.jpeg']:
+        #     FTYPE = 'JPEG'
+        # elif thumb_extension == '.gif':
+        #     FTYPE = 'GIF'
+        # elif thumb_extension == '.png':
+        #     FTYPE = 'PNG'
+        # else:
+        #     return False    # Unrecognized file type
+
+        # # Save thumbnail to in-memory file as StringIO
+        # temp_thumb = io.BytesIO()
+        # #image.save(temp_thumb, FTYPE)
+        # print(temp_thumb)
+        # image.save(temp_thumb, save_all=True)
+
+        # # temp_thumb.seek(0)
+
+        # # # set save=False, otherwise it will run in an infinite loop
+        # # self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+        # # self.save()
+        # # temp_thumb.close()
+
+        return True
 
 

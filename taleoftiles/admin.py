@@ -197,6 +197,7 @@ class ProductAdmin(admin.ModelAdmin):
     action_form = UpdateScoreForm
     actions = [disable_action,'set_tag_action']
 
+
     resource_class = ProductResource
     inlines = (PriceStackedAdmin,PhotoStackedAdmin)
 

@@ -71,8 +71,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "taleoftiles.core_context.category_menu",
-                "taleoftiles.core_context.footer_menu",
                 "taleoftiles.core_context.user_menu",
             ]
         },
@@ -170,6 +168,7 @@ AWS_S3_CUSTOM_DOMAIN    = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 AWS_DEFAULT_ACL         = 'public-read'
 MEDIA_URL               = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
+# -----> AWS3 <----- 
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
