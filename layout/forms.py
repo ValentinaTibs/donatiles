@@ -13,7 +13,6 @@ class ContactForm(forms.Form):
 
     email       = forms.CharField(max_length=200)
     request    	= forms.CharField(widget=forms.Textarea())
-    captcha 	= ReCaptchaField(widget=ReCaptchaV3)
 
     def clean(self):
         try:

@@ -27,6 +27,26 @@
   </div>
 </div>
 
+<!-- <div class="block block-coldbg block-faqquestions">
+  <div class="content">
+    <h1>{% trans 'contact-us'|title %}</h1>
+  
+    <div>
+      <div class="faqquestions-question">
+      <h4>{% trans 'faq-contact-us'  %}</h4>
+        <p>
+          <form method="post" action="{% url 'support' %}">
+            {% csrf_token %}
+            <p>{{contact_form}}</p>
+  
+            <input type="submit" class="btn btn-primary" value="{% trans 'send-request' %}">
+            <input type="hidden" name="next" value="{{ request.get_full_path }} " />
 
+          </form>
+        </p>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 {% endblock %}

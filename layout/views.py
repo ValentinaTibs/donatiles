@@ -11,7 +11,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
 def support(request):  
-    dyn_elements = Element.objects.filter(tag__parent__slug = 'support', public = True)
     contact_form =ContactForm(request.POST or None, request.FILES or None)    
     if request.method == "POST":
         
@@ -24,7 +23,6 @@ def support(request):
 
             contact_form = _('Request successfully sent')
     return render(request, "support.html",{
-        'layout_elems'  : dyn_elements,
         'contact_form'  : contact_form
         })
 
