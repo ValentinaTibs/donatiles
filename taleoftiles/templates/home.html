@@ -17,40 +17,7 @@
     </div>
   </div>
 
-  <style type="text/css">
 
-    .cover-home-links ul li{
-      word-break: break-all;
-    }
-
-    .cover-home-links ul li:nth-child(1) {
-      background: #B4CCC5;
-    }
-    .cover-home-links ul li:nth-child(2) {
-      background: #AB5243;
-    }
-    .cover-home-links ul li:nth-child(3) {
-      background: #3D312F;
-    }
-    .cover-home-links ul li:nth-child(4) {
-      background: #F1B360;
-    }
-
-
-  </style>
-  <div class="cover-home-links">
-    <div class="content">
-      <ul>
-
-      {% for tag in tags|filter_tags:'categoria' %}
-          <li >
-            <a href="{% url 'catalogue' %}?filters={{tag.slug}}" class="btn-gridbox">{{tag}}</a>
-        </li>
-      {% endfor %}
-
-      </ul>
-    </div>
-  </div>
 </div>
 
 

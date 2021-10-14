@@ -29,7 +29,6 @@ def index(request):
 
     return render(request, "home.html",{
         'layout_elems'  : home_elems,
-        'tags'          : home_tags,
         'secondary_post': secondary_post,
         'main_post'     : main_post,
         'home_prods'    : home_prods
