@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'CRM',
     'layout',
     'blog',
+    'subdomains'
     # 'storages'
 ]
 
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     'django.middleware.locale.LocaleMiddleware',
+    'subdomains.middleware.SubdomainURLRoutingMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -58,7 +60,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "gettingstarted.urls"
 
 TEMPLATES = [
     {
@@ -198,5 +199,15 @@ AKISMET_API_KEY = "c689f6942bd9"
 AKISMET_BLOG_URL = "https://www.taleotfiles.com"
 # --------------------------------------
 
+# -----> 
+# https://stackoverflow.com/questions/14491284/django-subdomain
+
+ROOT_URLCONF = "gettingstarted.urls"
+
+# SUBDOMAIN_URLCONF = {
+#     None: 'gettingstarted.urls',
+#     'toys': 'gettingstarted.urls.toys',
+#     'shoes': 'yourproject.urls.shoes'
+# }
 
 
