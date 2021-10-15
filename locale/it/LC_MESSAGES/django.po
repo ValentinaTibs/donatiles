@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-10 10:11+0000\n"
+"POT-Creation-Date: 2021-10-14 21:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: CRM/forms.py:33
+#: CRM/forms.py:51
 msgid "notes"
 msgstr ""
 
-#: CRM/forms.py:46
+#: CRM/forms.py:67
 msgid "Not Valid Code"
 msgstr "Codice non valido"
 
-#: CRM/forms.py:48
+#: CRM/forms.py:69
 msgid "Aleady Used Code"
 msgstr "Codice già utilizzato"
 
-#: CRM/forms.py:50
+#: CRM/forms.py:71
 msgid "Expired Code"
 msgstr "Codice scaduto"
 
-#: CRM/forms.py:91 CRM/forms.py:129
+#: CRM/forms.py:112 CRM/forms.py:148
 msgid "Wrong Product"
 msgstr "Prodotto non disponibile"
 
-#: CRM/forms.py:158 layout/forms.py:22
+#: CRM/forms.py:177 layout/forms.py:21
 msgid "Invalid email"
 msgstr "Email non valida"
 
-#: CRM/forms.py:162
+#: CRM/forms.py:181
 msgid "Duplicated email"
 msgstr "Email già presente"
 
-#: gettingstarted/deploy_settings.py:116 gettingstarted/local_settings.py:118
+#: gettingstarted/deploy_settings.py:114 gettingstarted/local_settings.py:120
 msgid "English"
 msgstr "Inglese"
 
-#: gettingstarted/deploy_settings.py:117 gettingstarted/local_settings.py:119
+#: gettingstarted/deploy_settings.py:115 gettingstarted/local_settings.py:121
 msgid "Italiano"
 msgstr "Italiano"
 
-#: gettingstarted/deploy_settings.py:118 gettingstarted/local_settings.py:120
+#: gettingstarted/deploy_settings.py:116 gettingstarted/local_settings.py:122
 msgid "French"
 msgstr "French"
 
-#: layout/views.py:25
+#: layout/views.py:24
 msgid "Request successfully sent"
 msgstr "Richiesta inviata con successo"
 
@@ -66,8 +66,7 @@ msgstr "Richiesta inviata con successo"
 msgid "account-page-name"
 msgstr "Il tuo account"
 
-#: taleoftiles/templates/account.html:27 taleoftiles/templates/support.html:36
-#: taleoftiles/templates/support.html:113
+#: taleoftiles/templates/account.html:27
 msgid "orders"
 msgstr "Ordini"
 
@@ -103,6 +102,8 @@ msgstr "Tale of Tiles Blog"
 
 #: taleoftiles/templates/blog.html:6 taleoftiles/templates/catalogue.html:7
 #: taleoftiles/templates/home.html:8 taleoftiles/templates/product.html:6
+#: taleoftiles/templates/product_cottoetrusco copy.html:6
+#: taleoftiles/templates/product_cottoetrusco.html:6
 #: taleoftiles/templates/product_wallpaper.html:6
 #: taleoftiles/templates/support.html:6
 msgid "home-keywords-meta-tag"
@@ -118,28 +119,21 @@ msgstr ""
 msgid "catalogue-page-name"
 msgstr "Catalogo"
 
-#: taleoftiles/templates/catalogue.html:29
+#: taleoftiles/templates/catalogue.html:15
 msgid "filters"
 msgstr "Filtri"
 
-#: taleoftiles/templates/catalogue.html:112
-msgid "all-series"
-msgstr "Tutte le serie"
+#: taleoftiles/templates/catalogue.html:19
+msgid "category"
+msgstr ""
 
-#: taleoftiles/templates/catalogue.html:136
+#: taleoftiles/templates/catalogue.html:47
 #: taleoftiles/templates/product.html:14
-#: taleoftiles/templates/product_wallpaper.html:14
+#: taleoftiles/templates/product_cottoetrusco copy.html:19
+#: taleoftiles/templates/product_cottoetrusco.html:20
+#: taleoftiles/templates/product_wallpaper.html:19
 msgid "all-products"
 msgstr "Tutti i prodotti"
-
-#: taleoftiles/templates/catalogue.html:143
-#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:46
-msgid "products"
-msgstr "Prodotti"
-
-#: taleoftiles/templates/catalogue.html:146
-msgid "order-for"
-msgstr "Ordina per"
 
 #: taleoftiles/templates/checkout_base.html:114
 msgid "summary"
@@ -154,17 +148,16 @@ msgid "payment"
 msgstr "Pagamenti"
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:291
+#: taleoftiles/templates/empty_base.html:282
 msgid "termini-e-condizioni"
 msgstr ""
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:301
 msgid "tiles"
 msgstr "Piastrelle"
 
 #: taleoftiles/templates/empty_base.html:85
-#: taleoftiles/templates/empty_base.html:218
+#: taleoftiles/templates/empty_base.html:209
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:14
 msgid "support"
 msgstr "Assistenza"
@@ -178,35 +171,69 @@ msgid "logout"
 msgstr "Logout"
 
 #: taleoftiles/templates/empty_base.html:91
-#: taleoftiles/templates/empty_base.html:220
+#: taleoftiles/templates/empty_base.html:211
 msgid "login-register"
 msgstr "Login-Registrati"
 
-#: taleoftiles/templates/empty_base.html:136
-#: taleoftiles/templates/empty_base.html:200
+#: taleoftiles/templates/empty_base.html:190
 msgid "catalogue-menu"
 msgstr "Catalogo"
 
-#: taleoftiles/templates/empty_base.html:153
-#: taleoftiles/templates/empty_base.html:217
+#: taleoftiles/templates/empty_base.html:208
 msgid "blog-menu"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:258
 msgid "of"
 msgstr "Di"
 
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:258
 msgid "added-to-chart"
 msgstr "Aggiunto al carrello"
 
-#: taleoftiles/templates/empty_base.html:268
+#: taleoftiles/templates/empty_base.html:259
 msgid "open-chart"
 msgstr "Vai al carrello"
 
-#: taleoftiles/templates/empty_base.html:290
+#: taleoftiles/templates/empty_base.html:281
 msgid "privacy-policy"
 msgstr "Privacy Policy"
+
+#: taleoftiles/templates/empty_base.html:287
+msgid "carta da parati"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:288
+msgid "carta da parati moderna"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:289
+msgid "carta da parati camera da letto "
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:290
+msgid "carta da parati 3d"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:291
+msgid "carta da parati design"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:292
+msgid "carta da parati bagno"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:297
+msgid "cotto etrusco"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:298
+msgid "cotto fatto a mano"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:299
+msgid "cotto di design"
+msgstr ""
 
 #: taleoftiles/templates/home.html:6
 msgid "home-page-name"
@@ -220,98 +247,20 @@ msgstr ""
 "superfici e pavimenti. Rivestimenti di design italiano: cementine, cotto, "
 "pietra, effetto legno."
 
-#: taleoftiles/templates/home.html:61
-msgid "choose-home-claim"
-msgstr ""
-"Scegli le tue piastrelle tra la nostra <strong>selezione di oltre 200 "
-"prodotti</strong>"
-
-#: taleoftiles/templates/home.html:63
-msgid "secure-payment"
-msgstr "Pagamenti Sicuri"
-
-#: taleoftiles/templates/home.html:64
-msgid "secure-payment-details"
-msgstr ""
-"Pagamenti sicuri, veloci e garantiti tramite PayPal, carta di credito o "
-"bonifico bancario."
-
-#: taleoftiles/templates/home.html:81
-msgid "sample-description"
-msgstr ""
-"Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of "
-"Tiles Book. Navigando nel catalogo potrai scegliere fino a 4 campioni da "
-"ricevere gratuitamente a casa tua per sognare con i nostri prodotti "
-"esclusivamente italiani."
-
-#: taleoftiles/templates/home.html:88
-msgid "sample-touchhand"
-msgstr ""
-"Iscriviti alla Newsletter per ricevere consigli di ristrutturazione ed un 5% "
-"di sconto sul tuo primo ordine."
-
-#: taleoftiles/templates/home.html:92
+#: taleoftiles/templates/home.html:47
 msgid "email-c2a"
 msgstr "La tua email"
 
-#: taleoftiles/templates/home.html:118 taleoftiles/templates/home.html:209
-msgid "receive-home-free-samples"
-msgstr ""
-"<h3>Ricevi le tue piastrelle a casa <strong>tutti i prezzi sono inclusi di "
-"iva e spedizione</strong></h3> \n"
-"<br/><h4><i>Spedizione Inclusa in tutta Europa</i></h4>\n"
-"      "
-
-#: taleoftiles/templates/home.html:161
+#: taleoftiles/templates/home.html:93
 msgid "title-renovate-home"
 msgstr "Idee per ristrutturare"
 
-#: taleoftiles/templates/home.html:162
+#: taleoftiles/templates/home.html:94
 msgid "subtitle-renovate-home"
 msgstr ""
 "Divertiti con le nostre idee per rinnovare in modo semplice i tuoi ambienti."
 
-#: taleoftiles/templates/home.html:170
-msgid "title-faq-home"
-msgstr "Domande frequenti"
-
-#: taleoftiles/templates/home.html:174
-msgid "faq-1"
-msgstr "Come posso restituire il prodotto, se cambio idea?"
-
-#: taleoftiles/templates/home.html:175 taleoftiles/templates/home.html:180
-#: taleoftiles/templates/home.html:185 taleoftiles/templates/home.html:190
-#: taleoftiles/templates/home.html:194 taleoftiles/templates/home.html:198
-msgid "read-answer"
-msgstr "Leggi risposta"
-
-#: taleoftiles/templates/home.html:179
-msgid "faq-2"
-msgstr "Quali sono i tempi di consegna?"
-
-#: taleoftiles/templates/home.html:184
-msgid "faq-3"
-msgstr "Come avverrà la consegna?"
-
-#: taleoftiles/templates/home.html:189
-msgid "faq-4"
-msgstr "Posso vedere le piastrelle prima di acquistarle?"
-
-#: taleoftiles/templates/home.html:193
-msgid "faq-5"
-msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
-
-#: taleoftiles/templates/home.html:197
-msgid "faq-6"
-msgstr ""
-"Devo avere delle accortezze particolari nel calcolare le misure per "
-"scegliere le piastrelle?"
-
-#: taleoftiles/templates/home.html:208
-msgid "are-you-designer"
-msgstr "Sei un designer?"
-
-#: taleoftiles/templates/home.html:224
+#: taleoftiles/templates/home.html:104
 msgid "founder-name"
 msgstr "Noi siamo Tale of Tiles"
 
@@ -320,7 +269,9 @@ msgid "your-chart"
 msgstr "Carrello"
 
 #: taleoftiles/templates/include/chart.html:40
-#: taleoftiles/templates/product.html:146
+#: taleoftiles/templates/product.html:124
+#: taleoftiles/templates/product_cottoetrusco.html:150
+#: taleoftiles/templates/product_wallpaper.html:137
 msgid "total"
 msgstr "Totale"
 
@@ -600,7 +551,9 @@ msgid "summary-back-home"
 msgstr "Torna a Tale of Tiles"
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
-#: taleoftiles/templates/product.html:184
+#: taleoftiles/templates/product.html:152
+#: taleoftiles/templates/product_cottoetrusco.html:177
+#: taleoftiles/templates/product_wallpaper.html:162
 msgid "any-doubt"
 msgstr "Hai qualche dubbio"
 
@@ -637,112 +590,144 @@ msgid "give-it-alook"
 msgstr "Dai un'occhiata a questi!"
 
 #: taleoftiles/templates/product.html:24
-#: taleoftiles/templates/product_wallpaper.html:24
+#: taleoftiles/templates/product_cottoetrusco copy.html:29
+#: taleoftiles/templates/product_wallpaper.html:29
 msgid "sampling-c2a"
 msgstr ""
-"<strong>Ordina il tuo campione</strong><br/>Richiedilo a info@taleoftiles.com"
+"<h3>Ordina il tuo campione!</h3> \n"
+"<br/><h4>manda una mail di richiesta a <i> <a href=\"mailto:info@taleoftiles."
+"com\">info@taleoftiles.com</a></i></h4>"
 
-#: taleoftiles/templates/product.html:29
+#: taleoftiles/templates/product.html:28
 msgid "full-sampler"
 msgstr "Tale of Tiles Book completo"
 
-#: taleoftiles/templates/product.html:32
+#: taleoftiles/templates/product.html:31
 msgid "already-in-sampler"
 msgstr "Già aggiunto al Tale of Tiles Book"
 
-#: taleoftiles/templates/product.html:39
+#: taleoftiles/templates/product.html:38
 msgid "add-sampler-button"
 msgstr "Aggiungi al Tale of Tiles Book"
 
-#: taleoftiles/templates/product.html:42
+#: taleoftiles/templates/product.html:41
 msgid "add-sampler-text"
 msgstr ""
 "Componi il tuo Tale of Tiles Book per toccare con mano i tuoi prodotti "
 "preferiti"
 
-#: taleoftiles/templates/product.html:45
+#: taleoftiles/templates/product.html:44
 msgid "not-samplable"
 msgstr "Non campionabile"
 
-#: taleoftiles/templates/product.html:78
-msgid "formats"
-msgstr "Formati"
-
-#: taleoftiles/templates/product.html:85
-#: taleoftiles/templates/product_wallpaper.html:57
-msgid "finishes"
-msgstr "Finiture"
-
-#: taleoftiles/templates/product.html:103
-#: taleoftiles/templates/product_wallpaper.html:78
+#: taleoftiles/templates/product.html:81
+#: taleoftiles/templates/product_cottoetrusco copy.html:94
+#: taleoftiles/templates/product_cottoetrusco.html:107
+#: taleoftiles/templates/product_wallpaper.html:94
 msgid "code"
 msgstr "Codice"
 
-#: taleoftiles/templates/product.html:109
-#: taleoftiles/templates/product_wallpaper.html:84
+#: taleoftiles/templates/product.html:87
+#: taleoftiles/templates/product_cottoetrusco copy.html:100
+#: taleoftiles/templates/product_cottoetrusco.html:113
+#: taleoftiles/templates/product_wallpaper.html:100
 msgid "starting-from"
 msgstr "Prezzo a metro quadro"
 
-#: taleoftiles/templates/product.html:128
+#: taleoftiles/templates/product.html:106
+#: taleoftiles/templates/product_cottoetrusco.html:132
+#: taleoftiles/templates/product_wallpaper.html:119
 msgid "superficie-da-rivestire"
 msgstr "Superficie da rivestire"
 
-#: taleoftiles/templates/product.html:128
+#: taleoftiles/templates/product.html:106
+#: taleoftiles/templates/product_cottoetrusco.html:132
+#: taleoftiles/templates/product_wallpaper.html:119
 msgid "min"
 msgstr "Minimo"
 
-#: taleoftiles/templates/product.html:153
+#: taleoftiles/templates/product.html:130
+#: taleoftiles/templates/product_cottoetrusco.html:156
+#: taleoftiles/templates/product_wallpaper.html:143
 msgid "include-sfrido"
 msgstr "Includi lo sfrido"
 
-#: taleoftiles/templates/product.html:163
+#: taleoftiles/templates/product.html:134
+#: taleoftiles/templates/product_cottoetrusco.html:160
+#: taleoftiles/templates/product_wallpaper.html:147
 #, fuzzy
 #| msgid "sample-description"
 msgid "sfrido-small-description"
 msgstr ""
 "Lo sfrido è il calcolo dello scarto di piastrelle del processo di posa."
 
-#: taleoftiles/templates/product.html:173
+#: taleoftiles/templates/product.html:141
+#: taleoftiles/templates/product_cottoetrusco.html:167
+#: taleoftiles/templates/product_wallpaper.html:154
 msgid "add-chart-button"
 msgstr "Aggiungi al carrello"
 
-#: taleoftiles/templates/product.html:179
-#: taleoftiles/templates/product_wallpaper.html:102
+#: taleoftiles/templates/product.html:147
+#: taleoftiles/templates/product_cottoetrusco copy.html:117
+#: taleoftiles/templates/product_cottoetrusco.html:175
+#: taleoftiles/templates/product_wallpaper.html:160
 msgid "free-shipping"
 msgstr "Spedizione gratuita"
 
-#: taleoftiles/templates/product.html:182
-#: taleoftiles/templates/product_wallpaper.html:69
+#: taleoftiles/templates/product.html:150
+#: taleoftiles/templates/product_cottoetrusco copy.html:85
 msgid "receive-date"
 msgstr "Ordinando oggi stesso, riceverai il prodotto a casa tua"
 
-#: taleoftiles/templates/product.html:182
-#: taleoftiles/templates/product_wallpaper.html:69
+#: taleoftiles/templates/product.html:150
+#: taleoftiles/templates/product_cottoetrusco copy.html:85
 msgid "untill"
 msgstr "entro il"
 
-#: taleoftiles/templates/product.html:185
+#: taleoftiles/templates/product.html:153
+#: taleoftiles/templates/product_cottoetrusco.html:178
+#: taleoftiles/templates/product_wallpaper.html:163
 #, fuzzy
 #| msgid "any-doubt"
 msgid "any-doubt-subtitle"
 msgstr "Contatta l’assistenza o consulta le domande frequenti"
 
-#: taleoftiles/templates/product.html:209
-#: taleoftiles/templates/product_wallpaper.html:150
+#: taleoftiles/templates/product.html:189
+#: taleoftiles/templates/product_cottoetrusco copy.html:170
+#: taleoftiles/templates/product_cottoetrusco.html:202
+#: taleoftiles/templates/product_wallpaper.html:199
 msgid "download-tech-spech"
 msgstr "Scheda tecnica [PDF]"
 
-#: taleoftiles/templates/product.html:233
-#: taleoftiles/templates/product_wallpaper.html:174
+#: taleoftiles/templates/product.html:200
+#: taleoftiles/templates/product_cottoetrusco copy.html:194
+#: taleoftiles/templates/product_cottoetrusco.html:213
+#: taleoftiles/templates/product_wallpaper.html:210
 msgid "product-support"
 msgstr "Prodotto di supporto"
 
-#: taleoftiles/templates/product.html:248
-#: taleoftiles/templates/product_wallpaper.html:189
+#: taleoftiles/templates/product.html:215
+#: taleoftiles/templates/product_cottoetrusco copy.html:209
+#: taleoftiles/templates/product_cottoetrusco.html:228
+#: taleoftiles/templates/product_wallpaper.html:225
 msgid "product-same-serie"
 msgstr "Prodotti della stessa serie"
 
-#: taleoftiles/templates/product_wallpaper.html:103
+#: taleoftiles/templates/product_cottoetrusco copy.html:62
+#: taleoftiles/templates/product_cottoetrusco.html:64
+#: taleoftiles/templates/product_cottoetrusco.html:71
+#: taleoftiles/templates/product_wallpaper.html:60
+msgid "size"
+msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco copy.html:73
+#: taleoftiles/templates/product_cottoetrusco.html:66
+#: taleoftiles/templates/product_cottoetrusco.html:75
+#: taleoftiles/templates/product_wallpaper.html:71
+msgid "finishes"
+msgstr "Finiture"
+
+#: taleoftiles/templates/product_cottoetrusco copy.html:119
 msgid "vogliamo-essere-sicuri"
 msgstr ""
 "Vogliamo essere sicuri che la tua carta da parati sia proprio come la "
@@ -750,41 +735,41 @@ msgstr ""
 "alle misure della tua parete. Riceverai una simulazione grafica fatta su "
 "misura per te. "
 
-#: taleoftiles/templates/product_wallpaper.html:109
+#: taleoftiles/templates/product_cottoetrusco copy.html:127
 msgid "wallpaper_email"
 msgstr "Email *"
 
-#: taleoftiles/templates/product_wallpaper.html:110
+#: taleoftiles/templates/product_cottoetrusco copy.html:128
 msgid "wallpaper_name_surname"
 msgstr "Nome e Cognome"
 
-#: taleoftiles/templates/product_wallpaper.html:111
+#: taleoftiles/templates/product_cottoetrusco copy.html:129
 msgid "wallpaper_telephone"
 msgstr "Num. di Telefono"
 
-#: taleoftiles/templates/product_wallpaper.html:113
+#: taleoftiles/templates/product_cottoetrusco copy.html:131
 msgid "wallpaper_width"
 msgstr "Larghezza (in cm) * "
 
-#: taleoftiles/templates/product_wallpaper.html:114
+#: taleoftiles/templates/product_cottoetrusco copy.html:132
 msgid "wallpaper_height"
 msgstr "Altezza (in cm) *"
 
-#: taleoftiles/templates/product_wallpaper.html:115
+#: taleoftiles/templates/product_cottoetrusco copy.html:133
 msgid "wallpaper_notes"
 msgstr "Personalizzazioni e note"
 
-#: taleoftiles/templates/product_wallpaper.html:116
+#: taleoftiles/templates/product_cottoetrusco copy.html:134
 msgid "wallpaper_accept"
 msgstr ""
 "Per presa visione delle norme di invio ed autorizzazione al trattamento dei "
 "dati personali ai fini dello svolgimento del servizio richiesto"
 
-#: taleoftiles/templates/product_wallpaper.html:119
+#: taleoftiles/templates/product_cottoetrusco copy.html:138
 msgid "request-wallpaper-button"
 msgstr "Richiedi Controllo Misure"
 
-#: taleoftiles/templates/product_wallpaper.html:126
+#: taleoftiles/templates/product_cottoetrusco copy.html:146
 msgid "wallpaper_completed"
 msgstr ""
 "Il nostro ufficio elaborerà la richiesta entro 24-48 e riceverai per email "
@@ -793,6 +778,38 @@ msgstr ""
 "mezzo Paypal stesso, carta di credito o bonifico bancario. Una volta "
 "ricevuta conferma da PayPal del pagamento della pro-forma, inizieremo la "
 "produzione della tua carta da parati personalizzata"
+
+#: taleoftiles/templates/product_cottoetrusco.html:31
+#, fuzzy
+#| msgid "sampling-c2a"
+msgid "sampling-c2a-up"
+msgstr ""
+"<h3>Ordina il tuo campione!</h3> \n"
+"<br/><h4>manda una mail di richiesta a <i> <a href=\"mailto:info@taleoftiles."
+"com\">info@taleoftiles.com</a></i></h4>"
+
+#: taleoftiles/templates/product_cottoetrusco.html:32
+#, fuzzy
+#| msgid "sampling-c2a"
+msgid "sampling-c2a-down"
+msgstr ""
+"<h3>Ordina il tuo campione!</h3> \n"
+"<br/><h4>manda una mail di richiesta a <i> <a href=\"mailto:info@taleoftiles."
+"com\">info@taleoftiles.com</a></i></h4>"
+
+#: taleoftiles/templates/product_cottoetrusco.html:73
+msgid "special-sizes"
+msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco.html:84
+msgid "Come starà a casa tua?"
+msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco.html:102
+#, fuzzy
+#| msgid "frequent-question"
+msgid "request-quotation"
+msgstr "Richiedi Quotazione"
 
 #: taleoftiles/templates/registration/login.html:53
 msgid "already-logged-in"
@@ -922,378 +939,399 @@ msgstr ""
 msgid "support-text-3"
 msgstr "Vuoi un consiglio su un prodotto?"
 
-#: taleoftiles/templates/support.html:25 taleoftiles/templates/support.html:177
+#: taleoftiles/templates/support.html:25 taleoftiles/templates/support.html:32
 msgid "contact-us"
 msgstr "Contattaci"
 
-#: taleoftiles/templates/support.html:32
-msgid "frequent-question"
-msgstr "Domande frequenti"
-
-#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:84
-msgid "samples"
-msgstr "Campioni"
-
-#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:134
-msgid "shippings"
-msgstr "Spedizione"
-
-#: taleoftiles/templates/support.html:38 taleoftiles/templates/support.html:159
-msgid "company"
-msgstr "Azienda"
-
-#: taleoftiles/templates/support.html:41
-msgid "search"
-msgstr "Cerca"
-
-#: taleoftiles/templates/support.html:49
-msgid "faq-prod-madeitaly"
-msgstr "Tutti i prodotti sono al 100% Made in Italy?"
-
-#: taleoftiles/templates/support.html:50
-msgid "faq-prod-madeitaly-body"
-msgstr ""
-"Qui è necessaria una piccola spiegazione: le migliori piastrelle riproducono "
-"effetti naturali, ed in natura è difficile che si trovino ad esempio lastre "
-"di legno identiche o ciottolati identici. Una buona piastrella darà la "
-"sensazione di trovarsi davanti la diversità di un prodotto naturale. Questa "
-"caratteristica porta il nome di grado di stonalizzazione. La caratteristica "
-"di un prodotto questo tipo di prodotti consiste nell’avere una "
-"differenziazione delle facce delle singole piastrelle, al fine di ottenere "
-"un risultato visivo vicino alla naturalezza del materiale a cui la "
-"piastrella si ispira. Il campione che riceverai a casa essendo di piccole "
-"dimensioni, non descrive completamente ogni centimetro della piastrella "
-"stessa. Ti aiuterà però a toccare dal vivo l’effetto della superficie e la "
-"gradazione di colore."
-
-#: taleoftiles/templates/support.html:53
-msgid "faq-prod-multiface"
-msgstr ""
-"Le piastrelle che riceverò saranno identiche a quelle in foto? Cosa si "
-"intende per grado di stonalizzazione?"
-
-#: taleoftiles/templates/support.html:54
-msgid "faq-prod-multiface-body"
-msgstr ""
-"Qui è necessaria una piccola spiegazione: le migliori piastrelle riproducono "
-"effetti naturali, ed in natura è difficile che si trovino ad esempio lastre "
-"di legno identiche o ciottolati identici. Una buona piastrella darà la "
-"sensazione di trovarsi davanti la diversità di un prodotto naturale. Questa "
-"caratteristica porta il nome di grado di stonalizzazione. La caratteristica "
-"di un prodotto questo tipo di prodotti consiste nell’avere una "
-"differenziazione delle facce delle singole piastrelle, al fine di ottenere "
-"un risultato visivo vicino alla naturalezza del materiale a cui la "
-"piastrella si ispira. Il campione che riceverai a casa essendo di piccole "
-"dimensioni, non descrive completamente ogni centimetro della piastrella "
-"stessa. Ti aiuterà però a toccare dal vivo l’effetto della superficie e la "
-"gradazione di colore."
-
-#: taleoftiles/templates/support.html:58
-msgid "faq-prod-handmade"
-msgstr "Qual è la differenza tra prodotto industriale e prodotto fatto a mano?"
-
-#: taleoftiles/templates/support.html:59
-msgid "faq-prod-handmade-body"
-msgstr ""
-"I nostri prodotti industriali vengono realizzati con fasi produttive in "
-"fabbriche italiane di altissima qualità. I prodotti fatti a mano vengono "
-"invece realizzati nel rispetto di antiche tecniche manuali e sono quindi "
-"sempre prodotti unici ed irripetibili."
-
-#: taleoftiles/templates/support.html:63
-msgid "faq-prod-temperature"
-msgstr "Le piastrelle si rovinano a contatto con caldo o freddo? "
-
-#: taleoftiles/templates/support.html:64
-msgid "faq-prod-temperature-body"
-msgstr ""
-"Tutti i prodotti industriali in gres porcellanato fine sono antigelivi, "
-"dunque, resistenti al gelo. Resistono inoltre ad altissime temperature "
-"quindi, ad esempio, una teglia uscita dal forno di casa ci può essere "
-"poggiata sopra senza problemi. Le altissime temperature del processo di "
-"produzione industriale garantiscono un prodotto che rimane integro e sempre "
-"uguale nel tempo.  I prodotti fatti a mano, invece, sono molto diversi dai "
-"prodotti industriali. Ciascun prodotto ha caratteristiche tecniche "
-"differenti, quindi ti invitiamo a consultare la scheda tecnica di ogni "
-"prodotto a cui sei interessato, altrimenti contattaci ad info@taleoftiles.com"
-
-#: taleoftiles/templates/support.html:68
-msgid "faq-prod-maintenance"
-msgstr ""
-"Quali sono i prodotti più facilmente lavabili? E’ possibile lavarli con ogni "
-"detersivo oppure c’è il rischio che si rovinino o diventino opache?"
-
-#: taleoftiles/templates/support.html:69
-msgid "faq-prod-maintenance-body"
-msgstr ""
-"Tutti i detersivi commerciali possono essere usati senza timori di rovinare "
-"o opacizzare le piastrelle. L’uso dell’acido per pulirle potrebbe, se non "
-"asciugato con cura, danneggiare lo strato superficiale della cottura "
-"dell’argilla. Il gres fine porcellanato è antibatterico, per una pulizia "
-"accurata è sufficiente acqua tiepida."
-
-#: taleoftiles/templates/support.html:73
-msgid "faq-prod-decor"
-msgstr "Come funziona il prodotto denominato \"decoro\"?"
-
-#: taleoftiles/templates/support.html:74
-msgid "faq-prod-decor-body"
-msgstr ""
-"Nei prodotti che riportano la dicitura \"decoro\",  il produttore inserirà, "
-"in ogni scatola, differenti disegni tra quelli disponibili. Non è possibile, "
-"né per noi, né per voi, scegliere una sola faccia tra quelle disponibili "
-"nella versione \"decoro\", nè prevedere quante facce di ciascuna immagine ci "
-"saranno all’interno della scatola. Sarà un po’ come aprire un pacchetto di "
-"figurine. "
-
-#: taleoftiles/templates/support.html:78
-msgid "faq-prod-fughe"
-msgstr ""
-"La fuga è sempre necessaria? Posso posare le piastrelle una vicina all’altra "
-"senza che si veda lo stucco?"
-
-#: taleoftiles/templates/support.html:79
-msgid "faq-prod-fughe-body"
-msgstr ""
-"La fuga è sempre necessaria nella posa delle piastrelle per compensare la "
-"naturale dilatazione dei materiali. Anche quando il prodotto è rettificato, "
-"ovvero con bordi perfettamente dritti, seppure di un solo millimetro, noi "
-"consigliamo di montare sempre con la fuga. Si può giocare molto con la "
-"visibilità della fuga scegliendo con cura il colore dello stucco per "
-"ottenere un effetto finale meno visibile. "
-
-#: taleoftiles/templates/support.html:87
-msgid "faq-sample-1"
-msgstr "Cos’è il Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:88
-msgid "faq-sample-1-body"
-msgstr ""
-"Tale of Tiles Book è un campionario personalizzabile che ti permetterà di "
-"toccare con mano i nostri prodotti e poterne apprezzare ogni dettaglio. "
-"Contiene 4 campioni di piastrelle da te scelte, che ti regaliamo perché tu "
-"possa valutare con cura la tua scelta.  Riceverai un Tale of Tiles Book "
-"completamente gratuito direttamente a casa tua. Con Tale of Tiles Book sarai "
-"tu a scrivere la storia della tua casa."
-
-#: taleoftiles/templates/support.html:92
-msgid "faq-sample-2"
-msgstr "Quanto costa il Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:93
-msgid "faq-sample-2-body"
-msgstr ""
-"Il tuo primo Tale of Tiles Book viene spedito direttamente a casa tua "
-"gratuitamente. Se vorrai ricevere a casa altri Tale of Tiles book, i "
-"successivi saranno acquistabili ad un prezzo di euro 25 compreso di "
-"trasporto, costo che verrà detratto dal successivo ordine."
-
-#: taleoftiles/templates/support.html:97
-msgid "faq-sample-3"
-msgstr "Posso avere più di un Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:98
-msgid "faq-sample-3-body"
-msgstr ""
-"Il tuo primo Tale of Tiles Book è sempre gratuito, tuttavia è possibile "
-"richiederne più di uno ed i successivi saranno acquistabili ad un prezzo di "
-"25€ spese di spedizione incluse, costo che verrà detratto dal tuo eventuale "
-"ordine."
-
-#: taleoftiles/templates/support.html:102
-msgid "faq-sample-4"
-msgstr "Posso avere un campione di un prodotto fatto a mano?"
-
-#: taleoftiles/templates/support.html:103
-msgid "faq-sample-4-body"
-msgstr ""
-"Il prodotto fatto a mano, non può essere campionato nel Tale of Tiles Book, "
-"ma è sempre possibile richiederlo. Ti invitiamo a contattarci via mail ad "
-"info@taleoftiles.com con la tua personale richiesta."
-
-#: taleoftiles/templates/support.html:107
-msgid "faq-sample-5"
-msgstr "In quanto tempo riceverò il mio Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:108
-msgid "faq-sample-5-body"
-msgstr ""
-"Il Tale of Tiles Book viene spedito direttamente a casa tua tramite corriere "
-"espresso. Al momento dell’evasione del pacco, ti verrà comunicato il "
-"tracking della spedizione. Le spedizioni vengono elaborate in 2 giorni "
-"lavorativi dalla richiesta del Tale of Tiles Book. "
-
-#: taleoftiles/templates/support.html:116
-msgid "faq-order-minmax"
-msgstr "Ci sono dei limiti minimi o massimi negli ordini?"
-
-#: taleoftiles/templates/support.html:117
-msgid "faq-order-minmax-body"
-msgstr ""
-"Sia per i prodotti industriali che per quelli artigianali è indicato nella "
-"scheda prodotto la quantità minima di m2 che puoi acquistare. Queste "
-"restrizioni sono dovute a limiti di produzione. È sempre però possibile "
-"contattarci presso orders@taleoftiles.com per trovare una soluzione anche "
-"per piccole metrature. Per ordini sopra i 200m2 contatta orders@taleoftiles."
-"com per lo “Sconto Grandi Quantità”."
-
-#: taleoftiles/templates/support.html:120
-msgid "faq-order-sfrido"
-msgstr "Cosa si intende per sfrido? "
-
-#: taleoftiles/templates/support.html:121
-msgid "faq-order-sfrido-body"
-msgstr ""
-"Lo sfrido è il calcolo degli scarti di posa delle piastrelle. È un calcolo "
-"che prevede diverse variabili, come il formato delle piastrelle rispetto al "
-"forma della stanza. Il sito calcola automaticamente questo quantitativo "
-"aggiuntivo in  base all’ordine indicato, ed è la percentuale minima "
-"consigliata da aziende produttrici e posatori. È sempre consigliato  "
-"aggiungerlo perchè in fase di posa si prevedono degli scarti dati dai tagli "
-"delle piastrelle."
-
-#: taleoftiles/templates/support.html:125
-msgid "faq-order-payment"
-msgstr "Quali metodi di pagamento accettate?"
-
-#: taleoftiles/templates/support.html:126
-msgid "faq-order-payment-body"
-msgstr "Accettiamo Bonifico Bancario, PayPal e Carta di Credito "
-
-#: taleoftiles/templates/support.html:130
-msgid "faq-order-return"
-msgstr "Come posso restituire il prodotto, se cambio idea?"
-
-#: taleoftiles/templates/support.html:131
-msgid "faq-order-return-body"
-msgstr ""
-"E’ sempre possibile restituire il materiale che riceverai tramite Tale of "
-"Tiles srls entro 14 giorni dall’arrivo nel luogo che hai indicato per la "
-"ricezione della merce. Se vorrai restituirlo sarà possibile farlo compilando "
-"il modulo di richiesta di restituzione disponibile QUI. Per ragioni "
-"logistiche il materiale per essere trasportato indietro dovrà essere re-"
-"imballato. Per questo se cambierai idea e vorrai restituire i prodotti "
-"dovrai occuparti di sigillare nuovamente il bancale in maniera analoga a "
-"quando ti è stato recapitato. In caso di recesso ti sarà addebitato il costo "
-"del trasporto. Il tuo pagamento ti sarà restituito entro 30 giorni dalla "
-"ricezione della merce restituita."
-
-#: taleoftiles/templates/support.html:137
-msgid "faq-transport-cost"
-msgstr "Quanto costa e cosa include il trasporto?"
-
-#: taleoftiles/templates/support.html:138
-msgid "faq-transport-cost-body"
-msgstr ""
-"Ricevere a casa tua le piastrelle da Tale of Tiles è gratuito a meno di casi "
-"eccezionali ad esempio isole, ztl o zone con accesso difficoltoso o remoto. "
-"Se pensi che la tua consegna sia tra questi casi, scrivici a "
-"orders@taleoftiles.com prima di effettuare l’ordine per ricevere un "
-"preventivo di spedizione personalizzata. Nel trasporto non è incluso il "
-"facchinaggio. Il nostro è un trasporto standard con sponda idraulica a "
-"terra, in zone facilmente raggiungibili con mezzi di trasporto."
-
-#: taleoftiles/templates/support.html:141
-msgid "faq-transport-track"
-msgstr "Dove si trova la mia spedizione?"
-
-#: taleoftiles/templates/support.html:143
-msgid " faq-transport-track-body "
-msgstr ""
-"E’ possibile tracciare la posizione delle tue piastrelle inserendo il numero "
-"di spedizione ottenuto al momento dell’ordine presso questo sito ***** . In "
-"caso di problemi con la spedizione puoi contattarci presso "
-"orders@taleoftiles.com"
-
-#: taleoftiles/templates/support.html:147
-msgid "faq-shipping-timeind"
-msgstr "Quali sono i tempi di consegna per i prodotti industriali?"
-
-#: taleoftiles/templates/support.html:148
-msgid "faq-shipping-timeind-body"
-msgstr ""
-"Per ogni prodotto, all’interno della sua scheda troverai il tempo necessario "
-"di lavorazione. Prima che tu concluda l’ordine, ti confermeremo le "
-"tempistiche esatte per la ricezione delle tue piastrelle. Ti garantiamo la "
-"consegna entro le tempistiche comunicate al momento dell’ordine. Qualora ci "
-"siano ritardi dovuti alla produzione delle tue piastrelle, avrai la "
-"possibilità di ripensarci e recedere l’acquisto e ti verrà restituito entro "
-"24 ore l’intero importo versato. "
-
-#: taleoftiles/templates/support.html:151
-msgid "faq-shipping-timehandm"
-msgstr "Quali sono i tempi di consegna per i prodotti fatti a mano?"
-
-#: taleoftiles/templates/support.html:152
-msgid "faq-shipping-timehandm-body"
-msgstr ""
-"Anche per i prodotti fatti a mano, come per quelli industriali, in ciascuna "
-"scheda prodotto troverai i tempi di consegna, che verranno confermati al "
-"momento dell’acquisto. I tempi potranno variare perchè trattandosi di "
-"prodotti fatti a mano la lavorazione può variare in base alle metrature "
-"richieste."
-
-#: taleoftiles/templates/support.html:155
-msgid "faq-shipping-broken"
-msgstr ""
-"Cosa faccio se il materiale arriva danneggiato o se la confezione che lo "
-"contiene non è integra?"
-
-#: taleoftiles/templates/support.html:156
-msgid "faq-shipping-broken-body"
-msgstr ""
-"Nel momento in cui completerai il tuo ordine, ti arriveranno via mail le "
-"istruzioni da seguire per seguire la spedizione delle tue piastrelle. Tutti "
-"i materiali in vendita su Tale of Tiles hanno consegna integra garantita dal "
-"produttore alla porta di casa tua. Se il pacco dovesse essere danneggiato o "
-"aperto o il materiale lesionato,  potrai scegliere se ricevere un rimborso o "
-"se ricevere nuovamente la merce."
-
-#: taleoftiles/templates/support.html:162
-msgid "faq-company-1"
-msgstr "Dov’è la sede dell’azienda?"
-
-#: taleoftiles/templates/support.html:163
-msgid "faq-company-1-body"
-msgstr ""
-"Tale of Tiles è un'azienda tutta italiana e con sede a Forano (RI). "
-"Selezioniamo per voi i materiali prodotti nel territorio italiano da aziende "
-"con le quali collaboriamo da anni e che ci garantiscono rapporto qualità-"
-"prezzo, affidabilità e continui aggiornamenti. Il nostro team giovane è alla "
-"ricerca delle ultime tendenze in materia di materiali e decorazioni."
-
-#: taleoftiles/templates/support.html:166
-msgid "faq-company-2"
-msgstr "Fate voi le piastrelle?"
-
-#: taleoftiles/templates/support.html:167
-msgid "faq-company-2-body"
-msgstr ""
-"No, le piastrelle non sono realizzate da noi. Siamo rivenditori con "
-"esperienza maturata in 10 anni di vendita al dettaglio di pavimenti e "
-"rivestimenti Made in Italy. Per questo motivo siamo in grado di selezionare "
-"solo il meglio del panorama industriale e fatto a mano italiano."
-
-#: taleoftiles/templates/support.html:171
-msgid "faq-company-3"
-msgstr "E’ possibile venirvi a trovare di persona?"
-
-#: taleoftiles/templates/support.html:172
-msgid "faq-company-3-body"
-msgstr ""
-"Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
-"(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il Lazio "
-"(facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
-
-#: taleoftiles/templates/support.html:180
+#: taleoftiles/templates/support.html:36
 #, fuzzy
 #| msgid "contact-us"
 msgid "faq-contact-us"
 msgstr "Contattaci"
 
-#: taleoftiles/templates/support.html:186
+#: taleoftiles/templates/support.html:42
 msgid "send-request"
 msgstr ""
+
+#~ msgid "all-series"
+#~ msgstr "Tutte le serie"
+
+#~ msgid "products"
+#~ msgstr "Prodotti"
+
+#~ msgid "order-for"
+#~ msgstr "Ordina per"
+
+#~ msgid "choose-home-claim"
+#~ msgstr ""
+#~ "Scegli le tue piastrelle tra la nostra <strong>selezione di oltre 200 "
+#~ "prodotti</strong>"
+
+#~ msgid "secure-payment"
+#~ msgstr "Pagamenti Sicuri"
+
+#~ msgid "secure-payment-details"
+#~ msgstr ""
+#~ "Pagamenti sicuri, veloci e garantiti tramite PayPal, carta di credito o "
+#~ "bonifico bancario."
+
+#~ msgid "sample-description"
+#~ msgstr ""
+#~ "Scrivi tu stesso la storia dei tuoi nuovi spazi da vivere con il Tale of "
+#~ "Tiles Book. Navigando nel catalogo potrai scegliere fino a 4 campioni da "
+#~ "ricevere gratuitamente a casa tua per sognare con i nostri prodotti "
+#~ "esclusivamente italiani."
+
+#~ msgid "sample-touchhand"
+#~ msgstr ""
+#~ "Iscriviti alla Newsletter per ricevere consigli di ristrutturazione ed un "
+#~ "5% di sconto sul tuo primo ordine."
+
+#~ msgid "receive-home-free-samples"
+#~ msgstr ""
+#~ "<h3>Ricevi le tue piastrelle a casa <strong>tutti i prezzi sono inclusi "
+#~ "di iva e spedizione</strong></h3> \n"
+#~ "<br/><h4><i>Spedizione Inclusa in tutta Europa</i></h4>\n"
+#~ "      "
+
+#~ msgid "title-faq-home"
+#~ msgstr "Domande frequenti"
+
+#~ msgid "faq-1"
+#~ msgstr "Come posso restituire il prodotto, se cambio idea?"
+
+#~ msgid "read-answer"
+#~ msgstr "Leggi risposta"
+
+#~ msgid "faq-2"
+#~ msgstr "Quali sono i tempi di consegna?"
+
+#~ msgid "faq-3"
+#~ msgstr "Come avverrà la consegna?"
+
+#~ msgid "faq-4"
+#~ msgstr "Posso vedere le piastrelle prima di acquistarle?"
+
+#~ msgid "faq-5"
+#~ msgstr "I prodotti sono italiani? Sono prodotti fatti a mano?"
+
+#~ msgid "faq-6"
+#~ msgstr ""
+#~ "Devo avere delle accortezze particolari nel calcolare le misure per "
+#~ "scegliere le piastrelle?"
+
+#~ msgid "are-you-designer"
+#~ msgstr "Sei un designer?"
+
+#~ msgid "formats"
+#~ msgstr "Formati"
+
+#~ msgid "samples"
+#~ msgstr "Campioni"
+
+#~ msgid "shippings"
+#~ msgstr "Spedizione"
+
+#~ msgid "company"
+#~ msgstr "Azienda"
+
+#~ msgid "search"
+#~ msgstr "Cerca"
+
+#~ msgid "faq-prod-madeitaly"
+#~ msgstr "Tutti i prodotti sono al 100% Made in Italy?"
+
+#~ msgid "faq-prod-madeitaly-body"
+#~ msgstr ""
+#~ "Qui è necessaria una piccola spiegazione: le migliori piastrelle "
+#~ "riproducono effetti naturali, ed in natura è difficile che si trovino ad "
+#~ "esempio lastre di legno identiche o ciottolati identici. Una buona "
+#~ "piastrella darà la sensazione di trovarsi davanti la diversità di un "
+#~ "prodotto naturale. Questa caratteristica porta il nome di grado di "
+#~ "stonalizzazione. La caratteristica di un prodotto questo tipo di prodotti "
+#~ "consiste nell’avere una differenziazione delle facce delle singole "
+#~ "piastrelle, al fine di ottenere un risultato visivo vicino alla "
+#~ "naturalezza del materiale a cui la piastrella si ispira. Il campione che "
+#~ "riceverai a casa essendo di piccole dimensioni, non descrive "
+#~ "completamente ogni centimetro della piastrella stessa. Ti aiuterà però a "
+#~ "toccare dal vivo l’effetto della superficie e la gradazione di colore."
+
+#~ msgid "faq-prod-multiface"
+#~ msgstr ""
+#~ "Le piastrelle che riceverò saranno identiche a quelle in foto? Cosa si "
+#~ "intende per grado di stonalizzazione?"
+
+#~ msgid "faq-prod-multiface-body"
+#~ msgstr ""
+#~ "Qui è necessaria una piccola spiegazione: le migliori piastrelle "
+#~ "riproducono effetti naturali, ed in natura è difficile che si trovino ad "
+#~ "esempio lastre di legno identiche o ciottolati identici. Una buona "
+#~ "piastrella darà la sensazione di trovarsi davanti la diversità di un "
+#~ "prodotto naturale. Questa caratteristica porta il nome di grado di "
+#~ "stonalizzazione. La caratteristica di un prodotto questo tipo di prodotti "
+#~ "consiste nell’avere una differenziazione delle facce delle singole "
+#~ "piastrelle, al fine di ottenere un risultato visivo vicino alla "
+#~ "naturalezza del materiale a cui la piastrella si ispira. Il campione che "
+#~ "riceverai a casa essendo di piccole dimensioni, non descrive "
+#~ "completamente ogni centimetro della piastrella stessa. Ti aiuterà però a "
+#~ "toccare dal vivo l’effetto della superficie e la gradazione di colore."
+
+#~ msgid "faq-prod-handmade"
+#~ msgstr ""
+#~ "Qual è la differenza tra prodotto industriale e prodotto fatto a mano?"
+
+#~ msgid "faq-prod-handmade-body"
+#~ msgstr ""
+#~ "I nostri prodotti industriali vengono realizzati con fasi produttive in "
+#~ "fabbriche italiane di altissima qualità. I prodotti fatti a mano vengono "
+#~ "invece realizzati nel rispetto di antiche tecniche manuali e sono quindi "
+#~ "sempre prodotti unici ed irripetibili."
+
+#~ msgid "faq-prod-temperature"
+#~ msgstr "Le piastrelle si rovinano a contatto con caldo o freddo? "
+
+#~ msgid "faq-prod-temperature-body"
+#~ msgstr ""
+#~ "Tutti i prodotti industriali in gres porcellanato fine sono antigelivi, "
+#~ "dunque, resistenti al gelo. Resistono inoltre ad altissime temperature "
+#~ "quindi, ad esempio, una teglia uscita dal forno di casa ci può essere "
+#~ "poggiata sopra senza problemi. Le altissime temperature del processo di "
+#~ "produzione industriale garantiscono un prodotto che rimane integro e "
+#~ "sempre uguale nel tempo.  I prodotti fatti a mano, invece, sono molto "
+#~ "diversi dai prodotti industriali. Ciascun prodotto ha caratteristiche "
+#~ "tecniche differenti, quindi ti invitiamo a consultare la scheda tecnica "
+#~ "di ogni prodotto a cui sei interessato, altrimenti contattaci ad "
+#~ "info@taleoftiles.com"
+
+#~ msgid "faq-prod-maintenance"
+#~ msgstr ""
+#~ "Quali sono i prodotti più facilmente lavabili? E’ possibile lavarli con "
+#~ "ogni detersivo oppure c’è il rischio che si rovinino o diventino opache?"
+
+#~ msgid "faq-prod-maintenance-body"
+#~ msgstr ""
+#~ "Tutti i detersivi commerciali possono essere usati senza timori di "
+#~ "rovinare o opacizzare le piastrelle. L’uso dell’acido per pulirle "
+#~ "potrebbe, se non asciugato con cura, danneggiare lo strato superficiale "
+#~ "della cottura dell’argilla. Il gres fine porcellanato è antibatterico, "
+#~ "per una pulizia accurata è sufficiente acqua tiepida."
+
+#~ msgid "faq-prod-decor"
+#~ msgstr "Come funziona il prodotto denominato \"decoro\"?"
+
+#~ msgid "faq-prod-decor-body"
+#~ msgstr ""
+#~ "Nei prodotti che riportano la dicitura \"decoro\",  il produttore "
+#~ "inserirà, in ogni scatola, differenti disegni tra quelli disponibili. Non "
+#~ "è possibile, né per noi, né per voi, scegliere una sola faccia tra quelle "
+#~ "disponibili nella versione \"decoro\", nè prevedere quante facce di "
+#~ "ciascuna immagine ci saranno all’interno della scatola. Sarà un po’ come "
+#~ "aprire un pacchetto di figurine. "
+
+#~ msgid "faq-prod-fughe"
+#~ msgstr ""
+#~ "La fuga è sempre necessaria? Posso posare le piastrelle una vicina "
+#~ "all’altra senza che si veda lo stucco?"
+
+#~ msgid "faq-prod-fughe-body"
+#~ msgstr ""
+#~ "La fuga è sempre necessaria nella posa delle piastrelle per compensare la "
+#~ "naturale dilatazione dei materiali. Anche quando il prodotto è "
+#~ "rettificato, ovvero con bordi perfettamente dritti, seppure di un solo "
+#~ "millimetro, noi consigliamo di montare sempre con la fuga. Si può giocare "
+#~ "molto con la visibilità della fuga scegliendo con cura il colore dello "
+#~ "stucco per ottenere un effetto finale meno visibile. "
+
+#~ msgid "faq-sample-1"
+#~ msgstr "Cos’è il Tale of Tiles Book?"
+
+#~ msgid "faq-sample-1-body"
+#~ msgstr ""
+#~ "Tale of Tiles Book è un campionario personalizzabile che ti permetterà di "
+#~ "toccare con mano i nostri prodotti e poterne apprezzare ogni dettaglio. "
+#~ "Contiene 4 campioni di piastrelle da te scelte, che ti regaliamo perché "
+#~ "tu possa valutare con cura la tua scelta.  Riceverai un Tale of Tiles "
+#~ "Book completamente gratuito direttamente a casa tua. Con Tale of Tiles "
+#~ "Book sarai tu a scrivere la storia della tua casa."
+
+#~ msgid "faq-sample-2"
+#~ msgstr "Quanto costa il Tale of Tiles Book?"
+
+#~ msgid "faq-sample-2-body"
+#~ msgstr ""
+#~ "Il tuo primo Tale of Tiles Book viene spedito direttamente a casa tua "
+#~ "gratuitamente. Se vorrai ricevere a casa altri Tale of Tiles book, i "
+#~ "successivi saranno acquistabili ad un prezzo di euro 25 compreso di "
+#~ "trasporto, costo che verrà detratto dal successivo ordine."
+
+#~ msgid "faq-sample-3"
+#~ msgstr "Posso avere più di un Tale of Tiles Book?"
+
+#~ msgid "faq-sample-3-body"
+#~ msgstr ""
+#~ "Il tuo primo Tale of Tiles Book è sempre gratuito, tuttavia è possibile "
+#~ "richiederne più di uno ed i successivi saranno acquistabili ad un prezzo "
+#~ "di 25€ spese di spedizione incluse, costo che verrà detratto dal tuo "
+#~ "eventuale ordine."
+
+#~ msgid "faq-sample-4"
+#~ msgstr "Posso avere un campione di un prodotto fatto a mano?"
+
+#~ msgid "faq-sample-4-body"
+#~ msgstr ""
+#~ "Il prodotto fatto a mano, non può essere campionato nel Tale of Tiles "
+#~ "Book, ma è sempre possibile richiederlo. Ti invitiamo a contattarci via "
+#~ "mail ad info@taleoftiles.com con la tua personale richiesta."
+
+#~ msgid "faq-sample-5"
+#~ msgstr "In quanto tempo riceverò il mio Tale of Tiles Book?"
+
+#~ msgid "faq-sample-5-body"
+#~ msgstr ""
+#~ "Il Tale of Tiles Book viene spedito direttamente a casa tua tramite "
+#~ "corriere espresso. Al momento dell’evasione del pacco, ti verrà "
+#~ "comunicato il tracking della spedizione. Le spedizioni vengono elaborate "
+#~ "in 2 giorni lavorativi dalla richiesta del Tale of Tiles Book. "
+
+#~ msgid "faq-order-minmax"
+#~ msgstr "Ci sono dei limiti minimi o massimi negli ordini?"
+
+#~ msgid "faq-order-minmax-body"
+#~ msgstr ""
+#~ "Sia per i prodotti industriali che per quelli artigianali è indicato "
+#~ "nella scheda prodotto la quantità minima di m2 che puoi acquistare. "
+#~ "Queste restrizioni sono dovute a limiti di produzione. È sempre però "
+#~ "possibile contattarci presso orders@taleoftiles.com per trovare una "
+#~ "soluzione anche per piccole metrature. Per ordini sopra i 200m2 contatta "
+#~ "orders@taleoftiles.com per lo “Sconto Grandi Quantità”."
+
+#~ msgid "faq-order-sfrido"
+#~ msgstr "Cosa si intende per sfrido? "
+
+#~ msgid "faq-order-sfrido-body"
+#~ msgstr ""
+#~ "Lo sfrido è il calcolo degli scarti di posa delle piastrelle. È un "
+#~ "calcolo che prevede diverse variabili, come il formato delle piastrelle "
+#~ "rispetto al forma della stanza. Il sito calcola automaticamente questo "
+#~ "quantitativo aggiuntivo in  base all’ordine indicato, ed è la percentuale "
+#~ "minima consigliata da aziende produttrici e posatori. È sempre "
+#~ "consigliato  aggiungerlo perchè in fase di posa si prevedono degli scarti "
+#~ "dati dai tagli delle piastrelle."
+
+#~ msgid "faq-order-payment"
+#~ msgstr "Quali metodi di pagamento accettate?"
+
+#~ msgid "faq-order-payment-body"
+#~ msgstr "Accettiamo Bonifico Bancario, PayPal e Carta di Credito "
+
+#~ msgid "faq-order-return"
+#~ msgstr "Come posso restituire il prodotto, se cambio idea?"
+
+#~ msgid "faq-order-return-body"
+#~ msgstr ""
+#~ "E’ sempre possibile restituire il materiale che riceverai tramite Tale of "
+#~ "Tiles srls entro 14 giorni dall’arrivo nel luogo che hai indicato per la "
+#~ "ricezione della merce. Se vorrai restituirlo sarà possibile farlo "
+#~ "compilando il modulo di richiesta di restituzione disponibile QUI. Per "
+#~ "ragioni logistiche il materiale per essere trasportato indietro dovrà "
+#~ "essere re-imballato. Per questo se cambierai idea e vorrai restituire i "
+#~ "prodotti dovrai occuparti di sigillare nuovamente il bancale in maniera "
+#~ "analoga a quando ti è stato recapitato. In caso di recesso ti sarà "
+#~ "addebitato il costo del trasporto. Il tuo pagamento ti sarà restituito "
+#~ "entro 30 giorni dalla ricezione della merce restituita."
+
+#~ msgid "faq-transport-cost"
+#~ msgstr "Quanto costa e cosa include il trasporto?"
+
+#~ msgid "faq-transport-cost-body"
+#~ msgstr ""
+#~ "Ricevere a casa tua le piastrelle da Tale of Tiles è gratuito a meno di "
+#~ "casi eccezionali ad esempio isole, ztl o zone con accesso difficoltoso o "
+#~ "remoto. Se pensi che la tua consegna sia tra questi casi, scrivici a "
+#~ "orders@taleoftiles.com prima di effettuare l’ordine per ricevere un "
+#~ "preventivo di spedizione personalizzata. Nel trasporto non è incluso il "
+#~ "facchinaggio. Il nostro è un trasporto standard con sponda idraulica a "
+#~ "terra, in zone facilmente raggiungibili con mezzi di trasporto."
+
+#~ msgid "faq-transport-track"
+#~ msgstr "Dove si trova la mia spedizione?"
+
+#~ msgid " faq-transport-track-body "
+#~ msgstr ""
+#~ "E’ possibile tracciare la posizione delle tue piastrelle inserendo il "
+#~ "numero di spedizione ottenuto al momento dell’ordine presso questo sito "
+#~ "***** . In caso di problemi con la spedizione puoi contattarci presso "
+#~ "orders@taleoftiles.com"
+
+#~ msgid "faq-shipping-timeind"
+#~ msgstr "Quali sono i tempi di consegna per i prodotti industriali?"
+
+#~ msgid "faq-shipping-timeind-body"
+#~ msgstr ""
+#~ "Per ogni prodotto, all’interno della sua scheda troverai il tempo "
+#~ "necessario di lavorazione. Prima che tu concluda l’ordine, ti "
+#~ "confermeremo le tempistiche esatte per la ricezione delle tue piastrelle. "
+#~ "Ti garantiamo la consegna entro le tempistiche comunicate al momento "
+#~ "dell’ordine. Qualora ci siano ritardi dovuti alla produzione delle tue "
+#~ "piastrelle, avrai la possibilità di ripensarci e recedere l’acquisto e ti "
+#~ "verrà restituito entro 24 ore l’intero importo versato. "
+
+#~ msgid "faq-shipping-timehandm"
+#~ msgstr "Quali sono i tempi di consegna per i prodotti fatti a mano?"
+
+#~ msgid "faq-shipping-timehandm-body"
+#~ msgstr ""
+#~ "Anche per i prodotti fatti a mano, come per quelli industriali, in "
+#~ "ciascuna scheda prodotto troverai i tempi di consegna, che verranno "
+#~ "confermati al momento dell’acquisto. I tempi potranno variare perchè "
+#~ "trattandosi di prodotti fatti a mano la lavorazione può variare in base "
+#~ "alle metrature richieste."
+
+#~ msgid "faq-shipping-broken"
+#~ msgstr ""
+#~ "Cosa faccio se il materiale arriva danneggiato o se la confezione che lo "
+#~ "contiene non è integra?"
+
+#~ msgid "faq-shipping-broken-body"
+#~ msgstr ""
+#~ "Nel momento in cui completerai il tuo ordine, ti arriveranno via mail le "
+#~ "istruzioni da seguire per seguire la spedizione delle tue piastrelle. "
+#~ "Tutti i materiali in vendita su Tale of Tiles hanno consegna integra "
+#~ "garantita dal produttore alla porta di casa tua. Se il pacco dovesse "
+#~ "essere danneggiato o aperto o il materiale lesionato,  potrai scegliere "
+#~ "se ricevere un rimborso o se ricevere nuovamente la merce."
+
+#~ msgid "faq-company-1"
+#~ msgstr "Dov’è la sede dell’azienda?"
+
+#~ msgid "faq-company-1-body"
+#~ msgstr ""
+#~ "Tale of Tiles è un'azienda tutta italiana e con sede a Forano (RI). "
+#~ "Selezioniamo per voi i materiali prodotti nel territorio italiano da "
+#~ "aziende con le quali collaboriamo da anni e che ci garantiscono rapporto "
+#~ "qualità-prezzo, affidabilità e continui aggiornamenti. Il nostro team "
+#~ "giovane è alla ricerca delle ultime tendenze in materia di materiali e "
+#~ "decorazioni."
+
+#~ msgid "faq-company-2"
+#~ msgstr "Fate voi le piastrelle?"
+
+#~ msgid "faq-company-2-body"
+#~ msgstr ""
+#~ "No, le piastrelle non sono realizzate da noi. Siamo rivenditori con "
+#~ "esperienza maturata in 10 anni di vendita al dettaglio di pavimenti e "
+#~ "rivestimenti Made in Italy. Per questo motivo siamo in grado di "
+#~ "selezionare solo il meglio del panorama industriale e fatto a mano "
+#~ "italiano."
+
+#~ msgid "faq-company-3"
+#~ msgstr "E’ possibile venirvi a trovare di persona?"
+
+#~ msgid "faq-company-3-body"
+#~ msgstr ""
+#~ "Possediamo da oltre 10 anni uno showroom con un negozio fisico a Forano "
+#~ "(RI), nella campagna del centro Italia, al confine tra l’Umbria ed il "
+#~ "Lazio (facilmente raggiungibile in treno dall'aeroporto di Fiumicino). "
 
 #~ msgid "settings"
 #~ msgstr "Stili"

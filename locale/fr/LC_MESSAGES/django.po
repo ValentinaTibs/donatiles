@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-10 10:11+0000\n"
+"POT-Creation-Date: 2021-10-14 21:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: CRM/forms.py:33
+#: CRM/forms.py:51
 msgid "notes"
 msgstr ""
 
-#: CRM/forms.py:46
+#: CRM/forms.py:67
 msgid "Not Valid Code"
 msgstr "Code invalide"
 
-#: CRM/forms.py:48
+#: CRM/forms.py:69
 msgid "Aleady Used Code"
 msgstr "Code déjà utilisé"
 
-#: CRM/forms.py:50
+#: CRM/forms.py:71
 msgid "Expired Code"
 msgstr "Code Expiré"
 
-#: CRM/forms.py:91 CRM/forms.py:129
+#: CRM/forms.py:112 CRM/forms.py:148
 msgid "Wrong Product"
 msgstr "Produit Incorrecr"
 
-#: CRM/forms.py:158 layout/forms.py:22
+#: CRM/forms.py:177 layout/forms.py:21
 msgid "Invalid email"
 msgstr "Email invalide"
 
-#: CRM/forms.py:162
+#: CRM/forms.py:181
 msgid "Duplicated email"
 msgstr "Couriel dupliqué"
 
-#: gettingstarted/deploy_settings.py:116 gettingstarted/local_settings.py:118
+#: gettingstarted/deploy_settings.py:114 gettingstarted/local_settings.py:120
 msgid "English"
 msgstr "Anglais"
 
-#: gettingstarted/deploy_settings.py:117 gettingstarted/local_settings.py:119
+#: gettingstarted/deploy_settings.py:115 gettingstarted/local_settings.py:121
 msgid "Italiano"
 msgstr "Italien"
 
-#: gettingstarted/deploy_settings.py:118 gettingstarted/local_settings.py:120
+#: gettingstarted/deploy_settings.py:116 gettingstarted/local_settings.py:122
 msgid "French"
 msgstr ""
 
-#: layout/views.py:25
+#: layout/views.py:24
 msgid "Request successfully sent"
 msgstr ""
 
@@ -66,8 +66,7 @@ msgstr ""
 msgid "account-page-name"
 msgstr "Votre compte"
 
-#: taleoftiles/templates/account.html:27 taleoftiles/templates/support.html:36
-#: taleoftiles/templates/support.html:113
+#: taleoftiles/templates/account.html:27
 msgid "orders"
 msgstr "Commandes"
 
@@ -103,6 +102,8 @@ msgstr "Tale of Tiles Blog"
 
 #: taleoftiles/templates/blog.html:6 taleoftiles/templates/catalogue.html:7
 #: taleoftiles/templates/home.html:8 taleoftiles/templates/product.html:6
+#: taleoftiles/templates/product_cottoetrusco copy.html:6
+#: taleoftiles/templates/product_cottoetrusco.html:6
 #: taleoftiles/templates/product_wallpaper.html:6
 #: taleoftiles/templates/support.html:6
 msgid "home-keywords-meta-tag"
@@ -120,28 +121,21 @@ msgstr ""
 msgid "catalogue-page-name"
 msgstr "Catalogue"
 
-#: taleoftiles/templates/catalogue.html:29
+#: taleoftiles/templates/catalogue.html:15
 msgid "filters"
 msgstr "Filtres"
 
-#: taleoftiles/templates/catalogue.html:112
-msgid "all-series"
-msgstr "Toutes le séries"
+#: taleoftiles/templates/catalogue.html:19
+msgid "category"
+msgstr ""
 
-#: taleoftiles/templates/catalogue.html:136
+#: taleoftiles/templates/catalogue.html:47
 #: taleoftiles/templates/product.html:14
-#: taleoftiles/templates/product_wallpaper.html:14
+#: taleoftiles/templates/product_cottoetrusco copy.html:19
+#: taleoftiles/templates/product_cottoetrusco.html:20
+#: taleoftiles/templates/product_wallpaper.html:19
 msgid "all-products"
 msgstr "Tous les produits"
-
-#: taleoftiles/templates/catalogue.html:143
-#: taleoftiles/templates/support.html:34 taleoftiles/templates/support.html:46
-msgid "products"
-msgstr "Produits"
-
-#: taleoftiles/templates/catalogue.html:146
-msgid "order-for"
-msgstr "Trier par"
 
 #: taleoftiles/templates/checkout_base.html:114
 msgid "summary"
@@ -156,17 +150,16 @@ msgid "payment"
 msgstr "Paiement"
 
 #: taleoftiles/templates/checkout_base.html:138
-#: taleoftiles/templates/empty_base.html:291
+#: taleoftiles/templates/empty_base.html:282
 msgid "termini-e-condizioni"
 msgstr "Conditions générales"
 
 #: taleoftiles/templates/checkout_base.html:150
-#: taleoftiles/templates/empty_base.html:301
 msgid "tiles"
 msgstr "Carreaux"
 
 #: taleoftiles/templates/empty_base.html:85
-#: taleoftiles/templates/empty_base.html:218
+#: taleoftiles/templates/empty_base.html:209
 #: taleoftiles/templates/support.html:5 taleoftiles/templates/support.html:14
 msgid "support"
 msgstr "Assistance"
@@ -180,35 +173,69 @@ msgid "logout"
 msgstr "Déconnexion"
 
 #: taleoftiles/templates/empty_base.html:91
-#: taleoftiles/templates/empty_base.html:220
+#: taleoftiles/templates/empty_base.html:211
 msgid "login-register"
 msgstr "Connexion-Registrez vous"
 
-#: taleoftiles/templates/empty_base.html:136
-#: taleoftiles/templates/empty_base.html:200
+#: taleoftiles/templates/empty_base.html:190
 msgid "catalogue-menu"
 msgstr "Catalogue"
 
-#: taleoftiles/templates/empty_base.html:153
-#: taleoftiles/templates/empty_base.html:217
+#: taleoftiles/templates/empty_base.html:208
 msgid "blog-menu"
 msgstr "Idées pour la rénovation"
 
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:258
 msgid "of"
 msgstr "de"
 
-#: taleoftiles/templates/empty_base.html:267
+#: taleoftiles/templates/empty_base.html:258
 msgid "added-to-chart"
 msgstr "Ajouté au panier"
 
-#: taleoftiles/templates/empty_base.html:268
+#: taleoftiles/templates/empty_base.html:259
 msgid "open-chart"
 msgstr "Allez au panier"
 
-#: taleoftiles/templates/empty_base.html:290
+#: taleoftiles/templates/empty_base.html:281
 msgid "privacy-policy"
 msgstr "Politique de Confidentialité"
+
+#: taleoftiles/templates/empty_base.html:287
+msgid "carta da parati"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:288
+msgid "carta da parati moderna"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:289
+msgid "carta da parati camera da letto "
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:290
+msgid "carta da parati 3d"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:291
+msgid "carta da parati design"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:292
+msgid "carta da parati bagno"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:297
+msgid "cotto etrusco"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:298
+msgid "cotto fatto a mano"
+msgstr ""
+
+#: taleoftiles/templates/empty_base.html:299
+msgid "cotto di design"
+msgstr ""
 
 #: taleoftiles/templates/home.html:6
 msgid "home-page-name"
@@ -221,96 +248,20 @@ msgstr ""
 "E-commerce de carreaux et tuiles arisanales et industriales pour surfaces et "
 "sols. Revêtements design Italien: carreaux de ciment, tuiles, effet bois."
 
-#: taleoftiles/templates/home.html:61
-msgid "choose-home-claim"
-msgstr ""
-"Sélectionnez votres carreaux entre notre <strong> sélection de plus de 200 "
-"produits </strong>"
-
-#: taleoftiles/templates/home.html:63
-msgid "secure-payment"
-msgstr "Paiements Sécurisés"
-
-#: taleoftiles/templates/home.html:64
-msgid "secure-payment-details"
-msgstr ""
-"Paiements sécurisés, rapides et garantis via PayPal, carte de crédit ou "
-"virement bancaire."
-
-#: taleoftiles/templates/home.html:81
-msgid "sample-description"
-msgstr ""
-"Écrivez vous-même l'histoire de vos espaces avec le Tale of Tales Book. En "
-"naviguant dans notre catalogue, vous pourrez sélectionner juqu'à 4 "
-"échantillon que vous recevrez gratuitement à votre domicile."
-
-#: taleoftiles/templates/home.html:88
-msgid "sample-touchhand"
-msgstr ""
-"Abonnez-vous à notre newsletter pour recevoir des conseils de "
-"restructuration et un 5% de réduction sur votre première commande."
-
-#: taleoftiles/templates/home.html:92
+#: taleoftiles/templates/home.html:47
 msgid "email-c2a"
 msgstr "Votre email"
 
-#: taleoftiles/templates/home.html:118 taleoftiles/templates/home.html:209
-msgid "receive-home-free-samples"
-msgstr ""
-"<h3> Recevez vos carreaux chez vous <strong> tous les prix incluentTVA et "
-"livraison </strong> </h3> \n"
-"<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4>"
-
-#: taleoftiles/templates/home.html:161
+#: taleoftiles/templates/home.html:93
 msgid "title-renovate-home"
 msgstr "Idées pur rénover"
 
-#: taleoftiles/templates/home.html:162
+#: taleoftiles/templates/home.html:94
 msgid "subtitle-renovate-home"
 msgstr ""
 "Amousez-vous avec nos idées pour rénover vos espaces de manière facile."
 
-#: taleoftiles/templates/home.html:170
-msgid "title-faq-home"
-msgstr "Questions fréquentes"
-
-#: taleoftiles/templates/home.html:174
-msgid "faq-1"
-msgstr "Comment renvoyer un produit, si je change d'avis?"
-
-#: taleoftiles/templates/home.html:175 taleoftiles/templates/home.html:180
-#: taleoftiles/templates/home.html:185 taleoftiles/templates/home.html:190
-#: taleoftiles/templates/home.html:194 taleoftiles/templates/home.html:198
-msgid "read-answer"
-msgstr "Lisez la réponse"
-
-#: taleoftiles/templates/home.html:179
-msgid "faq-2"
-msgstr "Quels sont les délais de livraison?"
-
-#: taleoftiles/templates/home.html:184
-msgid "faq-3"
-msgstr "Comment sera la livraison?"
-
-#: taleoftiles/templates/home.html:189
-msgid "faq-4"
-msgstr "Puis-je voir les carreaux avante de les acheter?"
-
-#: taleoftiles/templates/home.html:193
-msgid "faq-5"
-msgstr "Sont les produits italiens? Sont-les fait à la main?"
-
-#: taleoftiles/templates/home.html:197
-msgid "faq-6"
-msgstr ""
-"Devrais-je avoir des précautions pour calculer les mesures quand je choisis "
-"les carreaux?"
-
-#: taleoftiles/templates/home.html:208
-msgid "are-you-designer"
-msgstr ""
-
-#: taleoftiles/templates/home.html:224
+#: taleoftiles/templates/home.html:104
 msgid "founder-name"
 msgstr "Nous sommes Tale of Tiles"
 
@@ -319,7 +270,9 @@ msgid "your-chart"
 msgstr "Panier"
 
 #: taleoftiles/templates/include/chart.html:40
-#: taleoftiles/templates/product.html:146
+#: taleoftiles/templates/product.html:124
+#: taleoftiles/templates/product_cottoetrusco.html:150
+#: taleoftiles/templates/product_wallpaper.html:137
 msgid "total"
 msgstr "Total"
 
@@ -594,7 +547,9 @@ msgid "summary-back-home"
 msgstr "Revenez à Tale Of Tiles"
 
 #: taleoftiles/templates/payment.html:57 taleoftiles/templates/payment.html:131
-#: taleoftiles/templates/product.html:184
+#: taleoftiles/templates/product.html:152
+#: taleoftiles/templates/product_cottoetrusco.html:177
+#: taleoftiles/templates/product_wallpaper.html:162
 msgid "any-doubt"
 msgstr "Avez-vous des doutes"
 
@@ -630,147 +585,209 @@ msgid "give-it-alook"
 msgstr "Lance un regard ici!"
 
 #: taleoftiles/templates/product.html:24
-#: taleoftiles/templates/product_wallpaper.html:24
+#: taleoftiles/templates/product_cottoetrusco copy.html:29
+#: taleoftiles/templates/product_wallpaper.html:29
 msgid "sampling-c2a"
 msgstr ""
 "<h3>Order your sampler</h3> \n"
 "<br/><h4>sand a request email to <i> <a href=\"mailto:info@taleoftiles.com"
 "\">info@taleoftiles.com</a></i></h4>"
 
-#: taleoftiles/templates/product.html:29
+#: taleoftiles/templates/product.html:28
 msgid "full-sampler"
 msgstr "Tale of Tiles Book complet"
 
-#: taleoftiles/templates/product.html:32
+#: taleoftiles/templates/product.html:31
 msgid "already-in-sampler"
 msgstr "Dejà ajouté au Tale of Tiles Book"
 
-#: taleoftiles/templates/product.html:39
+#: taleoftiles/templates/product.html:38
 msgid "add-sampler-button"
 msgstr "Ajouter au Tale of Tiles Book"
 
-#: taleoftiles/templates/product.html:42
+#: taleoftiles/templates/product.html:41
 msgid "add-sampler-text"
 msgstr ""
 "Composez votre Tale of Tiles Book pour toucher du doigt votres produits "
 "préférés"
 
-#: taleoftiles/templates/product.html:45
+#: taleoftiles/templates/product.html:44
 msgid "not-samplable"
 msgstr "Ça ne peut pas être ajouté comme un échantillon"
 
-#: taleoftiles/templates/product.html:78
-msgid "formats"
-msgstr "Tailles"
-
-#: taleoftiles/templates/product.html:85
-#: taleoftiles/templates/product_wallpaper.html:57
-msgid "finishes"
-msgstr "Finissage"
-
-#: taleoftiles/templates/product.html:103
-#: taleoftiles/templates/product_wallpaper.html:78
+#: taleoftiles/templates/product.html:81
+#: taleoftiles/templates/product_cottoetrusco copy.html:94
+#: taleoftiles/templates/product_cottoetrusco.html:107
+#: taleoftiles/templates/product_wallpaper.html:94
 msgid "code"
 msgstr "Code"
 
-#: taleoftiles/templates/product.html:109
-#: taleoftiles/templates/product_wallpaper.html:84
+#: taleoftiles/templates/product.html:87
+#: taleoftiles/templates/product_cottoetrusco copy.html:100
+#: taleoftiles/templates/product_cottoetrusco.html:113
+#: taleoftiles/templates/product_wallpaper.html:100
 msgid "starting-from"
 msgstr "Prix ​​mètre carré"
 
-#: taleoftiles/templates/product.html:128
+#: taleoftiles/templates/product.html:106
+#: taleoftiles/templates/product_cottoetrusco.html:132
+#: taleoftiles/templates/product_wallpaper.html:119
 msgid "superficie-da-rivestire"
 msgstr "Surface à revêtir"
 
-#: taleoftiles/templates/product.html:128
+#: taleoftiles/templates/product.html:106
+#: taleoftiles/templates/product_cottoetrusco.html:132
+#: taleoftiles/templates/product_wallpaper.html:119
 msgid "min"
 msgstr "Minimum"
 
-#: taleoftiles/templates/product.html:153
+#: taleoftiles/templates/product.html:130
+#: taleoftiles/templates/product_cottoetrusco.html:156
+#: taleoftiles/templates/product_wallpaper.html:143
 msgid "include-sfrido"
 msgstr "Comprend le déchet"
 
-#: taleoftiles/templates/product.html:163
+#: taleoftiles/templates/product.html:134
+#: taleoftiles/templates/product_cottoetrusco.html:160
+#: taleoftiles/templates/product_wallpaper.html:147
 msgid "sfrido-small-description"
 msgstr "Contactez le support ou consultez les questions fréquemment posées"
 
-#: taleoftiles/templates/product.html:173
+#: taleoftiles/templates/product.html:141
+#: taleoftiles/templates/product_cottoetrusco.html:167
+#: taleoftiles/templates/product_wallpaper.html:154
 msgid "add-chart-button"
 msgstr "Ajouté au panier"
 
-#: taleoftiles/templates/product.html:179
-#: taleoftiles/templates/product_wallpaper.html:102
+#: taleoftiles/templates/product.html:147
+#: taleoftiles/templates/product_cottoetrusco copy.html:117
+#: taleoftiles/templates/product_cottoetrusco.html:175
+#: taleoftiles/templates/product_wallpaper.html:160
 msgid "free-shipping"
 msgstr "Livraison et taxes comprises dans le total dans toute l'Europe"
 
-#: taleoftiles/templates/product.html:182
-#: taleoftiles/templates/product_wallpaper.html:69
+#: taleoftiles/templates/product.html:150
+#: taleoftiles/templates/product_cottoetrusco copy.html:85
 msgid "receive-date"
 msgstr "Si vous le commandez aujourd'hui, vous recevrez le produit chez vous!"
 
-#: taleoftiles/templates/product.html:182
-#: taleoftiles/templates/product_wallpaper.html:69
+#: taleoftiles/templates/product.html:150
+#: taleoftiles/templates/product_cottoetrusco copy.html:85
 msgid "untill"
 msgstr "Avant le"
 
-#: taleoftiles/templates/product.html:185
+#: taleoftiles/templates/product.html:153
+#: taleoftiles/templates/product_cottoetrusco.html:178
+#: taleoftiles/templates/product_wallpaper.html:163
 msgid "any-doubt-subtitle"
 msgstr "Contactez le support ou consultez les questions fréquemment posées"
 
-#: taleoftiles/templates/product.html:209
-#: taleoftiles/templates/product_wallpaper.html:150
+#: taleoftiles/templates/product.html:189
+#: taleoftiles/templates/product_cottoetrusco copy.html:170
+#: taleoftiles/templates/product_cottoetrusco.html:202
+#: taleoftiles/templates/product_wallpaper.html:199
 msgid "download-tech-spech"
 msgstr "Fiche technique"
 
-#: taleoftiles/templates/product.html:233
-#: taleoftiles/templates/product_wallpaper.html:174
+#: taleoftiles/templates/product.html:200
+#: taleoftiles/templates/product_cottoetrusco copy.html:194
+#: taleoftiles/templates/product_cottoetrusco.html:213
+#: taleoftiles/templates/product_wallpaper.html:210
 msgid "product-support"
 msgstr "Assistance pour le produit"
 
-#: taleoftiles/templates/product.html:248
-#: taleoftiles/templates/product_wallpaper.html:189
+#: taleoftiles/templates/product.html:215
+#: taleoftiles/templates/product_cottoetrusco copy.html:209
+#: taleoftiles/templates/product_cottoetrusco.html:228
+#: taleoftiles/templates/product_wallpaper.html:225
 msgid "product-same-serie"
 msgstr "Produits de la même série"
 
-#: taleoftiles/templates/product_wallpaper.html:103
+#: taleoftiles/templates/product_cottoetrusco copy.html:62
+#: taleoftiles/templates/product_cottoetrusco.html:64
+#: taleoftiles/templates/product_cottoetrusco.html:71
+#: taleoftiles/templates/product_wallpaper.html:60
+msgid "size"
+msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco copy.html:73
+#: taleoftiles/templates/product_cottoetrusco.html:66
+#: taleoftiles/templates/product_cottoetrusco.html:75
+#: taleoftiles/templates/product_wallpaper.html:71
+msgid "finishes"
+msgstr "Finissage"
+
+#: taleoftiles/templates/product_cottoetrusco copy.html:119
 msgid "vogliamo-essere-sicuri"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:109
+#: taleoftiles/templates/product_cottoetrusco copy.html:127
 msgid "wallpaper_email"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:110
+#: taleoftiles/templates/product_cottoetrusco copy.html:128
 msgid "wallpaper_name_surname"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:111
+#: taleoftiles/templates/product_cottoetrusco copy.html:129
 msgid "wallpaper_telephone"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:113
+#: taleoftiles/templates/product_cottoetrusco copy.html:131
 msgid "wallpaper_width"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:114
+#: taleoftiles/templates/product_cottoetrusco copy.html:132
 msgid "wallpaper_height"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:115
+#: taleoftiles/templates/product_cottoetrusco copy.html:133
 msgid "wallpaper_notes"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:116
+#: taleoftiles/templates/product_cottoetrusco copy.html:134
 msgid "wallpaper_accept"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:119
+#: taleoftiles/templates/product_cottoetrusco copy.html:138
 msgid "request-wallpaper-button"
 msgstr ""
 
-#: taleoftiles/templates/product_wallpaper.html:126
+#: taleoftiles/templates/product_cottoetrusco copy.html:146
 msgid "wallpaper_completed"
 msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco.html:31
+#, fuzzy
+#| msgid "sampling-c2a"
+msgid "sampling-c2a-up"
+msgstr ""
+"<h3>Order your sampler</h3> \n"
+"<br/><h4>sand a request email to <i> <a href=\"mailto:info@taleoftiles.com"
+"\">info@taleoftiles.com</a></i></h4>"
+
+#: taleoftiles/templates/product_cottoetrusco.html:32
+#, fuzzy
+#| msgid "sampling-c2a"
+msgid "sampling-c2a-down"
+msgstr ""
+"<h3>Order your sampler</h3> \n"
+"<br/><h4>sand a request email to <i> <a href=\"mailto:info@taleoftiles.com"
+"\">info@taleoftiles.com</a></i></h4>"
+
+#: taleoftiles/templates/product_cottoetrusco.html:73
+msgid "special-sizes"
+msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco.html:84
+msgid "Come starà a casa tua?"
+msgstr ""
+
+#: taleoftiles/templates/product_cottoetrusco.html:102
+#, fuzzy
+#| msgid "frequent-question"
+msgid "request-quotation"
+msgstr "Questions fréquentes "
 
 #: taleoftiles/templates/registration/login.html:53
 msgid "already-logged-in"
@@ -898,385 +915,401 @@ msgstr ""
 msgid "support-text-3"
 msgstr "Voulez vous des conseils sur les produits?"
 
-#: taleoftiles/templates/support.html:25 taleoftiles/templates/support.html:177
+#: taleoftiles/templates/support.html:25 taleoftiles/templates/support.html:32
 msgid "contact-us"
 msgstr "Contactez-nous"
 
-#: taleoftiles/templates/support.html:32
-msgid "frequent-question"
-msgstr "Questions fréquentes "
-
-#: taleoftiles/templates/support.html:35 taleoftiles/templates/support.html:84
-msgid "samples"
-msgstr "Échantillons"
-
-#: taleoftiles/templates/support.html:37 taleoftiles/templates/support.html:134
-msgid "shippings"
-msgstr "Livraisons"
-
-#: taleoftiles/templates/support.html:38 taleoftiles/templates/support.html:159
-msgid "company"
-msgstr "Enterprise"
-
-#: taleoftiles/templates/support.html:41
-msgid "search"
-msgstr "Recherche"
-
-#: taleoftiles/templates/support.html:49
-msgid "faq-prod-madeitaly"
-msgstr "Sont-ils tous les produits 100% fabriqués en Italie?"
-
-#: taleoftiles/templates/support.html:50
-msgid "faq-prod-madeitaly-body"
-msgstr ""
-"Il est necessaire vous donner une explication: les meilleurs carreaux "
-"reproduisent des effets naturels, et en nature il est difficile que on "
-"trouve panneaux de bois ou pavé identiques. Un carreau de qualité donnera la "
-"sensation de voir la diversité d'un produit naturel. Cette caractéristique "
-"s'appelle degré de dénuancage. La caractéristique d'un produit comme ça est "
-"une différenciation des faces de chaque carreau, pour obtenir un résultat "
-"visuelle qui soit proche à le naturel auquel le carreau s'inspire. "
-"L'échantillon qui vous allez recevoir serait trop petit pour donner une "
-"image complète de chaque centimètre de la surface du carreau même. Mais il "
-"vous aidera à toucher avec vos mains l'effet de la surface et à voir avec "
-"vos yeux la gradation de coleur."
-
-#: taleoftiles/templates/support.html:53
-msgid "faq-prod-multiface"
-msgstr ""
-"Seront les carreaux que je vais recevoir identiques à celles sur les photos? "
-"Qu'entend-on par degré de dénuancage?"
-
-#: taleoftiles/templates/support.html:54
-msgid "faq-prod-multiface-body"
-msgstr ""
-"Il est necessaire vous donner une explication: les meilleurs carreaux "
-"reproduisent des effets naturels, et en nature il est difficile que on "
-"trouve panneaux de bois ou pavé identiques. Un carreau de qualité donnera la "
-"sensation de voir la diversité d'un produit naturel. Cette caractéristique "
-"s'appelle degré de dénuancage. La caractéristique d'un produit comme ça est "
-"une différenciation des faces de chaque carreau, pour obtenir un résultat "
-"visuelle qui soit proche à le naturel auquel le carreau s'inspire. "
-"L'échantillon qui vous allez recevoir serait trop petit pour donner une "
-"image complète de chaque centimètre de la surface du carreau même. Mais il "
-"vous aidera à toucher avec vos mains l'effet de la surface et à voir avec "
-"vos yeux la gradation de coleur."
-
-#: taleoftiles/templates/support.html:58
-msgid "faq-prod-handmade"
-msgstr ""
-"Quelle est la diefférence entre un produit industriel et un produit fait à "
-"la main?"
-
-#: taleoftiles/templates/support.html:59
-msgid "faq-prod-handmade-body"
-msgstr ""
-"Nos produits industriels sont réalisés avec phases de production dans usines "
-"italiennes de haute qualité. Les produits faits à la main sont réalisés avec "
-"techniques anciennes artisanales et donc sont toujours produits uniques et "
-"irremplaçable."
-
-#: taleoftiles/templates/support.html:63
-msgid "faq-prod-temperature"
-msgstr "Les carreaux se gâtent en contact avec le chaud ou le froid?"
-
-#: taleoftiles/templates/support.html:64
-msgid "faq-prod-temperature-body"
-msgstr ""
-"Tous les produits industriel en grès cérame fin sont antigel, donc ils sont "
-"résistents au gel. Ils résistent aussi à très hautes températures, donc on "
-"peut appuyer une plaque de cuisson qui vient de sortir du four sans "
-"problèmes. Les très hautes températures du processus de fabrication "
-"industrielle garantissent un produit qui reste le même dans le temps. Les "
-"produits faits à la main, par contre, sont très diverses. Chaque produit a "
-"ses spécifications techniques. Por cette raison nous vous invitons à "
-"consulter la fiche technique du produit qui vous interesse ou à nous "
-"contacter à info@taleoftiles.com."
-
-#: taleoftiles/templates/support.html:68
-msgid "faq-prod-maintenance"
-msgstr ""
-"Quels sont les produits qui on lave plus facilement? Est-il possible de les "
-"laver avec chaque détergent ou on risque de les ruiner ou de les rendre "
-"opaques?"
-
-#: taleoftiles/templates/support.html:69
-msgid "faq-prod-maintenance-body"
-msgstr ""
-"Tous les détergents sur le marché peuvent être utilisés sans peur de ruiner "
-"ou opacifier les carreaux. L'utilisation de acid pour les nettoyer pourrait, "
-"si on ne le séche pas méticuleusement, endommager la couche supérieure de la "
-"cuisson de l'argile. Le grès cérame fin est antibactérien et, pour un "
-"nettoyage complet il suffit d'utiliser de l'eau tiéde."
-
-#: taleoftiles/templates/support.html:73
-msgid "faq-prod-decor"
-msgstr "Comment ça marche le produit qui s'appelle \"decoro\"?"
-
-#: taleoftiles/templates/support.html:74
-msgid "faq-prod-decor-body"
-msgstr ""
-"Dans les produits qui s'appellent \"decoro\", le producteur va insérer, dans "
-"chaque carton des dessins différentes entre les presets disponibles. Il "
-"n'est pas possible, tant pour nous que pour vous, de choisir une seule face "
-"entre les presets disponibles dans la version \"decoro\", ni prévoir combien "
-"de faces de chaque image vous allez avoir dans votre carton. Il serait comme "
-"ouvrir un paquet de cartes."
-
-#: taleoftiles/templates/support.html:78
-msgid "faq-prod-fughe"
-msgstr ""
-"Sont les joins du carrelage toujours necessaires? Peux je poser les carreaux "
-"l'une près de l'autre sans qu'on voie le mastic?"
-
-#: taleoftiles/templates/support.html:79
-msgid "faq-prod-fughe-body"
-msgstr ""
-"Les joints sont toujours necessaires quand on pose les carreaux parce que "
-"ils contrebalncent la naturel dilatation des matériaux. Même quand le bords "
-"du produit sont parfaitement droits, nous recommandons de mettre toujours "
-"les joints, même si d'un seul millimètre. On peut jeuer avec la visibilité "
-"des joints en choisissant bien la couleur du mastic pour avoir un effet "
-"final moins visible."
-
-#: taleoftiles/templates/support.html:87
-msgid "faq-sample-1"
-msgstr "C'est quoi le Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:88
-msgid "faq-sample-1-body"
-msgstr ""
-"Le Tale of Tiles Book est un échantillonnage personnalisable qui vous offre "
-"la possibilité de toucher du doigt nos produits et d'en pouvoir apprécier "
-"chaque détail. Il contient 4 échantillons de carreaux de votre choix, que "
-"nous vous offrons pour vous faire évaluer de manière approfondie votre "
-"choix. Vous allez recevoir un Tale of Tiles Book  complètement gratuit "
-"directement à votre porte. Avec Tale of Tiles Book vous allez écrire "
-"l'histoire de votre maison!"
-
-#: taleoftiles/templates/support.html:92
-msgid "faq-sample-2"
-msgstr "Combien coûte le Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:93
-msgid "faq-sample-2-body"
-msgstr ""
-"Ton premier Tale of Tiles Book est livré directement à votre porte "
-"gratuitement. Si vous voulez recevoir autres Tale of Tiles Book, les "
-"suivants seront achetables à 25€ transport compris. Le coût sera déduits de "
-"la commande suivante."
-
-#: taleoftiles/templates/support.html:97
-msgid "faq-sample-3"
-msgstr "Peux je avoir plus d'un Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:98
-msgid "faq-sample-3-body"
-msgstr ""
-"Ton premier Tale of Tiles Book est toujours gratuit. Il est toutefois "
-"possible d'en demander plus d'un et les suivants seront achetable à un prix "
-"de 25€ transport et taxes comprises. Le coût sera déduits de la commande "
-"suivante."
-
-#: taleoftiles/templates/support.html:102
-msgid "faq-sample-4"
-msgstr "Peux je avoir un échantillon d'un produit fait à la main?"
-
-#: taleoftiles/templates/support.html:103
-msgid "faq-sample-4-body"
-msgstr ""
-"Le produit fait à la main ne peut pas être l'objet d'un échantillonnage dans "
-"le Tale of Tiles Book, mais il est toujours possible le demander. S'il vous "
-"plaît nous contacter en utilisant notre addresse email info@taleoftiles.com "
-"et en écrivant votre effectifs demandés."
-
-#: taleoftiles/templates/support.html:107
-msgid "faq-sample-5"
-msgstr "En combien de temps je vais recevoir mon Tale of Tiles Book?"
-
-#: taleoftiles/templates/support.html:108
-msgid "faq-sample-5-body"
-msgstr ""
-"Votre Tale of Tiles Book est expédié directement à votre porte par courrier "
-"express. Lors de l'expédition du colis, on vous communiquera le suivi de la "
-"livraison. Les commandes sont livrées depuis deux jours de travail da la "
-"commande de votre Tale of Tiles Book."
-
-#: taleoftiles/templates/support.html:116
-msgid "faq-order-minmax"
-msgstr "Y a-t-il une limite minimale ou maximale pour les commandes?"
-
-#: taleoftiles/templates/support.html:117
-msgid "faq-order-minmax-body"
-msgstr ""
-"Tant pour les produits industriels que pour ceux faits à la main dans la "
-"fiche du produite est indiqué la quantité minimale de mètres carrés qu'on "
-"peut acheter. Il est toutefois toujours possible nous contacter à "
-"orders@taleoftiles.com pour trouver une solution aussi pour petites "
-"surfaces. Por les commandes au-dessus de 200 mètres carrés, contactez nous à "
-"orders@taleoftiles.com pour avoir la \"Réduction Grandes Quantités\"."
-
-#: taleoftiles/templates/support.html:120
-msgid "faq-order-sfrido"
-msgstr "Qu'entend-on par «déchet»?"
-
-#: taleoftiles/templates/support.html:121
-msgid "faq-order-sfrido-body"
-msgstr ""
-"Le déchet est le calcul de les déchets de pose des carreaux. Ce calcul "
-"prévoit différentes variables, comme le format des carreaux par rapport au "
-"format de la chambre. Le site calcule automatiquementce quantité "
-"additionnelle sur la base de la commande. Cette quantité représente le "
-"pourcentage minimale recommandée par tous les fabricants et les poseurs. Il "
-"est recommandé l'ajouter parche que en phase de pose on prevoit des écarts "
-"résultant des coupes des carreaux."
-
-#: taleoftiles/templates/support.html:125
-msgid "faq-order-payment"
-msgstr " Quelles méthodes de paiement puis-je utiliser?"
-
-#: taleoftiles/templates/support.html:126
-msgid "faq-order-payment-body"
-msgstr "Nous acceptons les virements bancaires, PayPal et la carte de crédit"
-
-#: taleoftiles/templates/support.html:130
-msgid "faq-order-return"
-msgstr "Comment peux je retourner un produit, si j'ai changé d'avis?"
-
-#: taleoftiles/templates/support.html:131
-msgid "faq-order-return-body"
-msgstr ""
-"Il est possible retourner le produits qui vous recevez par Tale of Tiles "
-"srls dans les 14 jours de l'arrivée dans le lieu qui vous avez indiqué pour "
-"recevoir la marchandise. Si vous souhaitez le retourner, vous pouvez le "
-"faire en remplissant le formulaire de demande de retour disponible ICI. Pour "
-"des raisons logistiques, le matériel à retourner devra être emballé à "
-"nouveau. Pour cette raison, si vous changez d'avis et souhaitez retourner "
-"les produits, vous devrez prendre soin de refermer la palette de la même "
-"manière que lorsqu'elle vous a été livrée. En cas de rétractation, les frais "
-"de transport vous seront facturés. Votre paiement vous sera retourné dans "
-"les 30 jours suivant la réception de la marchandise retournée."
-
-#: taleoftiles/templates/support.html:137
-msgid "faq-transport-cost"
-msgstr "Combien cela coûte-t-il et que comprend le transport?"
-
-#: taleoftiles/templates/support.html:138
-msgid "faq-transport-cost-body"
-msgstr ""
-"La réception des carreaux par Tale of Tiles chez vous est gratuite sauf dans "
-"des cas exceptionnels tels que des îles, des zones à trafic limité ou des "
-"zones d'accès difficile ou éloigné. Si vous pensez que votre livraison est "
-"l'un de ces cas, écrivez-nous à orders@taleoftiles.com avant de passer votre "
-"commande pour recevoir un devis d'expédition personnalisé. Le transport "
-"n'inclut pas le portage. Le nôtre est un transport standard avec un hayon "
-"élévateur au sol, dans des zones facilement accessibles par les moyens de "
-"transport."
-
-#: taleoftiles/templates/support.html:141
-msgid "faq-transport-track"
-msgstr "Où se trove mon expédition?"
-
-#: taleoftiles/templates/support.html:143
-msgid " faq-transport-track-body "
-msgstr ""
-"Il est possible de suivre la position de vos carreaux en saisissant le "
-"numéro d'expédition obtenu au moment de la commande sur ce site *****. Si "
-"vous rencontrez des problèmes avec votre envoi, vous pouvez nous contacter à "
-"orders@taleoftiles.com"
-
-#: taleoftiles/templates/support.html:147
-msgid "faq-shipping-timeind"
-msgstr "Quels sont les délais de livraison des produits industriels?"
-
-#: taleoftiles/templates/support.html:148
-msgid "faq-shipping-timeind-body"
-msgstr ""
-"Pour chaque produit, vous trouverez le temps de traitement nécessaire dans "
-"sa fiche. Avant de terminer la commande, nous vous confirmerons le moment "
-"exact de réception de vos carreaux. Nous garantissons la livraison dans les "
-"délais communiqués au moment de la commande. S'il y a des retards dus à la "
-"production de vos carreaux, vous aurez la possibilité de reconsidérer et de "
-"retirer l'achat et le montant total payé vous sera retourné dans les 24 "
-"heures."
-
-#: taleoftiles/templates/support.html:151
-msgid "faq-shipping-timehandm"
-msgstr "Quels sont les délais de livraison des produits artisanaux?"
-
-#: taleoftiles/templates/support.html:152
-msgid "faq-shipping-timehandm-body"
-msgstr ""
-"Aussi pour les produits artisanaux, comme pour les produits industriels, "
-"dans chaque fiche produit, vous trouverez les délais de livraison, qui "
-"seront confirmés au moment de l'achat. Les délais peuvent varier car, étant "
-"des produits fabriqués à la main, le traitement peut varier en fonction des "
-"tailles requises."
-
-#: taleoftiles/templates/support.html:155
-msgid "faq-shipping-broken"
-msgstr ""
-"Que dois-je faire si le matériel arrive endommagé ou si le colis qui le "
-"contient n'est pas intact?"
-
-#: taleoftiles/templates/support.html:156
-msgid "faq-shipping-broken-body"
-msgstr ""
-"Lorsque vous aurez terminé votre commande, les instructions à suivre pour "
-"suivre l'expédition de vos carreaux vous parviendront par mail. Tous les "
-"matériaux vendus sur Tale of Tiles ont une livraison en bon état garantie à "
-"partir du fabricant juq'à votre porte. Si le colis est endommagé ou ouvert "
-"ou si le matériel est endommagé, vous pouvez choisir de recevoir un "
-"remboursement ou de recevoir à nouveau la marchandise."
-
-#: taleoftiles/templates/support.html:162
-msgid "faq-company-1"
-msgstr "Où se trouve le siège de l'entreprise?"
-
-#: taleoftiles/templates/support.html:163
-msgid "faq-company-1-body"
-msgstr ""
-"Tale of Tiles est une société entièrement italienne basée à Forano (RI). "
-"Nous sélectionnons pour vous les matériaux produits sur le territoire "
-"italien par des entreprises avec lesquelles nous collaborons depuis des "
-"années et qui nous garantissent un rapport qualité-prix, fiabilité et des "
-"mises à jour continues. Notre jeune équipe recherche les dernières tendances "
-"en matière de matériaux et de décorations."
-
-#: taleoftiles/templates/support.html:166
-msgid "faq-company-2"
-msgstr "Faites-vous les carreaux?"
-
-#: taleoftiles/templates/support.html:167
-msgid "faq-company-2-body"
-msgstr ""
-"Non, les carreaux ne sont pas fabriqués par nous. Nous sommes des "
-"détaillants avec une expérience acquisé en 10 ans de vente au détail de "
-"revêtements de sol et muraux Made in Italy. Pour cette raison, nous ne "
-"pouvons sélectionner que le meilleur de la scène industrielle et artisanale "
-"italienne."
-
-#: taleoftiles/templates/support.html:171
-msgid "faq-company-3"
-msgstr "Est-il possible de vous rendre visite en personne?"
-
-#: taleoftiles/templates/support.html:172
-msgid "faq-company-3-body"
-msgstr ""
-"Depuis plus de 10 ans, nous possédons une salle d'exposition avec un magasin "
-"physique à Forano (RI), dans la campagne du centre de l'Italie, à la "
-"frontière entre l'Ombie et le Latium (facilement accessible en train depuis "
-"l'aéroport de Fiumicino)."
-
-#: taleoftiles/templates/support.html:180
+#: taleoftiles/templates/support.html:36
 #, fuzzy
 #| msgid "contact-us"
 msgid "faq-contact-us"
 msgstr "Contactez-nous"
 
-#: taleoftiles/templates/support.html:186
+#: taleoftiles/templates/support.html:42
 msgid "send-request"
 msgstr ""
+
+#~ msgid "all-series"
+#~ msgstr "Toutes le séries"
+
+#~ msgid "products"
+#~ msgstr "Produits"
+
+#~ msgid "order-for"
+#~ msgstr "Trier par"
+
+#~ msgid "choose-home-claim"
+#~ msgstr ""
+#~ "Sélectionnez votres carreaux entre notre <strong> sélection de plus de "
+#~ "200 produits </strong>"
+
+#~ msgid "secure-payment"
+#~ msgstr "Paiements Sécurisés"
+
+#~ msgid "secure-payment-details"
+#~ msgstr ""
+#~ "Paiements sécurisés, rapides et garantis via PayPal, carte de crédit ou "
+#~ "virement bancaire."
+
+#~ msgid "sample-description"
+#~ msgstr ""
+#~ "Écrivez vous-même l'histoire de vos espaces avec le Tale of Tales Book. "
+#~ "En naviguant dans notre catalogue, vous pourrez sélectionner juqu'à 4 "
+#~ "échantillon que vous recevrez gratuitement à votre domicile."
+
+#~ msgid "sample-touchhand"
+#~ msgstr ""
+#~ "Abonnez-vous à notre newsletter pour recevoir des conseils de "
+#~ "restructuration et un 5% de réduction sur votre première commande."
+
+#~ msgid "receive-home-free-samples"
+#~ msgstr ""
+#~ "<h3> Recevez vos carreaux chez vous <strong> tous les prix incluentTVA et "
+#~ "livraison </strong> </h3> \n"
+#~ "<br/> <h4> <i> Livraison et taxes incluse dans toute l'Europe </i> </h4>"
+
+#~ msgid "title-faq-home"
+#~ msgstr "Questions fréquentes"
+
+#~ msgid "faq-1"
+#~ msgstr "Comment renvoyer un produit, si je change d'avis?"
+
+#~ msgid "read-answer"
+#~ msgstr "Lisez la réponse"
+
+#~ msgid "faq-2"
+#~ msgstr "Quels sont les délais de livraison?"
+
+#~ msgid "faq-3"
+#~ msgstr "Comment sera la livraison?"
+
+#~ msgid "faq-4"
+#~ msgstr "Puis-je voir les carreaux avante de les acheter?"
+
+#~ msgid "faq-5"
+#~ msgstr "Sont les produits italiens? Sont-les fait à la main?"
+
+#~ msgid "faq-6"
+#~ msgstr ""
+#~ "Devrais-je avoir des précautions pour calculer les mesures quand je "
+#~ "choisis les carreaux?"
+
+#~ msgid "formats"
+#~ msgstr "Tailles"
+
+#~ msgid "samples"
+#~ msgstr "Échantillons"
+
+#~ msgid "shippings"
+#~ msgstr "Livraisons"
+
+#~ msgid "company"
+#~ msgstr "Enterprise"
+
+#~ msgid "search"
+#~ msgstr "Recherche"
+
+#~ msgid "faq-prod-madeitaly"
+#~ msgstr "Sont-ils tous les produits 100% fabriqués en Italie?"
+
+#~ msgid "faq-prod-madeitaly-body"
+#~ msgstr ""
+#~ "Il est necessaire vous donner une explication: les meilleurs carreaux "
+#~ "reproduisent des effets naturels, et en nature il est difficile que on "
+#~ "trouve panneaux de bois ou pavé identiques. Un carreau de qualité donnera "
+#~ "la sensation de voir la diversité d'un produit naturel. Cette "
+#~ "caractéristique s'appelle degré de dénuancage. La caractéristique d'un "
+#~ "produit comme ça est une différenciation des faces de chaque carreau, "
+#~ "pour obtenir un résultat visuelle qui soit proche à le naturel auquel le "
+#~ "carreau s'inspire. L'échantillon qui vous allez recevoir serait trop "
+#~ "petit pour donner une image complète de chaque centimètre de la surface "
+#~ "du carreau même. Mais il vous aidera à toucher avec vos mains l'effet de "
+#~ "la surface et à voir avec vos yeux la gradation de coleur."
+
+#~ msgid "faq-prod-multiface"
+#~ msgstr ""
+#~ "Seront les carreaux que je vais recevoir identiques à celles sur les "
+#~ "photos? Qu'entend-on par degré de dénuancage?"
+
+#~ msgid "faq-prod-multiface-body"
+#~ msgstr ""
+#~ "Il est necessaire vous donner une explication: les meilleurs carreaux "
+#~ "reproduisent des effets naturels, et en nature il est difficile que on "
+#~ "trouve panneaux de bois ou pavé identiques. Un carreau de qualité donnera "
+#~ "la sensation de voir la diversité d'un produit naturel. Cette "
+#~ "caractéristique s'appelle degré de dénuancage. La caractéristique d'un "
+#~ "produit comme ça est une différenciation des faces de chaque carreau, "
+#~ "pour obtenir un résultat visuelle qui soit proche à le naturel auquel le "
+#~ "carreau s'inspire. L'échantillon qui vous allez recevoir serait trop "
+#~ "petit pour donner une image complète de chaque centimètre de la surface "
+#~ "du carreau même. Mais il vous aidera à toucher avec vos mains l'effet de "
+#~ "la surface et à voir avec vos yeux la gradation de coleur."
+
+#~ msgid "faq-prod-handmade"
+#~ msgstr ""
+#~ "Quelle est la diefférence entre un produit industriel et un produit fait "
+#~ "à la main?"
+
+#~ msgid "faq-prod-handmade-body"
+#~ msgstr ""
+#~ "Nos produits industriels sont réalisés avec phases de production dans "
+#~ "usines italiennes de haute qualité. Les produits faits à la main sont "
+#~ "réalisés avec techniques anciennes artisanales et donc sont toujours "
+#~ "produits uniques et irremplaçable."
+
+#~ msgid "faq-prod-temperature"
+#~ msgstr "Les carreaux se gâtent en contact avec le chaud ou le froid?"
+
+#~ msgid "faq-prod-temperature-body"
+#~ msgstr ""
+#~ "Tous les produits industriel en grès cérame fin sont antigel, donc ils "
+#~ "sont résistents au gel. Ils résistent aussi à très hautes températures, "
+#~ "donc on peut appuyer une plaque de cuisson qui vient de sortir du four "
+#~ "sans problèmes. Les très hautes températures du processus de fabrication "
+#~ "industrielle garantissent un produit qui reste le même dans le temps. Les "
+#~ "produits faits à la main, par contre, sont très diverses. Chaque produit "
+#~ "a ses spécifications techniques. Por cette raison nous vous invitons à "
+#~ "consulter la fiche technique du produit qui vous interesse ou à nous "
+#~ "contacter à info@taleoftiles.com."
+
+#~ msgid "faq-prod-maintenance"
+#~ msgstr ""
+#~ "Quels sont les produits qui on lave plus facilement? Est-il possible de "
+#~ "les laver avec chaque détergent ou on risque de les ruiner ou de les "
+#~ "rendre opaques?"
+
+#~ msgid "faq-prod-maintenance-body"
+#~ msgstr ""
+#~ "Tous les détergents sur le marché peuvent être utilisés sans peur de "
+#~ "ruiner ou opacifier les carreaux. L'utilisation de acid pour les nettoyer "
+#~ "pourrait, si on ne le séche pas méticuleusement, endommager la couche "
+#~ "supérieure de la cuisson de l'argile. Le grès cérame fin est "
+#~ "antibactérien et, pour un nettoyage complet il suffit d'utiliser de l'eau "
+#~ "tiéde."
+
+#~ msgid "faq-prod-decor"
+#~ msgstr "Comment ça marche le produit qui s'appelle \"decoro\"?"
+
+#~ msgid "faq-prod-decor-body"
+#~ msgstr ""
+#~ "Dans les produits qui s'appellent \"decoro\", le producteur va insérer, "
+#~ "dans chaque carton des dessins différentes entre les presets disponibles. "
+#~ "Il n'est pas possible, tant pour nous que pour vous, de choisir une seule "
+#~ "face entre les presets disponibles dans la version \"decoro\", ni prévoir "
+#~ "combien de faces de chaque image vous allez avoir dans votre carton. Il "
+#~ "serait comme ouvrir un paquet de cartes."
+
+#~ msgid "faq-prod-fughe"
+#~ msgstr ""
+#~ "Sont les joins du carrelage toujours necessaires? Peux je poser les "
+#~ "carreaux l'une près de l'autre sans qu'on voie le mastic?"
+
+#~ msgid "faq-prod-fughe-body"
+#~ msgstr ""
+#~ "Les joints sont toujours necessaires quand on pose les carreaux parce que "
+#~ "ils contrebalncent la naturel dilatation des matériaux. Même quand le "
+#~ "bords du produit sont parfaitement droits, nous recommandons de mettre "
+#~ "toujours les joints, même si d'un seul millimètre. On peut jeuer avec la "
+#~ "visibilité des joints en choisissant bien la couleur du mastic pour avoir "
+#~ "un effet final moins visible."
+
+#~ msgid "faq-sample-1"
+#~ msgstr "C'est quoi le Tale of Tiles Book?"
+
+#~ msgid "faq-sample-1-body"
+#~ msgstr ""
+#~ "Le Tale of Tiles Book est un échantillonnage personnalisable qui vous "
+#~ "offre la possibilité de toucher du doigt nos produits et d'en pouvoir "
+#~ "apprécier chaque détail. Il contient 4 échantillons de carreaux de votre "
+#~ "choix, que nous vous offrons pour vous faire évaluer de manière "
+#~ "approfondie votre choix. Vous allez recevoir un Tale of Tiles Book  "
+#~ "complètement gratuit directement à votre porte. Avec Tale of Tiles Book "
+#~ "vous allez écrire l'histoire de votre maison!"
+
+#~ msgid "faq-sample-2"
+#~ msgstr "Combien coûte le Tale of Tiles Book?"
+
+#~ msgid "faq-sample-2-body"
+#~ msgstr ""
+#~ "Ton premier Tale of Tiles Book est livré directement à votre porte "
+#~ "gratuitement. Si vous voulez recevoir autres Tale of Tiles Book, les "
+#~ "suivants seront achetables à 25€ transport compris. Le coût sera déduits "
+#~ "de la commande suivante."
+
+#~ msgid "faq-sample-3"
+#~ msgstr "Peux je avoir plus d'un Tale of Tiles Book?"
+
+#~ msgid "faq-sample-3-body"
+#~ msgstr ""
+#~ "Ton premier Tale of Tiles Book est toujours gratuit. Il est toutefois "
+#~ "possible d'en demander plus d'un et les suivants seront achetable à un "
+#~ "prix de 25€ transport et taxes comprises. Le coût sera déduits de la "
+#~ "commande suivante."
+
+#~ msgid "faq-sample-4"
+#~ msgstr "Peux je avoir un échantillon d'un produit fait à la main?"
+
+#~ msgid "faq-sample-4-body"
+#~ msgstr ""
+#~ "Le produit fait à la main ne peut pas être l'objet d'un échantillonnage "
+#~ "dans le Tale of Tiles Book, mais il est toujours possible le demander. "
+#~ "S'il vous plaît nous contacter en utilisant notre addresse email "
+#~ "info@taleoftiles.com et en écrivant votre effectifs demandés."
+
+#~ msgid "faq-sample-5"
+#~ msgstr "En combien de temps je vais recevoir mon Tale of Tiles Book?"
+
+#~ msgid "faq-sample-5-body"
+#~ msgstr ""
+#~ "Votre Tale of Tiles Book est expédié directement à votre porte par "
+#~ "courrier express. Lors de l'expédition du colis, on vous communiquera le "
+#~ "suivi de la livraison. Les commandes sont livrées depuis deux jours de "
+#~ "travail da la commande de votre Tale of Tiles Book."
+
+#~ msgid "faq-order-minmax"
+#~ msgstr "Y a-t-il une limite minimale ou maximale pour les commandes?"
+
+#~ msgid "faq-order-minmax-body"
+#~ msgstr ""
+#~ "Tant pour les produits industriels que pour ceux faits à la main dans la "
+#~ "fiche du produite est indiqué la quantité minimale de mètres carrés qu'on "
+#~ "peut acheter. Il est toutefois toujours possible nous contacter à "
+#~ "orders@taleoftiles.com pour trouver une solution aussi pour petites "
+#~ "surfaces. Por les commandes au-dessus de 200 mètres carrés, contactez "
+#~ "nous à orders@taleoftiles.com pour avoir la \"Réduction Grandes Quantités"
+#~ "\"."
+
+#~ msgid "faq-order-sfrido"
+#~ msgstr "Qu'entend-on par «déchet»?"
+
+#~ msgid "faq-order-sfrido-body"
+#~ msgstr ""
+#~ "Le déchet est le calcul de les déchets de pose des carreaux. Ce calcul "
+#~ "prévoit différentes variables, comme le format des carreaux par rapport "
+#~ "au format de la chambre. Le site calcule automatiquementce quantité "
+#~ "additionnelle sur la base de la commande. Cette quantité représente le "
+#~ "pourcentage minimale recommandée par tous les fabricants et les poseurs. "
+#~ "Il est recommandé l'ajouter parche que en phase de pose on prevoit des "
+#~ "écarts résultant des coupes des carreaux."
+
+#~ msgid "faq-order-payment"
+#~ msgstr " Quelles méthodes de paiement puis-je utiliser?"
+
+#~ msgid "faq-order-payment-body"
+#~ msgstr ""
+#~ "Nous acceptons les virements bancaires, PayPal et la carte de crédit"
+
+#~ msgid "faq-order-return"
+#~ msgstr "Comment peux je retourner un produit, si j'ai changé d'avis?"
+
+#~ msgid "faq-order-return-body"
+#~ msgstr ""
+#~ "Il est possible retourner le produits qui vous recevez par Tale of Tiles "
+#~ "srls dans les 14 jours de l'arrivée dans le lieu qui vous avez indiqué "
+#~ "pour recevoir la marchandise. Si vous souhaitez le retourner, vous pouvez "
+#~ "le faire en remplissant le formulaire de demande de retour disponible "
+#~ "ICI. Pour des raisons logistiques, le matériel à retourner devra être "
+#~ "emballé à nouveau. Pour cette raison, si vous changez d'avis et souhaitez "
+#~ "retourner les produits, vous devrez prendre soin de refermer la palette "
+#~ "de la même manière que lorsqu'elle vous a été livrée. En cas de "
+#~ "rétractation, les frais de transport vous seront facturés. Votre paiement "
+#~ "vous sera retourné dans les 30 jours suivant la réception de la "
+#~ "marchandise retournée."
+
+#~ msgid "faq-transport-cost"
+#~ msgstr "Combien cela coûte-t-il et que comprend le transport?"
+
+#~ msgid "faq-transport-cost-body"
+#~ msgstr ""
+#~ "La réception des carreaux par Tale of Tiles chez vous est gratuite sauf "
+#~ "dans des cas exceptionnels tels que des îles, des zones à trafic limité "
+#~ "ou des zones d'accès difficile ou éloigné. Si vous pensez que votre "
+#~ "livraison est l'un de ces cas, écrivez-nous à orders@taleoftiles.com "
+#~ "avant de passer votre commande pour recevoir un devis d'expédition "
+#~ "personnalisé. Le transport n'inclut pas le portage. Le nôtre est un "
+#~ "transport standard avec un hayon élévateur au sol, dans des zones "
+#~ "facilement accessibles par les moyens de transport."
+
+#~ msgid "faq-transport-track"
+#~ msgstr "Où se trove mon expédition?"
+
+#~ msgid " faq-transport-track-body "
+#~ msgstr ""
+#~ "Il est possible de suivre la position de vos carreaux en saisissant le "
+#~ "numéro d'expédition obtenu au moment de la commande sur ce site *****. Si "
+#~ "vous rencontrez des problèmes avec votre envoi, vous pouvez nous "
+#~ "contacter à orders@taleoftiles.com"
+
+#~ msgid "faq-shipping-timeind"
+#~ msgstr "Quels sont les délais de livraison des produits industriels?"
+
+#~ msgid "faq-shipping-timeind-body"
+#~ msgstr ""
+#~ "Pour chaque produit, vous trouverez le temps de traitement nécessaire "
+#~ "dans sa fiche. Avant de terminer la commande, nous vous confirmerons le "
+#~ "moment exact de réception de vos carreaux. Nous garantissons la livraison "
+#~ "dans les délais communiqués au moment de la commande. S'il y a des "
+#~ "retards dus à la production de vos carreaux, vous aurez la possibilité de "
+#~ "reconsidérer et de retirer l'achat et le montant total payé vous sera "
+#~ "retourné dans les 24 heures."
+
+#~ msgid "faq-shipping-timehandm"
+#~ msgstr "Quels sont les délais de livraison des produits artisanaux?"
+
+#~ msgid "faq-shipping-timehandm-body"
+#~ msgstr ""
+#~ "Aussi pour les produits artisanaux, comme pour les produits industriels, "
+#~ "dans chaque fiche produit, vous trouverez les délais de livraison, qui "
+#~ "seront confirmés au moment de l'achat. Les délais peuvent varier car, "
+#~ "étant des produits fabriqués à la main, le traitement peut varier en "
+#~ "fonction des tailles requises."
+
+#~ msgid "faq-shipping-broken"
+#~ msgstr ""
+#~ "Que dois-je faire si le matériel arrive endommagé ou si le colis qui le "
+#~ "contient n'est pas intact?"
+
+#~ msgid "faq-shipping-broken-body"
+#~ msgstr ""
+#~ "Lorsque vous aurez terminé votre commande, les instructions à suivre pour "
+#~ "suivre l'expédition de vos carreaux vous parviendront par mail. Tous les "
+#~ "matériaux vendus sur Tale of Tiles ont une livraison en bon état garantie "
+#~ "à partir du fabricant juq'à votre porte. Si le colis est endommagé ou "
+#~ "ouvert ou si le matériel est endommagé, vous pouvez choisir de recevoir "
+#~ "un remboursement ou de recevoir à nouveau la marchandise."
+
+#~ msgid "faq-company-1"
+#~ msgstr "Où se trouve le siège de l'entreprise?"
+
+#~ msgid "faq-company-1-body"
+#~ msgstr ""
+#~ "Tale of Tiles est une société entièrement italienne basée à Forano (RI). "
+#~ "Nous sélectionnons pour vous les matériaux produits sur le territoire "
+#~ "italien par des entreprises avec lesquelles nous collaborons depuis des "
+#~ "années et qui nous garantissent un rapport qualité-prix, fiabilité et des "
+#~ "mises à jour continues. Notre jeune équipe recherche les dernières "
+#~ "tendances en matière de matériaux et de décorations."
+
+#~ msgid "faq-company-2"
+#~ msgstr "Faites-vous les carreaux?"
+
+#~ msgid "faq-company-2-body"
+#~ msgstr ""
+#~ "Non, les carreaux ne sont pas fabriqués par nous. Nous sommes des "
+#~ "détaillants avec une expérience acquisé en 10 ans de vente au détail de "
+#~ "revêtements de sol et muraux Made in Italy. Pour cette raison, nous ne "
+#~ "pouvons sélectionner que le meilleur de la scène industrielle et "
+#~ "artisanale italienne."
+
+#~ msgid "faq-company-3"
+#~ msgstr "Est-il possible de vous rendre visite en personne?"
+
+#~ msgid "faq-company-3-body"
+#~ msgstr ""
+#~ "Depuis plus de 10 ans, nous possédons une salle d'exposition avec un "
+#~ "magasin physique à Forano (RI), dans la campagne du centre de l'Italie, à "
+#~ "la frontière entre l'Ombie et le Latium (facilement accessible en train "
+#~ "depuis l'aéroport de Fiumicino)."
 
 #~ msgid "settings"
 #~ msgstr "Styles"

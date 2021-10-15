@@ -19,6 +19,24 @@ import datetime as dt
 import pytz
 utc=pytz.UTC
 
+class OrderForm(forms.Form):
+    
+    email        = forms.EmailField(required=True)
+    name_surname = forms.CharField(required=True)
+    address      = forms.CharField(required=True)
+    squared_meters       = forms.IntegerField(required=True)
+    
+    def clean(self):
+        return super(OrderForm, self).clean()
+
+class SampleForm(forms.Form):
+    
+    email        = forms.EmailField(required=True)
+    name_surname = forms.CharField(required=True)
+    address      = forms.CharField(required=True)
+    
+    def clean(self):
+        return super(SampleForm, self).clean()
 
 class WallpaperForm(forms.Form):
     

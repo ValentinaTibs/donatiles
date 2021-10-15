@@ -17,7 +17,7 @@ from layout.models      import Element, MailTemplate
 from blog.models        import Post
 from CRM.models        import Chart
 
-from CRM.forms          import AddChartForm,WallpaperForm
+from CRM.forms          import AddChartForm,WallpaperForm, SampleForm, OrderForm
 from django.db.models import Count
 
 # ---- akismet import -----
@@ -67,14 +67,12 @@ def catalogue(request):
         tag_len = tag_len + 1
 
     # tags in the catalogue shoulder    
-    all_tags = Tag.objects.filter(in_catalogue = True ,parent__isnull = True, public = True).in_bulk(field_name='slug')   
     active_tags = Tag.objects.filter(tag_query,public=True) 
     if tag_len > 0 :      
         products_list = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
     else:
         active_tags = []
         products_list = Product.objects.filter(is_active = True).annotate(num_tags=Count('tags')).distinct().order_by(order_by)
-    
 
     # pagination 
     paginator = Paginator(products_list, results_limit )
@@ -86,8 +84,10 @@ def catalogue(request):
         products = paginator.page(paginator.num_pages)
 
     return render(request, "catalogue.html", {
-        "products": products,"active_tags" : active_tags,
-        'tags':all_tags,'url_data':'_'.join(url_data) })
+        "products": products,
+        "active_tags" : active_tags,
+        'url_data':'_'.join(url_data) 
+        })
 
 
 def compute_price(request):
@@ -118,12 +118,60 @@ def product(request, product_code, chi_form = None ):
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
 
     #for all product in the same series that are not support and not itself
-    serie = tags = product.get_tag('serie')
-    if serie:
-        related_series  = Product.active.filter(tags = product.get_tag('serie'),support_to = None).exclude(pk = product.pk)
-    
+    serie = product.serie()
 
-    if product.is_wallpaper():   
+    if serie:
+        related_series  = Product.active.filter(tags = serie,support_to = None).exclude(pk = product.pk)
+    
+    #wallpaper product 
+    if not product.is_wallpaper(): 
+        sample_form = SampleForm(request.POST or {'product':product.pk,} ,  None)
+        order_form = OrderForm(request.POST or {'product':product.pk,} ,  None)
+        
+        if request.is_ajax():
+
+            if  sample_form.is_valid() :
+
+                akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url=settings.AKISMET_BLOG_URL)
+                is_spam = akismet_api.comment_check(
+                    user_ip=request.META['REMOTE_ADDR'],
+                    user_agent=request.META['HTTP_USER_AGENT'],
+                    comment_type='contact-form',
+                    comment_author=sample_form.cleaned_data['name_surname'],
+                    comment_author_email=sample_form.cleaned_data['email'],
+                    comment_content=sample_form.cleaned_data['notes'],
+                )
+
+                if is_spam:
+                    data = {'html_errors' : "Il Contenuto Inserito sembrerebbe spam"}
+                    return JsonResponse(data, safe=False, status = 500) 
+
+                new_mail = MailTemplate()
+                new_mail.send_wallpaper_req(request, 
+                    sample_form.cleaned_data['email'], 
+                    sample_form.cleaned_data['width'], 
+                    sample_form.cleaned_data['height'], 
+                    sample_form.cleaned_data['notes'],
+                    sample_form.cleaned_data['name_surname'],  
+                    sample_form.cleaned_data['telephone'],
+                    product_code)
+            else:
+                data = {'html_errors' : sample_form.errors}
+                return JsonResponse(data, safe=False, status = 500)            
+
+            return JsonResponse({'data':'success'}, status = 200)
+
+        
+        return render(request, "product_cottoetrusco.html",{
+            "product":product,
+            "products_series":related_series,
+            "sample_form" : sample_form,
+            "order_form" : order_form,
+            "is_cottoetrusco" : product.get_tag('cottoetrusco') 
+            #"errors" : sample_form.errors(),
+            })
+
+    else:   
         wallpaper_form = WallpaperForm(request.POST or {'product':product.pk,} ,  None)
         if request.is_ajax():
 
@@ -140,9 +188,7 @@ def product(request, product_code, chi_form = None ):
                 )
 
                 if is_spam:
-                    print("IS FUCKING SPAM")
                     data = {'html_errors' : "Il Contenuto Inserito sembrerebbe spam"}
-                    
                     return JsonResponse(data, safe=False, status = 500) 
 
                 new_mail = MailTemplate()
@@ -166,6 +212,7 @@ def product(request, product_code, chi_form = None ):
             "chi_form" : chi_form,
             "wallpaper_form" : wallpaper_form
             })
+
 
     chi_form = AddChartForm(request.POST or {'product':product.pk,} ,  None)
  

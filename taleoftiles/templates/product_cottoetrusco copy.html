@@ -8,7 +8,12 @@
 {% load static %}
 {% block content %}
 
+<style type="text/css">
+  .hide {
+    display: none;
+  }
 
+</style>
 <div class="content product-header">
   <ul class="breadcrumb">
     <li><a href="{% url 'catalogue' %}"> {% trans 'all-products' %}</a></li>
@@ -21,28 +26,8 @@
   </ul>
   <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
-    <a href="mailto:info@taleoftiles.com" class="btn btn-secondary" target="_blank"><span>{% blocktrans %}sampling-c2a{% endblocktrans %}</span></a>
-<!-- 
-{% if sampler and sampler.all_samples.count > 4 %}
+    <p class="note">{% blocktrans %}sampling-c2a{% endblocktrans %}</p>
 
-  <p class="note">{% trans 'full-sampler' %} </p>
-{% elif sampler|is_in_sample:product.code %}
-
-  <p class="note">{% trans 'already-in-sampler' %} </p>
-
-{% elif product.is_samplable %}
-  <form  action="{% url 'add_sample' product.code %}" method="POST">
-        {% csrf_token %}
-        <button class="btn btn-secondary"><svg class="icon-l icon">
-          <use xlink:href="{% static 'images/svgdefs.svg#icon-samples-add' %}"/></svg>
-          <span>{% trans 'add-sampler-button' %}</span>
-        </button>
-  </form>
-  <p class="note">{% trans 'add-sampler-text' %}</p>
-
-{% else %}
-    <p class="note">{% trans 'not-samplable' %} </p>
-{% endif %} -->
   </div>
 </div>
 
@@ -51,16 +36,16 @@
 
   <div class="product-gallery">
      <div class="product-gallery-container">
-    {% for image in product.images.all %}
-      <div class="product-gallery-item">
-        {% if image.imagefile %} 
-        <img  loading="lazy" src=" {{ image.imagefile.url }}" 
-        {% if image.format_tag %} id="sm_image_{{ image.format_tag }}" {% endif %}
-        alt="{{ product.publication.title }}">
-        {% else %}
-        <div> </div>
-        {% endif %}
-      </div>
+      {% for image in product.images.all %}
+        <div class="product-gallery-item">
+          {% if image.imagefile %} 
+          <img loading="lazy" src=" {{ image.imagefile.url }}" 
+          {% if image.format_tag %} id="sm_image_{{ image.format_tag }}" {% endif %}
+          alt="{{ product.publication.title }}">
+          {% else %}
+          <div> </div>
+          {% endif %}
+        </div>
       {% endfor %}
       </div>
     <div class="product-gallery-controls">
@@ -71,9 +56,37 @@
   </div>
 
   <div class="product-selection">
-    
+    <div class="product-options">
+      
+      {% if chi_form.size %}
+      <h5>{% trans 'size' %}</h5>
 
-<!-- <form  action="{% url 'product' product.code %}"  name="product_ship" id="form_product_ship" method="POST">  -->
+        {% for id_choice,name_choice in chi_form.fields.size.choices %}
+            <input type="radio" name="size" value="{{id_choice}}" id="id_size_{{ id_choice }}" required="">
+            <label  for="size_{{ id_choice }}" id="label_size_{{ id_choice }}" >{{ name_choice }}</label>
+        {% endfor %}
+
+
+    {% endif %}
+
+    {% if chi_form.finish %}
+      <h5>{% trans 'finishes' %}</h5>
+
+        {% for id_choice,name_choice in chi_form.fields.finish.choices %}
+            <input type="radio" name="finish" value="{{id_choice}}" id="id_finish_{{ id_choice }}" required="">
+            <label  for="finish_{{ id_choice }}" id="label_finish_{{ id_choice }}" >{{ name_choice }}</label>
+        {% endfor %}
+
+
+    {% endif %}
+    </div>
+<br/>
+    <div class="product-shippinginfo">
+      <p class="note">{% trans 'receive-date' %}<br><strong>{% trans 'untill' %} {% woking_days product.wait_time %} </strong></p>
+    </div>
+
+
+<!-- <form  >  -->
 {% csrf_token %}
     <div class="product-addtocartbox">
       <div>
@@ -91,84 +104,52 @@
             <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
             {% endfor %}
 
-            {% for choice in chi_form.finish %}
-            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
-            {% endfor %}
-
           </div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
 
-      <div>
-
-        <div class="row">
-          <div>
-            <strong>{% trans 'superficie-da-rivestire' %}</strong><br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;
-          </div>
-          <div class="input-qty">
-
-            {{chi_form.quantity}}
-
-            <div class="product-qtybtns">
-              <svg class="icon-m icon" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
-              <span class="product-note">m&sup2;</span>
-              <svg class="icon-m icon" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="row">
-          {{chi_form.product}}
-          <div><strong>{% trans 'total' %}</strong></div>
-          <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
-        </div>
-        <div class="row">
-          <div class="checkbox">
-            {{chi_form.has_frido}}
-            <label for="id_has_frido">{% trans 'include-sfrido' %}</label>
-          </div>
-        </div>
-        <div class="row">
-          {% trans 'sfrido-small-description' %}
-        </div>
-      </div>
-
-      {{chi_form.save_it.as_hidden}}
-      {{chi_form.product.as_hidden}}
       
-      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></button>
-      
+    </div>  <!-- product-addtocartbox -->
 <!-- </form> -->
 
-    </div>  <!-- product-addtocartbox -->
+
     <div class="product-shippinginfo">
       <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
       <p class="note">
-        
-        {% trans 'receive-date' %}<br><strong>{% trans 'untill' %} {% woking_days product.wait_time %} </strong></p>
-        
-      <p class="note">{% trans 'any-doubt' %}<br> 
-        <a href="{% url 'support' %}">{% trans 'any-doubt-subtitle' %}</a></p>
+        <h4><span >{% blocktrans %}vogliamo-essere-sicuri{% endblocktrans %}</span></h4>
+      </p>
+    </div>
 
+
+    <div class="product-addtocartbox"  id="buy_wallpaper_panel">
+      <div style="padding: 2%;">
+        <div class="formrow" id="wallpaper_form_errors">   </div>
+        <div class="formrow"> {% trans 'wallpaper_email'  %} {{wallpaper_form.email}}  </div>
+        <div class="formrow"> {% trans 'wallpaper_name_surname'  %} {{wallpaper_form.name_surname}}  </div>
+        <div class="formrow"> {% trans 'wallpaper_telephone'  %} {{wallpaper_form.telephone}}  </div>
+        
+        <div class="formrow"> {% trans 'wallpaper_width'  %} {{wallpaper_form.width}}  </div>
+        <div class="formrow"> {% trans 'wallpaper_height' %} {{wallpaper_form.height}} </div>
+        <div class="formrow"> {% trans 'wallpaper_notes'  %} {{wallpaper_form.notes}}  </div>
+        <div class="formrow"> {{wallpaper_form.accept}} &nbsp; {% trans 'wallpaper_accept' %}  </div>
+      </div>
+
+     <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: 
+     center;"  onClick="Javascript:sendWallPaperRequest()" > {% trans 'request-wallpaper-button' %} </button>
+
+    </div>  <!-- product-addtocartbox -->
+<!-- </form> -->
+
+    <div id="results_wallpaper" class="product-addtocartbox hide" >
+      <br/>
+          <div style="padding: 7%;">
+            <div class="formrow"> {% blocktrans %}wallpaper_completed{% endblocktrans %}</div>    
+        </div>  <!-- product-addtocartbox -->
     </div>
 
   </div>
 
   <div class="product-main">
-
-    <div class="product-meta">
-
-    {% for effect in product|effects %}
-      {% if effect.slug %}<a href="{% url 'catalogue' %}?filters={{effect.slug}}"  class="tag">{{effect.name}}</a>{% endif %}
-    {% endfor %}
-
-    {% for colour in product|colour %}
-      <a href="{% url 'catalogue' %}?filters={{colour.slug}}" class="tag">{{colour.name}}</a>
-    {% endfor %}
-
-    </div>
 
 	{% autoescape off %}
 		<p>{{ product.publication.content }}</p>
@@ -190,6 +171,19 @@
         </button>
       </a>
     {% endif %}
+  </div>
+
+  <div class="product-meta">
+
+
+	{% for effect in product|effects %}
+    <a href="{% url 'catalogue' %}?filters={{effect.slug}}"  class="tag">{{effect.name}} </a><br>
+	{% endfor %}
+
+  {% for colour in product|colour %}
+    <a href="{% url 'catalogue' %}?filters={{colour.slug}}"  class="tag">{{colour.name}} </a><br>
+	{% endfor %}
+
   </div>
 
 </div>
@@ -229,130 +223,76 @@
 
   function compute_money(){
 
-    var formats = document.getElementsByName('size');
-    for(i = 0; i < formats.length; i++) {
-      var sel_size = document.getElementById('label_id_size_'+i).innerHTML
-      document.getElementById('sm_price_catch_'+sel_size).style.display = "none";
-      if(formats[i].checked) {
+    var rad = document.getElementsByName('size');
+
+    for (var i = 0; i < rad.length; i++) {
+      var the_elem = document.getElementsByName("size")[i]
+      if (the_elem.checked){
+        var value = the_elem.value;
+        var sel_size = document.getElementById('label_size_'+value).innerHTML;
         document.getElementById('selected_format').innerHTML = String(sel_size);
         document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
-        document.getElementById('sm_catch').innerHTML = qtyField.val();
-        document.getElementById('sm_notification').innerHTML = qtyField.val();
-        //document.getElementById('sm_image_'+sel_size).style.display = "none";
       }
     }
-
-    var finishes = document.getElementsByName('finish');
-
-    for(var j = 0; j < finishes.length; j++) {
-
-      if(finishes[j].checked) {
-        var sel_finish = document.getElementById('label_finish_'+finishes[j].value).innerHTML;
-        document.getElementById('selected_format').innerHTML = String(sel_finish);
-        document.getElementById('sm_catch').innerHTML = qtyField.val();
-        document.getElementById('sm_notification').innerHTML = qtyField.val();
-      }
-    }
-
-    $.ajax({
-      type: "POST",
- 
-      url: "{% url 'compute_price'  %}",
-      data: {
-          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-          quantity: $( 'input[id="id_quantity"]' ).val(),
-          product : $( 'input[id="id_product"]' ).val(),
-          size : $( 'input[name="size"]:checked' ).val(),
-          finish : $( 'input[name="finish"]:checked' ).val(),
-          has_frido :$('#id_has_frido').prop('checked')
-      },
-      success:  function(result) { $("#price_catch").html(result['tot_price']); },
-      error:    function(result) { console.log('error'); }
-    });
-
+    
   }
 
-
-  function add_quantity(){
-    qtyField.val( +qtyField.val() + 1 );
-    compute_money();
-  }
-
-  function minus_quantity(){
-    qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
-    compute_money();
-  }
 
   window.onload = function() {
 
-    //enabling click on the sizes
     var prev = null;
     var rad = document.getElementsByName('size');
 
     var some_size_checked = false;
     for (var i = 0; i < rad.length; i++) {
-      some_size_checked = document.getElementsByName("size")[i].checked
+
+      some_size_checked = document.getElementsByName("size")[i].checked;
+      console.log(some_size_checked)
         rad[i].addEventListener('change', function() {
             compute_money()
         });
     }
-
-    var some_finish_checked = false;
-    var rad_finish = document.getElementsByName('finish');
-    for (var i = 0; i < rad_finish.length; i++) {
-      some_finish_checked = document.getElementsByName("finish")[i].checked
-        rad_finish[i].addEventListener('change', function() {
-            compute_money()
-        });
-    }
-
     if (!some_size_checked){
-      document.getElementById("id_size_0").checked = true;
+      var value = document.getElementsByName("size")[0].value;
+      document.getElementById("id_size_"+value).checked = true;
     }
-
-    document.getElementById('id_quantity').addEventListener('input', function () {
-        compute_money();
-    });
-
-    document.getElementById('id_has_frido').addEventListener('change', function () {
-        compute_money();
-    });
 
     compute_money()
-
   };
 
 
-  function addToCart() {
-    $.ajax({
-      type: "POST",
- 
-      url: "{% url 'product' product.code %}",
-      data: {
-          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-          
-          quantity: $( 'input[id="id_quantity"]' ).val(),
-          product : $( 'input[id="id_product"]' ).val(),
-          save_it : $( 'input[name="id_save_it"]' ).val(),
-          size : $( 'input[name="size"]:checked' ).val(),
-          finish : $( 'input[name="finish"]:checked' ).val(),
-          has_frido :$('#id_has_frido').prop('checked')
-      },
-      success: function(result) {
-          console.log('ok');
-          var num_chi = Number($(".cartbtn span").html()) +1;
-          $(".cartbtn span").html(num_chi);
-          $("#overlayCart").html(result);
-          $("#id_quantity").val('');
-          $("#price_catch").html('0');
-          
-      },
-      error: function(result) {
-          console.log('error');
-      }
-    });
-  }
+  function sendWallPaperRequest() {
+      $.ajax({
+        type: "POST",
+   
+        url: "{% url 'product' product.code %}",
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            
+            email        : $( 'input[id="id_email"]' ).val(),
+            name_surname : $( 'input[id="id_name_surname"]' ).val(),
+            telephone    : $( 'input[id="id_telephone"]' ).val(),
+            width        : $( 'input[id="id_width"]' ).val(),
+            height       : $( 'input[id="id_height"]' ).val(),
+            notes        : document.getElementById('id_notes').value ,
+            accept       : $( 'input[id="id_accept"]' ).prop('checked')
+        },
+        success: function(result) {
+            document.getElementById("results_wallpaper").classList.toggle('hide'); 
+            document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
+        },
+        error: function(result) {
+            
+            $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
 
+            const array1 = result['responseJSON']['html_errors'];
+            for (const [key, value] of Object.entries(array1)) {
+              document.getElementById("id_"+key).classList.toggle('error'); 
+            }
+        
+        }
+      });
+    }
 
 !function() {
     "use strict";

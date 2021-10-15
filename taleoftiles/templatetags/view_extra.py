@@ -62,7 +62,7 @@ def is_in_sample(sample, product):
 @register.filter
 def serie(product):
     if product: 
-        return product.get_tag("serie")
+        return product.serie()
     return "-"
 
 @register.filter
