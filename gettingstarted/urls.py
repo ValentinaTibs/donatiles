@@ -11,6 +11,7 @@ import taleoftiles.views
 import CRM.views
 import blog.views
 import layout.views
+import capsule.views
 
 
 urlpatterns = [ ]
@@ -68,6 +69,8 @@ urlpatterns += i18n_patterns(
     path("support/",        layout.views.support, name="support"),
     path("termsandconds/",  layout.views.termsandconds, name="termsandconds"),
     path("privacypolicy/",  layout.views.privacypolicy, name="privacypolicy"),
+
+    path("capsule/",        capsule.views.index,        name="capsule"),
 
     prefix_default_language=False
 )
