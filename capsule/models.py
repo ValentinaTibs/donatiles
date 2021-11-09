@@ -1,21 +1,16 @@
 from django.db import models
 
 # Create your models here.
-from taleoftiles.models import Publication, Product
+from taleoftiles.models import Tag, Publication
+from layout.models 		import Image
 
 class Influencer(models.Model):
-	name   		= models.CharField(max_length=200)
-	slug		= models.CharField(max_length=200, unique=True, blank=True,null=False)
-	publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.SET_NULL, related_name='influencer' )
-	product     = models.ForeignKey(Product, blank = True, null = True, on_delete=models.SET_NULL, related_name='influencer' )
+	long_name	= models.CharField(max_length=200)
+	palette1   		= models.CharField(max_length=6)
+	palette2  		= models.CharField(max_length=6)
+	palette3   		= models.CharField(max_length=6)
 
-	def in_home(self):
-		return self.tags.filter(slug='in-home').count()>0
-
-	def __str__(self):
-		return self.publication.title
-
-	def save(self, *args, **kwargs):
-		if not self.slug:
-			self.slug = self.name.replace(" ","-").lower()
-		return super().save(*args, **kwargs)  # Call the "real" save() method.
+#	publication = models.OneToOneField(Publication, blank = True,  null = True,on_delete=models.SET_NULL, related_name='influencer' )
+	name     	= models.ForeignKey(Tag, blank = True, null = True, on_delete=models.SET_NULL, related_name='influencer' )
+	logo     	= models.ForeignKey(Image, blank = True, null = True, on_delete=models.SET_NULL, related_name='influencer' )
+	description	= models.ForeignKey(Publication, blank = True, null = True, on_delete=models.SET_NULL, related_name='influencer' )

@@ -173,31 +173,6 @@
 
       <li><a href="" data-overlay="Auth"><span>{% trans 'login-register' %}</span></a></li>
       <li class="settingsmenu">
-        
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_language_info for LANGUAGE_CODE as lang %}
-          
-          {% with img_name="images/svgdefs.svg#icon-lang-"|add:lang.code %}
-            <div><svg class="icon-s icon"><use xlink:href="{% static img_name %}"/></svg><span>{{lang.name}}</span></div>
-          {% endwith %}
-
-        <button class="btn btn-tree"><svg class="icon icon-l">
-          <use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
-        <div class="openable">
-          {% get_available_languages as LANGUAGES %}
-          {% for lang in LANGUAGES %} 
-              {% with img_name="images/svgdefs.svg#icon-lang-"|add:lang.0 %}
-                
-                {% get_language_info for lang.0 as lang__ %}          
-                <a href="{% change_lang lang.0 %}"><svg class="icon-s icon">
-                <use xlink:href="{% static img_name %}"/></svg><span>{{lang__.name}}</span></a>
-            {% endwith %}
-          {% endfor %}
-        </div>
-
-
-      </li>
-      <li class="settingsmenu">
         <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>Euro</span></div>
         <button class="btn btn-tree"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-down' %}"/></svg></button>
         <div class="openable">
@@ -236,6 +211,7 @@
 <div id="content">
 {% block content %} {% endblock %}
 </div>
+
 <footer>
   <div class="content grid grid4">
     <div>
@@ -245,6 +221,11 @@
       <a href="{% url 'termsandconds' %} " class="btn-link btn-link-arrow"> {% trans 'termini-e-condizioni'|title %}</a>
 
     </div>
+        <ul class="  linkslist ">
+            
+              <li><a href="">qualcosadierre </a></li>
+
+        </ul>
 
         <ul class="  linkslist ">
             <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati' %} </a></li>
@@ -255,13 +236,7 @@
             <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'carta da parati bagno' %} </a></li>
         </ul>
 
-        <ul class="  linkslist ">
-            
-              <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'cotto etrusco' %} </a></li>
-              <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'cotto fatto a mano' %} </a></li>
-              <li><a href="{% url 'catalogue' %}?filters={{cartadaparati}}">{% trans 'cotto di design' %} </a></li>
 
-        </ul>
 
     
       <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">

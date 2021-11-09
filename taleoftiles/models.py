@@ -35,8 +35,6 @@ class CatalogueTagManager(models.Manager):
         return qs
 
 
-
-
 class Tag(models.Model):
     name    = models.CharField(max_length=200)
     summary = models.CharField(max_length=200, null = True, blank=True,)
@@ -161,6 +159,7 @@ class Product(models.Model):
     
     objects     = models.Manager() # The default manager.
     active      = ActiveProductManager() # The Active Charts
+
 
     class Meta:
         # Gives the proper plural name for admin
