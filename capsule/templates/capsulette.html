@@ -1,14 +1,35 @@
 {% extends "capsule_base.html" %}
+
 {% load view_extra %}
 {% load i18n %}
 {% load static %}
 
-{% block title%} {% trans 'home-page-name' %} {% endblock%}
+{% block title%} {{art_caps.long_name}} | Capsule Wallpaper Collection {% endblock%}
 {% block description-meta-tag %} {% trans 'home-description-meta-tag' %} {% endblock %}
 {% block keywords-meta-tag %} {% trans 'home-keywords-meta-tag' %} {% endblock %}
 
-{% block content %}
+{% block logo %} 
+<style type="text/css">
 
+.logo,.overlay  {
+  background-color: #{{art_caps.palette1}};
+}
+
+.nav-primary {
+  background-color: #{{art_caps.palette2}};
+}
+
+footer{
+  background-color: #{{art_caps.palette3}};
+}
+
+</style>
+<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} ">
+
+{% endblock%}
+
+
+{% block content %}
 
 <div class="cover cover-capsule" >
   <div class="content">
@@ -19,14 +40,12 @@
 </div>
 
 
-
 <div class="content grid grid-catalogue">
 
   <aside>
-    
     <div class="">
       <div class="">
-          <h2><a>qualcosadierre</a></h2>
+          <h2><a>{{art_caps.long_name}}</a></h2>
       </div>
     </div>
 
@@ -35,21 +54,21 @@
   <section>
 
       <p>
-      Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.
+        {{art_caps.description.title}}
+
       </p>
     <br/> 
 
     <div class="grid grid-catalogue-products infinite-container" id="grid-catalogue-products">
         
-      {% for product in products %}
+      {% for product in art_caps.name.products.all %}
         {% include 'capsule_thumb.html' %}
       {% endfor %}
 
     </div>
-
-    <p>
-      Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.
-      </p>
+      {% autoescape off %}
+          <p> {{art_caps.description.content}} </p>
+       {% endautoescape %}
 
     <br/> 
 

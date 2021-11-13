@@ -5,7 +5,7 @@ from taleoftiles.models import Tag, Publication
 from layout.models 		import Image
 
 class Influencer(models.Model):
-	long_name	= models.CharField(max_length=200)
+	long_name		= models.CharField(max_length=200)
 	palette1   		= models.CharField(max_length=6)
 	palette2  		= models.CharField(max_length=6)
 	palette3   		= models.CharField(max_length=6)

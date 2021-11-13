@@ -168,9 +168,6 @@
 
     <ul>
 
-      <li><a href="{% url 'blog'%}"><span> {% trans 'blog-menu'|title %}</span></a></li>
-      <li><a href="{% url 'support' %}"><span>{% trans 'support'|title %}</span></a></li>
-
       <li><a href="" data-overlay="Auth"><span>{% trans 'login-register' %}</span></a></li>
       <li class="settingsmenu">
         <div><svg class="icon-s icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-currency-eur' %}"/></svg><span>Euro</span></div>
@@ -202,7 +199,10 @@
   </nav>
 
   <div class="logo">
-    <a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-no-background.svg' %}" alt="Tale of Tiles"></a>
+    <a href="{% url 'index' %}">
+      {% block logo %} {% endblock %}
+      
+    </a>
   </div>
 
 

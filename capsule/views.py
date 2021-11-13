@@ -1,11 +1,18 @@
+from django.core.exceptions import ObjectDoesNotExist
+
 from django.shortcuts import render
-from taleoftiles.models import Product
+
+from capsule.models import Influencer
 # Create your views here.
 
-def index(request):  
-    influencer_slug = 'giggilatrottola'
-    #products = Product.filter(is_active = True, influencer__slug = influencer_slug).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
-    products = Product.objects.all()[:3]
+def index(request,_name):  
+
+    try: 
+        art_caps = Influencer.objects.get(name__slug  = _name )
+    except ObjectDoesNotExist:
+        return render(request, "404.html",{"message":"The Capsule you are looking for is not existing",}) 
+
     return render(request, "capsulette.html",{
-        "products": products,
+        "art_caps": art_caps,
         })
+
