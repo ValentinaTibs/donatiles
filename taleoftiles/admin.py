@@ -54,6 +54,7 @@ class PriceStackedAdmin(admin.StackedInline):
         
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
+
 class PriceAdmin(admin.ModelAdmin):
 
     model = Price
@@ -196,11 +197,11 @@ class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     action_form = UpdateScoreForm
     actions = [disable_action,'set_tag_action']
-
+    exclude = ('order','support_to','is_decor','is_active','available' )
 
     resource_class = ProductResource
-    inlines = (PriceStackedAdmin,PhotoStackedAdmin)
-
+    #inlines = (PriceStackedAdmin,PhotoStackedAdmin)
+    inlines = (PhotoStackedAdmin,)
     search_fields = ( 'code',)
     
     list_display = ('name_',

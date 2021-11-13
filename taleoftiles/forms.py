@@ -17,14 +17,16 @@ class UpdateScoreForm(ActionForm):
 class CustomProductModelForm(forms.ModelForm):
     
     series      = forms.ModelChoiceField(queryset = Tag.objects.filter(parent__slug='serie',public = True), required = False)
-    samplable   = forms.BooleanField(required = False)
-    in_home     = forms.BooleanField(required = False)
     colours     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='colour',public = True), required = False)
     formats     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__parent__slug='format',public = True), required = False)
-    settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting',public = True), required = False)
-    styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style',public = True), required = False)
-    effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect',public = True), required = False)
     finishes    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='finish',public = True), required = False)
+    influencers = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='influencer_name',public = True), required = False)
+
+    # settings    = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='setting',public = True), required = False)
+    # styles      = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='style',public = True), required = False)
+    # effects     = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(parent__slug='effect',public = True), required = False)
+    # samplable   = forms.BooleanField(required = False)
+    # in_home     = forms.BooleanField(required = False)
     # in_product_edits   = forms.ModelMultipleChoiceField(queryset = Tag.objects.filter(in_product_edit=True, public = True), required = False)
     
     class Meta:
@@ -40,24 +42,21 @@ class CustomProductModelForm(forms.ModelForm):
         serie       = kwargs['instance'].tags.filter(parent__slug='serie').first()
         colours     = kwargs['instance'].tags.filter(parent__slug='colour')
         formats     = kwargs['instance'].tags.filter(parent__parent__slug='format')
-        settings    = kwargs['instance'].tags.filter(parent__slug='setting')
-        styles      = kwargs['instance'].tags.filter(parent__slug='style')
-        effects     = kwargs['instance'].tags.filter(parent__slug='effect')
         finishes    = kwargs['instance'].tags.filter(parent__slug='finish')
+        influencers = kwargs['instance'].tags.filter(parent__slug='influencer_name')
         # in_product_edits = kwargs['instance'].tags.filter(in_product_edit=True)
-        samplable   = kwargs['instance'].tags.filter(slug='samplable').first()
-        in_home     = kwargs['instance'].tags.filter(slug='in_home').first()
+        # settings    = kwargs['instance'].tags.filter(parent__slug='setting')
+        # styles      = kwargs['instance'].tags.filter(parent__slug='style')
+        # effects     = kwargs['instance'].tags.filter(parent__slug='effect')
+        # samplable   = kwargs['instance'].tags.filter(slug='samplable').first()
+        # in_home     = kwargs['instance'].tags.filter(slug='in_home').first()
 
         
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
         if serie:
             self.initial['series'] = serie.pk
 
-        if samplable:
-            self.initial['samplable'] = True
 
-        if in_home:
-            self.initial['in_home'] = True
 
         if colours:
             col_iv = []
@@ -71,23 +70,7 @@ class CustomProductModelForm(forms.ModelForm):
                 format_iv.append(format_.pk)
             self.initial['formats'] = format_iv   
         
-        if settings:
-            settings_iv = []
-            for setting in settings:
-                settings_iv.append(setting.pk)
-            self.initial['settings'] = settings_iv   
 
-        if styles:
-            styles_iv = []
-            for style in styles:
-                styles_iv.append(style.pk)
-            self.initial['styles'] = styles_iv 
-
-        if effects:
-            effects_iv = []
-            for effect in effects:
-                effects_iv.append(effect.pk)
-            self.initial['effects'] = effects_iv  
 
         if finishes:
             finishes_iv = []
@@ -95,12 +78,42 @@ class CustomProductModelForm(forms.ModelForm):
                 finishes_iv.append(finish.pk)
             self.initial['finishes'] = finishes_iv  
 
+        if influencers:
+            influencers_iv = []
+            for influencer in influencers:
+                influencer_iv.append(influencer.pk)
+            self.initial['influencers'] = influencers_iv  
+
         # if in_product_edits:
         #     in_product_edits_iv = []
         #     for in_product_edit in in_product_edits:
         #         in_product_edits_iv.append(in_product_edit.pk)
         #     self.initial['in_product_edits'] = in_product_edits_iv      
-            
+        #   if settings:
+        #     settings_iv = []
+        #     for setting in settings:
+        #         settings_iv.append(setting.pk)
+        #     self.initial['settings'] = settings_iv   
+
+        # if styles:
+        #     styles_iv = []
+        #     for style in styles:
+        #         styles_iv.append(style.pk)
+        #     self.initial['styles'] = styles_iv 
+
+        # if samplable:
+        #     self.initial['samplable'] = True
+
+        # if in_home:
+        #     self.initial['in_home'] = True
+
+        # if effects:
+        #     effects_iv = []
+        #     for effect in effects:
+        #         effects_iv.append(effect.pk)
+        #     self.initial['effects'] = effects_iv  
+
+              
         return
 
     def save(self, commit=True):
@@ -116,22 +129,7 @@ class CustomProductModelForm(forms.ModelForm):
         if self.cleaned_data.get('series'):
             product.tags.add(self.cleaned_data.get('series')) 
 
-        # ---- SAMPLABLE UPDATE -----   
-        samplables = product.tags.filter(slug='samplable') 
-        samplable_tag = Tag.objects.get(slug='samplable')
-        for samplable in samplables:
-            product.tags.remove(samplable.pk)
-        if self.cleaned_data.get('samplable'):
-            product.tags.add(samplable_tag.pk)
-
-        # ---- IN HOME UPDATE -----   
-        in_homes = product.tags.filter(slug='in_home') 
-        in_home_tag = Tag.objects.get(slug='in_home')
-        for in_home in in_homes:
-            product.tags.remove(in_home.pk)
-        if self.cleaned_data.get('in_home'):
-            product.tags.add(in_home_tag.pk)
-
+        
         # ---- colors UPDATE -----
         colours = product.tags.filter(parent__slug='colour') 
         for color in colours:
@@ -148,34 +146,9 @@ class CustomProductModelForm(forms.ModelForm):
         if self.cleaned_data.get('formats'):
             for format_ in self.cleaned_data.get('formats'):
                     product.tags.add(format_) 
-                    product.tags.add(format_.parent) 
+                    product.tags.add(format_.parent)         
 
-        # ---- SETTINGS UPDATE -----
-        settings = product.tags.filter(parent__slug='setting') 
-        for setting in settings:
-            product.tags.remove(setting.pk)
-        if self.cleaned_data.get('settings'):
-            for setting in self.cleaned_data.get('settings'):
-                    product.tags.add(setting)                                     
-
-        # ---- STYLEs UPDATE -----
-        styles = product.tags.filter(parent__slug='style') 
-        for style in styles:
-            product.tags.remove(style.pk)
-        if self.cleaned_data.get('styles'):
-            for style in self.cleaned_data.get('styles'):
-                    product.tags.add(style) 
-
-        # ---- EFFECT UPDATE -----
-        effects = product.tags.filter(parent__slug='effect') 
-    
-        for effect in effects:
-            product.tags.remove(effect.pk)
-        if self.cleaned_data.get('effects'):
-            for effect in self.cleaned_data.get('effects'):
-                    product.tags.add(effect)
-
-        # ---- FINSH UPDATE -----                    
+        # ---- FINISH UPDATE -----                    
                     
         finishes = product.tags.filter(parent__slug='finish') 
     
@@ -184,6 +157,17 @@ class CustomProductModelForm(forms.ModelForm):
         if self.cleaned_data.get('finishes'):
             for finish in self.cleaned_data.get('finishes'):
                     product.tags.add(finish)
+
+        # ---- INFLUENCER UPDATE -----                    
+                    
+        influencers = product.tags.filter(parent__slug='influencer_name') 
+    
+        for influencer in influencers:
+            product.tags.remove(influencer.pk)
+        if self.cleaned_data.get('influencers'):
+            for influencer in self.cleaned_data.get('influencers'):
+                    product.tags.add(influencer)
+
 
         # ---- product edito for catalogue -----                    
                     
@@ -194,6 +178,47 @@ class CustomProductModelForm(forms.ModelForm):
         # if self.cleaned_data.get('in_product_edits'):
         #     for in_product_edit in self.cleaned_data.get('in_product_edits'):
         #             product.tags.add(in_product_edit)
+        # ---- SAMPLABLE UPDATE -----   
+        # samplables = product.tags.filter(slug='samplable') 
+        # samplable_tag = Tag.objects.get(slug='samplable')
+        # for samplable in samplables:
+        #     product.tags.remove(samplable.pk)
+        # if self.cleaned_data.get('samplable'):
+        #     product.tags.add(samplable_tag.pk)
+
+        # # ---- IN HOME UPDATE -----   
+        # in_homes = product.tags.filter(slug='in_home') 
+        # in_home_tag = Tag.objects.get(slug='in_home')
+        # for in_home in in_homes:
+        #     product.tags.remove(in_home.pk)
+        # if self.cleaned_data.get('in_home'):
+        #     product.tags.add(in_home_tag.pk)
+
+
+        # # ---- SETTINGS UPDATE -----
+        # settings = product.tags.filter(parent__slug='setting') 
+        # for setting in settings:
+        #     product.tags.remove(setting.pk)
+        # if self.cleaned_data.get('settings'):
+        #     for setting in self.cleaned_data.get('settings'):
+        #             product.tags.add(setting)                                     
+
+        # # ---- STYLEs UPDATE -----
+        # styles = product.tags.filter(parent__slug='style') 
+        # for style in styles:
+        #     product.tags.remove(style.pk)
+        # if self.cleaned_data.get('styles'):
+        #     for style in self.cleaned_data.get('styles'):
+        #             product.tags.add(style) 
+
+        # # ---- EFFECT UPDATE -----
+        # effects = product.tags.filter(parent__slug='effect') 
+    
+        # for effect in effects:
+        #     product.tags.remove(effect.pk)
+        # if self.cleaned_data.get('effects'):
+        #     for effect in self.cleaned_data.get('effects'):
+        #             product.tags.add(effect)        
 
         return super(CustomProductModelForm, self).save(True)
 
