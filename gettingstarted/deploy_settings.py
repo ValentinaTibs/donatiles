@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'CRM',
     'layout',
     'blog',
-    'capsule'
+    'capsule',
+    'django_hosts'
     #'subdomains'
     # 'storages'
 ]
 
 MIDDLEWARE = [
+    "django_hosts.middleware.HostsRequestMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     'django.middleware.locale.LocaleMiddleware',
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django_hosts.middleware.HostsResponseMiddleware'
 ]
 
 
@@ -203,6 +206,17 @@ AKISMET_BLOG_URL = "https://www.taleotfiles.com"
 # https://stackoverflow.com/questions/14491284/django-subdomain
 
 ROOT_URLCONF = "gettingstarted.urls"
+
+SITE_ID = 1
+
+ALLOWED_HOSTS = ['api.localhost', 'maps.localhost', 'localhost', 'api.mysite', 'maps.mysite', 'mysite']
+ROOT_HOSTCONF = 'gettingstarted.hosts'
+DEFAULT_HOST= 'www'
+
+SUBDOMAIN_URLCONFS ={
+    None: 'gettingstarted.urls',
+    'capsule': 'gettingstarted.urls',
+}
 
 # SUBDOMAIN_URLCONF = {
 #     None: 'gettingstarted.urls',

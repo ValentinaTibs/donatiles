@@ -29,7 +29,6 @@ def index(request):
     home_elems      = Element.objects.filter(tag__parent__slug = 'home', public = True)
     secondary_post  = Post.active.get(tags__slug='secondary-post')
     main_post       = Post.active.get(tags__slug='main-post')
-
     return render(request, "home.html",{
         'layout_elems'  : home_elems,
         'secondary_post': secondary_post,

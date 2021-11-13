@@ -70,8 +70,6 @@ urlpatterns += i18n_patterns(
     path("termsandconds/",  layout.views.termsandconds, name="termsandconds"),
     path("privacypolicy/",  layout.views.privacypolicy, name="privacypolicy"),
 
-    path("capsule/",        capsule.views.index,        name="capsule"),
-
     prefix_default_language=False
 )
 
