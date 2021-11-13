@@ -65,7 +65,7 @@
   gtag('config', 'UA-178049116-1');
 </script>
 
-  
+{% block extra_css %} {% endblock %}
 </head>
 
 <body>
@@ -127,7 +127,7 @@
 
   <nav class="nav-primary">
 
-    <div><a href="{% url 'index' %}"><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
+    <div><a href="{% url 'index' %}">{% block logo_compact %} {% endblock %}</a></div>
     <ul>
 
     </ul>
@@ -198,12 +198,7 @@
 
   </nav>
 
-  <div class="logo">
-    <a href="{% url 'index' %}">
-      {% block logo %} {% endblock %}
-      
-    </a>
-  </div>
+  <div class="logo"> <a href="{% url 'index' %}">{% block logo %} {% endblock %}</a></div>
 
 
 </header>

@@ -8,7 +8,8 @@
 {% block description-meta-tag %} {% trans 'home-description-meta-tag' %} {% endblock %}
 {% block keywords-meta-tag %} {% trans 'home-keywords-meta-tag' %} {% endblock %}
 
-{% block logo %} 
+
+{% block extra_css %}
 <style type="text/css">
 
 .logo,.overlay  {
@@ -24,9 +25,18 @@ footer, .cover{
 }
 
 </style>
-<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} ">
-
 {% endblock%}
+
+
+{% block logo_compact %} 
+<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+{% endblock%}
+
+{% block logo %} 
+<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+{% endblock%}
+
+
 
 
 {% block content %}
