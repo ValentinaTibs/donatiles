@@ -56,20 +56,26 @@
   <div class="product-selection">
     <div class="product-options">
 
-    {% if chi_form.finish %}
       <h5>{% trans 'finishes' %}</h5>
 
-        {% for id_choice,name_choice in chi_form.fields.finish.choices %}
-            <input type="radio" name="finish" value="{{id_choice}}" id="id_finish_{{ id_choice }}" required="">
-            <label  for="finish_{{ id_choice }}" id="label_finish_{{ id_choice }}" >{{ name_choice }}</label>
-        {% endfor %}
+          <input type="radio" name="finish" value="0" id="id_finish_0" required="">
+          <label for="finish_0" id="label_finish_0">S-Vinyl Raw</label>
 
-    {% endif %}
+          <input type="radio" name="finish" value="1" id="id_finish_1" required="" >
+          <label for="finish_1" id="label_finish_1">S-Vinyl Satin  </label>
+      
+          <input type="radio" name="finish" value="2" id="id_finish_2" required="">
+          <label for="finish_2" id="label_finish_2">S-Pulp</label>
+
+          <input type="radio" name="finish" value="3" id="id_finish_3" required="">
+          <label for="finish_3" id="label_finish_3">S-Fiberglass</label>
+      
+
     </div>
 
     <div class="product-configuratorbox">
       <h4>Come starà a casa tua?</h4>
-      <button class="btn btn-primary" onClick="openPopup('popupWPConf')"><span><strong>Apri il configuratore</strong><br>per avere un'anteprima</span></button>
+      <button class="btn btn-primary" onClick="openPopup('popupWPConf')"><span><strong>Apri il configuratore</strong><br>per avere un'anteprima e calcolare quanti mq</span></button>
       <p>Quando ordini una carta da parati ti inviamo <strong>sempre</strong>, prima di confermare l'ordine, un rendering della/e parete/i che vuoi tappezzare, per verificare la resa in base alle proporzioni della parete</p>
     </div>
 
@@ -88,13 +94,10 @@
             <div class="product-note" style="color: black;">{% trans 'starting-from' %}</div>
             <div class="product-figure"><span> €</span>
 
-            {% for choice in chi_form.size %}
-            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
-            {% endfor %}
-
-            {% for choice in chi_form.finish %}
-            <b style="display:none;" name="sm_price_catch" id="sm_price_catch_{{choice.choice_label}}">{% min_price product 'min_price' choice.choice_label %}</b>
-            {% endfor %}
+            <b style="display: none;" name="sm_price_catch" id="sm_price_0">78</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_1">78</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_2">78</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_3">130</b>
 
           </div><div class="product-note">al m&sup2;</div></div>
         </div>
@@ -108,12 +111,10 @@
           </div>
           <div class="input-qty">
 
-            {{chi_form.quantity}}
+            <input disabled type="number" name="quantity" min="0" required="" id="id_quantity">
 
             <div class="product-qtybtns">
-              <svg class="icon-m icon" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
-              <span class="product-note">m&sup2;</span>
-              <svg class="icon-m icon" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
+              <span class="product-note">m&sup2;</span>  
             </div>
           </div>
         </div>
@@ -134,7 +135,7 @@
       {{chi_form.save_it.as_hidden}}
       {{chi_form.product.as_hidden}}
 
-      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></button>
+      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">--</b> m&sup2;</strong></button>
 
 <!-- </form> -->
 
@@ -152,14 +153,6 @@
   <div class="product-main">
 
     <div class="product-meta">
-
-    {% for effect in product|effects %}
-      {% if effect.slug %}<a href="{% url 'catalogue' %}?filters={{effect.slug}}"  class="tag">{{effect.name}}</a>{% endif %}
-    {% endfor %}
-
-    {% for colour in product|colour %}
-      <a href="{% url 'catalogue' %}?filters={{colour.slug}}"  class="tag">{{colour.name}} </a>
-    {% endfor %}
 
     </div>
 
@@ -187,18 +180,6 @@
 
 </div>
 
-{% if product.supports.count > 0 %}
-<div class="block block-lightestbg">
-  <div class="content">
-    <h2>{% trans 'product-support' %}</h2>
-  </div>
-  <div class="content grid grid4">
-	{% for support in product.supports.all %}
-		{% product_thumb support %}
-	{% endfor %}
-  </div>
-</div>
-{% endif %}
 
 
 {% if products_series.count > 0 %}
@@ -226,46 +207,33 @@
 
   function compute_money(){
 
-    var rad = document.getElementsByName('size');
-
+    var rad = document.getElementsByName('finish');
     for (var i = 0; i < rad.length; i++) {
-      var the_elem = document.getElementsByName("size")[i]
+      var the_elem = document.getElementsByName("finish")[i]
       if (the_elem.checked){
-        var value = the_elem.value;
-        var sel_size = document.getElementById('label_size_'+value).innerHTML;
+        var sel_size = document.getElementById('label_finish_'+i).innerHTML;
         document.getElementById('selected_format').innerHTML = String(sel_size);
-        document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+        document.getElementById('sm_price_'+i).style.display = "inline";
       }
-    }
-    
+    }    
   }
 
-  function add_quantity(){
-    qtyField.val( +qtyField.val() + 1 );
-    compute_money();
-  }
-
-  function minus_quantity(){
-    qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
-    compute_money();
-  }
 
   window.onload = function() {
 
     var prev = null;
-    var rad = document.getElementsByName('size');
+    var rad = document.getElementsByName('finish');
 
     var some_size_checked = false;
     for (var i = 0; i < rad.length; i++) {
-
-      some_size_checked = document.getElementsByName("size")[i].checked;
+      some_size_checked = document.getElementsByName("finish")[i].checked;
       rad[i].addEventListener('change', function() {
           compute_money()
       });
     }
     if (!some_size_checked){
-      var value = document.getElementsByName("size")[0].value;
-      document.getElementById("id_size_"+value).checked = true;
+      var value = document.getElementsByName("finish")[0].value;
+      document.getElementById("id_finish_"+value).checked = true;
     }
 
     compute_money()
