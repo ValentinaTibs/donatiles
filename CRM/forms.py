@@ -94,11 +94,12 @@ class NewChartItemForm(forms.ModelForm):
 
     class Meta:
         model = ChartItem
-        fields = ('size', 'quantity' ,'product','chart','has_frido')
+        fields = ('size','finish','quantity' ,'product','chart','has_frido')
         widgets = { 
             'product'   :forms.HiddenInput(),
             'chart'     :forms.HiddenInput(),
             'size'      :forms.RadioSelect(),
+            'finish'    :forms.RadioSelect(),
             'has_frido' :forms.CheckboxInput(attrs={'checked' : True,}),
         }
 
@@ -107,14 +108,21 @@ class NewChartItemForm(forms.ModelForm):
         product = args[0].get('product')
         size = args[0].get('size')
         if product:
-            prod_sizes = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
+            prod_sizes      = Tag.objects.filter(parent__parent__slug = 'format', prices__product__pk = product)
+            prod_finishes   = Tag.objects.filter(parent__slug = 'finish', products__pk = product)
+            
         else:
             raise forms.ValidationError(_('Wrong Product'), code='prod-error')
 
         super(NewChartItemForm, self).__init__(*args, **kwargs)
-        self.fields['size'].required = True
+        self.fields['size'].required = False
         self.fields['size'].empty_label = None
         self.fields['size'].queryset = prod_sizes
+        
+        self.fields['finish'].required = False
+        self.fields['finish'].empty_label = None
+        self.fields['finish'].queryset = prod_finishes
+
         self.fields['quantity'].required = True   
                 
     def clean(self):

@@ -71,7 +71,8 @@ urlpatterns += i18n_patterns(
     path("privacypolicy/",  layout.views.privacypolicy, name="privacypolicy"),
 
     path("capsule/<str:_name>",        capsule.views.index, name="capsule"),
-
+    path("capsule/report",              capsule.views.report, name="report"),
+    path("capsule/report/<str:_name>", capsule.views.report, name="report"),
     prefix_default_language=False
 )
 

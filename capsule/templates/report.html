@@ -1,0 +1,111 @@
+{% extends "capsule_base.html" %}
+
+{% load view_extra %}
+{% load i18n %}
+{% load static %}
+
+{% block title%} {{art_caps.long_name}} | Capsule Wallpaper Collection {% endblock%}
+{% block description-meta-tag %} {% trans 'home-description-meta-tag' %} {% endblock %}
+{% block keywords-meta-tag %} {% trans 'home-keywords-meta-tag' %} {% endblock %}
+
+
+{% block extra_css %}
+<style type="text/css">
+
+.logo,.overlay  {
+  background-color: #{{art_caps.palette1}};
+}
+
+.nav-primary {
+  background-color: #{{art_caps.palette2}};
+}
+
+footer, .cover{
+  background-color: #{{art_caps.palette3}};
+}
+
+</style>
+{% endblock%}
+
+
+{% block logo_compact %} 
+<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+{% endblock%}
+
+{% block logo %} 
+<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+{% endblock%}
+
+
+{% block content %}
+
+<div class="cover cover-capsule" >
+  <div class="content">
+    <div class="cover-title">
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="content grid grid-catalogue">
+
+  <aside>
+    <div class="">
+      <div class="">
+          <h2><a>{{art_caps.long_name}}</a></h2>
+      </div>
+    </div>
+
+  </aside>
+
+  <section>
+
+      
+<div class="cartrecap">
+
+      <div class="cartreacap-header">
+        <h5>{% trans 'quantity' %}</h5>
+        <h5>{% trans 'price' %}</h5>
+      </div>
+	{% for chart in order.charts.all %}
+	{% for chart_item in chart.chart_item.all %}
+		<div class="cartrecap-item">
+        	<div class="cartrecap-thumb" style="background-image:url('{{chart_item.product.cover.imagefile.url}}')">
+        	</div>
+	        <div class="cartrecap-main">
+	          <h5>{{chart_item.product.serie}}</h5>
+	          <h4>{{chart_item.product.name}}</h4>
+	          <p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
+	        </div>
+	        <div class="cartrecap-qty">
+	          <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
+	          <div class="input-qty">
+	            {{chart_item.quantity}}m&sup2;
+				{% if chart_item.has_frido %}
+	            <div class="product-qtybtns">
+					<span class="product-note">{% trans 'this-product-has-frido' %}</span>
+	            </div>
+				{% endif %}
+	          </div>
+	        </div>
+	        <div class="cartrecap-price">
+				<span class="product-figure">€ {{chart_item.price}}</span>
+				<a href="{% url 'del_chart' chart_item.pk %}"> 
+					<button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-delete' %}"/></svg></button>
+				</a>
+	        </div>
+      </div>
+	{% endfor %}
+	{% endfor %} 
+	</div>
+  </section>
+
+</div>
+
+<input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
+<input type="hidden" id="hidden_page" value="{{products.number}}"> 
+
+
+{% endblock %}
+

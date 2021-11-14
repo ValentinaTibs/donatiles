@@ -197,7 +197,7 @@ class ProductAdmin(admin.ModelAdmin):
     form = CustomProductModelForm
     action_form = UpdateScoreForm
     actions = [disable_action,'set_tag_action']
-    exclude = ('order','support_to','is_decor','is_active','available' )
+    exclude = ('order','support_to','is_decor','is_active','available','tags' )
 
     resource_class = ProductResource
     #inlines = (PriceStackedAdmin,PhotoStackedAdmin)

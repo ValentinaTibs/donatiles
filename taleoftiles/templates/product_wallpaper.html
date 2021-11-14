@@ -55,17 +55,6 @@
 
   <div class="product-selection">
     <div class="product-options">
-      
-      {% if chi_form.size %}
-      <h5>{% trans 'size' %}</h5>
-
-        {% for id_choice,name_choice in chi_form.fields.size.choices %}
-            <input type="radio" name="size" value="{{id_choice}}" id="id_size_{{ id_choice }}" required="">
-            <label  for="size_{{ id_choice }}" id="label_size_{{ id_choice }}" >{{ name_choice }}</label>
-        {% endfor %}
-
-
-    {% endif %}
 
     {% if chi_form.finish %}
       <h5>{% trans 'finishes' %}</h5>
@@ -74,7 +63,6 @@
             <input type="radio" name="finish" value="{{id_choice}}" id="id_finish_{{ id_choice }}" required="">
             <label  for="finish_{{ id_choice }}" id="label_finish_{{ id_choice }}" >{{ name_choice }}</label>
         {% endfor %}
-
 
     {% endif %}
     </div>
@@ -138,14 +126,9 @@
           <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
         </div>
         <div class="row">
-          <div class="checkbox">
-            {{chi_form.has_frido}}
-            <label for="id_has_frido">{% trans 'include-sfrido' %}</label>
-          </div>
+          
         </div>
-        <div class="row">
-          {% trans 'sfrido-small-description' %}
-        </div>
+
       </div>
 
       {{chi_form.save_it.as_hidden}}

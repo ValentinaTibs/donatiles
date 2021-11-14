@@ -50,13 +50,10 @@ class CustomProductModelForm(forms.ModelForm):
         # effects     = kwargs['instance'].tags.filter(parent__slug='effect')
         # samplable   = kwargs['instance'].tags.filter(slug='samplable').first()
         # in_home     = kwargs['instance'].tags.filter(slug='in_home').first()
-
         
         super(CustomProductModelForm, self).__init__(*args, **kwargs)
         if serie:
             self.initial['series'] = serie.pk
-
-
 
         if colours:
             col_iv = []
@@ -69,8 +66,6 @@ class CustomProductModelForm(forms.ModelForm):
             for format_ in formats:
                 format_iv.append(format_.pk)
             self.initial['formats'] = format_iv   
-        
-
 
         if finishes:
             finishes_iv = []
@@ -81,7 +76,7 @@ class CustomProductModelForm(forms.ModelForm):
         if influencers:
             influencers_iv = []
             for influencer in influencers:
-                influencer_iv.append(influencer.pk)
+                influencers_iv.append(influencer.pk)
             self.initial['influencers'] = influencers_iv  
 
         # if in_product_edits:
@@ -156,7 +151,7 @@ class CustomProductModelForm(forms.ModelForm):
             product.tags.remove(finish.pk)
         if self.cleaned_data.get('finishes'):
             for finish in self.cleaned_data.get('finishes'):
-                    product.tags.add(finish)
+                product.tags.add(finish)
 
         # ---- INFLUENCER UPDATE -----                    
                     
@@ -166,8 +161,8 @@ class CustomProductModelForm(forms.ModelForm):
             product.tags.remove(influencer.pk)
         if self.cleaned_data.get('influencers'):
             for influencer in self.cleaned_data.get('influencers'):
-                    product.tags.add(influencer)
-
+                product.tags.add(influencer)
+        return super(CustomProductModelForm, self).save(True)
 
         # ---- product edito for catalogue -----                    
                     
@@ -220,5 +215,4 @@ class CustomProductModelForm(forms.ModelForm):
         #     for effect in self.cleaned_data.get('effects'):
         #             product.tags.add(effect)        
 
-        return super(CustomProductModelForm, self).save(True)
 
