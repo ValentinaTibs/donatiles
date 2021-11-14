@@ -27,10 +27,19 @@
   </ul>
   <h1>{{ product.name }}</h1>
   <div class="product-samplebtn">
-    <a href="mailto:info@taleoftiles.com" class="btn btn-secondary" target="_blank"><span>
-        <h3>{% trans 'sampling-c2a-up' %}</h3> 
-        <br/><h4>{% trans 'sampling-c2a-down' %} <i> <a href="mailto:info@taleoftiles.com">info@taleoftiles.com</a></i></h4>
-    </span></a>
+    <a class="btn btn-secondary" target="_blank" onclick='
+      document.getElementById("sample_form_container").classList.toggle("hide");
+    '><span>
+      <strong>Richiedi un Campione Gratuito</strong><br>pagherai solo la spedizione</span></a>
+      <span class=" hide " id="sample_form_container">
+        <form    style="background:#b5a294; padding: 2%;" >
+          {{sample_form}}
+          <br/>
+          <input class="btn btn-primary" type="button" value="Invia Richiesta">
+          
+        </form>
+
+      </span>
   </div>
 </div>
 <div class="content grid grid-product">
@@ -58,25 +67,38 @@
 
   <div class="product-selection">
     <div class="product-options">
-      
-        
-        {% if is_cottoetrusco %}
-          <h5>{% trans 'size' %}</h5>
-            {% include 'include/cottoetrusco/finiture.html' %}
-          <h5>{% trans 'finishes' %}</h5>
-            <input type="radio" name="finish" value="001" id="id_finish_0" checked>
-            <label for="id_finish_0" id="label_id_finish_0">Terre Ossidate</label>
+      <h5>{% trans 'size' %}</h5>
+                  
+          <input type="radio" name="size" value="100" id="id_size_0" required="" checked="">
+          <label for="id_size_0" id="label_id_size_100">11x11 h1.5</label>
 
-        {% else %}
-          <h5>{% trans 'size' %}</h5>
-          <input type="radio" name="size" value="002" id="id_size_0" checked>
-          <label for="id_size_0" id="label_id_size_0">{% trans 'special-sizes'|title %}</label>
+          <input type="radio" name="size" value="103" id="id_size_1" required="">
+          <label for="id_size_1" id="label_id_size_103">19x19 h2.5</label>
 
-          <h5>{% trans 'finishes' %}</h5>
-            <input type="radio" name="finish" value="003" id="id_finish_0" checked>
-            <label for="id_finish_0" id="label_id_finish_0">Naturale</label>
+          <input type="radio" name="size" value="102" id="id_size_2" required="">
+          <label for="id_size_2" id="label_id_size_102">5,5x25 h2.5</label>
 
-        {% endif %}
+          <input type="radio" name="size" value="109" id="id_size_3" required="">
+          <label for="id_size_3" id="label_id_size_109">Coda di Pavone h1.7</label>
+
+          <input type="radio" name="size" value="104" id="id_size_4" required="">
+          <label for="id_size_4" id="label_id_size_104">Esagono lato 14 h2.5</label>
+
+          <input type="radio" name="size" value="106" id="id_size_5" required="">
+          <label for="id_size_5" id="label_id_size_106">Losanga 30x10 h2.5</label>
+
+          <input type="radio" name="size" value="105" id="id_size_6" required="">
+          <label for="id_size_6" id="label_id_size_105">Rombo lato 14 h2.5</label>
+
+          <input type="radio" name="size" value="108" id="id_size_7" required="">
+          <label for="id_size_7" id="label_id_size_108">Stella e Croce lato 17.6 h2.5</label>
+
+          <input type="radio" name="size" value="107" id="id_size_8" required="">
+          <label for="id_size_8" id="label_id_size_107">Triangolo lato 9.5 h1.6</label>
+
+      <h5>{% trans 'finishes' %}</h5>
+      <input type="radio" name="finish" value="001" id="id_finish_0" checked>
+      <label for="id_finish_0" id="label_id_finish_0">Terre Ossidate</label>
     </div>
     
 
@@ -85,7 +107,7 @@
       <button class="btn btn-primary" onClick="
         document.getElementById('sample_form_req').classList.toggle('hide'); 
       "><span>
-      <strong>Richiedi un Campione Gratuito</strong><br>pagherai solo la spedizione</span></button>
+      <strong>Richiedi una quotazione</strong><br>la richiesta ha carattere informativo e non vincola all'acquisto</span></button>
 
     </div>
 
@@ -99,71 +121,39 @@
     {{sample_form}}
   </div>
 
-  <h3>{% trans 'request-quotation' %}</h3>
+  
     <div class="product-addtocartbox">
 
       <div>
         <div class="row">
           <div><strong>{% trans 'code'%}: {{product.code}}</strong>
-            <br><span id="selected_format">11x11 h1.5</span>
+            <br><span id="selected_format"></span>
           </div>
 
           <div>
             <div class="product-note" style="color: black;">{% trans 'starting-from' %}</div>
             <div class="product-figure"><span> €</span>
-              {% include 'include/cottoetrusco/prezzi.html' %}
+
+<b style="display: inline;" name="sm_price_catch" id="sm_price_catch_11x11 h1.5">341</b>
+<b style="display: none;" name="sm_price_catch" id="sm_price_catch_19x19 h2.5">274</b>
+<b style="display: none;" name="sm_price_catch" id="sm_price_catch_5,5x25 h2.5">341</b>
+<b style="display:none;" name="sm_price_catch" id="sm_price_catch_Coda di Pavone h1.7">354</b>
+<b style="display:none;" name="sm_price_catch" id="sm_price_catch_Esagono lato 14 h2.5">274</b>
+<b style="display:none;" name="sm_price_catch" id="sm_price_catch_Losanga 30x10 h2.5">274</b>
+<b style="display:none;" name="sm_price_catch" id="sm_price_catch_Rombo lato 14 h2.5">317</b>
+<b style="display:none;" name="sm_price_catch" id="sm_price_catch_Stella e Croce lato 17.6 h2.5">341</b>
+<b style="display:none;" name="sm_price_catch" id="sm_price_catch_Triangolo lato 9.5 h1.6">403</b>
+
+
           </div><div class="product-note">al m&sup2;</div></div>
         </div>
       </div>
-
-      <div>
-
-        <div class="row">
-          <div>
-            <strong>{% trans 'superficie-da-rivestire' %}</strong>{% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
-          </div>
-          <div class="input-qty">
-
-            {{chi_form.quantity}}
-
-            <div class="product-qtybtns">
-              <svg class="icon-m icon" onclick=minus_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-minus' %}"/></svg>
-              <span class="product-note">m&sup2;</span>
-              <svg class="icon-m icon" onclick=add_quantity()><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="row">
-          {{chi_form.product}}
-          <div><strong>{% trans 'total' %}</strong></div>
-          <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
-        </div>
-        <div class="row">
-          <div class="checkbox">
-            {{chi_form.has_frido}}
-            <label for="id_has_frido">{% trans 'include-sfrido' %}</label>
-          </div>
-        </div>
-        <div class="row">
-          {% trans 'sfrido-small-description' %}
-        </div>
-      </div>
-
-      {{chi_form.save_it.as_hidden}}
-      {{chi_form.product.as_hidden}}
-
-      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">88</b> m&sup2;</strong></button>
-
-
 
 
     </div>  <!-- product-addtocartbox -->
 
     <div class="product-shippinginfo">
-      <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
+      <p class="note"><span class="hilite">Spedizione su quotazione</span></p>
 
       <p class="note">{% trans 'any-doubt' %}<br>
         <a href="{% url 'support' %}">{% trans 'any-doubt-subtitle' %}</a></p>
@@ -230,7 +220,7 @@
 
 
 <script>
-  var qtyField = $( '#id_quantity' );
+  // var qtyField = $( '#id_quantity' );
 
   function compute_money(){
 
@@ -238,81 +228,42 @@
 
     for (var i = 0; i < rad.length; i++) {
       var the_elem = document.getElementsByName("size")[i]
+      var value = the_elem.value;
+      var sel_size = document.getElementById('label_id_size_'+value).innerHTML;
+        
       if (the_elem.checked){
-        var value = the_elem.value;
-        var sel_size = document.getElementById('label_size_'+value).innerHTML;
         document.getElementById('selected_format').innerHTML = String(sel_size);
         document.getElementById('sm_price_catch_'+sel_size).style.display = "inline";
+      }
+      else{
+       document.getElementById('sm_price_catch_'+sel_size).style.display = "none"; 
       }
     }
     
   }
 
-  function add_quantity(){
-    qtyField.val( +qtyField.val() + 1 );
-    compute_money();
+
+window.onload = function() {
+
+  var prev = null;
+  var rad = document.getElementsByName('size');
+
+  var some_size_checked = false;
+  for (var i = 0; i < rad.length; i++) {
+
+    some_size_checked = document.getElementsByName("size")[i].checked;
+    rad[i].addEventListener('change', function() {
+        compute_money()
+    });
+  }
+  if (!some_size_checked){
+    document.getElementById("id_size_0").checked = true;
   }
 
-  function minus_quantity(){
-    qtyField.val(Math.max(0, +qtyField.val() - 1 ) );
-    compute_money();
-  }
-
-  window.onload = function() {
-
-    var prev = null;
-    var rad = document.getElementsByName('size');
-
-    var some_size_checked = false;
-    for (var i = 0; i < rad.length; i++) {
-
-      some_size_checked = document.getElementsByName("size")[i].checked;
-      rad[i].addEventListener('change', function() {
-          compute_money()
-      });
-    }
-    if (!some_size_checked){
-      var value = document.getElementsByName("size")[0].value;
-      document.getElementById("id_size_"+value).checked = true;
-    }
-
-    compute_money()
-  };
+  compute_money()
+};
 
 
-  function sendWallPaperRequest() {
-      $.ajax({
-        type: "POST",
-   
-        url: "{% url 'product' product.code %}",
-        data: {
-            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-            
-            email        : $( 'input[id="id_email"]' ).val(),
-            name_surname : $( 'input[id="id_name_surname"]' ).val(),
-            telephone    : $( 'input[id="id_telephone"]' ).val(),
-            width        : $( 'input[id="id_width"]' ).val(),
-            height       : $( 'input[id="id_height"]' ).val(),
-            notes        : document.getElementById('id_notes').value ,
-            accept       : $( 'input[id="id_accept"]' ).prop('checked')
-        },
-        success: function(result) {
-            document.getElementById("results_wallpaper").classList.toggle('hide'); 
-            document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
-            gtag('event', 'conversion', {'send_to': 'AW-968635819/UOTHCNbdpdkCEKvr8M0D'});
-        },
-        error: function(result) {
-            
-            $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
-
-            const array1 = result['responseJSON']['html_errors'];
-            for (const [key, value] of Object.entries(array1)) {
-              document.getElementById("id_"+key).classList.toggle('error'); 
-            }
-        
-        }
-      });
-    }
 
 
 !function() {
