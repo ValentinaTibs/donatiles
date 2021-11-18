@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from layout.models      import Element, Mail, MailTemplate
 from layout.forms      import ContactForm
-from taleoftiles.models import Publication
+from taleoftiles.models import Publication, Product
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 
@@ -64,3 +64,10 @@ def password_reset_request(request):
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})
 
+def landing (request):
+
+    products_list = Product.objects.filter(is_active = True, tags__slug = 'landing_nov_21')
+    
+    return render(request, "landing_nov_21.html",{
+    'home_prods'  : products_list,
+    })
