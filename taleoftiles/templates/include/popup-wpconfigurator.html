@@ -131,10 +131,6 @@
       configuratorSettings.cut.right = Math.floor( bandSize + parseInt(img.style.left) ) + "px";
     }
 
-    // TO DO: send configurator settings to backend
-    console.log(  );
-
-
     $.ajax({
     type: "POST",
 
@@ -145,7 +141,13 @@
           finish : $( 'input[name="finish"]:checked' ).val(),
           cut :JSON.stringify( configuratorSettings )
       },
-      success:  function(result) { $("#price_catch").html(result['tot_price']); },
+      success:  function(result) { 
+        
+        $("#price_catch").html(result['tot_price']); 
+        document.getElementById("id_quantity").value = result['m2']; 
+        $("#sm_catch").html(result['m2']); 
+        
+      },
       error:    function(result) { console.log('error'); }
     });
 

@@ -95,7 +95,6 @@ def compute_price(request):
     finish = request.POST.get('finish', None)
     cut = request.POST.get('cut', None)
 
-    print(product,finish,cut)
     paper_width = 0
     if int(finish) == 0:
         paper_width = 50
@@ -113,9 +112,9 @@ def compute_price(request):
         data = {'html_errors' : 'Wrong Finish'}
         return JsonResponse(data, safe=False, status = 500)       
     
-    data = {'tot_price': 102,'m2':103,'rolli':104}
-
     #here CAPIRE COME CALCOLARE I rolli ed i m2
+    data = {'tot_price': 102,'m2':103,'rolli':104}
+    print(data)
     return JsonResponse(data, status = 200)
 
 

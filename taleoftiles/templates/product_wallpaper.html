@@ -107,7 +107,9 @@
 
         <div class="row">
           <div>
-            <strong>{% trans 'superficie-da-rivestire' %}</strong>{% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
+            <strong>{% trans 'superficie-da-rivestire' %}</strong>
+            {% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
+            <b class="hide" id="rolli_ammount"></b> 
           </div>
 
           <div class="input-qty" >
@@ -237,6 +239,7 @@
       document.getElementById("id_finish_"+value).checked = true;
     }
 
+    
     compute_money()
   };
 
@@ -370,8 +373,6 @@
         }, 3e3)
     })
 }(window);
-
-
 
 
 </script>
