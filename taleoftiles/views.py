@@ -96,24 +96,28 @@ def compute_price(request):
     cut = request.POST.get('cut', None)
 
     print(product,finish,cut)
-    # quantity = request.POST.get('quantity', None)
-    # if quantity and int(quantity) > 0:
-    #     product = Product.active.get(pk = request.POST.get('product', None))
-    #     post_size =request.POST.get('size', None)
-    #     if post_size:
-    #         size = Tag.objects.get(pk = post_size)
-    #     post_finish =request.POST.get('finish', None)
-    #     if post_finish:
-    #         size = Tag.objects.get(pk = post_finish)
+    paper_width = 0
+    if int(finish) == 0:
+        paper_width = 50
 
-    #     quantity = request.POST.get('quantity')
-    #     price = product.price(size)
-        
-    #     definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
-        
-    #     data = {'tot_price': definitive_price}
-    #     return JsonResponse(data, safe=False) 
-    return JsonResponse({})   
+    elif int(finish) == 1:
+        paper_width = 50
+
+    elif int(finish) == 2:
+        paper_width = 65
+
+    elif int(finish) == 3:
+        paper_width = 95
+
+    else :
+        data = {'html_errors' : 'Wrong Finish'}
+        return JsonResponse(data, safe=False, status = 500)       
+    
+    data = {'tot_price': 102,'m2':103,'rolli':104}
+
+    #here CAPIRE COME CALCOLARE I rolli ed i m2
+    return JsonResponse(data, status = 200)
+
 
 def product(request, product_code, chi_form = None ):    
     
