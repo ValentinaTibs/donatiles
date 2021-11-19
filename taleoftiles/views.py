@@ -91,23 +91,28 @@ def catalogue(request):
 
 
 def compute_price(request):
-    quantity = request.POST.get('quantity', None)
-    if quantity and int(quantity) > 0:
-        product = Product.active.get(pk = request.POST.get('product', None))
-        post_size =request.POST.get('size', None)
-        if post_size:
-            size = Tag.objects.get(pk = post_size)
-        post_finish =request.POST.get('finish', None)
-        if post_finish:
-            size = Tag.objects.get(pk = post_finish)
+    product = request.POST.get('product', None)
+    finish = request.POST.get('finish', None)
+    cut = request.POST.get('cut', None)
 
-        quantity = request.POST.get('quantity')
-        price = product.price(size)
+    print(product,finish,cut)
+    # quantity = request.POST.get('quantity', None)
+    # if quantity and int(quantity) > 0:
+    #     product = Product.active.get(pk = request.POST.get('product', None))
+    #     post_size =request.POST.get('size', None)
+    #     if post_size:
+    #         size = Tag.objects.get(pk = post_size)
+    #     post_finish =request.POST.get('finish', None)
+    #     if post_finish:
+    #         size = Tag.objects.get(pk = post_finish)
+
+    #     quantity = request.POST.get('quantity')
+    #     price = product.price(size)
         
-        definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
+    #     definitive_price = compute_sm_price( quantity, request.POST.get('has_frido'),product.price(size.slug), product.m2_box(size.slug),product.weight_box(size.slug))
         
-        data = {'tot_price': definitive_price}
-        return JsonResponse(data, safe=False) 
+    #     data = {'tot_price': definitive_price}
+    #     return JsonResponse(data, safe=False) 
     return JsonResponse({})   
 
 def product(request, product_code, chi_form = None ):    

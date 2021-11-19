@@ -132,7 +132,24 @@
     }
 
     // TO DO: send configurator settings to backend
-    console.log( JSON.stringify( configuratorSettings ) );
+    console.log(  );
+
+
+    $.ajax({
+    type: "POST",
+
+    url: "{% url 'compute_price'  %}",
+      data: {
+          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+          product : $( 'input[id="id_product"]' ).val(),
+          finish : $( 'input[name="finish"]:checked' ).val(),
+          cut :JSON.stringify( configuratorSettings )
+      },
+      success:  function(result) { $("#price_catch").html(result['tot_price']); },
+      error:    function(result) { console.log('error'); }
+    });
+
+
     closePopup();
   }
 

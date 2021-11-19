@@ -109,11 +109,12 @@
           <div>
             <strong>{% trans 'superficie-da-rivestire' %}</strong>{% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
           </div>
-          <div class="input-qty">
+
+          <div class="input-qty" >
 
             <input disabled type="number" name="quantity" min="0" required="" id="id_quantity">
 
-            <div class="product-qtybtns">
+            <div class="product-qtybtns" style="cursor: default;">
               <span class="product-note">m&sup2;</span>  
             </div>
           </div>
@@ -369,6 +370,8 @@
         }, 3e3)
     })
 }(window);
+
+
 
 
 </script>
