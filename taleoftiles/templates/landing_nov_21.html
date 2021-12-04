@@ -21,6 +21,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
   <link rel="manifest" href="{% static '/site.webmanifest' %}">
 
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="{% static 'js/jquery.waypoints.min.js' %}" ></script>
@@ -76,21 +77,113 @@
 
 <style type="text/css">
   
-
 .grid-subscribe {
     grid-template-columns: 2fr 2fr;
     grid-template-rows: 1fr;
 }
 
+.btn-primary{
+  border: none;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.cover-title {
+    max-width: 100%;
+}
+.cover-home .cover-title .bgtxt {
+    max-width: 100%; 
+    text-align: center;
+}
+
+.grid-landing {
+    display: grid;
+    column-gap: 0%;
+    row-gap: 0%;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+
+}
+.block-fullheight{
+    min-height: 50vh;
+}
+
+.grid-homestrength{
+
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows:  1fr 1fr ;
+}
+
+.grid-preventivo{
+
+    grid-template-columns: 1fr  ;
+    grid-template-rows:  1fr  ;
+}
+.grid-homesupport {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.cover-home+.block {
+    margin-top: 0;
+}
+
+.selected{
+  text-decoration: underline;
+  text-decoration-color: #CE7358;
+  text-decoration-thickness:  8px;
+}
+.light-text{
+  font-family: Karla,-apple-system,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: lighter;
+}
+
+#mc_embed_signup .button {
+    clear: both;
+    background-color: #CE7358;
+    width: 100%;
+}
 </style>
+
+<script type="text/javascript">
+  
+
+  function scrollToProduct(){
+    var element = document.getElementById("products");
+    element.scrollIntoView({behavior: "smooth"});
+  }
+
+  function scrollToPuntiForza(){
+    var element = document.getElementById("puntiforza");
+    element.scrollIntoView({behavior: "smooth"});
+  }
+
+  function scrollToPreventivo(){
+    var element = document.getElementById("preventivo");
+    element.scrollIntoView({behavior: "smooth"});
+  }
+</script>
+
 <header>
 
   <nav class="nav-secondary"><ul></ul></nav>
   <nav class="nav-primary">
 
     <div><a href=""><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
-    <ul></ul>
-    <div class="header-btns"></div>
+    <ul>
+    </ul>
+    <div class="header-btns nav-primary">
+      <ul>
+        <li class=""><a  onclick="scrollToProduct();"><span> Prodotti</span></a></li>
+      </ul>
+      <ul>
+        <li class=""><a onclick="scrollToPuntiForza();"><span> Punti di Forza</span></a></li>
+      </ul>
+      <ul>
+        <li class=""><a onclick="scrollToPreventivo();"><span> <button class="btn-primary">Richiedi Preventivo</button></span></a></li>
+      </ul>
+    </div>
 
 
 <div class="nav-mobile overlay" id="overlayMenu">
@@ -123,105 +216,144 @@
 
 <div id="content">
 
-<div class="cover cover-home" style="background-image: url('{% static 'images/cartadaparati-doccia-wallpaper-online-design.jpeg' %}')">
+<div class="cover cover-home" style="
+ background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), 
+ url('https://taleoftiles.s3.amazonaws.com/photos/styleditions_carta_da_parati_artdeco_ambientata-11920x134857.jpg')">
   <div class="content">
     <div class="cover-title">
-      <div class="bgtxt"><h1><span>AAAAA</span></h1></div>
+      <div class="bgtxt" style="cursor:pointer;">
+        <h1><span>Rinnova i tuoi ambienti con la nostra offerta lancio </span></h1>
+        <h2>Grazie alla nostra nuova collezione di carta da parati potrai rinnovare gli ambienti della tua casa.  <br/>
+        Moderna, personalizzabile e da oggi accessibile a tutti.<br/>
+        Affrettati prima che il prezzo torni alla normalità.<br/><br/>
+        SCOPRI 
+        </h2>
+        <h1 onclick="scrollToProduct();"><span> &#8595; &#8595; &#8595; </span></h1>
+      </div>
     </div>
   </div>
 </div>
 
 
-<div class="block">
-  <div class="content grid grid-homeintro">
-    <a href="{% url 'catalogue' %}?filters=cartadaparati" class="btn-gridbox">
-    	<h3>BBBBBB</h3></a>
-    <div>
-      <h3>CCCCCC</h3>
-      <img src=" {% static 'images/paypal.png' %}" alt="Paypal Payment ">
-      <img src=" {% static 'images/visa.png' %}" alt="Visa Payment">
-      <img src=" {% static 'images/mastercard.png' %}" alt="Mastercard Payment">
+<div class="block" id="products">
+ <div class="content grid grid-homesupport">
+
+ <a href="" class="faqquestion-thumb product-thumb-home" >
+    <img  style=" " src=" https://taleoftiles.s3.amazonaws.com/photos/Green_Leaves_Amb.jpg">
+    <div class="product-thumb-overlay">
+      <h5>Green Leaves</h5>
+      <h3>Green Leaves</h3>
     </div>
+  </a>
 
-    <div class="grid-homeintro-main" >
-      <a class="product-thumb-img">
-      <img src="{% static 'images/cartadaparati-doccia-wallpaper-online-design.jpeg' %}" alt="Argento / Narciso">
-      </a>
+  <div>
+    <h3 class="selected">Green Leaves</h3><br/>
+    <h4 class="light-text">Carta da parati adesiva con le foglie rappresentate. Ecologica, liscia e dalla buona resistenza a strappi e lavaggi.</h4>
+  </div>
 
-     
+<!-----      --------    --->
 
-<!-- Begin Mailchimp Signup Form -->
-<div id="mc_embed_signup">
-<form action="https://taleoftiles.us1.list-manage.com/subscribe/post?u=60bd7522754a462d36b313b1c&amp;id=8be64ef024" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-   <h2>DDDDDD</h2>
-    <div id="mc_embed_signup_scroll"  class="formrow formrow-multi">
-  
-    <div class="mc-field-group formitem">
-      <label for="mce-EMAIL"> EEEEEEs</label>
-      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+  <div>
+    <h3 class="selected">Green Leaves</h3><br/>
+    <h4 class="light-text">Carta da parati adesiva con le foglie rappresentate. Ecologica, liscia e dalla buona resistenza a strappi e lavaggi.</h4>
+  </div>
+
+ <a href="" class="faqquestion-thumb product-thumb-home" >
+    <img  style="zoom: 40%;" src=" https://taleoftiles.s3.amazonaws.com/photos/Green_Leaves_Amb.jpg">
+    <div class="product-thumb-overlay">
+      <h5>Green Leaves</h5>
+      <h3>Green Leaves</h3>
     </div>
+  </a>
 
-  <div id="mce-responses" class="clear">
-    <div class="response" id="mce-error-response" style="display:none"></div>
-    <div class="response" id="mce-success-response" style="display:none"></div>
-  </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_60bd7522754a462d36b313b1c_8be64ef024" tabindex="-1" value=""></div>
-    
-    <div class="formitem formitem-short">
-      <label > &nbsp; </label>
-      <input type="submit" value="⮕" name="subscribe" id="mc-embedded-subscribe" 
-      style="background-color: #ab5244; color: black; cursor: pointer;" 
-      class="button">
+
+
+<!-----      --------    --->
+
+ <a href="" class="faqquestion-thumb product-thumb-home" >
+    <img  style="zoom: 40%;" src=" https://taleoftiles.s3.amazonaws.com/photos/Green_Leaves_Amb.jpg">
+    <div class="product-thumb-overlay">
+      <h5>Green Leaves</h5>
+      <h3>Green Leaves</h3>
     </div>
+  </a>
 
+  <div>
+    <h3 class="selected">Green Leaves</h3><br/>
+    <h4 class="light-text">Carta da parati adesiva con le foglie rappresentate. Ecologica, liscia e dalla buona resistenza a strappi e lavaggi.</h4>
+  </div>
+
+ <!-----      --------    --->
+
+  <div>
+    <h3 class="selected">Green Leaves</h3><br/>
+    <h4 class="light-text">Carta da parati adesiva con le foglie rappresentate. Ecologica, liscia e dalla buona resistenza a strappi e lavaggi.</h4>
+  </div> 
+
+ <a href="" class="faqquestion-thumb product-thumb-home" >
+    <img  style="zoom: 40%;" src=" https://taleoftiles.s3.amazonaws.com/photos/Green_Leaves_Amb.jpg">
+    <div class="product-thumb-overlay">
+      <h5>Green Leaves</h5>
+      <h3>Green Leaves</h3>
     </div>
-
-</form>
-</div>
+  </a>
 
 
-<!--End mc_embed_signup-->
 
-    </div>
-    <h3>FFFFF</h3>
-    <h4>GGGGGG</h4>
+
   </div>
 </div>
 
+<div class="cover cover-home" style="
+ background:linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+ url('https://taleoftiles.s3.amazonaws.com/photos/styleditions_carta_da_parati_artdeco_ambientata-11920x134857.jpg')">
+  <div class="content">
+    <div class="cover-title">
+      <div class="bgtxt" style="cursor:pointer;">
+        <h1><span>        PREZZO LANCIO A 35€ AL M2 *  </span></h1>
+        <h2>I modelli qui sopra non sono gli unici presenti:<br/> 
+          ti aspettano altre 15 fantasie!
+        </h2>
+        <button 
+        class="btn-primary" style="margin: auto; cursor: pointer;"
+        onclick="scrollToPreventivo();"
+        >Richiedi Preventivo</button>
+        <br/>
+        <h4 >* Le spese di trasporto in Italia sono i 40€ indipendentemente dal n°di metri acquistati</h4>
 
-<!--  <div class="block">
-  <div class="content grid grid-homeintro">
- {% for product in home_prods %}
-    
-    <div>
-    
-      <img  style="width: 100%;" src="{% if  product.cover.imagefile %}  {{ product.cover.imagefile.url }} {% endif %}" alt=" {{ product.name }} / {{ product.serie.name }}">
 
+      </div>
     </div>
-{% endfor %}
   </div>
-</div> -->
+</div>
 
-<div class="block block-lightbg ">
-  <div class="content grid grid-homesupport">
-    {% for product in home_prods %}
-        <a href="" class="faqquestion-thumb product-thumb-home" >
-          <img  src="{% if  product.cover.imagefile %}  {{ product.cover.imagefile.url }} {% endif %}" alt=" {{ product.name }} / {{ product.serie.name }}">
-          <div class="product-thumb-overlay">
-            <h5>{{ product.serie.name }}</h5>
-            <h3>{{ product.name }}</h3>
-          </div>
-        </a>
-    {% endfor %}
-  </div>
-</div> 
+<div class="block block-coldbg block-fullheight" id="puntiforza">
 
-<div class="block block-coldbg block-fullheight">
-  <div class="content grid grid-homesupport">
+  <div class="content grid grid-homesupport grid-homestrength">
+
     <div class="grid-homesupport-main">
-      <h2>QQQQ</h2>
+      <h2>Perché Acquistare Tale of Tiles</h2><p><em>KKKKKK</em></p>
+      <p>ZZZZZZ</p>
     </div>
 
+    <div class="">
+      <h2>QQQQ</h2><p><em>KKKKKK</em></p>
+      <p>ZZZZZZ</p>
+    </div>
+
+    <div class="">
+      <h2>QQQQ</h2><p><em>KKKKKK</em></p>
+      <p>ZZZZZZ</p>
+    </div>
+
+
+    <div class="">
+    </div>
+
+    <div class="">
+      <h2>Richiedi Preventivo</h2><p><em>KKKKKK</em></p>
+      <p>ZZZZZZ</p>
+    </div>
 
   </div>
 </div>
@@ -268,20 +400,98 @@
 </div>
 
 
-<div class="block block-warmbg block-fullheight">
-  <div class="content grid grid-homeabout">
+<div class="block block-lightbg block-fullheight" id="preventivo">
+  <div class="content grid grid-homeabout grid-preventivo">
 
-    <div class="grid-homeabout-main">
-      <h2>{% trans 'founder-name' %}</h2>
-        <p><em>KKKKKK</em></p>
-        <p>ZZZZZZ</p>
+    <div >
+      <h2 style="text-align: center; "> Richiedi ora la Disponibilità</h2>
+      <h4 class="light-text" style="text-align:center;">Affrettati prima che i prodotti finiscano e il prezzo torni alla normalità.
+      <br/>
+      Compila il form qui sotto con i tuoi dati e scopri la disponibilità della carta desiderata. Ti risponderemo il prima possibile.
+      </h4>
+
+      <!-- Begin Mailchimp Signup Form -->
+
+
+<div id="mc_embed_signup" style="width:60%; margin: 0 20%">
+<form action="https://taleoftiles.us1.list-manage.com/subscribe/post?u=60bd7522754a462d36b313b1c&amp;id=8be64ef024" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+  
+<div class="indicates-required"><span class="asterisk">*</span> campi obbligatori</div>
+<div class="mc-field-group">
+  <label for="mce-MMERGE2">Nome completo  <span class="asterisk">*</span>
+</label>
+  <input type="text" value="" name="MMERGE2" class="required" id="mce-MMERGE2">
+</div>
+<div class="mc-field-group">
+  <label for="mce-EMAIL">Email  <span class="asterisk">*</span>
+</label>
+  <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+<div class="mc-field-group ">
+  <label for="mce-MMERGE1">Telefono  <span class="asterisk">*</span>
+</label>
+  <input type="text" name="MMERGE1" class="required" value="" id="mce-MMERGE1">
+</div>
+<div class="mc-field-group">
+  <label for="mce-MMERGE3">Prodotto  <span class="asterisk">*</span>
+</label>
+  <select name="MMERGE3" class="required" id="mce-MMERGE3">
+  <option value=""></option>
+  <option value="Green Leaves">Green Leaves</option>
+<option value="Blue Flowers">Blue Flowers</option>
+<option value="Vintage Flowers">Vintage Flowers</option>
+<option value="Water Ibisco">Water Ibisco</option>
+
+  </select>
+</div>
+<div class="mc-field-group">
+  <label for="mce-MMERGE4">Dimensioni  <span class="asterisk">*</span>
+</label>
+  <input type="text" value="" name="MMERGE4" class="required" id="mce-MMERGE4">
+</div>
+  <div id="mce-responses" class="clear foot">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+  </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_60bd7522754a462d36b313b1c_8be64ef024" tabindex="-1" value=""></div>
+        <div class="optionalParent">
+            <div class="clear foot" style="grid-template-columns: 3fr ;">
+                <input type="submit" value="Richiedi Disponibilità" name="subscribe" id="mc-embedded-subscribe" class="button btn-primary">
+                
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[2]='MMERGE2';ftypes[2]='text';fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='MMERGE1';ftypes[1]='phone';fnames[3]='MMERGE3';ftypes[3]='dropdown';fnames[4]='MMERGE4';ftypes[4]='text'; /*
+ * Translated default messages for the $ validation plugin.
+ * Locale: IT
+ */
+$.extend($.validator.messages, {
+       required: "Campo obbligatorio.",
+       remote: "Controlla questo campo.",
+       email: "Inserisci un indirizzo email valido.",
+       url: "Inserisci un indirizzo web valido.",
+       date: "Inserisci una data valida.",
+       dateISO: "Inserisci una data valida (ISO).",
+       number: "Inserisci un numero valido.",
+       digits: "Inserisci solo numeri.",
+       creditcard: "Inserisci un numero di carta di credito valido.",
+       equalTo: "Il valore non corrisponde.",
+       accept: "Inserisci un valore con un&apos;estensione valida.",
+       maxlength: $.validator.format("Non inserire pi&ugrave; di {0} caratteri."),
+       minlength: $.validator.format("Inserisci almeno {0} caratteri."),
+       rangelength: $.validator.format("Inserisci un valore compreso tra {0} e {1} caratteri."),
+       range: $.validator.format("Inserisci un valore compreso tra {0} e {1}."),
+       max: $.validator.format("Inserisci un valore minore o uguale a {0}."),
+       min: $.validator.format("Inserisci un valore maggiore o uguale a {0}.")
+});}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->
+
     </div>
 
     <div class="grid-homeabout-quote"><blockquote>TTTTTTT</blockquote><p class="note">– WWWWW</p></div>
-    <div class="grid-homeabout-quote"><blockquote>TTTTTTT</blockquote><p class="note">– WWWWW</p></div>
-    <div class="grid-homeabout-quote"><blockquote>TTTTTTT</blockquote><p class="note">– WWWWW</p></div>
-    <div class="grid-homeabout-quote"><blockquote>TTTTTTT</blockquote><p class="note">– WWWWW</p></div>
-
   </div>
 </div>
 
