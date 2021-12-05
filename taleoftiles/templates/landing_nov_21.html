@@ -171,7 +171,7 @@
   <nav class="nav-secondary"><ul></ul></nav>
   <nav class="nav-primary">
 
-    <div><a href=""><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
+    <div><a ><img src="{% static 'images/tot-logo-compact.svg' %}" class="logo-compact" alt="Tale of Tiles"></a></div>
     <ul>
     </ul>
     <div class="header-btns nav-primary">
@@ -361,38 +361,21 @@
 </div>
 
 
-<div class="block block-warmbg block-fullheight">
-  <div class="content grid grid-subscribe">
+
+<div class="content grid grid-homeabout" style="margin-top:3%;margin-bottom:3%;">
 
     <div class="grid-homeabout-main">
-      <h2>Chi Siamo</h2>
-
-        <p>Noi di Di. Esse Ceramiche siamo un'attività di Forano specializzata da oltre 10 anni in vendita e produzione di pavimenti, rivestimenti e arredo bagno per rinnovare i tuoi spazi. </p>
+      <h2>Noi siamo Tale of Tiles</h2>
+        <p><em>Donatella - Giacomo - Manuel - Valentina</em></p>
+        <p>Tale of Tiles nasce dal lavoro di quattro giovani ragazzi che selezionano, con amore e passione, materiali e mattonelle di altissima qualità made in italy.</p>
     </div>
 
-
-
+    <div class="grid-homeabout-quote"><blockquote>Grazie Donatella, la tua energia e la tua positività sono state d’ispirazione per rendere la nostra casa di campagna un posto migliore in cui vivere</blockquote><p class="note">– Scott e Emma - Clienti privati</p></div>
+    <div class="grid-homeabout-quote"><blockquote>Grandi persone oltre che professionisti esemplari. Sempre un piacere collaborare con voi</blockquote><p class="note">– Claudio - Architetto</p></div>
+    <div class="grid-homeabout-quote"><blockquote>Empatici, con molto gusto e conoscenza delle ultime tendenze</blockquote><p class="note">– Paola - Interior Designer</p></div>
+    <div class="grid-homeabout-quote"><blockquote>Estremamente professionali, precisi e orientati al risultato</blockquote><p class="note">– Luigi - Dharma e Selene Luxury Hotel via Nazionale , Roma</p></div>
 
   </div>
-</div>
-
-
-<div class="content grid grid-homeintro">
-    <a href="{% url 'catalogue' %}?filters=cartadaparati" class="btn-gridbox">
-      <h3>Chi Siamo</h3></a>
-    <div>
-      <h3>KKKKKKK</h3>
-    </div>
-
-    <div class="grid-homeintro-main" >
-      <a class="product-thumb-img">
-      <img src="{% static 'images/cartadaparati-doccia-wallpaper-online-design.jpeg' %}" alt="Argento / Narciso">
-      </a>
-    </div>
-
-  </div>
-</div>
-
 
 
 <div class="block block-lightbg block-fullheight" id="preventivo">
@@ -486,7 +469,6 @@ $.extend($.validator.messages, {
 
     </div>
 
-    <div class="grid-homeabout-quote"><blockquote>TTTTTTT</blockquote><p class="note">– WWWWW</p></div>
   </div>
 </div>
 
@@ -507,7 +489,7 @@ $.extend($.validator.messages, {
     {% for elem in footer_elems %}
         <ul class="  linkslist ">
           {% for foot_elem in elem.element.all %}
-            <li><a href="">{{foot_elem.content}} </a></li>
+            <li><a >{{foot_elem.content}} </a></li>
           {% endfor %}
         </ul>
     {% endfor %}
