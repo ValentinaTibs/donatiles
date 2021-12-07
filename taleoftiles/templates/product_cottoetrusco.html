@@ -118,7 +118,7 @@
   {% csrf_token %}
   <!--  SAMPLE FORM REQUEST  -->
   <div class="hide" id="sample_form_req" >
-    <p>Quando ordini una carta da parati ti inviamo <strong>sempre</strong>, prima di confermare l'ordine, un rendering della/e parete/i che vuoi tappezzare, per verificare la resa in base alle proporzioni della parete</p>
+    <p></p>
     <form>
     {{sample_form}}
     <input class="btn btn-primary" type="button" value="Invia Richiesta">
@@ -161,7 +161,7 @@
       <p class="note"><span class="hilite">Spedizione su quotazione</span></p>
 
       <p class="note">{% trans 'any-doubt' %}<br>
-        <a href="{% url 'support' %}">{% trans 'any-doubt-subtitle' %}</a></p>
+        <a href="{% url 'support' %}">Consulta la pagina di supporto</a></p>
 
     </div>
 
