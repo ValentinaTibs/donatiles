@@ -20,10 +20,6 @@ from CRM.models        import Chart
 from CRM.forms          import AddChartForm,WallpaperForm, SampleForm, OrderForm
 from django.db.models import Count
 
-# ---- akismet import -----
-from django.conf import settings
-from akismet import Akismet
-# ---- ---- ---- -----
 
 def index(request):  
     home_elems      = Element.objects.filter(tag__parent__slug = 'home', public = True)
@@ -140,19 +136,6 @@ def product(request, product_code, chi_form = None ):
 
             if  sample_form.is_valid() :
 
-                akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url=settings.AKISMET_BLOG_URL)
-                is_spam = akismet_api.comment_check(
-                    user_ip=request.META['REMOTE_ADDR'],
-                    user_agent=request.META['HTTP_USER_AGENT'],
-                    comment_type='contact-form',
-                    comment_author=sample_form.cleaned_data['name_surname'],
-                    comment_author_email=sample_form.cleaned_data['email'],
-                    comment_content=sample_form.cleaned_data['notes'],
-                )
-
-                if is_spam:
-                    data = {'html_errors' : "Il Contenuto Inserito sembrerebbe spam"}
-                    return JsonResponse(data, safe=False, status = 500) 
 
                 new_mail = MailTemplate()
                 new_mail.send_wallpaper_req(request, 
@@ -184,20 +167,6 @@ def product(request, product_code, chi_form = None ):
         if request.is_ajax():
 
             if  wallpaper_form.is_valid() :
-
-                akismet_api = Akismet(key=settings.AKISMET_API_KEY, blog_url=settings.AKISMET_BLOG_URL)
-                is_spam = akismet_api.comment_check(
-                    user_ip=request.META['REMOTE_ADDR'],
-                    user_agent=request.META['HTTP_USER_AGENT'],
-                    comment_type='contact-form',
-                    comment_author=wallpaper_form.cleaned_data['name_surname'],
-                    comment_author_email=wallpaper_form.cleaned_data['email'],
-                    comment_content=wallpaper_form.cleaned_data['notes'],
-                )
-
-                if is_spam:
-                    data = {'html_errors' : "Il Contenuto Inserito sembrerebbe spam"}
-                    return JsonResponse(data, safe=False, status = 500) 
 
                 new_mail = MailTemplate()
                 new_mail.send_wallpaper_req(request, 
