@@ -484,15 +484,13 @@ $.extend($.validator.messages, {
       <a href="{% url 'termsandconds' %} " class="btn-link btn-link-arrow"> {% trans 'termini-e-condizioni'|title %}</a>
 
     </div>
-
-
-    {% for elem in footer_elems %}
-        <ul class="  linkslist ">
-          {% for foot_elem in elem.element.all %}
-            <li><a >{{foot_elem.content}} </a></li>
-          {% endfor %}
-        </ul>
-    {% endfor %}
+    
+      <ul class="  linkslist ">
+      <li><a ></a></li>
+      </ul>
+      <ul class="  linkslist ">
+      <li><a ></a></li>
+      </ul>
     
       <img src="{% static 'images/tot-logo-mono-dark.svg' %}" class="logo-footer" alt="Tale of Tiles">
     </div>
