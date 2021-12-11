@@ -1,6 +1,6 @@
 {% extends "capsule_base.html" %}
 
-{% load view_extra %}
+{% load caps_extra %}
 {% load i18n %}
 {% load static %}
 
@@ -41,14 +41,19 @@ footer, .cover{
 
 {% block content %}
 
-<div class="cover cover-capsule" >
+
+{% with "images/capsule/"|addstr:art_caps.name|addstr:"_capsule_homepage.jpeg" as IMAGENAME %}
+
+<div class="cover cover-capsule" style="background-image: url('{% static IMAGENAME %}')">
+
   <div class="content">
     <div class="cover-title">
-      
+     
     </div>
   </div>
 </div>
 
+{% endwith %}
 
 <div class="content grid grid-catalogue">
 

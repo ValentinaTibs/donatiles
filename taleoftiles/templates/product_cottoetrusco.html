@@ -119,9 +119,9 @@
   <!--  SAMPLE FORM REQUEST  -->
   <div class="hide" id="sample_form_req" >
     <p></p>
-    <form>
+    <form >
     {{sample_form}}
-    <input class="btn btn-primary" type="button" value="Invia Richiesta">
+    <input class="btn btn-primary" type="button" value="Invia Richiesta"onClick="Javascript:sendCottoEtruscoRequest()"  >
       
     </form>
   </div>
@@ -369,5 +369,39 @@ window.onload = function() {
 
 </script>
 
+<script type="text/javascript">
+  function sendCottoEtruscoRequest(){
+    $.ajax({
+        type: "POST",
+   
+        url: "{% url 'product' product.code %}",
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            
+            email        : $( 'input[id="id_email"]' ).val(),
+            name_surname : $( 'input[id="id_name_surname"]' ).val(),
+            telephone    : $( 'input[id="id_telephone"]' ).val(),
+            width        : $( 'input[id="id_width"]' ).val(),
+            height       : $( 'input[id="id_height"]' ).val(),
+            notes        : document.getElementById('id_notes').value ,
+            accept       : $( 'input[id="id_accept"]' ).prop('checked')
+        },
+        success: function(result) {
+            document.getElementById("results_wallpaper").classList.toggle('hide'); 
+            document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
+        },
+        error: function(result) {
+            
+            $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
+
+            const array1 = result['responseJSON']['html_errors'];
+            for (const [key, value] of Object.entries(array1)) {
+              document.getElementById("id_"+key).classList.toggle('error'); 
+            }
+        
+        }
+      });
+  }
+</script>
 
 {% endblock %}
