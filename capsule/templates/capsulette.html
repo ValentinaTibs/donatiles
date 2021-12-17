@@ -70,6 +70,9 @@ footer, .cover{
     <div class="">
       <div class="">
           <h2><a>{{art_caps.long_name}}</a></h2>
+               {% autoescape off %}
+          <p> {{art_caps.description.content}} </p>
+       {% endautoescape %}
       </div>
     </div>
 
@@ -83,9 +86,7 @@ footer, .cover{
       {% endfor %}
 
     </div>
-      {% autoescape off %}
-          <p> {{art_caps.description.content}} </p>
-       {% endautoescape %}
+ 
 
     <br/> 
 
