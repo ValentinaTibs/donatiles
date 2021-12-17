@@ -1,4 +1,5 @@
 {% load static %}
+{% load caps_extra %}
 <div class="cloak" id="popupWPConf">
   <div class="popup-container">
     <div class="popup">
@@ -11,7 +12,9 @@
       <div class="popup-content configurator">
         <div class="configurator-imgholder">
           <div class="configurator-img" id="WPConf-img-container">
-            <img src=" {{ product.cover.imagefile.url }}" onload="setWPimgSize(event)" id="WPConf-img">
+            {% with "images/capsule/"|addstr:influencer.name|addstr:"/"|addstr:product.code|addstr:"_bigpic.jpeg" as IMAGENAME %}
+            <img src=" {% static IMAGENAME %}" onload="" id="WPConf-img">
+            {% endwith %}
             <div class="configurator-band" id="WPConf-band0"></div>
             <div class="configurator-band" id="WPConf-band1"></div>
           </div>
@@ -181,8 +184,10 @@
     imgRatio,
     draggable;
 
-  function setWPimgSize(e) {
-    imgRatio = e.target.naturalWidth / e.target.naturalHeight;
+  function setWPimgSize() {
+    var target = document.getElementById("WPConf-img");
+
+    imgRatio = target.naturalWidth / target.naturalHeight;
     let imgCont = document.getElementById("WPConf-img-container");
     imgCont.style.paddingTop = Math.floor((1/imgRatio)*100) + "%";
     drawImgBands();
@@ -328,6 +333,10 @@
     }
   }
 
+  document.addEventListener("DOMContentLoaded", function() {
+      setWPimgSize();
+  });
   enableDrag();
+
 
 </script>

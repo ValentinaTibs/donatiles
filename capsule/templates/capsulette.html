@@ -42,7 +42,7 @@ footer, .cover{
 {% block content %}
 
 
-{% with "images/capsule/"|addstr:art_caps.name|addstr:"_capsule_homepage.jpeg" as IMAGENAME %}
+{% with "images/capsule/"|addstr:art_caps.name|addstr:"/capsule_homepage.jpeg" as IMAGENAME %}
 
 <div class="cover cover-capsule" style="background-image: url('{% static IMAGENAME %}')">
 
@@ -94,8 +94,6 @@ footer, .cover{
 
 </div>
 
-<input type="hidden" id="hidden_url_data" value="{{url_data}}"> 
-<input type="hidden" id="hidden_page" value="{{products.number}}"> 
 
 
 {% endblock %}

@@ -5,9 +5,10 @@
 
 {% csrf_token %}
 
+
 <div class="product-thumb infinite-item" id="product-thumb-{{product.code}}" >
     
-    <a href="{% url 'product' product.code %}" class="product-thumb-img">
+    <a href="{% url 'capsule_product' _name=art_caps.name product_code=product.code  %}" class="product-thumb-img">
     <img  loading="lazy" src="{% if product.cover.imagefile %}  {{ product.cover.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ product.name }} / {{ product.serie.name }}"></a>
 
     <a href="{% url 'product' product.code %}" class="product-thumb-title">

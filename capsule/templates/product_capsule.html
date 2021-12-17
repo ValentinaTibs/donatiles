@@ -1,0 +1,382 @@
+{% extends "capsule_base.html" %}
+{% load caps_extra %}
+{% load i18n %}
+
+{% block title%} {{art_caps.long_name}}  | {{ product.name }} | {{ product.publication.title }} {% endblock%}
+{% block keywords-meta-tag %} {% trans 'home-keywords-meta-tag' %} {% endblock %}
+
+{% load static %}
+{% block content %}
+
+
+<style type="text/css">
+  .hide {
+    display: none;
+  }
+
+</style>
+<div class="content product-header">
+  <ul class="breadcrumb">
+    <li><a href="{% url 'catalogue' %}"> {% trans 'all-products' %}</a></li>
+    <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg>
+    <li>
+      {% with serie=influencer.name %}
+        <a href="{% url 'capsule' serie %}" >{{serie}} </a><br>
+      {% endwith %}
+    </li>
+  </ul>
+  <h1>{{ product.name }}</h1>
+
+</div>
+
+<div class="content grid grid-product">
+
+  <div class="product-gallery">
+     <div class="product-gallery-container">
+      {% for image in product.images.all %}
+        <div class="product-gallery-item">
+          {% if image.imagefile %} 
+          <img loading="lazy" src="{{ image.imagefile.url }}"
+          {% if image.format_tag %} id="sm_image_{{ image.format_tag }}" {% endif %}
+          alt="{{ product.publication.title }}">
+          {% else %}
+          <div> </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      </div>
+    <div class="product-gallery-controls">
+      <button class="btn" id="gallerybtn-prev"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-left' %}"/></svg></button>
+      <ul></ul>
+      <button class="btn" id="gallerybtn-next"><svg class="icon icon-m"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg></button>
+    </div>
+  </div>
+
+  <div class="product-selection">
+    <div class="product-options">
+
+      <h5>{% trans 'finishes' %}</h5>
+
+          <input type="radio" name="finish" value="0" id="id_finish_0" required="">
+          <label for="finish_0" id="label_finish_0">S-Vinyl Raw</label>
+
+          <input type="radio" name="finish" value="1" id="id_finish_1" required="" >
+          <label for="finish_1" id="label_finish_1">S-Vinyl Satin  </label>
+      
+          <input type="radio" name="finish" value="2" id="id_finish_2" required="">
+          <label for="finish_2" id="label_finish_2">S-Pulp</label>
+
+          <input type="radio" name="finish" value="3" id="id_finish_3" required="">
+          <label for="finish_3" id="label_finish_3">S-Fiberglass</label>
+      
+
+    </div>
+
+    <div class="product-configuratorbox">
+      <h4>Come starà a casa tua?</h4>
+      <button class="btn btn-primary" onClick="openPopup('popupWPConf')"><span><strong>Apri il configuratore</strong><br>per avere un'anteprima e calcolare quanta carta</span></button>
+      <p>Quando ordini una carta da parati ti inviamo <strong>sempre</strong>, prima di confermare l'ordine, un rendering della/e parete/i che vuoi tappezzare, per verificare la resa in base alle proporzioni della parete</p>
+    </div>
+
+<!-- <form  >  -->
+{% csrf_token %}
+    <div class="product-addtocartbox">
+
+      <div>
+        <div class="row">
+          <div><strong>{% trans 'code'%}: {{product.code}}</strong>
+            <br><span id="selected_format"></span>
+
+          </div>
+
+          <div>
+            <div class="product-note" style="color: black;">{% trans 'starting-from' %}</div>
+            <div class="product-figure"><span> €</span>
+
+            <b style="display: none;" name="sm_price_catch" id="sm_price_0">78</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_1">78</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_2">78</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_3">130</b>
+
+          </div><div class="product-note">al m&sup2;</div></div>
+        </div>
+      </div>
+
+      <div>
+
+        <div class="row">
+          <div>
+            <strong>{% trans 'superficie-da-rivestire' %}</strong>
+            {% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
+            <b class="hide" id="rolli_ammount"></b> 
+          </div>
+
+          <div class="input-qty" >
+
+            <input disabled type="number" name="quantity" min="0" required="" id="id_quantity">
+
+            <div class="product-qtybtns" style="cursor: default;">
+              <span class="product-note">m&sup2;</span>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          {{chi_form.product}}
+          <div><strong>{% trans 'total' %}</strong></div>
+          <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
+        </div>
+        <div class="row">
+          
+        </div>
+
+      </div>
+
+      {{chi_form.save_it.as_hidden}}
+      {{chi_form.product.as_hidden}}
+
+      <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">--</b> rotoli</strong></button>
+
+<!-- </form> -->
+
+    </div>  <!-- product-addtocartbox -->
+    <div class="product-shippinginfo">
+      <p class="note"><span class="hilite">{% trans 'free-shipping' %}</span></p>
+
+      <p class="note">{% trans 'any-doubt' %}<br>
+        <a href="{% url 'support' %}">{% trans 'any-doubt-subtitle' %}</a></p>
+
+    </div>
+
+  </div>
+
+  <div class="product-main">
+
+    <div class="product-meta">
+
+    </div>
+
+	{% autoescape off %}
+		<p>{{ product.publication.content }}</p>
+	{% endautoescape %}
+
+    <!-- ICONE scheda tecnica -->
+    <div class="product-marks">
+      {% for icon in product.techspec.icons.all %}
+        <img  src="{{ icon.imagefile.url }}" >
+      {% endfor %}
+    </div>
+
+    <!-- Scheda Tecnica -->
+    {% if product.techspec %} 
+      <a href="{{ product.techspec.file.url }}" download  target="_blank">
+        <button class="btn btn-secondary"><svg class="icon-l icon">
+          <use xlink:href="{% static 'images/svgdefs.svg#icon-download' %}"/></svg>
+          <span>{% trans 'download-tech-spech' %}</span>
+        </button>
+      </a>
+    {% endif %}
+  </div>
+
+</div>
+
+
+
+{% if products_series.count > 0 %}
+<div class="block block-lightbg">
+
+  <div class="content">
+    <h2>{% trans 'product-same-serie' %}</h2>
+  </div>
+
+  <div class="content grid grid4">
+
+    {% for product in art_caps.name.products.all %}
+      {% include 'capsule_thumb.html' %}
+    {% endfor %}
+
+  </div>
+
+</div>
+{% endif %}
+
+<!-- POPUP wallpaper configurator -->
+{% include 'include/popup-wpconfigurator.html' %}
+<!-- /POPUP -->
+
+<script>
+  var qtyField = $( '#id_quantity' );
+
+  function compute_money(){
+
+    var rad = document.getElementsByName('finish');
+    for (var i = 0; i < rad.length; i++) {
+      var the_elem = document.getElementsByName("finish")[i]
+      if (the_elem.checked){
+        var sel_size = document.getElementById('label_finish_'+i).innerHTML;
+        document.getElementById('selected_format').innerHTML = String(sel_size);
+        document.getElementById('sm_price_'+i).style.display = "inline";
+      }
+    }    
+  }
+
+
+  window.onload = function() {
+
+    var prev = null;
+    var rad = document.getElementsByName('finish');
+
+    var some_size_checked = false;
+    for (var i = 0; i < rad.length; i++) {
+      some_size_checked = document.getElementsByName("finish")[i].checked;
+      rad[i].addEventListener('change', function() {
+          compute_money()
+      });
+    }
+    if (!some_size_checked){
+      var value = document.getElementsByName("finish")[0].value;
+      document.getElementById("id_finish_"+value).checked = true;
+    }
+
+    
+    compute_money()
+  };
+
+
+  function sendWallPaperRequest() {
+      $.ajax({
+        type: "POST",
+   
+        url: "{% url 'product' product.code %}",
+        data: {
+            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            
+            email        : $( 'input[id="id_email"]' ).val(),
+            name_surname : $( 'input[id="id_name_surname"]' ).val(),
+            telephone    : $( 'input[id="id_telephone"]' ).val(),
+            width        : $( 'input[id="id_width"]' ).val(),
+            height       : $( 'input[id="id_height"]' ).val(),
+            notes        : document.getElementById('id_notes').value ,
+            accept       : $( 'input[id="id_accept"]' ).prop('checked')
+        },
+        success: function(result) {
+            document.getElementById("results_wallpaper").classList.toggle('hide'); 
+            document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
+            gtag('event', 'conversion', {'send_to': 'AW-968635819/UOTHCNbdpdkCEKvr8M0D'});
+        },
+        error: function(result) {
+            
+            $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
+
+            const array1 = result['responseJSON']['html_errors'];
+            for (const [key, value] of Object.entries(array1)) {
+              document.getElementById("id_"+key).classList.toggle('error'); 
+            }
+        
+        }
+      });
+    }
+
+
+!function() {
+    "use strict";
+    function t(e, t) {
+        e.preventDefault(),
+        e.stopPropagation();
+        var n, o = document.querySelector(".overlay.visible");
+        o && o !== t && o.classList.remove("visible"),
+        (n = t).classList.contains("visible") || window.addEventListener("click", function() {
+            c(n)
+        }),
+        t.classList.toggle("visible"),
+        "overlayAuth" === t.id && t.classList.contains("visible") && document.getElementById("loginEmail").focus()
+    }
+    function c(e) {
+        e.classList.remove("visible")
+    }
+    function o(e) {
+        r = e,
+        [].forEach.call(n, function(e) {
+            e.classList.remove("selected")
+        }),
+        n[r].classList.add("selected"),
+        i.style.webkitTransform = "translateX(-" + 100 * r + "%)",
+        i.style.transform = "translateX(-" + 100 * r + "%)"
+    }
+    var n, i, e, l, r, s, a, d, u, v;
+    ("ontouchstart"in window || 0 < navigator.MaxTouchPoints || 0 < navigator.msMaxTouchPoints) && document.body.classList.add("touch"),
+    window.onscroll = function() {
+        var e = document.querySelector("header");
+        56 < document.documentElement.scrollTop ? e.classList.add("compact") : e.classList.remove("compact")
+    }
+    ,
+    document.querySelectorAll(".nav-dropdown").forEach(function(e) {
+        e.querySelector("div:first-child").addEventListener("click", function() {
+            this.parentElement.querySelector(".nav-dropdown-options").classList.add("visible")
+        }),
+        e.addEventListener("mouseleave", function() {
+            this.querySelector(".nav-dropdown-options").classList.remove("visible")
+        })
+    }),
+    document.querySelectorAll(".nav-dropdown-options > div").forEach(function(e) {
+        e.addEventListener("click", function() {
+            this.parentElement.classList.remove("visible")
+        })
+    }),
+    document.querySelectorAll(".btn-tree").forEach(function(e) {
+        e.addEventListener("click", function() {
+            var e;
+            this.classList.contains("btn-tree-open") || (e = this.parentElement.querySelector(".openable")).style.setProperty("--tree-height", e.scrollHeight + "px"),
+            this.classList.toggle("btn-tree-open")
+        })
+    }),
+    i = document.querySelector(".product-gallery-container"),
+    e = document.querySelectorAll(".product-gallery-item"),
+    l = document.querySelector(".product-gallery-controls ul"),
+    r = 0,
+    s = e.length,
+    a = document.getElementById("gallerybtn-prev"),
+    d = document.getElementById("gallerybtn-next"),
+    [].forEach.call(e, function(e, t) {
+        e.dataset.id = t;
+        var n = document.createElement("li");
+        l.appendChild(n),
+        n.addEventListener("click", function() {
+            o(t)
+        })
+    }),
+    n = l.querySelectorAll("li"),
+    d.addEventListener("click", function() {
+        s - 1 <= r || o(+e[++r].dataset.id)
+    }),
+    a.addEventListener("click", function() {
+        r <= 0 || o(+e[--r].dataset.id)
+    }),
+    o(0),
+
+    document.querySelectorAll(".overlay-title .btn").forEach(function(e) {
+        e.addEventListener("click", function() {
+            c(this.parentElement.parentElement)
+        })
+    }),
+    document.querySelectorAll(".overlay").forEach(function(e) {
+        e.addEventListener("click", function(e) {
+            e.stopPropagation()
+        })
+    }),
+    u = document.querySelector(".notification"),
+    (v = document.getElementById("btnAddToCart")) && v.addEventListener("click", function() {
+        u.classList.add("visible"),
+        setTimeout(function() {
+            u.classList.remove("visible")
+        }, 3e3)
+    })
+}(window);
+
+
+</script>
+
+
+{% endblock %}
