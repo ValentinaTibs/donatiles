@@ -27,15 +27,24 @@ footer, .cover{
 </style>
 {% endblock%}
 
-
+            
 {% block logo_compact %} 
-<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+
+  {% with "images/capsule/"|addstr:art_caps.name|addstr:"/logo_mono.png" as LOGOFILE %}
+
+    <img  src=" {% static LOGOFILE %} " alt="{{ art_caps.long_name }} " class="logo-compact" >
+
+  {% endwith %}
+
 {% endblock%}
 
 {% block logo %} 
-<img  src="{% if art_caps.logo.imagefile %}  {{ art_caps.logo.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
-{% endblock%}
 
+{% with "images/capsule/"|addstr:art_caps.name|addstr:"/logo.png"  as LOGOFILE %}
+
+  <img  src="{% static LOGOFILE %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+  {% endwith %}
+{% endblock%}
 
 
 
