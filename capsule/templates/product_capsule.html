@@ -1,9 +1,47 @@
 {% extends "capsule_base.html" %}
 {% load caps_extra %}
 {% load i18n %}
+{% load static %}
 
 {% block title%} {{influencer.long_name}}  | {{ product.name }} {% endblock%}
 {% block keywords-meta-tag %} {% trans 'home-keywords-meta-tag' %} {% endblock %}
+
+
+{% block extra_css %}
+<style type="text/css">
+
+.logo,.overlay  {
+  background-color: #{{influencer.palette1}};
+}
+
+.nav-primary {
+  background-color: #{{influencer.palette2}};
+}
+
+footer, .cover{
+  background-color: #{{influencer.palette3}};
+}
+
+</style>
+{% endblock%}
+
+{% block logo_compact %} 
+
+  {% with "images/capsule/"|addstr:influencer.name|addstr:"/logo_mono.png" as LOGOFILE %}
+
+    <img  src=" {% static LOGOFILE %} " alt="{{ influencer.long_name }} " class="logo-compact" >
+
+  {% endwith %}
+
+{% endblock%}
+
+{% block logo %} 
+
+{% with "images/capsule/"|addstr:influencer.name|addstr:"/logo.png"  as LOGOFILE %}
+
+  <img  src="{% static LOGOFILE %}" alt="{{ influencer.long_name }} " class="logo-compact" >
+  {% endwith %}
+{% endblock%}
 
 {% load static %}
 {% block content %}
@@ -60,12 +98,6 @@
           <input type="radio" name="finish" value="0" id="id_finish_0" required="">
           <label for="finish_0" id="label_finish_0">S-Vinyl Raw</label>
 
-          <input type="radio" name="finish" value="1" id="id_finish_1" required="" >
-          <label for="finish_1" id="label_finish_1">S-Vinyl Satin  </label>
-      
-          <input type="radio" name="finish" value="2" id="id_finish_2" required="">
-          <label for="finish_2" id="label_finish_2">S-Pulp</label>
-
           <input type="radio" name="finish" value="3" id="id_finish_3" required="">
           <label for="finish_3" id="label_finish_3">S-Fiberglass</label>
       
@@ -93,10 +125,8 @@
             <div class="product-note" style="color: black;">{% trans 'starting-from' %}</div>
             <div class="product-figure"><span> €</span>
 
-            <b style="display: none;" name="sm_price_catch" id="sm_price_0">78</b>
-            <b style="display: none;" name="sm_price_catch" id="sm_price_1">78</b>
-            <b style="display: none;" name="sm_price_catch" id="sm_price_2">78</b>
-            <b style="display: none;" name="sm_price_catch" id="sm_price_3">130</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_0">49</b>
+            <b style="display: none;" name="sm_price_catch" id="sm_price_3">69</b>
 
           </div><div class="product-note">al m&sup2;</div></div>
         </div>
@@ -183,8 +213,6 @@
 </div>
 
 
-
-{% if products_series.count > 0 %}
 <div class="block block-lightbg">
 
   <div class="content">
@@ -193,14 +221,14 @@
 
   <div class="content grid grid4">
 
-    {% for product in art_caps.name.products.all %}
+    {% for product in influencer.name.products.all %}
       {% include 'capsule_thumb.html' %}
     {% endfor %}
 
   </div>
 
 </div>
-{% endif %}
+
 
 <!-- POPUP wallpaper configurator -->
 {% include 'include/popup-wpconfigurator.html' %}

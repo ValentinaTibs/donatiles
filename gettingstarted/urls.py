@@ -71,10 +71,11 @@ urlpatterns += i18n_patterns(
     path("privacypolicy/",  layout.views.privacypolicy, name="privacypolicy"),
     path("landing/",        layout.views.landing, name="landing"),
 
-    path("capsule/<str:_name>",        capsule.views.index, name="capsule"),
+    path("capsule/<str:_name>",         capsule.views.index, name="capsule"),
     path("capsule_report",              capsule.views.report, name="report"),
-    path("capsule_report/<str:_name>", capsule.views.report, name="report"),
+    path("capsule_report/<str:_name>",  capsule.views.report, name="report"),
     path("capsule/<str:_name>/<slug:product_code>",capsule.views.capsule_product, name="capsule_product"),
+    path("compute_capsule_price/",      capsule.views.compute_price,  name="compute_capsule_price"),
     prefix_default_language=False
 )
 

@@ -1,10 +1,9 @@
 {% extends "capsule_base.html" %}
-
 {% load caps_extra %}
 {% load i18n %}
 {% load static %}
 
-{% block title%} {{art_caps.long_name}} | Capsule Wallpaper Collection {% endblock%}
+{% block title%} {{influencer.long_name}} | Capsule Wallpaper Collection {% endblock%}
 {% block description-meta-tag %} {% trans 'home-description-meta-tag' %} {% endblock %}
 {% block keywords-meta-tag %} {% trans 'home-keywords-meta-tag' %} {% endblock %}
 
@@ -13,15 +12,15 @@
 <style type="text/css">
 
 .logo,.overlay  {
-  background-color: #{{art_caps.palette1}};
+  background-color: #{{influencer.palette1}};
 }
 
 .nav-primary {
-  background-color: #{{art_caps.palette2}};
+  background-color: #{{influencer.palette2}};
 }
 
 footer, .cover{
-  background-color: #{{art_caps.palette3}};
+  background-color: #{{influencer.palette3}};
 }
 
 </style>
@@ -30,9 +29,9 @@ footer, .cover{
             
 {% block logo_compact %} 
 
-  {% with "images/capsule/"|addstr:art_caps.name|addstr:"/logo_mono.png" as LOGOFILE %}
+  {% with "images/capsule/"|addstr:influencer.name|addstr:"/logo_mono.png" as LOGOFILE %}
 
-    <img  src=" {% static LOGOFILE %} " alt="{{ art_caps.long_name }} " class="logo-compact" >
+    <img  src=" {% static LOGOFILE %} " alt="{{ influencer.long_name }} " class="logo-compact" >
 
   {% endwith %}
 
@@ -40,9 +39,9 @@ footer, .cover{
 
 {% block logo %} 
 
-{% with "images/capsule/"|addstr:art_caps.name|addstr:"/logo.png"  as LOGOFILE %}
+{% with "images/capsule/"|addstr:influencer.name|addstr:"/logo.png"  as LOGOFILE %}
 
-  <img  src="{% static LOGOFILE %}" alt="{{ art_caps.long_name }} " class="logo-compact" >
+  <img  src="{% static LOGOFILE %}" alt="{{ influencer.long_name }} " class="logo-compact" >
   {% endwith %}
 {% endblock%}
 
@@ -51,7 +50,7 @@ footer, .cover{
 {% block content %}
 
 
-{% with "images/capsule/"|addstr:art_caps.name|addstr:"/capsule_homepage.jpeg" as IMAGENAME %}
+{% with "images/capsule/"|addstr:influencer.name|addstr:"/capsule_homepage.jpeg" as IMAGENAME %}
 
 <div class="cover cover-capsule" style="background-image: url('{% static IMAGENAME %}')">
 
@@ -69,9 +68,9 @@ footer, .cover{
   <aside>
     <div class="">
       <div class="">
-          <h2><a>{{art_caps.long_name}}</a></h2>
+          <h2><a>{{influencer.long_name}}</a></h2>
                {% autoescape off %}
-          <p> {{art_caps.description.content}} </p>
+          <p> {{influencer.description.content}} </p>
        {% endautoescape %}
       </div>
     </div>
@@ -81,7 +80,7 @@ footer, .cover{
   <section>
     <div class="grid grid-catalogue-products infinite-container" id="grid-catalogue-products">
         
-      {% for product in art_caps.name.products.all %}
+      {% for product in influencer.name.products.all %}
         {% include 'capsule_thumb.html' %}
       {% endfor %}
 

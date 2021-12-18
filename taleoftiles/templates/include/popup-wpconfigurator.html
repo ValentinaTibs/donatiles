@@ -1,5 +1,13 @@
 {% load static %}
 {% load caps_extra %}
+<style type="text/css">
+
+#WPConf-img{
+  transform: scale(1);
+}
+
+      
+</style>
 <div class="cloak" id="popupWPConf">
   <div class="popup-container">
     <div class="popup">
@@ -137,7 +145,7 @@
     $.ajax({
     type: "POST",
 
-    url: "{% url 'compute_price'  %}",
+    url: "{% url 'compute_capsule_price'  %}",
       data: {
           csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
