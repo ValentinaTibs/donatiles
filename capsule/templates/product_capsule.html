@@ -55,7 +55,7 @@ footer, .cover{
 </style>
 <div class="content product-header">
   <ul class="breadcrumb">
-    <li><a href="{% url 'catalogue' %}"> {% trans 'all-products' %}</a></li>
+    
     <svg class="icon-m icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-caret-right' %}"/></svg>
     <li>
       {% with serie=influencer.name %}
@@ -96,10 +96,10 @@ footer, .cover{
       <h5>{% trans 'finishes' %}</h5>
 
           <input type="radio" name="finish" value="0" id="id_finish_0" required="">
-          <label for="finish_0" id="label_finish_0">S-Vinyl Raw</label>
+          <label for="id_finish_0" id="label_finish_0" name="finish_label">S-Vinyl Raw</label>
 
           <input type="radio" name="finish" value="3" id="id_finish_3" required="">
-          <label for="finish_3" id="label_finish_3">S-Fiberglass</label>
+          <label for="id_finish_3" id="label_finish_3" name="finish_label">S-Fiberglass</label>
       
 
     </div>
@@ -235,79 +235,7 @@ footer, .cover{
 <!-- /POPUP -->
 
 <script>
-  var qtyField = $( '#id_quantity' );
-
-  function compute_money(){
-
-    var rad = document.getElementsByName('finish');
-    for (var i = 0; i < rad.length; i++) {
-      var the_elem = document.getElementsByName("finish")[i]
-      if (the_elem.checked){
-        var sel_size = document.getElementById('label_finish_'+i).innerHTML;
-        document.getElementById('selected_format').innerHTML = String(sel_size);
-        document.getElementById('sm_price_'+i).style.display = "inline";
-      }
-    }    
-  }
-
-
-  window.onload = function() {
-
-    var prev = null;
-    var rad = document.getElementsByName('finish');
-
-    var some_size_checked = false;
-    for (var i = 0; i < rad.length; i++) {
-      some_size_checked = document.getElementsByName("finish")[i].checked;
-      rad[i].addEventListener('change', function() {
-          compute_money()
-      });
-    }
-    if (!some_size_checked){
-      var value = document.getElementsByName("finish")[0].value;
-      document.getElementById("id_finish_"+value).checked = true;
-    }
-
-    
-    compute_money()
-  };
-
-
-  function sendWallPaperRequest() {
-      $.ajax({
-        type: "POST",
-   
-        url: "{% url 'product' product.code %}",
-        data: {
-            csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-            
-            email        : $( 'input[id="id_email"]' ).val(),
-            name_surname : $( 'input[id="id_name_surname"]' ).val(),
-            telephone    : $( 'input[id="id_telephone"]' ).val(),
-            width        : $( 'input[id="id_width"]' ).val(),
-            height       : $( 'input[id="id_height"]' ).val(),
-            notes        : document.getElementById('id_notes').value ,
-            accept       : $( 'input[id="id_accept"]' ).prop('checked')
-        },
-        success: function(result) {
-            document.getElementById("results_wallpaper").classList.toggle('hide'); 
-            document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
-            gtag('event', 'conversion', {'send_to': 'AW-968635819/UOTHCNbdpdkCEKvr8M0D'});
-        },
-        error: function(result) {
-            
-            $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
-
-            const array1 = result['responseJSON']['html_errors'];
-            for (const [key, value] of Object.entries(array1)) {
-              document.getElementById("id_"+key).classList.toggle('error'); 
-            }
-        
-        }
-      });
-    }
-
-
+ 
 !function() {
     "use strict";
     function t(e, t) {
@@ -393,15 +321,126 @@ footer, .cover{
         e.addEventListener("click", function(e) {
             e.stopPropagation()
         })
-    }),
-    u = document.querySelector(".notification"),
-    (v = document.getElementById("btnAddToCart")) && v.addEventListener("click", function() {
-        u.classList.add("visible"),
-        setTimeout(function() {
-            u.classList.remove("visible")
-        }, 3e3)
     })
+
 }(window);
+
+
+// function sendWallPaperRequest() {
+//       $.ajax({
+//         type: "POST",
+   
+//         url: "{% url 'product' product.code %}",
+//         data: {
+//             csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+            
+//             email        : $( 'input[id="id_email"]' ).val(),
+//             name_surname : $( 'input[id="id_name_surname"]' ).val(),
+//             telephone    : $( 'input[id="id_telephone"]' ).val(),
+//             width        : $( 'input[id="id_width"]' ).val(),
+//             height       : $( 'input[id="id_height"]' ).val(),
+//             notes        : document.getElementById('id_notes').value ,
+//             accept       : $( 'input[id="id_accept"]' ).prop('checked')
+//         },
+//         success: function(result) {
+//             document.getElementById("results_wallpaper").classList.toggle('hide'); 
+//             document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
+//             gtag('event', 'conversion', {'send_to': 'AW-968635819/UOTHCNbdpdkCEKvr8M0D'});
+//         },
+//         error: function(result) {
+            
+//             $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
+
+//             const array1 = result['responseJSON']['html_errors'];
+//             for (const [key, value] of Object.entries(array1)) {
+//               document.getElementById("id_"+key).classList.toggle('error'); 
+//             }
+        
+//         }
+//       });
+//     }
+
+ // var qtyField = $( '#id_quantity' );
+
+ //  function compute_money(){
+
+ //    var rad = document.getElementsByName('finish');
+ //    for (var i = 0; i < rad.length; i++) {
+ //      var the_elem = document.getElementsByName("finish")[i]
+ //      if (the_elem.checked){
+ //        var sel_size = document.getElementById('label_finish_'+i).innerHTML;
+ //        document.getElementById('selected_format').innerHTML = String(sel_size);
+ //        document.getElementById('sm_price_'+i).style.display = "inline";
+ //      }
+ //    }    
+ //  }
+
+ function compute_money(event){
+  var source = event.target || event.srcElement;
+
+  var rad = document.getElementsByName('sm_price_catch');
+  for (var i = 0; i < rad.length; i++) {
+    rad[i].style.display = "none";
+  }
+  var id_selected = source.id.split("_").pop();
+  document.getElementById("sm_price_"+id_selected).style.display = "inline";
+  document.getElementById('selected_format').innerHTML = source.innerHTML;
+}
+
+  window.onload = function() {
+
+    var prev = null;
+    var rad = document.getElementsByName('finish_label');
+
+    var some_size_checked = false;
+    for (var i = 0; i < rad.length; i++) {
+      some_size_checked = document.getElementsByName("finish")[i].checked;
+      rad[i].addEventListener('click', function(e) {
+          compute_money(e)
+      });
+    }
+    if (!some_size_checked){
+      document.getElementById("id_finish_0").checked = true;
+      document.getElementById("sm_price_0").style.display = "inline";
+      document.getElementById('selected_format').innerHTML = rad[0].innerHTML;
+    }
+    
+    compute_money()
+  };
+
+  function addToCart() {
+    $.ajax({
+      type: "POST",
+ 
+      url: "{% url 'product' product.code %}",
+      data: {
+          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+          
+          quantity: $( 'input[id="id_quantity"]' ).val(),
+          product : $( 'input[id="id_product"]' ).val(),
+          save_it : $( 'input[name="id_save_it"]' ).val(),
+          finish : $( 'input[name="finish"]:checked' ).val(),
+      },
+      success: function(result) {
+          
+          var num_chi = Number($(".cartbtn span").html()) +1;
+          $(".cartbtn span").html(num_chi);
+          $("#overlayCart").html(result);
+          $("#id_quantity").val('');
+          $("#price_catch").html('0');
+          u = document.querySelector(".notification");
+          u.classList.add("visible");
+          setTimeout(function() {
+              u.classList.remove("visible")
+          }, 3e3);
+          
+      },
+      error: function(result) {
+          console.log('error');
+      }
+    });
+  }
+
 
 
 </script>

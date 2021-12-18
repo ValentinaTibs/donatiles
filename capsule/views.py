@@ -75,15 +75,13 @@ def compute_price(request):
         data = {'html_errors' : 'Wrong Finish'}
         return JsonResponse(data, safe=False, status = 500)       
     
-    #here CAPIRE COME CALCOLARE I rolli ed i m2
     wall_h = wall_h+10
     rolls = math.ceil(float(wall_w)/ float(paper_width) ) +1
     m2 = float(wall_h)/ 100.0 *(float(rolls * paper_width)) / 100.0
-    print("--> ",wall_h)
+    
     tot_price = sm_price *m2
-
     data = {'tot_price': tot_price,'m2':m2,'rolli':rolls}
-    print(data)
+    
     return JsonResponse(data, status = 200)
 
 
