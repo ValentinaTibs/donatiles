@@ -2,13 +2,14 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.db.models import Q 
 
 import json
 import math
 
-
-from capsule.models import Influencer
-from taleoftiles.models import Product
+from capsule.models     import Influencer
+from taleoftiles.models import Product,Tag
+from CRM.models         import Chart, ChartItem
 
 def index(request,_name):  
 
@@ -39,6 +40,47 @@ def report(request,_name = None):
     return render(request, "report.html",{
         "influencer": influencer,
         })
+
+
+
+def add_chart_capsule(request):
+
+    if request.user.is_authenticated:
+        query = Q(user = request.user) 
+    else:
+        if not request.session.exists(request.session.session_key):
+            request.session.create()     
+
+        query = Q(session_id  = request.session.session_key) 
+
+    charts = Chart.objects.filter( query , completion_status = 's')
+    if charts.count() <= 0:
+        chart = Chart(session_id  = request.session.session_key)
+        if request.user.is_authenticated:
+            chart.user = request.user
+        chart.save()
+    else:
+        chart = charts.first()
+        
+    p = Product.objects.get(pk=request.POST.get('product', None))
+
+    f = int(request.POST.get('finish', None))
+    if( f == 0) :
+        f = Tag.objects.get(slug='s_vinylraw')
+    elif (f == 3) :
+        f = Tag.objects.get(slug='s_fiberglasss')
+    
+    q = float(request.POST.get('quantity', None))    
+    r = int(request.POST.get('rolli', None))
+
+    if(p and f and q and r):
+        chart_item = ChartItem(chart = chart, product = p, finish = f , quantity = q ,boxes = r)    
+        result = chart_item.save()
+        if result:
+            return render(request, "include/chart.html", {"charts": charts})        
+    
+    data = {'html_errors' : 'Wrong Finish'}
+    return JsonResponse(data, safe=False, status = 500)       
 
 
 def compute_price(request):
@@ -94,10 +136,12 @@ def capsule_product(request, _name, product_code, chi_form = None ):
 
     influencer = Influencer.objects.get(name__slug  = _name )
 
-    # if request.is_ajax():
+    
+    if request.is_ajax():
+        add_chart_capsule(request)
 
 
     return render(request, "product_capsule.html",{
-        "product":product,
+        "product"   :product,
         "influencer":influencer,
         })

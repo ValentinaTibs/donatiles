@@ -157,6 +157,8 @@
         $("#price_catch").html(result['tot_price']); 
         document.getElementById("id_quantity").value = result['m2']; 
         $("#sm_catch").html(result['rolli']); 
+        document.getElementById("rolli_ammount").value = result['rolli']; 
+        document.getElementById('sm_notification').innerHTML = result['m2']; 
         
       },
       error:    function(result) { console.log('error'); }

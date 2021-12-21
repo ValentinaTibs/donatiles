@@ -1,0 +1,45 @@
+
+{% load i18n %}
+{% load view_extra %}
+{% load static %}
+
+
+<div class="overlay" id="overlayAuth">
+
+  <div class="overlay-title">
+    <h4>{% trans 'already-registered' %}</h4>
+    <button class="btn"><svg class="icon icon-l"><use xlink:href="{% static 'images/svgdefs.svg#icon-overlay-close' %}"/></svg></button>
+  </div>
+
+  <form method="post" action="{% url 'login' %}?next={{request.get_full_path|urlencode}}">
+  {% csrf_token %}
+
+    <div class="formrow">
+      {{ loginform.username.label_tag }}
+      {{ loginform.username }}
+    </div>
+    <div class="formrow">
+      {{ loginform.password.label_tag }}
+      <a href="{% url 'password_reset' %}"> {% trans 'password-reset' %} </a>
+      {{ loginform.password }}
+    </div>
+    <input type="submit" class="btn btn-primary" value="Login">
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  </form>
+
+
+  <h4>{% trans 'wanna-register' %}</h4>
+  <p class="note">{% trans 'wanna-register-incentive' %}</p>
+
+  <form method="post" action="{% url 'add_user' %}">
+    {% csrf_token %}
+    <div class="formrow">
+      {{ signupform.username.label_tag }}
+      {{ signupform.username }}
+    </div>
+    <p class="note">{% trans 'register-and-we-will-send-password' %}</p>
+    <input type="submit" class="btn btn-primary" value="{% trans 'register' %}">
+    <input type="hidden" name="next" value="{{ request.get_full_path }} " />
+
+  </form>
+</div>

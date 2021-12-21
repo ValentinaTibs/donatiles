@@ -86,33 +86,6 @@ def catalogue(request):
         })
 
 
-def compute_price(request):
-    product = request.POST.get('product', None)
-    finish = request.POST.get('finish', None)
-    cut = request.POST.get('cut', None)
-
-    paper_width = 0
-    if int(finish) == 0:
-        paper_width = 50
-
-    elif int(finish) == 1:
-        paper_width = 50
-
-    elif int(finish) == 2:
-        paper_width = 65
-
-    elif int(finish) == 3:
-        paper_width = 95
-
-    else :
-        data = {'html_errors' : 'Wrong Finish'}
-        return JsonResponse(data, safe=False, status = 500)       
-    
-    #here CAPIRE COME CALCOLARE I rolli ed i m2
-    data = {'tot_price': 102,'m2':103,'rolli':104}
-    print(data)
-    return JsonResponse(data, status = 200)
-
 
 def product(request, product_code, chi_form = None ):    
     

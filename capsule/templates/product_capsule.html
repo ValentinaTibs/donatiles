@@ -138,12 +138,13 @@ footer, .cover{
           <div>
             <strong>{% trans 'superficie-da-rivestire' %}</strong>
             {% if product.min_ammount > 0 %}<br>{% trans 'min' %}: <b id="min_ammount">{{product.min_ammount}}</b> m&sup2;{% endif %}
-            <b class="hide" id="rolli_ammount"></b> 
           </div>
 
           <div class="input-qty" >
 
             <input disabled type="number" name="quantity" min="0" required="" id="id_quantity">
+            <input type="hidden" name="id_product" id="id_product" value="{{product.pk }}">
+            <input type="hidden" name="rolli_ammount" id="rolli_ammount" value="0">
 
             <div class="product-qtybtns" style="cursor: default;">
               <span class="product-note">m&sup2;</span>  
@@ -154,7 +155,7 @@ footer, .cover{
 
       <div>
         <div class="row">
-          {{chi_form.product}}
+          
           <div><strong>{% trans 'total' %}</strong></div>
           <div class="product-figure">€ <strong id="price_catch">{{price}}</strong></div>
         </div>
@@ -163,9 +164,6 @@ footer, .cover{
         </div>
 
       </div>
-
-      {{chi_form.save_it.as_hidden}}
-      {{chi_form.product.as_hidden}}
 
       <button class="btn btn-primary" style="background-color:rgb(181, 162, 148);text-align: center;" id="btnAddToCart" onClick="Javascript:addToCart()" > {% trans 'add-chart-button' %} <strong><b id="sm_catch">--</b> rotoli</strong></button>
 
@@ -321,59 +319,17 @@ footer, .cover{
         e.addEventListener("click", function(e) {
             e.stopPropagation()
         })
+    }),
+    u = document.querySelector(".notification"),
+    (v = document.getElementById("btnAddToCart")) && v.addEventListener("click", function() {
+        u.classList.add("visible"),
+        setTimeout(function() {
+            u.classList.remove("visible")
+        }, 3e3)
     })
 
 }(window);
 
-
-// function sendWallPaperRequest() {
-//       $.ajax({
-//         type: "POST",
-   
-//         url: "{% url 'product' product.code %}",
-//         data: {
-//             csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
-            
-//             email        : $( 'input[id="id_email"]' ).val(),
-//             name_surname : $( 'input[id="id_name_surname"]' ).val(),
-//             telephone    : $( 'input[id="id_telephone"]' ).val(),
-//             width        : $( 'input[id="id_width"]' ).val(),
-//             height       : $( 'input[id="id_height"]' ).val(),
-//             notes        : document.getElementById('id_notes').value ,
-//             accept       : $( 'input[id="id_accept"]' ).prop('checked')
-//         },
-//         success: function(result) {
-//             document.getElementById("results_wallpaper").classList.toggle('hide'); 
-//             document.getElementById("buy_wallpaper_panel").classList.toggle('hide'); 
-//             gtag('event', 'conversion', {'send_to': 'AW-968635819/UOTHCNbdpdkCEKvr8M0D'});
-//         },
-//         error: function(result) {
-            
-//             $("#wallpaper_form_errors").html("Si prega di compilare i campi contrassegnati con l'asterisco");
-
-//             const array1 = result['responseJSON']['html_errors'];
-//             for (const [key, value] of Object.entries(array1)) {
-//               document.getElementById("id_"+key).classList.toggle('error'); 
-//             }
-        
-//         }
-//       });
-//     }
-
- // var qtyField = $( '#id_quantity' );
-
- //  function compute_money(){
-
- //    var rad = document.getElementsByName('finish');
- //    for (var i = 0; i < rad.length; i++) {
- //      var the_elem = document.getElementsByName("finish")[i]
- //      if (the_elem.checked){
- //        var sel_size = document.getElementById('label_finish_'+i).innerHTML;
- //        document.getElementById('selected_format').innerHTML = String(sel_size);
- //        document.getElementById('sm_price_'+i).style.display = "inline";
- //      }
- //    }    
- //  }
 
  function compute_money(event){
   var source = event.target || event.srcElement;
@@ -405,21 +361,20 @@ footer, .cover{
       document.getElementById('selected_format').innerHTML = rad[0].innerHTML;
     }
     
-    compute_money()
   };
 
   function addToCart() {
     $.ajax({
       type: "POST",
  
-      url: "{% url 'product' product.code %}",
+      url: "{% url 'capsule_product' influencer.name product.code %}",
       data: {
           csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
           
           quantity: $( 'input[id="id_quantity"]' ).val(),
           product : $( 'input[id="id_product"]' ).val(),
-          save_it : $( 'input[name="id_save_it"]' ).val(),
           finish : $( 'input[name="finish"]:checked' ).val(),
+          rolli : $( 'input[id="rolli_ammount"]' ).val(),
       },
       success: function(result) {
           

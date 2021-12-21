@@ -291,87 +291,9 @@ def del_sample(request, item_id):
 
 def add_sample(request, product_code):
     return
-    
-    # try: 
-    #     product = Product.objects.get(code = product_code )
-    # except ObjectDoesNotExist:
-    #     return render(request, "404.html",{"message": "There is no product with code " + product_code,})
-
-    # query = Q()
-    # if request.user.is_authenticated:
-    #     query = Q(user = request.user) 
-    # else:
-    #     if not request.session.exists(request.session.session_key):
-    #         request.session.create()     
-    #     query = Q(session_id  = request.session.session_key) 
-    
-    # #retrieving an already ongoing sampler
-    # try: 
-    #     sampler = Sampler.objects.get( query , completion_status = 's')
-    # except ObjectDoesNotExist:
-    #     sampler = Sampler(session_id  = request.session.session_key)
-    #     if request.user.is_authenticated:
-    #         sampler.user = request.user
-    #     sampler.save()
-        
-
-    # #avoiding double insertion
-    # try:
-    #     sample = Sample.objects.get(sampler = sampler, product = product, status = 'ok')
-    #     return render(request, "include/sampler.html",{"message": "Already in your sample "})
-    # except ObjectDoesNotExist:
-    #     remove_stat = 'ok'       
-    #     if remove_stat == 'ok':
-    #         sample = Sample(sampler  = sampler, product = product, status = remove_stat)
-    #         sample.save()
-
-    # return redirect('product', product_code= product_code )
-
 
 def ajax_add_sample(request, ):
     return
-
-    # if request.is_ajax():
-    #     product_code = request.POST.get('product_code', None)
-        
-    #     try: 
-    #         product = Product.objects.get(code = product_code )
-    #     except ObjectDoesNotExist:
-    #         return render(request, "404.html",{"message": "There is no product with code " + product_code,})
-
-    #     query = Q()
-    #     if request.user.is_authenticated:
-    #         query = Q(user = request.user) 
-    #     else:
-    #         if not request.session.exists(request.session.session_key):
-    #             request.session.create()     
-    #         query = Q(session_id  = request.session.session_key) 
-        
-    #     #retrieving an already ongoing sampler
-    #     try: 
-    #         sampler = Sampler.objects.get( query , completion_status = 's')
-    #     except ObjectDoesNotExist:
-    #         sampler = Sampler(session_id  = request.session.session_key)
-    #         if request.user.is_authenticated:
-    #             sampler.user = request.user
-    #         sampler.save()
-    #     if (sampler.all_samples().count() >= 4):
-    #         response = JsonResponse({"error": "Full Sampler"})
-    #         response.status_code = 403 # To announce that the user isn't allowed to publish
-    #         return response
-
-    #     #avoiding double insertion
-    #     try:
-    #         sample = Sample.objects.get(sampler = sampler, product = product, status = 'ok')
-    #     except ObjectDoesNotExist:
-    #         remove_stat = 'ok'
-    #         if remove_stat == 'ok':
-    #             sample = Sample(sampler  = sampler, product = product, status = remove_stat)
-    #             sample.save()       
-                    
-    #     return render(request, "include/sampler.html", {"all_samples": sampler,'user':request.user })
-    
-
 def del_chart(request, item_id):
 
     if request.user.is_authenticated:
