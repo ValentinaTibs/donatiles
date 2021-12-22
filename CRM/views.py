@@ -74,11 +74,14 @@ def order(request, id_ ):
 
 def payment(request, id_):
 
+
+
     try:
         order = Order.objects.get( internal_tracking_id = id_)
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message": "This order does not exist" })
     
+
     if order.order_status == 'w':
         #2do per ragioni di sicurezza questo aggiornamento si dovrebbe fare solo se arrivo a questa pagina con una post
         if order.is_sampler:
@@ -96,6 +99,9 @@ def payment(request, id_):
         order.save()
         new_mail = MailTemplate()
         new_mail.send_order(request,order.payment_user(),order)
+
+        new_mail_staff = MailTemplate()
+        new_mail_staff.send_staff_order(request,order.payment_user(),order)
 
     prv_page = request.session.get('prev_page')
     return render(request, "payment.html", {'order':order,'prv_page':prv_page })   

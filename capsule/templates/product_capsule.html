@@ -368,7 +368,7 @@ footer, .cover{
     $.ajax({
       type: "POST",
  
-      url: "{% url 'capsule_product' influencer.name product.code %}",
+      url: "{% url 'add_chart_capsule' %}",
       data: {
           csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
           
@@ -384,7 +384,7 @@ footer, .cover{
           $(".cartbtn span").html(num_chi);
           $("#overlayCart").html(result);
           $("#id_quantity").val('');
-          $("#price_catch").html('0');
+          $("#price_catch").html('');
           u = document.querySelector(".notification");
           u.classList.add("visible");
           setTimeout(function() {

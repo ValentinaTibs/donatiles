@@ -184,6 +184,29 @@ class MailTemplate(models.Model):
             logger = logging.getLogger('email')
             logger.error(e.body)
 
+    def send_staff_order(self,request,user,order):
+        cLng = translation.get_language()
+        email_template_name = "email/it/order_staff_email.txt"
+        c = {
+                "order":order,
+                "user": user,
+                }
+        
+        email = render_to_string(email_template_name, c)
+        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
+                to_emails=To('info@taleoftiles.com', 'info@taleoftiles.com'),
+                subject=Subject("NUOVO ordine Pagato - Ordine num."+ order.internal_tracking_id),
+                html_content=HtmlContent(email))
+        print("email")
+        print(email)
+        # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        # try:
+        #     response = sg.send(message)
+
+        # except exceptions.BadRequestsError as e:
+        #     logger = logging.getLogger('email')
+        #     logger.error(e.body)            
+
     def send_wallpaper_req(self,request, email, width, height, notes, name_surname,  telephone, product_code):
         print(email, width, height, notes, name_surname,  telephone)
         cLng = translation.get_language()

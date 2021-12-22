@@ -130,7 +130,14 @@
       <p class="note"><span class="hilite">{{order.shipping_tracking_id}}</span></p>
 
 
+
+
     </div>
+    
+      <div class="checkout-title">
+        <a href="{% url 'payment' order.internal_tracking_id %}" class="btn btn-primary">
+          <svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Paga Ora</a>
+      </div>
   </aside>
 
 </div>

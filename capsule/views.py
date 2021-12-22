@@ -78,12 +78,12 @@ def add_chart_capsule(request):
         chart_item = ChartItem(chart = chart, product = p, finish = f , quantity = q ,boxes = r, note = c)    
         chart_item.save()
         return render(request, "include/chart.html", {"charts": charts})        
-    
     data = {'html_errors' : 'Wrong Finish'}
     return JsonResponse(data, safe=False, status = 500)       
 
 
 def compute_price(request):
+
     product = request.POST.get('product', None)
     finish = request.POST.get('finish', None)
     cut = request.POST.get('cut', None)
@@ -139,6 +139,7 @@ def capsule_product(request, _name, product_code, chi_form = None ):
     
     if request.is_ajax():
         add_chart_capsule(request)
+        return render(request)
 
 
     return render(request, "product_capsule.html",{

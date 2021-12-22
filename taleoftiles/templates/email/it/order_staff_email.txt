@@ -1,0 +1,31 @@
+{% autoescape off %}
+
+Nuov ordine Inoltrato e NON Pagato
+
+creato il :  {{order.created_at}} <br/>
+finalizzato il :{{order.modified_at}}
+
+<br/><br/>
+
+prodotti nel carrello: <br/>
+
+{% for chart in order.charts.all %}
+	{% for chart_item in chart.chart_item.all %}
+
+		prodotto 	 ->   {{chart_item.product}} <br/>
+		finitura 	 ->   {{chart_item.finish}} <br/>
+		taglio 		 ->   {{chart_item.note}}<br/>
+		num. rotoli	 ->   {{chart_item.boxes}}<br/>
+		<br/>
+	{% endfor %}
+{% endfor %}
+
+prezzo totale  -> {{order.final_payment}} <br/>
+<br/><br/>
+Email utente 		->   {{user.profile.shipping.email }}<br/>
+Nome Cognome utente ->   {{user.profile.shipping.fullname}} <br/>
+telefono 			->   {{user.profile.shipping.telephone_num }}<br/>
+indirizzo			->   {{user.profile.shipping.shipping_address}} | {{user.profile.shipping.city}} | {{user.profile.shipping.CAP}} | {{user.profile.shipping.country}} <br/>
+
+
+{% endautoescape %}

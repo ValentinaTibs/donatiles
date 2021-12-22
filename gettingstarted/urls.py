@@ -76,6 +76,8 @@ urlpatterns += i18n_patterns(
     path("capsule_report/<str:_name>",  capsule.views.report, name="report"),
     path("capsule/<str:_name>/<slug:product_code>",capsule.views.capsule_product, name="capsule_product"),
     path("compute_capsule_price/",      capsule.views.compute_price,  name="compute_capsule_price"),
+    path("add_chart_capsule/",      capsule.views.add_chart_capsule,  name="add_chart_capsule"),
+    
     prefix_default_language=False
 )
 
