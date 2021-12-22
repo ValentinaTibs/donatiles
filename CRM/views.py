@@ -349,5 +349,7 @@ def ajax_pay_order(request):
             return render(request, "include/payment_options.html", {"order": order })
         else:
             order.pay_order()
+            new_mail_staff = MailTemplate()
+            new_mail_staff.send_staff_payment_order(request,order)
 
     return render(request, "include/payment_options.html", {"order": order })

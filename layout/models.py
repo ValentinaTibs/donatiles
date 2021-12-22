@@ -193,19 +193,38 @@ class MailTemplate(models.Model):
                 }
         
         email = render_to_string(email_template_name, c)
-        message = Mail(from_email=From('info@taleoftiles.com', 'TaleOfTiles'),
+        message = Mail(from_email=From('info@taleoftiles.com', 'BACKEND TaleOfTiles'),
+                to_emails=To('info@taleoftiles.com', 'info@taleoftiles.com'),
+                subject=Subject("NUOVO ordine inserito NON Pagato - Ordine num."+ order.internal_tracking_id),
+                html_content=HtmlContent(email))
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        try:
+            response = sg.send(message)
+
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)         
+
+
+    def send_staff_payment_order(self,request,u,order):
+        email_template_name = "email/it/order_payed_staff_email.txt"
+        c = {
+                "order":order
+                }
+        
+        email = render_to_string(email_template_name, c)
+        message = Mail(from_email=From('info@taleoftiles.com', 'BACKEND TaleOfTiles'),
                 to_emails=To('info@taleoftiles.com', 'info@taleoftiles.com'),
                 subject=Subject("NUOVO ordine Pagato - Ordine num."+ order.internal_tracking_id),
                 html_content=HtmlContent(email))
-        print("email")
-        print(email)
-        # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        # try:
-        #     response = sg.send(message)
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        try:
+            response = sg.send(message)
 
-        # except exceptions.BadRequestsError as e:
-        #     logger = logging.getLogger('email')
-        #     logger.error(e.body)            
+        except exceptions.BadRequestsError as e:
+            logger = logging.getLogger('email')
+            logger.error(e.body)            
+
 
     def send_wallpaper_req(self,request, email, width, height, notes, name_surname,  telephone, product_code):
         print(email, width, height, notes, name_surname,  telephone)
