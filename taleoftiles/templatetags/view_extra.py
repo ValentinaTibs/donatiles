@@ -108,6 +108,10 @@ def change_lang(context, lang=None):
 def order_discount(order):
     return int(order.discount.total_discount(order.chart_price()))
     
+@register.filter
+def is_paid(order):
+    return order.is_paid()
+    
 
 # @register.filter(name='check_city') 
 # def check_city(user, city_name):

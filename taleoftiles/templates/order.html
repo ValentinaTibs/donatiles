@@ -96,13 +96,21 @@
 
 {% endif %}
      
+     <div class="cartrecap-item ">
+        <div class="cartrecap-main">
+          <h4>Spedizione</h4>
+        </div>
+        <div class="cartrecap-price">
+          <span class="product-figure">€ 45</span>
+        </div>
+      </div>
 
       <div class="cartrecap-item cartrecap-total">
         <div class="cartrecap-main">
           <h4>{% trans 'order-total' %}</h4>
         </div>
         <div class="cartrecap-price">
-          <span class="product-figure">€ {{order.total}}</span>
+          <span class="product-figure">€ {{order.total|add:45}}</span>
         </div>
       </div>
 
@@ -130,11 +138,13 @@
       <p class="note"><span class="hilite">{{order.shipping_tracking_id}}</span></p>
 
     </div>
-    
+    {% if order|is_paid   %}
+    {% else %}
       <div class="checkout-title">
         <a href="{% url 'payment' order.internal_tracking_id %}" class="btn btn-primary">
           <svg class="icon-l icon"><use xlink:href="{% static 'images/svgdefs.svg#icon-arrow-left' %}"/></svg>Paga Ora</a>
       </div>
+    {% endif %}
   </aside>
 
 </div>
