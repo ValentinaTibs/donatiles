@@ -49,7 +49,18 @@
                 <svg class="icon-m icon" onclick="addCM('h')"><use xlink:href="{% static 'images/svgdefs.svg#icon-add' %}"/></svg>
               </div>
             </div>
+            
           </div>
+          <div class="" >
+              <h5>Zoom</h5>
+              <input type="range" min="0" max="100" value="1" id="WPConf-Zoom" 
+              oninput="
+                rangeValue.innerText = this.value +'%';
+                var val = 0 + this.value / 100;
+                getElementById('WPConf-img').style.transform = 'scale('+val+')'; ">
+              <p id="rangeValue">0%</p>
+
+            </div>
           <ol>
             <li>Inserisci le dimensioni della parete</li>
             <li>Trascina l'immagine per "inquadrare" la parte che vuoi mostrare sulla parete</li>
@@ -114,6 +125,7 @@
 
     let configuratorSettings = {},
       img = document.getElementById("WPConf-img"),
+      zoom =  document.getElementById("WPConf-Zoom"),
       cutSize = getCutSize(),
       bandSize;
 
@@ -123,7 +135,8 @@
     };
     configuratorSettings.image = {
       width:  img.width  + "px",
-      height: img.height + "px"
+      height: img.height + "px",
+      zoom : zoom.value + " scale"
     };
     configuratorSettings.cut = {
       left: "0px",
@@ -131,6 +144,7 @@
       top: "0px",
       bottom: "0px"
     };
+
 
     if ( cutSize.mode === 'v' ) {
       bandSize = cutSize.bandSize*img.height/100;
