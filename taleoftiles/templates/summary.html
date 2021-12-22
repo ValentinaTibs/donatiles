@@ -86,7 +86,7 @@
 	          <p>{{chart_item.size}} / {{chart_item.finish}} / {{chart_item.product.colour}}</p>
 	        </div>
 	        <div class="cartrecap-qty">
-	          <p class="note">{{chart_item.boxes}} {% trans 'boxes'%}</p>
+	          <p class="note">{{chart_item.boxes}} rotoli</p>
 	          <div class="input-qty">
 	            {{chart_item.quantity}}m&sup2;
 				{% if chart_item.has_frido %}
@@ -109,10 +109,10 @@
 	<div class="cartrecap-item">
         <div class="cartrecap-main">
           <h4>{% trans 'shipping-cost' %}</h4>
-          <p class="note">{% trans 'shipping-included' %}</p>
+          <p class="note">spedizione fissa in tutta italia</p>
         </div>
         <div class="cartrecap-price">
-          <span class="product-figure">€ 0</span>
+          <span class="product-figure">€ 45</span>
         </div>
     </div>
 	{% if order.discount %}
@@ -131,7 +131,7 @@
           <h4>{% trans 'order-total' %}</h4>
         </div>
         <div class="cartrecap-price">
-          <span class="product-figure">€ {{ order.total }}</span>
+          <span class="product-figure">€ {{ order.total|add:45 }}</span>
         </div>
       </div>
 {% endif %} 
