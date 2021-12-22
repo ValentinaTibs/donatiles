@@ -154,8 +154,7 @@ def shipping(request, id_):
                     new_shipping.save()
                 order.user = da_user
                         
-            order.final_payment = order.total()
-            #order.shipping = new_shipping
+            order.final_payment = order.total() + order.shipping_price()
             order.save()
 
             return redirect('payment', id_ = order.internal_tracking_id)

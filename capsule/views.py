@@ -62,9 +62,10 @@ def add_chart_capsule(request):
     else:
         chart = charts.first()
         
+    # create new chart item with the values retrived
     p = Product.objects.get(pk=request.POST.get('product', None))
-
     f = int(request.POST.get('finish', None))
+    c = request.POST.get('cut', None)
     if( f == 0) :
         f = Tag.objects.get(slug='s_vinylraw')
     elif (f == 3) :
@@ -74,10 +75,9 @@ def add_chart_capsule(request):
     r = int(request.POST.get('rolli', None))
 
     if(p and f and q and r):
-        chart_item = ChartItem(chart = chart, product = p, finish = f , quantity = q ,boxes = r)    
-        result = chart_item.save()
-        if result:
-            return render(request, "include/chart.html", {"charts": charts})        
+        chart_item = ChartItem(chart = chart, product = p, finish = f , quantity = q ,boxes = r, note = c)    
+        chart_item.save()
+        return render(request, "include/chart.html", {"charts": charts})        
     
     data = {'html_errors' : 'Wrong Finish'}
     return JsonResponse(data, safe=False, status = 500)       
@@ -122,7 +122,7 @@ def compute_price(request):
     m2 = float(wall_h)/ 100.0 *(float(rolls * paper_width)) / 100.0
     
     tot_price = sm_price *m2
-    data = {'tot_price': tot_price,'m2':m2,'rolli':rolls}
+    data = {'tot_price': tot_price,'m2':m2,'rolli':rolls,'cut_val':cut}
     
     return JsonResponse(data, status = 200)
 

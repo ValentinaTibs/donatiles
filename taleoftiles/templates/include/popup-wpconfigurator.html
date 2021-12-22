@@ -159,7 +159,7 @@
         $("#sm_catch").html(result['rolli']); 
         document.getElementById("rolli_ammount").value = result['rolli']; 
         document.getElementById('sm_notification').innerHTML = result['m2']; 
-        
+        document.getElementById("cut_val").value = result['cut_val']; 
       },
       error:    function(result) { console.log('error'); }
     });

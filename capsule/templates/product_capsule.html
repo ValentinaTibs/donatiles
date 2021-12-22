@@ -144,7 +144,8 @@ footer, .cover{
 
             <input disabled type="number" name="quantity" min="0" required="" id="id_quantity">
             <input type="hidden" name="id_product" id="id_product" value="{{product.pk }}">
-            <input type="hidden" name="rolli_ammount" id="rolli_ammount" value="0">
+            <input type="hidden" name="rolli_ammount" id="rolli_ammount"  value="0">
+            <input type="hidden" name="cut_val"       id="cut_val"        value="0">
 
             <div class="product-qtybtns" style="cursor: default;">
               <span class="product-note">m&sup2;</span>  
@@ -375,6 +376,7 @@ footer, .cover{
           product : $( 'input[id="id_product"]' ).val(),
           finish : $( 'input[name="finish"]:checked' ).val(),
           rolli : $( 'input[id="rolli_ammount"]' ).val(),
+          cut: $( 'input[id="cut_val"]' ).val(),
       },
       success: function(result) {
           

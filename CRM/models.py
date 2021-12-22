@@ -193,7 +193,11 @@ class Order(models.Model):
         
         if self.discount:
             total = total - self.discount.total_discount(total)
-        return total
+
+        return total 
+
+    def shipping_price(self):
+        return 45
 
     
     def is_paid(self):
@@ -299,6 +303,7 @@ class ChartItem(models.Model):
     created_at  = models.DateTimeField(editable=False)
     modified_at = models.DateTimeField()
     
+    note        = models.CharField ( max_length=250, default="", null = True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
