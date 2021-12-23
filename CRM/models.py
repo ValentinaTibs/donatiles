@@ -294,8 +294,8 @@ class ChartItem(models.Model):
     product     = models.ForeignKey(Product,    verbose_name="Products",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     size        = models.ForeignKey(Tag,        verbose_name="Tags",        null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item')
     finish      = models.ForeignKey(Tag,        verbose_name="Finishes",    null=True, blank = True, on_delete=models.CASCADE, related_name='chart_item_f')
-    quantity    = models.PositiveIntegerField( default=1 )       
-    #saved_price = models.PositiveIntegerField( )       
+    quantity    = models.FloatField( default=1 )       
+    saved_price = models.PositiveIntegerField( null=True)       
     has_frido   = models.BooleanField(default = True)
 
     boxes       = models.PositiveIntegerField( default=1,null=True, blank = True, )       
@@ -319,6 +319,8 @@ class ChartItem(models.Model):
             return self.status
 
     def price(self):
+        if saved_price:
+            return saved_price
         if self.product.single_sell():
             return compute_single_price(0,0,0,0)
         else:
