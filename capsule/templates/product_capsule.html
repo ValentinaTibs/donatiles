@@ -365,7 +365,7 @@ footer, .cover{
   };
 
   function addToCart() {
-    console.log( $( 'input[id="price_catch"]' ).html());
+    
     $.ajax({
       type: "POST",
     
@@ -378,7 +378,7 @@ footer, .cover{
           finish : $( 'input[name="finish"]:checked' ).val(),
           rolli : $( 'input[id="rolli_ammount"]' ).val(),
           cut: $( 'input[id="cut_val"]' ).val(),
-          price : $( 'input[id="price_catch"]' ).html()
+          price : $( 'strong[id="price_catch"]' ).html()
       },
       success: function(result) {
           
