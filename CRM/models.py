@@ -319,7 +319,7 @@ class ChartItem(models.Model):
             return self.status
 
     def price(self):
-        if saved_price:
+        if self.saved_price:
             return self.saved_price
         if self.product.single_sell():
             return compute_single_price(0,0,0,0)
