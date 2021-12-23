@@ -392,14 +392,37 @@
 
 
 <div id="mc_embed_signup" style="width:60%; margin: 0 20%">
-
+{% csrf_token %}
 {{form}}
 <button class="btn-primary" id="request_quotation" onclick="SendRequest();">Richiedi Preventivo</button>
 </div>
 
+
 <script type='text/javascript'>
-  SendRequest
-    
+  
+  function SendRequest() {
+    $.ajax({
+      type: "POST",
+ 
+      url: "{% url 'landing' %}",
+      data: {
+          csrfmiddlewaretoken: $( 'input[name="csrfmiddlewaretoken"]' ).val(),
+          email         : $('input[id="id_email"]').val(),
+          name_surname  : $('input[id="id_name_surname"]').val(),
+          telephone     : $('input[id="id_telephone"]').val(),
+          size          : $('input[id="id_size"]').val(),
+          products      : $('input[id="id_products"]').val()
+      },
+      success: function(result) {          
+          u = document.querySelector(".mc_embed_signup");
+          u.classList.add("hide")
+          
+      },
+      error: function(result) {
+          console.log('error');
+      }
+    });
+
 </script>
 <!--End mc_embed_signup-->
 

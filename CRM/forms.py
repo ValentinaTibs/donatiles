@@ -66,7 +66,6 @@ class WallpaperLandingForm(forms.Form):
     email        = forms.EmailField(required=True, label ='Email')
     name_surname = forms.CharField(required=True, label ='Nome e Cognome')
     telephone    = forms.CharField(max_length=20,required=True, label ='Telefono')
-
     size         = forms.IntegerField(required=True, label ='Dimensioni')
     products     = forms.ChoiceField(choices = RELEVANCE_CHOICES, required=True, label ='Prodotti')
 

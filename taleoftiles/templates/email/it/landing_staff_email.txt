@@ -1,0 +1,5 @@
+{% autoescape off %}
+
+L'Ordine num {{order.internal_tracking_id}} è stato Pagato - 
+
+{% endautoescape %}

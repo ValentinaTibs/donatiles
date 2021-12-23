@@ -223,7 +223,32 @@ class MailTemplate(models.Model):
 
         except exceptions.BadRequestsError as e:
             logger = logging.getLogger('email')
-            logger.error(e.body)            
+            logger.error(e.body)     
+
+    def send_landing_request(self,form):
+        email_template_name = "email/it/landing_staff_email.txt"
+        c = {   
+                "email" : form.cleaned_data['email']  ,
+                "name_surname" : form.cleaned_data['name_surname']  ,
+                "telephone" : form.cleaned_data['telephone']  ,
+                "size" : form.cleaned_data['size']  ,
+                "products" : form.cleaned_data['products']  ,
+        }
+
+        email = render_to_string(email_template_name, c)
+        message = Mail(from_email=From('info@taleoftiles.com', 'BACKEND TaleOfTiles'),
+                to_emails=To('info@taleoftiles.com', 'info@taleoftiles.com'),
+                subject=Subject("NUOVA Richiesta LANDING"),
+                html_content=HtmlContent(email))
+        print(email)
+        # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        # try:
+        #     response = sg.send(message)
+
+        # except exceptions.BadRequestsError as e:
+        #     logger = logging.getLogger('email')
+        #     logger.error(e.body)            
+
 
 
     def send_wallpaper_req(self,request, email, width, height, notes, name_surname,  telephone, product_code):
