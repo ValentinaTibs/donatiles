@@ -79,7 +79,7 @@ def add_chart_capsule(request):
     
     q = float(request.POST.get('quantity', None))    
     r = int(request.POST.get('rolli', None))
-    pr = int(request.POST.get('price', None))
+    pr = float(request.POST.get('price', None))
 
     if(p and f and q and r):
         chart_item = ChartItem(chart = chart, product = p, finish = f , quantity = q ,boxes = r, note = c, saved_price = pr)    
