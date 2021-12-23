@@ -54,6 +54,21 @@ class WallpaperForm(forms.Form):
     def clean(self):
         return super(WallpaperForm, self).clean()
 
+RELEVANCE_CHOICES = (
+    (1, _("Green Leaves")),
+    (2, _("Blue Flowers")),
+    (3, _("Vintage Flowers")),
+    (4, _("Water Ibisco")),
+)
+
+class WallpaperLandingForm(forms.Form):
+    
+    email        = forms.EmailField(required=True, label ='Email')
+    name_surname = forms.CharField(required=True, label ='Nome e Cognome')
+    telephone    = forms.CharField(max_length=20,required=True, label ='Telefono')
+
+    size         = forms.IntegerField(required=True, label ='Dimensioni')
+    products     = forms.ChoiceField(choices = RELEVANCE_CHOICES, required=True, label ='Prodotti')
 
 class ApplyDiscountForm(forms.Form):
     code        = forms.CharField(max_length=20)

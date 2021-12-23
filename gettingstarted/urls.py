@@ -72,8 +72,8 @@ urlpatterns += i18n_patterns(
     path("landing/",        layout.views.landing, name="landing"),
 
     path("capsule/<str:_name>",         capsule.views.index, name="capsule"),
-    path("capsule_report",              capsule.views.report, name="report"),
-    path("capsule_report/<str:_name>",  capsule.views.report, name="report"),
+    path("report",              capsule.views.report, name="report"),
+    path("report/<str:_name>",  capsule.views.report, name="report"),
     path("capsule/<str:_name>/<slug:product_code>",capsule.views.capsule_product, name="capsule_product"),
     path("compute_capsule_price/",      capsule.views.compute_price,  name="compute_capsule_price"),
     path("add_chart_capsule/",      capsule.views.add_chart_capsule,  name="add_chart_capsule"),

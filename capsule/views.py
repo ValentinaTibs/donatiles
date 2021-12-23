@@ -36,6 +36,12 @@ def report(request,_name = None):
         influencer = Influencer.objects.get(name__slug  = _name )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The Capsule you are looking for is not existing",}) 
+    
+
+    active_tags = Tag.objects.filter(tag_query,public=True) 
+    if tag_len > 0 :      
+        products_list = Product.objects.filter(is_active = True, tags__in = active_tags).annotate(num_tags=Count('tags')).filter(num_tags=tag_len).distinct().order_by(order_by)
+    res = ChartItem.objects.filter(product__tags = influencer)
 
     return render(request, "report.html",{
         "influencer": influencer,

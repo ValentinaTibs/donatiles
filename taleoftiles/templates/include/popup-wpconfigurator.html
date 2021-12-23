@@ -56,7 +56,7 @@
               <input type="range" min="0" max="100" value="1" id="WPConf-Zoom" 
               oninput="
                 rangeValue.innerText = this.value +'%';
-                var val = 0 + this.value / 100;
+                var val = 1 + this.value / 100;
                 getElementById('WPConf-img').style.transform = 'scale('+val+')'; ">
               <p id="rangeValue">0%</p>
 

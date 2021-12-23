@@ -3,7 +3,8 @@ from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
 from layout.models      import Element, Mail, MailTemplate
-from layout.forms      import ContactForm
+from layout.forms       import ContactForm
+from CRM.forms          import WallpaperLandingForm
 from taleoftiles.models import Publication, Product
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
@@ -65,7 +66,8 @@ def password_reset_request(request):
 def landing (request):
 
     products_list = Product.objects.filter(is_active = True, tags__slug = 'landing_nov_21')
-    
+    wp = WallpaperLandingForm()
     return render(request, "landing_nov_21.html",{
     'home_prods'  : products_list,
+    'form' : wp
     })
