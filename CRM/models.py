@@ -320,7 +320,7 @@ class ChartItem(models.Model):
 
     def price(self):
         if saved_price:
-            return saved_price
+            return self.saved_price
         if self.product.single_sell():
             return compute_single_price(0,0,0,0)
         else:
