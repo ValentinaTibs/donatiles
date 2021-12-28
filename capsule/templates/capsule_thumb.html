@@ -11,7 +11,7 @@
     <a href="{% url 'capsule_product' _name=influencer.name product_code=product.code  %}" class="product-thumb-img">
     <img  loading="lazy" src="{% if product.cover.imagefile %}  {{ product.cover.imagefile.url }}  {% else %} {% static 'images/products/productthumb-complementary.png' %} {% endif %}" alt="{{ product.name }} / {{ product.serie.name }}"></a>
 
-    <a href="{% url 'product' product.code %}" class="product-thumb-title">
+    <a href="{% url 'capsule_product' _name=influencer.name product_code=product.code %}" class="product-thumb-title">
         <h4>{{ product.name }}</h4>
         <h5>scoprilo a partire da</h5> <h6>da <b> 49</b>€/m2</h6>
     </a>
