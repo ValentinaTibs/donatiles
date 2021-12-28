@@ -93,6 +93,11 @@ def product(request, product_code, chi_form = None ):
         product = Product.active.get(code = product_code )
     except ObjectDoesNotExist:
         return render(request, "404.html",{"message":"The product you asked to view is not existing",}) 
+    
+    capsule = product.tags.filter(slug = 'capsule').first()
+    if capsule:
+        influencer = product.tags.filter(parent__slug = 'influencer_name').first()
+        return redirect('/capsule/'+influencer.slug)
 
     #for all product in the same series that are not support and not itself
     serie = product.serie()
